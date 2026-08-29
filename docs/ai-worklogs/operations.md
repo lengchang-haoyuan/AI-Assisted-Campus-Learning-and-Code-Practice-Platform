@@ -53,3 +53,14 @@
 - 验证：8 项 `unittest` 通过，Python `compileall` 和 `pip check` 通过，环境变量 SQLAlchemy 连接通过，实际库只读结构对照通过，P00 health 与 Swagger 回归通过
 - 安全：数据库凭据仅通过交互式输入用于本次验证，未写入源码、`.env`、命令行参数、日志或报告；AI 请求表不保存 API Key、原始提示词或原始敏感输入
 - 备注：新增依赖 `PyMySQL` 与 `pydantic-settings` 已在执行前说明事实、风险和推荐方案并经用户批准；当前目录不是 Git 仓库，未执行提交
+
+## 2026-08-29 23:07:44 +08:00
+
+- 操作：初始化 Git 仓库、建立 `origin`、提交 P00-P01 基线并推送 GitHub
+- 目标：`https://github.com/lengchang-haoyuan/AI-Assisted-Campus-Learning-and-Code-Practice-Platform.git`
+- 原因：用户要求发布当前项目，并要求以后每个节点验收后提交和推送
+- 结果：完成；创建 `main`，基线提交为 `7cf42228e90cd403bc9d5d998034e1274683bd69`，本地与远端 `refs/heads/main` 哈希一致
+- 恢复方式：本次不删除远端仓库或重写历史；如需撤销代码，应通过新的 revert 提交处理
+- 验证：后端 8 项结构测试、Python 编译、`pip check`、前端类型检查和生产构建均通过；远端哈希通过 `git ls-remote` 核对
+- 安全：暂存预览确认 `.env`、`.venv`、`node_modules`、构建产物和本地依赖缓存未进入提交，未提交真实数据库凭据
+- 备注：根 README 和使用顺序已明确“每节点验证、更新报告、提交、推送并核对远端哈希”的交付流程
