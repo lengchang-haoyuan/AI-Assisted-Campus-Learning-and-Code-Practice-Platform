@@ -17,6 +17,12 @@ app/core/         配置、数据库、日志、异常和安全基础能力
 
 ## 启动
 
+复制 `.env.example` 为 `.env`，填写数据库连接并生成独立的 JWT Secret。`JWT_SECRET` 最少 32 字符，禁止提交到 Git：
+
+```powershell
+python -c "import secrets; print(secrets.token_urlsafe(48))"
+```
+
 ```powershell
 .\.venv\Scripts\Activate.ps1
 python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
@@ -24,6 +30,25 @@ python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
 - Swagger：`http://127.0.0.1:8000/docs`
 - Health：`http://127.0.0.1:8000/api/v1/health`
+
+## 用户认证
+
+```text
+POST /api/v1/auth/register
+POST /api/v1/auth/login
+GET  /api/v1/users/me
+```
+
+注册和登录使用 JSON。登录的 `identifier` 可填写用户名或邮箱：
+
+```json
+{
+  "identifier": "student_01",
+  "password": "用户输入的密码"
+}
+```
+
+密码使用 Argon2id 哈希，JWT 使用环境变量配置的 HS256 和过期分钟数。`/users/me` 要求 `Authorization: Bearer <token>`；缺少、无效或过期 Token 返回 401，已认证但账号不可用返回 403。
 
 所有响应包含 `X-Request-ID`。应用错误统一返回：
 
@@ -62,6 +87,9 @@ mysql --user=root --password --execute="source schema.sql"
 ```dotenv
 DATABASE_URL=mysql+pymysql://用户名:URL编码后的密码@127.0.0.1:3306/scholarhub?charset=utf8mb4
 LOG_LEVEL=INFO
+JWT_SECRET=至少32字符的随机值
+JWT_ALGORITHM=HS256
+JWT_EXPIRE_MINUTES=60
 ```
 
 然后执行：

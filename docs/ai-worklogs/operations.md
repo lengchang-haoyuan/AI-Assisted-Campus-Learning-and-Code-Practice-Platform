@@ -75,3 +75,15 @@
 - 验证：15 项 `unittest`、Python `compileall`、`pip check`、真实 HTTP health/Swagger/404/CORS、真实 MySQL Session 依赖 `SELECT 1` 均通过
 - 安全：500 响应和结构化日志不记录异常原文、SQL、请求体、查询字符串或凭据；数据库密码仅交互用于验证，未持久化
 - 备注：未新增第三方依赖；未实现注册登录、JWT、Project CRUD、社区、学习、Workflow 执行或 AI Provider
+
+## 2026-08-30 09:25:39 +08:00
+
+- 操作：完成 P03 用户注册、登录、JWT 和当前用户认证闭环
+- 目标：实现 `POST /api/v1/auth/register`、`POST /api/v1/auth/login`、`GET /api/v1/users/me`，以及前端 Bearer Token 注入和 401 清理
+- 原因：在 P02 分层基础上建立唯一的认证范围，不实现其他业务
+- 结果：完成；真实 MySQL 验收得到注册 201、重复注册 409、错误密码 401、登录 bearer Token、当前用户 200、无效 Token 401
+- 恢复方式：回退本阶段提交并移除新增依赖；本次未修改数据库结构，验收用户已删除
+- 验证：24 项后端测试、Python `compileall`、`pip check`、前端类型检查和生产构建通过；真实数据库确认密码为 Argon2id 哈希且不等于明文
+- 安全：JWT Secret 和数据库凭据仅通过环境变量或交互式输入使用，未写入代码、日志或报告；日志不记录密码、Token 和完整认证头
+- 依赖确认：用户明确批准新增 `pwdlib[argon2]` 和 `PyJWT`；实际安装 `pwdlib 0.3.1`、`argon2-cffi 25.1.0`、`PyJWT 2.13.0`，未安装不需要的 `python-multipart`
+- 备注：前端 Token 保存在 `sessionStorage`，收到 401 时同时清除存储和 Pinia 当前用户状态；未实现登录页面或业务路由

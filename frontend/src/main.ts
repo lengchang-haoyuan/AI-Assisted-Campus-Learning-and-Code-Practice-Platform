@@ -18,10 +18,13 @@ import 'element-plus/theme-chalk/el-skeleton.css'
 import 'element-plus/theme-chalk/el-tag.css'
 
 import App from './App.vue'
+import { setUnauthorizedHandler } from './auth/session'
 import router from './router'
+import { useAuthStore } from './stores/auth'
 import './styles/main.css'
 
 const app = createApp(App)
+const pinia = createPinia()
 
 app.component('ElAlert', ElAlert)
 app.component('ElButton', ElButton)
@@ -31,4 +34,10 @@ app.component('ElEmpty', ElEmpty)
 app.component('ElSkeleton', ElSkeleton)
 app.component('ElTag', ElTag)
 
-app.use(createPinia()).use(router).mount('#app')
+app.use(pinia).use(router)
+
+const authStore = useAuthStore(pinia)
+setUnauthorizedHandler(() => authStore.clearSession())
+void authStore.restoreSession()
+
+app.mount('#app')

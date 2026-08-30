@@ -2,11 +2,15 @@ import asyncio
 from dataclasses import dataclass
 import json
 import logging
+import os
 from pathlib import Path
+from secrets import token_urlsafe
 import unittest
 from unittest.mock import Mock, patch
 
 from fastapi import FastAPI
+
+os.environ.setdefault("JWT_SECRET", token_urlsafe(48))
 
 from app.api.deps import get_db_session
 from app.core.exceptions import (
@@ -38,24 +42,33 @@ async def invoke_asgi(
     path: str,
     *,
     headers: dict[str, str] | None = None,
+    body: dict[str, object] | None = None,
 ) -> ASGIResponse:
     messages: list[dict[str, object]] = []
     request_sent = False
+    request_body = json.dumps(body).encode("utf-8") if body is not None else b""
 
     async def receive() -> dict[str, object]:
         nonlocal request_sent
         if not request_sent:
             request_sent = True
-            return {"type": "http.request", "body": b"", "more_body": False}
+            return {
+                "type": "http.request",
+                "body": request_body,
+                "more_body": False,
+            }
         await asyncio.Event().wait()
         raise AssertionError("unreachable")
 
     async def send(message: dict[str, object]) -> None:
         messages.append(message)
 
+    request_headers = dict(headers or {})
+    if body is not None:
+        request_headers.setdefault("Content-Type", "application/json")
     encoded_headers = [
         (name.lower().encode("ascii"), value.encode("ascii"))
-        for name, value in (headers or {}).items()
+        for name, value in request_headers.items()
     ]
     scope = {
         "type": "http",
@@ -103,8 +116,11 @@ def request(
     path: str,
     *,
     headers: dict[str, str] | None = None,
+    body: dict[str, object] | None = None,
 ) -> ASGIResponse:
-    return asyncio.run(invoke_asgi(application, method, path, headers=headers))
+    return asyncio.run(
+        invoke_asgi(application, method, path, headers=headers, body=body)
+    )
 
 
 class APIFoundationTests(unittest.TestCase):
@@ -193,13 +209,18 @@ class APIFoundationTests(unittest.TestCase):
             "/api/v1/health",
             headers={
                 "Origin": "http://127.0.0.1:5173",
-                "Access-Control-Request-Method": "GET",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Authorization, Content-Type",
             },
         )
         self.assertEqual(allowed.status_code, 200)
         self.assertEqual(
             allowed.headers["access-control-allow-origin"],
             "http://127.0.0.1:5173",
+        )
+        self.assertIn("POST", allowed.headers["access-control-allow-methods"])
+        self.assertIn(
+            "Authorization", allowed.headers["access-control-allow-headers"]
         )
 
         simple = request(
@@ -216,7 +237,7 @@ class APIFoundationTests(unittest.TestCase):
             "/api/v1/health",
             headers={
                 "Origin": "https://untrusted.example",
-                "Access-Control-Request-Method": "GET",
+                "Access-Control-Request-Method": "POST",
             },
         )
         self.assertNotIn("access-control-allow-origin", denied.headers)

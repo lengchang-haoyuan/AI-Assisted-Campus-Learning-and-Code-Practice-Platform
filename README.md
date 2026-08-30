@@ -1,6 +1,6 @@
 # ScholarHub
 
-面向高校学生的 AI 辅助学习与代码实践平台。当前已完成 P00 工程初始化、P01 数据库设计与建库和 P02 FastAPI 后端基础架构。
+面向高校学生的 AI 辅助学习与代码实践平台。当前已完成 P00-P03：工程初始化、数据库、FastAPI 分层架构和 JWT 用户认证。
 
 ## 项目结构
 
@@ -59,4 +59,4 @@ mysql --user=root --password --execute="source schema.sql"
 
 ## 当前范围
 
-P00 提供前后端工程骨架；P01 提供 MySQL Schema 和 SQLAlchemy Models；P02 提供 Router、Service、Repository 分层边界、统一异常、结构化日志、CORS 和数据库 Session 依赖。认证、业务 CRUD、社区接口、Workflow 执行和 AI 调用仍未实现。
+P00-P02 提供工程、数据库和 FastAPI 分层基础；P03 提供注册、登录、当前用户、Argon2id 密码哈希、JWT 和前端 Axios 认证状态。Project CRUD、社区接口、学习业务、Workflow 执行和 AI 调用仍未实现，登录/注册页面将在前端页面阶段实现。
