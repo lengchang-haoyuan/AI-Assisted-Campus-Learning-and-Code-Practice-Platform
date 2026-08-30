@@ -1,5 +1,6 @@
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -23,6 +24,7 @@ class Settings(BaseSettings):
     app_name: str = Field(default="ScholarHub API", min_length=1)
     app_version: str = Field(default="0.1.0", pattern=r"^\d+\.\d+\.\d+$")
     debug: bool = False
+    log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
     api_v1_prefix: str = Field(
         default="/api/v1", pattern=r"^/[a-zA-Z0-9/_-]+$"
     )

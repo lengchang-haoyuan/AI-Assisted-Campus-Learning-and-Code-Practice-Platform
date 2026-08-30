@@ -64,3 +64,14 @@
 - 验证：后端 8 项结构测试、Python 编译、`pip check`、前端类型检查和生产构建均通过；远端哈希通过 `git ls-remote` 核对
 - 安全：暂存预览确认 `.env`、`.venv`、`node_modules`、构建产物和本地依赖缓存未进入提交，未提交真实数据库凭据
 - 备注：根 README 和使用顺序已明确“每节点验证、更新报告、提交、推送并核对远端哈希”的交付流程
+
+## 2026-08-30 09:10:45 +08:00
+
+- 操作：完成 P02 FastAPI 后端分层基础架构
+- 目标：建立 Router、Schema、Service、Repository、Model 的职责边界，并提供统一异常、结构化日志、请求 ID、CORS 和数据库 Session 依赖
+- 原因：为后续认证和业务接口提供稳定基础，不在本阶段实现任何业务功能
+- 结果：完成；health 响应保持兼容，未知路由及应用异常使用统一错误结构，Session 可通过 FastAPI 依赖获取并可靠关闭
+- 恢复方式：回退本阶段提交即可；本次未修改数据库结构、数据或外部服务配置
+- 验证：15 项 `unittest`、Python `compileall`、`pip check`、真实 HTTP health/Swagger/404/CORS、真实 MySQL Session 依赖 `SELECT 1` 均通过
+- 安全：500 响应和结构化日志不记录异常原文、SQL、请求体、查询字符串或凭据；数据库密码仅交互用于验证，未持久化
+- 备注：未新增第三方依赖；未实现注册登录、JWT、Project CRUD、社区、学习、Workflow 执行或 AI Provider
