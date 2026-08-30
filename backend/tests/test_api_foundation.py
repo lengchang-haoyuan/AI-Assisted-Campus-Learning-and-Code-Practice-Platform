@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 from secrets import token_urlsafe
 import unittest
+from urllib.parse import urlsplit
 from unittest.mock import Mock, patch
 
 from fastapi import FastAPI
@@ -47,6 +48,7 @@ async def invoke_asgi(
     messages: list[dict[str, object]] = []
     request_sent = False
     request_body = json.dumps(body).encode("utf-8") if body is not None else b""
+    parsed_url = urlsplit(path)
 
     async def receive() -> dict[str, object]:
         nonlocal request_sent
@@ -76,9 +78,9 @@ async def invoke_asgi(
         "http_version": "1.1",
         "method": method,
         "scheme": "http",
-        "path": path,
-        "raw_path": path.encode("ascii"),
-        "query_string": b"",
+        "path": parsed_url.path,
+        "raw_path": parsed_url.path.encode("ascii"),
+        "query_string": parsed_url.query.encode("ascii"),
         "root_path": "",
         "headers": encoded_headers,
         "client": ("127.0.0.1", 50000),
@@ -219,6 +221,8 @@ class APIFoundationTests(unittest.TestCase):
             "http://127.0.0.1:5173",
         )
         self.assertIn("POST", allowed.headers["access-control-allow-methods"])
+        self.assertIn("PUT", allowed.headers["access-control-allow-methods"])
+        self.assertIn("DELETE", allowed.headers["access-control-allow-methods"])
         self.assertIn(
             "Authorization", allowed.headers["access-control-allow-headers"]
         )

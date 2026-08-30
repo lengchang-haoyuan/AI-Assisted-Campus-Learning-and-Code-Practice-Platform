@@ -50,6 +50,20 @@ GET  /api/v1/users/me
 
 密码使用 Argon2id 哈希，JWT 使用环境变量配置的 HS256 和过期分钟数。`/users/me` 要求 `Authorization: Bearer <token>`；缺少、无效或过期 Token 返回 401，已认证但账号不可用返回 403。
 
+## 项目管理
+
+以下接口均要求 Bearer Token，且只允许访问当前用户拥有的项目：
+
+```text
+GET    /api/v1/projects?page=1&page_size=20
+POST   /api/v1/projects
+GET    /api/v1/projects/{project_id}
+PUT    /api/v1/projects/{project_id}
+DELETE /api/v1/projects/{project_id}
+```
+
+列表按 `created_at DESC, id DESC` 稳定排序，`page` 范围为 1-10000，`page_size` 范围为 1-100。空列表返回 `items: []`、`total: 0` 和 `total_pages: 0`。`PUT` 支持只提交需要修改的字段，但请求体不能为空；`owner` 和 `owner_id` 不接受客户端输入。
+
 所有响应包含 `X-Request-ID`。应用错误统一返回：
 
 ```json

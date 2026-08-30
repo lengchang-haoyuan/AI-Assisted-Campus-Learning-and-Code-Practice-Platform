@@ -87,3 +87,14 @@
 - 安全：JWT Secret 和数据库凭据仅通过环境变量或交互式输入使用，未写入代码、日志或报告；日志不记录密码、Token 和完整认证头
 - 依赖确认：用户明确批准新增 `pwdlib[argon2]` 和 `PyJWT`；实际安装 `pwdlib 0.3.1`、`argon2-cffi 25.1.0`、`PyJWT 2.13.0`，未安装不需要的 `python-multipart`
 - 备注：前端 Token 保存在 `sessionStorage`，收到 401 时同时清除存储和 Pinia 当前用户状态；未实现登录页面或业务路由
+
+## 2026-08-30 09:39:12 +08:00
+
+- 操作：完成 P04 Project REST CRUD、所有权校验、有界分页和稳定排序
+- 目标：实现 `GET/POST /api/v1/projects` 与 `GET/PUT/DELETE /api/v1/projects/{id}`，所有接口仅允许当前登录用户访问其项目
+- 原因：在 P03 认证闭环上建立第一个数据库持久化业务模块，不提前实现社区、Workflow、AI 或前端页面
+- 结果：完成；真实 HTTP + MySQL 验证创建 201、跨用户访问/更新/删除 403、更新持久化、删除 204、删除后 404 和空列表语义
+- 恢复方式：回退本阶段提交；本次没有修改数据库结构，验收项目和 2 名临时用户均已删除
+- 验证：38 项后端测试和 OpenAPI 契约检查通过；Python 编译、依赖检查、前端回归检查和生产构建见单次完成报告
+- 安全：owner 只来自 JWT 当前用户，客户端 owner 伪造返回 422；Service 对详情、更新和删除统一执行所有权检查
+- 依赖与数据：未新增依赖、未修改 `schema.sql` 或 SQLAlchemy Models；本机 `mysql` CLI 不在 `PATH`，验收清理改用项目已有 SQLAlchemy/PyMySQL 并确认无测试用户残留

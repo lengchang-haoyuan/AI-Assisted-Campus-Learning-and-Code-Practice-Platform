@@ -9,9 +9,11 @@ from app.core.config import get_security_settings, get_settings
 from app.core.database import get_session_factory
 from app.core.exceptions import AuthenticationRequiredError
 from app.core.security import InvalidAccessTokenError, SecurityService
+from app.repositories.project import ProjectRepository
 from app.repositories.user import UserRepository
 from app.services.auth import AuthService, UserIdentity
 from app.services.health import HealthService
+from app.services.project import ProjectService
 
 bearer_scheme = HTTPBearer(auto_error=False)
 
@@ -74,3 +76,10 @@ def get_current_user(
     return AuthService(UserRepository(session), security).get_current_user(user_id)
 
 CurrentUser = Annotated[UserIdentity, Depends(get_current_user)]
+
+
+def get_project_service(session: DatabaseSession) -> ProjectService:
+    return ProjectService(ProjectRepository(session))
+
+
+ProjectServiceDependency = Annotated[ProjectService, Depends(get_project_service)]
