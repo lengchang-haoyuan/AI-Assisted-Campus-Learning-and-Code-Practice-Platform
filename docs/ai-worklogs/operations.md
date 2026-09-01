@@ -98,3 +98,14 @@
 - 验证：38 项后端测试和 OpenAPI 契约检查通过；Python 编译、依赖检查、前端回归检查和生产构建见单次完成报告
 - 安全：owner 只来自 JWT 当前用户，客户端 owner 伪造返回 422；Service 对详情、更新和删除统一执行所有权检查
 - 依赖与数据：未新增依赖、未修改 `schema.sql` 或 SQLAlchemy Models；本机 `mysql` CLI 不在 `PATH`，验收清理改用项目已有 SQLAlchemy/PyMySQL 并确认无测试用户残留
+
+## 2026-09-01 12:26:09 +08:00
+
+- 操作：完成 P05 Vue 前端基础框架、认证页面、登录后布局、Project CRUD 页面、个人工作台和个人资料页
+- 目标：实现 `/login`、`/register`、`/`、`/projects`、`/projects/:id`、`/workspace/dashboard`、`/profile`，并通过真实 FastAPI API 完成首条业务闭环
+- 原因：在 P03/P04 认证和 Project API 基础上建立可运行的前端业务入口，不提前实现 P06 社区、P07 学习数据或 P09 Workflow
+- 结果：完成；Router、Pinia、Axios Token 注入和 401 清理、认证状态、项目列表/创建/详情/编辑/删除确认、Loading/空/失败/重试状态均已实现
+- 恢复方式：回退本阶段提交；本次未修改公共 API、数据库结构或依赖，临时验收项目和账号已清理
+- 验证：前端类型检查与生产构建通过；后端 38 项测试、Python 编译、`pip check`、MySQL 连接和结构检查通过；浏览器真实验证全部 P05 路由、CRUD、390×844 响应式、液态筛选、数字滚动、卡片翻面和失败重试，控制台无错误
+- 设计：采用“轻盈实验室布告板”基调并记录 `DESIGN.md`；最终设计检测器无问题。严格 HERO 像素门为 55% 且保持 open，因为参考图包含 P06/P07/P09 后续数据，当前阶段未用虚构数据换取像素一致
+- 安全：Token 保存在 `sessionStorage`，前端路由守卫仅改善导航体验，所有资源权限仍由后端 JWT 与 owner 校验；未提交数据库凭据、JWT Secret、测试密码或 Token

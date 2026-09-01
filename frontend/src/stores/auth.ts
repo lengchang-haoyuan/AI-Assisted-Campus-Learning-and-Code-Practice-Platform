@@ -15,6 +15,7 @@ export const useAuthStore = defineStore('auth', () => {
   const token = ref<string | null>(getAccessToken())
   const currentUser = ref<UserResponse | null>(null)
   const loading = ref(false)
+  const initialized = ref(false)
   const isLoggedIn = computed(() => token.value !== null)
 
   function clearSession(): void {
@@ -45,13 +46,22 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function restoreSession(): Promise<void> {
     if (!token.value) {
+      initialized.value = true
       return
     }
     try {
       currentUser.value = await getCurrentUser()
     } catch {
-      currentUser.value = null
+      if (getAccessToken() === null) clearSession()
+      else currentUser.value = null
+    } finally {
+      initialized.value = true
     }
+  }
+
+  async function refreshCurrentUser(): Promise<UserResponse> {
+    currentUser.value = await getCurrentUser()
+    return currentUser.value
   }
 
   function logout(): void {
@@ -62,10 +72,12 @@ export const useAuthStore = defineStore('auth', () => {
     token,
     currentUser,
     loading,
+    initialized,
     isLoggedIn,
     login,
     register,
     restoreSession,
+    refreshCurrentUser,
     clearSession,
     logout,
   }

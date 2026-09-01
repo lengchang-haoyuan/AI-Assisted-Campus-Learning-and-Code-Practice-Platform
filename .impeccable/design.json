@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-01T12:19:06+08:00",
+  "title": "Design System: ScholarHub",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "深墨",
+        "canonical": "#17232f",
+        "tonalRamp": ["#0b1117", "#17232f", "#2c3a47", "#485864", "#6b7982", "#98a2a8", "#c8ced1", "#eff2f3"]
+      },
+      "canvas": {
+        "role": "neutral",
+        "displayName": "实验台底色",
+        "canonical": "#f4f8f7",
+        "tonalRamp": ["#18201e", "#2d3b37", "#4f625d", "#768a84", "#9fb0ab", "#c1cfcb", "#dde7e4", "#f4f8f7"]
+      },
+      "seafoam-strong": {
+        "role": "primary",
+        "displayName": "实验室海沫绿",
+        "canonical": "#19775f",
+        "tonalRamp": ["#06251d", "#0b3e30", "#105844", "#19775f", "#35957b", "#67b79d", "#9ed7c2", "#ddf4eb"]
+      },
+      "cobalt": {
+        "role": "primary",
+        "displayName": "行动钴蓝",
+        "canonical": "#2867d8",
+        "tonalRamp": ["#091c43", "#102e70", "#18449f", "#2867d8", "#5788e3", "#89aaed", "#bccdf6", "#eef3ff"]
+      },
+      "apricot": {
+        "role": "secondary",
+        "displayName": "布告杏橙",
+        "canonical": "#f1a468",
+        "tonalRamp": ["#3c1e08", "#683712", "#99531f", "#c9783f", "#f1a468", "#f6bd92", "#fad7ba", "#fff1e6"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "实验室铭牌", "purpose": "品牌名称和滚动数字。" },
+      "headline": { "displayName": "路由标题", "purpose": "页面级标题，不用于紧凑面板。" },
+      "body": { "displayName": "中文工作文本", "purpose": "表单、说明和项目详情。" }
+    },
+    "shadows": [
+      { "name": "ambient-panel", "value": "0 16px 36px rgb(23 35 47 / 9%)", "purpose": "工作台栏和路由级面板。" },
+      { "name": "interactive-lift", "value": "0 9px 20px rgb(23 35 47 / 13%)", "purpose": "按钮悬停反馈。" }
+    ],
+    "motion": [
+      { "name": "state-fast", "value": "180ms ease", "purpose": "导航、颜色和轻量状态切换。" },
+      { "name": "liquid-select", "value": "300ms cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "液态筛选底片形变。" },
+      { "name": "card-flip", "value": "620ms cubic-bezier(0.2, 0.75, 0.2, 1)", "purpose": "项目卡正反面切换。" }
+    ],
+    "breakpoints": [
+      { "name": "wide", "value": "1240px" },
+      { "name": "tablet", "value": "920px" },
+      { "name": "mobile", "value": "720px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "用于创建、保存和主要确认命令。",
+      "html": "<button class=\"ds-btn-primary\">创建项目</button>",
+      "css": ".ds-btn-primary { min-height: 42px; padding: 10px 18px; color: #fff; background: #2867d8; border: 1px solid transparent; border-radius: 5px; font: 800 14px 'Microsoft YaHei', sans-serif; transition: transform 160ms ease, box-shadow 160ms ease; } .ds-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 9px 20px rgb(23 35 47 / 13%); } .ds-btn-primary:focus-visible { outline: 3px solid rgb(40 103 216 / 28%); outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "description": "用于取消和次要命令。",
+      "html": "<button class=\"ds-btn-secondary\">取消</button>",
+      "css": ".ds-btn-secondary { min-height: 42px; padding: 10px 18px; color: #17232f; background: #fff; border: 1px solid #d9e4e1; border-radius: 5px; font: 800 14px 'Microsoft YaHei', sans-serif; transition: transform 160ms ease, box-shadow 160ms ease; } .ds-btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 9px 20px rgb(23 35 47 / 13%); } .ds-btn-secondary:focus-visible { outline: 3px solid rgb(40 103 216 / 28%); outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "用于认证和项目字段。",
+      "html": "<input class=\"ds-input\" value=\"校园失物招领小程序\" />",
+      "css": ".ds-input { width: 100%; min-height: 44px; padding: 10px 12px; color: #17232f; background: #fff; border: 1px solid #cbd8d4; border-radius: 4px; font: 400 14px 'Microsoft YaHei', sans-serif; outline: 0; } .ds-input:focus { border-color: #2867d8; box-shadow: 0 0 0 3px rgb(40 103 216 / 11%); }"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "description": "显示项目状态和技术栈。",
+      "html": "<span class=\"ds-chip\">进行中</span>",
+      "css": ".ds-chip { padding: 5px 9px; display: inline-flex; align-items: center; color: #154b3e; background: #e5f7f0; border: 1px solid #b5dfd0; border-radius: 999px; font: 800 12px 'Microsoft YaHei', sans-serif; }"
+    },
+    {
+      "name": "Board Panel",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "首页三栏与工作台内容容器。",
+      "html": "<section class=\"ds-board-panel\"><h3>我的项目广场</h3><p>管理真实项目进度。</p></section>",
+      "css": ".ds-board-panel { padding: 22px; color: #17232f; background: #fff; border: 1px solid #d9e4e1; border-radius: 6px; box-shadow: inset 0 2px 0 #2867d8, 0 16px 36px rgb(23 35 47 / 9%); font-family: 'Microsoft YaHei', sans-serif; } .ds-board-panel h3 { margin: 0 0 8px; font-size: 19px; } .ds-board-panel p { margin: 0; color: #66747d; }"
+    },
+    {
+      "name": "Liquid Tabs",
+      "kind": "custom",
+      "description": "用于项目状态分段筛选。",
+      "html": "<div class=\"ds-liquid-tabs\"><button class=\"ds-liquid-tab is-active\">全部</button><button class=\"ds-liquid-tab\">进行中</button><button class=\"ds-liquid-tab\">已完成</button></div>",
+      "css": ".ds-liquid-tabs { padding: 4px; display: grid; grid-auto-flow: column; gap: 4px; background: #edf2f1; border: 1px solid #d9e4e1; border-radius: 999px; } .ds-liquid-tab { min-height: 36px; padding: 7px 13px; color: #66747d; background: transparent; border: 0; border-radius: 999px; font: 800 13px 'Microsoft YaHei', sans-serif; } .ds-liquid-tab.is-active { color: #104d3d; background: #bfe9d8; border: 1px solid #9bd7c0; border-radius: 53% 47% 45% 55% / 44% 55% 45% 56%; } .ds-liquid-tab:focus-visible { outline: 3px solid rgb(40 103 216 / 28%); outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "轻盈实验室布告板",
+    "overview": "ScholarHub 把校园项目、学习节奏和技术状态组织成一张清爽的实验室布告板。视觉层级依赖明确分栏、细边框、窄色带和克制阴影，高级动效只用于表达状态变化。",
+    "keyCharacteristics": [
+      "冷白纸面、深墨正文与三种功能强调色形成清晰对比。",
+      "桌面采用三栏工作面板，窄屏按任务顺序自然纵向排列。",
+      "圆角克制，胶囊形仅用于状态和分段控件。",
+      "数据来自真实 API，关键异步状态完整。"
+    ],
+    "rules": [
+      { "name": "The Three-Marker Rule", "body": "海沫绿、钴蓝、杏橙各自承担一种功能语义。", "section": "colors" },
+      { "name": "The Ink-First Rule", "body": "正文可读性先于氛围。", "section": "colors" },
+      { "name": "The Compact Panel Rule", "body": "面板内标题保持紧凑。", "section": "typography" },
+      { "name": "The Bordered-First Rule", "body": "先用边框和色带建立结构。", "section": "elevation" }
+    ],
+    "dos": [
+      "Do 使用真实后端状态驱动卡片、统计、空态和错误反馈。",
+      "Do 保持三种强调色的固定语义，并用文字补充颜色状态。",
+      "Do 在桌面和 390px 级窄屏验证长文本、表单与危险操作。",
+      "Do 为高级动效提供键盘操作、稳定尺寸和减少动态效果支持。"
+    ],
+    "donts": [
+      "Don't 用虚构的社区、Workflow 或学习统计冒充已实现业务数据。",
+      "Don't 在卡片内再嵌套装饰性卡片。",
+      "Don't 用单一蓝色或单一绿色覆盖所有层级和状态。",
+      "Don't 让前端权限控制代替服务端鉴权。"
+    ]
+  }
+}

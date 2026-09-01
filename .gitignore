@@ -20,3 +20,9 @@ backend/.ruff_cache/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Impeccable 本地构建缓存与重复验收中间产物
+.impeccable/build/
+.impeccable/review/diff/
+.impeccable/review/hero-repro.png
+assets/plates/
