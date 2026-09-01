@@ -29,6 +29,16 @@ const router = createRouter({
           component: () => import('@/views/DashboardView.vue'),
         },
         {
+          path: 'community',
+          name: 'community',
+          component: () => import('@/views/CommunityView.vue'),
+        },
+        {
+          path: 'community/projects/:id',
+          name: 'community-project-detail',
+          component: () => import('@/views/CommunityProjectDetailView.vue'),
+        },
+        {
           path: 'projects',
           name: 'projects',
           component: () => import('@/views/ProjectsView.vue'),

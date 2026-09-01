@@ -1,4 +1,4 @@
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from math import ceil
 from typing import Any, Mapping
@@ -79,6 +79,10 @@ class ProjectData:
     status: ProjectStatus
     created_at: datetime
     updated_at: datetime
+    tags: list[tuple[int, str, str]] = field(default_factory=list)
+    is_published: bool = False
+    published_at: datetime | None = None
+    view_count: int = 0
 
 
 @dataclass(frozen=True, slots=True)
@@ -163,4 +167,8 @@ class ProjectService:
             status=project.status,
             created_at=project.created_at,
             updated_at=project.updated_at,
+            tags=[(tag.id, tag.name, tag.slug) for tag in project.tags],
+            is_published=project.is_published,
+            published_at=project.published_at,
+            view_count=project.view_count,
         )

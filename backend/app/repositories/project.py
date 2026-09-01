@@ -1,6 +1,6 @@
 from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import Session, joinedload
+from sqlalchemy.orm import Session, joinedload, selectinload
 
 from app.models.project import Project
 
@@ -22,7 +22,7 @@ class ProjectRepository:
     ) -> list[Project]:
         statement = (
             select(Project)
-            .options(joinedload(Project.owner))
+            .options(joinedload(Project.owner), selectinload(Project.tags))
             .where(Project.owner_id == owner_id)
             .order_by(Project.created_at.desc(), Project.id.desc())
             .offset(offset)
@@ -33,7 +33,7 @@ class ProjectRepository:
     def get_by_id(self, project_id: int) -> Project | None:
         statement = (
             select(Project)
-            .options(joinedload(Project.owner))
+            .options(joinedload(Project.owner), selectinload(Project.tags))
             .where(Project.id == project_id)
             .execution_options(populate_existing=True)
         )

@@ -14,13 +14,18 @@ import {
   statusLabels,
 } from '@/domain/projects'
 import { useProjectStore } from '@/stores/projects'
+import { useCommunityStore } from '@/stores/community'
 import type { ProjectCreateInput } from '@/types/project'
 
 const route = useRoute()
 const router = useRouter()
 const projectStore = useProjectStore()
+const communityStore = useCommunityStore()
 const editMode = ref(route.query.edit === '1')
 const submitError = ref<string | null>(null)
+const publicationOpen = ref(false)
+const publicationTags = ref('')
+const publicationError = ref<string | null>(null)
 
 const projectId = computed(() => {
   const value = Number(route.params.id)
@@ -32,9 +37,58 @@ const stack = computed(() => (project.value ? getProjectStack(project.value) : [
 async function loadProject(): Promise<void> {
   if (projectId.value === null) return
   try {
-    await projectStore.fetchProject(projectId.value)
+    const result = await projectStore.fetchProject(projectId.value)
+    publicationTags.value = result.tags.map((tag) => tag.name).join('，')
   } catch {
     // Store 已保存可重试的用户提示。
+  }
+}
+
+function parsePublicationTags(): string[] | null {
+  const tags = publicationTags.value
+    .split(/[,，\n]/)
+    .map((tag) => tag.trim())
+    .filter((tag, index, values) => tag && values.findIndex((value) => value.toLowerCase() === tag.toLowerCase()) === index)
+  if (tags.length > 5) {
+    publicationError.value = '最多添加 5 个标签'
+    return null
+  }
+  if (tags.some((tag) => tag.length > 50)) {
+    publicationError.value = '每个标签不能超过 50 个字符'
+    return null
+  }
+  return tags
+}
+
+async function publishProject(): Promise<void> {
+  if (projectId.value === null) return
+  publicationError.value = null
+  const tags = parsePublicationTags()
+  if (tags === null) return
+  try {
+    await communityStore.publishProject(projectId.value, tags)
+    await loadProject()
+    publicationOpen.value = false
+    ElMessage.success('项目已发布到校园社区')
+  } catch (error: unknown) {
+    publicationError.value = getApiErrorMessage(error, '项目发布失败，请重试')
+  }
+}
+
+async function unpublishProject(): Promise<void> {
+  if (!project.value) return
+  try {
+    await ElMessageBox.confirm('撤下后，社区中的项目详情和互动入口将不可访问。', '确认撤下项目', {
+      confirmButtonText: '撤下',
+      cancelButtonText: '取消',
+      type: 'warning',
+    })
+    await communityStore.unpublishProject(project.value.id)
+    await loadProject()
+    ElMessage.success('项目已从社区撤下')
+  } catch (error: unknown) {
+    if (error === 'cancel' || error === 'close') return
+    ElMessage.error(getApiErrorMessage(error, '项目撤下失败，请重试'))
   }
 }
 
@@ -103,6 +157,30 @@ onBeforeUnmount(() => {
           <p>{{ project.description || '这个项目还没有补充说明。' }}</p>
         </div>
         <div class="detail-actions">
+          <RouterLink
+            v-if="project.is_published"
+            class="primary-command"
+            :to="`/community/projects/${project.id}`"
+          >
+            查看社区页
+          </RouterLink>
+          <button
+            v-if="project.is_published"
+            class="secondary-command"
+            type="button"
+            :disabled="communityStore.actionLoading"
+            @click="unpublishProject"
+          >
+            撤下社区
+          </button>
+          <button
+            v-else
+            class="primary-command"
+            type="button"
+            @click="publicationOpen = !publicationOpen"
+          >
+            {{ publicationOpen ? '收起发布设置' : '发布到社区' }}
+          </button>
           <button class="secondary-command" type="button" @click="editMode = !editMode">
             {{ editMode ? '退出编辑' : '编辑项目' }}
           </button>
@@ -111,6 +189,25 @@ onBeforeUnmount(() => {
           </button>
         </div>
       </header>
+
+      <section v-if="publicationOpen && !project.is_published" class="publication-panel" aria-labelledby="publication-title">
+        <div class="panel-title-row">
+          <h2 id="publication-title">发布到校园代码社区</h2>
+          <span>项目说明和技术栈将对登录用户可见</span>
+        </div>
+        <label class="field">
+          <span>项目标签</span>
+          <input v-model="publicationTags" maxlength="254" placeholder="例如：Vue，校园服务，课程设计" />
+          <small>使用逗号分隔，最多 5 个标签</small>
+        </label>
+        <div v-if="publicationError" class="inline-alert is-error" role="alert">{{ publicationError }}</div>
+        <div class="form-actions">
+          <button class="secondary-command" type="button" :disabled="communityStore.actionLoading" @click="publicationOpen = false">取消</button>
+          <button class="primary-command" type="button" :disabled="communityStore.actionLoading" @click="publishProject">
+            {{ communityStore.actionLoading ? '正在发布…' : '确认发布' }}
+          </button>
+        </div>
+      </section>
 
       <section v-if="editMode" class="editor-panel" aria-labelledby="edit-project-title">
         <h2 id="edit-project-title">编辑项目信息</h2>
@@ -141,6 +238,9 @@ onBeforeUnmount(() => {
           <div class="tag-row">
             <span v-for="technology in stack" :key="technology" class="tech-tag">{{ technology }}</span>
             <span v-if="stack.length === 0" class="tech-tag is-muted">暂未设置</span>
+          </div>
+          <div v-if="project.tags.length" class="tag-row" aria-label="社区标签">
+            <span v-for="tag in project.tags" :key="tag.id" class="tech-tag">{{ tag.name }}</span>
           </div>
           <dl class="detail-facts">
             <div><dt>主要语言</dt><dd>{{ project.language || '未设置' }}</dd></div>

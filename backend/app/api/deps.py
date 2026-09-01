@@ -10,8 +10,10 @@ from app.core.database import get_session_factory
 from app.core.exceptions import AuthenticationRequiredError
 from app.core.security import InvalidAccessTokenError, SecurityService
 from app.repositories.project import ProjectRepository
+from app.repositories.community import CommunityRepository
 from app.repositories.user import UserRepository
 from app.services.auth import AuthService, UserIdentity
+from app.services.community import CommunityService
 from app.services.health import HealthService
 from app.services.project import ProjectService
 
@@ -83,3 +85,12 @@ def get_project_service(session: DatabaseSession) -> ProjectService:
 
 
 ProjectServiceDependency = Annotated[ProjectService, Depends(get_project_service)]
+
+
+def get_community_service(session: DatabaseSession) -> CommunityService:
+    return CommunityService(CommunityRepository(session))
+
+
+CommunityServiceDependency = Annotated[
+    CommunityService, Depends(get_community_service)
+]

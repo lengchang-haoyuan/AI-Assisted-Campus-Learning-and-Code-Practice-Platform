@@ -11,6 +11,7 @@ from pydantic import (
 )
 
 from app.models.enums import ProjectDifficulty, ProjectStatus
+from app.schemas.community import TagResponse
 
 MAX_REQUIREMENTS_BYTES = 65_536
 OPTIONAL_TEXT_FIELDS = (
@@ -130,6 +131,10 @@ class ProjectResponse(ProjectFields):
 
     id: int
     owner: ProjectOwnerResponse
+    tags: list[TagResponse]
+    is_published: bool
+    published_at: datetime | None
+    view_count: int
     created_at: datetime
     updated_at: datetime
 
