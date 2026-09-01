@@ -8,6 +8,16 @@ from app.schemas.community import (
     TagResponse,
     TagSummaryResponse,
 )
+from app.schemas.course import CourseListResponse, CourseResponse
+from app.schemas.learning import (
+    LearningRecordListResponse as LearningRecordListV2Response,
+    LearningRecordResponse as LearningRecordV2Response,
+    LearningTaskListResponse,
+    LearningTaskResponse,
+    PlanListResponse,
+    PlanResponse,
+    ResourceRefResponse,
+)
 from app.schemas.project import (
     ProjectListResponse,
     ProjectOwnerResponse,
@@ -33,6 +43,16 @@ from app.services.community import (
     CommunityProjectData,
     CommunityProjectPage,
     TagSummaryData,
+)
+from app.services.course import CourseData, CoursePage
+from app.services.learning import (
+    PlanData,
+    PlanPage,
+    RecordData,
+    RecordPage,
+    ResourceRefData,
+    TaskData as LearningTaskData,
+    TaskPage as LearningTaskPage,
 )
 from app.services.project import ProjectData, ProjectPage
 from app.services.workspace import (
@@ -300,13 +320,117 @@ def to_workspace_dashboard_response(
             to_learning_record_response(record) for record in dashboard.recent_records
         ],
     )
-from app.schemas.community import (
-    CommentAuthorResponse,
-    CommentListResponse,
-    CommentResponse,
-    CommunityOwnerResponse,
-    CommunityProjectListResponse,
-    CommunityProjectResponse,
-    TagResponse,
-    TagSummaryResponse,
-)
+
+
+def to_course_response(course: CourseData) -> CourseResponse:
+    return CourseResponse(
+        id=course.id,
+        name=course.name,
+        code=course.code,
+        description=course.description,
+        instructor=course.instructor,
+        schedule_data=course.schedule_data,
+        status=course.status,
+        created_at=course.created_at,
+        updated_at=course.updated_at,
+    )
+
+
+def to_course_list_response(page: CoursePage) -> CourseListResponse:
+    return CourseListResponse(
+        items=[to_course_response(course) for course in page.items],
+        total=page.total,
+        page=page.page,
+        page_size=page.page_size,
+        total_pages=page.total_pages,
+    )
+
+
+def to_resource_ref_response(resource: ResourceRefData | None) -> ResourceRefResponse | None:
+    if resource is None:
+        return None
+    return ResourceRefResponse(id=resource.id, name=resource.name)
+
+
+def to_plan_response(plan: PlanData) -> PlanResponse:
+    return PlanResponse(
+        id=plan.id,
+        title=plan.title,
+        description=plan.description,
+        status=plan.status,
+        start_date=plan.start_date,
+        end_date=plan.end_date,
+        goal_data=plan.goal_data,
+        progress=plan.progress,
+        project=to_resource_ref_response(plan.project),
+        course=to_resource_ref_response(plan.course),
+        created_at=plan.created_at,
+        updated_at=plan.updated_at,
+    )
+
+
+def to_plan_list_response(page: PlanPage) -> PlanListResponse:
+    return PlanListResponse(
+        items=[to_plan_response(plan) for plan in page.items],
+        total=page.total,
+        page=page.page,
+        page_size=page.page_size,
+        total_pages=page.total_pages,
+    )
+
+
+def to_learning_task_v2_response(task: LearningTaskData) -> LearningTaskResponse:
+    return LearningTaskResponse(
+        id=task.id,
+        title=task.title,
+        description=task.description,
+        priority=task.priority,
+        status=task.status,
+        scheduled_date=task.scheduled_date,
+        start_time=task.start_time,
+        end_time=task.end_time,
+        estimated_minutes=task.estimated_minutes,
+        completed_at=task.completed_at,
+        plan=to_resource_ref_response(task.plan),
+        project=to_resource_ref_response(task.project),
+        created_at=task.created_at,
+        updated_at=task.updated_at,
+    )
+
+
+def to_learning_task_list_response(page: LearningTaskPage) -> LearningTaskListResponse:
+    return LearningTaskListResponse(
+        items=[to_learning_task_v2_response(task) for task in page.items],
+        total=page.total,
+        page=page.page,
+        page_size=page.page_size,
+        total_pages=page.total_pages,
+    )
+
+
+def to_learning_record_v2_response(record: RecordData) -> LearningRecordV2Response:
+    return LearningRecordV2Response(
+        id=record.id,
+        title=record.title,
+        content=record.content,
+        record_type=record.record_type,
+        duration_minutes=record.duration_minutes,
+        occurred_at=record.occurred_at,
+        project=to_resource_ref_response(record.project),
+        course=to_resource_ref_response(record.course),
+        task=to_resource_ref_response(record.task),
+        record_metadata=record.record_metadata,
+        created_at=record.created_at,
+    )
+
+
+def to_learning_record_list_v2_response(
+    page: RecordPage,
+) -> LearningRecordListV2Response:
+    return LearningRecordListV2Response(
+        items=[to_learning_record_v2_response(record) for record in page.items],
+        total=page.total,
+        page=page.page,
+        page_size=page.page_size,
+        total_pages=page.total_pages,
+    )

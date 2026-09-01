@@ -74,6 +74,21 @@ const router = createRouter({
           component: () => import('@/views/WorkspaceRecordsView.vue'),
         },
         {
+          path: 'learning',
+          name: 'learning-overview',
+          component: () => import('@/views/LearningOverviewView.vue'),
+        },
+        {
+          path: 'learning/tasks',
+          name: 'learning-tasks',
+          component: () => import('@/views/LearningTasksView.vue'),
+        },
+        {
+          path: 'learning/records',
+          name: 'learning-records',
+          component: () => import('@/views/LearningRecordsView.vue'),
+        },
+        {
           path: 'profile',
           name: 'profile',
           component: () => import('@/views/ProfileView.vue'),

@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, joinedload
 
 from app.models.enums import ProjectStatus, TaskStatus
-from app.models.learning import DailyTask, LearningRecord
+from app.models.learning import DailyTask, LearningPlan, LearningRecord
 from app.models.project import Project
 
 
@@ -111,11 +111,39 @@ class WorkspaceRepository:
         return saved
 
     def update_task(self, task: DailyTask) -> DailyTask:
-        self._commit_or_raise_conflict()
+        try:
+            self._session.flush()
+            if task.plan_id is not None:
+                self._recalculate_plan_progress(task.plan_id, task.user_id)
+            self._session.commit()
+        except IntegrityError as exc:
+            self._session.rollback()
+            raise WorkspacePersistenceConflictError from exc
         saved = self.get_task(task.id)
         if saved is None:
             raise RuntimeError("任务更新后无法重新加载")
         return saved
+
+    def _recalculate_plan_progress(self, plan_id: int, user_id: int) -> None:
+        total, completed = self._session.execute(
+            select(
+                func.count(DailyTask.id),
+                func.coalesce(
+                    func.sum(
+                        case((DailyTask.status == TaskStatus.COMPLETED, 1), else_=0)
+                    ),
+                    0,
+                ),
+            ).where(DailyTask.plan_id == plan_id, DailyTask.user_id == user_id)
+        ).one()
+        plan = self._session.scalar(
+            select(LearningPlan).where(
+                LearningPlan.id == plan_id,
+                LearningPlan.user_id == user_id,
+            )
+        )
+        if plan is not None:
+            plan.progress = round(completed * 100 / total) if total else 0
 
     def count_records(self, user_id: int) -> int:
         return self._session.scalar(

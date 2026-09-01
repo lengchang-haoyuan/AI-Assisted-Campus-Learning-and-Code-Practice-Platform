@@ -11,11 +11,15 @@ from app.core.exceptions import AuthenticationRequiredError
 from app.core.security import InvalidAccessTokenError, SecurityService
 from app.repositories.project import ProjectRepository
 from app.repositories.community import CommunityRepository
+from app.repositories.course import CourseRepository
+from app.repositories.learning import LearningRepository
 from app.repositories.user import UserRepository
 from app.repositories.workspace import WorkspaceRepository
 from app.services.auth import AuthService, UserIdentity
 from app.services.community import CommunityService
+from app.services.course import CourseService
 from app.services.health import HealthService
+from app.services.learning import LearningService
 from app.services.project import ProjectService
 from app.services.workspace import WorkspaceService
 
@@ -103,3 +107,19 @@ def get_workspace_service(session: DatabaseSession) -> WorkspaceService:
 
 
 WorkspaceServiceDependency = Annotated[WorkspaceService, Depends(get_workspace_service)]
+
+
+def get_course_service(session: DatabaseSession) -> CourseService:
+    return CourseService(CourseRepository(session))
+
+
+CourseServiceDependency = Annotated[CourseService, Depends(get_course_service)]
+
+
+def get_learning_service(session: DatabaseSession) -> LearningService:
+    return LearningService(LearningRepository(session))
+
+
+LearningServiceDependency = Annotated[
+    LearningService, Depends(get_learning_service)
+]
