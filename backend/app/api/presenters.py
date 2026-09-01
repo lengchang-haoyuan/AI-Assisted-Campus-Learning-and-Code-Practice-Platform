@@ -24,6 +24,16 @@ from app.schemas.project import (
     ProjectResponse,
 )
 from app.schemas.user import UserResponse
+from app.schemas.workflow import (
+    WorkflowEdgeListResponse,
+    WorkflowEdgeResponse,
+    WorkflowGraphResponse,
+    WorkflowListResponse,
+    WorkflowNodeListResponse,
+    WorkflowNodeResponse,
+    WorkflowProjectResponse,
+    WorkflowResponse,
+)
 from app.schemas.workspace import (
     LearningRecordListResponse,
     LearningRecordResponse,
@@ -55,6 +65,13 @@ from app.services.learning import (
     TaskPage as LearningTaskPage,
 )
 from app.services.project import ProjectData, ProjectPage
+from app.services.workflow import (
+    WorkflowData,
+    WorkflowEdgeData,
+    WorkflowGraphData,
+    WorkflowNodeData,
+    WorkflowPage,
+)
 from app.services.workspace import (
     LearningRecordData,
     LearningRecordPage,
@@ -433,4 +450,88 @@ def to_learning_record_list_v2_response(
         page=page.page,
         page_size=page.page_size,
         total_pages=page.total_pages,
+    )
+
+
+def to_workflow_response(workflow: WorkflowData) -> WorkflowResponse:
+    return WorkflowResponse(
+        id=workflow.id,
+        project=WorkflowProjectResponse(
+            id=workflow.project.id,
+            name=workflow.project.name,
+        ),
+        name=workflow.name,
+        description=workflow.description,
+        status=workflow.status,
+        version=workflow.version,
+        node_count=workflow.node_count,
+        edge_count=workflow.edge_count,
+        created_at=workflow.created_at,
+        updated_at=workflow.updated_at,
+    )
+
+
+def to_workflow_list_response(page: WorkflowPage) -> WorkflowListResponse:
+    return WorkflowListResponse(
+        items=[to_workflow_response(workflow) for workflow in page.items],
+        total=page.total,
+        page=page.page,
+        page_size=page.page_size,
+        total_pages=page.total_pages,
+    )
+
+
+def to_workflow_node_response(node: WorkflowNodeData) -> WorkflowNodeResponse:
+    return WorkflowNodeResponse(
+        id=node.id,
+        workflow_id=node.workflow_id,
+        node_key=node.node_key,
+        node_type=node.node_type,
+        name=node.name,
+        position_x=node.position_x,
+        position_y=node.position_y,
+        config=node.config,
+        status=node.status,
+        context_version=node.context_version,
+        created_at=node.created_at,
+        updated_at=node.updated_at,
+    )
+
+
+def to_workflow_node_list_response(
+    nodes: list[WorkflowNodeData],
+) -> WorkflowNodeListResponse:
+    return WorkflowNodeListResponse(
+        items=[to_workflow_node_response(node) for node in nodes],
+        total=len(nodes),
+    )
+
+
+def to_workflow_edge_response(edge: WorkflowEdgeData) -> WorkflowEdgeResponse:
+    return WorkflowEdgeResponse(
+        id=edge.id,
+        workflow_id=edge.workflow_id,
+        source_node_id=edge.source_node_id,
+        target_node_id=edge.target_node_id,
+        source_node_key=edge.source_node_key,
+        target_node_key=edge.target_node_key,
+        condition_data=edge.condition_data,
+        created_at=edge.created_at,
+    )
+
+
+def to_workflow_edge_list_response(
+    edges: list[WorkflowEdgeData],
+) -> WorkflowEdgeListResponse:
+    return WorkflowEdgeListResponse(
+        items=[to_workflow_edge_response(edge) for edge in edges],
+        total=len(edges),
+    )
+
+
+def to_workflow_graph_response(graph: WorkflowGraphData) -> WorkflowGraphResponse:
+    return WorkflowGraphResponse(
+        workflow=to_workflow_response(graph.workflow),
+        nodes=[to_workflow_node_response(node) for node in graph.nodes],
+        edges=[to_workflow_edge_response(edge) for edge in graph.edges],
     )

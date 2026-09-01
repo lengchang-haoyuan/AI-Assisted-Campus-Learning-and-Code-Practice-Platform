@@ -33,6 +33,7 @@ function logout(): void {
         <RouterLink to="/projects">项目库</RouterLink>
         <RouterLink to="/workspace/dashboard">我的桌面</RouterLink>
         <RouterLink to="/learning">学习系统</RouterLink>
+        <RouterLink to="/workflows">工作流</RouterLink>
       </nav>
 
       <form class="global-search" role="search" @submit.prevent="search">

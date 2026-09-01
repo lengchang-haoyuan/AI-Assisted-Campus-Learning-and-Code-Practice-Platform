@@ -14,6 +14,7 @@ from app.repositories.community import CommunityRepository
 from app.repositories.course import CourseRepository
 from app.repositories.learning import LearningRepository
 from app.repositories.user import UserRepository
+from app.repositories.workflow import WorkflowRepository
 from app.repositories.workspace import WorkspaceRepository
 from app.services.auth import AuthService, UserIdentity
 from app.services.community import CommunityService
@@ -21,6 +22,7 @@ from app.services.course import CourseService
 from app.services.health import HealthService
 from app.services.learning import LearningService
 from app.services.project import ProjectService
+from app.services.workflow import WorkflowService
 from app.services.workspace import WorkspaceService
 
 bearer_scheme = HTTPBearer(auto_error=False)
@@ -122,4 +124,13 @@ def get_learning_service(session: DatabaseSession) -> LearningService:
 
 LearningServiceDependency = Annotated[
     LearningService, Depends(get_learning_service)
+]
+
+
+def get_workflow_service(session: DatabaseSession) -> WorkflowService:
+    return WorkflowService(WorkflowRepository(session))
+
+
+WorkflowServiceDependency = Annotated[
+    WorkflowService, Depends(get_workflow_service)
 ]
