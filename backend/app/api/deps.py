@@ -12,10 +12,12 @@ from app.core.security import InvalidAccessTokenError, SecurityService
 from app.repositories.project import ProjectRepository
 from app.repositories.community import CommunityRepository
 from app.repositories.user import UserRepository
+from app.repositories.workspace import WorkspaceRepository
 from app.services.auth import AuthService, UserIdentity
 from app.services.community import CommunityService
 from app.services.health import HealthService
 from app.services.project import ProjectService
+from app.services.workspace import WorkspaceService
 
 bearer_scheme = HTTPBearer(auto_error=False)
 
@@ -94,3 +96,10 @@ def get_community_service(session: DatabaseSession) -> CommunityService:
 CommunityServiceDependency = Annotated[
     CommunityService, Depends(get_community_service)
 ]
+
+
+def get_workspace_service(session: DatabaseSession) -> WorkspaceService:
+    return WorkspaceService(WorkspaceRepository(session))
+
+
+WorkspaceServiceDependency = Annotated[WorkspaceService, Depends(get_workspace_service)]

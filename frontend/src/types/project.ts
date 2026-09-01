@@ -50,6 +50,7 @@ export interface ProjectResponse extends ProjectFields {
   is_published: boolean
   published_at: string | null
   view_count: number
+  progress: number
   created_at: string
   updated_at: string
 }

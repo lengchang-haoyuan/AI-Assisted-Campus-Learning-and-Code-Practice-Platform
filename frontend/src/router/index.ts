@@ -54,6 +54,26 @@ const router = createRouter({
           component: () => import('@/views/WorkspaceDashboardView.vue'),
         },
         {
+          path: 'workspace/tasks',
+          name: 'workspace-tasks',
+          component: () => import('@/views/WorkspaceTasksView.vue'),
+        },
+        {
+          path: 'workspace/projects',
+          name: 'workspace-projects',
+          component: () => import('@/views/WorkspaceProjectsView.vue'),
+        },
+        {
+          path: 'workspace/projects/:id',
+          name: 'workspace-project-detail',
+          component: () => import('@/views/WorkspaceProjectDetailView.vue'),
+        },
+        {
+          path: 'workspace/records',
+          name: 'workspace-records',
+          component: () => import('@/views/WorkspaceRecordsView.vue'),
+        },
+        {
           path: 'profile',
           name: 'profile',
           component: () => import('@/views/ProfileView.vue'),

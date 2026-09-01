@@ -83,6 +83,7 @@ class ProjectData:
     is_published: bool = False
     published_at: datetime | None = None
     view_count: int = 0
+    progress: int = 0
 
 
 @dataclass(frozen=True, slots=True)
@@ -171,4 +172,5 @@ class ProjectService:
             is_published=project.is_published,
             published_at=project.published_at,
             view_count=project.view_count,
+            progress=project.progress,
         )

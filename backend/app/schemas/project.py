@@ -135,6 +135,7 @@ class ProjectResponse(ProjectFields):
     is_published: bool
     published_at: datetime | None
     view_count: int
+    progress: int
     created_at: datetime
     updated_at: datetime
 
