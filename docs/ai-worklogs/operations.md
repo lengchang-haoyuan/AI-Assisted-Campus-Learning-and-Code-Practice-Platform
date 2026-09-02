@@ -158,3 +158,14 @@
 - 安全：Workflow 所属 Project 和当前用户权限由 Service 校验，整图保存使用版本复查和事务，未记录密码、Token、数据库凭据或内部异常
 - 依赖确认：用户明确批准 `@vue-flow/core@1.48.2`；pnpm 忽略间接 `vue-demi` 构建脚本，但直接 import、类型检查和生产构建均通过，未放宽脚本策略
 - 已知限制：仓库仍无前端 Lint、组件测试和 E2E 脚本；P05 HERO 门属于既有参考图验收项，与 P09 功能无关
+
+## 2026-09-02 12:46:24 +08:00
+
+- 操作：完成 P10 ProjectContext 领域模型、持久化分层 API、节点权限与下游失效规则
+- 目标：让 Project 和 P09 Workflow 共享可版本化上下文，支持创建、读取、修改、保存、节点受限读写和 stale 识别
+- 原因：为 P11/P12 Agent 提供经过 Schema 校验且按项目所有权隔离的确定性上下文，本阶段不接 AI Provider 或执行 Workflow
+- 结果：完成；复用 `projects.context_data`、`workflow_nodes.context_version/status`，新增 ContextBuilder、ContextManager、Repository、Service、Schema、Router 和 MySQL 验收脚本，未修改数据库结构或依赖
+- 恢复方式：回退本阶段提交；`schema.sql` 和 18 张现有表无需回滚，真实 MySQL 验收临时用户、项目和 Workflow 已自动清理
+- 验证：Python 编译、88 项后端测试、16 项 P10 专项测试、`pip check`、18 表/33 外键结构检查、40 条 OpenAPI 路径及真实 MySQL 版本 `1→2→3` 持久化验收通过
+- 安全：所有 ProjectContext 和节点接口要求 JWT，Service 校验 Project 所有权；节点配置只能缩小字段白名单，外部 JSON 限制大小、深度并拒绝密码、Token、Secret、API Key 和原始模型输入键
+- 已知限制：通用 `verify-backend.ps1` 固定调用系统 Python 的 `pytest`，与本仓库 `.venv + unittest` 约定不兼容；未新增 pytest、Ruff 或 Mypy 依赖，项目自身标准验证命令已通过

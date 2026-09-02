@@ -64,6 +64,33 @@ DELETE /api/v1/projects/{project_id}
 
 列表按 `created_at DESC, id DESC` 稳定排序，`page` 范围为 1-10000，`page_size` 范围为 1-100。空列表返回 `items: []`、`total: 0` 和 `total_pages: 0`。`PUT` 支持只提交需要修改的字段，但请求体不能为空；`owner` 和 `owner_id` 不接受客户端输入。
 
+## ProjectContext
+
+ProjectContext 复用 `projects.context_data` JSON 字段，不新增数据库表。以下接口均要求 Bearer Token，并按 Project 所有者隔离：
+
+```text
+POST /api/v1/projects/{project_id}/context
+GET  /api/v1/projects/{project_id}/context
+PUT  /api/v1/projects/{project_id}/context
+
+POST /api/v1/workflows/{workflow_id}/nodes/{node_id}/context/read
+POST /api/v1/workflows/{workflow_id}/nodes/{node_id}/context/write
+```
+
+- Context 记录 `schema_version`、业务 `version`、UTC 更新时间、更新来源和逐字段元数据。
+- 更新请求必须提交 `expected_version`；版本落后返回 409。无实际变化时不增加版本。
+- 普通字段整体替换，可空字段使用 `null` 清空；`architecture` 和 `extensions` 使用 JSON Merge Patch 语义，嵌套 `null` 删除对应键。
+- Project 核心字段与 Context 更新在同一数据库事务内保持一致。若旧 Project API 直接改变了核心字段，Context 会报告 `is_stale`，节点读取和写入会在同步前返回 409。
+- 节点只能使用其类型白名单中的字段；`config.context_reads` 和 `config.context_writes` 只能缩小默认权限，不能扩大权限。
+- 字段变化后，直接依赖节点及其 DAG 下游节点会持久化为 `stale`。例如 `language` 从 Python 改为 Java，会使 `project_structure` 和 `prompt` 节点过期。
+- Context 拒绝未知顶层字段、过深或过大的 JSON，以及密码、Token、Secret、API Key 和模型原始输入等敏感键。
+
+真实 MySQL 验收脚本会创建隔离的临时数据并在结束时清理：
+
+```powershell
+python -m scripts.verify_project_context
+```
+
 所有响应包含 `X-Request-ID`。应用错误统一返回：
 
 ```json

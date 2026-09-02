@@ -23,6 +23,14 @@ from app.schemas.project import (
     ProjectOwnerResponse,
     ProjectResponse,
 )
+from app.schemas.project_context import (
+    ContextFieldMetadataResponse,
+    ContextSourceResponse,
+    NodeContextResponse,
+    ProjectContextMutationResponse,
+    ProjectContextResponse,
+    ProjectContextValuesResponse,
+)
 from app.schemas.user import UserResponse
 from app.schemas.workflow import (
     WorkflowEdgeListResponse,
@@ -65,6 +73,11 @@ from app.services.learning import (
     TaskPage as LearningTaskPage,
 )
 from app.services.project import ProjectData, ProjectPage
+from app.services.project_context import (
+    NodeContextData,
+    ProjectContextData,
+    ProjectContextMutationData,
+)
 from app.services.workflow import (
     WorkflowData,
     WorkflowEdgeData,
@@ -131,6 +144,72 @@ def to_project_list_response(page: ProjectPage) -> ProjectListResponse:
         page=page.page,
         page_size=page.page_size,
         total_pages=page.total_pages,
+    )
+
+
+def to_project_context_response(context: ProjectContextData) -> ProjectContextResponse:
+    values = context.values
+    return ProjectContextResponse(
+        project_id=context.project_id,
+        version=context.version,
+        values=ProjectContextValuesResponse(
+            project_name=values.project_name,
+            language=values.language,
+            framework=values.framework,
+            frontend=values.frontend,
+            backend=values.backend,
+            database=values.database,
+            difficulty=values.difficulty,
+            requirements=values.requirements,
+            output_requirement=values.output_requirement,
+            architecture=values.architecture,
+            features=values.features,
+            constraints=values.constraints,
+            extensions=values.extensions,
+        ),
+        field_metadata={
+            field_name: ContextFieldMetadataResponse(
+                version=metadata.version,
+                updated_at=metadata.updated_at,
+                source=ContextSourceResponse(
+                    type=metadata.source.type,
+                    id=metadata.source.id,
+                    node_key=metadata.source.node_key,
+                ),
+            )
+            for field_name, metadata in context.field_metadata.items()
+        },
+        updated_at=context.updated_at,
+        source=ContextSourceResponse(
+            type=context.source.type,
+            id=context.source.id,
+            node_key=context.source.node_key,
+        ),
+        is_stale=context.is_stale,
+        stale_fields=context.stale_fields,
+        stale_node_ids=context.stale_node_ids,
+    )
+
+
+def to_project_context_mutation_response(
+    mutation: ProjectContextMutationData,
+) -> ProjectContextMutationResponse:
+    return ProjectContextMutationResponse(
+        context=to_project_context_response(mutation.context),
+        changed_fields=mutation.changed_fields,
+        stale_node_ids=mutation.stale_node_ids,
+    )
+
+
+def to_node_context_response(context: NodeContextData) -> NodeContextResponse:
+    return NodeContextResponse(
+        project_id=context.project_id,
+        workflow_id=context.workflow_id,
+        node_id=context.node_id,
+        node_key=context.node_key,
+        context_version=context.context_version,
+        values=context.values,
+        is_stale=context.is_stale,
     )
 
 
