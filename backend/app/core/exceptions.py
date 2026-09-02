@@ -36,3 +36,27 @@ class ConflictError(AppError):
     status_code = 409
     code = "conflict"
     default_message = "请求与当前资源状态冲突"
+
+
+class AIConfigurationError(AppError):
+    status_code = 503
+    code = "ai_configuration_error"
+    default_message = "AI Provider 尚未正确配置"
+
+
+class AIRateLimitError(AppError):
+    status_code = 503
+    code = "ai_rate_limited"
+    default_message = "AI Provider 当前请求过多，请稍后重试"
+
+
+class AIUpstreamTimeoutError(AppError):
+    status_code = 504
+    code = "ai_timeout"
+    default_message = "AI Provider 响应超时"
+
+
+class AIUpstreamError(AppError):
+    status_code = 502
+    code = "ai_upstream_error"
+    default_message = "AI Provider 调用失败"

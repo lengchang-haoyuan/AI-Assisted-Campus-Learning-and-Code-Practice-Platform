@@ -1,11 +1,14 @@
-from collections.abc import Generator
+from collections.abc import AsyncGenerator, Generator
 from typing import Annotated
 
 from fastapi import Depends
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+import httpx
 from sqlalchemy.orm import Session
 
-from app.core.config import get_security_settings, get_settings
+from app.ai.client import AIClient
+from app.ai.deepseek import DeepSeekProvider
+from app.core.config import get_ai_settings, get_security_settings, get_settings
 from app.core.database import get_session_factory
 from app.core.exceptions import AuthenticationRequiredError
 from app.core.security import InvalidAccessTokenError, SecurityService
@@ -18,6 +21,7 @@ from app.repositories.user import UserRepository
 from app.repositories.workflow import WorkflowRepository
 from app.repositories.workspace import WorkspaceRepository
 from app.services.auth import AuthService, UserIdentity
+from app.services.ai import AIService
 from app.services.community import CommunityService
 from app.services.course import CourseService
 from app.services.health import HealthService
@@ -145,3 +149,30 @@ def get_workflow_service(session: DatabaseSession) -> WorkflowService:
 WorkflowServiceDependency = Annotated[
     WorkflowService, Depends(get_workflow_service)
 ]
+
+
+async def get_ai_service() -> AsyncGenerator[AIService, None]:
+    settings = get_ai_settings()
+    async with httpx.AsyncClient(follow_redirects=False) as http_client:
+        provider = DeepSeekProvider(
+            http_client,
+            api_key=settings.deepseek_api_key,
+            base_url=settings.deepseek_base_url,
+            connect_timeout_seconds=settings.ai_connect_timeout_seconds,
+            request_timeout_seconds=settings.ai_total_timeout_seconds,
+        )
+        client = AIClient(
+            provider,
+            total_timeout_seconds=settings.ai_total_timeout_seconds,
+            max_retries=settings.ai_max_retries,
+            retry_base_delay_seconds=settings.ai_retry_base_delay_seconds,
+            max_retry_delay_seconds=settings.ai_max_retry_delay_seconds,
+        )
+        yield AIService(
+            client,
+            default_model=settings.deepseek_model,
+            api_key_env_name="DEEPSEEK_API_KEY",
+        )
+
+
+AIServiceDependency = Annotated[AIService, Depends(get_ai_service)]

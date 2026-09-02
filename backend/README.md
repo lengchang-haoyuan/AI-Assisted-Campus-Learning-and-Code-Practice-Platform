@@ -9,6 +9,7 @@ app/services/     业务用例和流程编排
 app/repositories/ SQLAlchemy 查询和持久化
 app/models/       ORM Model 和数据库映射
 app/core/         配置、数据库、日志、异常和安全基础能力
+app/ai/           AIClient、统一 Provider 接口和供应商 HTTP 适配器
 ```
 
 依赖方向固定为 `Router → Service → Repository → SQLAlchemy Model → MySQL`。Router 不访问 ORM，Service 不拼接 SQL，ORM Model 不直接作为 API 响应。
@@ -104,6 +105,25 @@ python -m scripts.verify_project_context
 ```
 
 日志使用单行 JSON，`LOG_LEVEL` 默认是 `INFO`；不记录查询字符串、请求体、异常原文或凭据。
+
+## AI Provider
+
+P11 默认使用 DeepSeek 的 OpenAI 兼容 HTTP 接口，调用链为 `Router → AIService → AIClient → DeepSeekProvider`。测试接口要求 Bearer Token：
+
+```text
+POST /api/v1/ai/test
+```
+
+只在本机未提交的 `.env` 中配置密钥：
+
+```dotenv
+AI_PROVIDER=deepseek
+DEEPSEEK_API_KEY=你的密钥
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-v4-flash
+```
+
+密钥缺失不会阻止后端和 Swagger 启动；调用测试接口时会返回 `503 ai_configuration_error`，不会伪造模型结果。AI 日志只记录 Provider、模型、状态、耗时、尝试次数和失败类别，不记录密钥、认证头或完整 Prompt。
 
 ## 环境约定
 

@@ -169,3 +169,15 @@
 - 验证：Python 编译、88 项后端测试、16 项 P10 专项测试、`pip check`、18 表/33 外键结构检查、40 条 OpenAPI 路径及真实 MySQL 版本 `1→2→3` 持久化验收通过
 - 安全：所有 ProjectContext 和节点接口要求 JWT，Service 校验 Project 所有权；节点配置只能缩小字段白名单，外部 JSON 限制大小、深度并拒绝密码、Token、Secret、API Key 和原始模型输入键
 - 已知限制：通用 `verify-backend.ps1` 固定调用系统 Python 的 `pytest`，与本仓库 `.venv + unittest` 约定不兼容；未新增 pytest、Ruff 或 Mypy 依赖，项目自身标准验证命令已通过
+
+## 2026-09-02 13:07:47 +08:00
+
+- 操作：完成 P11 统一 AI Provider、DeepSeek HTTP 适配、可靠性边界和受认证测试接口
+- 目标：建立 `Router → AIService → AIClient → AIProvider → DeepSeek` 调用链，统一输入输出、错误分类、超时、取消、受限重试和脱敏日志
+- 原因：为 P12 Agent 和 P13 Workflow Engine 提供不扩散供应商响应对象的模型调用边界，本阶段不实现 Agent、Workflow 执行或 AI 记录持久化
+- 结果：完成；新增 `POST /api/v1/ai/test`，缺少密钥返回可操作的 503，真实 DeepSeek 接口和完整 API 路径均返回统一 JSON
+- 恢复方式：回退本阶段提交并移除 `httpx` 直接依赖；本次未修改数据库结构、迁移、业务数据或前端代码
+- 验证：Python 编译、102 项后端测试、`pip check`、41 条 OpenAPI 路径、Fake Provider、HTTP Mock 和真实 DeepSeek API 路径通过；真实接口返回 200、模型 `deepseek-v4-flash`、`finish_reason=stop`
+- 安全：密钥只从已忽略的 `backend/.env` 读取，未输出或写入代码、日志、报告；日志不记录 Authorization、完整 Prompt、模型正文或个人数据
+- 依赖确认：用户明确批准新增 `httpx>=0.28,<1.0` 和 DeepSeek 方案；实际安装 `httpx 0.28.1`，未安装 OpenAI、Anthropic 或其他供应商 SDK
+- 已知限制：首次 8-token 真实请求因最终 `content` 为空被适配器正确拒绝，改为 64 tokens 后直连和 API 路径均通过；Ruff、Mypy、Pytest 未配置且未新增

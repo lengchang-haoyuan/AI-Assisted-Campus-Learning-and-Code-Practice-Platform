@@ -12,6 +12,12 @@ LOG_FIELDS = (
     "duration_ms",
     "error_code",
     "error_type",
+    "provider",
+    "model",
+    "status",
+    "latency_ms",
+    "failure_category",
+    "attempt_count",
 )
 
 
