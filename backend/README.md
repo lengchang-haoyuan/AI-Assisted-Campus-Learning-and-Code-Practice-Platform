@@ -153,6 +153,46 @@ AI_AGENT_TEMPERATURE=0.1
 python -m scripts.verify_agents
 ```
 
+## Workflow 执行引擎
+
+P13 在 P09-P12 边界上提供有界的顺序执行链：
+
+```text
+Router → WorkflowService → WorkflowEngine → Registry → Agent
+       → AIClient → AIProvider → ContextManager → Repository → MySQL
+```
+
+运行和查询接口均要求 Bearer Token，并按 Workflow 所属 Project 校验当前用户：
+
+```text
+POST /api/v1/workflows/{workflow_id}/run
+GET  /api/v1/workflows/{workflow_id}/runs
+GET  /api/v1/workflows/{workflow_id}/runs/{run_id}
+```
+
+运行请求必须提交当前 `expected_version`。`mode=incomplete` 只执行非成功节点及其下游，`mode=all` 明确重新执行整图。P13 注册 `requirements_analysis`、`tech_stack_analysis`、`architecture_design` 三类节点，执行顺序由 DAG 依赖决定；条件边和未注册节点会被拒绝。
+
+节点结果先经过 Pydantic Schema 校验，再原子保存 `AIResult`、节点输出和 ProjectContext。远程模型调用不处于数据库事务中。技术栈字段改变后，下游架构节点会持久化为 `stale`，当前运行随后重新生成该节点。
+
+运行上限使用无秘密环境变量配置：
+
+```dotenv
+WORKFLOW_MAX_NODES=12
+WORKFLOW_MAX_ROUNDS=12
+WORKFLOW_MAX_COMPLETION_TOKENS=9000
+WORKFLOW_TOTAL_TIMEOUT_SECONDS=90
+WORKFLOW_RECOVERY_TIMEOUT_SECONDS=120
+WORKFLOW_MAX_CONCURRENCY=1
+```
+
+当前版本固定顺序执行，只有 AIClient 对明确可重试的短暂且幂等 Provider 失败做有界重试。HTTP 请求取消会取消当前协程并记录 `cancelled`；P13 不提供跨进程取消接口。超过恢复超时的遗留 `running` 记录会在下一次运行时标记失败并恢复对应节点。
+
+Fake Provider + 真实 MySQL 验收脚本会创建隔离临时数据，运行三节点 Workflow，将技术栈由 Python 改为 Java，重新生成下游架构并在结束时清理：
+
+```powershell
+python -m scripts.verify_workflow_engine
+```
+
 ## 环境约定
 
 - MySQL 8.0 或更高版本，字符集为 `utf8mb4`，排序规则为 `utf8mb4_0900_ai_ci`。

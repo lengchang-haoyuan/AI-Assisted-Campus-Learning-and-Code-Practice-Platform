@@ -18,6 +18,11 @@ LOG_FIELDS = (
     "latency_ms",
     "failure_category",
     "attempt_count",
+    "workflow_run_id",
+    "node_id",
+    "node_key",
+    "termination_reason",
+    "total_tokens",
 )
 
 

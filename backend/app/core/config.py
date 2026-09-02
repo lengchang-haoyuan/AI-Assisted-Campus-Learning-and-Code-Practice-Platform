@@ -89,6 +89,16 @@ class AISettings(BaseSettings):
     ai_max_retry_delay_seconds: float = Field(default=2.0, ge=0.1, le=10.0)
     ai_agent_max_tokens: int = Field(default=3000, ge=256, le=4096)
     ai_agent_temperature: float = Field(default=0.1, ge=0.0, le=1.0)
+    workflow_max_nodes: int = Field(default=12, ge=1, le=100)
+    workflow_max_rounds: int = Field(default=12, ge=1, le=100)
+    workflow_max_completion_tokens: int = Field(
+        default=9000, ge=256, le=32768
+    )
+    workflow_total_timeout_seconds: float = Field(default=90.0, ge=5.0, le=600.0)
+    workflow_recovery_timeout_seconds: float = Field(
+        default=120.0, ge=5.0, le=900.0
+    )
+    workflow_max_concurrency: Literal[1] = 1
 
     @field_validator("deepseek_api_key", mode="before")
     @classmethod
@@ -112,6 +122,13 @@ class AISettings(BaseSettings):
             raise ValueError("AI_CONNECT_TIMEOUT_SECONDS 不能大于总超时")
         if self.ai_retry_base_delay_seconds > self.ai_max_retry_delay_seconds:
             raise ValueError("AI_RETRY_BASE_DELAY_SECONDS 不能大于最大重试延迟")
+        if self.workflow_max_rounds > self.workflow_max_nodes:
+            raise ValueError("WORKFLOW_MAX_ROUNDS 不能大于 WORKFLOW_MAX_NODES")
+        if (
+            self.workflow_recovery_timeout_seconds
+            < self.workflow_total_timeout_seconds
+        ):
+            raise ValueError("Workflow 恢复超时不能小于运行总超时")
         return self
 
 

@@ -12,6 +12,7 @@ from app.agents.project_analysis import ProjectAnalysisAgent
 from app.agents.project_review import ProjectReviewAgent
 from app.agents.prompt_agent import PromptAgent
 from app.agents.schemas import AgentType
+from app.context.context_manager import ContextManager
 from app.core.config import (
     AISettings,
     get_ai_settings,
@@ -29,6 +30,7 @@ from app.repositories.course import CourseRepository
 from app.repositories.learning import LearningRepository
 from app.repositories.user import UserRepository
 from app.repositories.workflow import WorkflowRepository
+from app.repositories.workflow_execution import WorkflowExecutionRepository
 from app.repositories.workspace import WorkspaceRepository
 from app.services.auth import AuthService, UserIdentity
 from app.services.ai import AIService
@@ -41,6 +43,13 @@ from app.services.project import ProjectService
 from app.services.project_context import ProjectContextService
 from app.services.workflow import WorkflowService
 from app.services.workspace import WorkspaceService
+from app.workflow.agents import (
+    ArchitectureDesignWorkflowAgent,
+    RequirementsAnalysisWorkflowAgent,
+    TechStackAnalysisWorkflowAgent,
+)
+from app.workflow.engine import WorkflowEngine, WorkflowEngineLimits
+from app.workflow.registry import WorkflowAgentRegistry
 
 bearer_scheme = HTTPBearer(auto_error=False)
 
@@ -179,6 +188,70 @@ def build_ai_client(
         retry_base_delay_seconds=settings.ai_retry_base_delay_seconds,
         max_retry_delay_seconds=settings.ai_max_retry_delay_seconds,
     )
+
+
+def build_workflow_registry(
+    client: AIClient, settings: AISettings
+) -> WorkflowAgentRegistry:
+    registry = WorkflowAgentRegistry()
+    shared_options = {
+        "model": settings.deepseek_model,
+        "temperature": settings.ai_agent_temperature,
+    }
+    registry.register(
+        "requirements_analysis",
+        lambda max_tokens: RequirementsAnalysisWorkflowAgent(
+            client, max_tokens=max_tokens, **shared_options
+        ),
+    )
+    registry.register(
+        "tech_stack_analysis",
+        lambda max_tokens: TechStackAnalysisWorkflowAgent(
+            client, max_tokens=max_tokens, **shared_options
+        ),
+    )
+    registry.register(
+        "architecture_design",
+        lambda max_tokens: ArchitectureDesignWorkflowAgent(
+            client, max_tokens=max_tokens, **shared_options
+        ),
+    )
+    return registry
+
+
+async def get_workflow_execution_service(
+    session: DatabaseSession,
+) -> AsyncGenerator[WorkflowService, None]:
+    settings = get_ai_settings()
+    async with httpx.AsyncClient(follow_redirects=False) as http_client:
+        client = build_ai_client(settings, http_client)
+        execution_repository = WorkflowExecutionRepository(session)
+        engine = WorkflowEngine(
+            execution_repository,
+            build_workflow_registry(client, settings),
+            ContextManager(),
+            WorkflowEngineLimits(
+                max_nodes=settings.workflow_max_nodes,
+                max_rounds=settings.workflow_max_rounds,
+                max_node_tokens=settings.ai_agent_max_tokens,
+                max_completion_tokens=settings.workflow_max_completion_tokens,
+                total_timeout_seconds=settings.workflow_total_timeout_seconds,
+                recovery_timeout_seconds=(
+                    settings.workflow_recovery_timeout_seconds
+                ),
+                max_concurrency=settings.workflow_max_concurrency,
+            ),
+        )
+        yield WorkflowService(
+            WorkflowRepository(session),
+            execution_repository,
+            engine,
+        )
+
+
+WorkflowExecutionServiceDependency = Annotated[
+    WorkflowService, Depends(get_workflow_execution_service)
+]
 
 
 async def get_ai_service() -> AsyncGenerator[AIService, None]:

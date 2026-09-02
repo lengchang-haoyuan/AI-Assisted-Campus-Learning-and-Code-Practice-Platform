@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from typing import Annotated
 
 from pydantic import (
     BaseModel,
@@ -10,7 +11,18 @@ from pydantic import (
     model_validator,
 )
 
-from app.models.enums import WorkflowNodeStatus, WorkflowStatus
+from app.models.enums import (
+    AIRequestStatus,
+    WorkflowNodeStatus,
+    WorkflowRunStatus,
+    WorkflowStatus,
+)
+from app.workflow.engine import WorkflowRunMode
+from app.workflow.schemas import (
+    ArchitectureDesignNodeResult,
+    RequirementsAnalysisNodeResult,
+    TechStackAnalysisNodeResult,
+)
 
 MAX_GRAPH_NODES = 100
 MAX_GRAPH_EDGES = 300
@@ -299,3 +311,67 @@ class WorkflowGraphResponse(BaseModel):
     workflow: WorkflowResponse
     nodes: list[WorkflowNodeResponse]
     edges: list[WorkflowEdgeResponse]
+
+
+WorkflowNodeResultResponse = Annotated[
+    RequirementsAnalysisNodeResult
+    | TechStackAnalysisNodeResult
+    | ArchitectureDesignNodeResult,
+    Field(discriminator="result_type"),
+]
+
+
+class WorkflowRunRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    expected_version: int = Field(ge=1)
+    mode: WorkflowRunMode = WorkflowRunMode.INCOMPLETE
+
+
+class WorkflowRunErrorResponse(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    code: str
+    message: str
+
+
+class WorkflowRunNodeResponse(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    request_id: int
+    node_id: int
+    node_key: str
+    node_type: str
+    status: AIRequestStatus
+    result: WorkflowNodeResultResponse | None
+    error: WorkflowRunErrorResponse | None
+    prompt_tokens: int | None
+    completion_tokens: int | None
+    total_tokens: int | None
+    latency_ms: int | None
+    requested_at: datetime
+    finished_at: datetime | None
+
+
+class WorkflowRunResponse(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    id: int
+    workflow_id: int
+    status: WorkflowRunStatus
+    context_version: int
+    error: WorkflowRunErrorResponse | None
+    nodes: list[WorkflowRunNodeResponse]
+    started_at: datetime | None
+    finished_at: datetime | None
+    created_at: datetime
+
+
+class WorkflowRunListResponse(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    items: list[WorkflowRunResponse]
+    total: int
+    page: int
+    page_size: int
+    total_pages: int

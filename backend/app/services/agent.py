@@ -124,6 +124,9 @@ class AgentService:
                 context,
                 validated_input.model_dump(mode="python"),
             )
+            persisted_result = AGENT_RESULT_SCHEMAS[agent_type].model_validate(
+                execution.result.model_dump(mode="python")
+            )
         except asyncio.CancelledError:
             self._mark_failed(
                 request.id,
@@ -145,6 +148,13 @@ class AgentService:
                 error_message="AI Agent 返回的结构化结果无效",
             )
             raise AgentOutputError() from exc
+        except ValidationError as exc:
+            self._mark_failed(
+                request.id,
+                error_code="agent_output_invalid",
+                error_message="AI Agent 返回的结构化结果无效",
+            )
+            raise AgentOutputError() from exc
         except AIClientError as exc:
             self._mark_failed(
                 request.id,
@@ -160,7 +170,7 @@ class AgentService:
             )
             raise
 
-        structured_result = execution.result.model_dump(mode="json")
+        structured_result = persisted_result.model_dump(mode="json")
         canonical_result = json.dumps(
             structured_result,
             ensure_ascii=False,
@@ -169,9 +179,9 @@ class AgentService:
         )
         completed = self._repository.complete_request(
             request.id,
-            result_type=execution.agent_type.value,
+            result_type=agent_type.value,
             structured_result=structured_result,
-            text_summary=self._result_summary(execution.result),
+            text_summary=self._result_summary(cast(AgentOutput, persisted_result)),
             content_hash=self._hash_text(canonical_result),
             prompt_tokens=execution.completion.usage.prompt_tokens,
             completion_tokens=execution.completion.usage.completion_tokens,

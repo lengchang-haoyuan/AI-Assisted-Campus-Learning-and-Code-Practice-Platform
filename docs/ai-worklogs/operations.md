@@ -193,3 +193,16 @@
 - 真实 Provider：DeepSeek 原生 JSON 模式下，ProjectAnalysisAgent 和 PromptAgent 均返回 `finish_reason=stop` 并通过 Pydantic Schema；未记录 API Key、完整 Prompt 或模型正文
 - 安全：Agent 单回合、总超时和 3000-token 默认上限明确；关闭 thinking；敏感输入和敏感模型输出均拒绝；不执行 shell、SQL、文件、工具或模型生成命令
 - 范围：按优先级只实现 3 个可验证核心 Agent；未提前实现 LearningPlanAgent、LearningReportAgent、WorkflowAgent 或 P13 Workflow Engine
+
+## 2026-09-02 19:42:06 +08:00
+
+- 操作：完成 P13 Workflow 执行引擎、三节点 Agent 注册、运行状态持久化、Context 更新和 Run 结果查询
+- 目标：串联 `WorkflowService → WorkflowEngine → Registry → Agent → AIClient → Provider → ContextManager → Repository → MySQL`，提供有界、可观测、可恢复的执行流程
+- 原因：在 P09 编辑器、P10 Context、P11 Provider 和 P12 Agent 之上形成可运行的 AI Workflow 核心，不提前进入 P14 报告和统计
+- 结果：完成；新增运行、运行列表和运行详情接口，支持需求分析、技术栈分析、架构设计的 DAG 顺序执行，以及技术栈变化后的下游 stale 和受影响节点重新生成
+- 恢复方式：回退本阶段提交；本次未新增依赖、未修改 `schema.sql`、SQLAlchemy Models、18 张表或前端代码，MySQL 验收临时数据已自动清理
+- 验证：12 项 P13 专项测试、133 项后端全量测试、Python 编译、`pip check`、48 条 OpenAPI 路径、MySQL 连接和 18 表/33 外键结构检查通过
+- MySQL 验收：Fake Provider 完成 3 节点首次运行和 2 节点重新生成，保存 5 条结构化节点结果；活跃重复运行被拒绝，过期运行、请求和节点可恢复，临时用户残留为 0
+- 可靠性：节点、回合、并发、总超时和 completion-token 预算均有上限；协程取消向上传播并持久化为 cancelled；只有 P11 AIClient 对明确短暂失败执行有界重试
+- 安全：运行和结果查询按 Workflow 所属 Project 校验当前用户；模型结果经 Pydantic Schema 验证，日志只记录关联 ID、状态、耗时、Token 和失败类别，不记录密钥、完整 Prompt 或模型正文
+- 已知限制：P13 固定顺序执行且不支持条件边或跨进程主动取消；跨进程中断通过下一次运行的超时恢复处理，真实 Provider 未在本阶段重复调用

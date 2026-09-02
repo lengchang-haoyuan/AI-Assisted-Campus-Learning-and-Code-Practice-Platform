@@ -5,7 +5,7 @@ from typing import Mapping
 
 from pydantic import BaseModel, ValidationError
 
-from app.agents.schemas import AgentOutput, AgentSchema, AgentType
+from app.agents.schemas import AgentSchema
 from app.ai.client import AIClient
 from app.ai.provider import (
     AICompletionRequest,
@@ -29,14 +29,14 @@ class AgentOutputValidationError(ValueError):
 
 @dataclass(frozen=True, slots=True)
 class AgentResult:
-    agent_type: AgentType
+    agent_type: str
     context_version: int
-    result: AgentOutput
+    result: AgentSchema
     completion: AICompletionResult
 
 
 class BaseAgent(ABC):
-    agent_type: AgentType
+    agent_type: str
     input_schema: type[AgentSchema]
     model_output_schema: type[AgentSchema]
     role_instruction: str
@@ -155,5 +155,5 @@ class BaseAgent(ABC):
         context: ProjectContext,
         input_data: AgentSchema,
         model_output: AgentSchema,
-    ) -> AgentOutput:
+    ) -> AgentSchema:
         raise NotImplementedError

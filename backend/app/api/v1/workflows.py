@@ -2,7 +2,11 @@ from typing import Annotated
 
 from fastapi import APIRouter, Path, Query, Response, status
 
-from app.api.deps import CurrentUser, WorkflowServiceDependency
+from app.api.deps import (
+    CurrentUser,
+    WorkflowExecutionServiceDependency,
+    WorkflowServiceDependency,
+)
 from app.api.presenters import (
     to_workflow_edge_list_response,
     to_workflow_edge_response,
@@ -10,6 +14,8 @@ from app.api.presenters import (
     to_workflow_list_response,
     to_workflow_node_list_response,
     to_workflow_node_response,
+    to_workflow_run_list_response,
+    to_workflow_run_response,
     to_workflow_response,
 )
 from app.schemas.workflow import (
@@ -25,6 +31,9 @@ from app.schemas.workflow import (
     WorkflowNodeListResponse,
     WorkflowNodeResponse,
     WorkflowNodeUpdate,
+    WorkflowRunListResponse,
+    WorkflowRunRequest,
+    WorkflowRunResponse,
     WorkflowResponse,
     WorkflowUpdate,
 )
@@ -37,6 +46,7 @@ from app.services.workflow import (
     WorkflowGraphUpdateData,
     WorkflowNodeCreateData,
     WorkflowNodeUpdateData,
+    WorkflowRunRequestData,
     WorkflowUpdateData,
 )
 
@@ -78,6 +88,68 @@ async def create_workflow(
         service.create_workflow(
             current_user.id, WorkflowCreateData(**payload.model_dump())
         )
+    )
+
+
+@router.post(
+    "/{workflow_id}/run",
+    response_model=WorkflowRunResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="运行或重新生成工作流",
+)
+async def run_workflow(
+    workflow_id: ResourceId,
+    payload: WorkflowRunRequest,
+    current_user: CurrentUser,
+    service: WorkflowExecutionServiceDependency,
+) -> WorkflowRunResponse:
+    return to_workflow_run_response(
+        await service.run_workflow(
+            workflow_id,
+            current_user.id,
+            WorkflowRunRequestData(
+                expected_version=payload.expected_version,
+                mode=payload.mode,
+            ),
+        )
+    )
+
+
+@router.get(
+    "/{workflow_id}/runs",
+    response_model=WorkflowRunListResponse,
+    summary="获取 WorkflowRun 列表",
+)
+async def list_workflow_runs(
+    workflow_id: ResourceId,
+    current_user: CurrentUser,
+    service: WorkflowExecutionServiceDependency,
+    page: Annotated[int, Query(ge=1, le=10_000)] = 1,
+    page_size: Annotated[int, Query(ge=1, le=100)] = 20,
+) -> WorkflowRunListResponse:
+    return to_workflow_run_list_response(
+        service.list_runs(
+            workflow_id,
+            current_user.id,
+            page=page,
+            page_size=page_size,
+        )
+    )
+
+
+@router.get(
+    "/{workflow_id}/runs/{run_id}",
+    response_model=WorkflowRunResponse,
+    summary="获取 WorkflowRun 详情和节点结果",
+)
+async def get_workflow_run(
+    workflow_id: ResourceId,
+    run_id: ResourceId,
+    current_user: CurrentUser,
+    service: WorkflowExecutionServiceDependency,
+) -> WorkflowRunResponse:
+    return to_workflow_run_response(
+        service.get_run(workflow_id, run_id, current_user.id)
     )
 
 

@@ -1,22 +1,35 @@
 from dataclasses import dataclass
 from datetime import datetime
 from math import ceil
-from typing import Any, Mapping
+from typing import Any, Mapping, cast
+
+from pydantic import ValidationError
 
 from app.core.exceptions import (
     ConflictError,
     PermissionDeniedError,
     ResourceNotFoundError,
 )
-from app.models.enums import WorkflowNodeStatus, WorkflowStatus
+from app.models.enums import (
+    AIRequestStatus,
+    WorkflowNodeStatus,
+    WorkflowRunStatus,
+    WorkflowStatus,
+)
 from app.models.project import Project
-from app.models.workflow import Workflow, WorkflowEdge, WorkflowNode
+from app.models.workflow import Workflow, WorkflowEdge, WorkflowNode, WorkflowRun
 from app.repositories.workflow import (
     WorkflowEdgeRecord,
     WorkflowNodeRecord,
     WorkflowPersistenceConflictError,
     WorkflowRepository,
     WorkflowVersionConflictError,
+)
+from app.repositories.workflow_execution import WorkflowExecutionRepository
+from app.workflow.engine import WorkflowEngine, WorkflowRunMode
+from app.workflow.schemas import (
+    WORKFLOW_NODE_RESULT_SCHEMAS,
+    WorkflowNodeResult,
 )
 
 MAX_GRAPH_NODES = 100
@@ -170,9 +183,116 @@ class WorkflowGraphData:
     edges: list[WorkflowEdgeData]
 
 
+@dataclass(frozen=True, slots=True)
+class WorkflowRunRequestData:
+    expected_version: int
+    mode: WorkflowRunMode
+
+
+@dataclass(frozen=True, slots=True)
+class WorkflowRunErrorData:
+    code: str
+    message: str
+
+
+@dataclass(frozen=True, slots=True)
+class WorkflowRunNodeData:
+    request_id: int
+    node_id: int
+    node_key: str
+    node_type: str
+    status: AIRequestStatus
+    result: WorkflowNodeResult | None
+    error: WorkflowRunErrorData | None
+    prompt_tokens: int | None
+    completion_tokens: int | None
+    total_tokens: int | None
+    latency_ms: int | None
+    requested_at: datetime
+    finished_at: datetime | None
+
+
+@dataclass(frozen=True, slots=True)
+class WorkflowRunData:
+    id: int
+    workflow_id: int
+    status: WorkflowRunStatus
+    context_version: int
+    error: WorkflowRunErrorData | None
+    nodes: list[WorkflowRunNodeData]
+    started_at: datetime | None
+    finished_at: datetime | None
+    created_at: datetime
+
+
+@dataclass(frozen=True, slots=True)
+class WorkflowRunPage:
+    items: list[WorkflowRunData]
+    total: int
+    page: int
+    page_size: int
+    total_pages: int
+
+
 class WorkflowService:
-    def __init__(self, repository: WorkflowRepository) -> None:
+    def __init__(
+        self,
+        repository: WorkflowRepository,
+        execution_repository: WorkflowExecutionRepository | None = None,
+        engine: WorkflowEngine | None = None,
+    ) -> None:
         self._repository = repository
+        self._execution_repository = execution_repository
+        self._engine = engine
+
+    async def run_workflow(
+        self,
+        workflow_id: int,
+        owner_id: int,
+        data: WorkflowRunRequestData,
+    ) -> WorkflowRunData:
+        if self._engine is None:
+            raise RuntimeError("WorkflowEngine 未配置")
+        run = await self._engine.run(
+            workflow_id,
+            owner_id,
+            expected_version=data.expected_version,
+            mode=data.mode,
+        )
+        return self._to_run_data(run)
+
+    def list_runs(
+        self,
+        workflow_id: int,
+        owner_id: int,
+        *,
+        page: int,
+        page_size: int,
+    ) -> WorkflowRunPage:
+        self._get_owned_workflow(workflow_id, owner_id)
+        repository = self._require_execution_repository()
+        total = repository.count_runs(workflow_id)
+        runs = repository.list_runs(
+            workflow_id,
+            offset=(page - 1) * page_size,
+            limit=page_size,
+        )
+        return WorkflowRunPage(
+            items=[self._to_run_data(run) for run in runs],
+            total=total,
+            page=page,
+            page_size=page_size,
+            total_pages=ceil(total / page_size) if total else 0,
+        )
+
+    def get_run(
+        self, workflow_id: int, run_id: int, owner_id: int
+    ) -> WorkflowRunData:
+        self._get_owned_workflow(workflow_id, owner_id)
+        run = self._require_execution_repository().get_run(workflow_id, run_id)
+        if run is None:
+            raise ResourceNotFoundError("WorkflowRun 不存在")
+        return self._to_run_data(run)
 
     def list_workflows(
         self,
@@ -458,6 +578,11 @@ class WorkflowService:
             raise PermissionDeniedError("无权操作该工作流")
         return workflow
 
+    def _require_execution_repository(self) -> WorkflowExecutionRepository:
+        if self._execution_repository is None:
+            raise RuntimeError("WorkflowExecutionRepository 未配置")
+        return self._execution_repository
+
     @staticmethod
     def _get_workflow_node(workflow: Workflow, node_id: int) -> WorkflowNode:
         node = next((item for item in workflow.nodes if item.id == node_id), None)
@@ -573,4 +698,77 @@ class WorkflowService:
             workflow=cls._to_workflow_data(workflow),
             nodes=[cls._to_node_data(node) for node in nodes],
             edges=[cls._to_edge_data(edge, nodes) for edge in edges],
+        )
+
+    @staticmethod
+    def _to_run_data(run: WorkflowRun) -> WorkflowRunData:
+        snapshot = run.context_snapshot
+        context_version = snapshot.get("version") if isinstance(snapshot, dict) else None
+        if not isinstance(context_version, int) or context_version < 1:
+            raise ConflictError("WorkflowRun 缺少有效 Context 快照")
+
+        node_results: list[WorkflowRunNodeData] = []
+        for request in sorted(run.ai_requests, key=lambda item: item.id):
+            metadata = request.request_metadata or {}
+            node_id = metadata.get("node_id")
+            node_key = metadata.get("node_key")
+            if not isinstance(node_id, int) or not isinstance(node_key, str):
+                raise ConflictError("WorkflowRun 节点记录元数据无效")
+            result: WorkflowNodeResult | None = None
+            if request.result is not None:
+                raw_result = request.result.structured_result
+                schema = WORKFLOW_NODE_RESULT_SCHEMAS.get(request.request_type)
+                if schema is None or not isinstance(raw_result, dict):
+                    raise ConflictError("WorkflowRun 节点结果格式无效")
+                try:
+                    parsed = schema.model_validate(raw_result)
+                except ValidationError as exc:
+                    raise ConflictError("WorkflowRun 节点结果格式无效") from exc
+                result = cast(WorkflowNodeResult, parsed)
+            elif request.status == AIRequestStatus.COMPLETED:
+                raise ConflictError("已完成节点缺少结构化结果")
+
+            total_tokens = metadata.get("total_tokens")
+            if total_tokens is not None and not isinstance(total_tokens, int):
+                raise ConflictError("WorkflowRun Token 元数据无效")
+            error = None
+            if request.error_code is not None:
+                error = WorkflowRunErrorData(
+                    code=request.error_code,
+                    message=request.error_message or "Workflow 节点执行失败",
+                )
+            node_results.append(
+                WorkflowRunNodeData(
+                    request_id=request.id,
+                    node_id=node_id,
+                    node_key=node_key,
+                    node_type=request.request_type,
+                    status=request.status,
+                    result=result,
+                    error=error,
+                    prompt_tokens=request.prompt_tokens,
+                    completion_tokens=request.completion_tokens,
+                    total_tokens=total_tokens,
+                    latency_ms=request.latency_ms,
+                    requested_at=request.requested_at,
+                    finished_at=request.finished_at,
+                )
+            )
+
+        run_error = None
+        if run.error_code is not None:
+            run_error = WorkflowRunErrorData(
+                code=run.error_code,
+                message=run.error_message or "WorkflowRun 执行失败",
+            )
+        return WorkflowRunData(
+            id=run.id,
+            workflow_id=run.workflow_id,
+            status=run.status,
+            context_version=context_version,
+            error=run_error,
+            nodes=node_results,
+            started_at=run.started_at,
+            finished_at=run.finished_at,
+            created_at=run.created_at,
         )

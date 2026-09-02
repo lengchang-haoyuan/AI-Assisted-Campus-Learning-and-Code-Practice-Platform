@@ -40,6 +40,10 @@ from app.schemas.workflow import (
     WorkflowNodeListResponse,
     WorkflowNodeResponse,
     WorkflowProjectResponse,
+    WorkflowRunErrorResponse,
+    WorkflowRunListResponse,
+    WorkflowRunNodeResponse,
+    WorkflowRunResponse,
     WorkflowResponse,
 )
 from app.schemas.workspace import (
@@ -84,6 +88,8 @@ from app.services.workflow import (
     WorkflowGraphData,
     WorkflowNodeData,
     WorkflowPage,
+    WorkflowRunData,
+    WorkflowRunPage,
 )
 from app.services.workspace import (
     LearningRecordData,
@@ -613,4 +619,56 @@ def to_workflow_graph_response(graph: WorkflowGraphData) -> WorkflowGraphRespons
         workflow=to_workflow_response(graph.workflow),
         nodes=[to_workflow_node_response(node) for node in graph.nodes],
         edges=[to_workflow_edge_response(edge) for edge in graph.edges],
+    )
+
+
+def to_workflow_run_response(run: WorkflowRunData) -> WorkflowRunResponse:
+    return WorkflowRunResponse(
+        id=run.id,
+        workflow_id=run.workflow_id,
+        status=run.status,
+        context_version=run.context_version,
+        error=(
+            WorkflowRunErrorResponse(code=run.error.code, message=run.error.message)
+            if run.error is not None
+            else None
+        ),
+        nodes=[
+            WorkflowRunNodeResponse(
+                request_id=node.request_id,
+                node_id=node.node_id,
+                node_key=node.node_key,
+                node_type=node.node_type,
+                status=node.status,
+                result=node.result,
+                error=(
+                    WorkflowRunErrorResponse(
+                        code=node.error.code,
+                        message=node.error.message,
+                    )
+                    if node.error is not None
+                    else None
+                ),
+                prompt_tokens=node.prompt_tokens,
+                completion_tokens=node.completion_tokens,
+                total_tokens=node.total_tokens,
+                latency_ms=node.latency_ms,
+                requested_at=node.requested_at,
+                finished_at=node.finished_at,
+            )
+            for node in run.nodes
+        ],
+        started_at=run.started_at,
+        finished_at=run.finished_at,
+        created_at=run.created_at,
+    )
+
+
+def to_workflow_run_list_response(page: WorkflowRunPage) -> WorkflowRunListResponse:
+    return WorkflowRunListResponse(
+        items=[to_workflow_run_response(run) for run in page.items],
+        total=page.total,
+        page=page.page,
+        page_size=page.page_size,
+        total_pages=page.total_pages,
     )
