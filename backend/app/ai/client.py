@@ -46,6 +46,10 @@ class AIClient:
         self._jitter = jitter
         self._logger = logging.getLogger("scholarhub.ai")
 
+    @property
+    def provider_name(self) -> str:
+        return self._provider.name
+
     async def complete(self, request: AICompletionRequest) -> AICompletionResult:
         started_at = perf_counter()
         attempt_count = 0

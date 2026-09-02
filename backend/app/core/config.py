@@ -87,6 +87,8 @@ class AISettings(BaseSettings):
     ai_max_retries: int = Field(default=1, ge=0, le=2)
     ai_retry_base_delay_seconds: float = Field(default=0.25, ge=0.05, le=2.0)
     ai_max_retry_delay_seconds: float = Field(default=2.0, ge=0.1, le=10.0)
+    ai_agent_max_tokens: int = Field(default=3000, ge=256, le=4096)
+    ai_agent_temperature: float = Field(default=0.1, ge=0.0, le=1.0)
 
     @field_validator("deepseek_api_key", mode="before")
     @classmethod

@@ -125,6 +125,34 @@ DEEPSEEK_MODEL=deepseek-v4-flash
 
 密钥缺失不会阻止后端和 Swagger 启动；调用测试接口时会返回 `503 ai_configuration_error`，不会伪造模型结果。AI 日志只记录 Provider、模型、状态、耗时、尝试次数和失败类别，不记录密钥、认证头或完整 Prompt。
 
+## 核心 AI Agent
+
+P12 提供项目分析、开发 Prompt 和项目审查三个单回合 Agent。所有接口要求 Bearer Token，运行前校验 Project 所有权和 ProjectContext 新鲜度：
+
+```text
+POST /api/v1/agents/project-analysis
+POST /api/v1/agents/prompt
+POST /api/v1/agents/project-review
+GET  /api/v1/agents/results/{request_id}
+```
+
+运行接口接收 `project_id` 和对应类型的 `input`。Agent 只读取经过 P10 Schema 校验的 ProjectContext，不执行 shell、SQL、文件或 Workflow；系统规则、Context 和用户输入使用独立消息与数据区块。模型使用单回合、原生 JSON 输出模式，结果仍必须通过对应 Pydantic Schema 才能保存。
+
+`AIRequest` 保存输入哈希、Context 版本、Provider、模型、状态、耗时和 Token 用量，不保存原始输入；`AIResult` 保存通过 Schema 校验的结构化结果。结果查询按当前用户隔离，其他用户使用相同 `request_id` 也无法读取。
+
+Agent 输出上限可通过无秘密环境变量调整，默认值保持在硬上限以内：
+
+```dotenv
+AI_AGENT_MAX_TOKENS=3000
+AI_AGENT_TEMPERATURE=0.1
+```
+
+真实 MySQL 验收脚本使用 Fake Provider 创建隔离数据，验证分析和 Prompt 结果持久化、查询隔离和原始输入不落库，并在结束时清理：
+
+```powershell
+python -m scripts.verify_agents
+```
+
 ## 环境约定
 
 - MySQL 8.0 或更高版本，字符集为 `utf8mb4`，排序规则为 `utf8mb4_0900_ai_ci`。

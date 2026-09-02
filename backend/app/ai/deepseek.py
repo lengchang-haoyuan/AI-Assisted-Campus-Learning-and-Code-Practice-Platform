@@ -7,6 +7,7 @@ from app.ai.provider import (
     AIFailureCategory,
     AIProvider,
     AIProviderResult,
+    AIResponseFormat,
     AIUsage,
     MODEL_NAME_PATTERN,
 )
@@ -81,6 +82,12 @@ class DeepSeekProvider(AIProvider):
         }
         if request.max_tokens is not None:
             payload["max_tokens"] = request.max_tokens
+        if request.response_format == AIResponseFormat.JSON_OBJECT:
+            payload["response_format"] = {"type": "json_object"}
+        if request.reasoning_enabled is not None:
+            payload["thinking"] = {
+                "type": "enabled" if request.reasoning_enabled else "disabled"
+            }
 
         try:
             response = await self._http_client.post(

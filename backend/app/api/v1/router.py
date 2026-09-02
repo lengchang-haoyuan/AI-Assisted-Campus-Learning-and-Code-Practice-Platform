@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from app.api.v1.ai import router as ai_router
+from app.api.v1.agents import router as agents_router
 from app.api.v1.auth import router as auth_router
 from app.api.v1.community import router as community_router
 from app.api.v1.courses import router as courses_router
@@ -24,3 +25,4 @@ api_router.include_router(courses_router)
 api_router.include_router(learning_router)
 api_router.include_router(workflows_router)
 api_router.include_router(ai_router)
+api_router.include_router(agents_router)

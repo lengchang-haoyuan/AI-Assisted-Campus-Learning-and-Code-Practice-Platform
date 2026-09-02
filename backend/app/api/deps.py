@@ -8,11 +8,21 @@ from sqlalchemy.orm import Session
 
 from app.ai.client import AIClient
 from app.ai.deepseek import DeepSeekProvider
-from app.core.config import get_ai_settings, get_security_settings, get_settings
+from app.agents.project_analysis import ProjectAnalysisAgent
+from app.agents.project_review import ProjectReviewAgent
+from app.agents.prompt_agent import PromptAgent
+from app.agents.schemas import AgentType
+from app.core.config import (
+    AISettings,
+    get_ai_settings,
+    get_security_settings,
+    get_settings,
+)
 from app.core.database import get_session_factory
 from app.core.exceptions import AuthenticationRequiredError
 from app.core.security import InvalidAccessTokenError, SecurityService
 from app.repositories.project import ProjectRepository
+from app.repositories.agent import AgentRepository
 from app.repositories.project_context import ProjectContextRepository
 from app.repositories.community import CommunityRepository
 from app.repositories.course import CourseRepository
@@ -22,6 +32,7 @@ from app.repositories.workflow import WorkflowRepository
 from app.repositories.workspace import WorkspaceRepository
 from app.services.auth import AuthService, UserIdentity
 from app.services.ai import AIService
+from app.services.agent import AgentService
 from app.services.community import CommunityService
 from app.services.course import CourseService
 from app.services.health import HealthService
@@ -151,23 +162,29 @@ WorkflowServiceDependency = Annotated[
 ]
 
 
+def build_ai_client(
+    settings: AISettings, http_client: httpx.AsyncClient
+) -> AIClient:
+    provider = DeepSeekProvider(
+        http_client,
+        api_key=settings.deepseek_api_key,
+        base_url=settings.deepseek_base_url,
+        connect_timeout_seconds=settings.ai_connect_timeout_seconds,
+        request_timeout_seconds=settings.ai_total_timeout_seconds,
+    )
+    return AIClient(
+        provider,
+        total_timeout_seconds=settings.ai_total_timeout_seconds,
+        max_retries=settings.ai_max_retries,
+        retry_base_delay_seconds=settings.ai_retry_base_delay_seconds,
+        max_retry_delay_seconds=settings.ai_max_retry_delay_seconds,
+    )
+
+
 async def get_ai_service() -> AsyncGenerator[AIService, None]:
     settings = get_ai_settings()
     async with httpx.AsyncClient(follow_redirects=False) as http_client:
-        provider = DeepSeekProvider(
-            http_client,
-            api_key=settings.deepseek_api_key,
-            base_url=settings.deepseek_base_url,
-            connect_timeout_seconds=settings.ai_connect_timeout_seconds,
-            request_timeout_seconds=settings.ai_total_timeout_seconds,
-        )
-        client = AIClient(
-            provider,
-            total_timeout_seconds=settings.ai_total_timeout_seconds,
-            max_retries=settings.ai_max_retries,
-            retry_base_delay_seconds=settings.ai_retry_base_delay_seconds,
-            max_retry_delay_seconds=settings.ai_max_retry_delay_seconds,
-        )
+        client = build_ai_client(settings, http_client)
         yield AIService(
             client,
             default_model=settings.deepseek_model,
@@ -176,3 +193,29 @@ async def get_ai_service() -> AsyncGenerator[AIService, None]:
 
 
 AIServiceDependency = Annotated[AIService, Depends(get_ai_service)]
+
+
+async def get_agent_service(
+    session: DatabaseSession,
+) -> AsyncGenerator[AgentService, None]:
+    settings = get_ai_settings()
+    async with httpx.AsyncClient(follow_redirects=False) as http_client:
+        client = build_ai_client(settings, http_client)
+        agent_options = {
+            "model": settings.deepseek_model,
+            "max_tokens": settings.ai_agent_max_tokens,
+            "temperature": settings.ai_agent_temperature,
+        }
+        agents = {
+            AgentType.PROJECT_ANALYSIS: ProjectAnalysisAgent(client, **agent_options),
+            AgentType.PROMPT: PromptAgent(client, **agent_options),
+            AgentType.PROJECT_REVIEW: ProjectReviewAgent(client, **agent_options),
+        }
+        yield AgentService(
+            AgentRepository(session),
+            agents,
+            api_key_env_name="DEEPSEEK_API_KEY",
+        )
+
+
+AgentServiceDependency = Annotated[AgentService, Depends(get_agent_service)]

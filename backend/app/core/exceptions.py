@@ -60,3 +60,9 @@ class AIUpstreamError(AppError):
     status_code = 502
     code = "ai_upstream_error"
     default_message = "AI Provider 调用失败"
+
+
+class AgentOutputError(AppError):
+    status_code = 502
+    code = "agent_output_invalid"
+    default_message = "AI Agent 返回的结构化结果无效"

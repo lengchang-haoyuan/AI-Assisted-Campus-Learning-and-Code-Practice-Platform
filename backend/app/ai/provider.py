@@ -13,6 +13,11 @@ class AIMessageRole(str, Enum):
     ASSISTANT = "assistant"
 
 
+class AIResponseFormat(str, Enum):
+    TEXT = "text"
+    JSON_OBJECT = "json_object"
+
+
 class AIMessage(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
@@ -35,6 +40,8 @@ class AICompletionRequest(BaseModel):
     model: str = Field(min_length=1, max_length=100, pattern=MODEL_NAME_PATTERN)
     temperature: float = Field(default=0.2, ge=0.0, le=2.0)
     max_tokens: int | None = Field(default=None, ge=1, le=8192)
+    response_format: AIResponseFormat = AIResponseFormat.TEXT
+    reasoning_enabled: bool | None = None
 
     @model_validator(mode="after")
     def validate_total_message_size(self) -> "AICompletionRequest":

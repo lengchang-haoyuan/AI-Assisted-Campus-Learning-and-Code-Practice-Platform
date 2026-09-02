@@ -23,6 +23,7 @@ from app.ai.provider import (
     AIMessageRole,
     AIProvider,
     AIProviderResult,
+    AIResponseFormat,
     AIUsage,
 )
 from app.api.deps import get_ai_service, get_current_user
@@ -232,6 +233,8 @@ class DeepSeekProviderTests(unittest.TestCase):
                 sent_payload = json.loads(request_data.content)
                 self.assertEqual(sent_payload["model"], "deepseek-v4-flash")
                 self.assertEqual(sent_payload["messages"][0]["role"], "user")
+                self.assertNotIn("response_format", sent_payload)
+                self.assertNotIn("thinking", sent_payload)
                 return httpx.Response(
                     200,
                     request=request_data,
@@ -267,6 +270,49 @@ class DeepSeekProviderTests(unittest.TestCase):
         self.assertEqual(result.provider, "deepseek")
         self.assertEqual(result.content, "统一响应")
         self.assertEqual(result.usage.total_tokens, 5)
+
+    def test_maps_json_and_reasoning_options(self) -> None:
+        async def run_scenario() -> None:
+            async def handler(request_data: httpx.Request) -> httpx.Response:
+                sent_payload = json.loads(request_data.content)
+                self.assertEqual(
+                    sent_payload["response_format"], {"type": "json_object"}
+                )
+                self.assertEqual(sent_payload["thinking"], {"type": "disabled"})
+                return httpx.Response(
+                    200,
+                    request=request_data,
+                    json={
+                        "model": "deepseek-v4-flash",
+                        "choices": [
+                            {
+                                "message": {"content": '{"status":"ok"}'},
+                                "finish_reason": "stop",
+                            }
+                        ],
+                        "usage": None,
+                    },
+                )
+
+            async with httpx.AsyncClient(
+                transport=httpx.MockTransport(handler)
+            ) as http_client:
+                provider = DeepSeekProvider(
+                    http_client,
+                    api_key=SecretStr("test-key"),
+                    base_url="https://api.deepseek.com",
+                    connect_timeout_seconds=1,
+                    request_timeout_seconds=2,
+                )
+                request_data = make_request().model_copy(
+                    update={
+                        "response_format": AIResponseFormat.JSON_OBJECT,
+                        "reasoning_enabled": False,
+                    }
+                )
+                await provider.complete(request_data)
+
+        asyncio.run(run_scenario())
 
     def test_missing_key_fails_before_network_request(self) -> None:
         async def run_scenario() -> bool:

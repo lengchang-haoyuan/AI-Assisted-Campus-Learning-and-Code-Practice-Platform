@@ -181,3 +181,15 @@
 - 安全：密钥只从已忽略的 `backend/.env` 读取，未输出或写入代码、日志、报告；日志不记录 Authorization、完整 Prompt、模型正文或个人数据
 - 依赖确认：用户明确批准新增 `httpx>=0.28,<1.0` 和 DeepSeek 方案；实际安装 `httpx 0.28.1`，未安装 OpenAI、Anthropic 或其他供应商 SDK
 - 已知限制：首次 8-token 真实请求因最终 `content` 为空被适配器正确拒绝，改为 64 tokens 后直连和 API 路径均通过；Ruff、Mypy、Pytest 未配置且未新增
+
+## 2026-09-02 18:58:32 +08:00
+
+- 操作：完成 P12 BaseAgent、ProjectAnalysisAgent、PromptAgent、ProjectReviewAgent、结构化结果 API 与 AIRequest/AIResult 持久化
+- 目标：让核心 Agent 读取 P10 ProjectContext，经 P11 AIClient/AIProvider 单回合调用模型，并由 Service 保存和按当前用户查询结果
+- 原因：为后续 P13 Workflow Engine 提供经过 Schema 校验、可审计且不直接操作数据库的 Agent 边界，本阶段不执行 Workflow 或模型生成命令
+- 结果：完成；新增 3 个运行接口和 1 个结果查询接口，系统规则、Context、用户输入和模型输出分界，原始输入只保存 SHA-256 哈希和安全元数据
+- 恢复方式：回退本阶段提交；本次未新增依赖、未修改 `schema.sql`、SQLAlchemy Models、18 张表或前端代码，MySQL 验收临时数据已自动清理
+- 验证：18 项 P12 专项测试、121 项后端全量测试、Python 编译、`pip check`、45 条 OpenAPI 路径、真实 MySQL 持久化与跨用户隔离验收通过
+- 真实 Provider：DeepSeek 原生 JSON 模式下，ProjectAnalysisAgent 和 PromptAgent 均返回 `finish_reason=stop` 并通过 Pydantic Schema；未记录 API Key、完整 Prompt 或模型正文
+- 安全：Agent 单回合、总超时和 3000-token 默认上限明确；关闭 thinking；敏感输入和敏感模型输出均拒绝；不执行 shell、SQL、文件、工具或模型生成命令
+- 范围：按优先级只实现 3 个可验证核心 Agent；未提前实现 LearningPlanAgent、LearningReportAgent、WorkflowAgent 或 P13 Workflow Engine

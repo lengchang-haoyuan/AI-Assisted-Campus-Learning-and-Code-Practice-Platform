@@ -59,7 +59,7 @@ class AIService:
         try:
             result = await self._client.complete(request)
         except AIClientError as exc:
-            self._raise_application_error(exc)
+            raise_ai_application_error(exc, self._api_key_env_name)
 
         return AICompletionData(
             provider=result.provider,
@@ -72,21 +72,25 @@ class AIService:
             latency_ms=result.latency_ms,
         )
 
-    def _raise_application_error(self, error: AIClientError) -> NoReturn:
-        if error.category == AIFailureCategory.CONFIGURATION:
-            raise AIConfigurationError(
-                f"未配置 {self._api_key_env_name}，请在后端环境变量中配置后重试"
-            ) from error
-        if error.category == AIFailureCategory.AUTHENTICATION:
-            raise AIConfigurationError(
-                "AI Provider 凭据不可用，请联系管理员检查后端配置"
-            ) from error
-        if error.category == AIFailureCategory.RATE_LIMIT:
-            raise AIRateLimitError() from error
-        if error.category in {
-            AIFailureCategory.CONNECTION_TIMEOUT,
-            AIFailureCategory.RESPONSE_TIMEOUT,
-            AIFailureCategory.TOTAL_TIMEOUT,
-        }:
-            raise AIUpstreamTimeoutError() from error
-        raise AIUpstreamError() from error
+
+
+def raise_ai_application_error(
+    error: AIClientError, api_key_env_name: str
+) -> NoReturn:
+    if error.category == AIFailureCategory.CONFIGURATION:
+        raise AIConfigurationError(
+            f"未配置 {api_key_env_name}，请在后端环境变量中配置后重试"
+        ) from error
+    if error.category == AIFailureCategory.AUTHENTICATION:
+        raise AIConfigurationError(
+            "AI Provider 凭据不可用，请联系管理员检查后端配置"
+        ) from error
+    if error.category == AIFailureCategory.RATE_LIMIT:
+        raise AIRateLimitError() from error
+    if error.category in {
+        AIFailureCategory.CONNECTION_TIMEOUT,
+        AIFailureCategory.RESPONSE_TIMEOUT,
+        AIFailureCategory.TOTAL_TIMEOUT,
+    }:
+        raise AIUpstreamTimeoutError() from error
+    raise AIUpstreamError() from error
