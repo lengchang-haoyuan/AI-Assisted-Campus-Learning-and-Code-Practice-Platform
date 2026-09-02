@@ -48,6 +48,7 @@ CREATE TABLE projects (
     progress SMALLINT UNSIGNED NOT NULL DEFAULT 0,
     is_published BOOLEAN NOT NULL DEFAULT FALSE,
     published_at DATETIME(6) NULL,
+    completed_at DATETIME(6) NULL,
     view_count BIGINT UNSIGNED NOT NULL DEFAULT 0,
     created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updated_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
@@ -63,7 +64,10 @@ CREATE TABLE projects (
     ),
     CONSTRAINT ck_projects_progress_range CHECK (progress BETWEEN 0 AND 100),
     INDEX ix_projects_owner_status (owner_id, status),
-    INDEX ix_projects_published_created (is_published, created_at)
+    INDEX ix_projects_published_created (is_published, created_at),
+    INDEX ix_projects_created_at (created_at),
+    INDEX ix_projects_completed_at (completed_at),
+    INDEX ix_projects_published_at (published_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE tags (
@@ -102,7 +106,8 @@ CREATE TABLE comments (
         REFERENCES projects (id) ON DELETE CASCADE,
     CONSTRAINT fk_comments_user_id_users FOREIGN KEY (user_id)
         REFERENCES users (id) ON DELETE RESTRICT,
-    INDEX ix_comments_project_created (project_id, created_at)
+    INDEX ix_comments_project_created (project_id, created_at),
+    INDEX ix_comments_created_at (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE likes (
@@ -116,7 +121,8 @@ CREATE TABLE likes (
         REFERENCES users (id) ON DELETE CASCADE,
     CONSTRAINT fk_likes_project_id_projects FOREIGN KEY (project_id)
         REFERENCES projects (id) ON DELETE CASCADE,
-    INDEX ix_likes_project_created (project_id, created_at)
+    INDEX ix_likes_project_created (project_id, created_at),
+    INDEX ix_likes_created_at (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE favorites (
@@ -130,7 +136,22 @@ CREATE TABLE favorites (
         REFERENCES users (id) ON DELETE CASCADE,
     CONSTRAINT fk_favorites_project_id_projects FOREIGN KEY (project_id)
         REFERENCES projects (id) ON DELETE CASCADE,
-    INDEX ix_favorites_project_created (project_id, created_at)
+    INDEX ix_favorites_project_created (project_id, created_at),
+    INDEX ix_favorites_created_at (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE project_views (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    project_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    viewed_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    CONSTRAINT pk_project_views PRIMARY KEY (id),
+    CONSTRAINT fk_project_views_project_id_projects FOREIGN KEY (project_id)
+        REFERENCES projects (id) ON DELETE CASCADE,
+    CONSTRAINT fk_project_views_user_id_users FOREIGN KEY (user_id)
+        REFERENCES users (id) ON DELETE RESTRICT,
+    INDEX ix_project_views_viewed_user (viewed_at, user_id),
+    INDEX ix_project_views_project_viewed (project_id, viewed_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE courses (
@@ -224,7 +245,8 @@ CREATE TABLE daily_tasks (
         end_time IS NULL OR start_time IS NULL OR end_time > start_time
     ),
     INDEX ix_daily_tasks_user_schedule (user_id, scheduled_date, status),
-    INDEX ix_daily_tasks_plan_status (plan_id, status)
+    INDEX ix_daily_tasks_plan_status (plan_id, status),
+    INDEX ix_daily_tasks_completed_at (completed_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE workflows (

@@ -1,6 +1,6 @@
 from app.models.ai import AIRequest, AIResult
 from app.models.base import Base
-from app.models.community import Comment, Favorite, Like
+from app.models.community import Comment, Favorite, Like, ProjectView
 from app.models.course import Course
 from app.models.learning import DailyTask, LearningPlan, LearningRecord, LearningReport
 from app.models.project import Project, Tag, project_tags
@@ -20,6 +20,7 @@ __all__ = [
     "LearningReport",
     "Like",
     "Project",
+    "ProjectView",
     "Tag",
     "User",
     "Workflow",

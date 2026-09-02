@@ -163,7 +163,7 @@ class CommunityService:
     def record_view(self, project_id: int, viewer_id: int) -> int:
         self._get_published(project_id, viewer_id)
         try:
-            view_count = self._repository.increment_view(project_id)
+            view_count = self._repository.increment_view(project_id, viewer_id)
         except CommunityPersistenceConflictError as exc:
             raise ConflictError("浏览量更新冲突") from exc
         if view_count is None:

@@ -97,6 +97,7 @@ class DailyTask(IdMixin, TimestampMixin, Base):
         ),
         Index("ix_daily_tasks_user_schedule", "user_id", "scheduled_date", "status"),
         Index("ix_daily_tasks_plan_status", "plan_id", "status"),
+        Index("ix_daily_tasks_completed_at", "completed_at"),
         MYSQL_TABLE_OPTIONS,
     )
 

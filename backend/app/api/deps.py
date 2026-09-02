@@ -11,6 +11,7 @@ from app.ai.deepseek import DeepSeekProvider
 from app.agents.project_analysis import ProjectAnalysisAgent
 from app.agents.project_review import ProjectReviewAgent
 from app.agents.prompt_agent import PromptAgent
+from app.agents.learning_report import LearningReportAgent
 from app.agents.schemas import AgentType
 from app.context.context_manager import ContextManager
 from app.core.config import (
@@ -23,11 +24,13 @@ from app.core.database import get_session_factory
 from app.core.exceptions import AuthenticationRequiredError
 from app.core.security import InvalidAccessTokenError, SecurityService
 from app.repositories.project import ProjectRepository
+from app.repositories.statistics import StatisticsRepository
 from app.repositories.agent import AgentRepository
 from app.repositories.project_context import ProjectContextRepository
 from app.repositories.community import CommunityRepository
 from app.repositories.course import CourseRepository
 from app.repositories.learning import LearningRepository
+from app.repositories.learning_report import LearningReportRepository
 from app.repositories.user import UserRepository
 from app.repositories.workflow import WorkflowRepository
 from app.repositories.workflow_execution import WorkflowExecutionRepository
@@ -39,7 +42,9 @@ from app.services.community import CommunityService
 from app.services.course import CourseService
 from app.services.health import HealthService
 from app.services.learning import LearningService
+from app.services.learning_report import LearningReportService
 from app.services.project import ProjectService
+from app.services.statistics import StatisticsService
 from app.services.project_context import ProjectContextService
 from app.services.workflow import WorkflowService
 from app.services.workspace import WorkspaceService
@@ -119,6 +124,15 @@ def get_project_service(session: DatabaseSession) -> ProjectService:
 
 
 ProjectServiceDependency = Annotated[ProjectService, Depends(get_project_service)]
+
+
+def get_statistics_service(session: DatabaseSession) -> StatisticsService:
+    return StatisticsService(StatisticsRepository(session))
+
+
+StatisticsServiceDependency = Annotated[
+    StatisticsService, Depends(get_statistics_service)
+]
 
 
 def get_project_context_service(session: DatabaseSession) -> ProjectContextService:
@@ -292,3 +306,23 @@ async def get_agent_service(
 
 
 AgentServiceDependency = Annotated[AgentService, Depends(get_agent_service)]
+
+
+async def get_learning_report_service(
+    session: DatabaseSession,
+) -> AsyncGenerator[LearningReportService, None]:
+    settings = get_ai_settings()
+    async with httpx.AsyncClient(follow_redirects=False) as http_client:
+        client = build_ai_client(settings, http_client)
+        agent = LearningReportAgent(
+            client,
+            model=settings.deepseek_model,
+            max_tokens=settings.ai_agent_max_tokens,
+            temperature=settings.ai_agent_temperature,
+        )
+        yield LearningReportService(LearningReportRepository(session), agent)
+
+
+LearningReportServiceDependency = Annotated[
+    LearningReportService, Depends(get_learning_report_service)
+]

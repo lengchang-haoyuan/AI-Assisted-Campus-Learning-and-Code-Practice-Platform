@@ -22,6 +22,7 @@ class Comment(IdMixin, TimestampMixin, Base):
     __tablename__ = "comments"
     __table_args__ = (
         Index("ix_comments_project_created", "project_id", "created_at"),
+        Index("ix_comments_created_at", "created_at"),
         MYSQL_TABLE_OPTIONS,
     )
 
@@ -50,6 +51,7 @@ class Like(IdMixin, Base):
     __table_args__ = (
         UniqueConstraint("user_id", "project_id", name="uq_likes_user_project"),
         Index("ix_likes_project_created", "project_id", "created_at"),
+        Index("ix_likes_created_at", "created_at"),
         MYSQL_TABLE_OPTIONS,
     )
 
@@ -76,6 +78,7 @@ class Favorite(IdMixin, Base):
     __table_args__ = (
         UniqueConstraint("user_id", "project_id", name="uq_favorites_user_project"),
         Index("ix_favorites_project_created", "project_id", "created_at"),
+        Index("ix_favorites_created_at", "created_at"),
         MYSQL_TABLE_OPTIONS,
     )
 
@@ -96,3 +99,28 @@ class Favorite(IdMixin, Base):
     user: Mapped["User"] = relationship(back_populates="favorites")
     project: Mapped["Project"] = relationship(back_populates="favorites")
 
+
+class ProjectView(IdMixin, Base):
+    __tablename__ = "project_views"
+    __table_args__ = (
+        Index("ix_project_views_viewed_user", "viewed_at", "user_id"),
+        Index("ix_project_views_project_viewed", "project_id", "viewed_at"),
+        MYSQL_TABLE_OPTIONS,
+    )
+
+    project_id: Mapped[int] = mapped_column(
+        BIGINT(unsigned=True),
+        ForeignKey("projects.id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    user_id: Mapped[int] = mapped_column(
+        BIGINT(unsigned=True),
+        ForeignKey("users.id", ondelete="RESTRICT"),
+        nullable=False,
+    )
+    viewed_at: Mapped[datetime] = mapped_column(
+        UTCDateTime(), nullable=False, server_default=text("CURRENT_TIMESTAMP(6)")
+    )
+
+    project: Mapped["Project"] = relationship(back_populates="views")
+    user: Mapped["User"] = relationship(back_populates="project_views")

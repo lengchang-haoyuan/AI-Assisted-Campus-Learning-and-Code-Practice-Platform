@@ -27,7 +27,7 @@ from app.models.enums import ProjectDifficulty, ProjectStatus, enum_type
 
 if TYPE_CHECKING:
     from app.models.ai import AIRequest
-    from app.models.community import Comment, Favorite, Like
+    from app.models.community import Comment, Favorite, Like, ProjectView
     from app.models.learning import DailyTask, LearningPlan, LearningRecord
     from app.models.user import User
     from app.models.workflow import Workflow
@@ -64,6 +64,9 @@ class Project(IdMixin, TimestampMixin, Base):
         CheckConstraint("progress BETWEEN 0 AND 100", name="progress_range"),
         Index("ix_projects_owner_status", "owner_id", "status"),
         Index("ix_projects_published_created", "is_published", "created_at"),
+        Index("ix_projects_created_at", "created_at"),
+        Index("ix_projects_completed_at", "completed_at"),
+        Index("ix_projects_published_at", "published_at"),
         MYSQL_TABLE_OPTIONS,
     )
 
@@ -100,6 +103,7 @@ class Project(IdMixin, TimestampMixin, Base):
         Boolean, nullable=False, server_default=text("0")
     )
     published_at: Mapped[datetime | None] = mapped_column(UTCDateTime())
+    completed_at: Mapped[datetime | None] = mapped_column(UTCDateTime())
     view_count: Mapped[int] = mapped_column(
         BIGINT(unsigned=True), nullable=False, server_default=text("0")
     )
@@ -115,6 +119,9 @@ class Project(IdMixin, TimestampMixin, Base):
         back_populates="project", cascade="all, delete-orphan", passive_deletes=True
     )
     favorites: Mapped[list["Favorite"]] = relationship(
+        back_populates="project", cascade="all, delete-orphan", passive_deletes=True
+    )
+    views: Mapped[list["ProjectView"]] = relationship(
         back_populates="project", cascade="all, delete-orphan", passive_deletes=True
     )
     workflows: Mapped[list["Workflow"]] = relationship(

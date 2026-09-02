@@ -1,6 +1,6 @@
 # ScholarHub
 
-面向高校学生的 AI 辅助学习与代码实践平台。当前已完成 P00-P04：工程初始化、数据库、FastAPI 分层架构、JWT 用户认证和项目管理 CRUD。
+面向高校学生的 AI 辅助学习与代码实践平台。当前已完成 P00-P14，覆盖认证、项目与校园代码社区、学习系统、可视化 Workflow、ProjectContext、AI Provider/Agent、Workflow 执行、真实数据统计和 AI 学习报告。
 
 ## 项目结构
 
@@ -59,4 +59,4 @@ mysql --user=root --password --execute="source schema.sql"
 
 ## 当前范围
 
-P00-P02 提供工程、数据库和 FastAPI 分层基础；P03 提供认证闭环；P04 提供当前用户隔离的 Project REST CRUD、有界分页和所有权校验。社区接口、学习业务、Workflow 执行和 AI 调用仍未实现，登录、注册和项目管理页面将在 P05 实现。
+P00-P14 的规划功能已落地。前端 `/analytics` 使用 ECharts 展示数据库聚合的 7/30 日趋势、项目和技术栈统计，并可生成、刷新后查询当前用户的 AI 学习报告。下一阶段只剩 P15 全系统联调与答辩优化，不在当前阶段提前实现。

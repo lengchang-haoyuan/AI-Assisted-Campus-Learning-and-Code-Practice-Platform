@@ -6,7 +6,7 @@ from sqlalchemy import delete, exists, func, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, joinedload, selectinload
 
-from app.models.community import Comment, Favorite, Like
+from app.models.community import Comment, Favorite, Like, ProjectView
 from app.models.project import Project, Tag, project_tags
 
 
@@ -101,7 +101,7 @@ class CommunityRepository:
         project.published_at = None
         self._commit_or_raise_conflict()
 
-    def increment_view(self, project_id: int) -> int | None:
+    def increment_view(self, project_id: int, user_id: int) -> int | None:
         statement = (
             update(Project)
             .where(Project.id == project_id, Project.is_published.is_(True))
@@ -111,6 +111,7 @@ class CommunityRepository:
         if result.rowcount != 1:
             self._session.rollback()
             return None
+        self._session.add(ProjectView(project_id=project_id, user_id=user_id))
         self._commit_or_raise_conflict()
         return self._session.scalar(select(Project.view_count).where(Project.id == project_id))
 

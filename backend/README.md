@@ -193,6 +193,37 @@ Fake Provider + 真实 MySQL 验收脚本会创建隔离临时数据，运行三
 python -m scripts.verify_workflow_engine
 ```
 
+## 数据统计与 AI 学习报告
+
+P14 统计接口均要求 Bearer Token，返回全平台匿名聚合，不返回用户明细。数据库统一使用 UTC，前端通过 `timezone_offset_minutes` 传入当前浏览器相对 UTC 的分钟偏移；趋势范围只允许 7 日或 30 日，缺失日期返回零值而不是伪造活动：
+
+```text
+GET /api/v1/statistics/today?timezone_offset_minutes=480
+GET /api/v1/statistics/trend?days=7&timezone_offset_minutes=480
+GET /api/v1/statistics/projects?days=30&timezone_offset_minutes=480
+GET /api/v1/statistics/tech-stacks?dimension=language&limit=10
+```
+
+今日访问人数按 `project_views.user_id` 去重；完成任务人数按当日 `daily_tasks.completed_at` 去重；社区互动为浏览、未删除评论、点赞和收藏之和。项目完成时间由 `projects.completed_at` 精确记录，P14 不对已有历史状态回填时间，因此迁移前已完成的项目不会被错误计入历史趋势。
+
+学习报告按当前用户隔离，报告周期最多 90 日。Repository 只向 Agent 提供聚合指标，不提供学习记录正文、完整 Prompt 或个人数据；模型结果必须包含 `summary`、`achievement`、`problems`、`suggestions` 和 `structured_data` 并通过 Pydantic 校验：
+
+```text
+POST /api/v1/learning-reports
+GET  /api/v1/learning-reports?page=1&page_size=20
+GET  /api/v1/learning-reports/{report_id}
+```
+
+报告生成成功后保存 `AIRequest`、`AIResult` 和 `learning_reports` 关联。Provider 失败或输出无效时，报告持久化为 `failed` 并保存安全失败类别，不伪造完成结果；失败周期可重试，未过期的重复生成返回冲突。
+
+已有数据库先运行可审查的增量迁移。脚本会预检完整基线，拒绝部分应用状态；重复运行只报告已应用，不改写已有数据：
+
+```powershell
+python -m scripts.apply_p14_statistics_migration
+python -m scripts.verify_database_schema
+python -m scripts.verify_statistics_reports
+```
+
 ## 环境约定
 
 - MySQL 8.0 或更高版本，字符集为 `utf8mb4`，排序规则为 `utf8mb4_0900_ai_ci`。

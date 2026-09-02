@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from math import ceil
 from typing import Any, Mapping
 
@@ -101,6 +101,8 @@ class ProjectService:
 
     def create_project(self, owner_id: int, data: ProjectCreateData) -> ProjectData:
         project = Project(owner_id=owner_id, **asdict(data))
+        if project.status == ProjectStatus.COMPLETED:
+            project.completed_at = datetime.now(UTC)
         try:
             return self._to_data(self._repository.create(project))
         except ProjectPersistenceConflictError as exc:
@@ -128,8 +130,13 @@ class ProjectService:
         self, project_id: int, owner_id: int, data: ProjectUpdateData
     ) -> ProjectData:
         project = self._get_owned_project(project_id, owner_id)
+        previous_status = project.status
         for field_name, value in data.values.items():
             setattr(project, field_name, value)
+        if project.status == ProjectStatus.COMPLETED and previous_status != project.status:
+            project.completed_at = datetime.now(UTC)
+        elif previous_status == ProjectStatus.COMPLETED and project.status != previous_status:
+            project.completed_at = None
         try:
             return self._to_data(self._repository.update(project))
         except ProjectPersistenceConflictError as exc:

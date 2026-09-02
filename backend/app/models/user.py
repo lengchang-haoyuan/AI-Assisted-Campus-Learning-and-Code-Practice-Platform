@@ -7,7 +7,7 @@ from app.models.base import Base, IdMixin, MYSQL_TABLE_OPTIONS, TimestampMixin
 
 if TYPE_CHECKING:
     from app.models.ai import AIRequest
-    from app.models.community import Comment, Favorite, Like
+    from app.models.community import Comment, Favorite, Like, ProjectView
     from app.models.course import Course
     from app.models.learning import DailyTask, LearningPlan, LearningRecord, LearningReport
     from app.models.project import Project
@@ -54,10 +54,12 @@ class User(IdMixin, TimestampMixin, Base):
     favorites: Mapped[list["Favorite"]] = relationship(
         back_populates="user", passive_deletes=True
     )
+    project_views: Mapped[list["ProjectView"]] = relationship(
+        back_populates="user", passive_deletes=True
+    )
     workflow_runs: Mapped[list["WorkflowRun"]] = relationship(
         back_populates="started_by", passive_deletes=True
     )
     ai_requests: Mapped[list["AIRequest"]] = relationship(
         back_populates="user", passive_deletes=True
     )
-
