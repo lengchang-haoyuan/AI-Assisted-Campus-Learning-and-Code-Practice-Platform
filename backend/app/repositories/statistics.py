@@ -10,6 +10,7 @@ from app.models.community import Comment, Favorite, Like, ProjectView
 from app.models.enums import ProjectStatus, TaskStatus
 from app.models.learning import DailyTask
 from app.models.project import Project
+from app.repositories.project_progress import project_progress_rows
 
 
 @dataclass(frozen=True, slots=True)
@@ -200,7 +201,8 @@ class StatisticsRepository:
             getattr(status, "value", str(status)): int(count)
             for status, count in status_rows
         }
-        average_progress = self._session.scalar(select(func.avg(Project.progress)))
+        progress_rows = project_progress_rows()
+        average_progress = self._session.scalar(select(func.avg(progress_rows.c.progress)))
         return ProjectStatisticsRecord(
             total=self._scalar_count(Project.id),
             published=self._scalar_count(Project.id, Project.is_published.is_(True)),

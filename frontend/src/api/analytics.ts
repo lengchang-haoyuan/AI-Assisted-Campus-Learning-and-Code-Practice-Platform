@@ -54,6 +54,9 @@ export async function listLearningReports(): Promise<LearningReportListResponse>
 export async function generateLearningReport(
   input: LearningReportCreateInput,
 ): Promise<LearningReportResponse> {
-  const response = await apiClient.post<LearningReportResponse>('/learning-reports', input)
+  // 覆盖后端 AI 总超时上限 180 秒，并预留响应持久化时间；普通请求仍为 5 秒。
+  const response = await apiClient.post<LearningReportResponse>('/learning-reports', input, {
+    timeout: 190_000,
+  })
   return response.data
 }

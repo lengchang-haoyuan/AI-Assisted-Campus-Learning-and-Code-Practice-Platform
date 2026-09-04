@@ -18,7 +18,8 @@ function search(): void {
 
 function logout(): void {
   authStore.logout()
-  void router.replace({ name: 'login' })
+  // 退出认证会话时同时销毁其他 Store，不能只做 SPA 路由切换。
+  window.location.replace(router.resolve({ name: 'login' }).href)
 }
 </script>
 

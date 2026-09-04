@@ -1,6 +1,6 @@
 # ScholarHub
 
-面向高校学生的 AI 辅助学习与代码实践平台。当前已完成 P00-P14，覆盖认证、项目与校园代码社区、学习系统、可视化 Workflow、ProjectContext、AI Provider/Agent、Workflow 执行、真实数据统计和 AI 学习报告。
+面向高校学生的 AI 辅助学习与代码实践平台。当前已完成 P00-P15 的功能开发与最终联调，覆盖认证、项目与校园代码社区、学习系统、可视化 Workflow、ProjectContext、AI Provider/Agent、Workflow 执行、真实数据统计和 AI 学习报告。
 
 ## 项目结构
 
@@ -25,7 +25,7 @@ cd backend
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
@@ -38,7 +38,7 @@ Swagger：`http://127.0.0.1:8000/docs`
 ```powershell
 cd frontend
 pnpm install
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 pnpm dev
 ```
 
@@ -59,4 +59,4 @@ mysql --user=root --password --execute="source schema.sql"
 
 ## 当前范围
 
-P00-P14 的规划功能已落地。前端 `/analytics` 使用 ECharts 展示数据库聚合的 7/30 日趋势、项目和技术栈统计，并可生成、刷新后查询当前用户的 AI 学习报告。下一阶段只剩 P15 全系统联调与答辩优化，不在当前阶段提前实现。
+前端 `/analytics` 使用 ECharts 展示数据库聚合的 7/30 日趋势、项目和技术栈统计，并可生成、刷新后查询当前用户的 AI 学习报告。P15 已完成三项跨模块修复、Fake/真实 Provider 全链路和关键浏览器回归；依赖安全审计因外部服务超时未取得结论。启动、演示路径和简化边界见 [P15 演示与答辩指南](docs/P15_演示与答辩指南.md)，验证明细见 [P15 交付报告](docs/ai-worklogs/reports/20260904-134029-p15-integration.md)。

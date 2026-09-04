@@ -18,6 +18,7 @@ from app.models.enums import (
 from app.models.learning import DailyTask, LearningRecord, LearningReport
 from app.models.project import Project
 from app.models.workflow import WorkflowRun
+from app.repositories.project_progress import project_progress_rows
 
 
 class LearningReportPersistenceError(Exception):
@@ -104,8 +105,9 @@ class LearningReportRepository:
         for status, count in project_status_rows:
             project_by_status[getattr(status, "value", str(status))] = int(count)
         project_total = sum(project_by_status.values())
+        progress_rows = project_progress_rows()
         average_progress = self._session.scalar(
-            select(func.avg(Project.progress)).where(Project.owner_id == user_id)
+            select(func.avg(progress_rows.c.progress)).where(progress_rows.c.owner_id == user_id)
         )
 
         workflow_total = self._count(

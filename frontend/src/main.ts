@@ -18,10 +18,11 @@ const authStore = useAuthStore(pinia)
 setUnauthorizedHandler(() => {
   authStore.clearSession()
   if (router.currentRoute.value.meta.requiresAuth) {
-    void router.replace({
+    // 完整导航销毁所有 Store 和旧会话请求，避免切换账号后显示旧数据。
+    window.location.replace(router.resolve({
       name: 'login',
       query: { redirect: router.currentRoute.value.fullPath },
-    })
+    }).href)
   }
 })
 

@@ -201,10 +201,12 @@ P14 统计接口均要求 Bearer Token，返回全平台匿名聚合，不返回
 GET /api/v1/statistics/today?timezone_offset_minutes=480
 GET /api/v1/statistics/trend?days=7&timezone_offset_minutes=480
 GET /api/v1/statistics/projects?days=30&timezone_offset_minutes=480
-GET /api/v1/statistics/tech-stacks?dimension=language&limit=10
+GET /api/v1/statistics/tech-stacks?limit=10
 ```
 
 今日访问人数按 `project_views.user_id` 去重；完成任务人数按当日 `daily_tasks.completed_at` 去重；社区互动为浏览、未删除评论、点赞和收藏之和。项目完成时间由 `projects.completed_at` 精确记录，P14 不对已有历史状态回填时间，因此迁移前已完成的项目不会被错误计入历史趋势。
+
+P15 统一项目进度口径：只计算项目所有者的关联任务，按完成率取整数，与工作台一致；没有关联任务时使用 `projects.progress`。统计和新报告均在数据库查询层计算，不回写项目字段或历史报告快照。
 
 学习报告按当前用户隔离，报告周期最多 90 日。Repository 只向 Agent 提供聚合指标，不提供学习记录正文、完整 Prompt 或个人数据；模型结果必须包含 `summary`、`achievement`、`problems`、`suggestions` 和 `structured_data` 并通过 Pydantic 校验：
 
@@ -216,7 +218,7 @@ GET  /api/v1/learning-reports/{report_id}
 
 报告生成成功后保存 `AIRequest`、`AIResult` 和 `learning_reports` 关联。Provider 失败或输出无效时，报告持久化为 `failed` 并保存安全失败类别，不伪造完成结果；失败周期可重试，未过期的重复生成返回冲突。
 
-已有数据库先运行可审查的增量迁移。脚本会预检完整基线，拒绝部分应用状态；重复运行只报告已应用，不改写已有数据：
+已有数据库先备份并审查增量迁移。脚本检查 P14 新增表、列和索引是否已存在，拒绝部分应用状态；它不能代替完整结构校验。MySQL DDL 不保证整份脚本原子回滚，失败后需人工核对，不能直接重跑或删除已有表。已完整应用时重复运行只报告已应用：
 
 ```powershell
 python -m scripts.apply_p14_statistics_migration
@@ -267,3 +269,11 @@ python -m unittest discover -s tests -v
 ```
 
 测试覆盖 health、Swagger、统一异常、错误脱敏、CORS、请求 ID、JSON 日志、Session 释放和 Router 分层边界，同时检查 SQLAlchemy metadata 与 `schema.sql`。`python -m scripts.verify_database_schema` 还会只读对比实际 MySQL 数据库与 Models。
+
+P15 跨模块验收入口如下，Fake 与真实 Provider 模式均已通过；后续失败仍以非零退出码报告：
+
+```powershell
+python -X utf8 -m scripts.verify_integration
+```
+
+该脚本通过 HTTP/ASGI 请求真实 API 和 MySQL，默认只替换外部 Provider，不依赖开发服务器、不消耗模型额度。它创建随机命名的临时用户和关联数据，在 `finally` 中清理；请使用开发数据库，勿在生产库运行。浏览器演示、真实模型模式和已知边界见 [P15 演示与答辩指南](../docs/P15_演示与答辩指南.md)。
