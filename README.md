@@ -8,7 +8,7 @@
 ScholarHub/
 ├── frontend/   Vue 3 + TypeScript + Vite
 ├── backend/    FastAPI + Pydantic + SQLAlchemy
-└── docs/       开发操作记录与阶段报告
+└── 开发相关文档/ 规划、提示词、说明、日志、报告、证据与答辩材料
 ```
 
 ## 环境要求
@@ -59,4 +59,4 @@ mysql --user=root --password --execute="source schema.sql"
 
 ## 当前范围
 
-前端 `/analytics` 使用 ECharts 展示数据库聚合的 7/30 日趋势、项目和技术栈统计，并可生成、刷新后查询当前用户的 AI 学习报告。P15 已完成三项跨模块修复、Fake/真实 Provider 全链路和关键浏览器回归；依赖安全审计因外部服务超时未取得结论。启动、演示路径和简化边界见 [P15 演示与答辩指南](docs/P15_演示与答辩指南.md)，验证明细见 [P15 交付报告](docs/ai-worklogs/reports/20260904-134029-p15-integration.md)。
+前端 `/analytics` 使用 ECharts 展示数据库聚合的 7/30 日趋势、项目和技术栈统计，并可生成、刷新后查询当前用户的 AI 学习报告。P15 已完成三项跨模块修复、Fake/真实 Provider 全链路和关键浏览器回归；依赖安全审计因外部服务超时未取得结论。启动、演示路径和简化边界见 [P15 演示与答辩指南](开发相关文档/答辩材料/P15演示与答辩指南.md)，验证明细见 [P15 交付报告](开发相关文档/阶段报告/20260904-134029-P15-全系统联调交付报告.md)。

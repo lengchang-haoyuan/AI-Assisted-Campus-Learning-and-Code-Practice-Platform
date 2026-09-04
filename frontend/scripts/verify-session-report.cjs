@@ -7,7 +7,7 @@ const path = require('node:path')
 const { chromium } = require('playwright')
 
 const backend = path.resolve(__dirname, '../../backend')
-const evidence = path.resolve(__dirname, '../../docs/ai-worklogs/evidence/p15')
+const evidence = path.resolve(__dirname, '../../开发相关文档/测试证据/P15')
 const frontendUrl = 'http://127.0.0.1:5173'
 const apiUrl = 'http://127.0.0.1:8000/api/v1'
 const tokenKey = 'scholarhub.access_token'
