@@ -6,6 +6,7 @@ from contextlib import nullcontext
 from datetime import UTC, datetime, timedelta, timezone
 import json
 from secrets import token_hex, token_urlsafe
+from time import sleep
 from unittest.mock import patch
 
 from fastapi import FastAPI
@@ -116,6 +117,13 @@ def verify(application: FastAPI, user_ids: list[int], suffix: str) -> None:
             return await client.request(method, "/api/v1" + path, **kwargs)
 
     def call(method: str, path: str, expected: int = 200, **kwargs):
+        if method == "POST" and path == "/auth/login":
+            challenge = call("POST", "/auth/slider/challenge")
+            sleep(0.6)
+            verified = call("POST", "/auth/slider/verify", json={
+                "challenge_id": challenge["challenge_id"], "position": 100,
+            })
+            kwargs["json"] = {**kwargs["json"], "slider_token": verified["slider_token"]}
         response = asyncio.run(send(method, path, **kwargs))
         if response.status_code != expected:
             code = response.json().get("error", {}).get("code", "unknown")

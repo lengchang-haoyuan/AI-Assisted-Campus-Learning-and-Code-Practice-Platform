@@ -9,6 +9,17 @@ export interface RegisterInput {
 export interface LoginInput {
   identifier: string
   password: string
+  slider_token: string
+}
+
+export interface SliderChallenge {
+  challenge_id: string
+  expires_in: number
+}
+
+export interface SliderVerification {
+  slider_token: string
+  expires_in: number
 }
 
 export interface TokenResponse {

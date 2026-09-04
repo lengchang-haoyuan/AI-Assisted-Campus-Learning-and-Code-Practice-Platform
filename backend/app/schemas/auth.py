@@ -36,6 +36,7 @@ class LoginRequest(BaseModel):
 
     identifier: str = Field(min_length=3, max_length=255)
     password: str = Field(min_length=1, max_length=128)
+    slider_token: str = Field(min_length=32, max_length=128)
 
     @field_validator("identifier", mode="before")
     @classmethod
@@ -48,4 +49,21 @@ class TokenResponse(BaseModel):
 
     access_token: str
     token_type: str = "bearer"
+    expires_in: int
+
+
+class SliderChallengeResponse(BaseModel):
+    challenge_id: str
+    expires_in: int
+
+
+class SliderVerifyRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    challenge_id: str = Field(min_length=32, max_length=128)
+    position: int = Field(ge=0, le=100, strict=True)
+
+
+class SliderVerifyResponse(BaseModel):
+    slider_token: str
     expires_in: int

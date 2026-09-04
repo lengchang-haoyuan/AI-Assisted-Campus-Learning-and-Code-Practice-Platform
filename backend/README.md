@@ -36,20 +36,31 @@ python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
 ```text
 POST /api/v1/auth/register
+POST /api/v1/auth/slider/challenge
+POST /api/v1/auth/slider/verify
 POST /api/v1/auth/login
 GET  /api/v1/users/me
 ```
 
-注册和登录使用 JSON。登录的 `identifier` 可填写用户名或邮箱：
+注册和登录使用 JSON。登录前先完成基础滑块验证：
+
+1. 请求 `/auth/slider/challenge` 获取 `challenge_id` 和有效秒数（120 秒）。
+2. 用户向右拖动到底后请求 `/auth/slider/verify`，JSON 为 `{"challenge_id":"上一步返回的值","position":100}`；挑战最短存续 0.5 秒，每次提交消费挑战。
+3. 校验通过后返回有效 60 秒的一次性 `slider_token`；将其随账号密码提交。用户名或邮箱均可作为 `identifier`：
 
 ```json
 {
   "identifier": "student_01",
-  "password": "用户输入的密码"
+  "password": "用户输入的密码",
+  "slider_token": "滑块验证接口返回的一次性凭证"
 }
 ```
 
 密码使用 Argon2id 哈希，JWT 使用环境变量配置的 HS256 和过期分钟数。`/users/me` 要求 `Authorization: Bearer <token>`；缺少、无效或过期 Token 返回 401，已认证但账号不可用返回 403。
+
+登录请求缺少 `slider_token` 返回 422；伪造、过期或重放凭证返回 400（`slider_verification_required`），验证容量耗尽返回 429。密码错误仍返回通用 401 提示且消费滑块凭证，前端自动重取挑战。旧登录客户端和 Swagger 手工调用需要补齐上述握手；注册、JWT 响应和已登录会话不变。
+
+本版滑块是基础交互校验，不是专业反机器人 CAPTCHA：位置由客户端报告，脚本仍可自动申请和完成挑战。挑战保存在有锁、容量有界（2048 条）的进程内内存，不写数据库或日志。当前仅支持单 worker 本地部署；服务重启或热重载后需刷新滑块。多 worker/多实例不共享凭证，公开部署前须另行接入共享存储及成熟的验证码和限流方案。本次未新增 Redis 或依赖。
 
 ## 项目管理
 

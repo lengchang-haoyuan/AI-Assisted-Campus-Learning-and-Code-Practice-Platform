@@ -36,6 +36,7 @@ from app.repositories.workflow import WorkflowRepository
 from app.repositories.workflow_execution import WorkflowExecutionRepository
 from app.repositories.workspace import WorkspaceRepository
 from app.services.auth import AuthService, UserIdentity
+from app.services.slider_captcha import SliderCaptchaService, get_slider_captcha_service
 from app.services.ai import AIService
 from app.services.agent import AgentService
 from app.services.community import CommunityService
@@ -90,6 +91,9 @@ def get_auth_service(
 
 
 AuthServiceDependency = Annotated[AuthService, Depends(get_auth_service)]
+SliderCaptchaDependency = Annotated[
+    SliderCaptchaService, Depends(get_slider_captcha_service)
+]
 
 
 def get_token_user_id(

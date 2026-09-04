@@ -7,7 +7,9 @@ const path = require('node:path')
 const { chromium } = require('playwright')
 
 const backend = path.resolve(__dirname, '../../backend')
-const evidence = path.resolve(__dirname, '../../开发相关文档/测试证据/P15')
+const evidence = process.env.SCHOLARHUB_EVIDENCE_DIR
+  ? path.resolve(process.env.SCHOLARHUB_EVIDENCE_DIR)
+  : path.resolve(__dirname, '../../开发相关文档/测试证据/P15')
 const frontendUrl = 'http://127.0.0.1:5173'
 const apiUrl = 'http://127.0.0.1:8000/api/v1'
 const tokenKey = 'scholarhub.access_token'
@@ -58,8 +60,30 @@ async function main() {
     async function login(user) {
       await page.getByLabel('用户名或邮箱').fill(user.username)
       await page.getByLabel('密码', { exact: true }).fill(user.password)
+      await completeSlider()
       await page.getByRole('button', { name: '登录', exact: true }).click()
       await page.waitForURL(url => url.pathname === '/')
+    }
+
+    async function completeSlider() {
+      const slider = page.getByRole('slider', { name: '滑块验证' })
+      await page.locator('.slider-captcha.is-ready').waitFor()
+      // 重置有回弹动画，先等待滑块稳定再计算真实拖动坐标。
+      await slider.click({ trial: true })
+      const handle = await slider.boundingBox()
+      const track = await page.locator('.slider-captcha__track').boundingBox()
+      assert.ok(handle && track)
+      const start = handle.x + handle.width / 2
+      const end = track.x + track.width - handle.width / 2 - 5
+      const y = handle.y + handle.height / 2
+      await page.mouse.move(start, y)
+      await page.mouse.down()
+      for (let step = 1; step <= 20; step++) {
+        await page.mouse.move(start + (end - start) * step / 20, y)
+        await new Promise(resolve => setTimeout(resolve, 30))
+      }
+      await page.mouse.up()
+      await page.getByText('验证通过', { exact: true }).waitFor()
     }
 
     phase = '6 秒报告与重复提交'
@@ -115,6 +139,7 @@ async function main() {
     await page.getByLabel('用户名或邮箱').fill(users[1].username)
     await page.getByLabel('密码', { exact: true }).fill('incorrect-p15-test-password')
     const beforeWrongPassword = await page.evaluate(() => performance.timeOrigin)
+    await completeSlider()
     const rejected = page.waitForResponse(response => response.url().endsWith('/auth/login'))
     await page.getByRole('button', { name: '登录', exact: true }).click()
     assert.equal((await rejected).status(), 401)
@@ -130,7 +155,7 @@ async function main() {
     assert.equal(await page.locator('.analytics-report-summary').count(), 0)
     assert.equal((await page.locator('body').innerText()).includes(users[0].username), false)
     mkdirSync(evidence, { recursive: true })
-    await page.screenshot({ path: path.join(evidence, 'session-isolation.png'), fullPage: true })
+    await page.screenshot({ path: path.join(evidence, '账号切换与错误隔离.png'), fullPage: true })
     console.log('通过：退出完整导航、错误密码反馈、跨账号失败态隔离')
 
     phase = '受保护页面 401 清理'
@@ -145,7 +170,7 @@ async function main() {
     console.log('通过：受保护请求 401 清理 Token 和旧会话；无页面脚本错误')
   } catch (error) {
     mkdirSync(evidence, { recursive: true })
-    await page.screenshot({ path: path.join(evidence, 'session-failure.png'), fullPage: true })
+    await page.screenshot({ path: path.join(evidence, '回归失败现场.png'), fullPage: true })
     console.error(`失败阶段：${phase}；页面路径：${new URL(page.url()).pathname}`)
     throw error
   } finally {
