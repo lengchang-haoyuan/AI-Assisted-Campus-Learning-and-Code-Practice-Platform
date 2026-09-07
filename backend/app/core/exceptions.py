@@ -38,6 +38,12 @@ class ConflictError(AppError):
     default_message = "请求与当前资源状态冲突"
 
 
+class RateLimitError(AppError):
+    status_code = 429
+    code = "rate_limited"
+    default_message = "操作过于频繁，请稍后重试"
+
+
 class AIConfigurationError(AppError):
     status_code = 503
     code = "ai_configuration_error"

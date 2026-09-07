@@ -4,6 +4,7 @@ export interface RegisterInput {
   username: string
   email: string
   password: string
+  invite_token?: string
 }
 
 export interface LoginInput {

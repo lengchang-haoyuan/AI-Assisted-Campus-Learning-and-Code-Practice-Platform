@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import { pinia } from '@/stores'
 import { useAuthStore } from '@/stores/auth'
+import { getCampusMe } from '@/api/campus'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,6 +18,11 @@ const router = createRouter({
       name: 'register',
       component: () => import('@/views/RegisterView.vue'),
       meta: { guestOnly: true },
+    },
+    {
+      path: '/reset-password',
+      name: 'reset-password',
+      component: () => import('@/views/ResetPasswordView.vue'),
     },
     {
       path: '/',
@@ -108,6 +114,32 @@ const router = createRouter({
           name: 'profile',
           component: () => import('@/views/ProfileView.vue'),
         },
+        {
+          path: 'campus/join',
+          name: 'campus-join',
+          component: () => import('@/views/CampusJoinView.vue'),
+        },
+        {
+          path: 'campus/classes',
+          name: 'campus-classes',
+          component: () => import('@/views/ClassroomsView.vue'),
+        },
+        {
+          path: 'campus/classes/:classId',
+          name: 'campus-class-detail',
+          component: () => import('@/views/ClassroomDetailView.vue'),
+        },
+        {
+          path: 'campus/assignments/:assignmentId',
+          name: 'campus-assignment-detail',
+          component: () => import('@/views/TeachingAssignmentDetailView.vue'),
+        },
+        {
+          path: 'campus/admin/accounts',
+          name: 'campus-admin',
+          component: () => import('@/views/CampusAdminView.vue'),
+          meta: { campusAdmin: true },
+        },
       ],
     },
     { path: '/:pathMatch(.*)*', redirect: '/' },
@@ -122,6 +154,12 @@ router.beforeEach(async (to) => {
     return { name: 'login', query: { redirect: to.fullPath } }
   }
   if (to.meta.guestOnly && authStore.isLoggedIn) return { name: 'home' }
+  if (to.meta.campusAdmin && authStore.isLoggedIn) {
+    const membership = (await getCampusMe()).membership
+    if (membership?.role !== 'administrator' || membership.status !== 'active') {
+      return { name: 'campus-join' }
+    }
+  }
   return true
 })
 

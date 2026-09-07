@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
 
-from sqlalchemy import Boolean, String, Text, text
+from sqlalchemy import Boolean, CheckConstraint, Integer, String, Text, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base import Base, IdMixin, MYSQL_TABLE_OPTIONS, TimestampMixin
@@ -16,11 +16,17 @@ if TYPE_CHECKING:
 
 class User(IdMixin, TimestampMixin, Base):
     __tablename__ = "users"
-    __table_args__ = MYSQL_TABLE_OPTIONS
+    __table_args__ = (
+        CheckConstraint("auth_version >= 0", name="auth_version_nonnegative"),
+        MYSQL_TABLE_OPTIONS,
+    )
 
     username: Mapped[str] = mapped_column(String(50), nullable=False, unique=True)
     email: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+    auth_version: Mapped[int] = mapped_column(
+        Integer, nullable=False, default=0, server_default="0"
+    )
     avatar_url: Mapped[str | None] = mapped_column(String(500))
     bio: Mapped[str | None] = mapped_column(Text)
     is_active: Mapped[bool] = mapped_column(

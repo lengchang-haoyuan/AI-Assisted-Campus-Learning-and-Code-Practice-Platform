@@ -56,7 +56,7 @@ ResourceId = Annotated[int, Path(ge=1)]
 
 
 @router.get("", response_model=WorkflowListResponse, summary="获取当前用户的工作流列表")
-async def list_workflows(
+def list_workflows(
     current_user: CurrentUser,
     service: WorkflowServiceDependency,
     page: Annotated[int, Query(ge=1, le=10_000)] = 1,
@@ -79,7 +79,7 @@ async def list_workflows(
     status_code=status.HTTP_201_CREATED,
     summary="创建工作流",
 )
-async def create_workflow(
+def create_workflow(
     payload: WorkflowCreate,
     current_user: CurrentUser,
     service: WorkflowServiceDependency,
@@ -120,7 +120,7 @@ async def run_workflow(
     response_model=WorkflowRunListResponse,
     summary="获取 WorkflowRun 列表",
 )
-async def list_workflow_runs(
+def list_workflow_runs(
     workflow_id: ResourceId,
     current_user: CurrentUser,
     service: WorkflowExecutionServiceDependency,
@@ -142,7 +142,7 @@ async def list_workflow_runs(
     response_model=WorkflowRunResponse,
     summary="获取 WorkflowRun 详情和节点结果",
 )
-async def get_workflow_run(
+def get_workflow_run(
     workflow_id: ResourceId,
     run_id: ResourceId,
     current_user: CurrentUser,
@@ -158,7 +158,7 @@ async def get_workflow_run(
     response_model=WorkflowGraphResponse,
     summary="读取完整工作流图",
 )
-async def get_workflow_graph(
+def get_workflow_graph(
     workflow_id: ResourceId,
     current_user: CurrentUser,
     service: WorkflowServiceDependency,
@@ -173,7 +173,7 @@ async def get_workflow_graph(
     response_model=WorkflowGraphResponse,
     summary="原子保存完整工作流图",
 )
-async def replace_workflow_graph(
+def replace_workflow_graph(
     workflow_id: ResourceId,
     payload: WorkflowGraphUpdate,
     current_user: CurrentUser,
@@ -198,7 +198,7 @@ async def replace_workflow_graph(
     response_model=WorkflowNodeListResponse,
     summary="获取工作流节点列表",
 )
-async def list_workflow_nodes(
+def list_workflow_nodes(
     workflow_id: ResourceId,
     current_user: CurrentUser,
     service: WorkflowServiceDependency,
@@ -214,7 +214,7 @@ async def list_workflow_nodes(
     status_code=status.HTTP_201_CREATED,
     summary="创建工作流节点",
 )
-async def create_workflow_node(
+def create_workflow_node(
     workflow_id: ResourceId,
     payload: WorkflowNodeCreate,
     current_user: CurrentUser,
@@ -234,7 +234,7 @@ async def create_workflow_node(
     response_model=WorkflowNodeResponse,
     summary="获取工作流节点详情",
 )
-async def get_workflow_node(
+def get_workflow_node(
     workflow_id: ResourceId,
     node_id: ResourceId,
     current_user: CurrentUser,
@@ -250,7 +250,7 @@ async def get_workflow_node(
     response_model=WorkflowNodeResponse,
     summary="更新工作流节点",
 )
-async def update_workflow_node(
+def update_workflow_node(
     workflow_id: ResourceId,
     node_id: ResourceId,
     payload: WorkflowNodeUpdate,
@@ -272,7 +272,7 @@ async def update_workflow_node(
     status_code=status.HTTP_204_NO_CONTENT,
     summary="删除工作流节点",
 )
-async def delete_workflow_node(
+def delete_workflow_node(
     workflow_id: ResourceId,
     node_id: ResourceId,
     current_user: CurrentUser,
@@ -287,7 +287,7 @@ async def delete_workflow_node(
     response_model=WorkflowEdgeListResponse,
     summary="获取工作流边列表",
 )
-async def list_workflow_edges(
+def list_workflow_edges(
     workflow_id: ResourceId,
     current_user: CurrentUser,
     service: WorkflowServiceDependency,
@@ -303,7 +303,7 @@ async def list_workflow_edges(
     status_code=status.HTTP_201_CREATED,
     summary="创建工作流边",
 )
-async def create_workflow_edge(
+def create_workflow_edge(
     workflow_id: ResourceId,
     payload: WorkflowEdgeCreate,
     current_user: CurrentUser,
@@ -323,7 +323,7 @@ async def create_workflow_edge(
     response_model=WorkflowEdgeResponse,
     summary="获取工作流边详情",
 )
-async def get_workflow_edge(
+def get_workflow_edge(
     workflow_id: ResourceId,
     edge_id: ResourceId,
     current_user: CurrentUser,
@@ -339,7 +339,7 @@ async def get_workflow_edge(
     response_model=WorkflowEdgeResponse,
     summary="更新工作流边",
 )
-async def update_workflow_edge(
+def update_workflow_edge(
     workflow_id: ResourceId,
     edge_id: ResourceId,
     payload: WorkflowEdgeUpdate,
@@ -361,7 +361,7 @@ async def update_workflow_edge(
     status_code=status.HTTP_204_NO_CONTENT,
     summary="删除工作流边",
 )
-async def delete_workflow_edge(
+def delete_workflow_edge(
     workflow_id: ResourceId,
     edge_id: ResourceId,
     current_user: CurrentUser,
@@ -376,7 +376,7 @@ async def delete_workflow_edge(
     response_model=WorkflowResponse,
     summary="获取工作流详情",
 )
-async def get_workflow(
+def get_workflow(
     workflow_id: ResourceId,
     current_user: CurrentUser,
     service: WorkflowServiceDependency,
@@ -389,7 +389,7 @@ async def get_workflow(
     response_model=WorkflowResponse,
     summary="更新工作流",
 )
-async def update_workflow(
+def update_workflow(
     workflow_id: ResourceId,
     payload: WorkflowUpdate,
     current_user: CurrentUser,
@@ -409,7 +409,7 @@ async def update_workflow(
     status_code=status.HTTP_204_NO_CONTENT,
     summary="删除工作流",
 )
-async def delete_workflow(
+def delete_workflow(
     workflow_id: ResourceId,
     current_user: CurrentUser,
     service: WorkflowServiceDependency,

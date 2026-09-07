@@ -22,6 +22,9 @@ from app.workflow.schemas import (
     ArchitectureDesignNodeResult,
     RequirementsAnalysisNodeResult,
     TechStackAnalysisNodeResult,
+    ExerciseHintNodeResult,
+    CodeExplanationNodeResult,
+    AnswerReviewNodeResult,
 )
 
 MAX_GRAPH_NODES = 100
@@ -316,7 +319,10 @@ class WorkflowGraphResponse(BaseModel):
 WorkflowNodeResultResponse = Annotated[
     RequirementsAnalysisNodeResult
     | TechStackAnalysisNodeResult
-    | ArchitectureDesignNodeResult,
+    | ArchitectureDesignNodeResult
+    | ExerciseHintNodeResult
+    | CodeExplanationNodeResult
+    | AnswerReviewNodeResult,
     Field(discriminator="result_type"),
 ]
 

@@ -32,7 +32,7 @@ ResourceId = Annotated[int, Path(ge=1)]
     status_code=status.HTTP_201_CREATED,
     summary="从项目创建 ProjectContext",
 )
-async def create_project_context(
+def create_project_context(
     project_id: ResourceId,
     current_user: CurrentUser,
     service: ProjectContextServiceDependency,
@@ -47,7 +47,7 @@ async def create_project_context(
     response_model=ProjectContextResponse,
     summary="读取 ProjectContext",
 )
-async def get_project_context(
+def get_project_context(
     project_id: ResourceId,
     current_user: CurrentUser,
     service: ProjectContextServiceDependency,
@@ -60,7 +60,7 @@ async def get_project_context(
     response_model=ProjectContextMutationResponse,
     summary="更新 ProjectContext 并标记依赖节点过期",
 )
-async def update_project_context(
+def update_project_context(
     project_id: ResourceId,
     payload: ProjectContextUpdateRequest,
     current_user: CurrentUser,
@@ -83,7 +83,7 @@ async def update_project_context(
     response_model=NodeContextResponse,
     summary="按节点权限读取 ProjectContext",
 )
-async def read_workflow_node_context(
+def read_workflow_node_context(
     workflow_id: ResourceId,
     node_id: ResourceId,
     payload: NodeContextReadRequest,
@@ -105,7 +105,7 @@ async def read_workflow_node_context(
     response_model=ProjectContextMutationResponse,
     summary="按节点权限写入 ProjectContext",
 )
-async def write_workflow_node_context(
+def write_workflow_node_context(
     workflow_id: ResourceId,
     node_id: ResourceId,
     payload: NodeContextWriteRequest,

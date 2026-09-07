@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session, joinedload, selectinload
 
 from app.models.project import Project
 from app.models.workflow import Workflow, WorkflowEdge, WorkflowNode
+from app.models.enums import WorkflowNodeStatus, WorkflowStatus
 
 
 class WorkflowPersistenceConflictError(Exception):
@@ -158,6 +159,16 @@ class WorkflowRepository:
             if current_version != expected_version:
                 self._session.rollback()
                 raise WorkflowVersionConflictError
+            node_keys = {node.id: node.node_key for node in workflow.nodes}
+            old_inputs = {
+                node.node_key: {
+                    node_keys[edge.source_node_id]
+                    for edge in workflow.edges
+                    if edge.target_node_id == node.id
+                }
+                for node in workflow.nodes
+            }
+            graph_changed = False
             for edge in list(workflow.edges):
                 self._session.delete(edge)
             self._session.flush()
@@ -173,6 +184,7 @@ class WorkflowRepository:
             for record in nodes:
                 node = existing_nodes.get(record.node_key)
                 if node is None:
+                    graph_changed = True
                     node = WorkflowNode(
                         workflow_id=workflow.id,
                         node_key=record.node_key,
@@ -180,6 +192,17 @@ class WorkflowRepository:
                         name=record.name,
                     )
                     self._session.add(node)
+                elif (
+                    node.node_type != record.node_type
+                    or node.config != record.config
+                    or old_inputs[record.node_key] != {
+                        edge.source_node_key for edge in edges
+                        if edge.target_node_key == record.node_key
+                    }
+                ):
+                    # 运行结果对应旧配置，继续运行时必须重新生成该节点及其后继。
+                    node.status = WorkflowNodeStatus.STALE
+                    graph_changed = True
                 node.node_type = record.node_type
                 node.name = record.name
                 node.position_x = Decimal(str(record.position_x))
@@ -198,6 +221,8 @@ class WorkflowRepository:
                     )
                 )
             workflow.version += 1
+            if graph_changed and workflow.status != WorkflowStatus.DRAFT:
+                workflow.status = WorkflowStatus.STALE
             self._session.commit()
         except IntegrityError as exc:
             self._session.rollback()

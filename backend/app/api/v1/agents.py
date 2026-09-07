@@ -111,7 +111,7 @@ async def run_project_review_agent(
     response_model=AgentRecordResponse,
     summary="查询当前用户的 Agent 结果",
 )
-async def get_agent_result(
+def get_agent_result(
     request_id: RequestId,
     current_user: CurrentUser,
     service: AgentServiceDependency,

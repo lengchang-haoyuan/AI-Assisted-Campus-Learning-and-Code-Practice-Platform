@@ -12,6 +12,7 @@ class RegisterRequest(BaseModel):
     username: str = Field(min_length=3, max_length=50, pattern=USERNAME_PATTERN)
     email: str = Field(min_length=3, max_length=255)
     password: str = Field(min_length=8, max_length=128)
+    invite_token: str | None = Field(default=None, min_length=32, max_length=128)
 
     @field_validator("username", mode="before")
     @classmethod
@@ -42,6 +43,20 @@ class LoginRequest(BaseModel):
     @classmethod
     def normalize_identifier(cls, value: object) -> object:
         return value.strip() if isinstance(value, str) else value
+
+
+class ChangePasswordRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    current_password: str = Field(min_length=1, max_length=128)
+    new_password: str = Field(min_length=8, max_length=128)
+
+
+class ResetPasswordRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    reset_token: str = Field(min_length=32, max_length=128)
+    new_password: str = Field(min_length=8, max_length=128)
 
 
 class TokenResponse(BaseModel):

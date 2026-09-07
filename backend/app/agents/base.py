@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import json
 from typing import Mapping
 
-from pydantic import BaseModel, ValidationError
+from pydantic import ValidationError
 
 from app.agents.schemas import AgentSchema
 from app.ai.client import AIClient

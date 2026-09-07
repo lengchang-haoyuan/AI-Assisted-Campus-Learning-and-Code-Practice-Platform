@@ -21,7 +21,6 @@ from app.models.enums import (
 )
 from app.models.learning import DailyTask, LearningPlan, LearningRecord
 from app.models.project import Project
-from app.repositories.course import CourseRepository
 from app.repositories.learning import LearningRepository
 from app.services.auth import UserIdentity
 from app.services.course import CourseData, CoursePage, CourseService

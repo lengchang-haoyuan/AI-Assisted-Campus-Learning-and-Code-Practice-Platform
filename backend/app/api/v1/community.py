@@ -32,7 +32,7 @@ CommentId = Annotated[int, Path(ge=1)]
     response_model=CommunityProjectListResponse,
     summary="浏览校园社区项目",
 )
-async def list_community_projects(
+def list_community_projects(
     current_user: CurrentUser,
     service: CommunityServiceDependency,
     page: Annotated[int, Query(ge=1, le=10_000)] = 1,
@@ -53,7 +53,7 @@ async def list_community_projects(
     response_model=CommunityProjectResponse,
     summary="获取社区项目详情",
 )
-async def get_community_project(
+def get_community_project(
     project_id: ProjectId,
     current_user: CurrentUser,
     service: CommunityServiceDependency,
@@ -68,7 +68,7 @@ async def get_community_project(
     response_model=list[TagSummaryResponse],
     summary="获取社区项目标签",
 )
-async def list_community_tags(
+def list_community_tags(
     current_user: CurrentUser,
     service: CommunityServiceDependency,
 ) -> list[TagSummaryResponse]:
@@ -81,7 +81,7 @@ async def list_community_tags(
     response_model=CommunityProjectResponse,
     summary="发布项目到校园社区",
 )
-async def publish_project(
+def publish_project(
     project_id: ProjectId,
     payload: PublishProjectRequest,
     current_user: CurrentUser,
@@ -97,7 +97,7 @@ async def publish_project(
     status_code=status.HTTP_204_NO_CONTENT,
     summary="从校园社区撤下项目",
 )
-async def unpublish_project(
+def unpublish_project(
     project_id: ProjectId,
     current_user: CurrentUser,
     service: CommunityServiceDependency,
@@ -111,7 +111,7 @@ async def unpublish_project(
     response_model=ViewResponse,
     summary="记录项目浏览",
 )
-async def record_project_view(
+def record_project_view(
     project_id: ProjectId,
     current_user: CurrentUser,
     service: CommunityServiceDependency,
@@ -124,7 +124,7 @@ async def record_project_view(
     response_model=CommentListResponse,
     summary="获取项目评论",
 )
-async def list_project_comments(
+def list_project_comments(
     project_id: ProjectId,
     current_user: CurrentUser,
     service: CommunityServiceDependency,
@@ -146,7 +146,7 @@ async def list_project_comments(
     status_code=status.HTTP_201_CREATED,
     summary="发表评论",
 )
-async def create_project_comment(
+def create_project_comment(
     project_id: ProjectId,
     payload: CommentCreate,
     current_user: CurrentUser,
@@ -162,7 +162,7 @@ async def create_project_comment(
     status_code=status.HTTP_204_NO_CONTENT,
     summary="删除自己的评论",
 )
-async def delete_comment(
+def delete_comment(
     comment_id: CommentId,
     current_user: CurrentUser,
     service: CommunityServiceDependency,
@@ -176,7 +176,7 @@ async def delete_comment(
     response_model=InteractionResponse,
     summary="点赞项目",
 )
-async def like_project(
+def like_project(
     project_id: ProjectId,
     current_user: CurrentUser,
     service: CommunityServiceDependency,
@@ -190,7 +190,7 @@ async def like_project(
     response_model=InteractionResponse,
     summary="取消点赞项目",
 )
-async def unlike_project(
+def unlike_project(
     project_id: ProjectId,
     current_user: CurrentUser,
     service: CommunityServiceDependency,
@@ -204,7 +204,7 @@ async def unlike_project(
     response_model=InteractionResponse,
     summary="收藏项目",
 )
-async def favorite_project(
+def favorite_project(
     project_id: ProjectId,
     current_user: CurrentUser,
     service: CommunityServiceDependency,
@@ -218,7 +218,7 @@ async def favorite_project(
     response_model=InteractionResponse,
     summary="取消收藏项目",
 )
-async def unfavorite_project(
+def unfavorite_project(
     project_id: ProjectId,
     current_user: CurrentUser,
     service: CommunityServiceDependency,

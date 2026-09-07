@@ -240,6 +240,8 @@ class WorkspaceService:
             raise PermissionDeniedError("无权完成该任务")
         if task.status == TaskStatus.COMPLETED:
             return self._to_task_data(task)
+        if task.status == TaskStatus.CANCELLED:
+            raise ConflictError("已取消的任务不能完成")
         task.status = TaskStatus.COMPLETED
         task.completed_at = datetime.now(UTC)
         try:
@@ -265,6 +267,10 @@ class WorkspaceService:
     def create_record(
         self, user_id: int, data: LearningRecordCreateData
     ) -> LearningRecordData:
+        if data.record_type == RecordType.PROJECT and data.project_id is None:
+            raise ConflictError("项目实践记录必须关联项目")
+        if data.record_type in (RecordType.COURSE, RecordType.TASK):
+            raise ConflictError("课程学习和任务复盘请在学习记录页面关联来源后创建")
         self._validate_owned_project(data.project_id, user_id)
         record = LearningRecord(
             user_id=user_id,

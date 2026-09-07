@@ -43,6 +43,7 @@ async function changeScene(event: KeyboardEvent): Promise<void> {
 onMounted(() => {
   if (typeof route.query.identifier === 'string') form.identifier = route.query.identifier
   if (route.query.registered === '1') successMessage.value = '账号创建成功，请登录'
+  if (typeof route.query.notice === 'string') successMessage.value = route.query.notice
 })
 
 function safeRedirect(): string {

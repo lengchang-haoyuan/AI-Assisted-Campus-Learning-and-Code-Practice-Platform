@@ -348,6 +348,11 @@ class WorkflowService:
         self, workflow_id: int, owner_id: int, data: WorkflowUpdateData
     ) -> WorkflowData:
         workflow = self._get_owned_workflow(workflow_id, owner_id)
+        if "status" in data.values:
+            if data.values["status"] not in (WorkflowStatus.DRAFT, WorkflowStatus.READY):
+                raise ConflictError("执行状态由系统维护，只能手动设置草稿或就绪")
+            if workflow.status == WorkflowStatus.RUNNING:
+                raise ConflictError("运行中的工作流不能手动修改状态")
         if data.values.get("status") == WorkflowStatus.READY and not workflow.nodes:
             raise ConflictError("空工作流不能标记为就绪")
         for field_name, value in data.values.items():

@@ -72,13 +72,41 @@ export const WORKFLOW_NODE_TEMPLATES: readonly WorkflowNodeTemplate[] = [
     instruction: '输出模块职责、调用方向、数据边界和主要风险。',
   },
   {
+    nodeType: 'exercise_hint',
+    name: '解题提示',
+    description: '从题意出发，逐步提示思路与边界',
+    tone: 'mint',
+    instruction: '使用中文为初学者提供渐进提示，先引导思考，不直接给出完整答案。',
+  },
+  {
+    nodeType: 'code_explanation',
+    name: '代码讲解',
+    description: '解释已有代码的步骤与 Python 概念',
+    tone: 'blue',
+    instruction: '使用中文讲解填写的代码，说明执行顺序、返回值和容易出错的地方。',
+  },
+  {
+    nodeType: 'answer_review',
+    name: '答案评审',
+    description: '静态检查答案，给出改进和测试建议',
+    tone: 'apricot',
+    instruction: '依据题意静态评审填写的代码，指出问题和建议测试，不声称执行或测试通过。',
+  },
+  {
     nodeType: 'quality_check',
     name: '质量检查',
-    description: '汇总验证项与未决风险',
+    description: '仅可编辑，暂不支持 AI 执行',
     tone: 'ink',
     instruction: '检查结果完整性、一致性和仍需处理的问题。',
   },
 ] as const
+
+export const TEACHING_NODE_TYPES = ['exercise_hint', 'code_explanation', 'answer_review'] as const
+export const EXECUTABLE_NODE_TYPES = new Set(['requirements_analysis', 'tech_stack_analysis', 'architecture_design', ...TEACHING_NODE_TYPES])
+
+export function isTeachingNode(nodeType: string): boolean {
+  return TEACHING_NODE_TYPES.some(type => type === nodeType)
+}
 
 export const WORKFLOW_STATUS_LABELS: Record<WorkflowStatus, string> = {
   draft: '草稿',

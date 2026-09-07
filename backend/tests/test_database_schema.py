@@ -13,8 +13,12 @@ from app.models.base import UTCDateTime
 BACKEND_DIR = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = BACKEND_DIR / "schema.sql"
 EXPECTED_TABLES = {
+    "account_audits",
     "ai_requests",
     "ai_results",
+    "campus_invitations",
+    "campus_memberships",
+    "class_memberships",
     "comments",
     "courses",
     "daily_tasks",
@@ -26,7 +30,10 @@ EXPECTED_TABLES = {
     "project_tags",
     "project_views",
     "projects",
+    "password_resets",
     "tags",
+    "teaching_assignments",
+    "teaching_classes",
     "users",
     "workflow_edges",
     "workflow_nodes",
@@ -39,7 +46,7 @@ CREATE_TABLE_PATTERN = re.compile(
 )
 COLUMN_PATTERN = re.compile(
     r"^\s+`?([a-z_][a-z0-9_]*)`?\s+"
-    r"(?:BIGINT|INTEGER|SMALLINT|VARCHAR|TEXT|BOOLEAN|DATETIME|DATE|TIME|JSON|NUMERIC)\b",
+    r"(?:BIGINT|INTEGER|INT|SMALLINT|VARCHAR|TEXT|BOOLEAN|DATETIME|DATE|TIME|JSON|NUMERIC|BINARY)\b",
     re.IGNORECASE | re.MULTILINE,
 )
 

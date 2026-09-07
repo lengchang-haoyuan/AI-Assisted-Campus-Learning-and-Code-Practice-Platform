@@ -20,6 +20,7 @@ class UserIdentity:
     bio: str | None
     is_active: bool
     created_at: datetime
+    auth_version: int = 0
 
 
 class AuthService:
@@ -56,14 +57,18 @@ class AuthService:
             raise AuthenticationRequiredError("用户名/邮箱或密码错误")
         if not user.is_active:
             raise PermissionDeniedError("账号当前不可用")
-        return self._security.create_access_token(user.id)
+        return self._security.create_access_token(user.id, user.auth_version or 0)
 
-    def get_current_user(self, user_id: int) -> UserIdentity:
+    def get_current_user(
+        self, user_id: int, auth_version: int | None = None
+    ) -> UserIdentity:
         user = self._repository.get_by_id(user_id)
         if user is None:
             raise AuthenticationRequiredError("登录状态无效或已过期")
         if not user.is_active:
             raise PermissionDeniedError("账号当前不可用")
+        if auth_version is not None and auth_version != (user.auth_version or 0):
+            raise AuthenticationRequiredError("会话已撤销，请重新登录")
         return self._to_identity(user)
 
     @staticmethod
@@ -76,4 +81,5 @@ class AuthService:
             bio=user.bio,
             is_active=user.is_active,
             created_at=user.created_at,
+            auth_version=user.auth_version or 0,
         )

@@ -20,6 +20,7 @@ import type { WorkflowCanvasEdge, WorkflowCanvasNode } from '@/domain/workflow'
 const props = defineProps<{
   nodes: WorkflowCanvasNode[]
   edges: WorkflowCanvasEdge[]
+  disabled?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -86,6 +87,8 @@ function initializeCanvas(): void {
       :snap-to-grid="true"
       :snap-grid="[16, 16]"
       :delete-key-code="null"
+      :nodes-draggable="!disabled"
+      :nodes-connectable="!disabled"
       class="workflow-canvas"
       @connect="emit('connect', $event)"
       @nodes-initialized="initializeCanvas"

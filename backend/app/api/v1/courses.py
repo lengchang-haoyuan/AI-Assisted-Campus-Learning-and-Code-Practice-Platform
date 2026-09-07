@@ -17,7 +17,7 @@ CourseId = Annotated[int, Path(ge=1)]
 
 
 @router.get("", response_model=CourseListResponse, summary="获取我的课程")
-async def list_courses(
+def list_courses(
     current_user: CurrentUser,
     service: CourseServiceDependency,
     page: Annotated[int, Query(ge=1, le=10_000)] = 1,
@@ -34,7 +34,7 @@ async def list_courses(
     status_code=status.HTTP_201_CREATED,
     summary="创建课程",
 )
-async def create_course(
+def create_course(
     payload: CourseCreate,
     current_user: CurrentUser,
     service: CourseServiceDependency,
@@ -45,7 +45,7 @@ async def create_course(
 
 
 @router.get("/{course_id}", response_model=CourseResponse, summary="获取课程详情")
-async def get_course(
+def get_course(
     course_id: CourseId,
     current_user: CurrentUser,
     service: CourseServiceDependency,
@@ -54,7 +54,7 @@ async def get_course(
 
 
 @router.put("/{course_id}", response_model=CourseResponse, summary="更新课程")
-async def update_course(
+def update_course(
     course_id: CourseId,
     payload: CourseUpdate,
     current_user: CurrentUser,
@@ -70,7 +70,7 @@ async def update_course(
 
 
 @router.delete("/{course_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_course(
+def delete_course(
     course_id: CourseId,
     current_user: CurrentUser,
     service: CourseServiceDependency,

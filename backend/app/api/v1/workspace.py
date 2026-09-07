@@ -36,7 +36,7 @@ ProjectId = Annotated[int, Path(ge=1)]
     response_model=WorkspaceDashboardResponse,
     summary="获取个人工作台聚合数据",
 )
-async def get_workspace_dashboard(
+def get_workspace_dashboard(
     current_user: CurrentUser,
     service: WorkspaceServiceDependency,
     selected_date: Annotated[date, Query(alias="date")],
@@ -52,7 +52,7 @@ async def get_workspace_dashboard(
 
 
 @router.get("/tasks", response_model=TaskListResponse, summary="获取个人任务")
-async def list_tasks(
+def list_tasks(
     current_user: CurrentUser,
     service: WorkspaceServiceDependency,
     page: Annotated[int, Query(ge=1, le=10_000)] = 1,
@@ -75,7 +75,7 @@ async def list_tasks(
     status_code=status.HTTP_201_CREATED,
     summary="创建个人任务",
 )
-async def create_task(
+def create_task(
     payload: TaskCreate,
     current_user: CurrentUser,
     service: WorkspaceServiceDependency,
@@ -90,7 +90,7 @@ async def create_task(
     response_model=TaskResponse,
     summary="完成个人任务",
 )
-async def complete_task(
+def complete_task(
     task_id: TaskId,
     current_user: CurrentUser,
     service: WorkspaceServiceDependency,
@@ -103,7 +103,7 @@ async def complete_task(
     response_model=WorkspaceProjectListResponse,
     summary="获取工作台项目进度",
 )
-async def list_workspace_projects(
+def list_workspace_projects(
     current_user: CurrentUser,
     service: WorkspaceServiceDependency,
     page: Annotated[int, Query(ge=1, le=10_000)] = 1,
@@ -119,7 +119,7 @@ async def list_workspace_projects(
     response_model=WorkspaceProjectDetailResponse,
     summary="获取工作台项目详情",
 )
-async def get_workspace_project(
+def get_workspace_project(
     project_id: ProjectId,
     current_user: CurrentUser,
     service: WorkspaceServiceDependency,
@@ -134,7 +134,7 @@ async def get_workspace_project(
     response_model=LearningRecordListResponse,
     summary="获取个人学习记录",
 )
-async def list_learning_records(
+def list_learning_records(
     current_user: CurrentUser,
     service: WorkspaceServiceDependency,
     page: Annotated[int, Query(ge=1, le=10_000)] = 1,
@@ -151,7 +151,7 @@ async def list_learning_records(
     status_code=status.HTTP_201_CREATED,
     summary="保存学习记录",
 )
-async def create_learning_record(
+def create_learning_record(
     payload: LearningRecordCreate,
     current_user: CurrentUser,
     service: WorkspaceServiceDependency,

@@ -181,7 +181,7 @@ GET  /api/v1/workflows/{workflow_id}/runs
 GET  /api/v1/workflows/{workflow_id}/runs/{run_id}
 ```
 
-运行请求必须提交当前 `expected_version`。`mode=incomplete` 只执行非成功节点及其下游，`mode=all` 明确重新执行整图。P13 注册 `requirements_analysis`、`tech_stack_analysis`、`architecture_design` 三类节点，执行顺序由 DAG 依赖决定；条件边和未注册节点会被拒绝。
+运行请求必须提交当前 `expected_version`。`mode=incomplete` 只执行非成功节点及其下游，`mode=all` 明确重新执行整图。当前注册 `requirements_analysis`、`tech_stack_analysis`、`architecture_design` 三类项目分析节点，以及 `exercise_hint`、`code_explanation`、`answer_review` 三类教学节点；执行顺序由 DAG 依赖决定，条件边和未注册节点会被拒绝。教学评审只分析输入，不执行代码。
 
 节点结果先经过 Pydantic Schema 校验，再原子保存 `AIResult`、节点输出和 ProjectContext。远程模型调用不处于数据库事务中。技术栈字段改变后，下游架构节点会持久化为 `stale`，当前运行随后重新生成该节点。
 
@@ -288,3 +288,45 @@ python -X utf8 -m scripts.verify_integration
 ```
 
 该脚本通过 HTTP/ASGI 请求真实 API 和 MySQL，默认只替换外部 Provider，不依赖开发服务器、不消耗模型额度。它创建随机命名的临时用户和关联数据，在 `finally` 中清理；请使用开发数据库，勿在生产库运行。浏览器演示、真实模型模式和已知边界见 [P15 演示与答辩指南](../开发相关文档/答辩材料/P15演示与答辩指南.md)。
+
+## 工作流 AI 与 Python 教学节点（2026-09-05）
+
+工作流编辑器现提供“运行 AI / 保存并运行 AI”、继续未完成节点、全部重新运行、逐节点状态和持久化运行历史。支持原有需求分析、技术栈分析、架构设计，以及新增解题提示（`exercise_hint`）、代码讲解（`code_explanation`）、答案评审（`answer_review`）。质量检查节点仍仅支持编辑。
+
+教学节点配置 `problem` 可留空以使用关联项目描述；讲解与评审必须填写 `student_code`，保留 Python 缩进。教学结果使用现有 AIResult / WorkflowRun 保存，不改写项目资料或学习进度；答案评审为静态分析，不执行代码。修改节点类型、代码配置或前驱连线会使旧结果待更新，继续运行时重新生成相关节点。
+
+在编辑器中选择节点 → 填写题意和代码 → 应用配置 → 保存并运行 AI → 向下查看“AI 运行与结果”。失败可在查看原因后继续运行未完成节点；全部重跑会产生新的模型用量。
+
+DeepSeek 配置来自后端 `.env`，同名进程环境变量优先。如果环境中存在旧的 `DEEPSEEK_API_KEY`，可在启动后端的 PowerShell 中执行 `Remove-Item -LiteralPath Env:DEEPSEEK_API_KEY -ErrorAction SilentlyContinue`，随后正常启动 Uvicorn，让该进程读取 `.env`。该命令仅清除当前启动会话的变量，不更改系统配置。
+
+## P17 校园身份初始化
+
+应用现有数据库前，先备份并执行 `migrations/20260905_p17_campus_identity.sql`。迁移只增加身份结构，不创建校园成员。负责人明确指定一个现有有效账号后，首个管理员使用受控维护命令初始化：
+
+```powershell
+python -m app.cli.init_campus_admin --user-id <用户编号> --reason "已核验的初始化原因"
+```
+
+命令不创建默认密码，也不会自动提升首个注册用户。真实候选人与核验依据未确定时不要执行。
+
+## P18 教学班与教学任务
+
+应用现有数据库前先备份，再执行 `migrations/20260907_p18_classrooms_assignments.sql`。迁移新增 `teaching_classes`、`class_memberships`、`teaching_assignments`，不会创建真实班级、成员或任务。个人 `courses`、`daily_tasks` 和 `projects` 的授权与数据保持不变。
+
+教师通过有效校园身份创建教学班并成为首位任课教师；教师只能管理本人班级，学生只能读取已加入班级的非草稿任务。管理员可以查看班级元数据、管理成员和归档班级，但不能读取教学任务正文。发布后标题、说明、学习目标和交付要求冻结，只允许延长截止时间。
+
+主要接口：
+
+```text
+GET/POST /api/v1/campus/classes
+GET/PATCH /api/v1/campus/classes/{class_id}
+GET/POST /api/v1/campus/classes/{class_id}/members
+PATCH    /api/v1/campus/classes/{class_id}/members/{member_id}
+GET/POST /api/v1/campus/classes/{class_id}/assignments
+GET/PATCH /api/v1/campus/assignments/{assignment_id}
+POST /api/v1/campus/assignments/{assignment_id}/publish
+POST /api/v1/campus/assignments/{assignment_id}/close
+POST /api/v1/campus/assignments/{assignment_id}/archive
+```
+
+成员加入使用 P17 已核验的校园身份编号，班级角色必须与校园角色一致。项目模板仅允许教师引用自己的 Project，并保存不含 Context、私人笔记和仓库地址的白名单快照。

@@ -115,3 +115,40 @@ export interface WorkflowEdgeCreateInput {
 }
 
 export type WorkflowEdgeUpdateInput = Partial<WorkflowEdgeCreateInput>
+
+export type WorkflowRunMode = 'incomplete' | 'all'
+export type WorkflowRunStatus = 'pending' | 'running' | 'completed' | 'failed' | 'cancelled'
+export interface WorkflowRunError { code: string; message: string }
+export interface WorkflowRunNodeResponse {
+  request_id: number
+  node_id: number
+  node_key: string
+  node_type: string
+  status: 'pending' | 'running' | 'completed' | 'failed' | 'cancelled'
+  result: (JsonObject & { result_type: string; summary: string }) | null
+  error: WorkflowRunError | null
+  prompt_tokens: number | null
+  completion_tokens: number | null
+  total_tokens: number | null
+  latency_ms: number | null
+  requested_at: string
+  finished_at: string | null
+}
+export interface WorkflowRunResponse {
+  id: number
+  workflow_id: number
+  status: WorkflowRunStatus
+  context_version: number
+  error: WorkflowRunError | null
+  nodes: WorkflowRunNodeResponse[]
+  started_at: string | null
+  finished_at: string | null
+  created_at: string
+}
+export interface WorkflowRunListResponse {
+  items: WorkflowRunResponse[]
+  total: number
+  page: number
+  page_size: number
+  total_pages: number
+}

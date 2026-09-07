@@ -17,6 +17,7 @@ from app.context.context_manager import (
     ContextAccessError,
     ContextEdge,
     ContextManager,
+    ContextMergeResult,
     ContextNode,
     InvalidContextPolicyError,
 )
@@ -52,6 +53,11 @@ from app.workflow.schemas import (
     TechStackAnalysisNodeResult,
     WorkflowNodeInput,
     WorkflowNodeResult,
+    TeachingNodeInput,
+    CodeTeachingNodeInput,
+    ExerciseHintNodeResult,
+    CodeExplanationNodeResult,
+    AnswerReviewNodeResult,
 )
 
 MIN_NODE_COMPLETION_TOKENS = 256
@@ -125,7 +131,7 @@ class WorkflowEngine:
             )
         plan = self._build_plan(workflow, mode)
         node_inputs = {
-            node.id: self._node_input(node)
+            node.id: self._node_input(node, workflow.project.description)
             for node in workflow.nodes
             if node.id in plan.selected_node_ids
         }
@@ -271,18 +277,20 @@ class WorkflowEngine:
 
                     updates = self._context_updates(result)
                     descriptor = self._context_node(node)
-                    patch = self._context_manager.validate_node_write(
-                        descriptor, updates
-                    )
-                    merged = self._context_manager.merge(
-                        context,
-                        patch.model_dump(exclude_unset=True),
-                        source=ContextSource(
-                            type=ContextSourceType.WORKFLOW_NODE,
-                            id=node.id,
-                            node_key=node.node_key,
-                        ),
-                    )
+                    merged = ContextMergeResult(context, frozenset())
+                    if updates:
+                        patch = self._context_manager.validate_node_write(
+                            descriptor, updates
+                        )
+                        merged = self._context_manager.merge(
+                            context,
+                            patch.model_dump(exclude_unset=True),
+                            source=ContextSource(
+                                type=ContextSourceType.WORKFLOW_NODE,
+                                id=node.id,
+                                node_key=node.node_key,
+                            ),
+                        )
                     stale_node_ids = self._context_manager.stale_node_ids(
                         context_nodes,
                         context_edges,
@@ -550,9 +558,17 @@ class WorkflowEngine:
         )
 
     @staticmethod
-    def _node_input(node: WorkflowNode) -> WorkflowNodeInput:
+    def _node_input(node: WorkflowNode, project_description: str | None = None) -> WorkflowNodeInput:
         config = node.config or {}
         try:
+            if node.node_type in {"exercise_hint", "code_explanation", "answer_review"}:
+                schema = TeachingNodeInput if node.node_type == "exercise_hint" else CodeTeachingNodeInput
+                return schema.model_validate({
+                    "instruction": config.get("instruction"),
+                    "expected_output": config.get("expected_output"),
+                    "problem": config.get("problem") or project_description or "",
+                    "student_code": config.get("student_code"),
+                })
             return WorkflowNodeInput.model_validate(
                 {
                     "instruction": config.get("instruction"),
@@ -560,7 +576,7 @@ class WorkflowEngine:
                 }
             )
         except ValidationError as exc:
-            raise ConflictError("工作流节点执行配置无效") from exc
+            raise ConflictError(f"节点“{node.name}”配置无效，请检查题目、代码及文字长度") from exc
 
     @staticmethod
     def _context_node(node: WorkflowNode) -> ContextNode:
@@ -568,6 +584,9 @@ class WorkflowEngine:
 
     @staticmethod
     def _context_updates(result: WorkflowNodeResult) -> dict[str, object]:
+        if isinstance(result, (ExerciseHintNodeResult, CodeExplanationNodeResult, AnswerReviewNodeResult)):
+            # 教学输出由已有节点结果和运行记录保存，不改写项目需求与技术栈。
+            return {}
         if isinstance(result, RequirementsAnalysisNodeResult):
             return {
                 "requirements": [

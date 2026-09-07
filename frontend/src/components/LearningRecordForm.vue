@@ -35,6 +35,10 @@ function submit(): void {
     validationError.value = '学习时长需为 1 到 1440 之间的整数'
     return
   }
+  if (form.recordType === 'project' && !form.projectId) {
+    validationError.value = '项目实践记录必须关联项目'
+    return
+  }
   const parsedTime = form.occurredAt ? new Date(form.occurredAt) : null
   if (parsedTime && Number.isNaN(parsedTime.getTime())) {
     validationError.value = '记录时间格式不正确'
@@ -68,9 +72,11 @@ function submit(): void {
         <select v-model="form.recordType">
           <option value="study">自主学习</option>
           <option value="project">项目实践</option>
-          <option value="course">课程学习</option>
-          <option value="task">任务复盘</option>
         </select>
+        <span class="muted-copy">
+          课程学习和任务复盘请前往
+          <RouterLink to="/learning/records">学习系统的记录页面</RouterLink>，关联来源后创建。
+        </span>
       </label>
       <label class="field">
         学习时长（分钟）

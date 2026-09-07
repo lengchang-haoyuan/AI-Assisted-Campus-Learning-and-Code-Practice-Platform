@@ -1,0 +1,257 @@
+{
+  "owner": "jiaohaoyuan",
+  "count": 50,
+  "checked_examples": 156,
+  "projects": [
+    {
+      "number": 1,
+      "id": 89,
+      "name": "Python 入门 001｜颠倒字符串"
+    },
+    {
+      "number": 2,
+      "id": 88,
+      "name": "Python 入门 002｜计算字符串长度"
+    },
+    {
+      "number": 3,
+      "id": 87,
+      "name": "Python 入门 003｜转为大写"
+    },
+    {
+      "number": 4,
+      "id": 86,
+      "name": "Python 入门 004｜转为小写"
+    },
+    {
+      "number": 5,
+      "id": 85,
+      "name": "Python 入门 005｜删除普通空格"
+    },
+    {
+      "number": 6,
+      "id": 84,
+      "name": "Python 入门 006｜统计指定字符"
+    },
+    {
+      "number": 7,
+      "id": 83,
+      "name": "Python 入门 007｜判断回文字符串"
+    },
+    {
+      "number": 8,
+      "id": 82,
+      "name": "Python 入门 008｜取首尾字符"
+    },
+    {
+      "number": 9,
+      "id": 81,
+      "name": "Python 入门 009｜统计英文元音"
+    },
+    {
+      "number": 10,
+      "id": 80,
+      "name": "Python 入门 010｜单词首字母大写"
+    },
+    {
+      "number": 11,
+      "id": 79,
+      "name": "Python 入门 011｜空格替换为短横线"
+    },
+    {
+      "number": 12,
+      "id": 78,
+      "name": "Python 入门 012｜查找子字符串"
+    },
+    {
+      "number": 13,
+      "id": 77,
+      "name": "Python 入门 013｜颠倒单词顺序"
+    },
+    {
+      "number": 14,
+      "id": 76,
+      "name": "Python 入门 014｜统计十进制数字字符"
+    },
+    {
+      "number": 15,
+      "id": 75,
+      "name": "Python 入门 015｜只保留英文字母"
+    },
+    {
+      "number": 16,
+      "id": 74,
+      "name": "Python 入门 016｜两个整数相加"
+    },
+    {
+      "number": 17,
+      "id": 73,
+      "name": "Python 入门 017｜两个数中的较大值"
+    },
+    {
+      "number": 18,
+      "id": 72,
+      "name": "Python 入门 018｜判断奇偶数"
+    },
+    {
+      "number": 19,
+      "id": 71,
+      "name": "Python 入门 019｜求绝对值"
+    },
+    {
+      "number": 20,
+      "id": 70,
+      "name": "Python 入门 020｜三个数中的最小值"
+    },
+    {
+      "number": 21,
+      "id": 69,
+      "name": "Python 入门 021｜一到 n 累加"
+    },
+    {
+      "number": 22,
+      "id": 68,
+      "name": "Python 入门 022｜计算阶乘"
+    },
+    {
+      "number": 23,
+      "id": 67,
+      "name": "Python 入门 023｜生成一行乘法表"
+    },
+    {
+      "number": 24,
+      "id": 66,
+      "name": "Python 入门 024｜整数有几位"
+    },
+    {
+      "number": 25,
+      "id": 65,
+      "name": "Python 入门 025｜各位数字之和"
+    },
+    {
+      "number": 26,
+      "id": 64,
+      "name": "Python 入门 026｜颠倒整数"
+    },
+    {
+      "number": 27,
+      "id": 63,
+      "name": "Python 入门 027｜判断闰年"
+    },
+    {
+      "number": 28,
+      "id": 62,
+      "name": "Python 入门 028｜FizzBuzz 单值判断"
+    },
+    {
+      "number": 29,
+      "id": 61,
+      "name": "Python 入门 029｜列出所有正因数"
+    },
+    {
+      "number": 30,
+      "id": 60,
+      "name": "Python 入门 030｜判断质数"
+    },
+    {
+      "number": 31,
+      "id": 59,
+      "name": "Python 入门 031｜列表元素求和"
+    },
+    {
+      "number": 32,
+      "id": 58,
+      "name": "Python 入门 032｜列表最大值"
+    },
+    {
+      "number": 33,
+      "id": 57,
+      "name": "Python 入门 033｜筛选偶数"
+    },
+    {
+      "number": 34,
+      "id": 56,
+      "name": "Python 入门 034｜列表元素平方"
+    },
+    {
+      "number": 35,
+      "id": 55,
+      "name": "Python 入门 035｜统计正数个数"
+    },
+    {
+      "number": 36,
+      "id": 54,
+      "name": "Python 入门 036｜保持顺序去重"
+    },
+    {
+      "number": 37,
+      "id": 53,
+      "name": "Python 入门 037｜第二大的不同整数"
+    },
+    {
+      "number": 38,
+      "id": 52,
+      "name": "Python 入门 038｜合并列表并排序"
+    },
+    {
+      "number": 39,
+      "id": 51,
+      "name": "Python 入门 039｜颠倒列表"
+    },
+    {
+      "number": 40,
+      "id": 50,
+      "name": "Python 入门 040｜列表循环左移"
+    },
+    {
+      "number": 41,
+      "id": 49,
+      "name": "Python 入门 041｜统计单词频率"
+    },
+    {
+      "number": 42,
+      "id": 48,
+      "name": "Python 入门 042｜统计字符频率"
+    },
+    {
+      "number": 43,
+      "id": 47,
+      "name": "Python 入门 043｜交换字典键和值"
+    },
+    {
+      "number": 44,
+      "id": 46,
+      "name": "Python 入门 044｜筛选及格学生"
+    },
+    {
+      "number": 45,
+      "id": 45,
+      "name": "Python 入门 045｜合并两个字典"
+    },
+    {
+      "number": 46,
+      "id": 44,
+      "name": "Python 入门 046｜姓名与年龄配对"
+    },
+    {
+      "number": 47,
+      "id": 43,
+      "name": "Python 入门 047｜按奇偶分组"
+    },
+    {
+      "number": 48,
+      "id": 42,
+      "name": "Python 入门 048｜展开一层嵌套列表"
+    },
+    {
+      "number": 49,
+      "id": 41,
+      "name": "Python 入门 049｜生成斐波那契数列"
+    },
+    {
+      "number": 50,
+      "id": 40,
+      "name": "Python 入门 050｜检查圆括号配对"
+    }
+  ]
+}

@@ -96,6 +96,9 @@ NODE_CONTEXT_POLICIES = {
         writes=frozenset(),
     ),
     "prompt": NodeContextPolicy(reads=CONTEXT_FIELDS, writes=frozenset()),
+    "exercise_hint": NodeContextPolicy(reads=CONTEXT_FIELDS, writes=frozenset()),
+    "code_explanation": NodeContextPolicy(reads=CONTEXT_FIELDS, writes=frozenset()),
+    "answer_review": NodeContextPolicy(reads=CONTEXT_FIELDS, writes=frozenset()),
 }
 
 

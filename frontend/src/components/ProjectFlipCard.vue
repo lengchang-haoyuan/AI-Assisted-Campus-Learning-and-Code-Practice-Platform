@@ -34,11 +34,11 @@ function toggleFlip(): void {
         <img class="project-flip-card__cover" :src="imageUrl" :alt="`${project.name} 项目封面`" />
         <div class="project-flip-card__content">
           <div class="project-flip-card__heading">
-            <div>
-              <RouterLink class="project-flip-card__title" :to="`/projects/${project.id}`">
+            <div class="project-flip-card__intro">
+              <RouterLink class="project-flip-card__title" :title="project.name" :to="`/projects/${project.id}`">
                 {{ project.name }}
               </RouterLink>
-              <p>{{ description }}</p>
+              <p class="project-flip-card__description">{{ description }}</p>
             </div>
             <span class="status-chip" :data-status="project.status">
               {{ statusLabels[project.status] }}
@@ -46,7 +46,7 @@ function toggleFlip(): void {
           </div>
 
           <div class="tag-row" aria-label="技术栈">
-            <span v-for="technology in stack.slice(0, 4)" :key="technology" class="tech-tag">
+            <span v-for="technology in stack.slice(0, 4)" :key="technology" class="tech-tag" :title="technology">
               {{ technology }}
             </span>
             <span v-if="stack.length === 0" class="tech-tag is-muted">待补充技术栈</span>
@@ -62,7 +62,7 @@ function toggleFlip(): void {
 
       <section class="project-flip-card__face project-flip-card__back" :inert="!flipped">
         <div>
-          <p class="project-flip-card__back-title">{{ project.name }}</p>
+          <p class="project-flip-card__back-title" :title="project.name">{{ project.name }}</p>
           <dl class="project-facts">
             <div><dt>前端</dt><dd>{{ project.frontend || '未设置' }}</dd></div>
             <div><dt>后端</dt><dd>{{ project.backend || '未设置' }}</dd></div>

@@ -40,7 +40,7 @@ ResourceId = Annotated[int, Path(ge=1)]
 
 
 @router.get("/plans", response_model=PlanListResponse, summary="获取学习计划列表")
-async def list_plans(
+def list_plans(
     current_user: CurrentUser,
     service: LearningServiceDependency,
     page: Annotated[int, Query(ge=1, le=10_000)] = 1,
@@ -57,7 +57,7 @@ async def list_plans(
     status_code=status.HTTP_201_CREATED,
     summary="创建学习计划",
 )
-async def create_plan(
+def create_plan(
     payload: PlanCreate,
     current_user: CurrentUser,
     service: LearningServiceDependency,
@@ -68,7 +68,7 @@ async def create_plan(
 
 
 @router.get("/plans/{plan_id}", response_model=PlanResponse, summary="获取学习计划详情")
-async def get_plan(
+def get_plan(
     plan_id: ResourceId,
     current_user: CurrentUser,
     service: LearningServiceDependency,
@@ -77,7 +77,7 @@ async def get_plan(
 
 
 @router.put("/plans/{plan_id}", response_model=PlanResponse, summary="更新学习计划")
-async def update_plan(
+def update_plan(
     plan_id: ResourceId,
     payload: PlanUpdate,
     current_user: CurrentUser,
@@ -92,7 +92,7 @@ async def update_plan(
     status_code=status.HTTP_204_NO_CONTENT,
     summary="删除学习计划",
 )
-async def delete_plan(
+def delete_plan(
     plan_id: ResourceId,
     current_user: CurrentUser,
     service: LearningServiceDependency,
@@ -102,7 +102,7 @@ async def delete_plan(
 
 
 @router.get("/tasks", response_model=LearningTaskListResponse, summary="获取每日任务列表")
-async def list_tasks(
+def list_tasks(
     current_user: CurrentUser,
     service: LearningServiceDependency,
     page: Annotated[int, Query(ge=1, le=10_000)] = 1,
@@ -127,7 +127,7 @@ async def list_tasks(
     status_code=status.HTTP_201_CREATED,
     summary="创建每日任务",
 )
-async def create_task(
+def create_task(
     payload: LearningTaskCreate,
     current_user: CurrentUser,
     service: LearningServiceDependency,
@@ -138,7 +138,7 @@ async def create_task(
 
 
 @router.get("/tasks/{task_id}", response_model=LearningTaskResponse, summary="获取任务详情")
-async def get_task(
+def get_task(
     task_id: ResourceId,
     current_user: CurrentUser,
     service: LearningServiceDependency,
@@ -147,7 +147,7 @@ async def get_task(
 
 
 @router.put("/tasks/{task_id}", response_model=LearningTaskResponse, summary="更新每日任务")
-async def update_task(
+def update_task(
     task_id: ResourceId,
     payload: LearningTaskUpdate,
     current_user: CurrentUser,
@@ -164,7 +164,7 @@ async def update_task(
     response_model=LearningTaskResponse,
     summary="完成每日任务",
 )
-async def complete_task(
+def complete_task(
     task_id: ResourceId,
     current_user: CurrentUser,
     service: LearningServiceDependency,
@@ -177,7 +177,7 @@ async def complete_task(
     status_code=status.HTTP_204_NO_CONTENT,
     summary="删除每日任务",
 )
-async def delete_task(
+def delete_task(
     task_id: ResourceId,
     current_user: CurrentUser,
     service: LearningServiceDependency,
@@ -187,7 +187,7 @@ async def delete_task(
 
 
 @router.get("/records", response_model=LearningRecordListResponse, summary="获取学习记录列表")
-async def list_records(
+def list_records(
     current_user: CurrentUser,
     service: LearningServiceDependency,
     page: Annotated[int, Query(ge=1, le=10_000)] = 1,
@@ -204,7 +204,7 @@ async def list_records(
     status_code=status.HTTP_201_CREATED,
     summary="创建学习记录",
 )
-async def create_record(
+def create_record(
     payload: LearningRecordCreate,
     current_user: CurrentUser,
     service: LearningServiceDependency,
@@ -215,7 +215,7 @@ async def create_record(
 
 
 @router.get("/records/{record_id}", response_model=LearningRecordResponse, summary="获取学习记录详情")
-async def get_record(
+def get_record(
     record_id: ResourceId,
     current_user: CurrentUser,
     service: LearningServiceDependency,
@@ -226,7 +226,7 @@ async def get_record(
 
 
 @router.put("/records/{record_id}", response_model=LearningRecordResponse, summary="更新学习记录")
-async def update_record(
+def update_record(
     record_id: ResourceId,
     payload: LearningRecordUpdate,
     current_user: CurrentUser,
@@ -243,7 +243,7 @@ async def update_record(
     status_code=status.HTTP_204_NO_CONTENT,
     summary="删除学习记录",
 )
-async def delete_record(
+def delete_record(
     record_id: ResourceId,
     current_user: CurrentUser,
     service: LearningServiceDependency,

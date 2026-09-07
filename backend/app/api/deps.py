@@ -22,9 +22,10 @@ from app.core.config import (
 )
 from app.core.database import get_session_factory
 from app.core.exceptions import AuthenticationRequiredError
-from app.core.security import InvalidAccessTokenError, SecurityService
+from app.core.security import InvalidAccessTokenError, SecurityService, TokenIdentity
 from app.repositories.project import ProjectRepository
 from app.repositories.statistics import StatisticsRepository
+from app.repositories.teaching import TeachingRepository
 from app.repositories.agent import AgentRepository
 from app.repositories.project_context import ProjectContextRepository
 from app.repositories.community import CommunityRepository
@@ -32,10 +33,13 @@ from app.repositories.course import CourseRepository
 from app.repositories.learning import LearningRepository
 from app.repositories.learning_report import LearningReportRepository
 from app.repositories.user import UserRepository
+from app.repositories.campus import CampusRepository
 from app.repositories.workflow import WorkflowRepository
 from app.repositories.workflow_execution import WorkflowExecutionRepository
 from app.repositories.workspace import WorkspaceRepository
 from app.services.auth import AuthService, UserIdentity
+from app.services.campus import CampusService
+from app.services.rate_limit import SensitiveActionLimiter, get_sensitive_action_limiter
 from app.services.slider_captcha import SliderCaptchaService, get_slider_captcha_service
 from app.services.ai import AIService
 from app.services.agent import AgentService
@@ -46,6 +50,7 @@ from app.services.learning import LearningService
 from app.services.learning_report import LearningReportService
 from app.services.project import ProjectService
 from app.services.statistics import StatisticsService
+from app.services.teaching import TeachingService
 from app.services.project_context import ProjectContextService
 from app.services.workflow import WorkflowService
 from app.services.workspace import WorkspaceService
@@ -53,6 +58,9 @@ from app.workflow.agents import (
     ArchitectureDesignWorkflowAgent,
     RequirementsAnalysisWorkflowAgent,
     TechStackAnalysisWorkflowAgent,
+    ExerciseHintWorkflowAgent,
+    CodeExplanationWorkflowAgent,
+    AnswerReviewWorkflowAgent,
 )
 from app.workflow.engine import WorkflowEngine, WorkflowEngineLimits
 from app.workflow.registry import WorkflowAgentRegistry
@@ -94,33 +102,56 @@ AuthServiceDependency = Annotated[AuthService, Depends(get_auth_service)]
 SliderCaptchaDependency = Annotated[
     SliderCaptchaService, Depends(get_slider_captcha_service)
 ]
+SensitiveActionLimiterDependency = Annotated[
+    SensitiveActionLimiter, Depends(get_sensitive_action_limiter)
+]
 
 
-def get_token_user_id(
+def get_token_identity(
     credentials: Annotated[
         HTTPAuthorizationCredentials | None, Depends(bearer_scheme)
     ],
     security: SecurityDependency,
-) -> int:
+) -> TokenIdentity:
     if credentials is None or credentials.scheme.lower() != "bearer":
         raise AuthenticationRequiredError("缺少有效的访问令牌")
     try:
-        return security.get_user_id(credentials.credentials)
+        return security.get_identity(credentials.credentials)
     except InvalidAccessTokenError as exc:
         raise AuthenticationRequiredError("访问令牌无效或已过期") from exc
 
 
-TokenUserId = Annotated[int, Depends(get_token_user_id)]
+CurrentToken = Annotated[TokenIdentity, Depends(get_token_identity)]
 
 
 def get_current_user(
-    user_id: TokenUserId,
+    identity: CurrentToken,
     session: DatabaseSession,
     security: SecurityDependency,
 ) -> UserIdentity:
-    return AuthService(UserRepository(session), security).get_current_user(user_id)
+    return AuthService(UserRepository(session), security).get_current_user(
+        identity.user_id, identity.auth_version
+    )
 
 CurrentUser = Annotated[UserIdentity, Depends(get_current_user)]
+
+
+def get_campus_service(
+    session: DatabaseSession, security: SecurityDependency
+) -> CampusService:
+    return CampusService(CampusRepository(session), security)
+
+
+CampusServiceDependency = Annotated[CampusService, Depends(get_campus_service)]
+
+
+def get_teaching_service(session: DatabaseSession) -> TeachingService:
+    return TeachingService(TeachingRepository(session))
+
+
+TeachingServiceDependency = Annotated[
+    TeachingService, Depends(get_teaching_service)
+]
 
 
 def get_project_service(session: DatabaseSession) -> ProjectService:
@@ -234,6 +265,11 @@ def build_workflow_registry(
             client, max_tokens=max_tokens, **shared_options
         ),
     )
+    for agent_class in (ExerciseHintWorkflowAgent, CodeExplanationWorkflowAgent, AnswerReviewWorkflowAgent):
+        registry.register(
+            agent_class.agent_type,
+            lambda max_tokens, cls=agent_class: cls(client, max_tokens=max_tokens, **shared_options),
+        )
     return registry
 
 

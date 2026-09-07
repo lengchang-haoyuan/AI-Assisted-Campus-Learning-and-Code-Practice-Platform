@@ -21,6 +21,10 @@ backend/.ruff_cache/
 .DS_Store
 Thumbs.db
 
+# Obsidian 本地界面、仓库状态及误创建的嵌套仓库；知识笔记正常纳入版本管理
+**/.obsidian/
+开发相关文档/知识网络/毕业设计/
+
 # Impeccable 本地构建缓存与重复验收中间产物
 .impeccable/build/
 .impeccable/review/diff/

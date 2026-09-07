@@ -18,7 +18,7 @@ ProjectId = Annotated[int, Path(ge=1)]
 
 
 @router.get("", response_model=ProjectListResponse, summary="获取当前用户的项目列表")
-async def list_projects(
+def list_projects(
     current_user: CurrentUser,
     service: ProjectServiceDependency,
     page: Annotated[int, Query(ge=1, le=10_000)] = 1,
@@ -34,7 +34,7 @@ async def list_projects(
     status_code=status.HTTP_201_CREATED,
     summary="创建项目",
 )
-async def create_project(
+def create_project(
     payload: ProjectCreate,
     current_user: CurrentUser,
     service: ProjectServiceDependency,
@@ -44,7 +44,7 @@ async def create_project(
 
 
 @router.get("/{project_id}", response_model=ProjectResponse, summary="获取项目详情")
-async def get_project(
+def get_project(
     project_id: ProjectId,
     current_user: CurrentUser,
     service: ProjectServiceDependency,
@@ -53,7 +53,7 @@ async def get_project(
 
 
 @router.put("/{project_id}", response_model=ProjectResponse, summary="更新项目")
-async def update_project(
+def update_project(
     project_id: ProjectId,
     payload: ProjectUpdate,
     current_user: CurrentUser,
@@ -70,7 +70,7 @@ async def update_project(
     status_code=status.HTTP_204_NO_CONTENT,
     summary="删除项目",
 )
-async def delete_project(
+def delete_project(
     project_id: ProjectId,
     current_user: CurrentUser,
     service: ProjectServiceDependency,

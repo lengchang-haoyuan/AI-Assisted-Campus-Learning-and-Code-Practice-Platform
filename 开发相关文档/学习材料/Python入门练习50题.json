@@ -1,0 +1,1760 @@
+{
+  "title": "Python 原创入门练习 50 题",
+  "date": "2026-09-04",
+  "questions": [
+    {
+      "number": 1,
+      "title": "颠倒字符串",
+      "topic": "字符串",
+      "signature": "reverse_string(text: str) -> str",
+      "statement": "返回字符顺序完全相反的新字符串。大小写、空格和标点都要保留；空字符串返回空字符串。本题按 Python 字符顺序处理，不涉及组合表情。",
+      "hint": "先观察字符串切片的步长；进阶练习可用循环从末尾取字符。",
+      "cases": [
+        {
+          "args": [
+            "hello"
+          ],
+          "expected": "olleh"
+        },
+        {
+          "args": [
+            "Python"
+          ],
+          "expected": "nohtyP"
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": ""
+        },
+        {
+          "args": [
+            "a b"
+          ],
+          "expected": "b a"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "计算字符串长度",
+      "topic": "字符串",
+      "signature": "string_length(text: str) -> int",
+      "statement": "返回字符串的字符个数，空格和标点也计算在内。",
+      "hint": "可以先使用 len，再尝试通过循环计数。",
+      "cases": [
+        {
+          "args": [
+            "hello"
+          ],
+          "expected": 5
+        },
+        {
+          "args": [
+            "a b!"
+          ],
+          "expected": 4
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "转为大写",
+      "topic": "字符串",
+      "signature": "to_upper(text: str) -> str",
+      "statement": "输入仅包含英文字母、数字、空格和英文标点。将小写字母转为大写，其他字符保持不变。",
+      "hint": "查找字符串的 upper 方法。",
+      "cases": [
+        {
+          "args": [
+            "hello"
+          ],
+          "expected": "HELLO"
+        },
+        {
+          "args": [
+            "Py3!"
+          ],
+          "expected": "PY3!"
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": ""
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "转为小写",
+      "topic": "字符串",
+      "signature": "to_lower(text: str) -> str",
+      "statement": "输入仅包含英文字母、数字、空格和英文标点。将大写字母转为小写，其他字符保持不变。",
+      "hint": "查找字符串的 lower 方法。",
+      "cases": [
+        {
+          "args": [
+            "HELLO"
+          ],
+          "expected": "hello"
+        },
+        {
+          "args": [
+            "Py3!"
+          ],
+          "expected": "py3!"
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": ""
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "删除普通空格",
+      "topic": "字符串",
+      "signature": "remove_spaces(text: str) -> str",
+      "statement": "删除字符串中的所有普通半角空格 U+0020；制表符和换行符不删除。",
+      "hint": "用 replace，或在遍历时只收集不等于空格的字符。",
+      "cases": [
+        {
+          "args": [
+            "a b c"
+          ],
+          "expected": "abc"
+        },
+        {
+          "args": [
+            "   "
+          ],
+          "expected": ""
+        },
+        {
+          "args": [
+            "a\tb"
+          ],
+          "expected": "a\tb"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "title": "统计指定字符",
+      "topic": "字符串",
+      "signature": "count_char(text: str, target: str) -> int",
+      "statement": "target 保证恰好一个字符。返回它在 text 中出现的次数，区分大小写。",
+      "hint": "逐字符比较，并在相等时累加。",
+      "cases": [
+        {
+          "args": [
+            "banana",
+            "a"
+          ],
+          "expected": 3
+        },
+        {
+          "args": [
+            "AaA",
+            "a"
+          ],
+          "expected": 1
+        },
+        {
+          "args": [
+            "",
+            "x"
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "title": "判断回文字符串",
+      "topic": "字符串",
+      "signature": "is_palindrome(text: str) -> bool",
+      "statement": "正着读和反着读完全相同则返回 True，否则 False。区分大小写，空格参与比较，空字符串视为回文。",
+      "hint": "将字符串与它的逆序比较。",
+      "cases": [
+        {
+          "args": [
+            "level"
+          ],
+          "expected": true
+        },
+        {
+          "args": [
+            "Level"
+          ],
+          "expected": false
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": true
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "title": "取首尾字符",
+      "topic": "字符串",
+      "signature": "first_last(text: str) -> str",
+      "statement": "返回首字符与尾字符拼接的字符串。只有一个字符时将它重复两次；空字符串返回空字符串。",
+      "hint": "先处理空字符串，再使用索引。",
+      "cases": [
+        {
+          "args": [
+            "python"
+          ],
+          "expected": "pn"
+        },
+        {
+          "args": [
+            "a"
+          ],
+          "expected": "aa"
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": ""
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "title": "统计英文元音",
+      "topic": "字符串",
+      "signature": "count_vowels(text: str) -> int",
+      "statement": "统计 a、e、i、o、u 的出现次数，不区分英文大小写，其他字符不计。",
+      "hint": "先统一大小写，再判断字符是否属于元音集合。",
+      "cases": [
+        {
+          "args": [
+            "Hello"
+          ],
+          "expected": 2
+        },
+        {
+          "args": [
+            "AEIOU"
+          ],
+          "expected": 5
+        },
+        {
+          "args": [
+            "rhythm"
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "title": "单词首字母大写",
+      "topic": "字符串",
+      "signature": "capitalize_words(text: str) -> str",
+      "statement": "输入只含小写英文字母和普通空格。每个单词首字母改为大写，结果中单词以一个空格连接，不保留首尾和多余空格。",
+      "hint": "split 拆词，处理每个词，再用 join 拼接。",
+      "cases": [
+        {
+          "args": [
+            "hello world"
+          ],
+          "expected": "Hello World"
+        },
+        {
+          "args": [
+            "  learn   python "
+          ],
+          "expected": "Learn Python"
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": ""
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "title": "空格替换为短横线",
+      "topic": "字符串",
+      "signature": "spaces_to_hyphens(text: str) -> str",
+      "statement": "将每一个普通半角空格替换为一个短横线 -，连续空格也逐一替换。",
+      "hint": "注意这道题不需要先 split。",
+      "cases": [
+        {
+          "args": [
+            "hello world"
+          ],
+          "expected": "hello-world"
+        },
+        {
+          "args": [
+            "a  b"
+          ],
+          "expected": "a--b"
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": ""
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "title": "查找子字符串",
+      "topic": "字符串",
+      "signature": "contains_text(text: str, part: str) -> bool",
+      "statement": "判断 part 是否连续出现在 text 中，区分大小写。空子字符串视为存在。",
+      "hint": "可以使用 in 运算符。",
+      "cases": [
+        {
+          "args": [
+            "python",
+            "thon"
+          ],
+          "expected": true
+        },
+        {
+          "args": [
+            "python",
+            "Py"
+          ],
+          "expected": false
+        },
+        {
+          "args": [
+            "abc",
+            ""
+          ],
+          "expected": true
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "title": "颠倒单词顺序",
+      "topic": "字符串",
+      "signature": "reverse_words(text: str) -> str",
+      "statement": "按空白拆分单词，颠倒单词顺序，不颠倒单词内部字符。输出用一个普通空格连接，不保留多余空白。",
+      "hint": "先得到单词列表，再逆序并拼接。",
+      "cases": [
+        {
+          "args": [
+            "I love Python"
+          ],
+          "expected": "Python love I"
+        },
+        {
+          "args": [
+            " a   b "
+          ],
+          "expected": "b a"
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": ""
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "title": "统计十进制数字字符",
+      "topic": "字符串",
+      "signature": "count_digits(text: str) -> int",
+      "statement": "只统计 ASCII 数字 0 到 9 的出现次数，其他字符不计，包括全角数字。",
+      "hint": "直接判断字符是否处于 0 到 9 之间，留意 isdigit 的范围更广。",
+      "cases": [
+        {
+          "args": [
+            "a1b23"
+          ],
+          "expected": 3
+        },
+        {
+          "args": [
+            "１２3"
+          ],
+          "expected": 1
+        },
+        {
+          "args": [
+            "abc"
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "title": "只保留英文字母",
+      "topic": "字符串",
+      "signature": "keep_letters(text: str) -> str",
+      "statement": "按原顺序返回 A-Z、a-z 字符，保留大小写；数字、标点、空格和其他文字均删除。",
+      "hint": "使用两个区间判断，不需要正则表达式。",
+      "cases": [
+        {
+          "args": [
+            "a1B!"
+          ],
+          "expected": "aB"
+        },
+        {
+          "args": [
+            "你好Python3"
+          ],
+          "expected": "Python"
+        },
+        {
+          "args": [
+            "123"
+          ],
+          "expected": ""
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "title": "两个整数相加",
+      "topic": "数字与判断",
+      "signature": "add_numbers(a: int, b: int) -> int",
+      "statement": "返回两个整数的和，输入可以为零或负数。",
+      "hint": "函数使用 return 返回计算结果。",
+      "cases": [
+        {
+          "args": [
+            2,
+            3
+          ],
+          "expected": 5
+        },
+        {
+          "args": [
+            -4,
+            6
+          ],
+          "expected": 2
+        },
+        {
+          "args": [
+            0,
+            0
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "title": "两个数中的较大值",
+      "topic": "数字与判断",
+      "signature": "larger(a: int, b: int) -> int",
+      "statement": "返回两个整数中的较大值。相等时返回这个值。",
+      "hint": "先使用 if/else，再与 max 对照。",
+      "cases": [
+        {
+          "args": [
+            3,
+            7
+          ],
+          "expected": 7
+        },
+        {
+          "args": [
+            -2,
+            -8
+          ],
+          "expected": -2
+        },
+        {
+          "args": [
+            5,
+            5
+          ],
+          "expected": 5
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "title": "判断奇偶数",
+      "topic": "数字与判断",
+      "signature": "odd_even(n: int) -> str",
+      "statement": "偶数返回字符串“偶数”，奇数返回“奇数”。零是偶数，负数也按相同规则判断。",
+      "hint": "观察除以 2 的余数。",
+      "cases": [
+        {
+          "args": [
+            0
+          ],
+          "expected": "偶数"
+        },
+        {
+          "args": [
+            7
+          ],
+          "expected": "奇数"
+        },
+        {
+          "args": [
+            -4
+          ],
+          "expected": "偶数"
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "title": "求绝对值",
+      "topic": "数字与判断",
+      "signature": "absolute(n: int) -> int",
+      "statement": "返回整数的绝对值。第一次练习请尝试不用 abs。",
+      "hint": "负数取相反数，其他数直接返回。",
+      "cases": [
+        {
+          "args": [
+            -8
+          ],
+          "expected": 8
+        },
+        {
+          "args": [
+            0
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            6
+          ],
+          "expected": 6
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "title": "三个数中的最小值",
+      "topic": "数字与判断",
+      "signature": "smallest(a: int, b: int, c: int) -> int",
+      "statement": "返回三个整数中的最小值，允许相等和负数。",
+      "hint": "维护当前最小值，逐个比较。",
+      "cases": [
+        {
+          "args": [
+            3,
+            1,
+            2
+          ],
+          "expected": 1
+        },
+        {
+          "args": [
+            -1,
+            -3,
+            0
+          ],
+          "expected": -3
+        },
+        {
+          "args": [
+            2,
+            2,
+            2
+          ],
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "title": "一到 n 累加",
+      "topic": "循环",
+      "signature": "sum_to_n(n: int) -> int",
+      "statement": "给定 0 到 10000 的整数 n，返回 1+2+…+n；n 为 0 时返回 0。",
+      "hint": "用 range 和累加变量，留意右端点不包含。",
+      "cases": [
+        {
+          "args": [
+            5
+          ],
+          "expected": 15
+        },
+        {
+          "args": [
+            1
+          ],
+          "expected": 1
+        },
+        {
+          "args": [
+            0
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "title": "计算阶乘",
+      "topic": "循环",
+      "signature": "factorial(n: int) -> int",
+      "statement": "给定 0 到 12 的整数 n，返回 1×2×…×n。规定 0! = 1。",
+      "hint": "累乘初始值应当是 1。",
+      "cases": [
+        {
+          "args": [
+            5
+          ],
+          "expected": 120
+        },
+        {
+          "args": [
+            1
+          ],
+          "expected": 1
+        },
+        {
+          "args": [
+            0
+          ],
+          "expected": 1
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "title": "生成一行乘法表",
+      "topic": "循环",
+      "signature": "multiples(n: int) -> list[int]",
+      "statement": "给定 1 到 9 的整数 n，按顺序返回 n×1 到 n×9 的九个结果，使用列表表示。",
+      "hint": "遍历乘数 1 到 9，将乘积加入列表。",
+      "cases": [
+        {
+          "args": [
+            1
+          ],
+          "expected": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        },
+        {
+          "args": [
+            2
+          ],
+          "expected": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18
+          ]
+        },
+        {
+          "args": [
+            9
+          ],
+          "expected": [
+            9,
+            18,
+            27,
+            36,
+            45,
+            54,
+            63,
+            72,
+            81
+          ]
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "title": "整数有几位",
+      "topic": "循环",
+      "signature": "digit_count(n: int) -> int",
+      "statement": "计算整数绝对值的十进制位数，不计算负号。零有一位。",
+      "hint": "可以先转成字符串，也可以反复整除 10。",
+      "cases": [
+        {
+          "args": [
+            1234
+          ],
+          "expected": 4
+        },
+        {
+          "args": [
+            -25
+          ],
+          "expected": 2
+        },
+        {
+          "args": [
+            0
+          ],
+          "expected": 1
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "title": "各位数字之和",
+      "topic": "循环",
+      "signature": "digit_sum(n: int) -> int",
+      "statement": "返回整数绝对值的各位十进制数字之和，不计算负号。",
+      "hint": "先处理符号，再用取余和整除分离数字。",
+      "cases": [
+        {
+          "args": [
+            123
+          ],
+          "expected": 6
+        },
+        {
+          "args": [
+            -405
+          ],
+          "expected": 9
+        },
+        {
+          "args": [
+            0
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "title": "颠倒整数",
+      "topic": "循环",
+      "signature": "reverse_integer(n: int) -> int",
+      "statement": "颠倒整数绝对值的十进制数字后恢复原符号。颠倒后的前导零舍弃；零仍返回零。",
+      "hint": "可以借助字符串，也可用 result * 10 + digit 累积。",
+      "cases": [
+        {
+          "args": [
+            120
+          ],
+          "expected": 21
+        },
+        {
+          "args": [
+            -305
+          ],
+          "expected": -503
+        },
+        {
+          "args": [
+            0
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "title": "判断闰年",
+      "topic": "数字与判断",
+      "signature": "is_leap_year(year: int) -> bool",
+      "statement": "输入年份为 1 到 9999。采用公历规则：能被 400 整除，或能被 4 整除但不能被 100 整除时，返回 True。",
+      "hint": "分别写出 and、or 条件并注意括号。",
+      "cases": [
+        {
+          "args": [
+            2000
+          ],
+          "expected": true
+        },
+        {
+          "args": [
+            1900
+          ],
+          "expected": false
+        },
+        {
+          "args": [
+            2024
+          ],
+          "expected": true
+        },
+        {
+          "args": [
+            2023
+          ],
+          "expected": false
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "title": "FizzBuzz 单值判断",
+      "topic": "数字与判断",
+      "signature": "fizz_buzz(n: int) -> str",
+      "statement": "输入为正整数。3 和 5 的公倍数返回 FizzBuzz，仅为 3 的倍数返回 Fizz，仅为 5 的倍数返回 Buzz，否则返回该数的字符串。",
+      "hint": "先判断同时满足的情况。",
+      "cases": [
+        {
+          "args": [
+            15
+          ],
+          "expected": "FizzBuzz"
+        },
+        {
+          "args": [
+            9
+          ],
+          "expected": "Fizz"
+        },
+        {
+          "args": [
+            10
+          ],
+          "expected": "Buzz"
+        },
+        {
+          "args": [
+            7
+          ],
+          "expected": "7"
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "title": "列出所有正因数",
+      "topic": "循环",
+      "signature": "divisors(n: int) -> list[int]",
+      "statement": "给定 1 到 1000 的整数 n，按从小到大返回所有能整除 n 的正整数，包含 1 和 n。",
+      "hint": "遍历 1 到 n，筛选余数等于零的数。",
+      "cases": [
+        {
+          "args": [
+            6
+          ],
+          "expected": [
+            1,
+            2,
+            3,
+            6
+          ]
+        },
+        {
+          "args": [
+            7
+          ],
+          "expected": [
+            1,
+            7
+          ]
+        },
+        {
+          "args": [
+            1
+          ],
+          "expected": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "title": "判断质数",
+      "topic": "循环",
+      "signature": "is_prime(n: int) -> bool",
+      "statement": "给定 0 到 10000 的整数 n，判断是否为质数。质数大于 1，且只有 1 和自身两个正因数。",
+      "hint": "先排除小于 2 的数，再检查是否有其他因数。",
+      "cases": [
+        {
+          "args": [
+            2
+          ],
+          "expected": true
+        },
+        {
+          "args": [
+            9
+          ],
+          "expected": false
+        },
+        {
+          "args": [
+            1
+          ],
+          "expected": false
+        },
+        {
+          "args": [
+            0
+          ],
+          "expected": false
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "title": "列表元素求和",
+      "topic": "列表",
+      "signature": "list_sum(numbers: list[int]) -> int",
+      "statement": "返回整数列表所有元素的和，空列表返回 0，不修改原列表。",
+      "hint": "用循环累加，或使用 sum。",
+      "cases": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ]
+          ],
+          "expected": 6
+        },
+        {
+          "args": [
+            [
+              -2,
+              5
+            ]
+          ],
+          "expected": 3
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "title": "列表最大值",
+      "topic": "列表",
+      "signature": "list_max(numbers: list[int]) -> int | None",
+      "statement": "返回整数列表的最大值；空列表返回 None。不要将初始最大值固定为 0。",
+      "hint": "先处理空列表，再以首元素初始化。",
+      "cases": [
+        {
+          "args": [
+            [
+              2,
+              8,
+              3
+            ]
+          ],
+          "expected": 8
+        },
+        {
+          "args": [
+            [
+              -8,
+              -2
+            ]
+          ],
+          "expected": -2
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": null
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "title": "筛选偶数",
+      "topic": "列表",
+      "signature": "filter_even(numbers: list[int]) -> list[int]",
+      "statement": "返回只含偶数的新列表，保持原顺序与重复次数。零和负偶数也保留。",
+      "hint": "用取余判断，满足条件时 append。",
+      "cases": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4
+            ]
+          ],
+          "expected": [
+            2,
+            4
+          ]
+        },
+        {
+          "args": [
+            [
+              -2,
+              0,
+              3
+            ]
+          ],
+          "expected": [
+            -2,
+            0
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": []
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "title": "列表元素平方",
+      "topic": "列表",
+      "signature": "square_items(numbers: list[int]) -> list[int]",
+      "statement": "按原顺序返回每个整数的平方组成的新列表，不修改输入。",
+      "hint": "逐项计算 x * x。",
+      "cases": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ]
+          ],
+          "expected": [
+            1,
+            4,
+            9
+          ]
+        },
+        {
+          "args": [
+            [
+              -2,
+              0
+            ]
+          ],
+          "expected": [
+            4,
+            0
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": []
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "title": "统计正数个数",
+      "topic": "列表",
+      "signature": "count_positive(numbers: list[int]) -> int",
+      "statement": "返回列表中严格大于零的元素个数。零不算正数，重复元素分别计数。",
+      "hint": "把筛选条件与计数变量结合起来。",
+      "cases": [
+        {
+          "args": [
+            [
+              -1,
+              0,
+              2,
+              2
+            ]
+          ],
+          "expected": 2
+        },
+        {
+          "args": [
+            [
+              0,
+              0
+            ]
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "title": "保持顺序去重",
+      "topic": "列表",
+      "signature": "unique_items(numbers: list[int]) -> list[int]",
+      "statement": "每个整数只保留首次出现的一次，结果按首次出现顺序排列。",
+      "hint": "用结果列表判断是否已经出现；之后可尝试集合辅助。",
+      "cases": [
+        {
+          "args": [
+            [
+              3,
+              1,
+              3,
+              2,
+              1
+            ]
+          ],
+          "expected": [
+            3,
+            1,
+            2
+          ]
+        },
+        {
+          "args": [
+            [
+              5,
+              5
+            ]
+          ],
+          "expected": [
+            5
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": []
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "title": "第二大的不同整数",
+      "topic": "列表",
+      "signature": "second_largest(numbers: list[int]) -> int | None",
+      "statement": "返回去重后第二大的整数。不同整数不足两个时返回 None。",
+      "hint": "先去重再排序；最大值重复不算第二大。",
+      "cases": [
+        {
+          "args": [
+            [
+              4,
+              4,
+              2,
+              1
+            ]
+          ],
+          "expected": 2
+        },
+        {
+          "args": [
+            [
+              -3,
+              -1,
+              -2
+            ]
+          ],
+          "expected": -2
+        },
+        {
+          "args": [
+            [
+              7,
+              7
+            ]
+          ],
+          "expected": null
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": null
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "title": "合并列表并排序",
+      "topic": "列表",
+      "signature": "merge_sorted(a: list[int], b: list[int]) -> list[int]",
+      "statement": "将两个整数列表的全部元素合并后从小到大排序，保留重复值，不修改输入列表。输入本身不保证有序。",
+      "hint": "区分 sorted 返回新列表与 sort 原地排序。",
+      "cases": [
+        {
+          "args": [
+            [
+              3,
+              1
+            ],
+            [
+              2
+            ]
+          ],
+          "expected": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "args": [
+            [
+              2
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          "expected": [
+            1,
+            2,
+            2
+          ]
+        },
+        {
+          "args": [
+            [],
+            []
+          ],
+          "expected": []
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "title": "颠倒列表",
+      "topic": "列表",
+      "signature": "reverse_list(items: list[int]) -> list[int]",
+      "statement": "返回元素顺序相反的新列表，保持元素值不变，不修改输入列表。",
+      "hint": "字符串切片的思路也适用于列表。",
+      "cases": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ]
+          ],
+          "expected": [
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "args": [
+            [
+              8
+            ]
+          ],
+          "expected": [
+            8
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": []
+        }
+      ]
+    },
+    {
+      "number": 40,
+      "title": "列表循环左移",
+      "topic": "列表",
+      "signature": "rotate_left(items: list[int], k: int) -> list[int]",
+      "statement": "k 为非负整数。每左移一次，将首元素移到末尾，返回左移 k 次的新列表。空列表返回空列表，不修改输入。",
+      "hint": "非空时先将 k 对列表长度取余，再拼接两段。",
+      "cases": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4
+            ],
+            1
+          ],
+          "expected": [
+            2,
+            3,
+            4,
+            1
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ],
+            5
+          ],
+          "expected": [
+            3,
+            1,
+            2
+          ]
+        },
+        {
+          "args": [
+            [],
+            3
+          ],
+          "expected": []
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "title": "统计单词频率",
+      "topic": "字典",
+      "signature": "word_counts(text: str) -> dict[str, int]",
+      "statement": "输入只含小写英文字母与空白。按空白拆词，返回单词到次数的字典。字典键的排列不作为验收条件。",
+      "hint": "dict.get 可以给未出现过的键提供初始值。",
+      "cases": [
+        {
+          "args": [
+            "cat dog cat"
+          ],
+          "expected": {
+            "cat": 2,
+            "dog": 1
+          }
+        },
+        {
+          "args": [
+            " a  a "
+          ],
+          "expected": {
+            "a": 2
+          }
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": {}
+        }
+      ]
+    },
+    {
+      "number": 42,
+      "title": "统计字符频率",
+      "topic": "字典",
+      "signature": "char_counts(text: str) -> dict[str, int]",
+      "statement": "统计每个字符的次数，区分大小写，空格也计数。返回字典，空字符串返回空字典。",
+      "hint": "遍历字符，并更新对应计数。",
+      "cases": [
+        {
+          "args": [
+            "aba"
+          ],
+          "expected": {
+            "a": 2,
+            "b": 1
+          }
+        },
+        {
+          "args": [
+            "A a"
+          ],
+          "expected": {
+            "A": 1,
+            " ": 1,
+            "a": 1
+          }
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": {}
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "title": "交换字典键和值",
+      "topic": "字典",
+      "signature": "invert_mapping(mapping: dict[str, str]) -> dict[str, str]",
+      "statement": "输入字典的键和值均为字符串，且所有值互不相同。交换键和值后返回新字典，不修改输入。",
+      "hint": "使用 items 同时取得键和值。",
+      "cases": [
+        {
+          "args": [
+            {
+              "a": "1",
+              "b": "2"
+            }
+          ],
+          "expected": {
+            "1": "a",
+            "2": "b"
+          }
+        },
+        {
+          "args": [
+            {
+              "x": "y"
+            }
+          ],
+          "expected": {
+            "y": "x"
+          }
+        },
+        {
+          "args": [
+            {}
+          ],
+          "expected": {}
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "title": "筛选及格学生",
+      "topic": "字典",
+      "signature": "passing_students(scores: dict[str, int]) -> list[str]",
+      "statement": "姓名映射到 0–100 的整数成绩。返回成绩大于等于 60 的学生姓名列表，顺序与输入字典的插入顺序一致。",
+      "hint": "遍历 items，判断分数是否达到阈值。",
+      "cases": [
+        {
+          "args": [
+            {
+              "小明": 59,
+              "小红": 60,
+              "小李": 90
+            }
+          ],
+          "expected": [
+            "小红",
+            "小李"
+          ]
+        },
+        {
+          "args": [
+            {
+              "A": 0
+            }
+          ],
+          "expected": []
+        },
+        {
+          "args": [
+            {}
+          ],
+          "expected": []
+        }
+      ]
+    },
+    {
+      "number": 45,
+      "title": "合并两个字典",
+      "topic": "字典",
+      "signature": "merge_dicts(a: dict[str, int], b: dict[str, int]) -> dict[str, int]",
+      "statement": "合并为新字典。重复键使用 b 中的值，不修改 a 或 b，字典键顺序不参与验收。",
+      "hint": "先复制 a，再更新 b。",
+      "cases": [
+        {
+          "args": [
+            {
+              "x": 1
+            },
+            {
+              "y": 2
+            }
+          ],
+          "expected": {
+            "x": 1,
+            "y": 2
+          }
+        },
+        {
+          "args": [
+            {
+              "x": 1
+            },
+            {
+              "x": 3
+            }
+          ],
+          "expected": {
+            "x": 3
+          }
+        },
+        {
+          "args": [
+            {},
+            {}
+          ],
+          "expected": {}
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "title": "姓名与年龄配对",
+      "topic": "字典",
+      "signature": "pair_ages(names: list[str], ages: list[int]) -> dict[str, int]",
+      "statement": "两个列表长度相同，姓名互不重复，年龄为非负整数。按相同位置生成姓名到年龄的字典。",
+      "hint": "可以用索引，也可以使用 zip。",
+      "cases": [
+        {
+          "args": [
+            [
+              "小明",
+              "小红"
+            ],
+            [
+              18,
+              19
+            ]
+          ],
+          "expected": {
+            "小明": 18,
+            "小红": 19
+          }
+        },
+        {
+          "args": [
+            [
+              "A"
+            ],
+            [
+              0
+            ]
+          ],
+          "expected": {
+            "A": 0
+          }
+        },
+        {
+          "args": [
+            [],
+            []
+          ],
+          "expected": {}
+        }
+      ]
+    },
+    {
+      "number": 47,
+      "title": "按奇偶分组",
+      "topic": "函数综合",
+      "signature": "group_parity(numbers: list[int]) -> dict[str, list[int]]",
+      "statement": "返回恰含 even 和 odd 两个键的字典，其值分别为偶数和奇数列表，各组保持输入顺序，空输入也保留两个键。",
+      "hint": "先创建两个空列表，再遍历分配。",
+      "cases": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4
+            ]
+          ],
+          "expected": {
+            "even": [
+              2,
+              4
+            ],
+            "odd": [
+              1,
+              3
+            ]
+          }
+        },
+        {
+          "args": [
+            [
+              -2,
+              0,
+              -1
+            ]
+          ],
+          "expected": {
+            "even": [
+              -2,
+              0
+            ],
+            "odd": [
+              -1
+            ]
+          }
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": {
+            "even": [],
+            "odd": []
+          }
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "title": "展开一层嵌套列表",
+      "topic": "函数综合",
+      "signature": "flatten_once(groups: list[list[int]]) -> list[int]",
+      "statement": "输入是由整数列表组成的列表。按从左到右顺序展开一层；子列表可能为空，结果保留重复值。",
+      "hint": "使用外层和内层两个循环，不需要递归。",
+      "cases": [
+        {
+          "args": [
+            [
+              [
+                1,
+                2
+              ],
+              [
+                3
+              ]
+            ]
+          ],
+          "expected": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                1
+              ],
+              [],
+              [
+                2,
+                2
+              ]
+            ]
+          ],
+          "expected": [
+            1,
+            2,
+            2
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": []
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "title": "生成斐波那契数列",
+      "topic": "函数综合",
+      "signature": "fibonacci(n: int) -> list[int]",
+      "statement": "n 为 0–30 的整数。返回斐波那契数列前 n 项，从 0、1 开始，每项为前两项之和。",
+      "hint": "用两个变量保存相邻项，注意返回项数而非最大值。",
+      "cases": [
+        {
+          "args": [
+            6
+          ],
+          "expected": [
+            0,
+            1,
+            1,
+            2,
+            3,
+            5
+          ]
+        },
+        {
+          "args": [
+            1
+          ],
+          "expected": [
+            0
+          ]
+        },
+        {
+          "args": [
+            0
+          ],
+          "expected": []
+        }
+      ]
+    },
+    {
+      "number": 50,
+      "title": "检查圆括号配对",
+      "topic": "函数综合",
+      "signature": "balanced_parentheses(text: str) -> bool",
+      "statement": "输入只包含左圆括号 ( 和右圆括号 )。每个右括号必须能匹配此前未闭合的左括号，且最终无剩余，才返回 True。空字符串返回 True。",
+      "hint": "用计数器记录未闭合数量；中途为负可以立即判错。",
+      "cases": [
+        {
+          "args": [
+            "(())()"
+          ],
+          "expected": true
+        },
+        {
+          "args": [
+            ")("
+          ],
+          "expected": false
+        },
+        {
+          "args": [
+            "(()"
+          ],
+          "expected": false
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": true
+        }
+      ]
+    }
+  ]
+}

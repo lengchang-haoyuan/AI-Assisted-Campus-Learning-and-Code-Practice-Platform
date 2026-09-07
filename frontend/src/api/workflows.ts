@@ -13,7 +13,22 @@ import type {
   WorkflowNodeUpdateInput,
   WorkflowResponse,
   WorkflowUpdateInput,
+  WorkflowRunMode,
+  WorkflowRunResponse,
+  WorkflowRunListResponse,
 } from '@/types/workflow'
+
+export async function runWorkflow(workflowId: number, version: number, mode: WorkflowRunMode): Promise<WorkflowRunResponse> {
+  const response = await apiClient.post<WorkflowRunResponse>(`/workflows/${workflowId}/run`,
+    { expected_version: version, mode }, { timeout: 620_000 })
+  return response.data
+}
+
+export async function listWorkflowRuns(workflowId: number, page = 1): Promise<WorkflowRunListResponse> {
+  const response = await apiClient.get<WorkflowRunListResponse>(`/workflows/${workflowId}/runs`,
+    { params: { page, page_size: 10 } })
+  return response.data
+}
 
 export async function listWorkflows(query: WorkflowListQuery): Promise<WorkflowListResponse> {
   const response = await apiClient.get<WorkflowListResponse>('/workflows', {

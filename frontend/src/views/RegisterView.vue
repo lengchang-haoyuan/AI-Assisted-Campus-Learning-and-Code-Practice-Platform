@@ -8,7 +8,7 @@ import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
 const authStore = useAuthStore()
-const form = reactive({ username: '', email: '', password: '', confirmPassword: '' })
+const form = reactive({ username: '', email: '', password: '', confirmPassword: '', inviteToken: '' })
 const errorMessage = ref<string | null>(null)
 const fieldErrors = ref<Record<string, string>>({})
 
@@ -34,6 +34,7 @@ async function submit(): Promise<void> {
       username: form.username.trim(),
       email: form.email.trim().toLowerCase(),
       password: form.password,
+      ...(form.inviteToken.trim() ? { invite_token: form.inviteToken.trim() } : {}),
     })
     await router.replace({
       name: 'login',
@@ -97,6 +98,15 @@ async function submit(): Promise<void> {
               </small>
             </label>
           </div>
+
+          <details class="advanced-fields">
+            <summary>我有校园邀请凭证</summary>
+            <label class="field">
+              <span>邀请凭证</span>
+              <input v-model="form.inviteToken" type="password" autocomplete="off" minlength="32" maxlength="128" />
+              <small>凭证只随本次注册提交，不保存到浏览器。</small>
+            </label>
+          </details>
 
           <button class="primary-command auth-submit" type="submit" :disabled="authStore.loading">
             {{ authStore.loading ? '正在创建…' : '创建账号' }}

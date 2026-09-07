@@ -1,15 +1,29 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import { useAuthStore } from '@/stores/auth'
+import { getCampusMe } from '@/api/campus'
 
 const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
 const searchQuery = ref(typeof route.query.q === 'string' ? route.query.q : '')
+const isCampusAdmin = ref(false)
+const hasCampusMembership = ref(false)
 
 const userInitial = computed(() => authStore.currentUser?.username.slice(0, 1).toUpperCase() || 'S')
+
+onMounted(async () => {
+  try {
+    const membership = (await getCampusMe()).membership
+    hasCampusMembership.value = membership?.status === 'active'
+    isCampusAdmin.value = membership?.role === 'administrator' && membership.status === 'active'
+  } catch {
+    hasCampusMembership.value = false
+    isCampusAdmin.value = false
+  }
+})
 
 function search(): void {
   const query = searchQuery.value.trim()
@@ -36,6 +50,8 @@ function logout(): void {
         <RouterLink to="/learning">学习系统</RouterLink>
         <RouterLink to="/workflows">工作流</RouterLink>
         <RouterLink to="/analytics">数据</RouterLink>
+        <RouterLink v-if="hasCampusMembership" to="/campus/classes">教学班</RouterLink>
+        <RouterLink v-if="isCampusAdmin" to="/campus/admin/accounts">校园管理</RouterLink>
       </nav>
 
       <form class="global-search" role="search" @submit.prevent="search">

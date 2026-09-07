@@ -18,6 +18,24 @@ export async function login(input: LoginInput): Promise<TokenResponse> {
   return response.data
 }
 
+export async function changePassword(currentPassword: string, newPassword: string): Promise<void> {
+  await apiClient.post('/auth/change-password', {
+    current_password: currentPassword,
+    new_password: newPassword,
+  })
+}
+
+export async function logoutAll(): Promise<void> {
+  await apiClient.post('/auth/logout-all')
+}
+
+export async function resetPassword(resetToken: string, newPassword: string): Promise<void> {
+  await apiClient.post('/auth/reset-password', {
+    reset_token: resetToken,
+    new_password: newPassword,
+  })
+}
+
 export async function createSliderChallenge(signal: AbortSignal): Promise<SliderChallenge> {
   const response = await apiClient.post<SliderChallenge>('/auth/slider/challenge', {}, { signal })
   return response.data

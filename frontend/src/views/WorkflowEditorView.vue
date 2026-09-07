@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import type { Connection } from '@vue-flow/core'
 import { onBeforeRouteLeave, useRoute } from 'vue-router'
@@ -10,12 +10,16 @@ import WorkflowNodeConfigPanel from '@/components/WorkflowNodeConfigPanel.vue'
 import WorkflowNodeLibrary from '@/components/WorkflowNodeLibrary.vue'
 import WorkflowResultPanel from '@/components/WorkflowResultPanel.vue'
 import WorkflowToolbar from '@/components/WorkflowToolbar.vue'
+import WorkflowExecutionPanel from '@/components/WorkflowExecutionPanel.vue'
+import { useWorkflowExecution } from '@/composables/useWorkflowExecution'
+import '@/styles/workflow-execution.css'
 import {
   createCanvasEdge,
   createCanvasNode,
   graphToCanvas,
   toGraphUpdateInput,
   validateWorkflowGraph,
+  EXECUTABLE_NODE_TYPES,
 } from '@/domain/workflow'
 import type {
   WorkflowCanvasEdge,
@@ -24,17 +28,23 @@ import type {
   WorkflowNodeTemplate,
 } from '@/domain/workflow'
 import { useWorkflowStore } from '@/stores/workflows'
-import type { WorkflowStatus } from '@/types/workflow'
+import type { WorkflowStatus, WorkflowRunMode } from '@/types/workflow'
 
 const route = useRoute()
 const workflowStore = useWorkflowStore()
 const workflowId = Number(route.params.id)
+const { runs, selectedId, selected, page: runPage, totalPages: runTotalPages,
+  loading: runsLoading, busy: running, error: runError, refresh: refreshRuns, start: startRun } = useWorkflowExecution(workflowId)
+const runMode = ref<WorkflowRunMode>('incomplete')
+const configDirty = ref(false)
+const preparing = ref(false)
+const locked = computed(() => running.value || preparing.value || workflowStore.saving)
+let mounted = true
 const nodes = ref<WorkflowCanvasNode[]>([])
 const edges = ref<WorkflowCanvasEdge[]>([])
 const workflowName = ref('')
 const workflowStatus = ref<WorkflowStatus>('draft')
 const savedName = ref('')
-const savedStatus = ref<WorkflowStatus>('draft')
 const dirty = ref(false)
 const selectedNodeId = ref<string | null>(null)
 const selectedEdgeId = ref<string | null>(null)
@@ -54,6 +64,20 @@ const selectedEdge = computed(
   () => edges.value.find((edge) => edge.id === selectedEdgeId.value) ?? null,
 )
 const hasSelection = computed(() => selectedNode.value !== null || selectedEdge.value !== null)
+const runBlockers = computed(() => {
+  const reasons = [...graphErrors.value]
+  if (configDirty.value) reasons.push('节点配置尚未应用，请先点击“应用配置”。')
+  if (!nodes.value.length) reasons.push('请先添加一个 AI 节点。')
+  for (const node of nodes.value) {
+    if (!EXECUTABLE_NODE_TYPES.has(node.data.nodeType)) reasons.push(`“${node.data.name}”暂不支持 AI 执行，请移除或更换节点类型。`)
+    if (['code_explanation', 'answer_review'].includes(node.data.nodeType) &&
+        (typeof node.data.config?.student_code !== 'string' || !node.data.config.student_code.trim())) {
+      reasons.push(`请在“${node.data.name}”的配置中填写代码。`)
+    }
+  }
+  if (edges.value.some(edge => edge.data.conditionData && Object.keys(edge.data.conditionData).length)) reasons.push('当前执行引擎暂不支持条件连线。')
+  return reasons
+})
 
 function applyGraph(): void {
   const graph = workflowStore.currentGraph
@@ -64,7 +88,6 @@ function applyGraph(): void {
   workflowName.value = graph.workflow.name
   workflowStatus.value = graph.workflow.status
   savedName.value = graph.workflow.name
-  savedStatus.value = graph.workflow.status
   selectedNodeId.value = null
   selectedEdgeId.value = null
   dirty.value = false
@@ -74,6 +97,7 @@ async function load(): Promise<void> {
   if (!Number.isInteger(workflowId) || workflowId < 1) return
   await workflowStore.fetchGraph(workflowId)
   applyGraph()
+  await refreshRuns(1)
 }
 
 function markDirty(): void {
@@ -81,6 +105,7 @@ function markDirty(): void {
 }
 
 function addNode(template: WorkflowNodeTemplate): void {
+  if (locked.value || !canChangeSelection()) return
   if (nodes.value.length >= 100) {
     ElMessage.warning('节点数量不能超过 100 个')
     return
@@ -93,6 +118,7 @@ function addNode(template: WorkflowNodeTemplate): void {
 }
 
 function connect(connection: Connection): void {
+  if (locked.value || !canChangeSelection()) return
   const candidate = createCanvasEdge(connection.source, connection.target)
   const nextEdges = [...edges.value, candidate]
   const errors = validateWorkflowGraph(nodes.value, nextEdges)
@@ -106,22 +132,32 @@ function connect(connection: Connection): void {
   markDirty()
 }
 
+function canChangeSelection(): boolean {
+  if (!configDirty.value) return true
+  ElMessage.warning('请先应用当前节点的配置，再切换选择。')
+  return false
+}
+
 function selectNode(nodeId: string): void {
+  if (nodeId !== selectedNodeId.value && !canChangeSelection()) return
   selectedNodeId.value = nodeId
   selectedEdgeId.value = null
 }
 
 function selectEdge(edgeId: string): void {
+  if (!canChangeSelection()) return
   selectedEdgeId.value = edgeId
   selectedNodeId.value = null
 }
 
 function clearSelection(): void {
+  if (!canChangeSelection()) return
   selectedNodeId.value = null
   selectedEdgeId.value = null
 }
 
 function moveNode(nodeId: string, x: number, y: number): void {
+  if (locked.value) return
   nodes.value = nodes.value.map((node) => (
     node.id === nodeId ? { ...node, position: { x, y } } : node
   ))
@@ -129,6 +165,7 @@ function moveNode(nodeId: string, x: number, y: number): void {
 }
 
 function updateNode(nodeId: string, data: WorkflowCanvasNodeData): void {
+  if (locked.value) return
   nodes.value = nodes.value.map((node) => (
     node.id === nodeId ? { ...node, ariaLabel: data.name, data } : node
   ))
@@ -136,6 +173,8 @@ function updateNode(nodeId: string, data: WorkflowCanvasNodeData): void {
 }
 
 function deleteNode(nodeId: string): void {
+  if (locked.value) return
+  configDirty.value = false
   nodes.value = nodes.value.filter((node) => node.id !== nodeId)
   edges.value = edges.value.filter((edge) => edge.source !== nodeId && edge.target !== nodeId)
   clearSelection()
@@ -143,6 +182,7 @@ function deleteNode(nodeId: string): void {
 }
 
 function deleteEdge(edgeId: string): void {
+  if (locked.value) return
   edges.value = edges.value.filter((edge) => edge.id !== edgeId)
   clearSelection()
   markDirty()
@@ -158,16 +198,15 @@ function updateName(name: string): void {
   markDirty()
 }
 
-function updateStatus(status: WorkflowStatus): void {
-  workflowStatus.value = status
-  markDirty()
-}
-
-async function save(): Promise<void> {
-  if (!workflowStore.currentGraph) return
+async function save(): Promise<boolean> {
+  if (!workflowStore.currentGraph || running.value || workflowStore.saving) return false
+  if (configDirty.value) {
+    ElMessage.warning('请先应用当前节点的配置，再保存工作流。')
+    return false
+  }
   if (graphErrors.value.length > 0) {
     ElMessage.warning(graphErrors.value[0])
-    return
+    return false
   }
   try {
     const version = workflowStore.currentGraph.workflow.version
@@ -175,26 +214,48 @@ async function save(): Promise<void> {
       workflowId,
       toGraphUpdateInput(version, nodes.value, edges.value),
     )
-    if (workflowName.value.trim() !== savedName.value || workflowStatus.value !== savedStatus.value) {
+    if (workflowName.value.trim() !== savedName.value) {
       await workflowStore.updateWorkflow(workflowId, {
         name: workflowName.value.trim(),
-        status: workflowStatus.value,
       })
     }
     applyGraph()
     ElMessage.success('工作流已保存')
+    return true
   } catch (error: unknown) {
     ElMessage.error(getApiErrorMessage(error, '工作流保存失败'))
+    return false
   }
 }
 
+async function run(): Promise<void> {
+  if (locked.value || runsLoading.value || runBlockers.value.length || !workflowStore.currentGraph) return
+  preparing.value = true
+  try {
+    if (dirty.value && !(await save())) return
+    const workflow = workflowStore.currentGraph.workflow
+    await startRun(workflow.project.id, workflow.version, runMode.value)
+  } finally {
+    preparing.value = false
+  }
+}
+
+watch(running, async (value, previous) => {
+  if (previous && !value && !dirty.value && !configDirty.value) {
+    try {
+      await workflowStore.fetchGraph(workflowId)
+      if (mounted) applyGraph()
+    } catch { /* 加载错误由 Store 的图错误面板展示。 */ }
+  }
+})
+
 function beforeUnload(event: BeforeUnloadEvent): void {
-  if (!dirty.value) return
+  if (!dirty.value && !configDirty.value) return
   event.preventDefault()
 }
 
 onBeforeRouteLeave(() => {
-  if (!dirty.value) return true
+  if (!dirty.value && !configDirty.value) return true
   return window.confirm('工作流还有未保存修改，确定离开吗？')
 })
 
@@ -204,6 +265,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  mounted = false
   window.removeEventListener('beforeunload', beforeUnload)
   workflowStore.clearCurrentGraph()
 })
@@ -224,19 +286,22 @@ onUnmounted(() => {
         :name="workflowName"
         :status="workflowStatus"
         :version="workflowStore.currentGraph.workflow.version"
-        :dirty="dirty"
+        :dirty="dirty || configDirty"
         :saving="workflowStore.saving"
+        :running="locked"
+        :run-disabled="runBlockers.length > 0 || runsLoading"
         :has-selection="hasSelection"
         @update:name="updateName"
-        @update:status="updateStatus"
+        @run="run"
         @save="save"
         @delete-selection="deleteSelection"
       />
       <div class="workflow-editor-grid">
-        <WorkflowNodeLibrary :disabled="workflowStore.saving" @add="addNode" />
+        <WorkflowNodeLibrary :disabled="locked" @add="addNode" />
         <WorkflowCanvas
           :nodes="nodes"
           :edges="edges"
+          :disabled="locked || configDirty"
           @update:nodes="nodes = $event"
           @update:edges="edges = $event"
           @connect="connect"
@@ -246,7 +311,7 @@ onUnmounted(() => {
           @node-moved="moveNode"
         />
         <aside class="workflow-inspector">
-          <WorkflowNodeConfigPanel :node="selectedNode" @update="updateNode" @delete="deleteNode" />
+          <WorkflowNodeConfigPanel :node="selectedNode" :disabled="locked" @pending-change="configDirty = $event" @update="updateNode" @delete="deleteNode" />
           <WorkflowResultPanel
             :nodes="nodes"
             :edges="edges"
@@ -256,6 +321,9 @@ onUnmounted(() => {
           />
         </aside>
       </div>
+      <WorkflowExecutionPanel :runs="runs" :selected="selected" :loading="runsLoading" :busy="locked"
+        :error="runError" :blockers="runBlockers" :mode="runMode" :page="runPage" :total-pages="runTotalPages"
+        @refresh="refreshRuns" @select="selectedId = $event" @update:mode="runMode = $event" />
     </template>
   </section>
 </template>
