@@ -79,7 +79,7 @@ class LearningRecordData:
     title: str
     content: str | None
     record_type: RecordType
-    duration_minutes: int
+    duration_minutes: int | None
     occurred_at: datetime
     project: WorkspaceProjectRefData | None
     created_at: datetime
@@ -365,8 +365,6 @@ class WorkspaceService:
 
     @staticmethod
     def _to_record_data(record: LearningRecord) -> LearningRecordData:
-        if record.duration_minutes is None:
-            raise RuntimeError("工作台学习记录缺少时长")
         return LearningRecordData(
             id=record.id,
             title=record.title,

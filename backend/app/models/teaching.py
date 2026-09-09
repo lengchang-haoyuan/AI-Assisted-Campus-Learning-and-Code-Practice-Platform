@@ -68,6 +68,7 @@ class TeachingClass(IdMixin, TimestampMixin, Base):
 class ClassMembership(IdMixin, TimestampMixin, Base):
     __tablename__ = "class_memberships"
     __table_args__ = (
+        UniqueConstraint("id", "class_id", name="uq_class_member_class"),
         UniqueConstraint(
             "class_id",
             "campus_membership_id",
@@ -127,6 +128,7 @@ class ClassMembership(IdMixin, TimestampMixin, Base):
 class TeachingAssignment(IdMixin, TimestampMixin, Base):
     __tablename__ = "teaching_assignments"
     __table_args__ = (
+        UniqueConstraint("id", "class_id", name="uq_assignment_class"),
         Index(
             "ix_teaching_assignments_class_status_due",
             "class_id",

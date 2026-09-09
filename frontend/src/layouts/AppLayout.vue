@@ -51,6 +51,8 @@ function logout(): void {
         <RouterLink to="/workflows">工作流</RouterLink>
         <RouterLink to="/analytics">数据</RouterLink>
         <RouterLink v-if="hasCampusMembership" to="/campus/classes">教学班</RouterLink>
+        <RouterLink v-if="hasCampusMembership && !isCampusAdmin" to="/campus/submissions">成果</RouterLink>
+        <RouterLink v-if="hasCampusMembership" to="/notifications">通知</RouterLink>
         <RouterLink v-if="isCampusAdmin" to="/campus/admin/accounts">校园管理</RouterLink>
       </nav>
 

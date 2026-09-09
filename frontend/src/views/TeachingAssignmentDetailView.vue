@@ -3,7 +3,10 @@ import { computed, onMounted, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useRoute } from 'vue-router'
 
+import { getCampusMe } from '@/api/campus'
 import { getApiErrorMessage } from '@/api/errors'
+import { listProjects } from '@/api/projects'
+import { listAssignmentSubmissions, submitAssignment } from '@/api/submissions'
 import {
   archiveTeachingAssignment,
   closeTeachingAssignment,
@@ -12,6 +15,8 @@ import {
   updateTeachingAssignment,
 } from '@/api/teaching'
 import type { TeachingAssignmentResponse } from '@/types/teaching'
+import type { ProjectResponse } from '@/types/project'
+import type { SubmissionResponse } from '@/types/submission'
 
 const route = useRoute()
 const assignmentId = Number(route.params.assignmentId)
@@ -25,8 +30,22 @@ const instructions = ref('')
 const objectives = ref('')
 const criteria = ref('')
 const dueAt = ref('')
+const campusRole = ref<'student' | 'teacher' | 'administrator' | null>(null)
+const submissions = ref<SubmissionResponse[]>([])
+const projects = ref<ProjectResponse[]>([])
+const submissionSummary = ref('')
+const repositoryUrl = ref('')
+const repositoryRef = ref('')
+const sourceProjectId = ref<number | null>(null)
+const requestKey = ref(crypto.randomUUID().replaceAll('-', ''))
 
 const isDraft = computed(() => assignment.value?.status === 'draft')
+const ownSubmission = computed(() => submissions.value.find((item) => item.is_owner) ?? null)
+const canSubmit = computed(() => {
+  if (campusRole.value !== 'student' || assignment.value?.status !== 'published') return false
+  if (!assignment.value.due_at || Date.now() >= new Date(assignment.value.due_at).getTime()) return false
+  return !ownSubmission.value || ownSubmission.value.can_submit_next
+})
 
 function formatDate(value: string | null): string {
   if (!value) return '未设置'
@@ -52,12 +71,41 @@ async function loadAssignment(): Promise<void> {
   loading.value = true
   errorMessage.value = null
   try {
-    const value = await getTeachingAssignment(assignmentId)
+    const [value, campus] = await Promise.all([getTeachingAssignment(assignmentId), getCampusMe()])
     assignment.value = value
+    campusRole.value = campus.membership?.role ?? null
     fillForm(value)
+    submissions.value = (await listAssignmentSubmissions(assignmentId)).items
+    if (campusRole.value === 'student') {
+      projects.value = (await listProjects({ page: 1, pageSize: 100 })).items
+    }
   } catch (error: unknown) {
     errorMessage.value = getApiErrorMessage(error, '任务详情加载失败')
   } finally { loading.value = false }
+}
+
+async function submitWork(): Promise<void> {
+  if (!assignment.value || !canSubmit.value || saving.value) return
+  saving.value = true
+  try {
+    await submitAssignment(assignmentId, {
+      request_key: requestKey.value,
+      expected_latest_version: ownSubmission.value?.latest_version_number ?? 0,
+      summary: submissionSummary.value.trim(),
+      repository_url: repositoryUrl.value.trim() || null,
+      repository_ref: repositoryRef.value.trim() || null,
+      source_project_id: sourceProjectId.value,
+    })
+    submissions.value = (await listAssignmentSubmissions(assignmentId)).items
+    submissionSummary.value = ''
+    repositoryUrl.value = ''
+    repositoryRef.value = ''
+    sourceProjectId.value = null
+    requestKey.value = crypto.randomUUID().replaceAll('-', '')
+    ElMessage.success(ownSubmission.value?.latest_version_number === 1 ? '成果已提交' : '新版本已提交')
+  } catch (error: unknown) {
+    ElMessage.error(getApiErrorMessage(error, '成果提交失败'))
+  } finally { saving.value = false }
 }
 
 function lines(value: string): string[] {
@@ -140,6 +188,37 @@ onMounted(() => void loadAssignment())
           <span>项目模板快照</span><h2>{{ assignment.source_project_snapshot.name }}</h2><p>{{ assignment.source_project_snapshot.description || '未填写项目说明。' }}</p><small>快照采集于 {{ formatDate(String(assignment.source_project_snapshot.captured_at)) }}；源项目后续修改不会改变本任务。</small>
         </section>
       </div>
+
+      <section v-if="campusRole === 'student'" class="teaching-panel submission-panel">
+        <div class="teaching-panel__heading">
+          <div><span>我的成果</span><h2>{{ ownSubmission ? `当前为 V${ownSubmission.latest_version_number}` : '提交第一版成果' }}</h2></div>
+          <RouterLink v-if="ownSubmission" class="secondary-command" :to="`/campus/submissions/${ownSubmission.id}`">查看版本与反馈</RouterLink>
+        </div>
+        <div v-if="ownSubmission" class="submission-current">
+          <span class="status-chip">{{ { submitted: '待教师评阅', returned: '已退回修改', accepted: '已通过' }[ownSubmission.latest_version.status] }}</span>
+          <p>{{ ownSubmission.latest_version.summary }}</p>
+          <small v-if="ownSubmission.latest_version.feedback">教师意见：{{ ownSubmission.latest_version.feedback.comment }}</small>
+        </div>
+        <form v-if="canSubmit" class="form-grid submission-form" @submit.prevent="submitWork">
+          <label class="field field-span-2"><span>成果说明</span><textarea v-model="submissionSummary" required minlength="1" maxlength="8000" placeholder="说明完成内容、运行方法和已知问题" /></label>
+          <label class="field"><span>仓库链接（可选）</span><input v-model.trim="repositoryUrl" type="url" maxlength="1024" placeholder="https://github.com/user/repository" /></label>
+          <label class="field"><span>代码版本（可选）</span><input v-model.trim="repositoryRef" maxlength="100" placeholder="main、标签或提交标识" /></label>
+          <label class="field field-span-2"><span>关联本人项目（可选）</span><select v-model="sourceProjectId"><option :value="null">不关联</option><option v-for="project in projects" :key="project.id" :value="project.id">{{ project.name }}</option></select></label>
+          <div class="form-actions field-span-2"><button class="primary-command" type="submit" :disabled="saving">{{ saving ? '正在提交' : ownSubmission ? '提交新版本' : '提交成果' }}</button></div>
+        </form>
+        <div v-else-if="!ownSubmission" class="teaching-note">任务尚未发布、已截止或当前不可提交。</div>
+      </section>
+
+      <section v-else-if="campusRole === 'teacher'" class="teaching-panel submission-panel">
+        <div class="teaching-panel__heading"><div><span>学生成果</span><h2>提交与待评阅</h2></div><RouterLink class="secondary-command" to="/campus/submissions">打开待处理列表</RouterLink></div>
+        <div v-if="submissions.length" class="submission-list">
+          <RouterLink v-for="item in submissions" :key="item.id" :to="`/campus/submissions/${item.id}`">
+            <div><strong>{{ item.student_username }} · V{{ item.latest_version_number }}</strong><p>{{ item.latest_version.summary }}</p></div>
+            <span class="status-chip">{{ { submitted: '待评阅', returned: '已退回', accepted: '已通过' }[item.latest_version.status] }}</span>
+          </RouterLink>
+        </div>
+        <div v-else class="teaching-note">还没有学生提交成果。</div>
+      </section>
     </article>
   </div>
 </template>

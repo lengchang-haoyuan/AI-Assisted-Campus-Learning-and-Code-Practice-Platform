@@ -12,6 +12,7 @@ from app.api.v1.learning_reports import router as learning_reports_router
 from app.api.v1.projects import router as projects_router
 from app.api.v1.project_context import router as project_context_router
 from app.api.v1.statistics import router as statistics_router
+from app.api.v1.submissions import router as submissions_router
 from app.api.v1.teaching import router as teaching_router
 from app.api.v1.users import router as users_router
 from app.api.v1.workflows import router as workflows_router
@@ -22,6 +23,7 @@ api_router.include_router(health_router)
 api_router.include_router(auth_router)
 api_router.include_router(campus_router)
 api_router.include_router(teaching_router)
+api_router.include_router(submissions_router)
 api_router.include_router(users_router)
 api_router.include_router(projects_router)
 api_router.include_router(project_context_router)

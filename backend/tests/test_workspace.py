@@ -16,7 +16,7 @@ from app.models.enums import (
     TaskPriority,
     TaskStatus,
 )
-from app.models.learning import DailyTask
+from app.models.learning import DailyTask, LearningRecord
 from app.models.project import Project
 from app.repositories.workspace import (
     TaskStatsRecord,
@@ -162,6 +162,25 @@ class WorkspaceServiceTests(unittest.TestCase):
 
         self.assertEqual(result.status, TaskStatus.COMPLETED)
         self.repository.update_task.assert_not_called()
+
+    def test_workspace_lists_system_record_without_fabricated_duration(self) -> None:
+        record = LearningRecord(
+            id=5,
+            user_id=1,
+            title="教学任务通过：字符串练习",
+            content="教学提交已由教师确认通过。",
+            record_type=RecordType.TASK,
+            duration_minutes=None,
+            occurred_at=NOW,
+            created_at=NOW,
+        )
+        record.project = None
+        self.repository.count_records.return_value = 1
+        self.repository.list_records.return_value = [record]
+
+        result = self.service.list_records(1, page=1, page_size=20)
+
+        self.assertIsNone(result.items[0].duration_minutes)
 
     def test_dashboard_uses_user_date_and_utc_day_bounds(self) -> None:
         self.repository.get_task_stats.return_value = TaskStatsRecord(4, 3, 150)

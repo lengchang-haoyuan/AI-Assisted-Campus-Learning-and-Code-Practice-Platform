@@ -1,14 +1,17 @@
 from collections.abc import Iterator
 from contextlib import contextmanager
+from datetime import datetime
 
 from sqlalchemy import case, func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.core.exceptions import ConflictError
-from app.models.campus import CampusMembership, CampusRole
+from app.models.campus import CampusMembership, CampusRole, MembershipStatus
 from app.models.project import Project
+from app.models.submission import Notification
 from app.models.teaching import (
+    ClassMemberRole,
     ClassMembership,
     ClassMembershipStatus,
     TeachingAssignment,
@@ -221,3 +224,42 @@ class TeachingRepository:
                 Project.owner_id == owner_id,
             )
         )
+
+    def active_student_users(self, class_id: int) -> list[User]:
+        values = list(
+            self._session.scalars(
+                select(User)
+                .join(CampusMembership, CampusMembership.user_id == User.id)
+                .join(
+                    ClassMembership,
+                    ClassMembership.campus_membership_id == CampusMembership.id,
+                )
+                .where(
+                    ClassMembership.class_id == class_id,
+                    ClassMembership.member_role == ClassMemberRole.STUDENT,
+                    ClassMembership.status == ClassMembershipStatus.ACTIVE,
+                    CampusMembership.status == MembershipStatus.ACTIVE,
+                    User.is_active.is_(True),
+                )
+                .order_by(User.id.asc())
+                .limit(1001)
+            )
+        )
+        if len(values) > 1000:
+            raise ConflictError("班级有效学生超过单次发布通知上限")
+        return values
+
+    def add_assignment_notifications(
+        self, assignment_id: int, class_id: int, created_at: datetime
+    ) -> None:
+        for user in self.active_student_users(class_id):
+            self._session.add(
+                Notification(
+                    recipient_user_id=user.id,
+                    event_key=f"assignment_published:{assignment_id}",
+                    kind="assignment_published",
+                    assignment_id=assignment_id,
+                    created_at=created_at,
+                )
+            )
+        self._session.flush()

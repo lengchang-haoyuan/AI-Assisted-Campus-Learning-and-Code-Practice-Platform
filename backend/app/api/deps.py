@@ -25,6 +25,7 @@ from app.core.exceptions import AuthenticationRequiredError
 from app.core.security import InvalidAccessTokenError, SecurityService, TokenIdentity
 from app.repositories.project import ProjectRepository
 from app.repositories.statistics import StatisticsRepository
+from app.repositories.submission import SubmissionRepository
 from app.repositories.teaching import TeachingRepository
 from app.repositories.agent import AgentRepository
 from app.repositories.project_context import ProjectContextRepository
@@ -39,6 +40,7 @@ from app.repositories.workflow_execution import WorkflowExecutionRepository
 from app.repositories.workspace import WorkspaceRepository
 from app.services.auth import AuthService, UserIdentity
 from app.services.campus import CampusService
+from app.services.submission import SubmissionService
 from app.services.rate_limit import SensitiveActionLimiter, get_sensitive_action_limiter
 from app.services.slider_captcha import SliderCaptchaService, get_slider_captcha_service
 from app.services.ai import AIService
@@ -151,6 +153,15 @@ def get_teaching_service(session: DatabaseSession) -> TeachingService:
 
 TeachingServiceDependency = Annotated[
     TeachingService, Depends(get_teaching_service)
+]
+
+
+def get_submission_service(session: DatabaseSession) -> SubmissionService:
+    return SubmissionService(SubmissionRepository(session))
+
+
+SubmissionServiceDependency = Annotated[
+    SubmissionService, Depends(get_submission_service)
 ]
 
 

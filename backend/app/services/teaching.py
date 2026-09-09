@@ -585,14 +585,17 @@ class TeachingService:
         expected_revision: int,
         values: Mapping[str, object],
     ) -> TeachingAssignmentData:
+        discovered = self._repository.assignment(assignment_id)
+        if discovered is None:
+            raise ResourceNotFoundError("教学任务不存在")
         with self._repository.transaction():
             actor = self._actor(current_user)
-            value = self._repository.assignment(assignment_id, for_update=True)
-            if value is None:
-                raise ResourceNotFoundError("教学任务不存在")
             teaching_class, member = self._scoped_class(
-                value.class_id, actor, for_update=True, allow_admin=False
+                discovered.class_id, actor, for_update=True, allow_admin=False
             )
+            value = self._repository.assignment(assignment_id, for_update=True)
+            if value is None or value.class_id != teaching_class.id:
+                raise ResourceNotFoundError("教学任务不存在")
             if not self._teacher_can_manage(actor, member, teaching_class):
                 raise PermissionDeniedError("只有本班有效教师可以修改任务")
             self._assert_revision(value.revision, expected_revision)
@@ -640,14 +643,17 @@ class TeachingService:
             TeachingAssignmentStatus.CLOSED: TeachingAssignmentStatus.PUBLISHED,
             TeachingAssignmentStatus.ARCHIVED: TeachingAssignmentStatus.CLOSED,
         }
+        discovered = self._repository.assignment(assignment_id)
+        if discovered is None:
+            raise ResourceNotFoundError("教学任务不存在")
         with self._repository.transaction():
             actor = self._actor(current_user)
-            value = self._repository.assignment(assignment_id, for_update=True)
-            if value is None:
-                raise ResourceNotFoundError("教学任务不存在")
             teaching_class, member = self._scoped_class(
-                value.class_id, actor, for_update=True, allow_admin=False
+                discovered.class_id, actor, for_update=True, allow_admin=False
             )
+            value = self._repository.assignment(assignment_id, for_update=True)
+            if value is None or value.class_id != teaching_class.id:
+                raise ResourceNotFoundError("教学任务不存在")
             if not self._teacher_can_manage(actor, member, teaching_class):
                 raise PermissionDeniedError("只有本班有效教师可以变更任务状态")
             self._assert_revision(value.revision, expected_revision)
@@ -657,6 +663,9 @@ class TeachingService:
             if target_status == TeachingAssignmentStatus.PUBLISHED:
                 self._validate_future_due(value.due_at, required=True)
                 value.published_at = now
+                self._repository.add_assignment_notifications(
+                    value.id, value.class_id, now
+                )
             elif target_status == TeachingAssignmentStatus.CLOSED:
                 value.closed_at = now
             elif target_status == TeachingAssignmentStatus.ARCHIVED:

@@ -1643,6 +1643,45 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
 .assignment-detail__grid ol { margin: 16px 0 0; padding-left: 22px; color: #34434d; line-height: 1.8; }
 .assignment-snapshot h2 { margin: 10px 0 8px; }
 .assignment-snapshot p { color: var(--muted); line-height: 1.75; }
+.submission-panel { margin-top: 18px; }
+.submission-current { margin-bottom: 20px; padding: 16px; background: #f7faf9; border: 1px solid var(--line); border-radius: 6px; }
+.submission-current p { margin: 12px 0 7px; line-height: 1.7; white-space: pre-wrap; }
+.submission-current small { color: var(--muted); }
+.submission-form textarea { min-height: 150px; }
+.submission-list { display: grid; border-top: 1px solid var(--line); }
+.submission-list > a { padding: 16px 2px; display: flex; align-items: center; justify-content: space-between; gap: 18px; border-bottom: 1px dashed var(--line); }
+.submission-list p { max-width: 720px; margin: 7px 0 0; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.submission-filter { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-weight: 700; }
+.pending-assignment-panel { margin-bottom: 20px; }
+.pending-assignment-empty { margin-bottom: 20px; }
+.submission-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.submission-card { min-height: 210px; display: flex; flex-direction: column; }
+.submission-card h2 { margin: 24px 0 10px; font-size: 24px; }
+.submission-card > p { color: var(--muted); line-height: 1.65; }
+.submission-card footer { margin-top: auto; display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 13px; }
+.submission-card footer strong { color: var(--blue); }
+.feedback-form { margin-bottom: 18px; border-top: 3px solid var(--blue); }
+.submission-history { margin-top: 22px; }
+.submission-history > .teaching-panel__heading { margin-bottom: 0; }
+.submission-version { margin-top: 16px; }
+.submission-version > header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.submission-version > header > div { display: flex; align-items: center; gap: 12px; }
+.submission-version > header small { color: var(--muted); }
+.submission-version > p { margin: 18px 0; line-height: 1.8; white-space: pre-wrap; }
+.submission-version dl { display: grid; gap: 9px; }
+.submission-version dl div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 12px; }
+.submission-version dt { color: var(--muted); }
+.submission-version dd { margin: 0; overflow-wrap: anywhere; }
+.submission-version dd a { color: var(--blue); text-decoration: underline; }
+.feedback-result { margin-top: 18px; padding: 16px; background: var(--blue-soft); border-left: 3px solid var(--blue); }
+.feedback-result p { margin: 8px 0; line-height: 1.7; white-space: pre-wrap; }
+.feedback-result small { color: var(--muted); }
+.notification-list { display: grid; gap: 12px; }
+.notification-item { display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: none; }
+.notification-item.is-unread { border-left: 4px solid var(--blue); }
+.notification-item h2 { margin: 10px 0 6px; font-size: 20px; }
+.notification-item p { margin: 0; color: var(--muted); font-size: 13px; }
+.notification-item > strong { min-width: max-content; color: var(--blue); }
 
 @media (max-width: 760px) {
   .teaching-header,
@@ -1650,7 +1689,8 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
   .teaching-detail-hero,
   .assignment-detail__header { align-items: flex-start; flex-direction: column; }
   .teaching-grid,
-  .assignment-detail__grid { grid-template-columns: 1fr; }
+  .assignment-detail__grid,
+  .submission-card-grid { grid-template-columns: 1fr; }
   .teaching-member-form { grid-template-columns: 1fr; }
   .teaching-member-list article { grid-template-columns: minmax(0, 1fr) auto; }
   .teaching-member-list .text-command { grid-column: 1 / -1; justify-self: start; }
@@ -1658,6 +1698,10 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
   .assignment-detail__header .form-actions { width: 100%; }
   .teaching-detail-hero .form-actions > *,
   .assignment-detail__header .form-actions > * { flex: 1; }
+  .submission-list > a,
+  .notification-item,
+  .submission-version > header { align-items: flex-start; flex-direction: column; }
+  .submission-version dl div { grid-template-columns: 1fr; gap: 3px; }
 }
 
 @media (max-width: 480px) {

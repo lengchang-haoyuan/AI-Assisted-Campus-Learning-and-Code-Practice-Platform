@@ -54,7 +54,7 @@ export interface LearningRecordResponse {
   title: string
   content: string | null
   record_type: RecordType
-  duration_minutes: number
+  duration_minutes: number | null
   occurred_at: string
   project: WorkspaceProjectRef | null
   created_at: string

@@ -139,7 +139,7 @@ onMounted(() => {
             <li v-for="record in workspaceStore.dashboard.recent_records" :key="record.id">
               <time :datetime="record.occurred_at">{{ formatWorkspaceDate(record.occurred_at) }}</time>
               <div><strong>{{ record.title }}</strong><small>{{ record.project?.name || '个人学习' }}</small></div>
-              <span>{{ record.duration_minutes }} 分钟</span>
+              <span>{{ record.duration_minutes === null ? '未记录时长' : `${record.duration_minutes} 分钟` }}</span>
             </li>
           </ol>
           <div v-else class="workspace-empty"><strong>还没有学习记录</strong><RouterLink to="/workspace/records">保存第一条记录</RouterLink></div>

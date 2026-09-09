@@ -69,7 +69,7 @@ onMounted(() => {
         <article>
           <div class="panel-title-row"><h2>{{ record.title }}</h2><span class="status-chip">{{ recordTypeLabels[record.record_type] }}</span></div>
           <p v-if="record.content">{{ record.content }}</p>
-          <footer><span>{{ record.project?.name || '个人学习' }}</span><strong>{{ record.duration_minutes }} 分钟</strong></footer>
+          <footer><span>{{ record.project?.name || '个人学习' }}</span><strong>{{ record.duration_minutes === null ? '未记录时长' : `${record.duration_minutes} 分钟` }}</strong></footer>
         </article>
       </li>
     </ol>

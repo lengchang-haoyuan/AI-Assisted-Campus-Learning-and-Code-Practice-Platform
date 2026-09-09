@@ -97,9 +97,9 @@ onMounted(() => {
         <div class="workspace-record-timeline__marker" aria-hidden="true" />
         <time :datetime="record.occurred_at">{{ formatWorkspaceDate(record.occurred_at) }}</time>
         <article>
-          <div class="panel-title-row"><div><span class="status-chip">{{ recordTypeLabels[record.record_type] }}</span><h2>{{ record.title }}</h2></div><strong>{{ record.duration_minutes }} 分钟</strong></div>
+          <div class="panel-title-row"><div><span class="status-chip">{{ recordTypeLabels[record.record_type] }}</span><h2>{{ record.title }}</h2></div><strong>{{ record.duration_minutes === null ? '未记录时长' : `${record.duration_minutes} 分钟` }}</strong></div>
           <p v-if="record.content">{{ record.content }}</p>
-          <footer><span>{{ record.course?.name || record.project?.name || record.task?.name || '个人学习' }}</span><div class="learning-row-actions"><button class="text-command" type="button" @click="openEditor(record)">编辑</button><button class="text-command danger-text-command" type="button" :disabled="learningStore.actionKey === `record:${record.id}`" @click="removeRecord(record)">删除</button></div></footer>
+          <footer><span>{{ record.record_metadata?.source === 'teaching_submission' ? '教学评阅事件' : record.course?.name || record.project?.name || record.task?.name || '个人学习' }}</span><div class="learning-row-actions"><button v-if="record.record_metadata?.source !== 'teaching_submission'" class="text-command" type="button" @click="openEditor(record)">编辑</button><button class="text-command danger-text-command" type="button" :disabled="learningStore.actionKey === `record:${record.id}`" @click="removeRecord(record)">删除</button></div></footer>
         </article>
       </li>
     </ol>

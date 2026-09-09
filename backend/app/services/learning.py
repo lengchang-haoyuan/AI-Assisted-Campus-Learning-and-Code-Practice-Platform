@@ -157,7 +157,7 @@ class RecordData:
     title: str
     content: str | None
     record_type: RecordType
-    duration_minutes: int
+    duration_minutes: int | None
     occurred_at: datetime
     project: ResourceRefData | None
     course: ResourceRefData | None
@@ -370,6 +370,8 @@ class LearningService:
         self, record_id: int, user_id: int, data: RecordUpdateData
     ) -> RecordData:
         record = self._get_owned_record(record_id, user_id)
+        if (record.record_metadata or {}).get("source") == "teaching_submission":
+            raise ConflictError("教学通过记录由评阅结果生成，不能手工修改")
         changes = data.changes
         project_id, course_id, task_id = self._resolve_record_relations(
             changes.get("project_id", record.project_id),
@@ -563,8 +565,6 @@ class LearningService:
 
     @staticmethod
     def _to_record_data(record: LearningRecord) -> RecordData:
-        if record.duration_minutes is None:
-            raise RuntimeError("学习记录缺少时长")
         return RecordData(
             id=record.id,
             title=record.title,

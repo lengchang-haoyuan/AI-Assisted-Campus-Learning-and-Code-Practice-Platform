@@ -135,6 +135,21 @@ const router = createRouter({
           component: () => import('@/views/TeachingAssignmentDetailView.vue'),
         },
         {
+          path: 'campus/submissions',
+          name: 'campus-submissions',
+          component: () => import('@/views/SubmissionsView.vue'),
+        },
+        {
+          path: 'campus/submissions/:submissionId',
+          name: 'campus-submission-detail',
+          component: () => import('@/views/SubmissionDetailView.vue'),
+        },
+        {
+          path: 'notifications',
+          name: 'notifications',
+          component: () => import('@/views/NotificationsView.vue'),
+        },
+        {
           path: 'campus/admin/accounts',
           name: 'campus-admin',
           component: () => import('@/views/CampusAdminView.vue'),

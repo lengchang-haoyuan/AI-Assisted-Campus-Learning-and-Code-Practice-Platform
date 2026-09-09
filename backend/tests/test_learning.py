@@ -32,6 +32,7 @@ from app.services.learning import (
     RecordCreateData,
     RecordData,
     RecordPage,
+    RecordUpdateData,
     ResourceRefData,
     TaskCreateData,
     TaskData,
@@ -275,6 +276,27 @@ class LearningServiceTests(unittest.TestCase):
                     record_metadata=None,
                 ),
             )
+
+    def test_teaching_pass_record_cannot_be_edited_manually(self) -> None:
+        record = make_record()
+        record.record_metadata = {
+            "source": "teaching_submission",
+            "submission_id": 23,
+        }
+        self.repository.get_record.return_value = record
+
+        with self.assertRaises(ConflictError):
+            self.service.update_record(
+                17,
+                1,
+                RecordUpdateData({"title": "手工伪造通过记录"}),
+            )
+
+        self.repository.save_record.assert_not_called()
+
+        record.duration_minutes = None
+        result = self.service.get_record(17, 1)
+        self.assertIsNone(result.duration_minutes)
 
 
 class LearningAPITests(unittest.TestCase):

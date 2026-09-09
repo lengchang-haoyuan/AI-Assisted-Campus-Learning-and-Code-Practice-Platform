@@ -77,7 +77,7 @@ watch(projectId, () => { void loadProject() }, { immediate: true })
             <li v-for="record in workspaceStore.projectDetail.recent_records" :key="record.id">
               <time :datetime="record.occurred_at">{{ formatWorkspaceDate(record.occurred_at) }}</time>
               <div><strong>{{ record.title }}</strong><small>{{ recordTypeLabels[record.record_type] }}</small></div>
-              <span>{{ record.duration_minutes }} 分钟</span>
+              <span>{{ record.duration_minutes === null ? '未记录时长' : `${record.duration_minutes} 分钟` }}</span>
             </li>
           </ol>
           <div v-else class="workspace-empty"><strong>该项目还没有学习记录</strong><RouterLink to="/workspace/records">保存记录</RouterLink></div>

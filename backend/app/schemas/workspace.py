@@ -116,7 +116,7 @@ class LearningRecordResponse(BaseModel):
     title: str
     content: str | None
     record_type: RecordType
-    duration_minutes: int
+    duration_minutes: int | None
     occurred_at: datetime
     project: WorkspaceProjectRefResponse | None
     created_at: datetime

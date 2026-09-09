@@ -80,6 +80,7 @@ class FakeTeachingRepository:
         self.members: dict[int, ClassMembership] = {}
         self.assignments: dict[int, TeachingAssignment] = {}
         self.projects: dict[int, Project] = {}
+        self.assignment_notifications: list[tuple[int, int]] = []
         self.next_id = 1000
 
     @contextmanager
@@ -181,6 +182,12 @@ class FakeTeachingRepository:
     def owned_project(self, project_id: int, owner_id: int) -> Project | None:
         value = self.projects.get(project_id)
         return value if value is not None and value.owner_id == owner_id else None
+
+    def add_assignment_notifications(
+        self, assignment_id: int, class_id: int, created_at: datetime
+    ) -> None:
+        del created_at
+        self.assignment_notifications.append((assignment_id, class_id))
 
 
 class TeachingServiceTests(unittest.TestCase):
