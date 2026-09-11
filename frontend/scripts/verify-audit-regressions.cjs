@@ -43,6 +43,22 @@ async function main() {
       created_at: now, updated_at: now,
     })
     if (path.endsWith('/campus/me')) return respond({ membership: null })
+    if (path.endsWith('/projects/7/context')) return respond({
+      project_id: 7,
+      version: 1,
+      values: {
+        project_name: '回归测试项目', language: 'Python', framework: null,
+        frontend: null, backend: null, database: null, difficulty: 'beginner',
+        requirements: null, output_requirement: null, architecture: null,
+        features: [], constraints: [], extensions: {},
+      },
+      field_metadata: {},
+      updated_at: now,
+      source: { type: 'project', id: 7, node_key: null },
+      is_stale: false,
+      stale_fields: [],
+      stale_node_ids: [],
+    })
     if (path.endsWith('/workflows/11/runs')) return respond(emptyPage)
     if (path.endsWith('/workflows/11/graph')) {
       if (method === 'PUT') {

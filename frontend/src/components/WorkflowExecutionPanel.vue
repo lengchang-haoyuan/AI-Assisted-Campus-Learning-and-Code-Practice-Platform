@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ElMessage } from 'element-plus'
+
 import { WORKFLOW_NODE_TEMPLATES } from '@/domain/workflow'
 import type { JsonValue, WorkflowRunResponse, WorkflowRunMode } from '@/types/workflow'
 
@@ -46,6 +48,14 @@ function format(value: JsonValue): string {
   if (typeof value === 'object') return Object.entries(value).map(([key, item]) => `${label(key)}：${format(item)}`).join('\n')
   return typeof value === 'string' ? label(value) : String(value)
 }
+async function copyResult(value: JsonValue): Promise<void> {
+  try {
+    await navigator.clipboard.writeText(JSON.stringify(value, null, 2))
+    ElMessage.success('节点结果已复制')
+  } catch {
+    ElMessage.error('复制失败，请选择文本后手动复制')
+  }
+}
 </script>
 
 <template>
@@ -53,7 +63,7 @@ function format(value: JsonValue): string {
     <header class="workflow-execution__heading">
       <div>
         <h2 id="workflow-execution-title">AI 运行与结果</h2>
-        <p>运行时会保存画布、准备关联项目资料，并调用已配置的 AI。成功结果可在刷新后继续查看。</p>
+        <p>运行时会保存画布，读取已确认的项目 Context，并同步调用已配置的 AI。成功结果可在刷新后继续查看。</p>
       </div>
       <label class="field">
         运行范围
@@ -87,7 +97,13 @@ function format(value: JsonValue): string {
         <p v-if="selected.error" role="alert" class="inline-alert is-error">{{ selected.error.message }} {{ errorHints[selected.error.code] || '请检查节点配置，或刷新运行记录后重试。' }}（{{ selected.error.code }}）</p>
         <p v-if="!selected.nodes.length" class="muted-copy">本次运行尚未生成节点结果。</p>
         <article v-for="node in selected.nodes" :key="node.request_id" class="workflow-node-result">
-          <header><h4>{{ nodeName(node.node_type) }}</h4><span>{{ label(node.status) }}</span></header>
+          <header>
+            <h4>{{ nodeName(node.node_type) }}</h4>
+            <div class="workflow-node-result__actions">
+              <span>{{ label(node.status) }}</span>
+              <button v-if="node.result" class="text-command" type="button" @click="copyResult(node.result)">复制结果</button>
+            </div>
+          </header>
           <small>节点 {{ node.node_key }} · {{ node.latency_ms === null ? '耗时待统计' : `${(node.latency_ms / 1000).toFixed(1)} 秒` }} · {{ node.total_tokens === null ? '用量待统计' : `${node.total_tokens} tokens` }}</small>
           <p v-if="node.error" role="alert">{{ node.error.message }} {{ errorHints[node.error.code] || '' }}</p>
           <p v-if="node.node_type === 'answer_review'" class="muted-copy">静态评审建议，代码未执行，不代表自动判题通过。</p>

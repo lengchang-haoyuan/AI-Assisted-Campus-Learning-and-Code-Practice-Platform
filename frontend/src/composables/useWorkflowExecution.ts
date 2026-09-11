@@ -1,6 +1,5 @@
 import { computed, onUnmounted, ref, shallowRef } from 'vue'
 import { listWorkflowRuns, runWorkflow } from '@/api/workflows'
-import { prepareWorkflowContext } from '@/api/workflowContext'
 import { getApiErrorMessage } from '@/api/errors'
 import type { WorkflowRunMode, WorkflowRunResponse } from '@/types/workflow'
 
@@ -41,14 +40,12 @@ export function useWorkflowExecution(workflowId: number) {
     }
   }
 
-  async function start(projectId: number, version: number, mode: WorkflowRunMode): Promise<boolean> {
+  async function start(version: number, mode: WorkflowRunMode): Promise<boolean> {
     if (busy.value || loading.value) return false
     submitting.value = true
     error.value = null
     stopPolling()
     try {
-      await prepareWorkflowContext(projectId)
-      if (disposed) return false
       timer = setTimeout(() => { void refresh(1) }, 1200)
       const result = await runWorkflow(workflowId, version, mode)
       if (disposed) return false

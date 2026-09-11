@@ -33,3 +33,7 @@ export function getApiErrorMessage(
   if (isApiErrorResponse(error.response.data)) return error.response.data.error.message
   return fallback
 }
+
+export function getApiErrorStatus(error: unknown): number | null {
+  return axios.isAxiosError(error) ? (error.response?.status ?? null) : null
+}

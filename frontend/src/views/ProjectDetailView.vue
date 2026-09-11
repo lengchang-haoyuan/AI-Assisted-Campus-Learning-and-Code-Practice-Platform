@@ -157,6 +157,9 @@ onBeforeUnmount(() => {
           <p>{{ project.description || '这个项目还没有补充说明。' }}</p>
         </div>
         <div class="detail-actions">
+          <RouterLink class="secondary-command" :to="`/projects/${project.id}/ai`">
+            AI 工作台
+          </RouterLink>
           <RouterLink
             v-if="project.is_published"
             class="primary-command"

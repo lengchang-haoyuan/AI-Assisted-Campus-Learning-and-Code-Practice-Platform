@@ -5,6 +5,7 @@ import type { Connection } from '@vue-flow/core'
 import { onBeforeRouteLeave, useRoute } from 'vue-router'
 
 import { getApiErrorMessage } from '@/api/errors'
+import { findProjectContext } from '@/api/workflowContext'
 import WorkflowCanvas from '@/components/WorkflowCanvas.vue'
 import WorkflowNodeConfigPanel from '@/components/WorkflowNodeConfigPanel.vue'
 import WorkflowNodeLibrary from '@/components/WorkflowNodeLibrary.vue'
@@ -28,6 +29,7 @@ import type {
   WorkflowNodeTemplate,
 } from '@/domain/workflow'
 import { useWorkflowStore } from '@/stores/workflows'
+import type { ProjectContextResponse } from '@/types/ai'
 import type { WorkflowStatus, WorkflowRunMode } from '@/types/workflow'
 
 const route = useRoute()
@@ -39,6 +41,10 @@ const runMode = ref<WorkflowRunMode>('incomplete')
 const configDirty = ref(false)
 const preparing = ref(false)
 const locked = computed(() => running.value || preparing.value || workflowStore.saving)
+const workflowContext = ref<ProjectContextResponse | null>(null)
+const contextChecked = ref(false)
+const contextLoading = ref(false)
+const contextError = ref<string | null>(null)
 let mounted = true
 const nodes = ref<WorkflowCanvasNode[]>([])
 const edges = ref<WorkflowCanvasEdge[]>([])
@@ -64,8 +70,16 @@ const selectedEdge = computed(
   () => edges.value.find((edge) => edge.id === selectedEdgeId.value) ?? null,
 )
 const hasSelection = computed(() => selectedNode.value !== null || selectedEdge.value !== null)
+const staleContextNodeNames = computed(() => {
+  const staleIds = new Set(workflowContext.value?.stale_node_ids ?? [])
+  return nodes.value.filter((node) => node.data.databaseId !== null && staleIds.has(node.data.databaseId)).map((node) => node.data.name)
+})
 const runBlockers = computed(() => {
   const reasons = [...graphErrors.value]
+  if (!contextChecked.value || contextLoading.value) reasons.push('正在检查项目 Context，请稍候。')
+  else if (contextError.value) reasons.push('项目 Context 状态读取失败，请刷新后重试。')
+  else if (!workflowContext.value) reasons.push('关联项目还没有 Context，请先到 AI 工作台创建。')
+  else if (workflowContext.value.is_stale) reasons.push('项目 Context 与项目资料不一致，请先到 AI 工作台同步。')
   if (configDirty.value) reasons.push('节点配置尚未应用，请先点击“应用配置”。')
   if (!nodes.value.length) reasons.push('请先添加一个 AI 节点。')
   for (const node of nodes.value) {
@@ -78,6 +92,23 @@ const runBlockers = computed(() => {
   if (edges.value.some(edge => edge.data.conditionData && Object.keys(edge.data.conditionData).length)) reasons.push('当前执行引擎暂不支持条件连线。')
   return reasons
 })
+
+async function loadContext(projectId: number): Promise<boolean> {
+  contextLoading.value = true
+  contextError.value = null
+  try {
+    workflowContext.value = await findProjectContext(projectId)
+    contextChecked.value = true
+    return workflowContext.value !== null && !workflowContext.value.is_stale
+  } catch (error: unknown) {
+    workflowContext.value = null
+    contextChecked.value = true
+    contextError.value = getApiErrorMessage(error, '项目 Context 状态读取失败')
+    return false
+  } finally {
+    contextLoading.value = false
+  }
+}
 
 function applyGraph(): void {
   const graph = workflowStore.currentGraph
@@ -97,7 +128,11 @@ async function load(): Promise<void> {
   if (!Number.isInteger(workflowId) || workflowId < 1) return
   await workflowStore.fetchGraph(workflowId)
   applyGraph()
-  await refreshRuns(1)
+  const projectId = workflowStore.currentGraph?.workflow.project.id
+  await Promise.all([
+    refreshRuns(1),
+    projectId ? loadContext(projectId) : Promise.resolve(false),
+  ])
 }
 
 function markDirty(): void {
@@ -234,7 +269,11 @@ async function run(): Promise<void> {
   try {
     if (dirty.value && !(await save())) return
     const workflow = workflowStore.currentGraph.workflow
-    await startRun(workflow.project.id, workflow.version, runMode.value)
+    if (!(await loadContext(workflow.project.id))) {
+      ElMessage.warning(workflowContext.value?.is_stale ? '请先同步项目 Context' : '请先处理项目 Context')
+      return
+    }
+    await startRun(workflow.version, runMode.value)
   } finally {
     preparing.value = false
   }
@@ -244,7 +283,11 @@ watch(running, async (value, previous) => {
   if (previous && !value && !dirty.value && !configDirty.value) {
     try {
       await workflowStore.fetchGraph(workflowId)
-      if (mounted) applyGraph()
+      if (mounted) {
+        applyGraph()
+        const projectId = workflowStore.currentGraph?.workflow.project.id
+        if (projectId) await loadContext(projectId)
+      }
     } catch { /* 加载错误由 Store 的图错误面板展示。 */ }
   }
 })
@@ -296,6 +339,20 @@ onUnmounted(() => {
         @save="save"
         @delete-selection="deleteSelection"
       />
+      <section class="workflow-context-status" :data-state="contextError ? 'error' : !workflowContext ? 'missing' : workflowContext.is_stale ? 'stale' : 'ready'" aria-live="polite">
+        <div>
+          <strong v-if="contextLoading || !contextChecked">正在检查项目 Context…</strong>
+          <strong v-else-if="contextError">Context 状态读取失败</strong>
+          <strong v-else-if="!workflowContext">运行前需要创建项目 Context</strong>
+          <strong v-else-if="workflowContext.is_stale">Context 与项目资料不一致</strong>
+          <strong v-else>Context v{{ workflowContext.version }} 可用于运行</strong>
+          <p v-if="contextError">{{ contextError }}</p>
+          <p v-else-if="workflowContext?.is_stale">待同步字段：{{ workflowContext.stale_fields.join('、') }}</p>
+          <p v-else-if="staleContextNodeNames.length">受 Context 更新影响：{{ staleContextNodeNames.join('、') }}。选择“继续未完成的节点”即可重新生成。</p>
+          <p v-else>页面只读取当前版本；不会自动同步资料或发起付费调用。</p>
+        </div>
+        <RouterLink class="secondary-command" :to="`/projects/${workflowStore.currentGraph.workflow.project.id}/ai`">管理 Context 与 AI</RouterLink>
+      </section>
       <div class="workflow-editor-grid">
         <WorkflowNodeLibrary :disabled="locked" @add="addNode" />
         <WorkflowCanvas
