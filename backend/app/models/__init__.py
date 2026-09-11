@@ -2,7 +2,16 @@ from app.models.submission import Submission, SubmissionVersion, Feedback, Notif
 from app.models.ai import AIRequest, AIResult
 from app.models.base import Base
 from app.models.campus import AccountAudit, CampusInvitation, CampusMembership, PasswordReset
-from app.models.community import Comment, Favorite, Like, ProjectView
+from app.models.community import (
+    Comment,
+    CommunityGovernanceAction,
+    CommunityGovernanceCase,
+    CommunityPublication,
+    CommunityPublicationVersion,
+    Favorite,
+    Like,
+    ProjectView,
+)
 from app.models.course import Course
 from app.models.learning import DailyTask, LearningPlan, LearningRecord, LearningReport
 from app.models.project import Project, Tag, project_tags
@@ -20,6 +29,10 @@ __all__ = [
     "AIResult",
     "Base",
     "Comment",
+    "CommunityGovernanceAction",
+    "CommunityGovernanceCase",
+    "CommunityPublication",
+    "CommunityPublicationVersion",
     "Course",
     "ClassMembership",
     "DailyTask",

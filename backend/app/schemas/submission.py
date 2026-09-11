@@ -167,9 +167,11 @@ class NotificationResponse(BaseModel):
 
     id: int
     kind: str
-    assignment_id: int
+    assignment_id: int | None
     feedback_id: int | None
     submission_id: int | None
+    community_publication_id: int | None
+    community_case_id: int | None
     created_at: datetime
     read_at: datetime | None
 

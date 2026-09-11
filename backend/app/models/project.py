@@ -27,7 +27,7 @@ from app.models.enums import ProjectDifficulty, ProjectStatus, enum_type
 
 if TYPE_CHECKING:
     from app.models.ai import AIRequest
-    from app.models.community import Comment, Favorite, Like, ProjectView
+    from app.models.community import CommunityPublication, Comment, Favorite, Like, ProjectView
     from app.models.learning import DailyTask, LearningPlan, LearningRecord
     from app.models.user import User
     from app.models.workflow import Workflow
@@ -138,6 +138,9 @@ class Project(IdMixin, TimestampMixin, Base):
     )
     ai_requests: Mapped[list["AIRequest"]] = relationship(
         back_populates="project", passive_deletes=True
+    )
+    community_publication: Mapped["CommunityPublication | None"] = relationship(
+        back_populates="project", passive_deletes=True, uselist=False
     )
 
 

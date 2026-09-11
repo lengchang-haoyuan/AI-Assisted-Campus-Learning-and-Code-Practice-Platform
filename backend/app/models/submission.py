@@ -88,14 +88,45 @@ class Notification(IdMixin, Base):
     __tablename__ = "notifications"
     __table_args__ = (
         UniqueConstraint("recipient_user_id", "event_key", name="uq_notification_event"),
-        CheckConstraint("kind IN ('assignment_published', 'feedback_created')", name="notification_kind"),
+        CheckConstraint(
+            "kind IN ('assignment_published', 'feedback_created', "
+            "'community_publication_changed', 'community_case_resolved')",
+            name="notification_kind",
+        ),
+        CheckConstraint(
+            "(kind = 'assignment_published' AND assignment_id IS NOT NULL AND feedback_id IS NULL "
+            "AND community_publication_id IS NULL AND community_case_id IS NULL) OR "
+            "(kind = 'feedback_created' AND assignment_id IS NOT NULL AND feedback_id IS NOT NULL "
+            "AND community_publication_id IS NULL AND community_case_id IS NULL) OR "
+            "(kind = 'community_publication_changed' AND assignment_id IS NULL AND feedback_id IS NULL "
+            "AND community_publication_id IS NOT NULL AND community_case_id IS NULL) OR "
+            "(kind = 'community_case_resolved' AND assignment_id IS NULL AND feedback_id IS NULL "
+            "AND community_publication_id IS NULL AND community_case_id IS NOT NULL)",
+            name="notification_target",
+        ),
         Index("ix_notification_recipient_read_created", "recipient_user_id", "read_at", "created_at", "id"),
         MYSQL_TABLE_OPTIONS,
     )
     recipient_user_id: Mapped[int] = mapped_column(BIGINT(unsigned=True), ForeignKey("users.id", ondelete="RESTRICT"), nullable=False)
     event_key: Mapped[str] = mapped_column(String(160), nullable=False)
     kind: Mapped[str] = mapped_column(String(32), nullable=False)
-    assignment_id: Mapped[int] = mapped_column(BIGINT(unsigned=True), ForeignKey("teaching_assignments.id", ondelete="RESTRICT"), nullable=False)
+    assignment_id: Mapped[int | None] = mapped_column(BIGINT(unsigned=True), ForeignKey("teaching_assignments.id", ondelete="RESTRICT"))
     feedback_id: Mapped[int | None] = mapped_column(BIGINT(unsigned=True), ForeignKey("feedback.id", ondelete="RESTRICT"))
+    community_publication_id: Mapped[int | None] = mapped_column(
+        BIGINT(unsigned=True),
+        ForeignKey(
+            "community_publications.id",
+            name="fk_notification_publication",
+            ondelete="RESTRICT",
+        ),
+    )
+    community_case_id: Mapped[int | None] = mapped_column(
+        BIGINT(unsigned=True),
+        ForeignKey(
+            "community_governance_cases.id",
+            name="fk_notification_governance_case",
+            ondelete="RESTRICT",
+        ),
+    )
     created_at: Mapped[datetime] = mapped_column(UTCDateTime(), nullable=False)
     read_at: Mapped[datetime | None] = mapped_column(UTCDateTime())

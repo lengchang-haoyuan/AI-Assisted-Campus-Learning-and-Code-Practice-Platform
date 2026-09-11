@@ -40,10 +40,23 @@ async function openNotification(item: NotificationResponse): Promise<void> {
       item.read_at = (await markNotificationRead(item.id)).read_at
       unreadCount.value = Math.max(0, unreadCount.value - 1)
     }
-    await router.push(item.submission_id ? `/campus/submissions/${item.submission_id}` : `/campus/assignments/${item.assignment_id}`)
+    await router.push(notificationTarget(item))
   } catch (error: unknown) {
     ElMessage.error(getApiErrorMessage(error, '通知状态更新失败'))
   }
+}
+
+function notificationTarget(item: NotificationResponse): string {
+  if (item.community_publication_id || item.community_case_id) return '/community/governance'
+  if (item.submission_id) return `/campus/submissions/${item.submission_id}`
+  return item.assignment_id ? `/campus/assignments/${item.assignment_id}` : '/notifications'
+}
+
+function notificationLabel(item: NotificationResponse): { chip: string; title: string } {
+  if (item.kind === 'assignment_published') return { chip: '新任务', title: '教学任务已发布' }
+  if (item.kind === 'feedback_created') return { chip: '教师反馈', title: '你的成果收到反馈' }
+  if (item.kind === 'community_publication_changed') return { chip: '发布审核', title: '你的社区发布状态已更新' }
+  return { chip: '治理结果', title: '与你相关的社区案件已处理' }
 }
 
 onMounted(() => void loadPage())
@@ -51,15 +64,15 @@ onMounted(() => void loadPage())
 
 <template>
   <div class="page-shell teaching-page">
-    <header class="page-header teaching-header"><div><p class="page-kicker">站内通知</p><h1>教学消息</h1><p>未读 {{ unreadCount }} 条。通知不复制提交正文。</p></div><label class="submission-filter"><input v-model="unreadOnly" type="checkbox" @change="loadPage(1)" /> 只看未读</label></header>
+    <header class="page-header teaching-header"><div><p class="page-kicker">站内通知</p><h1>教学与社区消息</h1><p>未读 {{ unreadCount }} 条。通知只标记业务对象，不复制私人学习内容。</p></div><label class="submission-filter"><input v-model="unreadOnly" type="checkbox" @change="loadPage(1)" /> 只看未读</label></header>
     <div v-if="errorMessage" class="inline-alert is-error" role="alert"><span>{{ errorMessage }}</span><button type="button" @click="loadPage()">重试</button></div>
     <div v-if="loading" class="teaching-detail-loading"><span v-for="index in 3" :key="index" /></div>
     <section v-else-if="items.length" class="notification-list">
-      <a v-for="item in items" :key="item.id" class="teaching-panel notification-item" :class="{ 'is-unread': !item.read_at }" :href="item.submission_id ? `/campus/submissions/${item.submission_id}` : `/campus/assignments/${item.assignment_id}`" @click.prevent="openNotification(item)">
-        <div><span class="status-chip">{{ item.kind === 'assignment_published' ? '新任务' : '教师反馈' }}</span><h2>{{ item.kind === 'assignment_published' ? '教学任务已发布' : '你的成果收到反馈' }}</h2><p>{{ formatDate(item.created_at) }}</p></div><strong>{{ item.read_at ? '查看' : '查看并标为已读' }} →</strong>
+      <a v-for="item in items" :key="item.id" class="teaching-panel notification-item" :class="{ 'is-unread': !item.read_at }" :href="notificationTarget(item)" @click.prevent="openNotification(item)">
+        <div><span class="status-chip">{{ notificationLabel(item).chip }}</span><h2>{{ notificationLabel(item).title }}</h2><p>{{ formatDate(item.created_at) }}</p></div><strong>{{ item.read_at ? '查看' : '查看并标为已读' }} →</strong>
       </a>
     </section>
-    <div v-else-if="!loading" class="teaching-note">{{ unreadOnly ? '没有未读通知。' : '暂无教学通知。' }}</div>
+    <div v-else-if="!loading" class="teaching-note">{{ unreadOnly ? '没有未读通知。' : '暂无站内通知。' }}</div>
     <nav v-if="!loading && totalPages > 1" class="teaching-pagination" aria-label="通知分页">
       <button class="secondary-command compact-command" type="button" :disabled="page <= 1" @click="loadPage(page - 1)">上一页</button>
       <span>第 {{ page }} / {{ totalPages }} 页</span>

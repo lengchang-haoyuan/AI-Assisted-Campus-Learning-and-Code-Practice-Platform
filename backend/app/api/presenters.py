@@ -224,6 +224,10 @@ def to_community_project_response(
 ) -> CommunityProjectResponse:
     return CommunityProjectResponse(
         id=project.id,
+        publication_id=project.publication_id,
+        publication_kind=project.publication_kind,
+        publication_status=project.publication_status,
+        publication_version=project.publication_version,
         name=project.name,
         description=project.description,
         difficulty=project.difficulty,
@@ -233,6 +237,11 @@ def to_community_project_response(
         frontend=project.frontend,
         backend=project.backend,
         database=project.database,
+        repository_url=project.repository_url,
+        attribution=project.attribution,
+        source_license_statement=project.source_license_statement,
+        ai_assistance_statement=project.ai_assistance_statement,
+        human_review_statement=project.human_review_statement,
         owner=CommunityOwnerResponse(
             id=project.owner.id,
             username=project.owner.username,
@@ -281,9 +290,11 @@ def to_comment_response(comment: CommentData) -> CommentResponse:
             avatar_url=comment.author.avatar_url,
         ),
         content=comment.content,
+        revision=comment.revision,
         created_at=comment.created_at,
         updated_at=comment.updated_at,
         can_delete=comment.can_delete,
+        can_report=comment.can_report,
     )
 
 

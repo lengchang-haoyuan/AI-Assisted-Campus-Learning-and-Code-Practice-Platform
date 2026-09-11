@@ -4,16 +4,20 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { useRoute } from 'vue-router'
 
 import { getApiErrorMessage } from '@/api/errors'
+import { reportCommunityContent } from '@/api/community'
 import { getProjectCover } from '@/assets/projectCovers'
 import NumberRoller from '@/components/NumberRoller.vue'
 import { difficultyLabels, formatProjectTime, statusLabels } from '@/domain/projects'
 import { useCommunityStore } from '@/stores/community'
+import { useAuthStore } from '@/stores/auth'
 import type { CommentResponse } from '@/types/community'
 
 const route = useRoute()
 const communityStore = useCommunityStore()
+const authStore = useAuthStore()
 const commentContent = ref('')
 const commentError = ref<string | null>(null)
+const reportKeys = new Map<string, string>()
 
 const projectId = computed(() => {
   const value = Number(route.params.id)
@@ -101,6 +105,36 @@ async function removeComment(comment: CommentResponse): Promise<void> {
   }
 }
 
+async function reportContent(targetType: 'project' | 'comment', targetId: number): Promise<void> {
+  try {
+    const { value } = await ElMessageBox.prompt(
+      '请填写具体举报原因（3至500个字符）。举报人身份不会向内容作者公开。',
+      targetType === 'project' ? '举报项目' : '举报评论',
+      {
+        confirmButtonText: '提交举报',
+        cancelButtonText: '取消',
+        inputValidator: (text) => {
+          const length = text.trim().length
+          return (length >= 3 && length <= 500) || '请填写 3 至 500 个字符'
+        },
+      },
+    )
+    const reason = value.trim()
+    const fingerprint = `${targetType}:${targetId}:${reason}`
+    const key = reportKeys.get(fingerprint)
+      ?? (typeof crypto.randomUUID === 'function'
+        ? crypto.randomUUID().replaceAll('-', '')
+        : `report_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`)
+    reportKeys.set(fingerprint, key)
+    await reportCommunityContent(targetType, targetId, reason, key)
+    reportKeys.delete(fingerprint)
+    ElMessage.success('举报已提交，可在“治理进度”查询结果')
+  } catch (error: unknown) {
+    if (error === 'cancel' || error === 'close') return
+    ElMessage.error(getApiErrorMessage(error, '举报提交失败；重试相同内容时不会重复建案'))
+  }
+}
+
 async function changeCommentPage(nextPage: number): Promise<void> {
   if (projectId.value === null) return
   try {
@@ -140,6 +174,8 @@ onBeforeUnmount(() => {
           <div class="tag-row">
             <span class="status-chip" :data-status="project.status">{{ statusLabels[project.status] }}</span>
             <span class="tech-tag">{{ difficultyLabels[project.difficulty] }}</span>
+            <span v-if="project.publication_kind === 'practice_template'" class="tech-tag">教学实践模板</span>
+            <span v-if="project.publication_status === 'legacy_review_required'" class="tech-tag">历史内容待补审</span>
           </div>
           <h1>{{ project.name }}</h1>
           <p>{{ project.description || '发布者暂未补充项目说明。' }}</p>
@@ -167,6 +203,15 @@ onBeforeUnmount(() => {
             @click="toggleFavorite"
           >
             {{ project.favorited ? '已收藏' : '收藏项目' }}
+          </button>
+          <button
+            v-if="project.owner.id !== authStore.currentUser?.id"
+            class="text-command danger-text-command"
+            type="button"
+            :disabled="communityStore.actionLoading"
+            @click="reportContent('project', project.id)"
+          >
+            举报项目
           </button>
         </div>
       </header>
@@ -203,6 +248,12 @@ onBeforeUnmount(() => {
           <div v-if="stack.length" class="code-preview" aria-label="技术栈摘要">
             <span v-for="technology in stack" :key="technology">{{ technology }}</span>
           </div>
+          <dl class="detail-facts community-declarations">
+            <div><dt>署名</dt><dd>{{ project.attribution || '未填写' }}</dd></div>
+            <div><dt>来源或许可</dt><dd>{{ project.source_license_statement || '历史内容待补充' }}</dd></div>
+            <div><dt>AI 辅助声明</dt><dd>{{ project.ai_assistance_statement || '历史内容待补充' }}</dd></div>
+            <div v-if="project.publication_kind === 'practice_template'"><dt>人工审阅</dt><dd>{{ project.human_review_statement || '未填写' }}</dd></div>
+          </dl>
         </aside>
       </div>
 
@@ -249,6 +300,15 @@ onBeforeUnmount(() => {
               @click="removeComment(comment)"
             >
               删除
+            </button>
+            <button
+              v-else-if="comment.can_report"
+              class="text-command danger-text-command"
+              type="button"
+              :disabled="communityStore.actionLoading"
+              @click="reportContent('comment', comment.id)"
+            >
+              举报
             </button>
           </li>
         </ol>

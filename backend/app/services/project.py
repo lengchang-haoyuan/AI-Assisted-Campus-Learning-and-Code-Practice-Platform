@@ -144,6 +144,9 @@ class ProjectService:
 
     def delete_project(self, project_id: int, owner_id: int) -> None:
         project = self._get_owned_project(project_id, owner_id)
+        publication = project.community_publication
+        if publication is not None:
+            raise ConflictError("项目已产生社区审查记录，为保留治理证据只能归档")
         try:
             self._repository.delete(project)
         except ProjectPersistenceConflictError as exc:

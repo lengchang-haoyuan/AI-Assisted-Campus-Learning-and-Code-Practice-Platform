@@ -45,6 +45,7 @@ function logout(): void {
       <nav class="primary-navigation" aria-label="主导航">
         <RouterLink to="/">首页</RouterLink>
         <RouterLink to="/community">社区</RouterLink>
+        <RouterLink v-if="hasCampusMembership" to="/community/governance">治理</RouterLink>
         <RouterLink to="/projects">项目库</RouterLink>
         <RouterLink to="/workspace/dashboard">我的桌面</RouterLink>
         <RouterLink to="/learning">学习系统</RouterLink>

@@ -8,11 +8,9 @@ import {
   listCommunityProjects,
   listCommunityTags,
   listProjectComments,
-  publishProject as publishProjectRequest,
   recordProjectView,
   setProjectFavorite,
   setProjectLike,
-  unpublishProject as unpublishProjectRequest,
 } from '@/api/community'
 import { getApiErrorMessage } from '@/api/errors'
 import type {
@@ -179,30 +177,6 @@ export const useCommunityStore = defineStore('community', () => {
     if (currentProject.value?.id === projectId) currentProject.value.view_count = result.view_count
   }
 
-  async function publishProject(projectId: number, tagNames: string[]): Promise<void> {
-    actionLoading.value = true
-    try {
-      replaceProject(await publishProjectRequest(projectId, tagNames))
-    } finally {
-      actionLoading.value = false
-    }
-  }
-
-  async function unpublishProject(projectId: number): Promise<void> {
-    actionLoading.value = true
-    try {
-      await unpublishProjectRequest(projectId)
-      projectPage.value = {
-        ...projectPage.value,
-        items: projectPage.value.items.filter((project) => project.id !== projectId),
-        total: Math.max(0, projectPage.value.total - 1),
-      }
-      if (currentProject.value?.id === projectId) currentProject.value = null
-    } finally {
-      actionLoading.value = false
-    }
-  }
-
   function clearDetail(): void {
     currentProject.value = null
     commentPage.value = { ...EMPTY_COMMENT_PAGE }
@@ -230,8 +204,6 @@ export const useCommunityStore = defineStore('community', () => {
     toggleLike,
     toggleFavorite,
     countView,
-    publishProject,
-    unpublishProject,
     clearDetail,
   }
 })

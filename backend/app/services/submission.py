@@ -576,6 +576,8 @@ class SubmissionService:
             "assignment_id": value.assignment_id,
             "feedback_id": value.feedback_id,
             "submission_id": feedback.submission_id if feedback is not None else None,
+            "community_publication_id": value.community_publication_id,
+            "community_case_id": value.community_case_id,
             "created_at": value.created_at,
             "read_at": value.read_at,
         }

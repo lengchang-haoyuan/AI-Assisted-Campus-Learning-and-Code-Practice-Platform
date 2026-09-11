@@ -45,6 +45,11 @@ const router = createRouter({
           component: () => import('@/views/CommunityProjectDetailView.vue'),
         },
         {
+          path: 'community/governance',
+          name: 'community-governance',
+          component: () => import('@/views/CommunityGovernanceView.vue'),
+        },
+        {
           path: 'projects',
           name: 'projects',
           component: () => import('@/views/ProjectsView.vue'),

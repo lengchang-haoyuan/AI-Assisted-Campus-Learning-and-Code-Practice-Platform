@@ -2,7 +2,11 @@ import type { PageResponse } from './teaching'
 
 export type SubmissionStatus = 'submitted' | 'returned' | 'accepted'
 export type FeedbackDecision = 'accept' | 'return'
-export type NotificationKind = 'assignment_published' | 'feedback_created'
+export type NotificationKind =
+  | 'assignment_published'
+  | 'feedback_created'
+  | 'community_publication_changed'
+  | 'community_case_resolved'
 
 export interface FeedbackResponse {
   id: number
@@ -55,9 +59,11 @@ export interface SubmissionCreateInput {
 export interface NotificationResponse {
   id: number
   kind: NotificationKind
-  assignment_id: number
+  assignment_id: number | null
   feedback_id: number | null
   submission_id: number | null
+  community_publication_id: number | null
+  community_case_id: number | null
   created_at: string
   read_at: string | null
 }

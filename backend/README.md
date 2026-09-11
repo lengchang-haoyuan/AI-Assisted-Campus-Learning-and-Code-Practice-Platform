@@ -330,3 +330,17 @@ POST /api/v1/campus/assignments/{assignment_id}/archive
 ```
 
 成员加入使用 P17 已核验的校园身份编号，班级角色必须与校园角色一致。项目模板仅允许教师引用自己的 Project，并保存不含 Context、私人笔记和仓库地址的白名单快照。
+
+## P21 校园社区治理
+
+应用现有数据库前先在工作区外备份，再运行 `python -m scripts.apply_p21_community_governance_migration`。迁移新增发布、不可变版本快照、治理动作和举报/复核案件四张表，扩展评论治理字段及社区通知目标；历史公开项目转换为 `legacy_review_required`，不会自动通过、下架或删除原互动数据。
+
+社区列表、详情、标签及互动统一要求有效校园身份。作者用 `POST /api/v1/projects/{id}/publication-requests` 提交署名、来源/许可和 AI 辅助声明；管理员在 `/api/v1/community/moderation/*` 审核发布及处理案件。用户通过 `/api/v1/community/reports` 举报当前可见项目版本或评论，通过 `/api/v1/community/moderation/actions/{id}/appeals` 申请复核。旧即时发布入口返回 409，旧撤回入口继续映射到有审计记录的撤回操作。
+
+公开页面只读取获准版本快照。私人 Project 后续编辑不会改变已公开内容，管理员治理响应不会包含 Context、学习笔记、完整 AI 输入或教学提交。发布、撤回、决定、举报与复核均使用事务、请求键或 revision 检查；评论和案件创建使用数据库时间窗口做有界频率限制，不新增 Redis。
+
+真实 MySQL 隔离验收脚本会创建虚构账号、校园身份、项目、评论和治理记录，验证申请、审核、固定快照、重复请求、举报、下架、复核、权限与通知，并在结束时清理：
+
+```powershell
+python -m scripts.verify_p21_governance
+```

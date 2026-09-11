@@ -43,6 +43,8 @@ function toggleFlip(): void {
             <span class="status-chip" :data-status="project.status">
               {{ statusLabels[project.status] }}
             </span>
+            <span v-if="project.publication_kind === 'practice_template'" class="tech-tag">实践模板</span>
+            <span v-else-if="project.publication_status === 'legacy_review_required'" class="tech-tag">待补审</span>
             <span>由 {{ project.owner.username }} 发布</span>
           </div>
           <RouterLink class="community-card__title" :to="`/community/projects/${project.id}`">

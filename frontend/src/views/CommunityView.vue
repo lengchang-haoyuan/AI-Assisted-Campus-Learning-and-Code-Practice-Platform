@@ -82,7 +82,10 @@ onMounted(() => {
         <NumberRoller :value="communityStore.projectPage.total" />
         <span>个公开项目</span>
       </div>
-      <RouterLink class="primary-command" to="/projects">发布我的项目</RouterLink>
+      <div class="community-detail-actions">
+        <RouterLink class="secondary-command" to="/community/governance">治理进度</RouterLink>
+        <RouterLink class="primary-command" to="/projects">申请发布项目</RouterLink>
+      </div>
     </header>
 
     <section class="community-filter" aria-labelledby="community-filter-title">
@@ -127,7 +130,7 @@ onMounted(() => {
 
     <section v-else class="empty-state wide-empty-state">
       <h2>{{ selectedTag ? '这个标签下还没有项目' : '社区正在等待第一个项目' }}</h2>
-      <p>{{ selectedTag ? '切换其他标签继续浏览。' : '从项目库选择一个项目，添加标签后发布到社区。' }}</p>
+      <p>{{ selectedTag ? '切换其他标签继续浏览。' : '从项目库提交发布申请，人工审核通过后才会出现在这里。' }}</p>
       <RouterLink class="primary-command" to="/projects">前往项目库</RouterLink>
     </section>
 
