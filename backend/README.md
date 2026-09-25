@@ -281,13 +281,13 @@ python -m unittest discover -s tests -v
 
 测试覆盖 health、Swagger、统一异常、错误脱敏、CORS、请求 ID、JSON 日志、Session 释放和 Router 分层边界，同时检查 SQLAlchemy metadata 与 `schema.sql`。`python -m scripts.verify_database_schema` 还会只读对比实际 MySQL 数据库与 Models。
 
-P15 跨模块验收入口如下，Fake 与真实 Provider 模式均已通过；后续失败仍以非零退出码报告：
+P15 曾提供以下跨模块验收入口：
 
 ```powershell
 python -X utf8 -m scripts.verify_integration
 ```
 
-该脚本通过 HTTP/ASGI 请求真实 API 和 MySQL，默认只替换外部 Provider，不依赖开发服务器、不消耗模型额度。它创建随机命名的临时用户和关联数据，在 `finally` 中清理；请使用开发数据库，勿在生产库运行。浏览器演示、真实模型模式和已知边界见 [P15 演示与答辩指南](../开发相关文档/答辩材料/P15演示与答辩指南.md)。
+该脚本通过 HTTP/ASGI 请求真实 API 和 MySQL，默认只替换外部 Provider，不依赖开发服务器、不消耗模型额度。它创建随机命名的临时用户和关联数据，在 `finally` 中清理；请使用开发数据库，勿在生产库运行。脚本仍按 P15 的公共社区访问规则创建普通用户，尚未补充 P17 校园身份和 P21 审核快照，因此当前会在 `/api/v1/community/projects` 得到 403，不能作为 P21 之后的全量发布门槛。当前回归以 `unittest`、数据库结构校验和 `verify_p21_governance` 为准。浏览器演示和已知边界见 [P15 演示与答辩指南](../开发相关文档/答辩材料/P15演示与答辩指南.md)。
 
 ## 工作流 AI 与 Python 教学节点（2026-09-05）
 
