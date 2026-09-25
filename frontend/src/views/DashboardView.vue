@@ -176,7 +176,7 @@ onBeforeUnmount(() => {
           v-for="(project, index) in filteredProjects.slice(0, 3)"
           :key="project.id"
           :project="project"
-          :image-url="getProjectCover(project.id, index)"
+          :image-url="getProjectCover(project)"
           :featured="index === 0"
           @edit="editProject"
           @delete="removeProject"

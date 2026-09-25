@@ -118,10 +118,9 @@ onMounted(() => {
       aria-label="社区项目列表"
     >
       <CommunityProjectCard
-        v-for="(project, index) in communityStore.projectPage.items"
+        v-for="project in communityStore.projectPage.items"
         :key="project.id"
         :project="project"
-        :index="index"
         :action-disabled="communityStore.actionLoading"
         @like="toggleLike"
         @favorite="toggleFavorite"

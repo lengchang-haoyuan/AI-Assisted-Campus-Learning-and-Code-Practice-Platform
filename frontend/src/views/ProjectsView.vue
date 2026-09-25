@@ -136,10 +136,10 @@ onMounted(() => {
 
     <section v-else-if="visibleProjects.length > 0" class="project-list-grid" aria-label="项目列表">
       <ProjectFlipCard
-        v-for="(project, index) in visibleProjects"
+        v-for="project in visibleProjects"
         :key="project.id"
         :project="project"
-        :image-url="getProjectCover(project.id, index)"
+        :image-url="getProjectCover(project)"
         @edit="editProject"
         @delete="removeProject"
       />

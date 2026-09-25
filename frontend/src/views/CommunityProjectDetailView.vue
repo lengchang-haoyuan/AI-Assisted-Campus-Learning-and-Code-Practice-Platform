@@ -225,7 +225,7 @@ onBeforeUnmount(() => {
 
       <div class="community-detail-grid">
         <section class="community-project-story">
-          <img :src="getProjectCover(project.id)" :alt="`${project.name} 项目封面`" />
+          <img :src="getProjectCover(project)" :alt="`${project.name} 项目封面`" />
           <div>
             <h2>项目说明</h2>
             <p>{{ project.description || '发布者暂未补充项目说明。' }}</p>

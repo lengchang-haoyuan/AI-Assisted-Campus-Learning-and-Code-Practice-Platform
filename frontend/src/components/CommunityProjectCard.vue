@@ -8,7 +8,6 @@ import type { CommunityProjectResponse } from '@/types/community'
 
 const props = defineProps<{
   project: CommunityProjectResponse
-  index: number
   actionDisabled?: boolean
 }>()
 
@@ -35,7 +34,7 @@ function toggleFlip(): void {
       <section class="community-card__face community-card__front" :inert="flipped">
         <img
           class="community-card__cover"
-          :src="getProjectCover(project.id, index)"
+          :src="getProjectCover(project)"
           :alt="`${project.name} 项目封面`"
         />
         <div class="community-card__body">

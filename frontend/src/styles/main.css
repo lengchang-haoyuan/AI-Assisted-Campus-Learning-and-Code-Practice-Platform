@@ -328,7 +328,7 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
 .project-flip-card__heading, .project-flip-card__footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .project-flip-card__title, .project-flip-card__back-title { margin: 0; overflow-wrap: anywhere; }
 .project-flip-card__title { font-size: 17px; }
-.project-flip-card__content > p {
+.project-flip-card__description {
   margin: 10px 0 0;
   display: -webkit-box;
   overflow: hidden;
@@ -353,10 +353,10 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
 .project-flip-card__actions { margin-top: auto; }
 
 /* 项目库卡片使用固定的文字层级，长题意保留在项目详情中阅读。 */
-.projects-page .project-flip-card { height: auto; min-height: 480px; }
+.projects-page .project-flip-card { height: auto; min-height: 450px; }
 .projects-page .project-flip-card__inner { display: grid; }
 .projects-page .project-flip-card__face { position: relative; grid-area: 1 / 1; min-width: 0; }
-.projects-page .project-flip-card__front { grid-template-rows: 154px minmax(0, 1fr); }
+.projects-page .project-flip-card__front { grid-template-rows: 132px minmax(0, 1fr); }
 .projects-page .project-flip-card__content { display: flex; flex-direction: column; gap: 16px; padding: 20px; min-width: 0; }
 .projects-page .project-flip-card__heading { position: relative; display: block; }
 .projects-page .project-flip-card__intro { min-width: 0; }
@@ -870,7 +870,7 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
 .community-filter .panel-title-row > span { color: var(--muted); font-size: 12px; }
 .community-filter__scroll { overflow-x: auto; scrollbar-width: thin; }
 .community-filter .liquid-tabs { min-width: max-content; margin-bottom: 0; }
-.community-grid, .community-grid-loading { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.community-grid, .community-grid-loading { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
 .community-grid-loading span { min-height: 430px; background: #edf3f1; border-radius: 5px; animation: skeleton-pulse 1.5s ease-in-out infinite alternate; }
 .community-card { min-width: 0; height: 430px; perspective: 1100px; }
 .community-card__inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 620ms cubic-bezier(0.2, 0.75, 0.2, 1); }
@@ -887,6 +887,13 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
 .community-card__footer > span { white-space: nowrap; }
 .community-card__footer .number-roller { font-size: 15px; }
 .community-card__footer .text-command { justify-self: end; font-size: 12px; }
+.community-card .text-command {
+  min-height: 44px;
+  padding: 8px 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 .community-card__eyebrow { margin-bottom: 6px; color: var(--apricot); font-size: 12px; font-weight: 800; }
 .community-card__back h2 { margin-bottom: 0; overflow-wrap: anywhere; font-size: 18px; }
 .community-card__actions { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -959,6 +966,19 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
   .pulse-section, .pulse-numbers { margin-top: 0; }
 }
 
+@media (min-width: 921px) and (max-width: 1240px) {
+  .project-plaza .project-showcase { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-plaza .project-flip-card.is-featured { grid-column: 1 / -1; }
+  .project-plaza .project-flip-card:not(.is-featured) .project-flip-card__footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .project-plaza .project-flip-card:not(.is-featured) .project-flip-card__footer .text-command {
+    grid-column: 1 / -1;
+    justify-self: end;
+  }
+}
+
 @media (max-width: 920px) {
   .app-topbar { grid-template-columns: auto auto; }
   .global-search { order: 3; grid-column: 1 / -1; }
@@ -998,11 +1018,25 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
   .profile-actions { justify-self: end; }
   .logout-command { font-size: 12px; }
   .primary-navigation {
+    position: relative;
     justify-content: flex-start;
     overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline proximity;
     scrollbar-color: #adc2bc transparent;
   }
-  .primary-navigation a { min-width: max-content; padding-inline: 10px; flex: 0 0 auto; text-align: center; }
+  .primary-navigation::after {
+    content: "";
+    position: sticky;
+    right: 0;
+    width: 30px;
+    height: 43px;
+    margin-left: -30px;
+    flex: 0 0 30px;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 96%));
+    pointer-events: none;
+  }
+  .primary-navigation a { min-width: max-content; padding-inline: 10px; flex: 0 0 auto; text-align: center; scroll-snap-align: start; }
   .page-shell, .dashboard-board { width: min(100% - 22px, 1180px); }
   .page-shell { padding-top: 30px; }
   .page-header, .project-detail-header { align-items: flex-start; flex-direction: column; }
