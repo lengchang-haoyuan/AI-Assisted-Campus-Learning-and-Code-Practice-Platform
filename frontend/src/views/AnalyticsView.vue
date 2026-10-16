@@ -6,6 +6,8 @@ import type { EChartsCoreOption } from 'echarts/core'
 import EChartPanel from '@/components/EChartPanel.vue'
 import LiquidTabs from '@/components/LiquidTabs.vue'
 import NumberRoller from '@/components/NumberRoller.vue'
+import { statusLabels as projectStatusLabels } from '@/domain/projects'
+import { getLocalDateValue } from '@/domain/workspace'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type {
   LearningReportResponse,
@@ -18,18 +20,11 @@ const rangeValue = ref('7')
 const technologyKey = ref<TechnologyDimensionKey>('language')
 const utcOffsetMinutes = -new Date().getTimezoneOffset()
 
-function localDateValue(date: Date): string {
-  const year = date.getFullYear()
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const day = String(date.getDate()).padStart(2, '0')
-  return `${year}-${month}-${day}`
-}
-
 const todayDate = new Date()
-const periodEnd = ref(localDateValue(todayDate))
+const periodEnd = ref(getLocalDateValue(todayDate))
 const initialStart = new Date(todayDate)
 initialStart.setDate(initialStart.getDate() - 6)
-const periodStart = ref(localDateValue(initialStart))
+const periodStart = ref(getLocalDateValue(initialStart))
 
 const selectedDays = computed<TrendDays>(() => rangeValue.value === '30' ? 30 : 7)
 const currentTechnology = computed(() => analyticsStore.technologies?.dimensions.find(
@@ -49,10 +44,10 @@ const technologyHasData = computed(() => (currentTechnology.value?.items.length 
 
 const trendOption = computed<EChartsCoreOption>(() => ({
   animationDuration: 520,
-  color: ['#2867d8', '#19775f', '#d66e2c'],
+  color: ['#153c2d', '#548a72', '#8b6838'],
   aria: { enabled: true, decal: { show: true } },
   tooltip: { trigger: 'axis' },
-  legend: { top: 0, textStyle: { color: '#66747d' } },
+  legend: { top: 0, textStyle: { color: '#5c7067' } },
   grid: {
     top: 48,
     right: 18,
@@ -65,14 +60,14 @@ const trendOption = computed<EChartsCoreOption>(() => ({
     type: 'category',
     boundaryGap: false,
     data: analyticsStore.trend?.items.map((item) => item.date.slice(5)) ?? [],
-    axisLabel: { color: '#66747d', hideOverlap: true },
-    axisLine: { lineStyle: { color: '#d9e4e1' } },
+    axisLabel: { color: '#5c7067', hideOverlap: true },
+    axisLine: { lineStyle: { color: '#cfdfd5' } },
   },
   yAxis: {
     type: 'value',
     minInterval: 1,
-    axisLabel: { color: '#66747d' },
-    splitLine: { lineStyle: { color: '#e6eeec' } },
+    axisLabel: { color: '#5c7067' },
+    splitLine: { lineStyle: { color: '#e1eae3' } },
   },
   series: [
     {
@@ -101,10 +96,10 @@ const trendOption = computed<EChartsCoreOption>(() => ({
 
 const projectTrendOption = computed<EChartsCoreOption>(() => ({
   animationDuration: 520,
-  color: ['#2867d8', '#19775f', '#f1a468'],
+  color: ['#153c2d', '#548a72', '#8b6838'],
   aria: { enabled: true, decal: { show: true } },
   tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-  legend: { top: 0, textStyle: { color: '#66747d' } },
+  legend: { top: 0, textStyle: { color: '#5c7067' } },
   grid: {
     top: 48,
     right: 18,
@@ -116,14 +111,14 @@ const projectTrendOption = computed<EChartsCoreOption>(() => ({
   xAxis: {
     type: 'category',
     data: analyticsStore.trend?.items.map((item) => item.date.slice(5)) ?? [],
-    axisLabel: { color: '#66747d', hideOverlap: true },
-    axisLine: { lineStyle: { color: '#d9e4e1' } },
+    axisLabel: { color: '#5c7067', hideOverlap: true },
+    axisLine: { lineStyle: { color: '#cfdfd5' } },
   },
   yAxis: {
     type: 'value',
     minInterval: 1,
-    axisLabel: { color: '#66747d' },
-    splitLine: { lineStyle: { color: '#e6eeec' } },
+    axisLabel: { color: '#5c7067' },
+    splitLine: { lineStyle: { color: '#e1eae3' } },
   },
   series: [
     {
@@ -147,27 +142,23 @@ const projectTrendOption = computed<EChartsCoreOption>(() => ({
   ],
 }))
 
-const projectStatusLabels: Record<string, string> = {
-  not_started: '未开始',
-  in_progress: '进行中',
-  completed: '已完成',
-  published: '已发布',
-  archived: '已归档',
-}
-
 const statusOption = computed<EChartsCoreOption>(() => ({
   animationDuration: 520,
-  color: ['#9aa8ae', '#2867d8', '#19775f', '#f1a468', '#7355a8'],
+  color: ['#a0aba5', '#548a72', '#d9ed86', '#8b6838', '#737b69'],
   aria: { enabled: true, decal: { show: true } },
   tooltip: { trigger: 'item' },
-  legend: { bottom: 0, textStyle: { color: '#66747d' } },
+  legend: {
+    orient: 'vertical', right: 0, top: 'center', itemWidth: 12, itemHeight: 12,
+    textStyle: { color: '#5c7067', fontSize: 12 },
+    formatter: (name: string) => `${name}  ${analyticsStore.projects?.statuses.find((item) => projectStatusLabels[item.status] === name)?.count ?? 0}`,
+  },
   series: [
     {
       name: '项目状态',
       type: 'pie',
-      radius: ['42%', '68%'],
-      center: ['50%', '44%'],
-      label: { color: '#17232f', formatter: '{b}\n{c}' },
+      radius: ['43%', '66%'],
+      center: ['32%', '50%'],
+      label: { show: false },
       data: analyticsStore.projects?.statuses.map((item) => ({
         name: projectStatusLabels[item.status] ?? item.status,
         value: item.count,
@@ -178,7 +169,7 @@ const statusOption = computed<EChartsCoreOption>(() => ({
 
 const technologyOption = computed<EChartsCoreOption>(() => ({
   animationDuration: 520,
-  color: ['#2867d8'],
+  color: ['#153c2d'],
   aria: { enabled: true, decal: { show: true } },
   tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
   grid: {
@@ -192,22 +183,22 @@ const technologyOption = computed<EChartsCoreOption>(() => ({
   xAxis: {
     type: 'value',
     minInterval: 1,
-    axisLabel: { color: '#66747d' },
-    splitLine: { lineStyle: { color: '#e6eeec' } },
+    axisLabel: { color: '#5c7067' },
+    splitLine: { lineStyle: { color: '#e1eae3' } },
   },
   yAxis: {
     type: 'category',
     inverse: true,
     data: currentTechnology.value?.items.map((item) => item.name) ?? [],
-    axisLabel: { color: '#17232f', width: 120, overflow: 'truncate' },
-    axisLine: { lineStyle: { color: '#d9e4e1' } },
+    axisLabel: { color: '#153c2d', width: 120, overflow: 'truncate' },
+    axisLine: { lineStyle: { color: '#cfdfd5' } },
   },
   series: [
     {
       name: currentTechnology.value?.label ?? '技术栈',
       type: 'bar',
       barMaxWidth: 22,
-      label: { show: true, position: 'right', color: '#66747d' },
+      label: { show: true, position: 'right', color: '#5c7067' },
       data: currentTechnology.value?.items.map((item) => item.count) ?? [],
     },
   ],
@@ -334,7 +325,7 @@ onMounted(() => {
       </section>
 
       <div class="analytics-chart-grid">
-        <section class="analytics-figure analytics-figure--wide">
+        <section class="analytics-figure analytics-figure--wide analytics-figure--trend">
           <div class="analytics-figure__heading">
             <div><h2>学习与社区活跃趋势</h2><p>人数按天去重，社区互动按事件计数。</p></div>
             <span>{{ analyticsStore.trend.start_date }} 至 {{ analyticsStore.trend.end_date }}</span>
@@ -344,30 +335,6 @@ onMounted(() => {
             :empty="!trendHasData"
             empty-text="这一时间范围内还没有访问、任务完成或社区互动。"
             ariaLabel="学习与社区活跃折线图"
-          />
-        </section>
-
-        <section class="analytics-figure analytics-figure--wide">
-          <div class="analytics-figure__heading">
-            <div><h2>项目变化趋势</h2><p>完成时间从 P14 开始准确记录，不回填旧状态。</p></div>
-          </div>
-          <EChartPanel
-            :option="projectTrendOption"
-            :empty="!projectTrendHasData"
-            empty-text="这一时间范围内还没有项目新建、完成或发布事件。"
-            ariaLabel="项目变化柱状图"
-          />
-        </section>
-
-        <section class="analytics-figure">
-          <div class="analytics-figure__heading">
-            <div><h2>项目状态分布</h2><p>当前数据库中的项目状态快照。</p></div>
-          </div>
-          <EChartPanel
-            :option="statusOption"
-            :empty="!statusHasData"
-            empty-text="创建项目后即可看到状态分布。"
-            ariaLabel="项目状态环形图"
           />
         </section>
 
@@ -389,6 +356,33 @@ onMounted(() => {
             ariaLabel="技术栈使用条形图"
           />
         </section>
+
+        <section class="analytics-figure analytics-figure--status">
+          <div class="analytics-figure__heading">
+            <div><h2>项目状态分布</h2><p>当前项目的状态与数量。</p></div>
+          </div>
+          <div class="studio-status-chart">
+            <EChartPanel
+              :option="statusOption"
+              :empty="!statusHasData"
+              empty-text="创建项目后即可看到状态分布。"
+              ariaLabel="项目状态环形图"
+            />
+            <div v-if="statusHasData" class="studio-donut-total" aria-hidden="true"><strong>{{ analyticsStore.projects.total }}</strong><span>个项目</span></div>
+          </div>
+        </section>
+
+        <section class="analytics-figure analytics-figure--wide analytics-figure--projects">
+          <div class="analytics-figure__heading">
+            <div><h2>项目变化趋势</h2><p>按实际记录统计每日新建、完成与发布。</p></div>
+          </div>
+          <EChartPanel
+            :option="projectTrendOption"
+            :empty="!projectTrendHasData"
+            empty-text="这一时间范围内还没有项目新建、完成或发布事件。"
+            ariaLabel="项目变化柱状图"
+          />
+        </section>
       </div>
 
       <section class="analytics-reports" aria-labelledby="learning-report-title">
@@ -404,7 +398,7 @@ onMounted(() => {
             </label>
             <label class="field">
               结束日期
-              <input v-model="periodEnd" type="date" :min="periodStart" :max="localDateValue(todayDate)" required />
+              <input v-model="periodEnd" type="date" :min="periodStart" :max="getLocalDateValue(todayDate)" required />
             </label>
             <button class="primary-command" type="submit" :disabled="analyticsStore.generating">
               {{ analyticsStore.generating ? '正在生成' : '生成报告' }}

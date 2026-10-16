@@ -3,7 +3,7 @@ from datetime import UTC, date, datetime, time
 from math import ceil
 from typing import Any
 
-from app.core.exceptions import ConflictError, PermissionDeniedError, ResourceNotFoundError
+from app.core.exceptions import ConflictError, InputError, PermissionDeniedError, ResourceNotFoundError
 from app.models.course import Course
 from app.models.enums import (
     LearningPlanStatus,
@@ -11,7 +11,8 @@ from app.models.enums import (
     TaskPriority,
     TaskStatus,
 )
-from app.models.learning import DailyTask, LearningPlan, LearningRecord
+from app.models.learning import DailyTask, LearningPlan, LearningRecord, RECORD_SOURCE_KEYS
+from app.models.submission import FeedbackDecision
 from app.models.project import Project
 from app.repositories.learning import LearningPersistenceConflictError, LearningRepository
 
@@ -214,7 +215,7 @@ class LearningService:
         return self._save_plan(plan)
 
     def update_plan(self, plan_id: int, user_id: int, data: PlanUpdateData) -> PlanData:
-        plan = self._get_owned_plan(plan_id, user_id)
+        plan = self._get_owned_plan(plan_id, user_id, for_update=True)
         changes = data.changes
         project_id = changes.get("project_id", plan.project_id)
         course_id = changes.get("course_id", plan.course_id)
@@ -223,10 +224,23 @@ class LearningService:
         end_date = changes.get("end_date", plan.end_date)
         if start_date and end_date and end_date < start_date:
             raise ConflictError("计划结束日期不能早于开始日期")
+        if project_id is not None and project_id != plan.project_id:
+            task_project_ids = self._repository.list_plan_task_project_ids(plan.id, user_id)
+            if task_project_ids - {project_id}:
+                raise ConflictError("计划关联项目与已有任务项目不一致，请先调整任务项目或清空计划项目")
+        if (start_date, end_date) != (plan.start_date, plan.end_date) and (start_date or end_date):
+            first_task_date, last_task_date = self._repository.get_plan_task_date_bounds(plan.id, user_id)
+            if start_date and first_task_date and first_task_date < start_date:
+                raise ConflictError("计划开始日期晚于已有任务日期，请调整开始日期或任务日期")
+            if end_date and last_task_date and last_task_date > end_date:
+                raise ConflictError("计划结束日期早于已有任务日期，请调整结束日期或任务日期")
         if "status" in changes and changes["status"] != plan.status:
             self._validate_transition(plan.status, changes["status"], PLAN_TRANSITIONS, "计划")
-            if changes["status"] == LearningPlanStatus.COMPLETED and plan.progress < 100:
-                raise ConflictError("仍有未完成任务，不能完成学习计划")
+            if changes["status"] == LearningPlanStatus.COMPLETED:
+                total, completed = self._repository.get_plan_task_counts(plan.id, user_id)
+                if total == 0 or completed != total:
+                    raise ConflictError("仍有未完成任务或计划为空，不能完成学习计划")
+                plan.progress = 100
         for field_name, value in changes.items():
             setattr(plan, field_name, value)
         return self._save_plan(plan)
@@ -274,6 +288,7 @@ class LearningService:
         plan, project_id = self._resolve_task_relations(
             data.plan_id, data.project_id, user_id, data.scheduled_date
         )
+        self._ensure_plan_tasks_mutable(plan)
         task = DailyTask(
             user_id=user_id,
             title=data.title,
@@ -291,6 +306,7 @@ class LearningService:
 
     def update_task(self, task_id: int, user_id: int, data: TaskUpdateData) -> TaskData:
         task = self._get_owned_task(task_id, user_id)
+        self._lock_task_plans(task, data.changes.get("plan_id"))
         changes = data.changes
         old_plan_id = task.plan_id
         plan_id = changes.get("plan_id", task.plan_id)
@@ -299,6 +315,15 @@ class LearningService:
         plan, project_id = self._resolve_task_relations(
             plan_id, project_id, user_id, scheduled_date
         )
+        membership_changed = old_plan_id != plan_id
+        completed_count_changed = (task.status == TaskStatus.COMPLETED) != (
+            changes.get("status", task.status) == TaskStatus.COMPLETED
+        )
+        if membership_changed:
+            self._ensure_plan_tasks_mutable(task.plan)
+            self._ensure_plan_tasks_mutable(plan)
+        elif completed_count_changed:
+            self._ensure_plan_tasks_mutable(plan)
         start_time = changes.get("start_time", task.start_time)
         end_time = changes.get("end_time", task.end_time)
         if start_time and end_time and end_time <= start_time:
@@ -313,19 +338,28 @@ class LearningService:
         task.plan_id = plan.id if plan else None
         task.project_id = project_id
         plan_ids = {item for item in (old_plan_id, task.plan_id) if item is not None}
+        if plan and plan.status in {
+            LearningPlanStatus.COMPLETED, LearningPlanStatus.CANCELLED,
+        }:
+            # 终态计划只允许不影响任务集合或完成数量的编辑，保留原进度快照。
+            plan_ids.clear()
         return self._save_task(task, plan_ids)
 
     def complete_task(self, task_id: int, user_id: int) -> TaskData:
         task = self._get_owned_task(task_id, user_id)
+        self._lock_task_plans(task)
         if task.status == TaskStatus.COMPLETED:
             return self._to_task_data(task)
         self._validate_transition(task.status, TaskStatus.COMPLETED, TASK_TRANSITIONS, "任务")
+        self._ensure_plan_tasks_mutable(task.plan)
         task.status = TaskStatus.COMPLETED
         task.completed_at = datetime.now(UTC)
         return self._save_task(task, {task.plan_id} if task.plan_id else set())
 
     def delete_task(self, task_id: int, user_id: int) -> None:
         task = self._get_owned_task(task_id, user_id)
+        self._lock_task_plans(task)
+        self._ensure_plan_tasks_mutable(task.plan)
         try:
             self._repository.delete_task(task)
         except LearningPersistenceConflictError as exc:
@@ -348,6 +382,7 @@ class LearningService:
         return self._to_record_data(self._get_owned_record(record_id, user_id))
 
     def create_record(self, user_id: int, data: RecordCreateData) -> RecordData:
+        self._validate_record_metadata(data.record_metadata)
         project_id, course_id, task_id = self._resolve_record_relations(
             data.project_id, data.course_id, data.task_id, user_id
         )
@@ -370,9 +405,10 @@ class LearningService:
         self, record_id: int, user_id: int, data: RecordUpdateData
     ) -> RecordData:
         record = self._get_owned_record(record_id, user_id)
-        if (record.record_metadata or {}).get("source") == "teaching_submission":
+        if record.teaching_feedback is not None:
             raise ConflictError("教学通过记录由评阅结果生成，不能手工修改")
         changes = data.changes
+        self._validate_record_metadata(changes.get("record_metadata"))
         project_id, course_id, task_id = self._resolve_record_relations(
             changes.get("project_id", record.project_id),
             changes.get("course_id", record.course_id),
@@ -395,6 +431,13 @@ class LearningService:
         except LearningPersistenceConflictError as exc:
             raise ConflictError("学习记录当前无法删除") from exc
 
+    @staticmethod
+    def _ensure_plan_tasks_mutable(plan: LearningPlan | None) -> None:
+        if plan and plan.status in {
+            LearningPlanStatus.COMPLETED, LearningPlanStatus.CANCELLED,
+        }:
+            raise ConflictError("已完成或已取消的学习计划不能增减任务或改变完成数量")
+
     def _resolve_task_relations(
         self,
         plan_id: int | None,
@@ -402,7 +445,7 @@ class LearningService:
         user_id: int,
         scheduled_date: date,
     ) -> tuple[LearningPlan | None, int | None]:
-        plan = self._get_owned_plan(plan_id, user_id) if plan_id else None
+        plan = self._get_owned_plan(plan_id, user_id, for_update=True) if plan_id else None
         if project_id is not None:
             self._get_owned_project(project_id, user_id)
         if plan:
@@ -462,8 +505,15 @@ class LearningService:
         if course_id is not None:
             self._get_owned_course(course_id, user_id)
 
-    def _get_owned_plan(self, plan_id: int, user_id: int) -> LearningPlan:
-        plan = self._repository.get_plan(plan_id)
+    def _lock_task_plans(self, task: DailyTask, new_plan_id: int | None = None) -> None:
+        try:
+            self._repository.lock_task_plans(task, new_plan_id)
+        except LearningPersistenceConflictError as exc:
+            raise ConflictError("任务关联已被更新，请刷新后重试") from exc
+
+    def _get_owned_plan(self, plan_id: int, user_id: int, *, for_update: bool = False) -> LearningPlan:
+        plan = (self._repository.get_plan(plan_id, for_update=True) if for_update
+                else self._repository.get_plan(plan_id))
         if plan is None:
             raise ResourceNotFoundError("学习计划不存在")
         if plan.user_id != user_id:
@@ -565,6 +615,12 @@ class LearningService:
 
     @staticmethod
     def _to_record_data(record: LearningRecord) -> RecordData:
+        metadata = {key: value for key, value in (record.record_metadata or {}).items()
+                    if key not in RECORD_SOURCE_KEYS}
+        feedback = record.teaching_feedback
+        if feedback is not None and feedback.decision == FeedbackDecision.ACCEPT:
+            metadata.update(source="teaching_submission", submission_id=feedback.submission_id,
+                            version_number=feedback.version_number)
         return RecordData(
             id=record.id,
             title=record.title,
@@ -575,6 +631,11 @@ class LearningService:
             project=ResourceRefData(record.project.id, record.project.name) if record.project else None,
             course=ResourceRefData(record.course.id, record.course.name) if record.course else None,
             task=ResourceRefData(record.task.id, record.task.title) if record.task else None,
-            record_metadata=record.record_metadata,
+            record_metadata=metadata or None,
             created_at=record.created_at,
         )
+
+    @staticmethod
+    def _validate_record_metadata(metadata: object) -> None:
+        if isinstance(metadata, dict) and RECORD_SOURCE_KEYS & metadata.keys():
+            raise InputError("记录来源及教学关联字段由系统维护")

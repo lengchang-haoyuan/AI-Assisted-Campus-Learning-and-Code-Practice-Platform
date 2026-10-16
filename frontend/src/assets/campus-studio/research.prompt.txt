@@ -1,0 +1,11 @@
+Use case: product-mockup
+Asset type: original photographic research and Python/AI project cover for the ScholarHub Campus Studio website.
+Input images: Image 1 is a visual reference only, the approved website design. Match the visual mood of the bottom-left project card with forest-green notebooks and warm-cream research papers. Generate a NEW standalone cover photograph, never recreate a webpage.
+Primary request: a quietly ordered light oak study desk with three tactile green and cream cloth notebooks stacked at the left, neat warm-cream research sheets laid diagonally across the right and foreground, a slender dark-green pencil resting beside them, and a real leafy plant softly framing an edge.
+Scene/backdrop: serene sunlit study desk with warm cream background.
+Composition/framing: landscape 800x420 target, about 1.9:1; medium close still life from a gentle overhead angle; notebooks and sheets clearly visible, layered but uncluttered; full-bleed photograph.
+Style/medium: authored editorial product photograph, photoreal natural paper fibers, linen notebook cloth and oak grain.
+Lighting/mood: diffused morning sunlight with realistic soft leafy shadows; scholarly, tranquil and thoughtful.
+Color palette: forest #153C2D, mint #EDF4ED, warm cream #F9FAF5, sage and light oak; very sparse muted chartreuse accent.
+Materials/textures: textured unbranded book cloth, stacked paper edges, creamy matte research paper; only a few faint isolated abstract pencil strokes on papers, never writing or a data visualization.
+Constraints: notebooks have entirely blank covers and spines. NO words, NO letters, NO numbers, NO legible text, NO slogans, NO charts, NO graphs, NO plotted data, NO diagrams, NO tables, NO axes, NO logos, NO watermarks. NO screen or UI. Paper sheets must stay mostly blank with sparse freeform pencil gestures, not recognizable writing. No people.

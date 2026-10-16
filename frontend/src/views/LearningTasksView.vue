@@ -3,17 +3,20 @@ import { computed, onMounted, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 import { getApiErrorMessage } from '@/api/errors'
+import { listPlans } from '@/api/learning'
+import { listProjects } from '@/api/projects'
 import LearningNav from '@/components/LearningNav.vue'
 import LearningTaskEditor from '@/components/LearningTaskEditor.vue'
 import LiquidTabs, { type LiquidTabOption } from '@/components/LiquidTabs.vue'
 import { getLocalDateValue, priorityLabels, taskStatusLabels } from '@/domain/workspace'
 import { useLearningStore } from '@/stores/learning'
-import { useProjectStore } from '@/stores/projects'
-import type { LearningTaskCreateInput, LearningTaskResponse } from '@/types/learning'
+import type { LearningPlanResponse, LearningTaskCreateInput, LearningTaskResponse } from '@/types/learning'
+import type { ProjectResponse } from '@/types/project'
 import type { TaskStatus } from '@/types/workspace'
 
 const learningStore = useLearningStore()
-const projectStore = useProjectStore()
+const planOptions = ref<LearningPlanResponse[]>([])
+const projectOptions = ref<ProjectResponse[]>([])
 const scope = ref('today')
 const pageNumber = ref(1)
 const editingTask = ref<LearningTaskResponse | null>(null)
@@ -35,10 +38,16 @@ async function loadTasks(): Promise<void> {
 }
 
 async function loadReferences(): Promise<void> {
-  await Promise.all([
-    learningStore.fetchPlans({ page: 1, pageSize: 100 }),
-    projectStore.fetchProjects({ page: 1, pageSize: 100 }),
+  const [plans, projects] = await Promise.all([
+    listPlans({ page: 1, pageSize: 100 }),
+    listProjects({ page: 1, pageSize: 100 }),
   ])
+  planOptions.value = plans.items
+  projectOptions.value = projects.items
+}
+
+async function loadPlanOptions(): Promise<void> {
+  planOptions.value = (await listPlans({ page: 1, pageSize: 100 })).items
 }
 
 function openEditor(task: LearningTaskResponse | null = null): void {
@@ -56,7 +65,7 @@ async function saveTask(input: LearningTaskCreateInput & { status?: TaskStatus }
   try {
     await learningStore.saveTask(input, editingTask.value?.id)
     closeEditor()
-    await Promise.all([loadTasks(), learningStore.fetchPlans({ page: 1, pageSize: 100 })])
+    await Promise.all([loadTasks(), loadPlanOptions()])
     ElMessage.success(wasEditing ? '任务已更新' : '任务已创建')
   } catch (error: unknown) {
     ElMessage.error(getApiErrorMessage(error, '任务保存失败，请重试'))
@@ -66,7 +75,7 @@ async function saveTask(input: LearningTaskCreateInput & { status?: TaskStatus }
 async function completeTask(task: LearningTaskResponse): Promise<void> {
   try {
     await learningStore.completeTask(task.id)
-    await learningStore.fetchPlans({ page: 1, pageSize: 100 })
+    await loadPlanOptions()
     ElMessage.success('任务已完成，计划进度已同步')
   } catch (error: unknown) {
     ElMessage.error(getApiErrorMessage(error, '任务完成失败，请重试'))
@@ -79,7 +88,7 @@ async function removeTask(task: LearningTaskResponse): Promise<void> {
       confirmButtonText: '确认删除', cancelButtonText: '取消', type: 'warning',
     })
     await learningStore.removeTask(task.id)
-    await Promise.all([loadTasks(), learningStore.fetchPlans({ page: 1, pageSize: 100 })])
+    await Promise.all([loadTasks(), loadPlanOptions()])
     ElMessage.success('任务已删除')
   } catch (error: unknown) {
     if (error !== 'cancel' && error !== 'close') {
@@ -114,7 +123,7 @@ onMounted(() => {
 
     <section v-if="showEditor" class="workspace-panel workspace-editor learning-editor" aria-label="任务编辑器">
       <div class="panel-title-row"><h2>{{ editingTask ? '编辑任务' : '创建任务' }}</h2><button class="text-command" type="button" @click="closeEditor">关闭</button></div>
-      <LearningTaskEditor :key="editingTask?.id ?? 'new-task'" :initial-value="editingTask" :plans="learningStore.planPage.items" :projects="projectStore.projects" :submitting="learningStore.saving" @submit="saveTask" @cancel="closeEditor" />
+      <LearningTaskEditor :key="editingTask?.id ?? 'new-task'" :initial-value="editingTask" :plans="planOptions" :projects="projectOptions" :submitting="learningStore.saving" @submit="saveTask" @cancel="closeEditor" />
     </section>
 
     <div class="learning-toolbar">

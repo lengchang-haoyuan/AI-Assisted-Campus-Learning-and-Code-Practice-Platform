@@ -6,6 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, joinedload, selectinload
 
 from app.context.context_schema import CORE_PROJECT_FIELD_MAP
+from app.context.context_manager import ContextManager, ContextNode, ContextEdge, InvalidContextPolicyError
 from app.context.project_context import InvalidProjectContextError, ProjectContext
 from app.models.ai import AIRequest, AIResult
 from app.models.enums import (
@@ -16,6 +17,7 @@ from app.models.enums import (
 )
 from app.models.project import Project
 from app.models.workflow import Workflow, WorkflowNode, WorkflowRun
+from app.repositories.project_context import ProjectContextRepository
 
 
 class WorkflowExecutionPersistenceError(Exception):
@@ -24,6 +26,10 @@ class WorkflowExecutionPersistenceError(Exception):
 
 class WorkflowExecutionVersionError(Exception):
     """执行使用的 Workflow 或 Context 版本已过期。"""
+
+
+class WorkflowGraphVersionError(WorkflowExecutionVersionError):
+    """执行使用的工作流图版本已过期。"""
 
 
 class WorkflowActiveRunError(Exception):
@@ -56,28 +62,30 @@ class WorkflowExecutionRepository:
         stale_before: datetime,
     ) -> WorkflowRun:
         try:
-            workflow = self._session.scalar(
-                select(Workflow)
-                .where(Workflow.id == workflow_id)
-                .with_for_update()
-                .execution_options(populate_existing=True)
-            )
-            if workflow is None:
-                raise WorkflowRunStateError("工作流不存在")
+            workflow, project = self._lock_workflow(workflow_id)
             if workflow.version != expected_version:
+                raise WorkflowGraphVersionError
+            try:
+                persisted_context = ProjectContext.from_storage(project.context_data)
+                snapshot = ProjectContext.from_storage(context_snapshot)
+            except InvalidProjectContextError as exc:
+                raise WorkflowExecutionVersionError from exc
+            if persisted_context.version != snapshot.version:
                 raise WorkflowExecutionVersionError
 
-            active_runs = list(
-                self._session.scalars(
-                    select(WorkflowRun)
-                    .where(
-                        WorkflowRun.workflow_id == workflow_id,
-                        WorkflowRun.status == WorkflowRunStatus.RUNNING,
+            with self._session.no_autoflush:
+                active_runs = list(
+                    self._session.scalars(
+                        select(WorkflowRun)
+                        .where(
+                            WorkflowRun.workflow_id == workflow_id,
+                            WorkflowRun.status == WorkflowRunStatus.RUNNING,
+                        )
+                        .order_by(WorkflowRun.id)
+                        .with_for_update()
+                        .execution_options(populate_existing=True)
                     )
-                    .order_by(WorkflowRun.id)
-                    .with_for_update()
                 )
-            )
             for active_run in active_runs:
                 if active_run.started_at is not None and active_run.started_at > stale_before:
                     raise WorkflowActiveRunError
@@ -103,7 +111,9 @@ class WorkflowExecutionRepository:
             workflow.status = WorkflowStatus.RUNNING
             self._session.add(run)
             self._session.commit()
-            return self._reload_run(run.id)
+            saved_run = self._reload_run(run.id)
+            self._session.commit()
+            return saved_run
         except (
             WorkflowActiveRunError,
             WorkflowExecutionVersionError,
@@ -120,6 +130,7 @@ class WorkflowExecutionRepository:
         run_id: int,
         node_id: int,
         *,
+        expected_workflow_version: int,
         user_id: int,
         project_id: int,
         provider: str,
@@ -131,8 +142,11 @@ class WorkflowExecutionRepository:
         context_version: int,
     ) -> AIRequest:
         try:
-            run = self._required_run(run_id, for_update=True)
-            node = self._required_node(node_id, for_update=True)
+            with self._session.no_autoflush:
+                run, workflow, _ = self._lock_run(run_id)
+                if workflow.version != expected_workflow_version:
+                    raise WorkflowGraphVersionError
+                node = self._required_node(node_id, for_update=True)
             if run.status != WorkflowRunStatus.RUNNING:
                 raise WorkflowRunStateError("WorkflowRun 已不是运行状态")
             if node.workflow_id != run.workflow_id:
@@ -163,8 +177,11 @@ class WorkflowExecutionRepository:
             )
             self._session.add(request)
             self._session.commit()
-            return self._reload_request(request.id)
-        except WorkflowRunStateError:
+            saved_request = self._reload_request(request.id)
+            # 重载会开启读事务；模型等待前释放连接，并保留生产会话已加载的属性。
+            self._session.commit()
+            return saved_request
+        except (WorkflowExecutionVersionError, WorkflowRunStateError):
             self._session.rollback()
             raise
         except IntegrityError as exc:
@@ -177,6 +194,7 @@ class WorkflowExecutionRepository:
         node_id: int,
         request_id: int,
         *,
+        expected_workflow_version: int,
         expected_context_version: int,
         context: ProjectContext,
         changed_fields: frozenset[str],
@@ -192,11 +210,33 @@ class WorkflowExecutionRepository:
         total_tokens: int | None,
     ) -> None:
         try:
-            run = self._required_run(run_id, for_update=True)
-            node = self._required_node(node_id, for_update=True)
-            request = self._required_request(request_id, for_update=True)
-            workflow = self._required_workflow(run.workflow_id, for_update=True)
-            project = self._required_project(workflow.project_id, for_update=True)
+            with self._session.no_autoflush:
+                run, workflow, project = self._lock_run(run_id)
+                if workflow.version != expected_workflow_version:
+                    raise WorkflowGraphVersionError
+                workflows = ProjectContextRepository(self._session).lock_workflow_graphs(project)
+                project_nodes = [n for graph in workflows for n in graph.nodes]
+                project_edges = [e for graph in workflows for e in graph.edges]
+                stale_node_ids = ContextManager().stale_node_ids(
+                    [ContextNode(n.id, n.node_type, n.config) for n in project_nodes],
+                    [ContextEdge(e.source_node_id, e.target_node_id) for e in project_edges],
+                    changed_fields, source_node_id=node_id,
+                ) if changed_fields else frozenset()
+                locked_nodes = list(
+                    self._session.scalars(
+                        select(WorkflowNode)
+                        .where(
+                            WorkflowNode.id.in_(stale_node_ids | {node_id}),
+                        )
+                        .order_by(WorkflowNode.id)
+                        .with_for_update()
+                        .execution_options(populate_existing=True)
+                    )
+                )
+                node = next((item for item in locked_nodes if item.id == node_id), None)
+                if node is None:
+                    raise WorkflowRunStateError("工作流节点不存在")
+                request = self._required_request(request_id, for_update=True)
             if (
                 run.status != WorkflowRunStatus.RUNNING
                 or node.status != WorkflowNodeStatus.RUNNING
@@ -219,19 +259,14 @@ class WorkflowExecutionRepository:
                 if context_field in changed_fields:
                     setattr(project, project_field, context_values[context_field])
 
-            stale_nodes = list(
-                self._session.scalars(
-                    select(WorkflowNode)
-                    .where(
-                        WorkflowNode.workflow_id == run.workflow_id,
-                        WorkflowNode.id.in_(stale_node_ids or {-1}),
-                    )
-                    .with_for_update()
-                )
-            )
-            for stale_node in stale_nodes:
-                if stale_node.id != node_id:
+            for stale_node in locked_nodes:
+                if (stale_node.id != node_id and stale_node.id in stale_node_ids
+                        and stale_node.status != WorkflowNodeStatus.RUNNING):
                     stale_node.status = WorkflowNodeStatus.STALE
+            for graph in workflows:
+                if (graph.status != WorkflowStatus.RUNNING
+                        and any(n.id in stale_node_ids for n in graph.nodes)):
+                    graph.status = WorkflowStatus.STALE
 
             node.status = WorkflowNodeStatus.SUCCESS
             node.context_version = context.version
@@ -267,6 +302,7 @@ class WorkflowExecutionRepository:
         except (
             WorkflowExecutionVersionError,
             WorkflowRunStateError,
+            InvalidContextPolicyError,
         ):
             self._session.rollback()
             raise
@@ -274,17 +310,27 @@ class WorkflowExecutionRepository:
             self._session.rollback()
             raise WorkflowExecutionPersistenceError from exc
 
-    def finish_run(self, run_id: int) -> WorkflowRun:
+    def finish_run(
+        self, run_id: int, *, expected_workflow_version: int, expected_context_version: int
+    ) -> WorkflowRun:
         try:
-            run = self._required_run(run_id, for_update=True)
-            workflow = self._required_workflow(run.workflow_id, for_update=True)
+            run, workflow, project = self._lock_run(run_id)
+            if workflow.version != expected_workflow_version:
+                raise WorkflowGraphVersionError
+            try:
+                persisted_context = ProjectContext.from_storage(project.context_data)
+            except InvalidProjectContextError as exc:
+                raise WorkflowExecutionVersionError from exc
+            if persisted_context.version != expected_context_version:
+                raise WorkflowExecutionVersionError
             if run.status != WorkflowRunStatus.RUNNING:
                 raise WorkflowRunStateError("WorkflowRun 已不是运行状态")
             node_statuses = list(
                 self._session.scalars(
-                    select(WorkflowNode.status).where(
-                        WorkflowNode.workflow_id == workflow.id
-                    )
+                    select(WorkflowNode.status)
+                    .where(WorkflowNode.workflow_id == workflow.id)
+                    .order_by(WorkflowNode.id)
+                    .with_for_update()
                 )
             )
             run.status = WorkflowRunStatus.COMPLETED
@@ -297,7 +343,7 @@ class WorkflowExecutionRepository:
             )
             self._session.commit()
             return self._reload_run(run_id)
-        except WorkflowRunStateError:
+        except (WorkflowExecutionVersionError, WorkflowRunStateError):
             self._session.rollback()
             raise
         except IntegrityError as exc:
@@ -315,8 +361,7 @@ class WorkflowExecutionRepository:
         cancelled: bool = False,
     ) -> WorkflowRun:
         try:
-            run = self._required_run(run_id, for_update=True)
-            workflow = self._required_workflow(run.workflow_id, for_update=True)
+            run, workflow, _ = self._lock_run(run_id)
             if run.status not in {
                 WorkflowRunStatus.RUNNING,
                 WorkflowRunStatus.PENDING,
@@ -395,6 +440,14 @@ class WorkflowExecutionRepository:
         run.error_message = "上一次 WorkflowRun 已超时并由新运行恢复"
         run.finished_at = now
         self._session.execute(
+            update(WorkflowNode)
+            .where(
+                WorkflowNode.workflow_id == run.workflow_id,
+                WorkflowNode.status == WorkflowNodeStatus.RUNNING,
+            )
+            .values(status=WorkflowNodeStatus.STALE)
+        )
+        self._session.execute(
             update(AIRequest)
             .where(
                 AIRequest.workflow_run_id == run.id,
@@ -407,14 +460,33 @@ class WorkflowExecutionRepository:
                 finished_at=now,
             )
         )
-        self._session.execute(
-            update(WorkflowNode)
-            .where(
-                WorkflowNode.workflow_id == run.workflow_id,
-                WorkflowNode.status == WorkflowNodeStatus.RUNNING,
+
+    def _lock_workflow(self, workflow_id: int) -> tuple[Workflow, Project]:
+        # Context 写入先锁项目；所有执行事务沿同一顺序锁父记录，避免反向等待。
+        with self._session.no_autoflush:
+            project_id = self._session.scalar(
+                select(Workflow.project_id).where(Workflow.id == workflow_id)
             )
-            .values(status=WorkflowNodeStatus.STALE)
-        )
+            if project_id is None:
+                raise WorkflowRunStateError("工作流不存在")
+            project = self._required_project(project_id, for_update=True)
+            workflow = self._required_workflow(workflow_id, for_update=True)
+            if workflow.project_id != project.id:
+                raise WorkflowRunStateError("工作流项目关联已改变")
+            return workflow, project
+
+    def _lock_run(self, run_id: int) -> tuple[WorkflowRun, Workflow, Project]:
+        with self._session.no_autoflush:
+            workflow_id = self._session.scalar(
+                select(WorkflowRun.workflow_id).where(WorkflowRun.id == run_id)
+            )
+            if workflow_id is None:
+                raise WorkflowRunStateError("WorkflowRun 不存在")
+            workflow, project = self._lock_workflow(workflow_id)
+            run = self._required_run(run_id, for_update=True)
+            if run.workflow_id != workflow.id:
+                raise WorkflowRunStateError("WorkflowRun 工作流关联已改变")
+            return run, workflow, project
 
     def _required_run(self, run_id: int, *, for_update: bool) -> WorkflowRun:
         statement = select(WorkflowRun).where(WorkflowRun.id == run_id)

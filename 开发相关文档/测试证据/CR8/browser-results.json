@@ -1,0 +1,31 @@
+{
+  "boundaries": [
+    {
+      "tasks": 0,
+      "members": 0,
+      "passed": true
+    },
+    {
+      "tasks": 1,
+      "members": 1,
+      "passed": true
+    },
+    {
+      "tasks": 20,
+      "members": 50,
+      "passed": true
+    },
+    {
+      "tasks": 21,
+      "members": 51,
+      "passed": true
+    }
+  ],
+  "baselineHiddenSecondPages": true,
+  "draftPublish": true,
+  "memberRemovalFallback": true,
+  "retry": true,
+  "latestPageWins": true,
+  "studentPermissions": true,
+  "pageErrors": []
+}

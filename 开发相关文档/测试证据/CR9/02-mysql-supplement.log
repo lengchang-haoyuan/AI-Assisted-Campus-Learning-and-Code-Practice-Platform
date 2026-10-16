@@ -1,0 +1,26 @@
+{"timestamp":"2026-10-16T04:43:58.488440+00:00","level":"INFO","logger":"scholarhub.workflow","message":"workflow_run_started","status":"running","latency_ms":0,"workflow_run_id":15,"total_tokens":0}
+{"timestamp":"2026-10-16T04:43:58.493638+00:00","level":"INFO","logger":"scholarhub.workflow","message":"workflow_node_started","status":"running","latency_ms":0,"workflow_run_id":15,"node_id":7,"node_key":"architecture"}
+{"timestamp":"2026-10-16T04:43:58.494646+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-16T04:43:58.503891+00:00","level":"INFO","logger":"scholarhub.workflow","message":"workflow_node_finished","status":"success","latency_ms":0,"workflow_run_id":15,"node_id":7,"node_key":"architecture"}
+{"timestamp":"2026-10-16T04:43:58.509412+00:00","level":"INFO","logger":"scholarhub.workflow","message":"workflow_node_started","status":"running","latency_ms":0,"workflow_run_id":15,"node_id":8,"node_key":"child"}
+{"timestamp":"2026-10-16T04:43:58.509412+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-16T04:43:58.519265+00:00","level":"INFO","logger":"scholarhub.workflow","message":"workflow_node_finished","status":"success","latency_ms":0,"workflow_run_id":15,"node_id":8,"node_key":"child"}
+{"timestamp":"2026-10-16T04:43:58.525442+00:00","level":"INFO","logger":"scholarhub.workflow","message":"workflow_run_finished","status":"completed","latency_ms":40,"workflow_run_id":15,"termination_reason":"completed","total_tokens":200}
+{"timestamp":"2026-10-16T04:43:58.896178+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"41fd473760244021b2b197abe9d78ce2","method":"PATCH","path":"/api/v1/campus/assignments/2","status_code":422,"duration_ms":23.52}
+{"timestamp":"2026-10-16T04:43:58.898508+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"74ae69fe29ff40158af48cd1560f3c2c","method":"PATCH","path":"/api/v1/campus/assignments/2","status_code":422,"duration_ms":1.071}
+{"timestamp":"2026-10-16T04:43:58.899771+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"afae9989a80b4633b88decf36e7c898f","method":"PATCH","path":"/api/v1/campus/assignments/2","status_code":422,"duration_ms":1.085}
+{"timestamp":"2026-10-16T04:43:58.902241+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"79bf012bfb1d430889fb2e6a0b854c5b","method":"PATCH","path":"/api/v1/campus/assignments/2","status_code":422,"duration_ms":0.96}
+{"timestamp":"2026-10-16T04:43:58.907426+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"ef1bd1bbf9824f599bd8384623f7116c","method":"GET","path":"/api/v1/campus/assignments/2","status_code":200,"duration_ms":4.901}
+{"timestamp":"2026-10-16T04:43:58.912384+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"4cb3a4dfae24474499deb96208b47fe3","method":"GET","path":"/api/v1/campus/classes/3/assignments","status_code":200,"duration_ms":4.577}
+{"timestamp":"2026-10-16T04:43:59.006531+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"fe74e41dd29c4885ba99aff56c2ca065","method":"POST","path":"/api/v1/learning/records","status_code":422,"duration_ms":54.81}
+{"environment": "dedicated-local-mysql", "database": "scholarhub_l4_20261016_cr1", "initial_rows": 0}
+{"edit_then_start": "passed", "blocked_before_commit": true, "old_version_rejected": true}
+{"start_then_edit": "passed", "blocked_before_commit": true, "active_run_edit_rejected": true}
+{"simultaneous_starts": "passed", "successful_starts": 1, "active_run_conflicts": 1}
+{"context_then_complete": "passed", "blocked_before_commit": true, "context_conflict": true, "fail_run_without_deadlock": true}
+{"completed_run_edit": "passed", "completed_run": true, "edit_restored": true}
+{"cr3_mysql": "passed", "cross_workflow": true, "other_project_unchanged": true, "old_result_rejected": true, "incomplete_calls": 2, "atomic_rollback": true}
+{"cr6a_mysql": "passed", "rounding_rejected": true, "plan_task_race": true}
+{"cr5_mysql": "passed", "cr6b_mysql": "passed", "cr7_mysql": "passed", "null_revision_unchanged": true, "real_feedback_relation": true, "double_redeem_successes": 1, "membership_reused": true, "removed_class_member_unchanged": true}
+{"cr_mysql_supplement": "passed"}
+{"cleanup": "passed", "remaining_rows": 0}

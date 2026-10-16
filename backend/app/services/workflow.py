@@ -347,7 +347,9 @@ class WorkflowService:
     def update_workflow(
         self, workflow_id: int, owner_id: int, data: WorkflowUpdateData
     ) -> WorkflowData:
-        workflow = self._get_owned_workflow(workflow_id, owner_id)
+        workflow = self._get_owned_editable_workflow(
+            workflow_id, owner_id, allow_active_run="status" not in data.values
+        )
         if "status" in data.values:
             if data.values["status"] not in (WorkflowStatus.DRAFT, WorkflowStatus.READY):
                 raise ConflictError("执行状态由系统维护，只能手动设置草稿或就绪")
@@ -365,7 +367,7 @@ class WorkflowService:
             raise ConflictError("同一项目下的工作流名称不能重复") from exc
 
     def delete_workflow(self, workflow_id: int, owner_id: int) -> None:
-        workflow = self._get_owned_workflow(workflow_id, owner_id)
+        workflow = self._get_owned_editable_workflow(workflow_id, owner_id)
         try:
             self._repository.delete_workflow(workflow)
         except WorkflowPersistenceConflictError as exc:
@@ -378,7 +380,7 @@ class WorkflowService:
     def replace_graph(
         self, workflow_id: int, owner_id: int, data: WorkflowGraphUpdateData
     ) -> WorkflowGraphData:
-        workflow = self._get_owned_workflow(workflow_id, owner_id)
+        workflow = self._get_owned_editable_workflow(workflow_id, owner_id)
         if data.version != workflow.version:
             raise ConflictError("工作流已被更新，请刷新后重试")
         if workflow.status == WorkflowStatus.READY and not data.nodes:
@@ -429,7 +431,7 @@ class WorkflowService:
         owner_id: int,
         data: WorkflowNodeCreateData,
     ) -> WorkflowNodeData:
-        workflow = self._get_owned_workflow(workflow_id, owner_id)
+        workflow = self._get_owned_editable_workflow(workflow_id, owner_id)
         if len(workflow.nodes) >= MAX_GRAPH_NODES:
             raise ConflictError(f"工作流节点不能超过 {MAX_GRAPH_NODES} 个")
         if any(node.node_key == data.node_key for node in workflow.nodes):
@@ -462,7 +464,7 @@ class WorkflowService:
         owner_id: int,
         data: WorkflowNodeUpdateData,
     ) -> WorkflowNodeData:
-        workflow = self._get_owned_workflow(workflow_id, owner_id)
+        workflow = self._get_owned_editable_workflow(workflow_id, owner_id)
         node = self._get_workflow_node(workflow, node_id)
         requested_key = data.values.get("node_key")
         if requested_key is not None and any(
@@ -481,7 +483,7 @@ class WorkflowService:
     def delete_node(
         self, workflow_id: int, node_id: int, owner_id: int
     ) -> None:
-        workflow = self._get_owned_workflow(workflow_id, owner_id)
+        workflow = self._get_owned_editable_workflow(workflow_id, owner_id)
         node = self._get_workflow_node(workflow, node_id)
         if workflow.status == WorkflowStatus.READY and len(workflow.nodes) == 1:
             raise ConflictError("就绪工作流至少需要一个节点")
@@ -503,7 +505,7 @@ class WorkflowService:
         owner_id: int,
         data: WorkflowEdgeCreateData,
     ) -> WorkflowEdgeData:
-        workflow = self._get_owned_workflow(workflow_id, owner_id)
+        workflow = self._get_owned_editable_workflow(workflow_id, owner_id)
         if len(workflow.edges) >= MAX_GRAPH_EDGES:
             raise ConflictError(f"工作流边不能超过 {MAX_GRAPH_EDGES} 条")
         node_ids = {node.id for node in workflow.nodes}
@@ -538,7 +540,7 @@ class WorkflowService:
         owner_id: int,
         data: WorkflowEdgeUpdateData,
     ) -> WorkflowEdgeData:
-        workflow = self._get_owned_workflow(workflow_id, owner_id)
+        workflow = self._get_owned_editable_workflow(workflow_id, owner_id)
         edge = self._get_workflow_edge(workflow, edge_id)
         source_id = int(data.values.get("source_node_id", edge.source_node_id))
         target_id = int(data.values.get("target_node_id", edge.target_node_id))
@@ -560,7 +562,7 @@ class WorkflowService:
     def delete_edge(
         self, workflow_id: int, edge_id: int, owner_id: int
     ) -> None:
-        workflow = self._get_owned_workflow(workflow_id, owner_id)
+        workflow = self._get_owned_editable_workflow(workflow_id, owner_id)
         edge = self._get_workflow_edge(workflow, edge_id)
         try:
             self._repository.delete_edge(workflow, edge)
@@ -581,6 +583,18 @@ class WorkflowService:
             raise ResourceNotFoundError("工作流不存在")
         if workflow.project.owner_id != owner_id:
             raise PermissionDeniedError("无权操作该工作流")
+        return workflow
+
+    def _get_owned_editable_workflow(
+        self, workflow_id: int, owner_id: int, *, allow_active_run: bool = False
+    ) -> Workflow:
+        workflow = self._get_owned_workflow(workflow_id, owner_id)
+        try:
+            self._repository.lock_for_edit(workflow, allow_active_run=allow_active_run)
+        except WorkflowVersionConflictError as exc:
+            raise ConflictError("工作流已被更新，请刷新后重试") from exc
+        except WorkflowPersistenceConflictError as exc:
+            raise ConflictError("运行中的工作流不能修改执行图或删除") from exc
         return workflow
 
     def _require_execution_repository(self) -> WorkflowExecutionRepository:

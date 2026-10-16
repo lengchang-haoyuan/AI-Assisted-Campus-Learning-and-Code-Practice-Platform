@@ -31,7 +31,7 @@ from app.core.exceptions import (
     PermissionDeniedError,
     ResourceNotFoundError,
 )
-from app.models.enums import WorkflowNodeStatus
+from app.models.enums import WorkflowNodeStatus, WorkflowStatus
 from app.models.project import Project
 from app.models.workflow import WorkflowNode
 from app.repositories.project_context import (
@@ -263,8 +263,12 @@ class ProjectContextService:
         except InvalidContextPolicyError as exc:
             raise ConflictError("节点上下文权限配置无效") from exc
         for node in nodes:
-            if node.id in stale_node_ids:
+            if node.id in stale_node_ids and node.status != WorkflowNodeStatus.RUNNING:
                 node.status = WorkflowNodeStatus.STALE
+        for workflow in project.workflows:
+            if (workflow.status != WorkflowStatus.RUNNING
+                    and any(node.id in stale_node_ids for node in workflow.nodes)):
+                workflow.status = WorkflowStatus.STALE
         return stale_node_ids
 
     def _save(self, project: Project) -> Project:

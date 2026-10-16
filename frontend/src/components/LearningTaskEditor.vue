@@ -38,6 +38,27 @@ const form = reactive({
 })
 const validationError = ref<string | null>(null)
 
+const currentPlanIsTerminal = computed(() => {
+  const plan = props.plans.find((item) => item.id === props.initialValue?.plan?.id)
+  return plan?.status === 'completed' || plan?.status === 'cancelled'
+})
+
+const planOptions = computed(() => {
+  const currentPlan = props.initialValue?.plan
+  const options = props.plans
+    .filter((plan) => plan.status === 'draft' || plan.status === 'active' || plan.id === currentPlan?.id)
+    .map((plan) => ({
+      id: plan.id,
+      title: plan.status === 'completed'
+        ? `${plan.title}（已完成 · 当前关联）`
+        : plan.status === 'cancelled' ? `${plan.title}（已取消 · 当前关联）` : plan.title,
+    }))
+  if (currentPlan && !options.some((plan) => plan.id === currentPlan.id)) {
+    options.push({ id: currentPlan.id, title: `${currentPlan.name}（当前关联）` })
+  }
+  return options
+})
+
 const canChangeStatus = computed(() => {
   const status = props.initialValue?.status
   return status !== 'completed' && status !== 'cancelled'
@@ -105,10 +126,11 @@ function submit(): void {
       </label>
       <label class="field">
         关联计划
-        <select v-model="form.planId">
+        <select v-model="form.planId" :disabled="currentPlanIsTerminal">
           <option value="">不关联计划</option>
-          <option v-for="plan in plans" :key="plan.id" :value="String(plan.id)">{{ plan.title }}</option>
+          <option v-for="plan in planOptions" :key="plan.id" :value="String(plan.id)">{{ plan.title }}</option>
         </select>
+        <small v-if="currentPlanIsTerminal">计划已结束，保留当前关联；仍可编辑任务标题和说明。</small>
       </label>
       <label class="field">
         关联项目

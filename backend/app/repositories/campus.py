@@ -12,6 +12,7 @@ from app.models.campus import (
     CampusInvitation,
     CampusMembership,
     CampusRole,
+    InvitationStatus,
     MembershipStatus,
     PasswordReset,
 )
@@ -108,6 +109,20 @@ class CampusRepository:
             .where(CampusInvitation.id == invitation_id)
             .with_for_update()
         ).scalar_one_or_none()
+
+    def latest_consumed_invitation_id(self, user_id: int) -> int | None:
+        return self._session.scalar(select(CampusInvitation.id).where(
+            CampusInvitation.consumed_by_user_id == user_id,
+            CampusInvitation.status == InvitationStatus.CONSUMED,
+        ).order_by(CampusInvitation.consumed_at.desc(), CampusInvitation.id.desc()).limit(1))
+
+    def revoke_pending_invitations(self, user_id: int, email: str) -> None:
+        invitations = self._session.scalars(select(CampusInvitation).where(
+            or_(CampusInvitation.target_user_id == user_id, CampusInvitation.target_email == email.lower()),
+            CampusInvitation.status == InvitationStatus.PENDING,
+        ).order_by(CampusInvitation.id).with_for_update())
+        for invitation in invitations:
+            invitation.status = InvitationStatus.REVOKED
 
     def password_reset(self, digest: bytes) -> PasswordReset | None:
         return self._session.execute(

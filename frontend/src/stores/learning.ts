@@ -65,30 +65,40 @@ export const useLearningStore = defineStore('learning', () => {
   const planError = ref<string | null>(null)
   const taskError = ref<string | null>(null)
   const recordError = ref<string | null>(null)
+  let courseRequest = 0
+  let planRequest = 0
+  let taskRequest = 0
+  let recordRequest = 0
 
   async function fetchCourses(query: LearningPageQuery): Promise<void> {
+    const request = ++courseRequest
     loadingCourses.value = true
     courseError.value = null
     try {
-      coursePage.value = await listCourses(query)
+      const result = await listCourses(query)
+      if (request === courseRequest) coursePage.value = result
     } catch (error: unknown) {
+      if (request !== courseRequest) return
       courseError.value = getApiErrorMessage(error, '课程加载失败，请重试')
       throw error
     } finally {
-      loadingCourses.value = false
+      if (request === courseRequest) loadingCourses.value = false
     }
   }
 
   async function fetchPlans(query: LearningPageQuery): Promise<void> {
+    const request = ++planRequest
     loadingPlans.value = true
     planError.value = null
     try {
-      planPage.value = await listPlans(query)
+      const result = await listPlans(query)
+      if (request === planRequest) planPage.value = result
     } catch (error: unknown) {
+      if (request !== planRequest) return
       planError.value = getApiErrorMessage(error, '学习计划加载失败，请重试')
       throw error
     } finally {
-      loadingPlans.value = false
+      if (request === planRequest) loadingPlans.value = false
     }
   }
 
@@ -96,28 +106,34 @@ export const useLearningStore = defineStore('learning', () => {
     query: LearningPageQuery,
     options: { scheduledDate?: string; planId?: number } = {},
   ): Promise<void> {
+    const request = ++taskRequest
     loadingTasks.value = true
     taskError.value = null
     try {
-      taskPage.value = await listLearningTasks(query, options)
+      const result = await listLearningTasks(query, options)
+      if (request === taskRequest) taskPage.value = result
     } catch (error: unknown) {
+      if (request !== taskRequest) return
       taskError.value = getApiErrorMessage(error, '任务加载失败，请重试')
       throw error
     } finally {
-      loadingTasks.value = false
+      if (request === taskRequest) loadingTasks.value = false
     }
   }
 
   async function fetchRecords(query: LearningPageQuery): Promise<void> {
+    const request = ++recordRequest
     loadingRecords.value = true
     recordError.value = null
     try {
-      recordPage.value = await listLearningRecords(query)
+      const result = await listLearningRecords(query)
+      if (request === recordRequest) recordPage.value = result
     } catch (error: unknown) {
+      if (request !== recordRequest) return
       recordError.value = getApiErrorMessage(error, '学习记录加载失败，请重试')
       throw error
     } finally {
-      loadingRecords.value = false
+      if (request === recordRequest) loadingRecords.value = false
     }
   }
 

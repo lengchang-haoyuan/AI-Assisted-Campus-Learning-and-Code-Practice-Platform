@@ -1,0 +1,8 @@
+{"environment": "dedicated-local-mysql", "database": "scholarhub_l4_20261016_cr1", "initial_rows": 0}
+{"edit_then_start": "passed", "blocked_before_commit": true, "old_version_rejected": true}
+{"start_then_edit": "passed", "blocked_before_commit": true, "active_run_edit_rejected": true}
+{"simultaneous_starts": "passed", "successful_starts": 1, "active_run_conflicts": 1}
+{"context_then_complete": "passed", "blocked_before_commit": true, "context_conflict": true, "fail_run_without_deadlock": true}
+{"completed_run_edit": "passed", "completed_run": true, "edit_restored": true}
+{"cleanup": "passed", "remaining_rows": 0}
+{"cr1_mysql_concurrency": "passed", "checks": 5}

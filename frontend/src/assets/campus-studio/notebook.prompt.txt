@@ -1,0 +1,11 @@
+Use case: product-mockup
+Asset type: original photographic coding-practice project cover for the ScholarHub Campus Studio website.
+Input images: Image 1 is a visual reference only, the approved website design. Match the tactile notebook still life on the middle project card in the second row, with forest-green board and cream paper. Generate a NEW standalone scene, never recreate the website.
+Primary request: a beautiful warm-cream spiral-bound coding-practice notebook on a quiet light oak study desk, its cover decorated only with a small pair of inward-facing forest-green paper-cut angle brackets as a handmade physical motif, a lime-chartreuse paper bookmark peeking out at the top, a second forest-green notebook partly beneath, and a real plant leaf softly entering at the edge.
+Scene/backdrop: subtle forest-green textured study board behind the notebooks, simple warm cream and oak environment.
+Composition/framing: landscape 800x420 target, about 1.9:1; close-up gently angled editorial still life, spiral notebook as the main subject, entire notebook cover and bracket motif clearly framed, full-bleed photograph.
+Style/medium: authored editorial product photography; photoreal tactile cream paper, handmade cut-paper geometry, black metal spiral binding and natural linen notebook cover.
+Lighting/mood: soft natural morning sunlight with gentle shadows, calm and inviting.
+Color palette: forest #153C2D, mint #EDF4ED, warm cream #F9FAF5, sage and light oak, a single small lime-chartreuse bookmark.
+Materials/textures: thick handmade paper fibers, subtle cloth texture, real matte cut paper, metallic spiral rings and botanical leaf.
+Constraints: notebook is completely blank except for the pair of small physical paper-cut angle brackets. NO words, NO letters, NO numbers, NO code text, NO slogans, NO charts, NO graphs, NO plotted data, NO logos, NO watermarks. The angle brackets are simple decorative handmade paper shapes, not readable source code. NO website, NO UI, NO computer screen. No people.

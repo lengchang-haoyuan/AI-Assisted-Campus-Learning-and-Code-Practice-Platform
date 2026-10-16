@@ -1,0 +1,62 @@
+[
+  {
+    "name": "noticeboard",
+    "original_bytes": 942602,
+    "full_bytes": 49626,
+    "mobile_bytes": 10238,
+    "original_dimensions": [
+      1200,
+      600
+    ],
+    "mobile_width": 400,
+    "quality": 82
+  },
+  {
+    "name": "books",
+    "original_bytes": 482903,
+    "full_bytes": 33298,
+    "mobile_bytes": 12034,
+    "original_dimensions": [
+      800,
+      420
+    ],
+    "mobile_width": 400,
+    "quality": 82
+  },
+  {
+    "name": "components",
+    "original_bytes": 502793,
+    "full_bytes": 28442,
+    "mobile_bytes": 9582,
+    "original_dimensions": [
+      800,
+      420
+    ],
+    "mobile_width": 400,
+    "quality": 82
+  },
+  {
+    "name": "research",
+    "original_bytes": 496648,
+    "full_bytes": 34822,
+    "mobile_bytes": 12814,
+    "original_dimensions": [
+      800,
+      420
+    ],
+    "mobile_width": 400,
+    "quality": 82
+  },
+  {
+    "name": "notebook",
+    "original_bytes": 563528,
+    "full_bytes": 48606,
+    "mobile_bytes": 14012,
+    "original_dimensions": [
+      800,
+      420
+    ],
+    "mobile_width": 400,
+    "quality": 82
+  }
+]

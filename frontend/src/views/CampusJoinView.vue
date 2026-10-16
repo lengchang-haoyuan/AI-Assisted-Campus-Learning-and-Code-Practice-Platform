@@ -31,8 +31,7 @@ async function redeem(): Promise<void> {
   errorMessage.value = null
   try {
     await redeemInvitation(token.value.trim())
-    authStore.logout()
-    await router.replace({ name: 'login', query: { notice: '校园身份已加入，请重新登录' } })
+    authStore.logout(router.resolve({ name: 'login', query: { notice: '校园身份已加入，请重新登录' } }).href)
   } catch (error: unknown) {
     errorMessage.value = getApiErrorMessage(error, '邀请兑换失败')
   } finally {

@@ -29,6 +29,64 @@ const errorMessage = ref<string | null>(null)
 const actionKey = ref<string | null>(null)
 const showClassEditor = ref(false)
 const showAssignmentEditor = ref(false)
+const createdAssignmentId = ref<number | null>(null)
+const hasAddedMember = ref(false)
+const assignmentPage = ref(1)
+const assignmentTotal = ref(0)
+const assignmentTotalPages = ref(0)
+const assignmentLoading = ref(false)
+const assignmentError = ref<string | null>(null)
+const memberPage = ref(1)
+const memberTotal = ref(0)
+const memberTotalPages = ref(0)
+const memberLoading = ref(false)
+const memberError = ref<string | null>(null)
+let assignmentRequest = 0
+let memberRequest = 0
+
+async function loadAssignments(page = assignmentPage.value): Promise<void> {
+  const request = ++assignmentRequest
+  assignmentPage.value = page
+  assignmentLoading.value = true
+  assignmentError.value = null
+  try {
+    const result = await listTeachingAssignments(classId, page)
+    if (request !== assignmentRequest) return
+    const lastPage = Math.max(result.total_pages, 1)
+    if (page > lastPage) { await loadAssignments(lastPage); return }
+    assignments.value = result.items
+    assignmentTotal.value = result.total
+    assignmentTotalPages.value = result.total_pages
+  } catch (error: unknown) {
+    if (request !== assignmentRequest) return
+    assignments.value = []
+    assignmentError.value = getApiErrorMessage(error, '教学任务加载失败')
+  } finally {
+    if (request === assignmentRequest) assignmentLoading.value = false
+  }
+}
+
+async function loadMembers(page = memberPage.value): Promise<void> {
+  const request = ++memberRequest
+  memberPage.value = page
+  memberLoading.value = true
+  memberError.value = null
+  try {
+    const result = await listClassMembers(classId, page)
+    if (request !== memberRequest) return
+    const lastPage = Math.max(result.total_pages, 1)
+    if (page > lastPage) { await loadMembers(lastPage); return }
+    members.value = result.items
+    memberTotal.value = result.total
+    memberTotalPages.value = result.total_pages
+  } catch (error: unknown) {
+    if (request !== memberRequest) return
+    members.value = []
+    memberError.value = getApiErrorMessage(error, '班级成员加载失败')
+  } finally {
+    if (request === memberRequest) memberLoading.value = false
+  }
+}
 
 const classForm = reactive({ name: '', course_title: '', term_label: '' })
 const memberForm = reactive<{ campus_membership_id: number | null; member_role: ClassMemberRole }>({ campus_membership_id: null, member_role: 'student' })
@@ -68,10 +126,10 @@ async function loadPage(): Promise<void> {
     resetClassForm(value)
     const requests: Promise<unknown>[] = []
     if (value.viewer_role !== 'administrator') {
-      requests.push(listTeachingAssignments(classId).then((page) => { assignments.value = page.items }))
+      requests.push(loadAssignments())
     }
     if (value.can_view_members) {
-      requests.push(listClassMembers(classId).then((page) => { members.value = page.items }))
+      requests.push(loadMembers())
     }
     if (value.can_create_assignments) {
       requests.push(listProjects({ page: 1, pageSize: 100 }).then((page) => { projects.value = page.items }))
@@ -116,9 +174,10 @@ async function addMember(): Promise<void> {
   actionKey.value = 'add-member'
   try {
     await addClassMember(classId, memberForm.campus_membership_id, memberForm.member_role)
-    members.value = (await listClassMembers(classId)).items
+    await loadMembers()
+    hasAddedMember.value = true
     memberForm.campus_membership_id = null
-    ElMessage.success('班级成员已加入')
+    ElMessage.success('班级成员已加入，可通过分页查看')
   } catch (error: unknown) {
     ElMessage.error(getApiErrorMessage(error, '成员加入失败'))
   } finally { actionKey.value = null }
@@ -130,7 +189,7 @@ async function removeMember(member: ClassMemberResponse): Promise<void> {
     await ElMessageBox.confirm(`确定将“${member.username}”移出班级吗？`, '移除成员', { type: 'warning' })
     actionKey.value = `member:${member.id}`
     await updateClassMember(classId, member.id, member.revision, 'removed')
-    members.value = (await listClassMembers(classId)).items
+    await loadMembers()
     ElMessage.success('成员已移除')
   } catch (error: unknown) {
     if (error !== 'cancel' && error !== 'close') ElMessage.error(getApiErrorMessage(error, '成员移除失败'))
@@ -159,7 +218,7 @@ async function createAssignment(): Promise<void> {
   if (actionKey.value || !assignmentForm.due_at) return
   actionKey.value = 'assignment'
   try {
-    await createTeachingAssignment(classId, {
+    const created = await createTeachingAssignment(classId, {
       title: assignmentForm.title.trim(),
       instructions: assignmentForm.instructions.trim(),
       learning_objectives: lines(assignmentForm.learning_objectives),
@@ -167,10 +226,11 @@ async function createAssignment(): Promise<void> {
       due_at: new Date(assignmentForm.due_at).toISOString(),
       source_project_id: assignmentForm.source_project_id,
     })
+    createdAssignmentId.value = created.id
     Object.assign(assignmentForm, { title: '', instructions: '', learning_objectives: '', acceptance_criteria: '', due_at: '', source_project_id: null })
-    assignments.value = (await listTeachingAssignments(classId)).items
+    await loadAssignments()
     showAssignmentEditor.value = false
-    ElMessage.success('任务草稿已保存')
+    ElMessage.success('任务草稿已保存，可通过分页查看')
   } catch (error: unknown) {
     ElMessage.error(getApiErrorMessage(error, '任务草稿保存失败'))
   } finally { actionKey.value = null }
@@ -205,18 +265,27 @@ onMounted(() => void loadPage())
 
       <section v-if="teachingClass.can_view_members" class="teaching-panel">
         <div class="teaching-panel__heading"><div><span>成员管理</span><h2>班级成员</h2></div><p>使用成员本人校园身份编号加入，角色必须与核验身份一致。</p></div>
-        <form v-if="teachingClass.status === 'active'" class="teaching-member-form" @submit.prevent="addMember">
+        <form v-if="teachingClass.can_manage_members && teachingClass.status === 'active'" class="teaching-member-form" @submit.prevent="addMember">
           <label class="field"><span>校园身份编号</span><input v-model.number="memberForm.campus_membership_id" type="number" min="1" required /></label>
           <label class="field"><span>班级角色</span><select v-model="memberForm.member_role"><option value="student">学生</option><option v-if="teachingClass.viewer_role === 'administrator'" value="teacher">教师</option></select></label>
           <button class="primary-command" type="submit" :disabled="!!actionKey">加入班级</button>
         </form>
-        <div class="teaching-member-list">
+        <div v-if="memberError" class="inline-alert is-error" role="alert"><span>{{ memberError }}</span><button type="button" @click="loadMembers()">重试</button></div>
+        <p v-if="hasAddedMember" class="teaching-note"><button class="text-command" type="button" @click="loadMembers(Math.max(memberTotalPages, 1))">查看新加入成员</button></p>
+        <p v-if="memberLoading" role="status">正在加载成员…</p>
+        <div v-else class="teaching-member-list">
           <article v-for="member in members" :key="member.id">
             <div><strong>{{ member.username }}</strong><small>校园身份 #{{ member.campus_membership_id }} · {{ member.member_role === 'teacher' ? '教师' : '学生' }}</small></div>
             <span class="status-chip">{{ member.status === 'active' ? '有效' : member.status === 'left' ? '已退出' : '已移除' }}</span>
             <button v-if="teachingClass.can_manage_members && member.status === 'active' && (member.member_role === 'student' || teachingClass.viewer_role === 'administrator')" class="text-command danger-text-command" type="button" :disabled="!!actionKey" @click="removeMember(member)">移除</button>
           </article>
         </div>
+        <p v-if="!memberLoading && !memberError && !members.length" class="teaching-note">还没有班级成员。</p>
+        <nav v-if="memberTotalPages > 1" class="pagination" aria-label="班级成员分页">
+          <button type="button" :disabled="memberPage <= 1" @click="loadMembers(memberPage - 1)">上一页</button>
+          <span>第 {{ memberPage }} / {{ memberTotalPages }} 页 · 共 {{ memberTotal }} 人</span>
+          <button type="button" :disabled="memberPage >= memberTotalPages" @click="loadMembers(memberPage + 1)">下一页</button>
+        </nav>
       </section>
 
       <section class="teaching-panel">
@@ -224,6 +293,7 @@ onMounted(() => void loadPage())
           <div><span>教学任务</span><h2>{{ teachingClass.viewer_role === 'student' ? '已发布任务' : '任务列表' }}</h2></div>
           <button v-if="teachingClass.can_create_assignments" class="primary-command" type="button" @click="showAssignmentEditor = !showAssignmentEditor">{{ showAssignmentEditor ? '收起表单' : '新建任务' }}</button>
         </div>
+        <p v-if="createdAssignmentId" class="teaching-note">草稿已保存。<RouterLink :to="`/campus/assignments/${createdAssignmentId}`">查看新建草稿</RouterLink></p>
         <form v-if="showAssignmentEditor" class="form-grid teaching-assignment-form" @submit.prevent="createAssignment">
           <label class="field field-span-2"><span>任务标题</span><input v-model.trim="assignmentForm.title" required minlength="2" maxlength="160" /></label>
           <label class="field field-span-2"><span>任务说明</span><textarea v-model.trim="assignmentForm.instructions" required minlength="10" maxlength="20000" /></label>
@@ -234,12 +304,19 @@ onMounted(() => void loadPage())
           <div class="form-actions field-span-2"><button class="primary-command" type="submit" :disabled="!!actionKey">{{ actionKey === 'assignment' ? '正在保存' : '保存草稿' }}</button></div>
         </form>
         <div v-if="teachingClass.viewer_role === 'administrator'" class="teaching-note">管理员可以管理班级与成员，但不读取教学任务正文。</div>
+        <div v-else-if="assignmentError" class="inline-alert is-error" role="alert"><span>{{ assignmentError }}</span><button type="button" @click="loadAssignments()">重试</button></div>
+        <p v-else-if="assignmentLoading" role="status">正在加载教学任务…</p>
         <div v-else-if="assignments.length" class="teaching-assignment-list">
           <RouterLink v-for="assignment in assignments" :key="assignment.id" :to="`/campus/assignments/${assignment.id}`">
             <div><span class="status-chip">{{ { draft: '草稿', published: '已发布', closed: '已关闭', archived: '已归档' }[assignment.status] }}</span><h3>{{ assignment.title }}</h3><p>截止：{{ formatDate(assignment.due_at) }}</p></div><strong>v{{ assignment.revision }} →</strong>
           </RouterLink>
         </div>
         <div v-else class="teaching-note">{{ teachingClass.viewer_role === 'student' ? '教师还没有发布任务。' : '还没有教学任务。' }}</div>
+        <nav v-if="assignmentTotalPages > 1 && teachingClass.viewer_role !== 'administrator'" class="pagination" aria-label="教学任务分页">
+          <button type="button" :disabled="assignmentPage <= 1" @click="loadAssignments(assignmentPage - 1)">上一页</button>
+          <span>第 {{ assignmentPage }} / {{ assignmentTotalPages }} 页 · 共 {{ assignmentTotal }} 项</span>
+          <button type="button" :disabled="assignmentPage >= assignmentTotalPages" @click="loadAssignments(assignmentPage + 1)">下一页</button>
+        </nav>
       </section>
     </template>
   </div>

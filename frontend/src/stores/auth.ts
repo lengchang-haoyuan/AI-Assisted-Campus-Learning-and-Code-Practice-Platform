@@ -64,8 +64,10 @@ export const useAuthStore = defineStore('auth', () => {
     return currentUser.value
   }
 
-  function logout(): void {
+  function logout(redirectUrl = '/login'): void {
     clearSession()
+    // 销毁全部私人 Store 及在途请求上下文，所有退出入口共用同一边界。
+    window.location.replace(redirectUrl)
   }
 
   return {

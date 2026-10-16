@@ -3,16 +3,20 @@ import { onMounted, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 import { getApiErrorMessage } from '@/api/errors'
+import { listCourses, listLearningTasks } from '@/api/learning'
+import { listProjects } from '@/api/projects'
 import LearningNav from '@/components/LearningNav.vue'
 import LearningRecordEditor from '@/components/LearningRecordEditor.vue'
 import NumberRoller from '@/components/NumberRoller.vue'
 import { formatWorkspaceDate, recordTypeLabels } from '@/domain/workspace'
 import { useLearningStore } from '@/stores/learning'
-import { useProjectStore } from '@/stores/projects'
-import type { LearningRecordCreateInput, LearningRecordResponse } from '@/types/learning'
+import type { CourseResponse, LearningTaskResponse, LearningRecordCreateInput, LearningRecordResponse } from '@/types/learning'
+import type { ProjectResponse } from '@/types/project'
 
 const learningStore = useLearningStore()
-const projectStore = useProjectStore()
+const courseOptions = ref<CourseResponse[]>([])
+const taskOptions = ref<LearningTaskResponse[]>([])
+const projectOptions = ref<ProjectResponse[]>([])
 const pageNumber = ref(1)
 const editingRecord = ref<LearningRecordResponse | null>(null)
 const showEditor = ref(false)
@@ -22,11 +26,14 @@ async function loadRecords(): Promise<void> {
 }
 
 async function loadReferences(): Promise<void> {
-  await Promise.all([
-    learningStore.fetchCourses({ page: 1, pageSize: 100 }),
-    learningStore.fetchTasks({ page: 1, pageSize: 100 }),
-    projectStore.fetchProjects({ page: 1, pageSize: 100 }),
+  const [courses, tasks, projects] = await Promise.all([
+    listCourses({ page: 1, pageSize: 100 }),
+    listLearningTasks({ page: 1, pageSize: 100 }),
+    listProjects({ page: 1, pageSize: 100 }),
   ])
+  courseOptions.value = courses.items
+  taskOptions.value = tasks.items
+  projectOptions.value = projects.items
 }
 
 function openEditor(record: LearningRecordResponse | null = null): void {
@@ -87,7 +94,7 @@ onMounted(() => {
 
     <section v-if="showEditor" class="workspace-panel workspace-editor learning-editor" aria-label="学习记录编辑器">
       <div class="panel-title-row"><h2>{{ editingRecord ? '编辑学习记录' : '保存学习记录' }}</h2><button class="text-command" type="button" @click="closeEditor">关闭</button></div>
-      <LearningRecordEditor :key="editingRecord?.id ?? 'new-record'" :initial-value="editingRecord" :courses="learningStore.coursePage.items" :projects="projectStore.projects" :tasks="learningStore.taskPage.items" :submitting="learningStore.saving" @submit="saveRecord" @cancel="closeEditor" />
+      <LearningRecordEditor :key="editingRecord?.id ?? 'new-record'" :initial-value="editingRecord" :courses="courseOptions" :projects="projectOptions" :tasks="taskOptions" :submitting="learningStore.saving" @submit="saveRecord" @cancel="closeEditor" />
     </section>
 
     <div v-if="learningStore.recordError" class="inline-alert is-error" role="alert"><span>{{ learningStore.recordError }}</span><button type="button" @click="loadRecords">重试</button></div>

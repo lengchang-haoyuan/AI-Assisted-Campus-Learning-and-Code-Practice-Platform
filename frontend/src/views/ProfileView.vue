@@ -37,8 +37,7 @@ async function updatePassword(): Promise<void> {
   errorMessage.value = null
   try {
     await changePassword(securityForm.current, securityForm.next)
-    authStore.logout()
-    await router.replace({ name: 'login', query: { notice: '密码已修改，请重新登录' } })
+    authStore.logout(router.resolve({ name: 'login', query: { notice: '密码已修改，请重新登录' } }).href)
   } catch (error: unknown) {
     errorMessage.value = getApiErrorMessage(error, '密码修改失败')
   } finally { submitting.value = false }
@@ -48,8 +47,7 @@ async function revokeSessions(): Promise<void> {
   if (!window.confirm('确认撤销当前账号的全部登录会话？')) return
   try {
     await logoutAll()
-    authStore.logout()
-    await router.replace({ name: 'login', query: { notice: '全部会话已撤销，请重新登录' } })
+    authStore.logout(router.resolve({ name: 'login', query: { notice: '全部会话已撤销，请重新登录' } }).href)
   } catch (error: unknown) {
     errorMessage.value = getApiErrorMessage(error, '会话撤销失败')
   }

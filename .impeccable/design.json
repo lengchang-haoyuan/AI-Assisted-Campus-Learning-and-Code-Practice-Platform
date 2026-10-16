@@ -1,133 +1,405 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-01T12:19:06+08:00",
-  "title": "Design System: ScholarHub",
+  "generatedAt": "2026-10-14T10:56:02Z",
+  "title": "Design System: ScholarHub · Campus Studio",
   "extensions": {
     "colorMeta": {
       "ink": {
+        "role": "primary",
+        "displayName": "森林墨色",
+        "tonalRamp": [
+          "oklch(15% 0.0521 165.18)",
+          "oklch(26% 0.0521 165.18)",
+          "oklch(37% 0.0521 165.18)",
+          "oklch(49% 0.0521 165.18)",
+          "oklch(61% 0.0521 165.18)",
+          "oklch(73% 0.0521 165.18)",
+          "oklch(85% 0.0521 165.18)",
+          "oklch(95% 0.0521 165.18)"
+        ]
+      },
+      "muted": {
         "role": "neutral",
-        "displayName": "深墨",
-        "canonical": "#17232f",
-        "tonalRamp": ["#0b1117", "#17232f", "#2c3a47", "#485864", "#6b7982", "#98a2a8", "#c8ced1", "#eff2f3"]
+        "displayName": "灰叶文字",
+        "tonalRamp": [
+          "oklch(15% 0.0276 166.27)",
+          "oklch(26% 0.0276 166.27)",
+          "oklch(37% 0.0276 166.27)",
+          "oklch(49% 0.0276 166.27)",
+          "oklch(61% 0.0276 166.27)",
+          "oklch(73% 0.0276 166.27)",
+          "oklch(85% 0.0276 166.27)",
+          "oklch(95% 0.0276 166.27)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "暖白纸面",
+        "tonalRamp": [
+          "oklch(15% 0.0067 115.70)",
+          "oklch(26% 0.0067 115.70)",
+          "oklch(37% 0.0067 115.70)",
+          "oklch(49% 0.0067 115.70)",
+          "oklch(61% 0.0067 115.70)",
+          "oklch(73% 0.0067 115.70)",
+          "oklch(85% 0.0067 115.70)",
+          "oklch(95% 0.0067 115.70)"
+        ]
       },
       "canvas": {
         "role": "neutral",
-        "displayName": "实验台底色",
-        "canonical": "#f4f8f7",
-        "tonalRamp": ["#18201e", "#2d3b37", "#4f625d", "#768a84", "#9fb0ab", "#c1cfcb", "#dde7e4", "#f4f8f7"]
+        "displayName": "薄荷画布",
+        "tonalRamp": [
+          "oklch(15% 0.0119 145.48)",
+          "oklch(26% 0.0119 145.48)",
+          "oklch(37% 0.0119 145.48)",
+          "oklch(49% 0.0119 145.48)",
+          "oklch(61% 0.0119 145.48)",
+          "oklch(73% 0.0119 145.48)",
+          "oklch(85% 0.0119 145.48)",
+          "oklch(95% 0.0119 145.48)"
+        ]
       },
-      "seafoam-strong": {
-        "role": "primary",
-        "displayName": "实验室海沫绿",
-        "canonical": "#19775f",
-        "tonalRamp": ["#06251d", "#0b3e30", "#105844", "#19775f", "#35957b", "#67b79d", "#9ed7c2", "#ddf4eb"]
+      "line": {
+        "role": "neutral",
+        "displayName": "浅叶边线",
+        "tonalRamp": [
+          "oklch(15% 0.0218 158.54)",
+          "oklch(26% 0.0218 158.54)",
+          "oklch(37% 0.0218 158.54)",
+          "oklch(49% 0.0218 158.54)",
+          "oklch(61% 0.0218 158.54)",
+          "oklch(73% 0.0218 158.54)",
+          "oklch(85% 0.0218 158.54)",
+          "oklch(95% 0.0218 158.54)"
+        ]
       },
-      "cobalt": {
+      "mint": {
+        "role": "secondary",
+        "displayName": "柔薄荷",
+        "tonalRamp": [
+          "oklch(15% 0.0375 164.00)",
+          "oklch(26% 0.0375 164.00)",
+          "oklch(37% 0.0375 164.00)",
+          "oklch(49% 0.0375 164.00)",
+          "oklch(61% 0.0375 164.00)",
+          "oklch(73% 0.0375 164.00)",
+          "oklch(85% 0.0375 164.00)",
+          "oklch(95% 0.0375 164.00)"
+        ]
+      },
+      "mint-strong": {
         "role": "primary",
-        "displayName": "行动钴蓝",
-        "canonical": "#2867d8",
-        "tonalRamp": ["#091c43", "#102e70", "#18449f", "#2867d8", "#5788e3", "#89aaed", "#bccdf6", "#eef3ff"]
+        "displayName": "深叶绿",
+        "tonalRamp": [
+          "oklch(15% 0.0799 164.47)",
+          "oklch(26% 0.0799 164.47)",
+          "oklch(37% 0.0799 164.47)",
+          "oklch(49% 0.0799 164.47)",
+          "oklch(61% 0.0799 164.47)",
+          "oklch(73% 0.0799 164.47)",
+          "oklch(85% 0.0799 164.47)",
+          "oklch(95% 0.0799 164.47)"
+        ]
+      },
+      "lime-marker": {
+        "role": "secondary",
+        "displayName": "青柠荧光",
+        "tonalRamp": [
+          "oklch(15% 0.1301 118.08)",
+          "oklch(26% 0.1301 118.08)",
+          "oklch(37% 0.1301 118.08)",
+          "oklch(49% 0.1301 118.08)",
+          "oklch(61% 0.1301 118.08)",
+          "oklch(73% 0.1301 118.08)",
+          "oklch(85% 0.1301 118.08)",
+          "oklch(95% 0.1301 118.08)"
+        ]
+      },
+      "chart-green": {
+        "role": "secondary",
+        "displayName": "叶灰绿",
+        "tonalRamp": [
+          "oklch(15% 0.0689 164.26)",
+          "oklch(26% 0.0689 164.26)",
+          "oklch(37% 0.0689 164.26)",
+          "oklch(49% 0.0689 164.26)",
+          "oklch(61% 0.0689 164.26)",
+          "oklch(73% 0.0689 164.26)",
+          "oklch(85% 0.0689 164.26)",
+          "oklch(95% 0.0689 164.26)"
+        ]
       },
       "apricot": {
-        "role": "secondary",
-        "displayName": "布告杏橙",
-        "canonical": "#f1a468",
-        "tonalRamp": ["#3c1e08", "#683712", "#99531f", "#c9783f", "#f1a468", "#f6bd92", "#fad7ba", "#fff1e6"]
+        "role": "tertiary",
+        "displayName": "纸页暖棕",
+        "tonalRamp": [
+          "oklch(15% 0.0788 73.51)",
+          "oklch(26% 0.0788 73.51)",
+          "oklch(37% 0.0788 73.51)",
+          "oklch(49% 0.0788 73.51)",
+          "oklch(61% 0.0788 73.51)",
+          "oklch(73% 0.0788 73.51)",
+          "oklch(85% 0.0788 73.51)",
+          "oklch(95% 0.0788 73.51)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "纯白",
+        "tonalRamp": [
+          "oklch(15% 0.0000 0.00)",
+          "oklch(26% 0.0000 0.00)",
+          "oklch(37% 0.0000 0.00)",
+          "oklch(49% 0.0000 0.00)",
+          "oklch(61% 0.0000 0.00)",
+          "oklch(73% 0.0000 0.00)",
+          "oklch(85% 0.0000 0.00)",
+          "oklch(95% 0.0000 0.00)"
+        ]
+      },
+      "danger": {
+        "role": "semantic",
+        "displayName": "危险操作红",
+        "tonalRamp": [
+          "oklch(15% 0.1551 20.42)",
+          "oklch(26% 0.1551 20.42)",
+          "oklch(37% 0.1551 20.42)",
+          "oklch(49% 0.1551 20.42)",
+          "oklch(61% 0.1551 20.42)",
+          "oklch(73% 0.1551 20.42)",
+          "oklch(85% 0.1551 20.42)",
+          "oklch(95% 0.1551 20.42)"
+        ]
+      },
+      "danger-soft": {
+        "role": "semantic",
+        "displayName": "危险操作浅红",
+        "tonalRamp": [
+          "oklch(15% 0.0163 12.78)",
+          "oklch(26% 0.0163 12.78)",
+          "oklch(37% 0.0163 12.78)",
+          "oklch(49% 0.0163 12.78)",
+          "oklch(61% 0.0163 12.78)",
+          "oklch(73% 0.0163 12.78)",
+          "oklch(85% 0.0163 12.78)",
+          "oklch(95% 0.0163 12.78)"
+        ]
       }
     },
     "typographyMeta": {
-      "display": { "displayName": "实验室铭牌", "purpose": "品牌名称和滚动数字。" },
-      "headline": { "displayName": "路由标题", "purpose": "页面级标题，不用于紧凑面板。" },
-      "body": { "displayName": "中文工作文本", "purpose": "表单、说明和项目详情。" }
+      "display": {
+        "displayName": "编辑式问候",
+        "purpose": "首页大标题；手机收敛为 40px。"
+      },
+      "headline": {
+        "displayName": "路由标题",
+        "purpose": "项目库、学习与数据页面的主标题。"
+      },
+      "title": {
+        "displayName": "项目与档案标题",
+        "purpose": "内容容器内的标题，可换行。"
+      },
+      "body": {
+        "displayName": "校园工作文本",
+        "purpose": "说明、字段与技术信息，由自托管 Manrope 和 Noto Sans SC 共同承担。"
+      },
+      "label": {
+        "displayName": "导航与状态文字",
+        "purpose": "明确当前位置、筛选项和业务状态。"
+      },
+      "metric": {
+        "displayName": "统计数字",
+        "purpose": "使用等宽数字排列；数字轨道继承数值字号与字重。"
+      }
     },
     "shadows": [
-      { "name": "ambient-panel", "value": "0 16px 36px rgb(23 35 47 / 9%)", "purpose": "工作台栏和路由级面板。" },
-      { "name": "interactive-lift", "value": "0 9px 20px rgb(23 35 47 / 13%)", "purpose": "按钮悬停反馈。" }
+      {
+        "name": "field-focus",
+        "value": "0 0 0 3px rgb(21 91 66 / 12%)",
+        "purpose": "编辑字段聚焦反馈；主要内容容器无静止阴影。"
+      }
     ],
     "motion": [
-      { "name": "state-fast", "value": "180ms ease", "purpose": "导航、颜色和轻量状态切换。" },
-      { "name": "liquid-select", "value": "300ms cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "液态筛选底片形变。" },
-      { "name": "card-flip", "value": "620ms cubic-bezier(0.2, 0.75, 0.2, 1)", "purpose": "项目卡正反面切换。" }
+      {
+        "name": "state-fast",
+        "value": "180ms ease",
+        "purpose": "按钮底色、导航与轻量状态变化。"
+      },
+      {
+        "name": "project-progress",
+        "value": "480ms cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "项目进度填充。"
+      },
+      {
+        "name": "learning-progress",
+        "value": "550ms cubic-bezier(.22, 1, .36, 1)",
+        "purpose": "学习计划进度填充。"
+      },
+      {
+        "name": "number-roll",
+        "value": "520ms cubic-bezier(.22, 1, .36, 1)",
+        "purpose": "指标数字滚动。"
+      },
+      {
+        "name": "chart-update",
+        "value": "520ms",
+        "purpose": "统计图表更新时长。"
+      },
+      {
+        "name": "card-flip",
+        "value": "620ms cubic-bezier(.2, .75, .2, 1)",
+        "purpose": "项目卡正反面切换。"
+      },
+      {
+        "name": "filter-select",
+        "value": "300ms cubic-bezier(.22, 1, .36, 1)",
+        "purpose": "筛选选中底片的缩放。"
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "关闭应用壳内动画与过渡，并恢复自动滚动行为。"
+      }
     ],
     "breakpoints": [
-      { "name": "wide", "value": "1240px" },
-      { "name": "tablet", "value": "920px" },
-      { "name": "mobile", "value": "720px" }
+      {
+        "name": "compact-header",
+        "value": "1280px"
+      },
+      {
+        "name": "bottom-navigation",
+        "value": "1040px"
+      },
+      {
+        "name": "single-column",
+        "value": "760px"
+      },
+      {
+        "name": "tight-phone",
+        "value": "360px"
+      }
     ]
   },
   "components": [
     {
-      "name": "Primary Button",
+      "name": "主按钮",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "用于创建、保存和主要确认命令。",
-      "html": "<button class=\"ds-btn-primary\">创建项目</button>",
-      "css": ".ds-btn-primary { min-height: 42px; padding: 10px 18px; color: #fff; background: #2867d8; border: 1px solid transparent; border-radius: 5px; font: 800 14px 'Microsoft YaHei', sans-serif; transition: transform 160ms ease, box-shadow 160ms ease; } .ds-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 9px 20px rgb(23 35 47 / 13%); } .ds-btn-primary:focus-visible { outline: 3px solid rgb(40 103 216 / 28%); outline-offset: 3px; }"
+      "description": "创建、保存及继续项目的主要命令。",
+      "html": "<button class=\"ds-primary\">继续项目 <svg aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M340.864 149.312a30.59 30.59 0 0 0 0 42.752L652.736 512 340.864 831.872a30.59 30.59 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z\"></path></svg></button>",
+      "css": ".ds-primary{min-height:46px;padding:11px 20px;display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid transparent;border-radius:9px;cursor:pointer;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif;font-size:15px;font-weight:700;line-height:1.55;transition:background 180ms ease,border-color 180ms ease,transform 180ms ease;color:#fff;background:#153c2d;box-shadow:none}.ds-primary svg{width:22px;height:22px;flex:0 0 auto}.ds-primary:not(:disabled):hover{background:#20563f;transform:translateY(-1px)}.ds-primary:focus-visible{outline:3px solid #5a947a;outline-offset:4px;}.ds-primary:disabled{opacity:.58;cursor:not-allowed}"
     },
     {
-      "name": "Secondary Button",
+      "name": "次按钮",
       "kind": "button",
-      "description": "用于取消和次要命令。",
-      "html": "<button class=\"ds-btn-secondary\">取消</button>",
-      "css": ".ds-btn-secondary { min-height: 42px; padding: 10px 18px; color: #17232f; background: #fff; border: 1px solid #d9e4e1; border-radius: 5px; font: 800 14px 'Microsoft YaHei', sans-serif; transition: transform 160ms ease, box-shadow 160ms ease; } .ds-btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 9px 20px rgb(23 35 47 / 13%); } .ds-btn-secondary:focus-visible { outline: 3px solid rgb(40 103 216 / 28%); outline-offset: 3px; }"
+      "refersTo": "button-secondary",
+      "description": "开始专注、取消和次要命令。",
+      "html": "<button class=\"ds-secondary\">开始专注</button>",
+      "css": ".ds-secondary{min-height:46px;padding:11px 20px;display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid transparent;border-radius:9px;cursor:pointer;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif;font-size:15px;font-weight:700;line-height:1.55;transition:background 180ms ease,border-color 180ms ease,transform 180ms ease;color:#153c2d;background:transparent;border-color:#153c2d;box-shadow:none}.ds-secondary:not(:disabled):hover{background:#e3eee6;transform:translateY(-1px)}.ds-secondary:focus-visible{outline:3px solid #5a947a;outline-offset:4px;}.ds-secondary:disabled{opacity:.58;cursor:not-allowed}"
     },
     {
-      "name": "Text Field",
+      "name": "危险按钮",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "项目背面的删除命令，保留明确文字与确认流程。",
+      "html": "<button class=\"ds-danger\">删除</button>",
+      "css": ".ds-danger{min-height:46px;padding:11px 20px;display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid transparent;border-radius:9px;cursor:pointer;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif;font-size:15px;font-weight:700;line-height:1.55;transition:background 180ms ease,border-color 180ms ease,transform 180ms ease;color:#b43c44;background:#fff0f1;border-color:#f2c4c8;box-shadow:none}.ds-danger:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 9px 20px rgb(23 35 47 / 13%)}.ds-danger:focus-visible{outline:3px solid #5a947a;outline-offset:4px;}.ds-danger:disabled{opacity:.58;cursor:not-allowed}"
+    },
+    {
+      "name": "文字入口",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "最近项目区的查看全部入口。",
+      "html": "<a class=\"ds-arrow-link\" href=\"/projects\">查看全部 <svg aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M340.864 149.312a30.59 30.59 0 0 0 0 42.752L652.736 512 340.864 831.872a30.59 30.59 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z\"></path></svg></a>",
+      "css": ".ds-arrow-link{min-height:36px;display:inline-flex;align-items:center;gap:12px;color:#153c2d;background:transparent;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif;font-weight:700;text-decoration:none}.ds-arrow-link svg{width:22px;height:22px;transition:transform 180ms ease}.ds-arrow-link:hover svg{transform:translateX(3px)}.ds-arrow-link:focus-visible{outline:3px solid #5a947a;outline-offset:4px;}"
+    },
+    {
+      "name": "编辑字段",
       "kind": "input",
       "refersTo": "input",
-      "description": "用于认证和项目字段。",
-      "html": "<input class=\"ds-input\" value=\"校园失物招领小程序\" />",
-      "css": ".ds-input { width: 100%; min-height: 44px; padding: 10px 12px; color: #17232f; background: #fff; border: 1px solid #cbd8d4; border-radius: 4px; font: 400 14px 'Microsoft YaHei', sans-serif; outline: 0; } .ds-input:focus { border-color: #2867d8; box-shadow: 0 0 0 3px rgb(40 103 216 / 11%); }"
+      "description": "项目、课程和日期编辑器的字段。",
+      "html": "<label class=\"ds-field\">项目名称<input class=\"ds-input\" value=\"项目名称\" /></label>",
+      "css": ".ds-field{display:grid;gap:7px;color:#374650;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif;font-size:14px;font-weight:700}.ds-input{width:100%;min-height:44px;padding:10px 12px;color:#153c2d;background:#fff;border:1px solid #cbd8d4;border-radius:4px;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif;font-size:14px;font-weight:400;outline:0}.ds-input:hover{border-color:#cbd8d4}.ds-input:focus{border-color:#155b42;box-shadow:0 0 0 3px rgb(21 91 66 / 12%)}.ds-input:focus-visible{outline:3px solid #5a947a;outline-offset:4px;}"
     },
     {
-      "name": "Status Chip",
+      "name": "状态标签",
       "kind": "chip",
-      "description": "显示项目状态和技术栈。",
-      "html": "<span class=\"ds-chip\">进行中</span>",
-      "css": ".ds-chip { padding: 5px 9px; display: inline-flex; align-items: center; color: #154b3e; background: #e5f7f0; border: 1px solid #b5dfd0; border-radius: 999px; font: 800 12px 'Microsoft YaHei', sans-serif; }"
+      "refersTo": "status-chip",
+      "description": "以文字与底色同时标记项目或计划状态。",
+      "html": "<div class=\"ds-chip-row\"><span class=\"ds-chip\">进行中</span><span class=\"ds-chip ds-chip-draft\">未开始</span><span class=\"ds-chip ds-chip-complete\">已完成</span><span class=\"ds-chip ds-chip-failed\">可重试</span></div>",
+      "css": ".ds-chip-row{display:flex;flex-wrap:wrap;gap:8px}.ds-chip{display:inline-flex;align-items:center;max-width:100%;padding:5px 12px;color:#18533d;background:#deeee4;border:0;border-radius:999px;white-space:nowrap;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif;font-size:12px;font-weight:700}.ds-chip-draft{color:#4c5e55;background:#e7ece7}.ds-chip-complete{color:#35501a;background:#e2edc6}.ds-chip-failed{color:#8a3941;background:#f4e3e4}"
     },
     {
-      "name": "Board Panel",
+      "name": "手机主导航",
+      "kind": "nav",
+      "description": "1040px 以下的五项目的地；更多项打开原生模态导航。",
+      "html": "<nav class=\"ds-mobile-nav\" aria-label=\"手机主导航\"><a class=\"ds-mobile-current\" href=\"/\"><svg aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M192 413.952V896h640V413.952L512 147.328zM139.52 374.4l352-293.312a32 32 0 0 1 40.96 0l352 293.312A32 32 0 0 1 896 398.976V928a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V398.976a32 32 0 0 1 11.52-24.576\"></path></svg><span>首页</span></a><a href=\"/projects\"><svg aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M128 192v640h768V320H485.76L357.504 192zm-32-64h287.872l128.384 128H928a32 32 0 0 1 32 32v576a32 32 0 0 1-32 32H96a32 32 0 0 1-32-32V160a32 32 0 0 1 32-32\"></path></svg><span>项目库</span></a><a href=\"/learning\"><svg aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"m512 863.36 384-54.848v-638.72L525.568 222.72a96 96 0 0 1-27.136 0L128 169.792v638.72zM137.024 106.432l370.432 52.928a32 32 0 0 0 9.088 0l370.432-52.928A64 64 0 0 1 960 169.792v638.72a64 64 0 0 1-54.976 63.36l-388.48 55.488a32 32 0 0 1-9.088 0l-388.48-55.488A64 64 0 0 1 64 808.512v-638.72a64 64 0 0 1 73.024-63.36\"></path><path fill=\"currentColor\" d=\"M480 192h64v704h-64z\"></path></svg><span>学习</span></a><a href=\"/analytics\"><svg aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M416 896V128h192v768zm-288 0V448h192v448zm576 0V320h192v576z\"></path></svg><span>数据</span></a><button type=\"button\" aria-label=\"全部功能\"><svg aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M176 416a112 112 0 1 1 0 224 112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224 112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224 112 112 0 0 1 0-224\"></path></svg><span>更多</span></button></nav>",
+      "css": ".ds-mobile-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));min-height:68px;padding:6px 16px;background:#f9faf5;border-top:1px solid #cfdfd5;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif}.ds-mobile-nav>a,.ds-mobile-nav>button{min-height:54px;display:grid;justify-items:center;align-content:center;gap:4px;padding:0;border:0;border-radius:9px;color:#5c7067;background:transparent;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif;font-size:12px;text-decoration:none;cursor:pointer}.ds-mobile-nav svg{width:22px;height:22px;color:#153c2d}.ds-mobile-nav>.ds-mobile-current{color:#153c2d;font-weight:800;background:#e8f1e9}.ds-mobile-nav>a:hover,.ds-mobile-nav>button:hover{color:#153c2d}.ds-mobile-nav>a:focus-visible,.ds-mobile-nav>button:focus-visible{outline:3px solid #5a947a;outline-offset:4px;}"
+    },
+    {
+      "name": "纸面项目卡",
       "kind": "card",
       "refersTo": "card",
-      "description": "首页三栏与工作台内容容器。",
-      "html": "<section class=\"ds-board-panel\"><h3>我的项目广场</h3><p>管理真实项目进度。</p></section>",
-      "css": ".ds-board-panel { padding: 22px; color: #17232f; background: #fff; border: 1px solid #d9e4e1; border-radius: 6px; box-shadow: inset 0 2px 0 #2867d8, 0 16px 36px rgb(23 35 47 / 9%); font-family: 'Microsoft YaHei', sans-serif; } .ds-board-panel h3 { margin: 0 0 8px; font-size: 19px; } .ds-board-panel p { margin: 0; color: #66747d; }"
+      "description": "项目卡纸面信息区；封面按项目名称与技术字段选择响应式 WebP，翻面后移入焦点，返回时恢复触发按钮。",
+      "html": "<article class=\"ds-project-card\"><div class=\"ds-project-heading\"><a href=\"/projects\" class=\"ds-project-title\">项目名称</a><span class=\"ds-project-status\">进行中</span></div><p class=\"ds-project-stack\">TypeScript · Vue 3</p><p class=\"ds-project-copy\">管理项目范围、技术栈、状态和交付目标。</p><div class=\"ds-project-progress-label\">项目进度 <strong>62%</strong></div><div class=\"ds-project-progress\" role=\"progressbar\" aria-label=\"项目进度\" aria-valuenow=\"62\" aria-valuemin=\"0\" aria-valuemax=\"100\"><span></span></div><div class=\"ds-project-footer\"><button>编辑</button><a href=\"/projects\">查看详情</a><button>查看技术详情</button></div></article>",
+      "css": ".ds-project-card{padding:18px 20px 12px;color:#153c2d;background:#f9faf5;border:1px solid #cfdfd5;border-radius:12px;box-shadow:none;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif}.ds-project-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.ds-project-title{color:#153c2d;font-size:19px;font-weight:800;line-height:1.45;overflow-wrap:anywhere;text-decoration:none}.ds-project-status{padding:4px 9px;color:#18533d;background:#deeee4;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap}.ds-project-stack{margin:10px 0;color:#5c7067;font-size:12px}.ds-project-copy{margin:0 0 10px;color:#5c7067;font-size:14px;line-height:1.6}.ds-project-progress-label{font-size:13px}.ds-project-progress-label strong{margin-left:8px;font-weight:800;font-variant-numeric:tabular-nums}.ds-project-progress{height:9px;margin-top:8px;overflow:hidden;border-radius:8px;background:#dbe9df}.ds-project-progress>span{display:block;width:100%;height:100%;border-radius:inherit;background:#155b42;transform:scaleX(.62);transform-origin:left center;transition:transform 480ms cubic-bezier(.16,1,.3,1)}.ds-project-footer{margin-top:10px;padding-top:8px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 14px;border-top:1px solid #cfdfd5}.ds-project-footer button,.ds-project-footer a{min-height:36px;padding:0;color:#153c2d;background:transparent;border:0;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif;font-size:13px;font-weight:800;text-decoration:none;cursor:pointer}.ds-project-footer button:hover,.ds-project-footer a:hover,.ds-project-title:hover{color:#153c2d}.ds-project-footer button:focus-visible,.ds-project-footer a:focus-visible,.ds-project-title:focus-visible{outline:3px solid #5a947a;outline-offset:4px;}"
     },
     {
-      "name": "Liquid Tabs",
+      "name": "分段筛选",
       "kind": "custom",
-      "description": "用于项目状态分段筛选。",
-      "html": "<div class=\"ds-liquid-tabs\"><button class=\"ds-liquid-tab is-active\">全部</button><button class=\"ds-liquid-tab\">进行中</button><button class=\"ds-liquid-tab\">已完成</button></div>",
-      "css": ".ds-liquid-tabs { padding: 4px; display: grid; grid-auto-flow: column; gap: 4px; background: #edf2f1; border: 1px solid #d9e4e1; border-radius: 999px; } .ds-liquid-tab { min-height: 36px; padding: 7px 13px; color: #66747d; background: transparent; border: 0; border-radius: 999px; font: 800 13px 'Microsoft YaHei', sans-serif; } .ds-liquid-tab.is-active { color: #104d3d; background: #bfe9d8; border: 1px solid #9bd7c0; border-radius: 53% 47% 45% 55% / 44% 55% 45% 56%; } .ds-liquid-tab:focus-visible { outline: 3px solid rgb(40 103 216 / 28%); outline-offset: 2px; }"
+      "refersTo": "filter",
+      "description": "学习视图、项目状态与统计范围的选中底片。",
+      "html": "<div class=\"ds-filter\" role=\"group\" aria-label=\"课程与计划视图\"><button class=\"ds-filter-active\" aria-pressed=\"true\">学习计划</button><button aria-pressed=\"false\">课程档案</button></div>",
+      "css": ".ds-filter{padding:5px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(82px,1fr);gap:4px;background:transparent;border:1px solid #cfdfd5;border-radius:999px;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif}.ds-filter button{position:relative;z-index:1;min-height:38px;padding:7px 13px;color:#5c7067;background:transparent;border:0;border-radius:999px;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:color 180ms ease,transform 180ms ease}.ds-filter button::before{content:\"\";position:absolute;z-index:-1;inset:0;background:#c9e7d8;border:1px solid #9bd7c0;border-radius:20px;opacity:0;transform:scale(.82);transition:opacity 180ms ease,transform 300ms cubic-bezier(.22,1,.36,1),border-radius 300ms ease}.ds-filter>.ds-filter-active{color:#153c2d;transform:translateY(-1px)}.ds-filter>.ds-filter-active::before{opacity:1;transform:scale(1)}.ds-filter button:hover{color:#153c2d}.ds-filter button:focus-visible{outline:3px solid #5a947a;outline-offset:4px;}"
+    },
+    {
+      "name": "学习计划档案",
+      "kind": "custom",
+      "refersTo": "learning-dossier",
+      "description": "计划的信息、关联项、进度、日期与操作保持同组。",
+      "html": "<article class=\"ds-dossier\"><div class=\"ds-dossier-content\"><h2>学习计划名称</h2><p>把课程目标、项目实践和每天的行动放进同一条学习路径。</p><div class=\"ds-dossier-refs\"><span>关联课程</span><span>关联项目</span></div></div><div class=\"ds-dossier-progress\"><span class=\"ds-dossier-status\">进行中</span><div class=\"ds-dossier-progress-row\"><div class=\"ds-dossier-bar\" role=\"progressbar\" aria-label=\"计划进度\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\"><span></span></div><strong>60%</strong></div><small>开始日期 至 结束日期</small></div><div class=\"ds-dossier-actions\"><button>编辑</button><button class=\"ds-dossier-delete\">删除</button></div></article>",
+      "css": ".ds-dossier{padding:18px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(180px,.8fr) auto;align-items:center;gap:22px;color:#153c2d;background:#f9faf5;border:1px solid #cfdfd5;border-radius:12px;box-shadow:none;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif}.ds-dossier-content{min-width:0}.ds-dossier-content h2{margin:0 0 8px;font-size:21px}.ds-dossier-content p{margin:0 0 12px;color:#5c7067;font-size:14px;line-height:1.6;overflow-wrap:anywhere}.ds-dossier-refs{display:flex;flex-wrap:wrap;gap:8px}.ds-dossier-refs span{padding:4px 8px;border-radius:6px;color:#355d4c;background:#e7f0e8;font-size:12px;overflow-wrap:anywhere}.ds-dossier-progress{display:grid;gap:14px;justify-items:start}.ds-dossier-status{padding:5px 12px;border-radius:999px;color:#18533d;background:#deeee4;font-size:12px;font-weight:700}.ds-dossier-progress-row{width:100%;display:flex;align-items:center;gap:14px}.ds-dossier-progress-row strong{font-size:18px;font-variant-numeric:tabular-nums}.ds-dossier-bar{min-width:0;flex:1;height:8px;overflow:hidden;border-radius:999px;background:#dbe9df}.ds-dossier-bar span{display:block;width:100%;height:100%;background:#155b42;border-radius:inherit;transform:scaleX(.6);transform-origin:left center;transition:transform 550ms cubic-bezier(.22,1,.36,1)}.ds-dossier-progress small{color:#5c7067;font-size:12px}.ds-dossier-actions{display:flex;align-items:center;gap:16px;padding-left:20px;border-left:1px solid #cfdfd5}.ds-dossier-actions button{min-height:36px;padding:0;color:#153c2d;background:transparent;border:0;font-family:'Studio Manrope','Studio Sans','Microsoft YaHei','PingFang SC',sans-serif;font-size:14px;font-weight:800;cursor:pointer}.ds-dossier-actions>.ds-dossier-delete{color:#b43c44}.ds-dossier-actions button:hover{text-decoration:underline}.ds-dossier-actions button:focus-visible{outline:3px solid #5a947a;outline-offset:4px;}@media(max-width:760px){.ds-dossier{grid-template-columns:minmax(0,1fr);gap:16px}.ds-dossier-content h2{font-size:18px}.ds-dossier-content p{font-size:13px}.ds-dossier-actions{padding:10px 0 0;justify-content:flex-end;gap:22px;border-left:0;border-top:1px solid #cfdfd5}}"
     }
   ],
   "narrative": {
-    "northStar": "轻盈实验室布告板",
-    "overview": "ScholarHub 把校园项目、学习节奏和技术状态组织成一张清爽的实验室布告板。视觉层级依赖明确分栏、细边框、窄色带和克制阴影，高级动效只用于表达状态变化。",
+    "northStar": "Campus Studio — 校园实践工作室",
+    "overview": "Campus Studio 将校园代码实践组织成一张安静、清晰的工作桌。薄荷色画布承托暖白纸面，森林墨色提供阅读与行动的重心；书本、纸张、植物和自然光让项目入口具有可辨认的材料感。布局兼顾较大的编辑式标题与紧凑的操作信息。\n\n本记录覆盖登录后的应用壳、首页、项目库、课程与计划、学习与社区数据。图片提供氛围，项目名称、技术栈、状态、进度与统计仍由现有业务数据驱动。其他页面沿用共享样式时应保留已有任务流程、路由与权限入口。\n",
     "keyCharacteristics": [
-      "冷白纸面、深墨正文与三种功能强调色形成清晰对比。",
-      "桌面采用三栏工作面板，窄屏按任务顺序自然纵向排列。",
-      "圆角克制，胶囊形仅用于状态和分段控件。",
-      "数据来自真实 API，关键异步状态完整。"
+      "薄荷画布、暖白纸面、森林墨色与少量青柠标记。",
+      "自托管中文与拉丁字体，数字使用等宽数字排列。",
+      "细边框建立结构，主要卡片静止时无阴影。",
+      "图片项目卡、横向计划档案与克制的数据图表共享同一材料语言。"
     ],
     "rules": [
-      { "name": "The Three-Marker Rule", "body": "海沫绿、钴蓝、杏橙各自承担一种功能语义。", "section": "colors" },
-      { "name": "The Ink-First Rule", "body": "正文可读性先于氛围。", "section": "colors" },
-      { "name": "The Compact Panel Rule", "body": "面板内标题保持紧凑。", "section": "typography" },
-      { "name": "The Bordered-First Rule", "body": "先用边框和色带建立结构。", "section": "elevation" }
+      {
+        "name": "The Ink-First Rule",
+        "body": "森林墨色承担主要文字与行动层级；同一页面的强调色不能削弱正文、状态和按钮的辨认。",
+        "section": "colors"
+      },
+      {
+        "name": "The Number-Inheritance Rule",
+        "body": "滚动数字的数字、符号与轨道继承所在指标的字号、字重与颜色，确保数值和百分号保持同一层级。",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper-Plane Rule",
+        "body": "日常内容先用纸面、边线和空间建立层级；不要给主要卡片叠加浮空阴影。",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "Do 使用真实后端状态驱动卡片、统计、空态和错误反馈。",
-      "Do 保持三种强调色的固定语义，并用文字补充颜色状态。",
-      "Do 在桌面和 390px 级窄屏验证长文本、表单与危险操作。",
-      "Do 为高级动效提供键盘操作、稳定尺寸和减少动态效果支持。"
+      "**Do** 使用真实数据驱动项目标题、状态、进度、统计、空态和错误反馈。",
+      "**Do** 复用薄荷画布、暖白纸面、森林墨色及当前字号与圆角层级。",
+      "**Do** 保留长标题换行、清晰焦点、状态文字与减少动态效果支持。",
+      "**Do** 在手机按任务顺序重排内容，并为固定底部导航留出空间。",
+      "**Do** 保留字体及图标许可，使用本地校园静物素材维持材料一致性。"
     ],
     "donts": [
-      "Don't 用虚构的社区、Workflow 或学习统计冒充已实现业务数据。",
-      "Don't 在卡片内再嵌套装饰性卡片。",
-      "Don't 用单一蓝色或单一绿色覆盖所有层级和状态。",
-      "Don't 让前端权限控制代替服务端鉴权。"
+      "**Don't** 将静物封面或展示样例当作真实项目成果与运营统计。",
+      "**Don't** 给主项目卡、计划档案与图表容器增加浮空阴影。",
+      "**Don't** 将青柠标记扩展为正文大面积底色，降低扫读层级。",
+      "**Don't** 为改变视觉而删除原有命令、权限入口或可访问名称。"
     ]
   }
 }

@@ -8,9 +8,11 @@ import LearningNav from '@/components/LearningNav.vue'
 import LearningPlanEditor from '@/components/LearningPlanEditor.vue'
 import LiquidTabs, { type LiquidTabOption } from '@/components/LiquidTabs.vue'
 import NumberRoller from '@/components/NumberRoller.vue'
+import { getProjectCover, getProjectCoverSrcset } from '@/assets/projectCovers'
 import { courseStatusLabels, planStatusLabels } from '@/domain/learning'
 import { useLearningStore } from '@/stores/learning'
 import { useProjectStore } from '@/stores/projects'
+import type { ProjectResponse } from '@/types/project'
 import type {
   CourseCreateInput,
   CourseResponse,
@@ -31,6 +33,11 @@ const modeOptions: LiquidTabOption[] = [
 const activePlanCount = computed(
   () => learningStore.planPage.items.filter((plan) => plan.status === 'active').length,
 )
+
+function getPlanCoverSource(plan: LearningPlanResponse): ProjectResponse | Pick<ProjectResponse, 'name'> {
+  return projectStore.projects.find((project) => project.id === plan.project?.id)
+    ?? { name: plan.project?.name ?? plan.title }
+}
 
 async function loadOverview(): Promise<void> {
   await Promise.all([
@@ -172,15 +179,18 @@ onMounted(() => {
       <div v-if="learningStore.loadingPlans" class="learning-grid learning-grid--loading"><span v-for="index in 4" :key="index" /></div>
       <section v-else-if="learningStore.planPage.items.length" class="learning-grid" aria-label="学习计划列表">
         <article v-for="plan in learningStore.planPage.items" :key="plan.id" class="learning-plan-card">
-          <div class="panel-title-row"><span class="status-chip">{{ planStatusLabels[plan.status] }}</span><strong>{{ plan.progress }}%</strong></div>
-          <h2>{{ plan.title }}</h2>
-          <p>{{ plan.description || '暂未填写计划说明。' }}</p>
-          <div class="learning-plan-card__refs"><span>{{ plan.course?.name || '未关联课程' }}</span><span>{{ plan.project?.name || '未关联项目' }}</span></div>
-          <div class="learning-progress" :aria-label="`计划进度 ${plan.progress}%`"><span :style="{ transform: `scaleX(${plan.progress / 100})` }" /></div>
-          <footer>
+          <img class="studio-plan-cover" :src="getProjectCover(getPlanCoverSource(plan))" :srcset="getProjectCoverSrcset(getPlanCoverSource(plan))" sizes="(max-width: 760px) 80px, (max-width: 1040px) 140px, (max-width: 1280px) 150px, 190px" alt="" loading="lazy" width="200" height="130" />
+          <div class="studio-plan-content">
+            <h2>{{ plan.title }}</h2>
+            <p>{{ plan.description || '暂未填写计划说明。' }}</p>
+            <div class="learning-plan-card__refs"><span>{{ plan.course?.name || '未关联课程' }}</span><span>{{ plan.project?.name || '未关联项目' }}</span></div>
+          </div>
+          <div class="studio-plan-progress">
+            <span class="status-chip" :data-status="plan.status">{{ planStatusLabels[plan.status] }}</span>
+            <div class="studio-plan-progress-row"><div class="learning-progress" role="progressbar" aria-label="计划进度" :aria-valuenow="plan.progress" aria-valuemin="0" aria-valuemax="100"><span :style="{ transform: `scaleX(${plan.progress / 100})` }" /></div><strong>{{ plan.progress }}%</strong></div>
             <small>{{ plan.start_date || '未设开始' }} 至 {{ plan.end_date || '未设结束' }}</small>
-            <div><button class="text-command" type="button" @click="openPlanEditor(plan)">编辑</button><button class="text-command danger-text-command" type="button" :disabled="learningStore.actionKey === `plan:${plan.id}`" @click="removePlan(plan)">删除</button></div>
-          </footer>
+          </div>
+          <div class="studio-plan-actions"><button class="text-command" type="button" @click="openPlanEditor(plan)">编辑</button><button class="text-command danger-text-command" type="button" :disabled="learningStore.actionKey === `plan:${plan.id}`" @click="removePlan(plan)">删除</button></div>
         </article>
       </section>
       <section v-else class="empty-state"><h2>还没有学习计划</h2><p>先选择一门课程或一个项目，再建立可以执行的日期范围。</p><button class="primary-command" type="button" @click="openPlanEditor()">创建第一个计划</button></section>

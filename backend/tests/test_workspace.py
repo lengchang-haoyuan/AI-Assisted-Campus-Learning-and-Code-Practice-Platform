@@ -7,16 +7,17 @@ from unittest.mock import Mock
 os.environ.setdefault("JWT_SECRET", token_urlsafe(48))
 
 from app.api.deps import get_current_user, get_workspace_service
-from app.core.exceptions import PermissionDeniedError
+from app.core.exceptions import ConflictError, PermissionDeniedError
 from app.main import create_app
 from app.models.enums import (
+    LearningPlanStatus,
     ProjectDifficulty,
     ProjectStatus,
     RecordType,
     TaskPriority,
     TaskStatus,
 )
-from app.models.learning import DailyTask, LearningRecord
+from app.models.learning import DailyTask, LearningPlan, LearningRecord
 from app.models.project import Project
 from app.repositories.workspace import (
     TaskStatsRecord,
@@ -182,6 +183,53 @@ class WorkspaceServiceTests(unittest.TestCase):
 
         self.assertIsNone(result.items[0].duration_minutes)
 
+    def test_terminal_plan_rejects_first_completion_without_mutation(self) -> None:
+        for status in (LearningPlanStatus.COMPLETED, LearningPlanStatus.CANCELLED):
+            with self.subTest(status=status):
+                task = make_task_model()
+                task.plan_id = 11
+                task.plan = LearningPlan(id=11, user_id=1, status=status, progress=50)
+                self.repository.get_task.return_value = task
+                self.repository.update_task.side_effect = lambda item: item
+                self.repository.update_task.reset_mock()
+
+                with self.assertRaises(ConflictError):
+                    self.service.complete_task(3, 1)
+
+                self.assertEqual(task.status, TaskStatus.PENDING)
+                self.assertIsNone(task.completed_at)
+                self.assertEqual((task.plan.status, task.plan.progress), (status, 50))
+                self.repository.update_task.assert_not_called()
+
+    def test_terminal_plan_repeated_completion_is_still_idempotent(self) -> None:
+        for status in (LearningPlanStatus.COMPLETED, LearningPlanStatus.CANCELLED):
+            with self.subTest(status=status):
+                task = make_task_model(completed=True)
+                task.plan_id = 11
+                task.plan = LearningPlan(id=11, user_id=1, status=status, progress=50)
+                self.repository.get_task.return_value = task
+
+                result = self.service.complete_task(3, 1)
+
+                self.assertEqual(result.status, TaskStatus.COMPLETED)
+                self.assertEqual(result.completed_at, NOW)
+                self.assertEqual(task.plan.progress, 50)
+                self.repository.update_task.assert_not_called()
+
+    def test_open_plan_tasks_still_complete(self) -> None:
+        for status in (LearningPlanStatus.DRAFT, LearningPlanStatus.ACTIVE):
+            with self.subTest(status=status):
+                task = make_task_model()
+                task.plan_id = 11
+                task.plan = LearningPlan(id=11, user_id=1, status=status, progress=0)
+                self.repository.get_task.return_value = task
+                self.repository.update_task.side_effect = lambda item: item
+
+                result = self.service.complete_task(3, 1)
+
+                self.assertEqual(result.status, TaskStatus.COMPLETED)
+                self.repository.update_task.assert_called_with(task)
+
     def test_dashboard_uses_user_date_and_utc_day_bounds(self) -> None:
         self.repository.get_task_stats.return_value = TaskStatsRecord(4, 3, 150)
         self.repository.sum_recorded_minutes.return_value = 45
@@ -320,6 +368,31 @@ class WorkspaceAPITests(unittest.TestCase):
         create_data = self.service.create_task.call_args.args[1]
         self.assertEqual(create_data.title, "完成工作台接口")
         self.assertEqual(create_data.project_id, 7)
+
+    def test_terminal_plan_conflict_and_idempotence_use_existing_api_contract(self) -> None:
+        repository = Mock(spec=WorkspaceRepository)
+        service = WorkspaceService(repository)
+        self.app.dependency_overrides[get_workspace_service] = lambda: service
+        for status in (LearningPlanStatus.COMPLETED, LearningPlanStatus.CANCELLED):
+            with self.subTest(status=status):
+                task = make_task_model()
+                task.plan_id = 11
+                task.plan = LearningPlan(id=11, user_id=1, status=status, progress=50)
+                repository.get_task.return_value = task
+
+                response = request(self.app, "POST", "/api/v1/workspace/tasks/3/complete")
+
+                self.assertEqual(response.status_code, 409)
+                self.assertEqual(response.json()["error"]["code"], "conflict")
+                self.assertEqual(task.status, TaskStatus.PENDING)
+                self.assertIsNone(task.completed_at)
+                task.status = TaskStatus.COMPLETED
+                task.completed_at = NOW
+                repeated = request(self.app, "POST", "/api/v1/workspace/tasks/3/complete")
+                self.assertEqual(repeated.status_code, 200)
+                self.assertEqual(repeated.json()["status"], "completed")
+                self.assertEqual(task.plan.progress, 50)
+        repository.update_task.assert_not_called()
 
 
 if __name__ == "__main__":

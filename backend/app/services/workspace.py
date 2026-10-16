@@ -4,6 +4,7 @@ from math import ceil
 
 from app.core.exceptions import ConflictError, PermissionDeniedError, ResourceNotFoundError
 from app.models.enums import (
+    LearningPlanStatus,
     ProjectDifficulty,
     ProjectStatus,
     RecordType,
@@ -238,10 +239,18 @@ class WorkspaceService:
             raise ResourceNotFoundError("任务不存在")
         if task.user_id != user_id:
             raise PermissionDeniedError("无权完成该任务")
+        try:
+            self._repository.lock_task_plan(task)
+        except WorkspacePersistenceConflictError as exc:
+            raise ConflictError("任务关联已被更新，请刷新后重试") from exc
         if task.status == TaskStatus.COMPLETED:
             return self._to_task_data(task)
         if task.status == TaskStatus.CANCELLED:
             raise ConflictError("已取消的任务不能完成")
+        if task.plan and task.plan.status in {
+            LearningPlanStatus.COMPLETED, LearningPlanStatus.CANCELLED,
+        }:
+            raise ConflictError("已完成或已取消的学习计划不能增减任务或改变完成数量")
         task.status = TaskStatus.COMPLETED
         task.completed_at = datetime.now(UTC)
         try:

@@ -342,16 +342,19 @@ class CampusService:
         return self._mutate(actor=actor, action="issue_invitation", target_user_id=target_user_id, reason=reason, admin=True, work=work)
 
     def redeem_invitation(self, actor: UserIdentity, *, token: str) -> MembershipData:
-        now = datetime.now(UTC)
-
         def work(user: User) -> MembershipData:
+            now = datetime.now(UTC)
             invitation = self._repository.invitation(self._digest(token))
             if invitation is None:
                 raise ResourceNotFoundError("邀请凭证无效")
             if invitation.status == InvitationStatus.CONSUMED:
                 if invitation.consumed_by_user_id == user.id:
                     membership = self._repository.membership(user.id)
-                    if membership is not None:
+                    if (membership is not None and membership.status == MembershipStatus.ACTIVE
+                            and membership.role == invitation.role
+                            and invitation.consumed_at is not None
+                            and self._repository.latest_consumed_invitation_id(user.id) == invitation.id
+                            and membership.verified_at <= invitation.consumed_at):
                         return self._required_membership_data(membership)
                 raise ConflictError("邀请凭证已使用")
             if invitation.status != InvitationStatus.PENDING or invitation.expires_at <= now:
@@ -366,8 +369,17 @@ class CampusService:
                 raise ConflictError("邀请签发人已不具备核验资格")
             membership = self._repository.membership(user.id)
             if membership is not None:
-                if membership.role != invitation.role or membership.status != MembershipStatus.ACTIVE:
+                if (membership.role != invitation.role or membership.status not in {
+                    MembershipStatus.ACTIVE, MembershipStatus.REVOKED,
+                }):
                     raise ConflictError("当前校园身份与邀请不一致")
+                if membership.status == MembershipStatus.REVOKED:
+                    membership.status = MembershipStatus.ACTIVE
+                    membership.verified_by_user_id = issuer.id
+                    membership.verified_at = now
+                    membership.revision += 1
+                    user.auth_version = (user.auth_version or 0) + 1
+                    self._repository.revoke_pending_resets(user.id, now)
             else:
                 membership = CampusMembership(user_id=user.id, role=invitation.role, status=MembershipStatus.ACTIVE, verified_by_user_id=issuer.id, verified_at=now, revision=1)
                 self._repository.add(membership)
@@ -427,6 +439,8 @@ class CampusService:
                     membership.role = role
                 if campus_status is not None:
                     membership.status = campus_status
+                    if campus_status == MembershipStatus.REVOKED:
+                        self._repository.revoke_pending_invitations(target.id, target.email)
                 membership.revision += 1
                 membership.verified_by_user_id = actor.id
                 membership.verified_at = datetime.now(UTC)

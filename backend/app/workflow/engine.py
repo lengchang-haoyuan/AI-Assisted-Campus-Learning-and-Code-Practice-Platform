@@ -39,6 +39,7 @@ from app.repositories.workflow_execution import (
     WorkflowExecutionPersistenceError,
     WorkflowExecutionRepository,
     WorkflowExecutionVersionError,
+    WorkflowGraphVersionError,
     WorkflowRunStateError,
 )
 from app.workflow.registry import (
@@ -219,6 +220,9 @@ class WorkflowEngine:
                     agent = self._registry.create(
                         node.node_type, max_tokens=node_max_tokens
                     )
+                    read_fields = self._context_manager.get_node_policy(
+                        self._context_node(node)
+                    ).reads
                     validated_input = agent.validate_input(
                         node_inputs[node_id].model_dump(mode="python")
                     )
@@ -226,6 +230,7 @@ class WorkflowEngine:
                     request = self._repository.start_node(
                         run.id,
                         node.id,
+                        expected_workflow_version=expected_version,
                         user_id=user_id,
                         project_id=workflow.project_id,
                         provider=agent.provider_name,
@@ -250,6 +255,7 @@ class WorkflowEngine:
                     execution = await agent.run(
                         context,
                         validated_input.model_dump(mode="python"),
+                        context_fields=read_fields,
                     )
                     result_schema = WORKFLOW_NODE_RESULT_SCHEMAS[node.node_type]
                     result = cast(
@@ -303,6 +309,7 @@ class WorkflowEngine:
                         run.id,
                         node.id,
                         request.id,
+                        expected_workflow_version=expected_version,
                         expected_context_version=context.version,
                         context=merged.context,
                         changed_fields=merged.changed_fields,
@@ -332,7 +339,10 @@ class WorkflowEngine:
                     current_node_id = None
                     current_request_id = None
 
-                completed = self._repository.finish_run(run.id)
+                completed = self._repository.finish_run(
+                    run.id, expected_workflow_version=expected_version,
+                    expected_context_version=context.version,
+                )
                 self._log_run(
                     "workflow_run_finished",
                     completed,
@@ -407,6 +417,16 @@ class WorkflowEngine:
                 request_id=current_request_id,
                 error_code="context_update_invalid",
                 error_message="节点结果无法安全更新 ProjectContext",
+                started_at=run_started,
+                total_tokens=completion_tokens_used,
+            )
+        except WorkflowGraphVersionError:
+            return self._fail_run(
+                run,
+                node_id=current_node_id,
+                request_id=current_request_id,
+                error_code="workflow_version_conflict",
+                error_message="工作流已被并发修改，请使用最新版本重试",
                 started_at=run_started,
                 total_tokens=completion_tokens_used,
             )

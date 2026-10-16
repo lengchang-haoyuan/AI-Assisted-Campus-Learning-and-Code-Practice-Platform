@@ -1,6 +1,6 @@
 from collections.abc import Iterator
 from contextlib import contextmanager
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from threading import RLock, Thread
 import unittest
 
@@ -86,6 +86,16 @@ class FakeCampusRepository:
     def invitation_by_id(self, invitation_id: int) -> CampusInvitation | None:
         return next((value for value in self.invitations.values() if value.id == invitation_id), None)
 
+    def latest_consumed_invitation_id(self, user_id):
+        values = [invite.id for invite in self.invitations.values()
+                  if invite.consumed_by_user_id == user_id and invite.status == InvitationStatus.CONSUMED]
+        return max(values, default=None)
+
+    def revoke_pending_invitations(self, user_id, email):
+        for invite in self.invitations.values():
+            if (invite.target_user_id == user_id or invite.target_email == email.lower()) and invite.status == InvitationStatus.PENDING:
+                invite.status = InvitationStatus.REVOKED
+
     def password_reset(self, digest: bytes) -> PasswordReset | None:
         return self.resets.get(digest)
 
@@ -132,6 +142,66 @@ def identity(user: User) -> UserIdentity:
 
 
 class CampusIdentityTests(unittest.TestCase):
+    def revoked_member(self):
+        _, old_token = self.service.issue_invitation(self.admin_identity,
+            target_user_id=2, target_email=None, role=CampusRole.STUDENT,
+            expires_in_hours=1, reason='首次核验')
+        original = self.service.redeem_invitation(identity(self.student), token=old_token)
+        self.service.update_account(self.admin_identity, user_id=2, reason='撤销资格',
+            expected_revision=original.revision, expected_auth_version=None,
+            role=None, campus_status=MembershipStatus.REVOKED, account_enabled=None)
+        return self.repository.memberships[2], old_token
+
+    def test_new_invitation_restores_same_membership_and_invalidates_old_session(self):
+        member, old_token = self.revoked_member()
+        revision = member.revision
+        old_identity = identity(self.student)
+        _, token = self.service.issue_invitation(self.admin_identity,
+            target_user_id=2, target_email=None, role=CampusRole.STUDENT,
+            expires_in_hours=1, reason='重新核验')
+        restored = self.service.redeem_invitation(old_identity, token=token)
+        self.assertEqual(restored.id, member.id)
+        self.assertEqual(restored.status, MembershipStatus.ACTIVE)
+        self.assertEqual(restored.revision, revision + 1)
+        self.assertEqual(self.student.auth_version, old_identity.auth_version + 1)
+        with self.assertRaises(AuthenticationRequiredError):
+            self.service.me(old_identity)
+        self.assertEqual(self.service.me(identity(self.student)).id, member.id)
+        with self.assertRaises(ConflictError):
+            self.service.redeem_invitation(identity(self.student), token=old_token)
+
+    def test_consumed_invitation_and_status_patch_cannot_restore_revoked_member(self):
+        member, old_token = self.revoked_member()
+        with self.assertRaises(ConflictError):
+            self.service.redeem_invitation(identity(self.student), token=old_token)
+        with self.assertRaises(ConflictError):
+            self.service.update_account(self.admin_identity, user_id=2, reason='绕过核验',
+                expected_revision=member.revision, expected_auth_version=None,
+                role=None, campus_status=MembershipStatus.ACTIVE, account_enabled=None)
+        self.assertEqual(member.status, MembershipStatus.REVOKED)
+
+    def test_invalid_new_invitations_do_not_consume_or_restore(self):
+        for failure in ('expired', 'revoked', 'wrong_role', 'wrong_target', 'issuer_inactive'):
+            with self.subTest(failure=failure):
+                self.setUp()
+                member, _ = self.revoked_member()
+                _, token = self.service.issue_invitation(self.admin_identity,
+                    target_user_id=3 if failure == 'wrong_target' else 2,
+                    target_email=None,
+                    role=CampusRole.TEACHER if failure == 'wrong_role' else CampusRole.STUDENT,
+                    expires_in_hours=1, reason='核验失败测试')
+                invitation = self.repository.invitation(self.service._digest(token))
+                if failure == 'expired':
+                    invitation.expires_at = datetime.now(UTC) - timedelta(seconds=1)
+                if failure == 'revoked':
+                    invitation.status = InvitationStatus.REVOKED
+                if failure == 'issuer_inactive':
+                    self.admin.is_active = False
+                with self.assertRaises((ConflictError, PermissionDeniedError)):
+                    self.service.redeem_invitation(identity(self.student), token=token)
+                self.assertEqual(member.status, MembershipStatus.REVOKED)
+                self.assertIsNone(invitation.consumed_by_user_id)
+
     def setUp(self) -> None:
         self.security = SecurityService(
             SecuritySettings(

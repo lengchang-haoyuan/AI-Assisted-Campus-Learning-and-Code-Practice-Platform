@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session, joinedload
 from app.models.enums import ProjectStatus, TaskStatus
 from app.models.learning import DailyTask, LearningPlan, LearningRecord
 from app.models.project import Project
+from app.repositories.learning import LearningRepository, LearningPersistenceConflictError
 
 
 class WorkspacePersistenceConflictError(Exception):
@@ -97,10 +98,16 @@ class WorkspaceRepository:
     def get_task(self, task_id: int) -> DailyTask | None:
         return self._session.scalar(
             select(DailyTask)
-            .options(joinedload(DailyTask.project))
+            .options(joinedload(DailyTask.project), joinedload(DailyTask.plan))
             .where(DailyTask.id == task_id)
             .execution_options(populate_existing=True)
         )
+
+    def lock_task_plan(self, task: DailyTask) -> None:
+        try:
+            LearningRepository(self._session).lock_task_plans(task)
+        except LearningPersistenceConflictError as exc:
+            raise WorkspacePersistenceConflictError from exc
 
     def create_task(self, task: DailyTask) -> DailyTask:
         self._session.add(task)
@@ -125,23 +132,9 @@ class WorkspaceRepository:
         return saved
 
     def _recalculate_plan_progress(self, plan_id: int, user_id: int) -> None:
-        total, completed = self._session.execute(
-            select(
-                func.count(DailyTask.id),
-                func.coalesce(
-                    func.sum(
-                        case((DailyTask.status == TaskStatus.COMPLETED, 1), else_=0)
-                    ),
-                    0,
-                ),
-            ).where(DailyTask.plan_id == plan_id, DailyTask.user_id == user_id)
-        ).one()
-        plan = self._session.scalar(
-            select(LearningPlan).where(
-                LearningPlan.id == plan_id,
-                LearningPlan.user_id == user_id,
-            )
-        )
+        repository = LearningRepository(self._session)
+        plan = repository.get_plan(plan_id, for_update=True)
+        total, completed = repository.get_plan_task_counts(plan_id, user_id)
         if plan is not None:
             plan.progress = round(completed * 100 / total) if total else 0
 

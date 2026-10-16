@@ -1,0 +1,26 @@
+{
+  "result": "passed",
+  "checks": [
+    "desktop/mobile screenshots",
+    "focus start/pause/reset",
+    "mobile navigation and keyboard dismissal",
+    "global project search keeps q contract",
+    "create form, flip, edit and unchanged PUT fields",
+    "existing project pagination",
+    "learning views and plan editor",
+    "analytics range, dimensions and unchanged report POST",
+    "4 routes at 6 viewport widths",
+    "empty/error and unchanged campus role visibility"
+  ],
+  "API_requests_intercepted": 172,
+  "database_writes": 0,
+  "model_calls": 0,
+  "viewport_widths": [
+    1487,
+    1040,
+    820,
+    760,
+    390,
+    320
+  ]
+}

@@ -38,7 +38,10 @@ function renderChart(): void {
     return
   }
   chart ??= init(chartElement.value, undefined, { renderer: 'canvas' })
-  chart.setOption(props.option, { notMerge: true })
+  const option = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ? { ...props.option, animation: false }
+    : props.option
+  chart.setOption(option, { notMerge: true })
 }
 
 onMounted(() => {

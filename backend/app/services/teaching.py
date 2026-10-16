@@ -5,6 +5,7 @@ from typing import Any, Mapping
 
 from app.core.exceptions import (
     ConflictError,
+    InputError,
     PermissionDeniedError,
     ResourceNotFoundError,
 )
@@ -585,6 +586,9 @@ class TeachingService:
         expected_revision: int,
         values: Mapping[str, object],
     ) -> TeachingAssignmentData:
+        required_fields = ("title", "instructions", "learning_objectives", "acceptance_criteria")
+        if any(name in values and values[name] is None for name in required_fields):
+            raise InputError("教学任务的必填字段不能为 null")
         discovered = self._repository.assignment(assignment_id)
         if discovered is None:
             raise ResourceNotFoundError("教学任务不存在")
@@ -599,6 +603,8 @@ class TeachingService:
             if not self._teacher_can_manage(actor, member, teaching_class):
                 raise PermissionDeniedError("只有本班有效教师可以修改任务")
             self._assert_revision(value.revision, expected_revision)
+            if any(values.get(name, getattr(value, name)) is None for name in required_fields):
+                raise ConflictError("教学任务必填内容不完整，请先修复后再更新")
             if value.status == TeachingAssignmentStatus.DRAFT:
                 if "due_at" in values:
                     self._validate_future_due(values["due_at"], required=False)  # type: ignore[arg-type]

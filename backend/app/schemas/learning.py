@@ -4,6 +4,7 @@ from datetime import date, datetime, time
 from pydantic import BaseModel, ConfigDict, Field, JsonValue, field_validator, model_validator
 
 from app.models.enums import LearningPlanStatus, RecordType, TaskPriority, TaskStatus
+from app.models.learning import RECORD_SOURCE_KEYS
 
 MAX_JSON_BYTES = 32_768
 
@@ -236,6 +237,8 @@ class LearningRecordCreate(BaseModel):
     def validate_metadata(
         cls, value: dict[str, JsonValue] | None
     ) -> dict[str, JsonValue] | None:
+        if value is not None and RECORD_SOURCE_KEYS & value.keys():
+            raise ValueError("记录来源及教学关联字段由系统维护")
         return limit_json(value)
 
 
@@ -267,6 +270,8 @@ class LearningRecordUpdate(BaseModel):
     def validate_metadata(
         cls, value: dict[str, JsonValue] | None
     ) -> dict[str, JsonValue] | None:
+        if value is not None and RECORD_SOURCE_KEYS & value.keys():
+            raise ValueError("记录来源及教学关联字段由系统维护")
         return limit_json(value)
 
     @model_validator(mode="after")

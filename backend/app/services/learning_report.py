@@ -163,6 +163,15 @@ class LearningReportService:
             execution.result.model_dump(mode="python")
         )
         result_payload = result.model_dump(mode="json")
+        # 事实使用本次交给 Agent 的聚合快照，避免模型数字偏差或返回后的数据漂移。
+        result_payload["structured_data"].update({
+            "total_learning_minutes": source.learning.total_minutes,
+            "active_days": source.learning.active_days,
+            "task_completion_rate": source.tasks.completion_rate,
+            "project_average_progress": source.projects.average_progress,
+            "workflow_success_rate": source.workflows.success_rate,
+            "ai_request_count": source.ai_usage.request_count,
+        })
         canonical_result = json.dumps(
             result_payload,
             ensure_ascii=False,

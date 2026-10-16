@@ -1,0 +1,87 @@
+[
+  {
+    "surface": "home",
+    "reference": "C:\\Users\\Administrator\\.codex\\generated_images\\01a13927-d6e4-7c30-a786-faa4a99031d7\\exec-f1964d64-b75d-49c0-8aa8-c67162b8ed8f.png",
+    "reference_dimensions": [
+      1487,
+      1058
+    ],
+    "capture": "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\测试证据\\20261014-Campus-Studio\\desktop-home.png",
+    "capture_dimensions": [
+      1487,
+      1058
+    ],
+    "comparison": "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\测试证据\\20261014-Campus-Studio\\compare-home.png",
+    "comparison_panel_width": 744,
+    "placement": "approved reference left / browser capture right",
+    "density_note": "each source scaled proportionally to equal comparison width"
+  },
+  {
+    "surface": "projects",
+    "reference": "C:\\Users\\Administrator\\.codex\\generated_images\\01a13927-d6e4-7c30-a786-faa4a99031d7\\exec-d3a3f655-12eb-46b5-b4d7-d8f4560e499d.png",
+    "reference_dimensions": [
+      1487,
+      1058
+    ],
+    "capture": "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\测试证据\\20261014-Campus-Studio\\desktop-projects.png",
+    "capture_dimensions": [
+      1487,
+      1058
+    ],
+    "comparison": "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\测试证据\\20261014-Campus-Studio\\compare-projects.png",
+    "comparison_panel_width": 744,
+    "placement": "approved reference left / browser capture right",
+    "density_note": "each source scaled proportionally to equal comparison width"
+  },
+  {
+    "surface": "learning",
+    "reference": "C:\\Users\\Administrator\\.codex\\generated_images\\01a13927-d6e4-7c30-a786-faa4a99031d7\\exec-6acc02c8-bad0-410c-872e-0265a2ad8aef.png",
+    "reference_dimensions": [
+      1485,
+      1059
+    ],
+    "capture": "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\测试证据\\20261014-Campus-Studio\\desktop-learning.png",
+    "capture_dimensions": [
+      1487,
+      1058
+    ],
+    "comparison": "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\测试证据\\20261014-Campus-Studio\\compare-learning.png",
+    "comparison_panel_width": 744,
+    "placement": "approved reference left / browser capture right",
+    "density_note": "each source scaled proportionally to equal comparison width"
+  },
+  {
+    "surface": "analytics",
+    "reference": "C:\\Users\\Administrator\\.codex\\generated_images\\01a13927-d6e4-7c30-a786-faa4a99031d7\\exec-e5ebbb78-a233-4b6f-b281-a3fd6eadf540.png",
+    "reference_dimensions": [
+      1189,
+      1323
+    ],
+    "capture": "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\测试证据\\20261014-Campus-Studio\\desktop-analytics.png",
+    "capture_dimensions": [
+      1487,
+      1735
+    ],
+    "comparison": "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\测试证据\\20261014-Campus-Studio\\compare-analytics.png",
+    "comparison_panel_width": 620,
+    "placement": "approved reference left / browser capture right",
+    "density_note": "each source scaled proportionally to equal comparison width"
+  },
+  {
+    "surface": "mobile",
+    "reference": "C:\\Users\\Administrator\\.codex\\generated_images\\01a13927-d6e4-7c30-a786-faa4a99031d7\\exec-9b4e27e2-3073-4062-a26c-3402a47d47ff.png",
+    "reference_dimensions": [
+      853,
+      1844
+    ],
+    "capture": "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\测试证据\\20261014-Campus-Studio\\mobile-home.png",
+    "capture_dimensions": [
+      390,
+      844
+    ],
+    "comparison": "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\测试证据\\20261014-Campus-Studio\\compare-mobile.png",
+    "comparison_panel_width": 390,
+    "placement": "approved reference left / browser capture right",
+    "density_note": "reference scaled from 853px to 390 CSS px"
+  }
+]

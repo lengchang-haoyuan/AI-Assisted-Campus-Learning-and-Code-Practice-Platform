@@ -72,10 +72,12 @@ class BaseAgent(ABC):
         self,
         context: ProjectContext,
         input_data: dict[str, object],
+        *,
+        context_fields: frozenset[str] | None = None,
     ) -> AgentResult:
         validated_input = self.validate_input(input_data)
         request = AICompletionRequest(
-            messages=self._build_messages(context, validated_input),
+            messages=self._build_messages(context, validated_input, context_fields=context_fields),
             model=self._model,
             temperature=self._temperature,
             max_tokens=self._max_tokens,
@@ -96,12 +98,13 @@ class BaseAgent(ABC):
         )
 
     def _build_messages(
-        self, context: ProjectContext, input_data: AgentSchema
+        self, context: ProjectContext, input_data: AgentSchema, *,
+        context_fields: frozenset[str] | None = None,
     ) -> tuple[AIMessage, AIMessage]:
         context_json = json.dumps(
             {
                 "context_version": context.version,
-                "values": context.values.model_dump(mode="json"),
+                "values": context.values.model_dump(mode="json", include=context_fields),
             },
             ensure_ascii=False,
             sort_keys=True,

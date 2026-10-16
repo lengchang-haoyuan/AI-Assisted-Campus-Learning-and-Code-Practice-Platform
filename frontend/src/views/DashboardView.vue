@@ -4,11 +4,11 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { useRouter } from 'vue-router'
 
 import { getApiErrorMessage } from '@/api/errors'
-import { getProjectCover } from '@/assets/projectCovers'
+import { getProjectCover, getProjectCoverSrcset } from '@/assets/projectCovers'
 import LiquidTabs, { type LiquidTabOption } from '@/components/LiquidTabs.vue'
-import NumberRoller from '@/components/NumberRoller.vue'
 import ProjectFlipCard from '@/components/ProjectFlipCard.vue'
-import { formatProjectTime, statusLabels } from '@/domain/projects'
+import UiIcon from '@/components/UiIcon.vue'
+import { formatProjectTime, getProjectStack, statusLabels } from '@/domain/projects'
 import { useProjectStore } from '@/stores/projects'
 import type { ProjectResponse } from '@/types/project'
 
@@ -40,6 +40,10 @@ const inProgressCount = computed(
 const completedCount = computed(
   () => projectStore.projects.filter((project) => project.status === 'completed').length,
 )
+const featuredProject = computed(() => recentProjects.value.find((project) => project.status === 'in_progress') ?? recentProjects.value[0] ?? null)
+const featuredStack = computed(() => featuredProject.value ? getProjectStack(featuredProject.value).slice(0, 2).join(' · ') : '')
+const supportingProjects = computed(() => recentProjects.value.filter((project) => project.id !== featuredProject.value?.id))
+const todayLabel = new Intl.DateTimeFormat('zh-CN', { month: 'long', day: 'numeric', weekday: 'short' }).format(new Date())
 const timerLabel = computed(() => {
   const minutes = Math.floor(remainingSeconds.value / 60).toString().padStart(2, '0')
   const seconds = (remainingSeconds.value % 60).toString().padStart(2, '0')
@@ -109,127 +113,71 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="dashboard-board">
-    <aside class="board-panel daily-desk" aria-labelledby="daily-desk-title">
-      <div class="panel-title-row">
-        <h1 id="daily-desk-title">我的今日桌面</h1>
-        <RouterLink class="text-command" to="/projects">全部项目</RouterLink>
+  <div class="studio-home">
+    <div v-if="projectStore.listError" class="inline-alert is-error" role="alert">
+      <span>{{ projectStore.listError }}</span><button type="button" @click="loadProjects">重试</button>
+    </div>
+    <section class="studio-home-hero" aria-labelledby="daily-desk-title">
+      <div class="studio-greeting">
+        <p class="studio-today">{{ todayLabel }}</p>
+        <h1 id="daily-desk-title">把想法，<br />做成<span>作品。</span></h1>
+        <p class="studio-greeting-copy">从今天的实践开始，积累属于你的成长。</p>
       </div>
 
-      <div v-if="projectStore.listLoading" class="compact-skeleton" aria-label="项目加载中">
-        <span v-for="index in 4" :key="index" />
-      </div>
-      <ul v-else class="today-projects">
-        <li v-for="project in projectStore.projects.slice(0, 4)" :key="project.id">
-          <span class="project-state-dot" :data-status="project.status" />
-          <RouterLink :to="`/projects/${project.id}`">{{ project.name }}</RouterLink>
-          <small>{{ statusLabels[project.status] }}</small>
-        </li>
-        <li v-if="projectStore.projects.length === 0" class="muted-row">暂无项目</li>
-      </ul>
+      <article v-if="featuredProject" class="studio-featured">
+        <img class="studio-featured-cover" :src="getProjectCover(featuredProject)" :srcset="getProjectCoverSrcset(featuredProject)" sizes="(max-width: 760px) calc(100vw - 32px), 60vw" :alt="`${featuredProject.name} 项目封面`" width="1200" height="600" fetchpriority="high" />
+        <div class="studio-featured-content">
+          <span class="studio-featured-label">继续项目</span>
+          <h2><RouterLink :to="`/projects/${featuredProject.id}`">{{ featuredProject.name }}</RouterLink></h2>
+          <p class="studio-featured-stack">{{ featuredStack || '技术栈待补充' }}</p>
+          <div class="studio-featured-bottom">
+            <div class="studio-card-progress">
+              <span>项目进度 <strong>{{ featuredProject.progress }}%</strong></span>
+              <div class="studio-progress" role="progressbar" :aria-label="`${featuredProject.name} 项目进度`" :aria-valuenow="featuredProject.progress" aria-valuemin="0" aria-valuemax="100"><span :style="{ transform: `scaleX(${featuredProject.progress / 100})` }" /></div>
+            </div>
+            <RouterLink class="primary-command" :to="`/projects/${featuredProject.id}`">继续项目 <UiIcon name="arrow" /></RouterLink>
+          </div>
+        </div>
+      </article>
+      <article v-else class="studio-featured">
+        <img class="studio-featured-cover" :src="getProjectCover({})" :srcset="getProjectCoverSrcset({})" sizes="(max-width: 760px) calc(100vw - 32px), 60vw" alt="" width="1200" height="600" />
+        <div v-if="projectStore.listLoading" class="compact-skeleton studio-home-loading" aria-label="项目加载中"><span v-for="index in 3" :key="index" /></div>
+        <div v-else class="studio-featured-content studio-home-empty"><h2>从第一个项目开始</h2><p>记录一个想法，为它建立清晰的实践目标。</p><RouterLink class="primary-command" to="/projects">创建项目 <UiIcon name="plus" /></RouterLink></div>
+      </article>
 
-      <section class="focus-block" aria-labelledby="focus-title">
-        <div class="panel-title-row">
-          <h2 id="focus-title">本次专注</h2>
+      <section class="studio-focus" aria-labelledby="focus-title">
+        <h2 id="focus-title">本次专注</h2>
+        <div class="studio-focus-row">
+          <p class="focus-time" aria-label="剩余专注时间">{{ timerLabel }}</p>
+          <button class="secondary-command" type="button" @click="toggleTimer">{{ timerRunning ? '暂停专注' : '开始专注' }}</button>
           <button class="text-command" type="button" @click="resetTimer">重置</button>
         </div>
-        <p class="focus-time">{{ timerLabel }}</p>
-        <div class="focus-progress" aria-hidden="true">
-          <span :style="{ transform: `scaleX(${remainingSeconds / (25 * 60)})` }" />
-        </div>
-        <button class="focus-command" type="button" @click="toggleTimer">
-          {{ timerRunning ? '暂停专注' : '开始专注' }}
-        </button>
+        <div v-if="timerRunning" class="focus-progress" aria-hidden="true"><span :style="{ transform: `scaleX(${remainingSeconds / (25 * 60)})` }" /></div>
       </section>
+    </section>
 
-      <section class="desk-stat" aria-label="项目统计">
-        <div>
-          <NumberRoller :value="projectStore.page.total" />
-          <span>项目总数</span>
+    <section class="studio-recent" aria-labelledby="studio-recent-title">
+      <div class="panel-title-row"><h2 id="studio-recent-title">最近项目</h2><RouterLink class="text-command studio-arrow-link" to="/projects">查看全部 <UiIcon name="arrow" /></RouterLink></div>
+      <div class="studio-recent-layout">
+        <div class="studio-recent-list">
+          <article v-for="project in supportingProjects.slice(0, 2)" :key="project.id" class="studio-recent-project">
+            <RouterLink :to="`/projects/${project.id}`" tabindex="-1" aria-hidden="true"><img :src="getProjectCover(project)" :srcset="getProjectCoverSrcset(project)" sizes="(max-width: 760px) 106px, (max-width: 1280px) 35vw, 20vw" alt="" width="800" height="420" loading="lazy" /></RouterLink>
+            <div><h3><RouterLink :to="`/projects/${project.id}`" :title="project.name">{{ project.name }}</RouterLink></h3><p>{{ getProjectStack(project).slice(0, 2).join(' · ') || '技术栈待补充' }}</p><span class="status-chip" :data-status="project.status">{{ statusLabels[project.status] }}</span><small>更新于 {{ formatProjectTime(project.updated_at) }}</small></div>
+          </article>
+          <p v-if="!projectStore.listLoading && recentProjects.length === 0" class="muted-copy">创建项目后，最近的实践会出现在这里。</p>
+          <p v-else-if="!projectStore.listLoading && supportingProjects.length === 0" class="muted-copy">最近的项目已置顶展示，可进入项目库查看全部。</p>
         </div>
-        <div>
-          <NumberRoller :value="inProgressCount" />
-          <span>进行中</span>
-        </div>
-      </section>
-    </aside>
-
-    <section class="board-panel project-plaza" aria-labelledby="project-plaza-title">
-      <div class="panel-title-row plaza-heading">
-        <h2 id="project-plaza-title">我的项目广场</h2>
-        <RouterLink class="primary-command compact-command" to="/projects">新建项目</RouterLink>
-      </div>
-
-      <LiquidTabs v-model="activeFilter" :options="filterOptions" :ariaLabel="'项目状态筛选'" />
-
-      <div v-if="projectStore.listError" class="inline-alert is-error" role="alert">
-        <span>{{ projectStore.listError }}</span>
-        <button type="button" @click="loadProjects">重试</button>
-      </div>
-
-      <div v-if="projectStore.listLoading" class="project-grid-loading" aria-label="项目加载中">
-        <span v-for="index in 3" :key="index" />
-      </div>
-
-      <div v-else-if="filteredProjects.length > 0" class="project-showcase">
-        <ProjectFlipCard
-          v-for="(project, index) in filteredProjects.slice(0, 3)"
-          :key="project.id"
-          :project="project"
-          :image-url="getProjectCover(project)"
-          :featured="index === 0"
-          @edit="editProject"
-          @delete="removeProject"
-        />
-      </div>
-
-      <div v-else-if="!projectStore.listLoading" class="empty-state">
-        <h3>还没有符合条件的项目</h3>
-        <p>创建第一个项目，开始记录技术栈和交付目标。</p>
-        <RouterLink class="primary-command" to="/projects">创建项目</RouterLink>
+        <div class="studio-data-entry"><h3><UiIcon name="data" />学习与社区数据</h3><p>查看你的学习时长、项目进度与社区互动。</p><RouterLink class="studio-arrow-link" to="/analytics">查看学习数据 <UiIcon name="arrow" /></RouterLink></div>
       </div>
     </section>
 
-    <aside class="board-panel project-pulse" aria-labelledby="project-pulse-title">
-      <div class="panel-title-row">
-        <h2 id="project-pulse-title">项目脉搏</h2>
-        <span class="live-indicator">实时</span>
-      </div>
-
-      <section class="pulse-section">
-        <h3>最近更新</h3>
-        <ul class="pulse-list">
-          <li v-for="project in recentProjects.slice(0, 4)" :key="project.id">
-            <span class="avatar is-small">{{ project.name.slice(0, 1) }}</span>
-            <div>
-              <RouterLink :to="`/projects/${project.id}`">{{ project.name }}</RouterLink>
-              <small>{{ formatProjectTime(project.updated_at) }}</small>
-            </div>
-          </li>
-          <li v-if="recentProjects.length === 0" class="muted-row">暂无更新</li>
-        </ul>
-      </section>
-
-      <section class="pulse-section">
-        <h3>状态分布</h3>
-        <dl class="status-summary">
-          <div><dt>进行中</dt><dd>{{ inProgressCount }}</dd></div>
-          <div><dt>已完成</dt><dd>{{ completedCount }}</dd></div>
-          <div><dt>其他状态</dt><dd>{{ Math.max(0, projectStore.page.total - inProgressCount - completedCount) }}</dd></div>
-        </dl>
-      </section>
-
-      <section class="pulse-numbers" aria-label="本页项目数据">
-        <div><NumberRoller :value="projectStore.page.total" /><span>全部项目</span></div>
-        <div><NumberRoller :value="completedCount" /><span>完成项目</span></div>
-      </section>
-    </aside>
-
-    <nav class="quick-strip" aria-label="快速入口">
-      <strong>快速入口</strong>
-      <RouterLink to="/projects">项目管理 <span>创建、编辑和删除</span></RouterLink>
-      <RouterLink to="/workspace/dashboard">学习桌面 <span>查看项目进度</span></RouterLink>
-      <RouterLink to="/profile">个人资料 <span>确认账户信息</span></RouterLink>
-    </nav>
+    <details class="studio-project-tools">
+      <summary><span>我的项目广场</span><span class="studio-loaded-count">{{ projectStore.page.total }} 个项目 · 本页 {{ inProgressCount }} 个进行中 · {{ completedCount }} 个已完成</span></summary>
+      <div class="panel-title-row studio-project-toolbar"><LiquidTabs v-model="activeFilter" :options="filterOptions" ariaLabel="项目状态筛选" /><RouterLink class="primary-command compact-command" to="/projects">新建项目</RouterLink></div>
+      <div v-if="projectStore.listLoading" class="project-grid-loading" aria-label="项目加载中"><span v-for="index in 3" :key="index" /></div>
+      <div v-else-if="filteredProjects.length" class="project-list-grid"><ProjectFlipCard v-for="project in filteredProjects.slice(0, 3)" :key="project.id" :project="project" :image-url="getProjectCover(project)" :image-srcset="getProjectCoverSrcset(project)" @edit="editProject" @delete="removeProject" /></div>
+      <div v-else class="empty-state"><h3>还没有符合条件的项目</h3><p>创建第一个项目，开始记录技术栈和交付目标。</p><RouterLink class="primary-command" to="/projects">创建项目</RouterLink></div>
+    </details>
+    <nav class="studio-quick-links" aria-label="快速入口"><RouterLink to="/projects">项目管理</RouterLink><RouterLink to="/workspace/dashboard">学习桌面</RouterLink><RouterLink to="/profile">个人资料</RouterLink></nav>
   </div>
 </template>

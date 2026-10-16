@@ -421,7 +421,9 @@ class FakeExecutionRepository:
             created_at=NOW,
         )
 
-    def finish_run(self, run_id: int) -> WorkflowRun:
+    def finish_run(
+        self, run_id: int, *, expected_workflow_version: int, expected_context_version: int
+    ) -> WorkflowRun:
         run = next(item for item in self.runs if item.id == run_id)
         run.status = WorkflowRunStatus.COMPLETED
         run.finished_at = NOW

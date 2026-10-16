@@ -190,6 +190,9 @@ class TeachingAssignmentUpdateRequest(BaseModel):
         changed_fields = self.model_fields_set - {"expected_revision"}
         if not changed_fields:
             raise ValueError("至少提交一个任务变更字段")
+        for name in ("title", "instructions", "learning_objectives", "acceptance_criteria"):
+            if name in changed_fields and getattr(self, name) is None:
+                raise ValueError(f"{name} 不能为 null")
         return self
 
 

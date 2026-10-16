@@ -5,7 +5,7 @@ from unittest.mock import Mock
 import unittest
 
 from app.api.deps import get_current_user, get_teaching_service
-from app.core.exceptions import ConflictError, PermissionDeniedError, ResourceNotFoundError
+from app.core.exceptions import ConflictError, InputError, PermissionDeniedError, ResourceNotFoundError
 from app.main import create_app
 from app.models.campus import CampusMembership, CampusRole, MembershipStatus
 from app.models.enums import ProjectDifficulty, ProjectStatus
@@ -191,6 +191,25 @@ class FakeTeachingRepository:
 
 
 class TeachingServiceTests(unittest.TestCase):
+    def test_null_required_fields_are_rejected_before_mutation(self):
+        for field in ('title', 'instructions', 'learning_objectives', 'acceptance_criteria'):
+            with self.subTest(field=field):
+                value = self.create_draft()
+                original = (value.title, value.instructions, value.learning_objectives,
+                            value.acceptance_criteria, value.revision)
+                with self.assertRaises(InputError):
+                    self.service.update_assignment(self.teacher_a, assignment_id=value.id,
+                        expected_revision=value.revision, values={field: None})
+                self.assertEqual((value.title, value.instructions, value.learning_objectives,
+                                  value.acceptance_criteria, value.revision), original)
+
+    def test_optional_fields_can_be_cleared_without_losing_required_content(self):
+        value = self.create_draft()
+        updated = self.service.update_assignment(self.teacher_a, assignment_id=value.id,
+            expected_revision=value.revision, values={'due_at': None, 'source_project_id': None})
+        self.assertIsNone(updated.due_at)
+        self.assertEqual(updated.learning_objectives, ['理解切片'])
+
     def setUp(self) -> None:
         self.repository = FakeTeachingRepository()
         self.service = TeachingService(self.repository)  # type: ignore[arg-type]
@@ -420,6 +439,14 @@ class TeachingServiceTests(unittest.TestCase):
 
 
 class TeachingAPITests(unittest.TestCase):
+    def test_patch_rejects_explicit_null_without_calling_service(self):
+        for field in ('title', 'instructions', 'learning_objectives', 'acceptance_criteria'):
+            with self.subTest(field=field):
+                response = request(self.app, 'PATCH', '/api/v1/campus/assignments/1',
+                                   body={'expected_revision': 1, field: None})
+                self.assertEqual(response.status_code, 422)
+        self.service.update_assignment.assert_not_called()
+
     def setUp(self) -> None:
         self.app = create_app()
         self.service = Mock(spec=TeachingService)

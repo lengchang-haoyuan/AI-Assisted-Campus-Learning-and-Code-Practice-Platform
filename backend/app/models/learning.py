@@ -37,6 +37,9 @@ if TYPE_CHECKING:
     from app.models.course import Course
     from app.models.project import Project
     from app.models.user import User
+    from app.models.submission import Feedback
+
+RECORD_SOURCE_KEYS = frozenset({"source", "submission_id", "version_number"})
 
 
 class LearningPlan(IdMixin, TimestampMixin, Base):
@@ -180,6 +183,9 @@ class LearningRecord(IdMixin, Base):
     project: Mapped["Project | None"] = relationship(back_populates="learning_records")
     course: Mapped["Course | None"] = relationship(back_populates="learning_records")
     task: Mapped[DailyTask | None] = relationship(back_populates="learning_records")
+    teaching_feedback: Mapped["Feedback | None"] = relationship(
+        "Feedback", uselist=False, viewonly=True,
+    )
 
 
 class LearningReport(IdMixin, TimestampMixin, Base):

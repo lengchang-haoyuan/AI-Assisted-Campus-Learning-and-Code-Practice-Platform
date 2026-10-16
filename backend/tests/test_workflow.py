@@ -3,7 +3,7 @@ from decimal import Decimal
 import os
 from secrets import token_urlsafe
 import unittest
-from unittest.mock import Mock
+from unittest.mock import MagicMock, Mock
 
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
@@ -256,7 +256,7 @@ class WorkflowServiceTests(unittest.TestCase):
 
 class WorkflowRepositoryTests(unittest.TestCase):
     def test_replace_graph_rechecks_version_inside_transaction(self) -> None:
-        session = Mock(spec=Session)
+        session = MagicMock(spec=Session)
         session.scalar.return_value = 4
         repository = WorkflowRepository(session)
 

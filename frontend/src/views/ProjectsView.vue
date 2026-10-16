@@ -4,7 +4,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { useRoute, useRouter } from 'vue-router'
 
 import { getApiErrorMessage } from '@/api/errors'
-import { getProjectCover } from '@/assets/projectCovers'
+import { getProjectCover, getProjectCoverSrcset } from '@/assets/projectCovers'
 import ProjectFlipCard from '@/components/ProjectFlipCard.vue'
 import ProjectForm from '@/components/ProjectForm.vue'
 import { useProjectStore } from '@/stores/projects'
@@ -140,6 +140,7 @@ onMounted(() => {
         :key="project.id"
         :project="project"
         :image-url="getProjectCover(project)"
+        :image-srcset="getProjectCoverSrcset(project)"
         @edit="editProject"
         @delete="removeProject"
       />

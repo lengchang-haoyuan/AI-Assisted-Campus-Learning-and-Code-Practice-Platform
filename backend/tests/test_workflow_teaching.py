@@ -13,7 +13,7 @@ from app.services.workflow import WorkflowService
 from app.workflow.engine import WorkflowEngine, WorkflowEngineLimits, WorkflowRunMode
 from tests.test_workflow_engine import FakeExecutionRepository, QueueProvider, make_workflow
 from types import SimpleNamespace
-from unittest.mock import Mock, patch
+from unittest.mock import MagicMock, patch
 from app.models.enums import WorkflowNodeStatus, WorkflowStatus
 from app.repositories.workflow import WorkflowRepository, WorkflowNodeRecord, WorkflowEdgeRecord
 
@@ -82,8 +82,8 @@ class TeachingWorkflowTests(unittest.TestCase):
         workflow.status = WorkflowStatus.COMPLETED
         for node in workflow.nodes:
             node.status = WorkflowNodeStatus.SUCCESS
-        session = Mock()
-        session.scalar.return_value = workflow.version
+        session = MagicMock()
+        session.scalar.side_effect = [workflow.project_id, workflow.version, None, workflow.version]
         repository = WorkflowRepository(session)
         records = [WorkflowNodeRecord(node.node_key, node.node_type, node.name, 100, 80, dict(node.config)) for node in workflow.nodes]
         records[-1].config["student_code"] = "def reverse_string(text):\n    return text[::1]"
