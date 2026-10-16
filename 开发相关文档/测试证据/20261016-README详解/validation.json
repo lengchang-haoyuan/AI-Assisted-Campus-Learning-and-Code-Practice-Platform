@@ -1,0 +1,25 @@
+{
+  "markdownPreview": "passed",
+  "images": 8,
+  "brokenImages": 0,
+  "pageErrors": 0,
+  "viewportWidths": [
+    1280,
+    390
+  ],
+  "horizontalOverflow": false,
+  "mermaidFences": 8,
+  "renderer": "local marked GFM + Mermaid 12.2.0 from temporary browser CDN; no application dependency change",
+  "diagrams": 8,
+  "svgCount": 8,
+  "erOutsideDetails": true,
+  "localLinks": 71,
+  "missingLocalLinks": 0,
+  "navigationAnchors": 9,
+  "codeEntryLinks": 31,
+  "sourceExcerpts": 3,
+  "modelTables": 34,
+  "modelFieldChecks": 217,
+  "foreignKeyRelationships": 56,
+  "fieldKeyAndCardinalityChecks": "passed"
+}
