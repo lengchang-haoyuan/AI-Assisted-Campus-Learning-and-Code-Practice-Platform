@@ -1,0 +1,29 @@
+{
+  "source_restored": true,
+  "writer_connection_ids": [
+    23
+  ],
+  "held_read_connection_id": 24,
+  "read_transaction": {
+    "connection_id": 24,
+    "isolation_level": "REPEATABLE-READ",
+    "read_only": 1,
+    "db": "scholarhub_l4_s02_20261020"
+  },
+  "final_counts": {
+    "projects": 1,
+    "daily_tasks": 4,
+    "learning_records": 4,
+    "teaching_classes": 1,
+    "teaching_assignments": 3,
+    "class_memberships": 2,
+    "campus_memberships": 2,
+    "submissions": 3,
+    "submission_versions": 4,
+    "feedback": 3,
+    "ai_requests_aux": 1,
+    "source_claim_projection": 2
+  },
+  "stage": "S03",
+  "spark_runs": 0
+}

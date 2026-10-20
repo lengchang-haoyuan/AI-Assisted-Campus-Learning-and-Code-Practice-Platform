@@ -1,0 +1,25 @@
+{
+  "case_id": "D08",
+  "name": "无任务与真实SET NULL关系",
+  "kind": "data",
+  "input_changes": [
+    {
+      "op": "clear",
+      "table": "daily_tasks"
+    },
+    {
+      "op": "set",
+      "table": "learning_records",
+      "match": {},
+      "values": {
+        "task_id": null
+      }
+    }
+  ],
+  "expected_status": "validated",
+  "expected_assertions": {
+    "tasks.total": 0,
+    "tasks.completion_rate.percent": null,
+    "records.valid_unique_rows": 5
+  }
+}

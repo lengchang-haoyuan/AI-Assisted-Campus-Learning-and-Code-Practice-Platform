@@ -1,0 +1,13 @@
+test_core_delete_semantics (tests.test_database_schema.DatabaseSchemaTests.test_core_delete_semantics) ... ok
+test_metadata_discovers_all_tables (tests.test_database_schema.DatabaseSchemaTests.test_metadata_discovers_all_tables) ... ok
+test_mysql_ddl_compiles_for_every_table (tests.test_database_schema.DatabaseSchemaTests.test_mysql_ddl_compiles_for_every_table) ... ok
+test_named_constraints_and_indexes_exist_in_schema (tests.test_database_schema.DatabaseSchemaTests.test_named_constraints_and_indexes_exist_in_schema) ... ok
+test_schema_tables_and_columns_match_metadata (tests.test_database_schema.DatabaseSchemaTests.test_schema_tables_and_columns_match_metadata) ... ok
+test_sensitive_fields_are_not_modeled (tests.test_database_schema.DatabaseSchemaTests.test_sensitive_fields_are_not_modeled) ... ok
+test_utc_datetime_rejects_naive_values (tests.test_database_schema.DatabaseSchemaTests.test_utc_datetime_rejects_naive_values) ... ok
+test_workflow_edges_require_nodes_from_same_workflow (tests.test_database_schema.DatabaseSchemaTests.test_workflow_edges_require_nodes_from_same_workflow) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.060s
+
+OK

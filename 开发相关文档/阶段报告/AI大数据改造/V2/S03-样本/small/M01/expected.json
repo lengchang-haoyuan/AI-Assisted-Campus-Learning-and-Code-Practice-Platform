@@ -1,0 +1,60 @@
+{
+  "assertions": {
+    "1001": {
+      "records.known_minutes": 75,
+      "records.active_days": 3,
+      "tasks.total": 4,
+      "topic.revised_count": 1,
+      "topic.confirmed_count": 2
+    },
+    "1002": {
+      "records.valid_unique_rows": 2,
+      "records.known_minutes": 10,
+      "records.active_days": 2,
+      "records.missing_duration_count": 1,
+      "tasks.total": 1,
+      "tasks.cancelled": 1,
+      "tasks.completion_rate.percent": "0.000000",
+      "topic.cohort_count": 1,
+      "topic.revised_count": 0,
+      "topic.confirmed_count": 1,
+      "topic.first_pass_confirmed_count": 1,
+      "topic.first_review_wait_mean_minutes": "30.000000"
+    },
+    "1003": {
+      "records.valid_unique_rows": 0,
+      "tasks.total": 0,
+      "tasks.completion_rate.percent": null,
+      "topic.cohort_count": 0,
+      "topic.confirmation_rate.percent": null
+    }
+  },
+  "should_describe": [
+    "1001存在修订后确认且仍有待评",
+    "1002首次通过，无需人为制造二次提交",
+    "1002只有取消任务，取消仍占分母",
+    "1003无样本"
+  ],
+  "must_not_infer": [
+    "分钟少等于能力低",
+    "修订导致学习提升",
+    "无任务等于完成率100%",
+    "教师确认等于执行代码"
+  ],
+  "scoring": {
+    "dimensions": [
+      "事实准确",
+      "模式与反例",
+      "覆盖与限制",
+      "可回溯证据"
+    ],
+    "points_each": [
+      0,
+      1,
+      2
+    ],
+    "threshold": 6,
+    "full_score_example": "1001有1个修订后通过，但另有首次通过和待评；1002首次通过说明修订不是必经步骤。记录分钟与任务状态仅描述覆盖和进展，不证明能力或因果。1003无样本。"
+  },
+  "ai_judge_status": "not_run_S06"
+}

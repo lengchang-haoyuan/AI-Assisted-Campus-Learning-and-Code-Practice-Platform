@@ -1,0 +1,8 @@
+[
+  {
+    "table_name": "learning_records",
+    "source_key": null,
+    "source_row": 5,
+    "reason": "required_key_missing"
+  }
+]

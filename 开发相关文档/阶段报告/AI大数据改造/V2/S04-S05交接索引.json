@@ -1,0 +1,45 @@
+{
+  "stage": "S04",
+  "state": "validated_for_S05_handoff",
+  "contract_id": "V2-S01-r2",
+  "primary": {
+    "snapshot_id": "s03-owner3-restored",
+    "input_batch_id": "16becd7d-fa30-4f57-afa0-f5170f63741e",
+    "job_id": "v2-controlled",
+    "owner_user_id": 3,
+    "dataset_kind": "controlled",
+    "rule_version": "quality-1.0",
+    "metric_version": "learning-process-1.0",
+    "relative_path": "S04-产物/jobs/v2-controlled",
+    "acceptance": "S04-数据验收.json",
+    "input_kind": "api_created_controlled_ods"
+  },
+  "boundary": {
+    "job_id": "v1-boundary",
+    "owner_user_id": 4,
+    "relative_path": "S04-产物/jobs/v1-boundary"
+  },
+  "offline_only": {
+    "synthetic_job": "v1-scale",
+    "fixture_jobs": "v1-D00..D16/M01; exclude from personal publication"
+  },
+  "exclude": [
+    "S04-产物/.incomplete",
+    "d00-first development run",
+    "all fixture and synthetic sources for personal publication"
+  ],
+  "versions_unimplemented": [
+    "quality-1.1"
+  ],
+  "publication_executed": false,
+  "database_writes": 0,
+  "model_calls": 0,
+  "wsl_original": "/home/administrator/scholarhub-analytics/s04-20261020",
+  "required_gates": [
+    "completed job manifest and Parquet",
+    "quality fatal_errors=0 and reconciliation",
+    "S04 independent acceptance",
+    "owner and fixed source versions",
+    "S05 own atomic publication and access tests still required"
+  ]
+}

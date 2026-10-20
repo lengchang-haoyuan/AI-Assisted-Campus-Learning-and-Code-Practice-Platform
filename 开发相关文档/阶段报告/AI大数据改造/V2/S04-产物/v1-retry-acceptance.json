@@ -1,0 +1,13 @@
+{
+  "job_id": "v1-retry",
+  "snapshot_id": "fixture-D00",
+  "state": "validated",
+  "spark_python_all_subjects_equal": true,
+  "frozen_assertions_passed": false,
+  "subjects": 1,
+  "spark_seconds": 17.267950883000026,
+  "python_compute_seconds": 0.00022918800004845252,
+  "python_input_read_seconds": 0.004129766999994899,
+  "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+  "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-retry"
+}

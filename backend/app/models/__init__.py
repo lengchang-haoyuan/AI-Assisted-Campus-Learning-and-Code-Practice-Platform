@@ -1,5 +1,6 @@
 from app.models.submission import Submission, SubmissionVersion, Feedback, Notification
 from app.models.ai import AIRequest, AIResult
+from app.models.analytics import AnalyticsBatch, AnalyticsDailyMetric
 from app.models.base import Base
 from app.models.campus import AccountAudit, CampusInvitation, CampusMembership, PasswordReset
 from app.models.community import (
@@ -20,6 +21,7 @@ from app.models.user import User
 from app.models.workflow import Workflow, WorkflowEdge, WorkflowNode, WorkflowRun
 
 __all__ = [
+    "AnalyticsBatch", "AnalyticsDailyMetric",
     "Submission", "SubmissionVersion", "Feedback", "Notification",
     "AccountAudit",
     "CampusInvitation",

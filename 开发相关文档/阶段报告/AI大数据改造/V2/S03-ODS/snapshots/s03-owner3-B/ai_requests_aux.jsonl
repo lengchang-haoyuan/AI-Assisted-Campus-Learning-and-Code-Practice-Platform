@@ -1,0 +1,1 @@
+{"id": 1, "user_id": 3, "project_id": 1, "status": "completed", "requested_at": "2026-10-20T07:05:39.996519Z", "finished_at": "2026-10-20T07:05:40.020436Z", "prompt_tokens": 100, "completion_tokens": 80, "latency_ms": 18}

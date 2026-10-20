@@ -1,0 +1,3971 @@
+{
+  "contract_id": "V2-S01-r2",
+  "approval_status": "approved_design",
+  "approval_record": {
+    "group": "A",
+    "contract_id": "V2-S01-r1",
+    "user_reply": "批准A组设计（推荐）",
+    "recorded_at": "2026-10-20T14:39:23+08:00",
+    "scope": "本版列明设计、样例及评价方法／门槛；后续逐阶段执行，具体隔离写入与真实模型／输入／费用另行授权"
+  },
+  "artifact_kind": "design_fixture_not_business_data",
+  "schema": {
+    "projects": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "owner_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "users.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(20)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "not_started",
+          "in_progress",
+          "completed",
+          "published",
+          "archived"
+        ]
+      },
+      {
+        "field": "completed_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "created_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "updated_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ],
+    "daily_tasks": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "user_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "users.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "plan_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "learning_plans.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "project_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "projects.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "pending",
+          "in_progress",
+          "completed",
+          "cancelled"
+        ]
+      },
+      {
+        "field": "scheduled_date",
+        "sql_type": "DATE",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "DateType",
+        "normalization": "YYYY-MM-DD no timezone conversion"
+      },
+      {
+        "field": "completed_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "created_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "updated_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ],
+    "learning_records": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "user_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "users.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "project_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "projects.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "course_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "courses.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "task_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "daily_tasks.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "record_type",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "study",
+          "project",
+          "workflow",
+          "ai",
+          "course",
+          "task"
+        ]
+      },
+      {
+        "field": "duration_minutes",
+        "sql_type": "INTEGER",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "occurred_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "created_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ],
+    "teaching_classes": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "active",
+          "archived"
+        ]
+      }
+    ],
+    "teaching_assignments": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "class_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "teaching_classes.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "due_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "draft",
+          "published",
+          "closed",
+          "archived"
+        ]
+      },
+      {
+        "field": "published_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "closed_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "archived_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "created_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "updated_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ],
+    "class_memberships": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "class_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "teaching_classes.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "campus_membership_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "campus_memberships.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "member_role",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "teacher",
+          "student"
+        ]
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "active",
+          "left",
+          "removed"
+        ]
+      },
+      {
+        "field": "joined_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "left_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ],
+    "campus_memberships": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "user_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "users.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "role",
+        "sql_type": "VARCHAR(32)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "student",
+          "teacher",
+          "administrator"
+        ]
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(32)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "active",
+          "suspended",
+          "revoked"
+        ]
+      }
+    ],
+    "submissions": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [
+          "submission_versions.submission_id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "class_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "class_memberships.class_id",
+          "teaching_assignments.class_id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "assignment_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "teaching_assignments.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "student_membership_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "class_memberships.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "assignment_due_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "latest_version_number",
+        "sql_type": "INTEGER",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "submission_versions.version_number"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "revision",
+        "sql_type": "INTEGER",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "created_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "updated_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ],
+    "submission_versions": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "submission_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "submissions.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "version_number",
+        "sql_type": "INTEGER",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "source_project_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "projects.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "submitted",
+          "returned",
+          "accepted"
+        ]
+      },
+      {
+        "field": "submitted_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "reviewed_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "revision",
+        "sql_type": "INTEGER",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      }
+    ],
+    "feedback": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "submission_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "submission_versions.submission_id",
+          "submissions.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "version_number",
+        "sql_type": "INTEGER",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "submission_versions.version_number"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "class_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "class_memberships.class_id",
+          "submissions.class_id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "teacher_membership_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "class_memberships.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "decision",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal",
+        "enum_values": [
+          "accept",
+          "return"
+        ]
+      },
+      {
+        "field": "learning_record_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "learning_records.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "created_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ]
+  },
+  "source_claim_projection": {
+    "learning_record_id": "uint64",
+    "source_claim": "nullable string max32",
+    "submission_id_claim": "nullable uint64",
+    "version_number_claim": "nullable int32",
+    "purpose": "Only historical claim quality; never proves teaching origin"
+  },
+  "manifest": {
+    "batch_id": "11111111-1111-4111-8111-111111111111",
+    "owner_user_id": 1001,
+    "dataset_kind": "controlled",
+    "schema_version": "scholarhub-source-1.0",
+    "metric_version": "learning-process-1.0",
+    "rule_version": "quality-1.0",
+    "business_timezone": "Asia/Shanghai",
+    "period_start": "2026-10-01",
+    "period_end": "2026-10-03",
+    "source_cutoff": "2026-10-03T16:00:00Z",
+    "snapshot_started_at": "2026-10-03T16:00:00Z",
+    "snapshot_finished_at": "2026-10-03T16:00:01Z"
+  },
+  "base_input": {
+    "projects": [
+      {
+        "id": 501,
+        "owner_id": 1001,
+        "status": "in_progress",
+        "completed_at": null,
+        "created_at": "2026-09-30T00:00:00Z",
+        "updated_at": "2026-10-01T00:00:00Z"
+      }
+    ],
+    "daily_tasks": [
+      {
+        "id": 11,
+        "user_id": 1001,
+        "plan_id": null,
+        "project_id": 501,
+        "status": "completed",
+        "scheduled_date": "2026-10-01",
+        "completed_at": "2026-10-01T10:00:00Z",
+        "created_at": "2026-09-30T00:00:00Z",
+        "updated_at": "2026-10-03T12:00:00Z"
+      },
+      {
+        "id": 12,
+        "user_id": 1001,
+        "plan_id": null,
+        "project_id": 501,
+        "status": "completed",
+        "scheduled_date": "2026-10-02",
+        "completed_at": "2026-10-02T10:00:00Z",
+        "created_at": "2026-09-30T00:00:00Z",
+        "updated_at": "2026-10-03T12:00:00Z"
+      },
+      {
+        "id": 13,
+        "user_id": 1001,
+        "plan_id": null,
+        "project_id": 501,
+        "status": "cancelled",
+        "scheduled_date": "2026-10-03",
+        "completed_at": null,
+        "created_at": "2026-09-30T00:00:00Z",
+        "updated_at": "2026-10-03T12:00:00Z"
+      },
+      {
+        "id": 14,
+        "user_id": 1001,
+        "plan_id": null,
+        "project_id": 501,
+        "status": "pending",
+        "scheduled_date": "2026-10-03",
+        "completed_at": null,
+        "created_at": "2026-09-30T00:00:00Z",
+        "updated_at": "2026-10-03T12:00:00Z"
+      }
+    ],
+    "learning_records": [
+      {
+        "id": 1,
+        "user_id": 1001,
+        "project_id": 501,
+        "course_id": null,
+        "task_id": 11,
+        "record_type": "study",
+        "duration_minutes": 30,
+        "occurred_at": "2026-10-01T15:50:00Z",
+        "created_at": "2026-10-01T15:50:00Z"
+      },
+      {
+        "id": 2,
+        "user_id": 1001,
+        "project_id": 501,
+        "course_id": null,
+        "task_id": 12,
+        "record_type": "study",
+        "duration_minutes": 45,
+        "occurred_at": "2026-10-01T16:10:00Z",
+        "created_at": "2026-10-01T16:10:00Z"
+      },
+      {
+        "id": 3,
+        "user_id": 1001,
+        "project_id": null,
+        "course_id": null,
+        "task_id": null,
+        "record_type": "task",
+        "duration_minutes": null,
+        "occurred_at": "2026-10-02T02:00:00Z",
+        "created_at": "2026-10-02T02:00:00Z"
+      },
+      {
+        "id": 4,
+        "user_id": 1001,
+        "project_id": null,
+        "course_id": null,
+        "task_id": null,
+        "record_type": "task",
+        "duration_minutes": null,
+        "occurred_at": "2026-10-03T01:30:00Z",
+        "created_at": "2026-10-03T01:30:00Z"
+      },
+      {
+        "id": 5,
+        "user_id": 1001,
+        "project_id": null,
+        "course_id": null,
+        "task_id": null,
+        "record_type": "study",
+        "duration_minutes": 0,
+        "occurred_at": "2026-10-03T02:00:00Z",
+        "created_at": "2026-10-03T02:00:00Z"
+      },
+      {
+        "id": 1,
+        "user_id": 1001,
+        "project_id": 501,
+        "course_id": null,
+        "task_id": 11,
+        "record_type": "study",
+        "duration_minutes": 30,
+        "occurred_at": "2026-10-01T15:50:00Z",
+        "created_at": "2026-10-01T15:50:00Z"
+      }
+    ],
+    "teaching_classes": [
+      {
+        "id": 301,
+        "status": "active"
+      }
+    ],
+    "teaching_assignments": [
+      {
+        "id": 601,
+        "class_id": 301,
+        "due_at": "2026-10-03T12:00:00Z",
+        "status": "published",
+        "published_at": "2026-09-30T00:00:00Z",
+        "closed_at": null,
+        "archived_at": null,
+        "created_at": "2026-09-30T00:00:00Z",
+        "updated_at": "2026-09-30T00:00:00Z"
+      },
+      {
+        "id": 602,
+        "class_id": 301,
+        "due_at": "2026-10-03T12:00:00Z",
+        "status": "published",
+        "published_at": "2026-09-30T00:00:00Z",
+        "closed_at": null,
+        "archived_at": null,
+        "created_at": "2026-09-30T00:00:00Z",
+        "updated_at": "2026-09-30T00:00:00Z"
+      },
+      {
+        "id": 603,
+        "class_id": 301,
+        "due_at": "2026-10-03T12:00:00Z",
+        "status": "published",
+        "published_at": "2026-09-30T00:00:00Z",
+        "closed_at": null,
+        "archived_at": null,
+        "created_at": "2026-09-30T00:00:00Z",
+        "updated_at": "2026-09-30T00:00:00Z"
+      }
+    ],
+    "campus_memberships": [
+      {
+        "id": 201,
+        "user_id": 1001,
+        "role": "student",
+        "status": "active"
+      },
+      {
+        "id": 202,
+        "user_id": 2001,
+        "role": "teacher",
+        "status": "active"
+      }
+    ],
+    "class_memberships": [
+      {
+        "id": 401,
+        "class_id": 301,
+        "campus_membership_id": 201,
+        "member_role": "student",
+        "status": "active",
+        "joined_at": "2026-09-30T00:00:00Z",
+        "left_at": null
+      },
+      {
+        "id": 402,
+        "class_id": 301,
+        "campus_membership_id": 202,
+        "member_role": "teacher",
+        "status": "active",
+        "joined_at": "2026-09-30T00:00:00Z",
+        "left_at": null
+      }
+    ],
+    "submissions": [
+      {
+        "id": 701,
+        "class_id": 301,
+        "assignment_id": 601,
+        "student_membership_id": 401,
+        "assignment_due_at": "2026-10-03T12:00:00Z",
+        "latest_version_number": 2,
+        "revision": 4,
+        "created_at": "2026-10-01T00:00:00Z",
+        "updated_at": "2026-10-02T02:00:00Z"
+      },
+      {
+        "id": 702,
+        "class_id": 301,
+        "assignment_id": 602,
+        "student_membership_id": 401,
+        "assignment_due_at": "2026-10-03T12:00:00Z",
+        "latest_version_number": 1,
+        "revision": 1,
+        "created_at": "2026-10-02T03:00:00Z",
+        "updated_at": "2026-10-02T03:00:00Z"
+      },
+      {
+        "id": 703,
+        "class_id": 301,
+        "assignment_id": 603,
+        "student_membership_id": 401,
+        "assignment_due_at": "2026-10-03T12:00:00Z",
+        "latest_version_number": 1,
+        "revision": 2,
+        "created_at": "2026-10-03T01:00:00Z",
+        "updated_at": "2026-10-03T01:30:00Z"
+      }
+    ],
+    "submission_versions": [
+      {
+        "id": 711,
+        "submission_id": 701,
+        "version_number": 1,
+        "source_project_id": 501,
+        "status": "returned",
+        "submitted_at": "2026-10-01T00:00:00Z",
+        "reviewed_at": "2026-10-01T01:00:00Z",
+        "revision": 2
+      },
+      {
+        "id": 712,
+        "submission_id": 701,
+        "version_number": 2,
+        "source_project_id": 501,
+        "status": "accepted",
+        "submitted_at": "2026-10-01T03:00:00Z",
+        "reviewed_at": "2026-10-02T02:00:00Z",
+        "revision": 2
+      },
+      {
+        "id": 713,
+        "submission_id": 702,
+        "version_number": 1,
+        "source_project_id": 501,
+        "status": "submitted",
+        "submitted_at": "2026-10-02T03:00:00Z",
+        "reviewed_at": null,
+        "revision": 1
+      },
+      {
+        "id": 714,
+        "submission_id": 703,
+        "version_number": 1,
+        "source_project_id": 501,
+        "status": "accepted",
+        "submitted_at": "2026-10-03T01:00:00Z",
+        "reviewed_at": "2026-10-03T01:30:00Z",
+        "revision": 2
+      }
+    ],
+    "feedback": [
+      {
+        "id": 801,
+        "submission_id": 701,
+        "version_number": 1,
+        "class_id": 301,
+        "teacher_membership_id": 402,
+        "decision": "return",
+        "created_at": "2026-10-01T01:00:00Z",
+        "learning_record_id": null
+      },
+      {
+        "id": 802,
+        "submission_id": 701,
+        "version_number": 2,
+        "class_id": 301,
+        "teacher_membership_id": 402,
+        "decision": "accept",
+        "created_at": "2026-10-02T02:00:00Z",
+        "learning_record_id": 3
+      },
+      {
+        "id": 803,
+        "submission_id": 703,
+        "version_number": 1,
+        "class_id": 301,
+        "teacher_membership_id": 402,
+        "decision": "accept",
+        "created_at": "2026-10-03T01:30:00Z",
+        "learning_record_id": 4
+      }
+    ],
+    "source_claim_projection": []
+  },
+  "base_expected": {
+    "records": {
+      "raw_rows": 6,
+      "valid_unique_rows": 5,
+      "exact_duplicates": 1,
+      "known_minutes": 75,
+      "known_duration_count": 3,
+      "missing_duration_count": 2,
+      "known_zero_count": 1,
+      "active_days": 3,
+      "ordinary_count": 3,
+      "trusted_teaching_count": 2,
+      "unverified_claim_count": 0
+    },
+    "tasks": {
+      "total": 4,
+      "completed": 2,
+      "cancelled": 1,
+      "overdue_unfinished": 1,
+      "completion_rate": {
+        "numerator": 2,
+        "denominator": 4,
+        "percent": "50.000000",
+        "display": "50.0%"
+      }
+    },
+    "topic": {
+      "cohort_count": 3,
+      "revised_count": 1,
+      "confirmed_count": 2,
+      "returned_ever_count": 1,
+      "first_pass_confirmed_count": 1,
+      "revised_confirmed_count": 1,
+      "pending_latest_count": 1,
+      "revision_attempts": 1,
+      "revised_rate": {
+        "numerator": 1,
+        "denominator": 3,
+        "percent": "33.333333",
+        "display": "33.3%"
+      },
+      "confirmation_rate": {
+        "numerator": 2,
+        "denominator": 3,
+        "percent": "66.666667",
+        "display": "66.7%"
+      },
+      "revised_confirmation_rate": {
+        "numerator": 1,
+        "denominator": 1,
+        "percent": "100.000000",
+        "display": "100.0%"
+      },
+      "first_review_covered": 2,
+      "first_review_wait_sum_minutes": 90,
+      "first_review_wait_mean_minutes": "45.000000",
+      "first_review_histogram": {
+        "[0,60)": 1,
+        "[60,240)": 1,
+        "[240,1440)": 0,
+        "[1440,+inf)": 0
+      },
+      "missing_teaching_record_links": 0
+    },
+    "daily": [
+      {
+        "date": "2026-10-01",
+        "records": 1,
+        "known_minutes": 30,
+        "known_duration_count": 1,
+        "missing_duration_count": 0,
+        "tasks": 1,
+        "completed": 1,
+        "cancelled": 0,
+        "overdue_unfinished": 0,
+        "cohort": 1,
+        "revised": 1,
+        "confirmed": 1
+      },
+      {
+        "date": "2026-10-02",
+        "records": 2,
+        "known_minutes": 45,
+        "known_duration_count": 1,
+        "missing_duration_count": 1,
+        "tasks": 1,
+        "completed": 1,
+        "cancelled": 0,
+        "overdue_unfinished": 0,
+        "cohort": 1,
+        "revised": 0,
+        "confirmed": 0
+      },
+      {
+        "date": "2026-10-03",
+        "records": 2,
+        "known_minutes": 0,
+        "known_duration_count": 1,
+        "missing_duration_count": 1,
+        "tasks": 2,
+        "completed": 0,
+        "cancelled": 1,
+        "overdue_unfinished": 1,
+        "cohort": 1,
+        "revised": 0,
+        "confirmed": 1
+      }
+    ]
+  },
+  "patch_semantics": "Apply each case to a fresh deep copy of base_input and manifest. set/delete matches all equal fields, empty match means all. Exact expected values are authored independently of Spark. Only listed assertion paths are required for delta cases; D00 verifies the entire base result.",
+  "cases": [
+    {
+      "case_id": "D00",
+      "name": "基准、同键同值重复、NULL和0及跨日",
+      "kind": "data",
+      "input_changes": [],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "records": {
+          "raw_rows": 6,
+          "valid_unique_rows": 5,
+          "exact_duplicates": 1,
+          "known_minutes": 75,
+          "known_duration_count": 3,
+          "missing_duration_count": 2,
+          "known_zero_count": 1,
+          "active_days": 3,
+          "ordinary_count": 3,
+          "trusted_teaching_count": 2,
+          "unverified_claim_count": 0
+        },
+        "tasks": {
+          "total": 4,
+          "completed": 2,
+          "cancelled": 1,
+          "overdue_unfinished": 1,
+          "completion_rate": {
+            "numerator": 2,
+            "denominator": 4,
+            "percent": "50.000000",
+            "display": "50.0%"
+          }
+        },
+        "topic": {
+          "cohort_count": 3,
+          "revised_count": 1,
+          "confirmed_count": 2,
+          "returned_ever_count": 1,
+          "first_pass_confirmed_count": 1,
+          "revised_confirmed_count": 1,
+          "pending_latest_count": 1,
+          "revision_attempts": 1,
+          "revised_rate": {
+            "numerator": 1,
+            "denominator": 3,
+            "percent": "33.333333",
+            "display": "33.3%"
+          },
+          "confirmation_rate": {
+            "numerator": 2,
+            "denominator": 3,
+            "percent": "66.666667",
+            "display": "66.7%"
+          },
+          "revised_confirmation_rate": {
+            "numerator": 1,
+            "denominator": 1,
+            "percent": "100.000000",
+            "display": "100.0%"
+          },
+          "first_review_covered": 2,
+          "first_review_wait_sum_minutes": 90,
+          "first_review_wait_mean_minutes": "45.000000",
+          "first_review_histogram": {
+            "[0,60)": 1,
+            "[60,240)": 1,
+            "[240,1440)": 0,
+            "[1440,+inf)": 0
+          },
+          "missing_teaching_record_links": 0
+        },
+        "daily": [
+          {
+            "date": "2026-10-01",
+            "records": 1,
+            "known_minutes": 30,
+            "known_duration_count": 1,
+            "missing_duration_count": 0,
+            "tasks": 1,
+            "completed": 1,
+            "cancelled": 0,
+            "overdue_unfinished": 0,
+            "cohort": 1,
+            "revised": 1,
+            "confirmed": 1
+          },
+          {
+            "date": "2026-10-02",
+            "records": 2,
+            "known_minutes": 45,
+            "known_duration_count": 1,
+            "missing_duration_count": 1,
+            "tasks": 1,
+            "completed": 1,
+            "cancelled": 0,
+            "overdue_unfinished": 0,
+            "cohort": 1,
+            "revised": 0,
+            "confirmed": 0
+          },
+          {
+            "date": "2026-10-03",
+            "records": 2,
+            "known_minutes": 0,
+            "known_duration_count": 1,
+            "missing_duration_count": 1,
+            "tasks": 2,
+            "completed": 0,
+            "cancelled": 1,
+            "overdue_unfinished": 1,
+            "cohort": 1,
+            "revised": 0,
+            "confirmed": 1
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "D01",
+      "name": "同键不同值冲突",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "append",
+          "table": "learning_records",
+          "row": {
+            "id": 1,
+            "user_id": 1001,
+            "project_id": 501,
+            "course_id": null,
+            "task_id": 11,
+            "record_type": "study",
+            "duration_minutes": 31,
+            "occurred_at": "2026-10-01T15:50:00Z",
+            "created_at": "2026-10-01T15:50:00Z"
+          }
+        }
+      ],
+      "expected_status": "failed",
+      "expected_assertions": {
+        "fatal_error": "duplicate_key_conflict",
+        "publish": false
+      }
+    },
+    {
+      "case_id": "D02",
+      "name": "缺失主键",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "set",
+          "table": "learning_records",
+          "match": {
+            "id": 5
+          },
+          "values": {
+            "id": null
+          }
+        }
+      ],
+      "expected_status": "failed",
+      "expected_assertions": {
+        "fatal_error": "required_key_missing",
+        "publish": false
+      }
+    },
+    {
+      "case_id": "D03",
+      "name": "单业务日、DATE不二次换算",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "manifest",
+          "values": {
+            "period_start": "2026-10-02",
+            "period_end": "2026-10-02"
+          }
+        }
+      ],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "records.valid_unique_rows": 2,
+        "records.known_minutes": 45,
+        "records.active_days": 1,
+        "records.missing_duration_count": 1,
+        "records.trusted_teaching_count": 1,
+        "tasks.total": 1,
+        "tasks.completed": 1,
+        "topic.cohort_count": 1,
+        "topic.confirmed_count": 0,
+        "topic.revised_count": 0
+      }
+    },
+    {
+      "case_id": "D04",
+      "name": "伪教学来源投影",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "append",
+          "table": "source_claim_projection",
+          "row": {
+            "learning_record_id": 5,
+            "source_claim": "teaching_submission",
+            "submission_id_claim": 701,
+            "version_number_claim": 2
+          }
+        }
+      ],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "records.trusted_teaching_count": 2,
+        "records.unverified_claim_count": 1,
+        "records.ordinary_count": 2,
+        "records.known_minutes": 75
+      }
+    },
+    {
+      "case_id": "D05",
+      "name": "普通学习记录删除后的新快照",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "delete",
+          "table": "learning_records",
+          "match": {
+            "id": 5
+          }
+        }
+      ],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "records.valid_unique_rows": 4,
+        "records.known_minutes": 75,
+        "records.known_duration_count": 2,
+        "records.missing_duration_count": 2,
+        "records.known_zero_count": 0,
+        "records.active_days": 3,
+        "new_batch_required": true
+      }
+    },
+    {
+      "case_id": "D06",
+      "name": "学习记录修改无updated_at",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "set",
+          "table": "learning_records",
+          "match": {
+            "id": 2
+          },
+          "values": {
+            "duration_minutes": 60
+          }
+        }
+      ],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "records.known_minutes": 90,
+        "records.valid_unique_rows": 5,
+        "new_batch_required": true
+      }
+    },
+    {
+      "case_id": "D07",
+      "name": "全部为空但批次有所有者",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "clear_all"
+        }
+      ],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "records.valid_unique_rows": 0,
+        "records.known_minutes": 0,
+        "records.known_duration_count": 0,
+        "records.missing_duration_count": 0,
+        "records.active_days": 0,
+        "tasks.total": 0,
+        "tasks.completion_rate.percent": null,
+        "topic.cohort_count": 0,
+        "topic.confirmation_rate.percent": null,
+        "topic.first_review_wait_mean_minutes": null,
+        "owner_user_id": 1001
+      }
+    },
+    {
+      "case_id": "D08",
+      "name": "无任务与真实SET NULL关系",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "clear",
+          "table": "daily_tasks"
+        },
+        {
+          "op": "set",
+          "table": "learning_records",
+          "match": {},
+          "values": {
+            "task_id": null
+          }
+        }
+      ],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "tasks.total": 0,
+        "tasks.completion_rate.percent": null,
+        "records.valid_unique_rows": 5
+      }
+    },
+    {
+      "case_id": "D09",
+      "name": "时长全部未知",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "set",
+          "table": "learning_records",
+          "match": {},
+          "values": {
+            "duration_minutes": null
+          }
+        }
+      ],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "records.valid_unique_rows": 5,
+        "records.known_minutes": 0,
+        "records.known_duration_count": 0,
+        "records.missing_duration_count": 5,
+        "records.known_zero_count": 0
+      }
+    },
+    {
+      "case_id": "D10",
+      "name": "仅取消任务保留分母",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "replace",
+          "table": "daily_tasks",
+          "rows": [
+            {
+              "id": 13,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "cancelled",
+              "scheduled_date": "2026-10-03",
+              "completed_at": null,
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            }
+          ]
+        },
+        {
+          "op": "set",
+          "table": "learning_records",
+          "match": {},
+          "values": {
+            "task_id": null
+          }
+        }
+      ],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "tasks.total": 1,
+        "tasks.completed": 0,
+        "tasks.cancelled": 1,
+        "tasks.overdue_unfinished": 0,
+        "tasks.completion_rate.percent": "0.000000"
+      }
+    },
+    {
+      "case_id": "D11",
+      "name": "199除以200不是全部完成",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "replace",
+          "table": "daily_tasks",
+          "rows": [
+            {
+              "id": 10000,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10001,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10002,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10003,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10004,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10005,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10006,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10007,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10008,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10009,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10010,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10011,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10012,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10013,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10014,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10015,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10016,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10017,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10018,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10019,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10020,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10021,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10022,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10023,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10024,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10025,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10026,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10027,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10028,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10029,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10030,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10031,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10032,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10033,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10034,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10035,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10036,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10037,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10038,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10039,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10040,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10041,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10042,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10043,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10044,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10045,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10046,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10047,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10048,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10049,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10050,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10051,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10052,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10053,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10054,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10055,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10056,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10057,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10058,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10059,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10060,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10061,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10062,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10063,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10064,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10065,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10066,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10067,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10068,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10069,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10070,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10071,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10072,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10073,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10074,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10075,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10076,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10077,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10078,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10079,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10080,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10081,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10082,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10083,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10084,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10085,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10086,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10087,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10088,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10089,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10090,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10091,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10092,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10093,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10094,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10095,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10096,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10097,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10098,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10099,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10100,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10101,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10102,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10103,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10104,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10105,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10106,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10107,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10108,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10109,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10110,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10111,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10112,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10113,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10114,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10115,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10116,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10117,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10118,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10119,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10120,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10121,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10122,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10123,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10124,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10125,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10126,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10127,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10128,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10129,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10130,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10131,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10132,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10133,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10134,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10135,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10136,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10137,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10138,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10139,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10140,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10141,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10142,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10143,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10144,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10145,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10146,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10147,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10148,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10149,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10150,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10151,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10152,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10153,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10154,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10155,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10156,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10157,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10158,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10159,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10160,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10161,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10162,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10163,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10164,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10165,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10166,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10167,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10168,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10169,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10170,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10171,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10172,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10173,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10174,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10175,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10176,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10177,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10178,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10179,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10180,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10181,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10182,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10183,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10184,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10185,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10186,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10187,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10188,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10189,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10190,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10191,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10192,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10193,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10194,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10195,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10196,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10197,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10198,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "completed",
+              "scheduled_date": "2026-10-03",
+              "completed_at": "2026-10-03T10:00:00Z",
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            },
+            {
+              "id": 10199,
+              "user_id": 1001,
+              "plan_id": null,
+              "project_id": 501,
+              "status": "pending",
+              "scheduled_date": "2026-10-03",
+              "completed_at": null,
+              "created_at": "2026-09-30T00:00:00Z",
+              "updated_at": "2026-10-03T12:00:00Z"
+            }
+          ]
+        },
+        {
+          "op": "set",
+          "table": "learning_records",
+          "match": {},
+          "values": {
+            "task_id": null
+          }
+        }
+      ],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "tasks.total": 200,
+        "tasks.completed": 199,
+        "tasks.overdue_unfinished": 1,
+        "tasks.completion_rate.percent": "99.500000",
+        "tasks.completion_rate.display": "99.5%",
+        "eligible_to_complete_plan": false
+      }
+    },
+    {
+      "case_id": "D12",
+      "name": "引用不存在的学习记录",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "set",
+          "table": "feedback",
+          "match": {
+            "id": 802
+          },
+          "values": {
+            "learning_record_id": 9999
+          }
+        }
+      ],
+      "expected_status": "failed",
+      "expected_assertions": {
+        "fatal_error": "dangling_relation",
+        "publish": false
+      }
+    },
+    {
+      "case_id": "D13",
+      "name": "已完成批次重复发布",
+      "kind": "publication_policy",
+      "input_changes": [],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "completed_batch_overwrite": false,
+        "identical_replay": "no_op",
+        "different_content_same_batch": "409_conflict",
+        "failed_new_batch_preserves_previous": true
+      }
+    },
+    {
+      "case_id": "D14",
+      "name": "空批次越权",
+      "kind": "authorization_policy",
+      "input_changes": [],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "owner_1001_status": 200,
+        "other_owner_status": 404,
+        "nonexistent_status": 404,
+        "unauthenticated_status": 401,
+        "ordinary_get_spark_calls": 0,
+        "ordinary_get_model_calls": 0
+      }
+    },
+    {
+      "case_id": "D15",
+      "name": "右开截止边界",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "set",
+          "table": "learning_records",
+          "match": {
+            "id": 5
+          },
+          "values": {
+            "occurred_at": "2026-10-03T16:00:00Z"
+          }
+        }
+      ],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "records.valid_unique_rows": 4,
+        "records.known_minutes": 75,
+        "records.known_duration_count": 2,
+        "records.missing_duration_count": 2,
+        "records.known_zero_count": 0,
+        "quality.outside_observation_time": 1
+      }
+    },
+    {
+      "case_id": "D16",
+      "name": "教学学习记录删除不撤销教师确认",
+      "kind": "data",
+      "input_changes": [
+        {
+          "op": "delete",
+          "table": "learning_records",
+          "match": {
+            "id": 3
+          }
+        },
+        {
+          "op": "set",
+          "table": "feedback",
+          "match": {
+            "id": 802
+          },
+          "values": {
+            "learning_record_id": null
+          }
+        }
+      ],
+      "expected_status": "validated",
+      "expected_assertions": {
+        "records.valid_unique_rows": 4,
+        "records.known_minutes": 75,
+        "records.missing_duration_count": 1,
+        "records.trusted_teaching_count": 1,
+        "topic.confirmed_count": 2,
+        "topic.missing_teaching_record_links": 1,
+        "new_batch_required": true
+      }
+    }
+  ],
+  "evaluation_stage": {
+    "data_cases": "S04",
+    "publication_and_auth_cases": "S05",
+    "initial_scale": "S06"
+  },
+  "generation_note": "Static fictional design fixtures, not records generated through business APIs. Actual controlled data must be generated and verified in S02 with an authorized isolated database. New snapshots get new batch_id.",
+  "evaluation_amendment": {
+    "contract_id": "V2-S01-r2",
+    "base_contract_id": "V2-S01-r1",
+    "user_reply": "用ai来评分把",
+    "recorded_at": "2026-10-20T14:50:59+08:00",
+    "scope": "仅将S06专题解释与S08反馈证据／可执行性改为AI裁判辅助评分；保持数据、案例、指标和原有数值阈值；不授权真实模型费用或下一阶段执行"
+  },
+  "topic_scoring": {
+    "mode": "fixed_assertions_and_ai_judge",
+    "numeric_truth": "冻结独立预期与同口径基线，不接受AI分数覆盖事实或权限失败",
+    "explanation_stage": "S06",
+    "dimensions": 4,
+    "score_per_dimension": [
+      0,
+      1,
+      2
+    ],
+    "total_min": 6,
+    "causal_or_ability_overclaim_allowed": false,
+    "proposed_formal_judge_calls": 1,
+    "calibration": "复用S01-AI固定模板与评价案例.json的G01–G03；评分器变更则新评价轮次",
+    "execution_status": "not_run"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "snapshot_id": "s03-owner4-boundary",
+  "job_id": "v1-boundary",
+  "owner_user_id": 4,
+  "dataset_kind": "controlled",
+  "period_start": "2026-10-19",
+  "period_end": "2026-10-20",
+  "business_timezone": "Asia/Shanghai",
+  "source_cutoff": "2026-10-20T07:34:07.103019Z",
+  "schema_version": "scholarhub-source-1.0",
+  "metric_version": "learning-process-1.0",
+  "rule_version": "quality-1.0",
+  "dataset_id": "s02-controlled-owner-4",
+  "source_counts": {
+    "projects": 0,
+    "daily_tasks": 200,
+    "learning_records": 0,
+    "teaching_classes": 0,
+    "teaching_assignments": 0,
+    "class_memberships": 0,
+    "campus_memberships": 0,
+    "submissions": 0,
+    "submission_versions": 0,
+    "feedback": 0,
+    "source_claim_projection": 0,
+    "ai_requests_aux": 0
+  },
+  "quality": {
+    "fatal_errors": 0,
+    "reconciled": true
+  },
+  "records_summary": {
+    "valid_unique_rows": 0,
+    "known_minutes": 0,
+    "known_duration_count": 0,
+    "missing_duration_count": 0,
+    "known_zero_count": 0,
+    "active_days": 0,
+    "trusted_teaching_count": 0,
+    "unverified_claim_count": 0,
+    "ordinary_count": 0,
+    "raw_rows": 0,
+    "exact_duplicates": 0
+  },
+  "tasks_summary": {
+    "total": 200,
+    "completed": 199,
+    "cancelled": 0,
+    "overdue_unfinished": 0,
+    "completion_rate": {
+      "numerator": 199,
+      "denominator": 200,
+      "percent": "99.500000",
+      "display": "99.5%"
+    }
+  },
+  "topic_summary": {
+    "cohort_count": 0,
+    "revised_count": 0,
+    "confirmed_count": 0,
+    "returned_ever_count": 0,
+    "first_pass_confirmed_count": 0,
+    "revised_confirmed_count": 0,
+    "pending_latest_count": 0,
+    "revision_attempts": 0,
+    "first_review_covered": 0,
+    "first_review_wait_sum_minutes": 0.0,
+    "first_review_wait_mean_minutes": null,
+    "missing_teaching_record_links": 0,
+    "revised_rate": {
+      "numerator": 0,
+      "denominator": 0,
+      "percent": null,
+      "display": "无样本"
+    },
+    "confirmation_rate": {
+      "numerator": 0,
+      "denominator": 0,
+      "percent": null,
+      "display": "无样本"
+    },
+    "revised_confirmation_rate": {
+      "numerator": 0,
+      "denominator": 0,
+      "percent": null,
+      "display": "无样本"
+    },
+    "first_review_histogram": {
+      "[0,60)": 0,
+      "[60,240)": 0,
+      "[240,1440)": 0,
+      "[1440,+inf)": 0
+    }
+  },
+  "daily": [
+    {
+      "metric_date": "2026-10-20",
+      "records": 0,
+      "known_minutes": 0,
+      "known_duration_count": 0,
+      "missing_duration_count": 0,
+      "completed": 199,
+      "cancelled": 0,
+      "overdue_unfinished": 0,
+      "task_total": 200,
+      "cohort_count": 0,
+      "revised_count": 0,
+      "confirmed_count": 0,
+      "known_zero_count": 0,
+      "ordinary_count": 0,
+      "trusted_teaching_count": 0,
+      "unverified_claim_count": 0
+    }
+  ]
+}

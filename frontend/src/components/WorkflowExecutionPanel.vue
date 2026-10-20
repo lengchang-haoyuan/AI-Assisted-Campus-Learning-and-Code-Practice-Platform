@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { computed, nextTick, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 
+import WorkflowNodeResultContent from '@/components/WorkflowNodeResultContent.vue'
 import { WORKFLOW_NODE_TEMPLATES } from '@/domain/workflow'
-import type { JsonValue, WorkflowRunResponse, WorkflowRunMode } from '@/types/workflow'
+import type { JsonValue, WorkflowRunNodeResponse, WorkflowRunResponse, WorkflowRunMode } from '@/types/workflow'
 
-defineProps<{
+const props = defineProps<{
   runs: WorkflowRunResponse[]
   selected: WorkflowRunResponse | null
   loading: boolean
@@ -21,14 +23,6 @@ const emit = defineEmits<{
   'update:mode': [mode: WorkflowRunMode]
 }>()
 const labels: Record<string, string> = {
-  hints: '渐进提示', concepts: '知识点', next_step: '下一步', steps: '逐步讲解',
-  complexity: '复杂度', pitfalls: '容易出错的地方', verdict: '静态评审结论', strengths: '做得好的地方',
-  issues: '待改进问题', suggested_tests: '建议自己运行的测试', requirements: '需求', features: '功能',
-  constraints: '约束', language: '语言', framework: '框架', frontend: '前端', backend: '后端',
-  database: '数据库', style: '架构风格', components: '组件职责', data_flows: '数据流', decisions: '设计决策',
-  title: '目标', description: '说明', acceptance_criteria: '验收要求', value: '选择', reason: '理由',
-  name: '名称', responsibility: '职责', technology: '技术', dependencies: '依赖', source: '来源', target: '目标', data: '数据', choice: '方案',
-  looks_correct: '静态阅读暂未发现明显问题，仍需自测', needs_revision: '需要修改', insufficient_information: '信息不足',
   pending: '等待中', running: '运行中', completed: '已完成', failed: '失败', cancelled: '已中止',
 }
 const errorHints: Record<string, string> = {
@@ -39,14 +33,45 @@ const errorHints: Record<string, string> = {
   workflow_timeout: '本次运行超时，可继续运行未完成节点。',
   budget_exhausted: '本次生成预算已用尽，可分成较小的工作流运行。',
 }
+type Metric = 'latency_ms' | 'total_tokens'
+const metric = ref<Metric>('latency_ms')
+// 同类型节点也可能出现多次，按本次请求编号保存选择，避免历史记录互相串位。
+const selectedNodeIds = ref<Record<number, number>>({})
+const nodeHeading = ref<HTMLElement | null>(null)
+const selectedNode = computed(() => {
+  const run = props.selected
+  return run?.nodes.find(node => node.request_id === selectedNodeIds.value[run.id]) ?? run?.nodes[0] ?? null
+})
+const selectedNodeIndex = computed(() => props.selected?.nodes.findIndex(node => node.request_id === selectedNode.value?.request_id) ?? -1)
+const resultCount = computed(() => props.selected?.nodes.filter(node => node.result !== null).length ?? 0)
+const metricMax = computed(() => Math.max(1, ...(props.selected?.nodes.map(node => node[metric.value] ?? 0) ?? [])))
+
+function selectNode(runId: number, requestId: number): void {
+  selectedNodeIds.value[runId] = requestId
+}
+async function stepNode(offset: number): Promise<void> {
+  const run = props.selected
+  const nextNode = run?.nodes[selectedNodeIndex.value + offset]
+  if (!run || !nextNode) return
+  selectNode(run.id, nextNode.request_id)
+  await nextTick()
+  nodeHeading.value?.focus({ preventScroll: true })
+  nodeHeading.value?.scrollIntoView({ block: 'start', behavior: 'auto' })
+}
 function label(key: string): string { return labels[key] ?? key }
 function nodeName(type: string): string { return WORKFLOW_NODE_TEMPLATES.find(item => item.nodeType === type)?.name ?? type }
 function time(value: string): string { return new Date(value).toLocaleString('zh-CN', { hour12: false }) }
-function format(value: JsonValue): string {
-  if (value === null) return '未提供'
-  if (Array.isArray(value)) return value.length ? value.map((item, i) => `${i + 1}. ${format(item)}`).join('\n') : '无'
-  if (typeof value === 'object') return Object.entries(value).map(([key, item]) => `${label(key)}：${format(item)}`).join('\n')
-  return typeof value === 'string' ? label(value) : String(value)
+function duration(value: number | null): string {
+  return value === null ? '待统计' : `${(value / 1000).toFixed(1)} 秒`
+}
+function usage(value: number | null): string {
+  return value === null ? '待统计' : `${value.toLocaleString('zh-CN')} tokens`
+}
+function metricLabel(node: WorkflowRunNodeResponse): string {
+  return metric.value === 'latency_ms' ? duration(node.latency_ms) : usage(node.total_tokens)
+}
+function metricWidth(node: WorkflowRunNodeResponse): string {
+  return `${Math.max(0, node[metric.value] ?? 0) / metricMax.value * 100}%`
 }
 async function copyResult(value: JsonValue): Promise<void> {
   try {
@@ -63,7 +88,7 @@ async function copyResult(value: JsonValue): Promise<void> {
     <header class="workflow-execution__heading">
       <div>
         <h2 id="workflow-execution-title">AI 运行与结果</h2>
-        <p>运行时会保存画布，读取已确认的项目 Context，并同步调用已配置的 AI。成功结果可在刷新后继续查看。</p>
+        <p>选择一条运行记录，再打开其中的节点，查看对应分析与建议。生成结果会保存在运行记录中。</p>
       </div>
       <label class="field">
         运行范围
@@ -82,42 +107,65 @@ async function copyResult(value: JsonValue): Promise<void> {
     <p v-if="error" role="alert" class="inline-alert is-error">{{ error }}</p>
     <div v-if="runs.length" class="workflow-execution__body">
       <nav class="workflow-run-history" aria-label="运行历史">
-        <button v-for="run in runs" :key="run.id" type="button" :aria-pressed="selected?.id === run.id" @click="emit('select', run.id)">
-          <strong>运行 #{{ run.id }} · {{ label(run.status) }}</strong>
-          <span>{{ time(run.created_at) }}</span>
-        </button>
+        <h3>运行记录 <span>本页 {{ runs.length }} 条</span></h3>
+        <div v-for="run in runs" :key="run.id" class="workflow-run-entry" :class="{ 'is-selected': selected?.id === run.id }">
+          <button class="workflow-run-entry__trigger" type="button" :aria-expanded="selected?.id === run.id"
+            :aria-controls="selected?.id === run.id ? `workflow-run-nodes-${run.id}` : undefined" @click="emit('select', run.id)">
+            <span class="workflow-run-entry__title"><strong>运行 #{{ run.id }}</strong><span class="workflow-run-status" :data-status="run.status">{{ label(run.status) }}</span></span>
+            <time :datetime="run.created_at">{{ time(run.created_at) }}</time>
+            <span class="workflow-run-entry__count">{{ run.nodes.length }} 个节点<span aria-hidden="true">{{ selected?.id === run.id ? '已展开' : '点击查看节点' }}</span></span>
+          </button>
+          <ol v-if="selected?.id === run.id" :id="`workflow-run-nodes-${run.id}`" class="workflow-run-node-list" :aria-label="`运行 #${run.id} 的节点`">
+            <li v-for="(node, index) in run.nodes" :key="node.request_id">
+              <button type="button" :aria-pressed="selectedNode?.request_id === node.request_id" aria-controls="workflow-selected-node" @click="selectNode(run.id, node.request_id)">
+                <span class="workflow-run-node-list__number">{{ index + 1 }}</span>
+                <span class="workflow-run-node-list__copy"><strong>{{ nodeName(node.node_type) }}</strong><small>{{ label(node.status) }} · {{ duration(node.latency_ms) }}</small></span>
+                <span class="workflow-node-status-dot" :data-status="node.status" aria-hidden="true" />
+              </button>
+            </li>
+          </ol>
+        </div>
         <div v-if="totalPages > 1" class="workflow-run-pagination">
           <button type="button" :disabled="page <= 1 || loading || busy" @click="emit('refresh', page - 1)">上一页</button>
           <span>{{ page }} / {{ totalPages }}</span>
           <button type="button" :disabled="page >= totalPages || loading || busy" @click="emit('refresh', page + 1)">下一页</button>
         </div>
       </nav>
-      <div v-if="selected" class="workflow-run-results" aria-live="polite">
-        <h3>运行 #{{ selected.id }} · {{ label(selected.status) }}</h3>
+      <div v-if="selected" class="workflow-run-results">
+        <header class="workflow-run-overview">
+          <div><h3>运行 #{{ selected.id }} <span class="workflow-run-status" :data-status="selected.status">{{ label(selected.status) }}</span></h3><p>{{ time(selected.created_at) }} · Context v{{ selected.context_version }}</p></div>
+          <p class="workflow-run-overview__count">已有结果 <strong>{{ resultCount }}<span> / {{ selected.nodes.length }}</span></strong></p>
+        </header>
         <p v-if="selected.error" role="alert" class="inline-alert is-error">{{ selected.error.message }} {{ errorHints[selected.error.code] || '请检查节点配置，或刷新运行记录后重试。' }}（{{ selected.error.code }}）</p>
-        <p v-if="!selected.nodes.length" class="muted-copy">本次运行尚未生成节点结果。</p>
-        <article v-for="node in selected.nodes" :key="node.request_id" class="workflow-node-result">
-          <header>
-            <h4>{{ nodeName(node.node_type) }}</h4>
+        <details v-if="selected.nodes.length" class="workflow-run-chart">
+          <summary>节点运行统计 <span>查看耗时与用量</span></summary>
+          <div class="workflow-run-chart__heading"><p>{{ metric === 'latency_ms' ? '各节点调用耗时' : '各节点 Token 用量' }}</p><label>统计指标<select v-model="metric"><option value="latency_ms">耗时</option><option value="total_tokens">Token 用量</option></select></label></div>
+          <ol class="workflow-run-chart__rows" :aria-label="metric === 'latency_ms' ? '各节点调用耗时' : '各节点 Token 用量'">
+            <li v-for="(node, index) in selected.nodes" :key="node.request_id">
+              <span>{{ index + 1 }}. {{ nodeName(node.node_type) }}</span><span class="workflow-run-chart__track" aria-hidden="true"><span :style="{ width: metricWidth(node) }" /></span><strong>{{ metricLabel(node) }}</strong>
+            </li>
+          </ol>
+        </details>
+        <p v-if="!selected.nodes.length" class="workflow-execution__empty">本次运行尚未生成节点记录，刷新后可查看最新状态。</p>
+        <article v-if="selectedNode" id="workflow-selected-node" :key="selectedNode.request_id" class="workflow-node-result" aria-labelledby="workflow-selected-node-title">
+          <header class="workflow-node-result__heading">
+            <div><p class="workflow-node-result__position">节点 {{ selectedNodeIndex + 1 }} / {{ selected.nodes.length }}</p><h4 id="workflow-selected-node-title" ref="nodeHeading" tabindex="-1">{{ nodeName(selectedNode.node_type) }}</h4></div>
             <div class="workflow-node-result__actions">
-              <span>{{ label(node.status) }}</span>
-              <button v-if="node.result" class="text-command" type="button" @click="copyResult(node.result)">复制结果</button>
+              <span class="workflow-run-status" :data-status="selectedNode.status">{{ label(selectedNode.status) }}</span>
+              <button v-if="selectedNode.result" class="secondary-command" type="button" @click="copyResult(selectedNode.result)">复制结果</button>
             </div>
           </header>
-          <small>节点 {{ node.node_key }} · {{ node.latency_ms === null ? '耗时待统计' : `${(node.latency_ms / 1000).toFixed(1)} 秒` }} · {{ node.total_tokens === null ? '用量待统计' : `${node.total_tokens} tokens` }}</small>
-          <p v-if="node.error" role="alert">{{ node.error.message }} {{ errorHints[node.error.code] || '' }}</p>
-          <p v-if="node.node_type === 'answer_review'" class="muted-copy">静态评审建议，代码未执行，不代表自动判题通过。</p>
-          <template v-if="node.result">
-            <p class="workflow-node-summary">{{ node.result.summary }}</p>
-            <dl>
-              <template v-for="(value, key) in node.result" :key="key">
-                <div v-if="key !== 'summary' && key !== 'result_type'" class="workflow-result-section">
-                  <dt>{{ label(String(key)) }}</dt>
-                  <dd>{{ format(value) }}</dd>
-                </div>
-              </template>
-            </dl>
-          </template>
+          <div class="workflow-node-result__metadata"><span>耗时 <strong>{{ duration(selectedNode.latency_ms) }}</strong></span><span>用量 <strong>{{ usage(selectedNode.total_tokens) }}</strong></span><details><summary>节点标识</summary><code>{{ selectedNode.node_key }}</code></details></div>
+          <p v-if="selectedNode.error" role="alert" class="inline-alert is-error">{{ selectedNode.error.message }} {{ errorHints[selectedNode.error.code] || '' }}（{{ selectedNode.error.code }}）</p>
+          <p v-if="selectedNode.node_type === 'answer_review'" class="muted-copy">静态评审建议，代码未执行，不代表自动判题通过。</p>
+          <WorkflowNodeResultContent v-if="selectedNode.result" :result="selectedNode.result" />
+          <p v-else-if="selectedNode.status === 'running' || selectedNode.status === 'pending'" class="workflow-node-result__empty" role="status">{{ selectedNode.status === 'running' ? '正在生成此节点的结果，完成后会自动更新。' : '此节点正在等待处理，结果会在运行后显示。' }}</p>
+          <p v-else class="workflow-node-result__empty">{{ selectedNode.status === 'failed' ? '此节点未能生成结果。可查看错误原因，再继续运行未完成的节点。' : selectedNode.status === 'cancelled' ? '此节点已中止，没有可展示的结果。' : '此节点已完成，但没有可展示的结构化结果。' }}</p>
+          <footer v-if="selected.nodes.length > 1" class="workflow-node-result__pagination">
+            <button class="text-command" type="button" :disabled="selectedNodeIndex <= 0" @click="stepNode(-1)">上一个节点</button>
+            <span>{{ selectedNodeIndex + 1 }} / {{ selected.nodes.length }}</span>
+            <button class="text-command" type="button" :disabled="selectedNodeIndex >= selected.nodes.length - 1" @click="stepNode(1)">下一个节点</button>
+          </footer>
         </article>
       </div>
     </div>

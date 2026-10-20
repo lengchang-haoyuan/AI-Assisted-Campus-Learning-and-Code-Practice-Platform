@@ -1,0 +1,43 @@
+{
+  "stage": "S03",
+  "registered_at": "2026-10-20T07:34:06.327917+00:00",
+  "target": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "database": "scholarhub_l4_s02_20261020"
+  },
+  "initial_state": {
+    "learning_records": 4,
+    "daily_tasks": 204,
+    "submissions": 3
+  },
+  "user_replies": [
+    "批准临时记录验证并按标记清理（推荐）",
+    "批准9字段辅助快照（推荐）"
+  ],
+  "scope": {
+    "new_records": 2,
+    "owner": 3,
+    "minutes": [
+      10,
+      20
+    ],
+    "update": {
+      "10": 15
+    },
+    "delete": "only S03 marked temporary rows; preserve S02 originals",
+    "ai_aux_fields": [
+      "id",
+      "user_id",
+      "project_id",
+      "status",
+      "requested_at",
+      "finished_at",
+      "prompt_tokens",
+      "completion_tokens",
+      "latency_ms"
+    ],
+    "schema": "ai-request-aux-1.0"
+  },
+  "real_model_calls": 0
+}

@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "errors": {
+    "invalid_time": 2,
+    "integer_out_of_range": 3,
+    "invalid_json_type": 1,
+    "unknown_enum": 1,
+    "required_key_missing": 1
+  },
+  "invalid_rows": 8,
+  "valid_historical_zero_retained_in_normalization": true,
+  "batch_rejected": true,
+  "failed_attempt": "/home/administrator/scholarhub-analytics/s04-20261020/.incomplete/v2-quality-types-4320da6f7a6740288e8a015b790f20db"
+}

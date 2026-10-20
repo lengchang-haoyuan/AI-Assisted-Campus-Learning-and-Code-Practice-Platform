@@ -1,0 +1,23 @@
+{
+  "same_seed_source_files_byte_identical": true,
+  "jsonl_files": 11,
+  "field_whitelist_checked": true,
+  "independent_100_subject_answer_matches_generator_counts": {
+    "records": 10000,
+    "known_minutes": 421978,
+    "missing_duration_count": 2000,
+    "known_zero_count": 1000,
+    "tasks": 2500,
+    "cohort_count": 100,
+    "confirmed_count": 60,
+    "revised_count": 30
+  },
+  "peak_working_set_bytes": 41369600,
+  "memory_method": "Windows GetProcessMemoryInfo PeakWorkingSetSize; includes replay and independent 100-subject calculations; not Spark RSS",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "unrun_scales": [
+    100000,
+    1000000
+  ],
+  "spark_runs": 0
+}

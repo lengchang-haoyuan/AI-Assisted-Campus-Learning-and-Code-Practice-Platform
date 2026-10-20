@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "forced_prepared_snapshot_before_lock": true,
+  "held_connections": [
+    {
+      "connection_id": 19,
+      "batch_id": "e9c1fc11-14b3-4306-953f-862c37f992c4",
+      "replayed": false
+    },
+    {
+      "connection_id": 18,
+      "batch_id": "e9c1fc11-14b3-4306-953f-862c37f992c4",
+      "replayed": true
+    }
+  ],
+  "daily_rows": 2,
+  "final_counts": {
+    "batches": 10,
+    "daily_rows": 13
+  }
+}

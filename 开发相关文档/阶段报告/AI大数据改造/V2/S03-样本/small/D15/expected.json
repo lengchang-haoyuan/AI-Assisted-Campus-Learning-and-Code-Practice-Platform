@@ -1,0 +1,26 @@
+{
+  "case_id": "D15",
+  "name": "右开截止边界",
+  "kind": "data",
+  "input_changes": [
+    {
+      "op": "set",
+      "table": "learning_records",
+      "match": {
+        "id": 5
+      },
+      "values": {
+        "occurred_at": "2026-10-03T16:00:00Z"
+      }
+    }
+  ],
+  "expected_status": "validated",
+  "expected_assertions": {
+    "records.valid_unique_rows": 4,
+    "records.known_minutes": 75,
+    "records.known_duration_count": 2,
+    "records.missing_duration_count": 2,
+    "records.known_zero_count": 0,
+    "quality.outside_observation_time": 1
+  }
+}

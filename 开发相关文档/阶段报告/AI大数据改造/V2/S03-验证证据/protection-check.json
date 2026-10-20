@@ -1,0 +1,14 @@
+{
+  "baseline_source_files": 350,
+  "baseline_bytes_unchanged": true,
+  "new_sources": [
+    "backend/scripts/export_ods_snapshot.py",
+    "backend/tests/test_ods_snapshot.py",
+    "analytics/__init__.py",
+    "analytics/snapshot_files.py",
+    "analytics/fixture_answers.py",
+    "analytics/prepare_samples.py"
+  ],
+  "old_diff_unchanged": true,
+  "business_application_changed": false
+}

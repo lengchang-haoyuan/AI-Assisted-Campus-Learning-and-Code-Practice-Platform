@@ -1,0 +1,16 @@
+{
+  "markdownPreview": "passed",
+  "images": 9,
+  "brokenImages": 0,
+  "pageErrors": 0,
+  "viewportWidths": [
+    1280,
+    390
+  ],
+  "horizontalOverflow": false,
+  "mermaidFences": 10,
+  "renderer": "local marked GFM + Mermaid 12.2.0 from temporary browser CDN; no application dependency change",
+  "diagrams": 10,
+  "svgCount": 10,
+  "erOutsideDetails": true
+}

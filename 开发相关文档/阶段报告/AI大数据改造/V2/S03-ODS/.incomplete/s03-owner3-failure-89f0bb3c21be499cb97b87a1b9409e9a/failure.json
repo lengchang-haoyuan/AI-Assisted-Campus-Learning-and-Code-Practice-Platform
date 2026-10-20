@@ -1,0 +1,6 @@
+{
+  "extraction_status": "failed",
+  "snapshot_id": "s03-owner3-failure",
+  "error_type": "RuntimeError",
+  "published": false
+}

@@ -1,0 +1,100 @@
+{
+  "stage": "S05",
+  "contract_version": "V2-S01-r2",
+  "status": "passed",
+  "fixture_subject_mapping": {
+    "1001": {
+      "isolated_real_api_user": 3,
+      "other_user": 4
+    }
+  },
+  "assertions": [
+    {
+      "case_id": "D13",
+      "name": "completed_batch_overwrite",
+      "expected": false,
+      "actual": false,
+      "passed": true,
+      "evidence": "checks.json:completed_header_immutable"
+    },
+    {
+      "case_id": "D13",
+      "name": "identical_replay",
+      "expected": "no_op",
+      "actual": "no_op",
+      "passed": true,
+      "evidence": "checks.json:same_identity_replay; publish-replay.log"
+    },
+    {
+      "case_id": "D13",
+      "name": "different_content_same_batch",
+      "expected": "409_conflict",
+      "actual": "409_conflict",
+      "passed": true,
+      "evidence": "checks.json:completed_different_content_conflict; app.core.exceptions.ConflictError.status_code=409"
+    },
+    {
+      "case_id": "D13",
+      "name": "failed_new_batch_preserves_previous",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "evidence": "checks.json:old_completed_read_during_fault/failed_no_partial_daily"
+    },
+    {
+      "case_id": "D14",
+      "name": "owner_1001_status",
+      "expected": 200,
+      "actual": 200,
+      "passed": true,
+      "evidence": "api-evidence.json:empty permission fixture owner3"
+    },
+    {
+      "case_id": "D14",
+      "name": "other_owner_status",
+      "expected": 404,
+      "actual": 404,
+      "passed": true,
+      "evidence": "api-evidence.json:empty permission fixture owner4"
+    },
+    {
+      "case_id": "D14",
+      "name": "nonexistent_status",
+      "expected": 404,
+      "actual": 404,
+      "passed": true,
+      "evidence": "api-evidence.json:nonexistent UUID"
+    },
+    {
+      "case_id": "D14",
+      "name": "unauthenticated_status",
+      "expected": 401,
+      "actual": 401,
+      "passed": true,
+      "evidence": "api-evidence.json:empty fixture no token"
+    },
+    {
+      "case_id": "D14",
+      "name": "ordinary_get_spark_calls",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "evidence": "final-readonly-api.json:Popen call count; GET imports no Spark entry"
+    },
+    {
+      "case_id": "D14",
+      "name": "ordinary_get_model_calls",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "evidence": "final-readonly-api.json:AIClient.complete call count"
+    }
+  ],
+  "passed_assertions": 10,
+  "required_assertions": 10,
+  "publication_authorization_score": 10,
+  "score_total": 10,
+  "prior_S04_score_not_retested_here": 90,
+  "S06_J1_and_browser": "not_run",
+  "GET_DML": []
+}

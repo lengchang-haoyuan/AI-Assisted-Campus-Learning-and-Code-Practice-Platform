@@ -1,0 +1,23 @@
+{
+  "case_id": "D06",
+  "name": "学习记录修改无updated_at",
+  "kind": "data",
+  "input_changes": [
+    {
+      "op": "set",
+      "table": "learning_records",
+      "match": {
+        "id": 2
+      },
+      "values": {
+        "duration_minutes": 60
+      }
+    }
+  ],
+  "expected_status": "validated",
+  "expected_assertions": {
+    "records.known_minutes": 90,
+    "records.valid_unique_rows": 5,
+    "new_batch_required": true
+  }
+}

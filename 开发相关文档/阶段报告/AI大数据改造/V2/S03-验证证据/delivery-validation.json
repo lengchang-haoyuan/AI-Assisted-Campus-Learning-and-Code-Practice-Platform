@@ -1,0 +1,12 @@
+{
+  "markdown_documents": 3,
+  "resolved_local_links": 52,
+  "json_files": 81,
+  "controlled_manifests": 7,
+  "snapshot_field_privacy_check": "passed",
+  "prior_350_source_files_unchanged": true,
+  "previous_log_bytes_preserved": true,
+  "git_diff_check_exit_code": 0,
+  "spark_runs": 0,
+  "models_calls": 0
+}

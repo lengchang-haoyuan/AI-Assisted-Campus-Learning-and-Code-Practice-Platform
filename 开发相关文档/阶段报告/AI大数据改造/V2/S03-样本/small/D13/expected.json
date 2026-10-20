@@ -1,0 +1,13 @@
+{
+  "case_id": "D13",
+  "name": "已完成批次重复发布",
+  "kind": "publication_policy",
+  "input_changes": [],
+  "expected_status": "validated",
+  "expected_assertions": {
+    "completed_batch_overwrite": false,
+    "identical_replay": "no_op",
+    "different_content_same_batch": "409_conflict",
+    "failed_new_batch_preserves_previous": true
+  }
+}

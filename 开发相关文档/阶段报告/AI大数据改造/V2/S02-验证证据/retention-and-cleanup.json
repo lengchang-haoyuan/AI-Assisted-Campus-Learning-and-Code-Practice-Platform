@@ -1,0 +1,15 @@
+{
+  "status": "retained_by_explicit_user_authorization",
+  "database": "scholarhub_l4_s02_20261020",
+  "run_marker": "s02_3e08a80a",
+  "no_database_dropped": true,
+  "no_existing_database_cleared": true,
+  "failed_operations_left_no_rows": true,
+  "rollback_probe_record_ids_absent": [
+    5
+  ],
+  "successful_sources_retained_for_S03": true,
+  "resume_created_no_accounts_or_source_rows": true,
+  "resume_auth": "existing SecurityService, temporary JWT secret in process, no stored credentials or account changes",
+  "environment_file_changed": false
+}

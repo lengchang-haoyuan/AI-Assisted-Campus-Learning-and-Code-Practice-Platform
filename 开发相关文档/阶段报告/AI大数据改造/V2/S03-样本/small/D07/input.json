@@ -1,0 +1,30 @@
+{
+  "manifest": {
+    "batch_id": "11111111-1111-4111-8111-111111111111",
+    "owner_user_id": 1001,
+    "dataset_kind": "controlled",
+    "schema_version": "scholarhub-source-1.0",
+    "metric_version": "learning-process-1.0",
+    "rule_version": "quality-1.0",
+    "business_timezone": "Asia/Shanghai",
+    "period_start": "2026-10-01",
+    "period_end": "2026-10-03",
+    "source_cutoff": "2026-10-03T16:00:00Z",
+    "snapshot_started_at": "2026-10-03T16:00:00Z",
+    "snapshot_finished_at": "2026-10-03T16:00:01Z"
+  },
+  "tables": {
+    "projects": [],
+    "daily_tasks": [],
+    "learning_records": [],
+    "teaching_classes": [],
+    "teaching_assignments": [],
+    "campus_memberships": [],
+    "class_memberships": [],
+    "submissions": [],
+    "submission_versions": [],
+    "feedback": [],
+    "source_claim_projection": []
+  },
+  "artifact_kind": "fictional_test_vector_not_database_snapshot"
+}

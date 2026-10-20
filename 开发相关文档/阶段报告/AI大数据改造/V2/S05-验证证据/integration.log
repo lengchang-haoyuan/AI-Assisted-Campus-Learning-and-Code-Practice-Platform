@@ -1,0 +1,52 @@
+{"timestamp":"2026-10-20T12:54:14.737070+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"9c16303e09524209b4eb723569b28f0d","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":200,"duration_ms":11.676}
+{"timestamp":"2026-10-20T12:54:14.739099+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"32234e45d80b4bd583cafa0835e3eb2f","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":401,"duration_ms":0.752}
+{"timestamp":"2026-10-20T12:54:14.741084+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"3a2e7f2608984c24b3da84d8c830ed63","method":"GET","path":"/api/v1/offline-analytics/batches/77e12daa-c693-4c47-8ef8-e7c5b78b1395","status_code":401,"duration_ms":0.636}
+{"timestamp":"2026-10-20T12:54:14.746083+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"df2a0e97dbd941619e0e472e5a880235","method":"GET","path":"/api/v1/offline-analytics/batches/77e12daa-c693-4c47-8ef8-e7c5b78b1395","status_code":404,"duration_ms":3.55}
+{"timestamp":"2026-10-20T12:54:14.749200+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"0a6a30545c8f4cb18b29b69d2e9b1fda","method":"GET","path":"/api/v1/offline-analytics/batches/77e12daa-c693-4c47-8ef8-e7c5b78b1395","status_code":404,"duration_ms":2.9}
+{"timestamp":"2026-10-20T12:54:14.754200+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"161134615b5f4b51b100c37018e7a666","method":"GET","path":"/api/v1/offline-analytics/batches/77e12daa-c693-4c47-8ef8-e7c5b78b1395","status_code":200,"duration_ms":3.338}
+{"timestamp":"2026-10-20T12:54:14.758710+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"f4c578c90c154a0caed1f70579fcc537","method":"GET","path":"/api/v1/offline-analytics/batches/b9378c01-70b2-4456-9d44-b579617375d1","status_code":200,"duration_ms":3.505}
+{"timestamp":"2026-10-20T12:54:14.762747+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"a817815d1eb44f8b935befa4593f9041","method":"GET","path":"/api/v1/offline-analytics/batches/4f720b67-7fed-4237-8b91-ad48b478e699","status_code":404,"duration_ms":2.862}
+{"timestamp":"2026-10-20T12:54:14.766747+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"955584a2af2e407296038e55c4a931b4","method":"GET","path":"/api/v1/offline-analytics/batches/989b5df8-b382-43bc-91de-5bf0a09cd2bf","status_code":404,"duration_ms":3.156}
+{"timestamp":"2026-10-20T12:54:14.771748+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"d5555574d87f431a9ab3e3bf661fa23a","method":"GET","path":"/api/v1/offline-analytics/batches/45c55b05-ff63-4cc6-b6ca-734146054710","status_code":200,"duration_ms":3.626}
+{"timestamp":"2026-10-20T12:54:14.775747+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"be291a25360046bfa7f4c2abb420f5d1","method":"GET","path":"/api/v1/offline-analytics/batches/45c55b05-ff63-4cc6-b6ca-734146054710","status_code":404,"duration_ms":2.917}
+{"timestamp":"2026-10-20T12:54:14.778083+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"f093657883bc433ea999965b8eaf9f92","method":"GET","path":"/api/v1/offline-analytics/batches/45c55b05-ff63-4cc6-b6ca-734146054710","status_code":401,"duration_ms":0.509}
+{"timestamp":"2026-10-20T12:54:14.781270+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"8fc56463874e43799ded3fae54c03a07","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":422,"duration_ms":2.479}
+{"timestamp":"2026-10-20T12:54:14.783948+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"3f1aeb4d3efa4c6f9d756304314685d6","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":422,"duration_ms":2.161}
+{"timestamp":"2026-10-20T12:54:14.787946+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"3bdc35bbac2342aab5c12a6064dd653f","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":422,"duration_ms":2.725}
+{"timestamp":"2026-10-20T12:54:14.790946+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"6d75a352d82a4f39a8f73bae5f47dced","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":422,"duration_ms":2.193}
+{"timestamp":"2026-10-20T12:54:14.793946+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"b8a93adbd7ee453b82a3dba0a3bb4daa","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":422,"duration_ms":1.985}
+{"timestamp":"2026-10-20T12:54:14.797015+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"4bf065d28e064d7eb15effed65b6c2db","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":422,"duration_ms":2.392}
+{"timestamp":"2026-10-20T12:54:14.801014+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"11bceddd16ac46edb721362ecf59a559","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":422,"duration_ms":2.354}
+{"timestamp":"2026-10-20T12:54:14.804017+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"565ab14e24b4415ea7e545abedefc130","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":422,"duration_ms":2.073}
+{"timestamp":"2026-10-20T12:54:14.807022+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"4b7508d03ce248d78ba5871d61bf1e50","method":"GET","path":"/api/v1/offline-analytics/batches/77e12daa-c693-4c47-8ef8-e7c5b78b1395","status_code":422,"duration_ms":2.273}
+{"timestamp":"2026-10-20T12:54:14.812103+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"a8eaf10943e14fdd90f90f3eae439aec","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":200,"duration_ms":4.418}
+{"timestamp":"2026-10-20T12:54:14.816102+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"3742a2b2d8554ab7aefb08f830327665","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":200,"duration_ms":3.146}
+{"timestamp":"2026-10-20T12:54:14.821478+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"a888fd869a544ef0bef3e63da1b39d36","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":200,"duration_ms":3.083}
+{"timestamp":"2026-10-20T12:54:14.825483+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"fb92ea444b544b92a98277c168ff2c48","method":"GET","path":"/api/v1/offline-analytics/batches","status_code":200,"duration_ms":3.431}
+{"timestamp":"2026-10-20T12:54:14.909731+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"2847a9e695af4e878783adb15c53b9a0","method":"GET","path":"/api/v1/statistics/today","status_code":200,"duration_ms":82.654}
+{"timestamp":"2026-10-20T12:54:14.923242+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"926d345ef3964b99b6de1889136978ed","method":"GET","path":"/api/v1/offline-analytics/batches/297855ea-edfd-442e-9dad-2877abe3a884","status_code":404,"duration_ms":3.072}
+{"timestamp":"2026-10-20T12:54:14.928247+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"c3723a1e6b4a4fe4bfd35157b6450924","method":"GET","path":"/api/v1/offline-analytics/batches/77e12daa-c693-4c47-8ef8-e7c5b78b1395","status_code":200,"duration_ms":3.366}
+{"timestamp":"2026-10-20T12:54:14.940643+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"cd5ffcc08c174a3c90f2214dc50065ef","method":"GET","path":"/api/v1/offline-analytics/batches/297855ea-edfd-442e-9dad-2877abe3a884","status_code":404,"duration_ms":2.966}
+{"timestamp":"2026-10-20T12:54:14.961050+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"d5610bdd62fa41309a595e992228892c","method":"GET","path":"/api/v1/offline-analytics/batches/97db22ac-38e6-432c-ac5c-e49d52a0c249","status_code":404,"duration_ms":3.224}
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Administrator\AppData\Local\Temp\ScholarHub-S05-20261020\verify_s05.py", line 159, in <module>
+    futures=[pool.submit(worker) for _ in range(2)];concurrency=[f.result(timeout=30) for f in futures]
+                                                                 ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\concurrent\futures\_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Temp\ScholarHub-S05-20261020\verify_s05.py", line 156, in worker
+    result=AnalyticsService(AnalyticsRepository(s)).publish(concurrent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\毕业设计\ScholarHub\backend\app\services\analytics.py", line 77, in publish
+    raise ConflictError("已完成批次内容不同，禁止覆盖")
+app.core.exceptions.ConflictError: 已完成批次内容不同，禁止覆盖

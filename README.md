@@ -8,11 +8,14 @@
 
 从一个项目开始，把学习计划、AI 分析、动手实践和教学反馈连起来。ScholarHub 面向高校学生与教师：学生可以管理个人项目，编排 AI 工作流并记录学习过程；教师可以发布任务、查看分版本提交并给出反馈，让每次修改都有迹可循。
 
+面向**数据科学与大数据技术**毕业设计，项目进一步将现有学习、任务、提交与教师反馈组织为可复核的数据链：**MySQL 一致性快照 → ODS → PySpark 清洗关联 → Spark SQL 指标 → 不可变批次 → 本人只读 API**。截至 **2026-10-20，V2 S00–S05 已完成**；图表页面接入与综合分析验收是下一阶段 S06。
+
 <p>
   <a href="#功能亮点">功能亮点</a> ·
   <a href="#界面预览">界面预览</a> ·
   <a href="#快速开始">快速开始</a> ·
   <a href="#技术实现">技术实现</a> ·
+  <a href="#大数据离线分析">大数据离线分析</a> ·
   <a href="#关键代码节点">关键代码节点</a> ·
   <a href="#核心调用链">核心调用链</a> ·
   <a href="#er-diagrams">ER图</a> ·
@@ -24,16 +27,16 @@
 
 - **项目实践**：管理项目目标、技术栈、状态与进度，从项目库进入个人实践空间。
 - **个人学习**：组织课程、学习计划、每日任务与学习记录，把长期目标拆成每天的行动。
-- **AI 工作台与工作流**：编辑项目 Context，获取需求分析与开发 Prompt；用节点和连线组织 AI 分析、提示、讲解与静态评审。
+- **AI 工作台与工作流**：编辑项目 Context，获取需求分析与开发 Prompt；用节点和连线组织 AI 分析、提示、讲解与静态评审。运行历史支持“运行记录 → 单个节点”两级导航，需求、技术栈、架构及教学结果分别阅读。
 - **教学任务与反馈**：教师发布任务，学生提交 V1、V2 等不可覆盖的版本，教师逐版退回修改或确认通过。
 - **校园作品社区**：通过发布申请与人工审核展示作品，支持评论、点赞、收藏、举报和复核。
-- **数据与复盘**：查看学习及项目统计，生成并保存带有生成时事实快照的 AI 学习报告。
+- **数据与复盘**：保留原实时统计与 AI 学习报告；新增独立的 Spark 离线分析，提供数据质量分流、可信教学关联、学习过程专题与本人发布批次查询。
 
 一次典型的实践过程是：**创建项目 → 安排学习任务 → 用 AI 辅助分析或练习 → 自主实现 → 提交版本并获得反馈 → 记录与复盘**。
 
 ## 界面预览
 
-当前界面采用 Campus Studio 设计：森林绿、纸白与清晰的内容层次。以下均为当前前端页面的浏览器截图，展示数据为演示样例；点击图片可查看原图。
+界面采用 Campus Studio 设计：森林绿、纸白与清晰的内容层次。以下为阶段验收时的浏览器截图，展示数据为演示样例；点击图片可查看原图。
 
 ### 学习从一个项目开始
 
@@ -65,6 +68,12 @@
     </td>
   </tr>
 </table>
+
+### 运行记录内独立查看节点结果
+
+运行历史、节点列表与详情各自保留选择；需求按说明和验收项组织，架构按模块与数据流展示，运行统计保留耗时/Token 的零值与缺失含义。下图使用固定 Mock 数据验证交互，条图表达数量，不代表 AI 质量评分。
+
+[![工作流结果：选中一条运行后独立查看需求分析节点](开发相关文档/测试证据/20261018-工作流结果/mock-desktop-requirements.png)](开发相关文档/测试证据/20261018-工作流结果/mock-desktop-requirements.png)
 
 <details>
 <summary>查看更多：数据分析与手机端</summary>
@@ -142,6 +151,23 @@ python -m app.cli.init_campus_admin --user-id <用户编号> --reason "已核验
 
 随后由管理员向教师和学生签发定向邀请，再建立教学班与任务。具体配置与权限说明见 [后端 README](backend/README.md#p17-校园身份初始化)。
 
+### 4. 阅读与运行离线分析
+
+普通 Web 功能不要求安装 Spark。离线作业使用独立的 WSL/PySpark 环境，不写入后端 requirements；当前验证环境为 Ubuntu 24.04、Python 3.12.3、PySpark 4.2.0、JDK 17、local[2]。
+
+先看 [analytics 执行入口](analytics/README.md)，再看 [Spark 作业说明](analytics/S04.md) 与 [发布/API契约](开发相关文档/阶段报告/AI大数据改造/V2/S05-发布与接口契约.md)。仓库保留虚构隔离快照、独立答案和完整计算产物，可以离线复核数据及谱系；克隆不会创建它们引用的用户或数据库。
+
+在已配置好的 PySpark 环境、仓库根目录，可用新 job-id 输出到新目录：
+
+```bash
+python -B -m analytics.spark_job \
+  --input '开发相关文档/阶段报告/AI大数据改造/V2/S03-ODS/snapshots/s03-owner3-restored' \
+  --output ./analytics-output \
+  --job-id local-review-001
+```
+
+成功 job-id 不可复用。`analytics-output` 是本例本地输出目录，勿将它当成新的受控发布来源直接导入。当前发布 CLI 明确限定本轮已批准隔离库与两份完成任务；新环境需先核对账号归属、源样本与迁移目标，不能照搬虚构用户编号。实际命令和恢复边界见 [后端离线分析说明](backend/README.md#s05-离线分析发布与本人只读接口)。
+
 ## 技术实现
 
 | 层次 | 主要技术 |
@@ -151,6 +177,7 @@ python -m app.cli.init_campus_admin --user-id <用户编号> --reason "已核验
 | 后端 | FastAPI、Pydantic、SQLAlchemy、HTTPX |
 | 数据与认证 | MySQL 8、PyMySQL、JWT、Argon2 |
 | AI | DeepSeek Provider、结构化 Agent、ProjectContext、有向无环工作流 |
+| 离线分析 | WSL、PySpark 4.2.0、Spark SQL、JSONL ODS、Parquet DWD/ADS、版本化发布批次 |
 
 ### 系统架构
 
@@ -165,7 +192,7 @@ flowchart LR
     Agent --> Provider["DeepSeek / 测试 Fake"]
 ```
 
-前端通过统一 API 层访问后端；后端沿用 `Router → Service → Repository → Model` 分层。当前包含 **30个页面、96个 OpenAPI 路径、136个接口操作、34张数据表与81个外键约束**，口径截至2026-10-16。
+前端通过统一 API 层访问后端；后端沿用 `Router → Service → Repository → Model` 分层。截至2026-10-20，当前源码包含 **30个页面文件、98个 OpenAPI 路径、138个接口操作、36张数据表与83个外键约束**。表/外键以 ORM 为准，两张新增分析表目前仅在专用隔离库完成实际迁移；已有业务库需另行审查迁移，不能仅更新代码就认定数据库已升级。
 
 ### 值得关注的实现
 
@@ -173,6 +200,72 @@ flowchart LR
 - **并发与旧结果保护**：运行中禁止修改执行图，提交结果时核对图与 Context 版本；模型等待期间不持有数据库事务。
 - **完整的学习与反馈记录**：计划完成以真实任务状态为依据；提交版本与反馈保留历史，教学来源由真实关联关系确认。
 - **账号与权限边界**：服务端校验身份、资源归属与校园角色；退出账号销毁私人状态，异步列表仅接收最新请求结果。
+- **可信数据分析**：固定输入、独立答案、质量对账与 Spark SQL 聚合分开；完成批次不可覆盖，普通图表 GET 只读已发布结果。
+
+## 大数据离线分析
+
+### 分析问题与技术分工
+
+首个专题是**提交修订与教师确认进展**：固定窗口内有哪些首次提交，哪些发生修订，哪些获得教师确认，哪些仍待评阅？分钟与活跃日提供背景，任务及提交反馈描述过程，不将它们直接转换成学习能力分数。
+
+| 层次 | 职责 | 当前实现 |
+| --- | --- | --- |
+| MySQL 业务源 | 保存学习记录、任务、版本与反馈，处理权限和事务 | 既有10张核心来源表；AI请求9字段独立辅助白名单 |
+| ODS | 在一个受控一致性事务窗口抽取白名单字段 | 完整窗口快照、manifest、主体/时区/截止/版本；更新删除重新抽取 |
+| DWD | 清洗类型、区分重复与冲突、验证归属和关系 | record/task/cohort 三类事实及 AI 辅助 Parquet；异常与质量计数 |
+| ADS | 使用 Spark SQL 形成日汇总、专题和规则证据 | 三类指标、精确分母、来源计数、等待分布、触发及反例 |
+| 发布/MySQL汇总 | 保存完成批次与每日结果，支持稳定低延迟查询 | 两张独立分析表；幂等、行锁、失败回滚、完成历史不可变 |
+| API/展示 | 认证本人读取固定批次 | 两个GET已实现；Vue/ECharts离线页面待S06接入 |
+
+MySQL 承担业务事实与发布结果查询，Spark 承担离线清洗、多表关系核验、聚合及实验，两者职责不同。作业是当前机器上的单机 Spark 实验，不能据此宣称已经部署分布式集群。
+
+```mermaid
+flowchart TB
+    Source["MySQL 业务事实"] --> ODS["同连接一致性抽取<br/>ODS JSONL + manifest"]
+    ODS --> DWD["PySpark 清洗与关系核验<br/>DWD Parquet"]
+    DWD --> ADS["Spark SQL 三类指标与专题<br/>ADS + 质量/谱系"]
+    ADS --> Store["离线 CLI 受控发布<br/>MySQL completed 批次"]
+    Store --> GET["认证本人只读 GET"]
+    GET -. "S06 待接入" .-> Chart["Vue / ECharts"]
+```
+
+### 三类指标及正确性边界
+
+| 指标 | 保留事实 | 关键口径 |
+| --- | --- | --- |
+| 记录背景 | 已记录分钟、已知/缺失时长数、零分钟、活跃日、来源分类 | NULL与0独立；教学通过记录不补造学习时长 |
+| 任务过程 | completed/全部保留任务、cancelled、逾期未完 | 取消仍入分母；199/200=99.500000%；无任务为无样本 |
+| 提交与反馈 | V1群组、修订、教师确认、首次/修订后确认、待评、首次反馈等待与覆盖 | 固定V1窗口，按快照截止读取已保存版本事实；不推断未保存的历史日状态 |
+
+教学来源必须由 **ACCEPT Feedback → 提交版本 → 学生归属 → learning_record_id** 的真实关系证明，`record_metadata.source` 声明不能升级可信来源。提交版本保存说明、仓库 URL 与 ref；可变仓库引用不是不可变代码快照。教师确认与 AI 静态评审、学生自测声明分别记录。
+
+记录时间按 UTC 瞬间转换到业务日，`scheduled_date` 直接保留 DATE。每个结论保留样本量、分子分母、日期和 DWD 定位。重复完全相同行计数去重，同键冲突及错误关联阻止完成；不靠任意挑一行或丢掉异常制造漂亮结果。
+
+### 当前结果与实验
+
+| 数据/验证 | 已获得的结果 |
+| --- | --- |
+| 主受控样本 | 4条记录，已知75分钟/2条、缺失2条、活跃2日；任务2/4、取消1、逾期未完1；提交群组3、修订1、教师确认2、待评1 |
+| 边界受控样本 | 199/200保持99.500000%，与主用户分开，不混算分母 |
+| 固定答案 | 15个数据案例及多主体M01在真实Spark与独立Python下核对；D13/D14发布/权限另在S05验证 |
+| 规模输入 | 1万唯一学习记录、100个合成主体；用于实验，不是线上用户规模 |
+| 规模运行 | 同口径结果一致；本机一次Spark计算25.9026秒、另列启动3.1189秒，Python读取0.0781秒+计算0.6591秒；小数据Python更快 |
+| 发布正确性 | 冻结答案、ADS、发布表与API一致；失败不暴露部分结果，重试/重放不增行，两种双连接并发顺序通过 |
+
+以上规模耗时来自[S04固定参数实验](开发相关文档/阶段报告/AI大数据改造/V2/S04-完成报告.md)，尚不是多轮冷热中位数或分布式加速结论。输入先由驱动读取，当前不宣称可承载超出驱动内存的规模。三轮复验、页面解释和综合分析留S06；正式J1解释评分及真实模型质量仍需独立评价。
+
+### 发布、查询与页面职责
+
+| 入口 | 含义 |
+| --- | --- |
+| `GET /api/v1/offline-analytics/batches?dataset_kind=controlled&page=1&page_size=20` | 本人completed批次；可按1–90日周期筛选，size≤50 |
+| `GET /api/v1/offline-analytics/batches/{batch_id}` | 同一完整批次的元信息、daily、三类汇总和quality；不接受详情局部日期过滤 |
+
+列表默认 `dataset_kind=business`；当前演示来源是 `controlled`，因此默认列表为空是正常状态。`empty_reason` 分别表达无完成批次、周期未匹配和页码超出。本人空批次仍先鉴权，未登录401，他人/不存在/未完成404，非法参数422；管理员也不能读取他人分析。
+
+普通 GET 不启动 Spark、模型或发布，不回写业务记录。原 `/statistics` 继续提供实时聚合，新接口只读历史完成批次；同一页面应固定 batch_id，避免不同版本/窗口混算。
+
+AI 项目准备页继续维护事实与 Context，高级工作流继续保留画布和历史。新的实践工作台、等待学生提交会话和建议应用按 S07–S10 实施；它们不是当前Spark数据链的依赖。当前[正式批次交接](开发相关文档/阶段报告/AI大数据改造/V2/S05-S06交接索引.json)明确标出主/边界及应排除的测试fixture。
 
 ## 关键代码节点
 
@@ -258,6 +351,22 @@ if changes["status"] == LearningPlanStatus.COMPLETED:
     plan.progress = 100
 ```
 
+### 5. 大数据与分析发布
+
+| 代码入口 | 关键符号 | 职责与阅读重点 |
+| --- | --- | --- |
+| [backend/scripts/export_ods_snapshot.py](backend/scripts/export_ods_snapshot.py) | `export_snapshot` | 单连接一致性读取与白名单投影，事务结束后写文件 |
+| [analytics/snapshot_files.py](analytics/snapshot_files.py) | `publish_snapshot` | 临时目录与完成快照分开，完成ID不可覆盖 |
+| [analytics/spark_quality.py](analytics/spark_quality.py) | `normalize / relationship_errors` | 显式Schema、类型/主键/关系校验、质量分流 |
+| [analytics/learning_process.sql](analytics/learning_process.sql) | Spark SQL视图 | 三事实先独立聚合再关联，防止一对多放大；准确NULL/DATE/分母 |
+| [analytics/spark_job.py](analytics/spark_job.py) | `run_job` | 固定输入/任务/版本，DWD/ADS与质量、谱系及完成目录 |
+| [analytics/verify_s04.py](analytics/verify_s04.py) | 独立验证入口 | 冻结答案、Python基线、规模与故障验证，不参与被测聚合 |
+| [backend/app/services/analytics_artifacts.py](backend/app/services/analytics_artifacts.py) | `load_publication` | 只从受控任务清单解析完成产物，核对ADS、归属、版本与质量 |
+| [backend/app/services/analytics.py](backend/app/services/analytics.py) | `publish / get_batch` | 发布校验、完成重放与只读本人详情分开 |
+| [backend/app/repositories/analytics.py](backend/app/repositories/analytics.py) | `reserve / lock / replace_unpublished_daily` | 唯一身份、RR快照边界、批次行锁、失败回滚和完成保护 |
+| [backend/app/api/v1/analytics.py](backend/app/api/v1/analytics.py) | 两个GET | 复用认证与DTO，不接受客户端owner或服务器路径 |
+| [frontend/src/components/WorkflowNodeResultContent.vue](frontend/src/components/WorkflowNodeResultContent.vue) | 节点内容组件 | 当前工作流需求/选型/架构/教学结果的结构化展示 |
+
 ## 核心调用链
 
 ### 1. 从画布到 AI 结果
@@ -325,7 +434,7 @@ sequenceDiagram
 
 ## 数据模型与 ER 图
 
-按五个业务域拆成六张图，社区部分分为互动与治理两张；合计覆盖当前34张表。以下图直接展示，不需要展开折叠区。
+按业务域拆成七张图，社区部分分为互动与治理两张，另列离线分析；合计覆盖当前36张表。以下图直接展示，不需要展开折叠区。
 
 `PK` 为主键，`FK` 为外键，`UK` 为单列唯一约束，`nullable` 表示可空。字段类型按模型语义简化，图中只保留关键字段与主要关联；完整复合外键、唯一约束和审计字段以 [Models](backend/app/models/)、[schema.sql](backend/schema.sql) 和 [增量迁移](backend/migrations/) 为准。
 
@@ -754,13 +863,85 @@ erDiagram
 
 主要模型：[backend/app/models/community.py](backend/app/models/community.py)。
 
+### 7. 离线分析批次与日汇总
+
+```mermaid
+erDiagram
+    USERS {
+        bigint id PK
+        string username UK
+    }
+    ANALYTICS_BATCHES {
+        char batch_id PK
+        bigint owner_user_id FK
+        date period_start
+        date period_end
+        datetime source_cutoff
+        string metric_version
+        string rule_version
+        string state
+        string dataset_kind
+        string artifact_ref
+        json input_counts
+        json quality
+        json topic_summary
+        datetime published_at "nullable"
+    }
+    ANALYTICS_DAILY_METRICS {
+        char batch_id PK, FK
+        date metric_date PK
+        bigint records
+        bigint known_minutes
+        bigint missing_duration_count
+        bigint task_total
+        bigint completed
+        bigint cancelled
+        bigint cohort_count
+        bigint revised_count
+        bigint confirmed_count
+    }
+    USERS ||..o{ ANALYTICS_BATCHES : owner_user_id
+    ANALYTICS_BATCHES ||..o{ ANALYTICS_DAILY_METRICS : batch_id
+```
+
+批次头保存快照/job来源、规则与质量，日行经batch外键继承归属；空completed批次允许0日行。复合唯一身份为 `(owner_user_id, artifact_ref, metric_version, rule_version)`，日行按 `(batch_id, metric_date)` 唯一。只有短事务成功后state=completed的结果可读。
+
+主要模型：[backend/app/models/analytics.py](backend/app/models/analytics.py)；发布规则：[S05说明](开发相关文档/阶段报告/AI大数据改造/V2/S05-发布与接口契约.md)。
+
 ## 验证与进展
+
+### 本轮 GitHub 提交前复核（2026-10-20）
+
+| 当前检查 | 结果/口径 |
+| --- | --- |
+| 后端 `unittest discover` | **296项通过**，使用已有backend/.venv；Fake仅用于工程测试 |
+| 前端 `pnpm build` | 类型检查与生产构建通过；保留Analytics既有572.35 kB分包提示 |
+| 工作流结果交互 | **17项Mock浏览器回归通过**，覆盖运行/节点隔离、刷新记忆、键盘、空态、零/缺失、转义及窄屏 |
+| 真实Spark与发布 | 引用S04真实运行及S05真实MySQL/API/双连接证据；提交前不重复写库或运行模型 |
+
+完整本轮命令、渲染与推送状态见 [本次交付报告](开发相关文档/阶段报告/20261020-GitHub同步与README进度更新报告.md)。
+
+### V2 主线进度
+
+| 阶段 | 状态与成果 | 证据 |
+| --- | --- | --- |
+| S00 现状与数据基线 | 已完成：选择已有业务主线，明确来源与缺口 | [报告](开发相关文档/阶段报告/AI大数据改造/V2/S00-完成报告.md) |
+| S01 数据/指标/评价契约 | 已完成：V2-S01-r2、A/B分段设计获批、冻结答案及评分方法 | [契约](开发相关文档/开发规划/AI实践与大数据实施契约.md) |
+| S02 现有业务最小闭环 | 已完成：隔离真实API的V1退回/V2通过与关联学习记录 | [报告](开发相关文档/阶段报告/AI大数据改造/V2/S02-完成报告.md) |
+| S03 一致性快照与样本 | 已完成：固定ODS、A/B修改删除、独立答案、1万档 | [报告](开发相关文档/阶段报告/AI大数据改造/V2/S03-完成报告.md) |
+| S04 PySpark指标与专题 | 已完成：真实Spark、DWD/ADS、质量对账、独立基线与故障恢复 | [报告](开发相关文档/阶段报告/AI大数据改造/V2/S04-完成报告.md) |
+| S05 批次发布与只读API | 已完成：正式主/边界批次、本人权限、重放并发与失败恢复 | [报告](开发相关文档/阶段报告/AI大数据改造/V2/S05-完成报告.md) |
+| S06 页面与分析验收 | 待执行：同批图表、解释、初步规模复验与浏览器证据 | [交接输入](开发相关文档/阶段报告/AI大数据改造/V2/S05-S06交接索引.json) |
+| S07–S10 最小AI联合主线 | 待执行：固定CSV模板、会话/尝试、反馈与事件分析、建议一次应用 | [V2总纲](开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/00-执行总纲与使用顺序.docx) |
+| S11 / S12–S13 | S11默认选做；S12–S13保留实验复验与论文/答辩时间 | [阶段提示词](开发相关文档/AI提示词/README.md) |
+
+### 历史业务整改验收（2026-10-16）
 
 2026-10-16 完成 CR1–CR9 严格审查整改，覆盖工作流并发、Context、账号隔离、请求竞态、学习计划、可信来源、校园身份与教学分页。
 
 | 已完成的验证 | 结果 |
 | --- | --- |
-| 后端 `unittest` | **271项通过** |
+| 当时后端 `unittest` | **271项通过**，历史记录，不是本轮数量 |
 | 前端类型检查与生产构建 | 通过；保留 Analytics 分包体积提示 |
 | 隔离 MySQL 主线与专项并发/事务验收 | 通过，测试数据清理后为0行 |
 | 真实 API 浏览器主线 | **150次 API 请求，0个页面脚本错误** |
@@ -772,6 +953,8 @@ erDiagram
 ```powershell
 # 项目根目录：后端测试
 cd backend
+# Windows未安装IANA数据时，可仅为当前进程使用已存在的WSL时区目录：
+# $env:PYTHONTZPATH = '\\wsl.localhost\Ubuntu-24.04\usr\share\zoneinfo'
 .\.venv\Scripts\python.exe -B -m unittest discover -s tests -q
 
 # 前端类型与构建
@@ -784,7 +967,8 @@ pnpm build
 
 - **AI 质量与成本**：统一额度、预算、并发与质量评测，见 [P22检查点](开发相关文档/阶段报告/20260911-P22-现状检查与实施待确认.md)。
 - **上线与真实教学试点**：生产配置、备份恢复、隐私流程及真实师生课程周期验证，见 [P23检查点](开发相关文档/阶段报告/20260911-P23-现状检查与实施待确认.md) 与 [P24试点方案](开发相关文档/AI提示词/P24_真实班级试点.md)。
-- **规划中的扩展**：[AI引导式分步实践](开发相关文档/开发规划/20261014-AI引导式工作流改进方案与验收目标.md) 与 [Spark离线分析](开发相关文档/开发规划/20261015-ScholarHub大数据毕业设计后续计划与实施方法.md)，目前处于方案阶段。
+- **当前下一步 S06**：消费S05完成批次，接入个人离线图表并验证专题解释及初步实验；不改实时统计、不依赖新的AI会话。
+- **随后 S07–S10**：落实[确认版实施契约](开发相关文档/开发规划/AI实践与大数据实施契约.md)的最小AI实践；[较早工作流方案](开发相关文档/开发规划/20261014-AI引导式工作流改进方案与验收目标.md)仅作背景，不按旧编号重复建设。
 
 当前适合本地演示与继续开发。AI 评审为静态建议，平台不执行学生代码；统一生产保障和真实班级试点仍待完成。
 
@@ -796,6 +980,8 @@ pnpm build
 | 开发资料与过程记录 | [文档索引](开发相关文档/README.md)、[操作日志](开发相关文档/开发日志/开发操作日志.md) |
 | 功能交付与验证证据 | [阶段报告](开发相关文档/阶段报告/)、[测试证据](开发相关文档/测试证据/) |
 | AI 辅助开发的阶段设计 | [AI提示词索引](开发相关文档/AI提示词/README.md) |
+| 大数据源码与复跑 | [analytics入口](analytics/README.md)、[Spark作业](analytics/S04.md)、[发布与API](开发相关文档/阶段报告/AI大数据改造/V2/S05-发布与接口契约.md) |
+| 当前毕设范围与进度 | [V2确认契约](开发相关文档/开发规划/AI实践与大数据实施契约.md)、[最新进度](开发相关文档/知识网络/19-开发进度与后续路线.md) |
 | 学习材料与源码导览 | [学习材料](开发相关文档/学习材料/)、[知识地图](开发相关文档/知识网络/00-ScholarHub知识地图.md) |
 | 演示与答辩 | [原型逐页演示指南](开发相关文档/答辩材料/ScholarHub原型逐页演示指南.md) |
 
@@ -803,6 +989,7 @@ pnpm build
 ScholarHub/
 ├── frontend/           Vue 界面、API、Store 与工作流画布
 ├── backend/            FastAPI、数据模型、Agent 与执行引擎
+├── analytics/          一致性快照、样本、PySpark清洗、Spark SQL与独立核对
 ├── assets/readme/      仓库首页封面与当前页面截图
 ├── 开发相关文档/       规划、学习材料、日志、验收与答辩资料
 └── README.md           项目入口

@@ -1,0 +1,24 @@
+{
+  "case_id": "D07",
+  "name": "全部为空但批次有所有者",
+  "kind": "data",
+  "input_changes": [
+    {
+      "op": "clear_all"
+    }
+  ],
+  "expected_status": "validated",
+  "expected_assertions": {
+    "records.valid_unique_rows": 0,
+    "records.known_minutes": 0,
+    "records.known_duration_count": 0,
+    "records.missing_duration_count": 0,
+    "records.active_days": 0,
+    "tasks.total": 0,
+    "tasks.completion_rate.percent": null,
+    "topic.cohort_count": 0,
+    "topic.confirmation_rate.percent": null,
+    "topic.first_review_wait_mean_minutes": null,
+    "owner_user_id": 1001
+  }
+}

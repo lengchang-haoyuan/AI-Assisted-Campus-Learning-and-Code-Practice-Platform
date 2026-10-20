@@ -1,0 +1,12 @@
+{
+  "job_id": "v1-boundary",
+  "snapshot_id": "s03-owner4-boundary",
+  "state": "validated",
+  "spark_python_all_subjects_equal": true,
+  "frozen_assertions_passed": false,
+  "subjects": 1,
+  "spark_seconds": 11.657301250000046,
+  "python_compute_seconds": 0.00021562900008120778,
+  "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+  "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-boundary"
+}

@@ -1,0 +1,88 @@
+test_199_of_200_keeps_fraction (tests.test_analytics.AnalyticsContractTests.test_199_of_200_keeps_fraction) ... ok
+test_actual_approved_payload (tests.test_analytics.AnalyticsContractTests.test_actual_approved_payload) ... ok
+test_bad_ratio_rejected (tests.test_analytics.AnalyticsContractTests.test_bad_ratio_rejected) ... ok
+test_cancelled_stays_in_denominator (tests.test_analytics.AnalyticsContractTests.test_cancelled_stays_in_denominator) ... ok
+test_daily_cannot_disagree_with_ADS (tests.test_analytics.AnalyticsContractTests.test_daily_cannot_disagree_with_ADS) ... ok
+test_distinct_empty_list_meanings (tests.test_analytics.AnalyticsContractTests.test_distinct_empty_list_meanings) ... ok
+test_duplicate_day_rejected (tests.test_analytics.AnalyticsContractTests.test_duplicate_day_rejected) ... ok
+test_filters_limit_dates_and_owner_input (tests.test_analytics.AnalyticsContractTests.test_filters_limit_dates_and_owner_input) ... ok
+test_quality_failure_rejected (tests.test_analytics.AnalyticsContractTests.test_quality_failure_rejected) ... ok
+test_synthetic_and_unknown_rules_rejected (tests.test_analytics.AnalyticsContractTests.test_synthetic_and_unknown_rules_rejected) ... ok
+test_unknown_duration_not_zeroed (tests.test_analytics.AnalyticsContractTests.test_unknown_duration_not_zeroed) ... ok
+test_unknown_job_or_path_rejected (tests.test_analytics.AnalyticsContractTests.test_unknown_job_or_path_rejected) ... ok
+test_core_delete_semantics (tests.test_database_schema.DatabaseSchemaTests.test_core_delete_semantics) ... ok
+test_metadata_discovers_all_tables (tests.test_database_schema.DatabaseSchemaTests.test_metadata_discovers_all_tables) ... ok
+test_mysql_ddl_compiles_for_every_table (tests.test_database_schema.DatabaseSchemaTests.test_mysql_ddl_compiles_for_every_table) ... ok
+test_named_constraints_and_indexes_exist_in_schema (tests.test_database_schema.DatabaseSchemaTests.test_named_constraints_and_indexes_exist_in_schema) ... ok
+test_schema_tables_and_columns_match_metadata (tests.test_database_schema.DatabaseSchemaTests.test_schema_tables_and_columns_match_metadata) ... ok
+test_sensitive_fields_are_not_modeled (tests.test_database_schema.DatabaseSchemaTests.test_sensitive_fields_are_not_modeled) ... ok
+test_utc_datetime_rejects_naive_values (tests.test_database_schema.DatabaseSchemaTests.test_utc_datetime_rejects_naive_values) ... ok
+test_workflow_edges_require_nodes_from_same_workflow (tests.test_database_schema.DatabaseSchemaTests.test_workflow_edges_require_nodes_from_same_workflow) ... ok
+test_query_bounds_are_validated_before_service_call (tests.test_statistics.StatisticsAPITests.test_query_bounds_are_validated_before_service_call) ... {"timestamp":"2026-10-20T13:02:51.960140+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"cf58e234571843bd86f0ffe4906c3ee3","method":"GET","path":"/api/v1/statistics/trend","status_code":422,"duration_ms":45.547}
+ok
+test_statistics_routes_require_authentication (tests.test_statistics.StatisticsAPITests.test_statistics_routes_require_authentication) ... {"timestamp":"2026-10-20T13:02:52.001166+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"b21316ea57d843028b69654de1697123","method":"GET","path":"/api/v1/statistics/today","status_code":401,"duration_ms":38.658}
+{"timestamp":"2026-10-20T13:02:52.003167+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"c8cf5bf0f6c841f8b187ba0789dbea72","method":"GET","path":"/api/v1/statistics/trend","status_code":401,"duration_ms":1.153}
+{"timestamp":"2026-10-20T13:02:52.005672+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"d75b3cd0322249d5a96c6ab628cb2518","method":"GET","path":"/api/v1/statistics/projects","status_code":401,"duration_ms":1.688}
+{"timestamp":"2026-10-20T13:02:52.007677+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"1d05c966b60649e391c1d1b73d6bdbc5","method":"GET","path":"/api/v1/statistics/tech-stacks","status_code":401,"duration_ms":1.473}
+ok
+test_projects_and_technology_stacks_have_stable_empty_semantics (tests.test_statistics.StatisticsServiceTests.test_projects_and_technology_stacks_have_stable_empty_semantics) ... ok
+test_today_uses_local_day_bounds_and_sums_interactions (tests.test_statistics.StatisticsServiceTests.test_today_uses_local_day_bounds_and_sums_interactions) ... ok
+test_trend_fills_missing_days_and_uses_distinct_daily_counts (tests.test_statistics.StatisticsServiceTests.test_trend_fills_missing_days_and_uses_distinct_daily_counts) ... ok
+test_foreign_report_is_not_returned_when_owner_scoped_lookup_is_empty (tests.test_learning_reports.LearningReportAPITests.test_foreign_report_is_not_returned_when_owner_scoped_lookup_is_empty) ... {"timestamp":"2026-10-20T13:02:52.123802+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"f08d262a3f9b4eb2ae22f0fa9de9df2c","method":"GET","path":"/api/v1/learning-reports/7","status_code":404,"duration_ms":113.9}
+{"timestamp":"2026-10-20T13:02:52.125827+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"66f5d835edde40858f0eee9f99926073","method":"GET","path":"/api/v1/learning-reports","status_code":200,"duration_ms":1.572}
+ok
+test_routes_require_authentication_and_validate_period (tests.test_learning_reports.LearningReportAPITests.test_routes_require_authentication_and_validate_period) ... {"timestamp":"2026-10-20T13:02:52.202940+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"a469604bc84149c6a7789795459ce62d","method":"GET","path":"/api/v1/learning-reports","status_code":401,"duration_ms":75.738}
+{"timestamp":"2026-10-20T13:02:52.277049+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"73e8259236c844d2aaff414cc4f390ac","method":"POST","path":"/api/v1/learning-reports","status_code":422,"duration_ms":72.491}
+ok
+test_fake_provider_returns_schema_validated_report (tests.test_learning_reports.LearningReportAgentTests.test_fake_provider_returns_schema_validated_report) ... {"timestamp":"2026-10-20T13:02:52.279048+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_invalid_or_sensitive_model_output_is_rejected (tests.test_learning_reports.LearningReportAgentTests.test_invalid_or_sensitive_model_output_is_rejected) ... {"timestamp":"2026-10-20T13:02:52.281084+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-20T13:02:52.282049+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_cancellation_preserves_failed_state_and_reraises (tests.test_learning_reports.LearningReportGenerationTests.test_cancellation_preserves_failed_state_and_reraises) ... {"timestamp":"2026-10-20T13:02:52.303577+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"cancelled","latency_ms":0,"failure_category":"cancelled","attempt_count":1}
+ok
+test_correct_output_is_preserved (tests.test_learning_reports.LearningReportGenerationTests.test_correct_output_is_preserved) ... {"timestamp":"2026-10-20T13:02:52.306090+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_generate_list_and_detail_api_return_the_same_saved_facts (tests.test_learning_reports.LearningReportGenerationTests.test_generate_list_and_detail_api_return_the_same_saved_facts) ... {"timestamp":"2026-10-20T13:02:52.382155+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-20T13:02:52.383155+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"81e25d2f32f84cc7a27fa620963518a7","method":"POST","path":"/api/v1/learning-reports","status_code":201,"duration_ms":74.564}
+{"timestamp":"2026-10-20T13:02:52.385155+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"68bc2cae8d684adb86c919d43edf7a83","method":"GET","path":"/api/v1/learning-reports","status_code":200,"duration_ms":1.635}
+{"timestamp":"2026-10-20T13:02:52.387155+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"6ee9b0369da84a87865296c773c7a64a","method":"GET","path":"/api/v1/learning-reports/7","status_code":200,"duration_ms":1.637}
+ok
+test_generation_uses_original_source_snapshot_without_requery (tests.test_learning_reports.LearningReportGenerationTests.test_generation_uses_original_source_snapshot_without_requery) ... {"timestamp":"2026-10-20T13:02:52.390572+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_invalid_or_sensitive_output_stays_failed_and_can_be_retried (tests.test_learning_reports.LearningReportGenerationTests.test_invalid_or_sensitive_output_stays_failed_and_can_be_retried) ... {"timestamp":"2026-10-20T13:02:52.393578+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-20T13:02:52.395579+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-20T13:02:52.397577+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-20T13:02:52.399577+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-20T13:02:52.402579+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-20T13:02:52.403579+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-20T13:02:52.406577+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-20T13:02:52.408085+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_valid_but_wrong_facts_are_corrected_in_both_result_assignments (tests.test_learning_reports.LearningReportGenerationTests.test_valid_but_wrong_facts_are_corrected_in_both_result_assignments) ... {"timestamp":"2026-10-20T13:02:52.411091+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_zero_partial_zero_and_rate_boundaries_use_source_values (tests.test_learning_reports.LearningReportGenerationTests.test_zero_partial_zero_and_rate_boundaries_use_source_values) ... {"timestamp":"2026-10-20T13:02:52.414091+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-20T13:02:52.428110+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-20T13:02:52.431115+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-20T13:02:52.434123+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_provider_failure_is_persisted_and_returned_as_retryable_state (tests.test_learning_reports.LearningReportServiceTests.test_provider_failure_is_persisted_and_returned_as_retryable_state) ... {"timestamp":"2026-10-20T13:02:52.436122+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"failed","latency_ms":0,"failure_category":"network","attempt_count":1}
+ok
+test_report_lookup_is_current_user_scoped (tests.test_learning_reports.LearningReportServiceTests.test_report_lookup_is_current_user_scoped) ... ok
+test_invalid_registration_payload_returns_422 (tests.test_auth.AuthAPITests.test_invalid_registration_payload_returns_422) ... {"timestamp":"2026-10-20T13:02:52.453635+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"e4f08f446e7f49599e765994e57469f1","method":"POST","path":"/api/v1/auth/register","status_code":422,"duration_ms":16.038}
+ok
+test_missing_and_invalid_token_return_401_without_database (tests.test_auth.AuthAPITests.test_missing_and_invalid_token_return_401_without_database) ... {"timestamp":"2026-10-20T13:02:52.483993+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"dd9d9cdccf1046878a17a6ba4e7b6778","method":"GET","path":"/api/v1/users/me","status_code":401,"duration_ms":29.318}
+{"timestamp":"2026-10-20T13:02:52.486000+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"e831c3d4107d4292883524fe63b5f55b","method":"GET","path":"/api/v1/users/me","status_code":401,"duration_ms":1.064}
+ok
+test_duplicate_email_is_conflict (tests.test_auth.AuthServiceTests.test_duplicate_email_is_conflict) ... ok
+test_duplicate_registration_is_conflict (tests.test_auth.AuthServiceTests.test_duplicate_registration_is_conflict) ... ok
+test_inactive_user_is_forbidden (tests.test_auth.AuthServiceTests.test_inactive_user_is_forbidden) ... ok
+test_register_hashes_password (tests.test_auth.AuthServiceTests.test_register_hashes_password) ... ok
+test_unknown_user_and_wrong_password_share_error (tests.test_auth.AuthServiceTests.test_unknown_user_and_wrong_password_share_error) ... ok
+test_password_hash_and_jwt_round_trip (tests.test_auth.SecurityTests.test_password_hash_and_jwt_round_trip) ... ok
+test_short_jwt_secret_is_rejected (tests.test_auth.SecurityTests.test_short_jwt_secret_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 47 tests in 1.147s
+
+OK

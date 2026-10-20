@@ -1,0 +1,7 @@
+{
+  "job_id": "v1-D01",
+  "snapshot_id": "fixture-D01",
+  "status": "expected_rejection",
+  "reason": "duplicate_key_conflict",
+  "elapsed_seconds": 4.802361219999966
+}

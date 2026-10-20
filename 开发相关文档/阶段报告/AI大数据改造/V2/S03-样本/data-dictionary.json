@@ -1,0 +1,781 @@
+{
+  "schema_version": "scholarhub-source-1.0",
+  "tables": {
+    "projects": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "owner_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "users.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(20)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "not_started",
+          "in_progress",
+          "completed",
+          "published",
+          "archived"
+        ]
+      },
+      {
+        "field": "completed_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "created_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "updated_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ],
+    "daily_tasks": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "user_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "users.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "plan_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "learning_plans.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "project_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "projects.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "pending",
+          "in_progress",
+          "completed",
+          "cancelled"
+        ]
+      },
+      {
+        "field": "scheduled_date",
+        "sql_type": "DATE",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "DateType",
+        "normalization": "YYYY-MM-DD no timezone conversion"
+      },
+      {
+        "field": "completed_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "created_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "updated_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ],
+    "learning_records": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "user_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "users.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "project_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "projects.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "course_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "courses.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "task_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "daily_tasks.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "record_type",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "study",
+          "project",
+          "workflow",
+          "ai",
+          "course",
+          "task"
+        ]
+      },
+      {
+        "field": "duration_minutes",
+        "sql_type": "INTEGER",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "occurred_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "created_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ],
+    "teaching_classes": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "active",
+          "archived"
+        ]
+      }
+    ],
+    "teaching_assignments": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "class_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "teaching_classes.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "due_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "draft",
+          "published",
+          "closed",
+          "archived"
+        ]
+      },
+      {
+        "field": "published_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "closed_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "archived_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "created_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "updated_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ],
+    "class_memberships": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "class_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "teaching_classes.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "campus_membership_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "campus_memberships.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "member_role",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "teacher",
+          "student"
+        ]
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "active",
+          "left",
+          "removed"
+        ]
+      },
+      {
+        "field": "joined_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "left_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ],
+    "campus_memberships": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "user_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "users.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "role",
+        "sql_type": "VARCHAR(32)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "student",
+          "teacher",
+          "administrator"
+        ]
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(32)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "active",
+          "suspended",
+          "revoked"
+        ]
+      }
+    ],
+    "submissions": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [
+          "submission_versions.submission_id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "class_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "class_memberships.class_id",
+          "teaching_assignments.class_id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "assignment_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "teaching_assignments.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "student_membership_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "class_memberships.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "assignment_due_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "latest_version_number",
+        "sql_type": "INTEGER",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "submission_versions.version_number"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "revision",
+        "sql_type": "INTEGER",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "created_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "updated_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ],
+    "submission_versions": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "submission_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "submissions.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "version_number",
+        "sql_type": "INTEGER",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "source_project_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "projects.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "status",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "StringType",
+        "normalization": "current enum values",
+        "enum_values": [
+          "submitted",
+          "returned",
+          "accepted"
+        ]
+      },
+      {
+        "field": "submitted_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "reviewed_at",
+        "sql_type": "DATETIME",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      },
+      {
+        "field": "revision",
+        "sql_type": "INTEGER",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      }
+    ],
+    "feedback": [
+      {
+        "field": "id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": true,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "submission_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "submission_versions.submission_id",
+          "submissions.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "version_number",
+        "sql_type": "INTEGER",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "submission_versions.version_number"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "class_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "class_memberships.class_id",
+          "submissions.class_id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "teacher_membership_id",
+        "sql_type": "BIGINT",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [
+          "class_memberships.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "decision",
+        "sql_type": "VARCHAR(16)",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal",
+        "enum_values": [
+          "accept",
+          "return"
+        ]
+      },
+      {
+        "field": "learning_record_id",
+        "sql_type": "BIGINT",
+        "nullable": true,
+        "primary_key": false,
+        "foreign_keys": [
+          "learning_records.id"
+        ],
+        "spark_type": "LongType",
+        "normalization": "integer 0..2^63-1; IDs >=1; overflow fatal"
+      },
+      {
+        "field": "created_at",
+        "sql_type": "DATETIME",
+        "nullable": false,
+        "primary_key": false,
+        "foreign_keys": [],
+        "spark_type": "TimestampType UTC",
+        "normalization": "ISO8601 with Z"
+      }
+    ]
+  },
+  "source_claim_projection": {
+    "learning_record_id": "uint64",
+    "source_claim": "nullable string max32",
+    "submission_id_claim": "nullable uint64",
+    "version_number_claim": "nullable int32",
+    "purpose": "Only historical claim quality; never proves teaching origin"
+  }
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "owner_user_id": 1001,
+    "snapshot_id": "fixture-D03",
+    "rule_id": "revision_observed",
+    "condition": "revised_count>0",
+    "triggered": false,
+    "numerator": 0,
+    "denominator": 1,
+    "dates": [
+      "2026-10-02"
+    ],
+    "evidence_ref": "dwd/cohort_facts",
+    "interpretation": "群组存在修订，不能推断修订改善能力"
+  },
+  {
+    "owner_user_id": 1001,
+    "snapshot_id": "fixture-D03",
+    "rule_id": "first_pass_counterexample",
+    "condition": "first_pass_confirmed_count>0",
+    "triggered": false,
+    "numerator": 0,
+    "denominator": 1,
+    "dates": [
+      "2026-10-02"
+    ],
+    "evidence_ref": "dwd/cohort_facts",
+    "interpretation": "存在首次通过，修订不是确认的必经步骤"
+  },
+  {
+    "owner_user_id": 1001,
+    "snapshot_id": "fixture-D03",
+    "rule_id": "pending_review",
+    "condition": "pending_latest_count>0",
+    "triggered": true,
+    "numerator": 1,
+    "denominator": 1,
+    "dates": [
+      "2026-10-02"
+    ],
+    "evidence_ref": "dwd/cohort_facts",
+    "interpretation": "最新版本仍待评，等待不补零"
+  },
+  {
+    "owner_user_id": 1001,
+    "snapshot_id": "fixture-D03",
+    "rule_id": "unknown_duration",
+    "condition": "missing_duration_count>0",
+    "triggered": true,
+    "numerator": 1,
+    "denominator": 2,
+    "dates": [
+      "2026-10-02"
+    ],
+    "evidence_ref": "dwd/record_facts",
+    "interpretation": "部分记录时长未知，已知分钟仅反映已记录覆盖"
+  },
+  {
+    "owner_user_id": 1001,
+    "snapshot_id": "fixture-D03",
+    "rule_id": "no_tasks",
+    "condition": "task_total=0",
+    "triggered": false,
+    "numerator": 0,
+    "denominator": 1,
+    "dates": [
+      "2026-10-02"
+    ],
+    "evidence_ref": "dwd/task_facts",
+    "interpretation": "空任务集合没有完成率样本"
+  }
+]

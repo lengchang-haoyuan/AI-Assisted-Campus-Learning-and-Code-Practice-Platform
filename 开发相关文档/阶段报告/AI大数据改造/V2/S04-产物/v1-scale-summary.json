@@ -1,0 +1,39 @@
+{
+  "group": "scale",
+  "results": [
+    {
+      "job_id": "v1-scale",
+      "snapshot_id": "synthetic-10000-seed-20261020-v1",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": false,
+      "subjects": 100,
+      "spark_seconds": 25.90262537400008,
+      "python_compute_seconds": 0.6590930699999262,
+      "python_input_read_seconds": 0.07811179199995877,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-scale"
+    }
+  ],
+  "spark_startup_seconds": 3.118939079000029,
+  "whole_process_seconds": 30.073365394000007,
+  "memory": {
+    "sample_seconds": 1,
+    "samples": 30,
+    "peak_process_tree_rss_bytes": 3105447936,
+    "per_process_peak_bytes": {
+      "13011:python": 69955584,
+      "13013:java": 3035492352
+    },
+    "method": "/proc statm; Python driver + descendant JVM/workers; sampled peak, not exact maximum"
+  },
+  "command": [
+    "/mnt/c/Users/Administrator/Desktop/毕业设计/ScholarHub/analytics/verify_s04.py",
+    "--output",
+    "/home/administrator/scholarhub-analytics/s04-20261020",
+    "--group",
+    "scale",
+    "--tag",
+    "v1"
+  ]
+}

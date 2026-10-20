@@ -1,0 +1,50 @@
+[
+  {
+    "table_name": "daily_tasks",
+    "source_key": "13",
+    "source_row": 1,
+    "reason": "invalid_time"
+  },
+  {
+    "table_name": "learning_records",
+    "source_key": "101",
+    "source_row": 1,
+    "reason": "integer_out_of_range"
+  },
+  {
+    "table_name": "learning_records",
+    "source_key": "102",
+    "source_row": 2,
+    "reason": "invalid_json_type"
+  },
+  {
+    "table_name": "learning_records",
+    "source_key": "103",
+    "source_row": 3,
+    "reason": "invalid_time"
+  },
+  {
+    "table_name": "learning_records",
+    "source_key": "104",
+    "source_row": 4,
+    "reason": "unknown_enum"
+  },
+  {
+    "table_name": "learning_records",
+    "source_key": null,
+    "source_row": 5,
+    "reason": "integer_out_of_range"
+  },
+  {
+    "table_name": "learning_records",
+    "source_key": null,
+    "source_row": 6,
+    "reason": "required_key_missing"
+  },
+  {
+    "table_name": "ai_requests_aux",
+    "source_key": "1",
+    "source_row": 1,
+    "reason": "integer_out_of_range"
+  }
+]

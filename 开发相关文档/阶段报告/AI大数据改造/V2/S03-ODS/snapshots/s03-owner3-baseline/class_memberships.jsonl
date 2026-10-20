@@ -1,0 +1,2 @@
+{"id": 1, "class_id": 1, "campus_membership_id": 2, "member_role": "teacher", "status": "active", "joined_at": "2026-10-20T07:05:39.420597Z", "left_at": null}
+{"id": 2, "class_id": 1, "campus_membership_id": 3, "member_role": "student", "status": "active", "joined_at": "2026-10-20T07:05:39.449646Z", "left_at": null}

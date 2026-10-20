@@ -1,0 +1,7 @@
+{
+  "job_id": "v1-D12",
+  "snapshot_id": "fixture-D12",
+  "status": "expected_rejection",
+  "reason": "dangling_relation",
+  "elapsed_seconds": 8.585698713999932
+}

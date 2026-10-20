@@ -1,0 +1,6 @@
+{
+  "status": "failed",
+  "error_type": "AssertionError",
+  "location": "verify_s02.py:72",
+  "detail": "fake_agent_succeeded: expected 'succeeded', got 'completed'"
+}

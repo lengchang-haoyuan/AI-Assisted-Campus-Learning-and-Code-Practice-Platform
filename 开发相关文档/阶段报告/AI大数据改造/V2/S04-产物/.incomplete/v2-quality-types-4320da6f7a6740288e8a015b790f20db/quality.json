@@ -1,0 +1,91 @@
+{
+  "tables": [
+    {
+      "table_name": "projects",
+      "raw_rows": 0,
+      "invalid_rows": 0,
+      "unique_rows": 0,
+      "exact_duplicates": 0
+    },
+    {
+      "table_name": "daily_tasks",
+      "raw_rows": 1,
+      "invalid_rows": 1,
+      "unique_rows": 0,
+      "exact_duplicates": 0
+    },
+    {
+      "table_name": "learning_records",
+      "raw_rows": 7,
+      "invalid_rows": 6,
+      "unique_rows": 1,
+      "exact_duplicates": 0
+    },
+    {
+      "table_name": "teaching_classes",
+      "raw_rows": 0,
+      "invalid_rows": 0,
+      "unique_rows": 0,
+      "exact_duplicates": 0
+    },
+    {
+      "table_name": "teaching_assignments",
+      "raw_rows": 0,
+      "invalid_rows": 0,
+      "unique_rows": 0,
+      "exact_duplicates": 0
+    },
+    {
+      "table_name": "class_memberships",
+      "raw_rows": 0,
+      "invalid_rows": 0,
+      "unique_rows": 0,
+      "exact_duplicates": 0
+    },
+    {
+      "table_name": "campus_memberships",
+      "raw_rows": 0,
+      "invalid_rows": 0,
+      "unique_rows": 0,
+      "exact_duplicates": 0
+    },
+    {
+      "table_name": "submissions",
+      "raw_rows": 0,
+      "invalid_rows": 0,
+      "unique_rows": 0,
+      "exact_duplicates": 0
+    },
+    {
+      "table_name": "submission_versions",
+      "raw_rows": 0,
+      "invalid_rows": 0,
+      "unique_rows": 0,
+      "exact_duplicates": 0
+    },
+    {
+      "table_name": "feedback",
+      "raw_rows": 0,
+      "invalid_rows": 0,
+      "unique_rows": 0,
+      "exact_duplicates": 0
+    },
+    {
+      "table_name": "source_claim_projection",
+      "raw_rows": 0,
+      "invalid_rows": 0,
+      "unique_rows": 0,
+      "exact_duplicates": 0
+    },
+    {
+      "table_name": "ai_requests_aux",
+      "raw_rows": 1,
+      "invalid_rows": 1,
+      "unique_rows": 0,
+      "exact_duplicates": 0
+    }
+  ],
+  "fatal_errors": 8,
+  "reconciled": true,
+  "historical_minutes_rule": "NULL unknown; zero valid; historical nonnegative integer, no API 1440 limit"
+}

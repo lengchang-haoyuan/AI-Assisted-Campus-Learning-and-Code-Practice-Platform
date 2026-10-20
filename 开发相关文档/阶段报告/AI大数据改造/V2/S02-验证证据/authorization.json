@@ -1,0 +1,12 @@
+{
+  "user_reply": "批准新建隔离库并保留来源样例（推荐）",
+  "target_host": "127.0.0.1",
+  "target_port": 3306,
+  "database": "scholarhub_l4_s02_20261020",
+  "max_fictional_accounts": 4,
+  "max_submission_heads": 3,
+  "max_tasks": 204,
+  "provider": "fake_only",
+  "retention": "保留成功来源供S03；只按本轮标记处理临时／失败对象；不清空旧库、不删库、不改业务服务配置",
+  "recorded_at": "2026-10-20T15:05:28+08:00"
+}

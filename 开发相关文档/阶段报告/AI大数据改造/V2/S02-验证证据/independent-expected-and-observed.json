@@ -1,0 +1,126 @@
+{
+  "dataset_kind": "controlled",
+  "owner_user_id": 3,
+  "source_cutoff": "2026-10-20T07:08:36.771864+00:00",
+  "period_start": "2026-10-19",
+  "period_end": "2026-10-20",
+  "known_minutes": 75,
+  "record_count": 4,
+  "known_duration_count": 2,
+  "missing_duration_count": 2,
+  "known_zero_count": 0,
+  "active_days": [
+    "2026-10-19",
+    "2026-10-20"
+  ],
+  "records": [
+    {
+      "id": 1,
+      "user_id": 3,
+      "duration_minutes": 30,
+      "occurred_at": "2026-10-19T15:30:00+00:00",
+      "task_id": null,
+      "project_id": 1,
+      "record_type": "project"
+    },
+    {
+      "id": 2,
+      "user_id": 3,
+      "duration_minutes": 45,
+      "occurred_at": "2026-10-19T16:30:00+00:00",
+      "task_id": null,
+      "project_id": 1,
+      "record_type": "project"
+    },
+    {
+      "id": 3,
+      "user_id": 3,
+      "duration_minutes": null,
+      "occurred_at": "2026-10-20T07:05:39.674175+00:00",
+      "task_id": null,
+      "project_id": null,
+      "record_type": "task"
+    },
+    {
+      "id": 4,
+      "user_id": 3,
+      "duration_minutes": null,
+      "occurred_at": "2026-10-20T07:05:39.750254+00:00",
+      "task_id": null,
+      "project_id": null,
+      "record_type": "task"
+    }
+  ],
+  "trusted_teaching_records": [
+    {
+      "feedback_id": 2,
+      "submission_id": 1,
+      "version_number": 2,
+      "learning_record_id": 3,
+      "user_id": 3,
+      "teacher_membership_id": 1,
+      "class_id": 1
+    },
+    {
+      "feedback_id": 3,
+      "submission_id": 2,
+      "version_number": 1,
+      "learning_record_id": 4,
+      "user_id": 3,
+      "teacher_membership_id": 1,
+      "class_id": 1
+    }
+  ],
+  "primary_tasks": {
+    "completed": 2,
+    "total": 4,
+    "cancelled": 1,
+    "overdue_unfinished": 1,
+    "percent": "50.000000"
+  },
+  "cohort": {
+    "total": 3,
+    "revised": 1,
+    "confirmed": 2,
+    "first_pass": 1,
+    "revised_confirmed": 1,
+    "pending": 1,
+    "revised_percent": "33.333333",
+    "confirmation_percent": "66.666667",
+    "first_feedback_coverage": "2/3",
+    "first_feedback_waits": [
+      {
+        "submission_id": 1,
+        "submitted_at": "2026-10-20T07:05:39.518425+00:00",
+        "feedback_at": "2026-10-20T07:05:39.587410+00:00",
+        "seconds": "0.068985",
+        "minutes": "0.00114975"
+      },
+      {
+        "submission_id": 2,
+        "submitted_at": "2026-10-20T07:05:39.735840+00:00",
+        "feedback_at": "2026-10-20T07:05:39.750254+00:00",
+        "seconds": "0.014414",
+        "minutes": "0.0002402333333333333333333333333"
+      }
+    ]
+  },
+  "boundary_other_owner": {
+    "user_id": 4,
+    "completed": 199,
+    "total": 200,
+    "percent": "99.500000",
+    "display_progress": 100,
+    "completion_rejected": true,
+    "terminal_plan_status": "cancelled"
+  },
+  "empty_tasks": {
+    "sample_count": 0,
+    "percent": null,
+    "plan_completion_rejected": true
+  },
+  "fake_ai_requests": 1,
+  "real_model_calls": 0,
+  "retained_for_S03": true,
+  "interpretation": "真实API产生的受控样例，不是自然长期用户数据；不是代码快照、平台执行或自动判题。S02观测截止非S03一致性快照批次。"
+}

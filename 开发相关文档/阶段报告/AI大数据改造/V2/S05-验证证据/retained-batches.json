@@ -1,0 +1,56 @@
+[
+  {
+    "batch_id": "16944674-269f-4aa1-8ec1-1f207e218739",
+    "state": "completed",
+    "owner_user_id": 3,
+    "artifact_ref": "s03-owner3-restored/s05-concurrent-fixture"
+  },
+  {
+    "batch_id": "246f4714-1f47-4150-92d1-40c315397591",
+    "state": "completed",
+    "owner_user_id": 3,
+    "artifact_ref": "s03-owner3-restored/s05-transaction-fixture-v2"
+  },
+  {
+    "batch_id": "297855ea-edfd-442e-9dad-2877abe3a884",
+    "state": "completed",
+    "owner_user_id": 3,
+    "artifact_ref": "s03-owner3-restored/s05-transaction-fixture"
+  },
+  {
+    "batch_id": "45c55b05-ff63-4cc6-b6ca-734146054710",
+    "state": "completed",
+    "owner_user_id": 3,
+    "artifact_ref": "s05-permission-empty/s05-empty-permission-fixture"
+  },
+  {
+    "batch_id": "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+    "state": "completed",
+    "owner_user_id": 3,
+    "artifact_ref": "s03-owner3-restored/v2-controlled"
+  },
+  {
+    "batch_id": "8775c62f-ce8b-4068-92c8-425bc225c0dc",
+    "state": "completed",
+    "owner_user_id": 3,
+    "artifact_ref": "s03-owner3-restored/s05-concurrent-fixture-v2"
+  },
+  {
+    "batch_id": "97db22ac-38e6-432c-ac5c-e49d52a0c249",
+    "state": "failed",
+    "owner_user_id": 3,
+    "artifact_ref": "s03-owner3-restored/s05-validation-fixture"
+  },
+  {
+    "batch_id": "989b5df8-b382-43bc-91de-5bf0a09cd2bf",
+    "state": "prepared",
+    "owner_user_id": 3,
+    "artifact_ref": "s03-owner3-restored/s05-prepared-fixture"
+  },
+  {
+    "batch_id": "b9378c01-70b2-4456-9d44-b579617375d1",
+    "state": "completed",
+    "owner_user_id": 4,
+    "artifact_ref": "s03-owner4-boundary/v1-boundary"
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "case_id": "D03",
+  "name": "单业务日、DATE不二次换算",
+  "kind": "data",
+  "input_changes": [
+    {
+      "op": "manifest",
+      "values": {
+        "period_start": "2026-10-02",
+        "period_end": "2026-10-02"
+      }
+    }
+  ],
+  "expected_status": "validated",
+  "expected_assertions": {
+    "records.valid_unique_rows": 2,
+    "records.known_minutes": 45,
+    "records.active_days": 1,
+    "records.missing_duration_count": 1,
+    "records.trusted_teaching_count": 1,
+    "tasks.total": 1,
+    "tasks.completed": 1,
+    "topic.cohort_count": 1,
+    "topic.confirmed_count": 0,
+    "topic.revised_count": 0
+  }
+}

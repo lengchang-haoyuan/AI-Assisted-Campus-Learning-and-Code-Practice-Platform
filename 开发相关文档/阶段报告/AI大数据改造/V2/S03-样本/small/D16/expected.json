@@ -1,0 +1,34 @@
+{
+  "case_id": "D16",
+  "name": "教学学习记录删除不撤销教师确认",
+  "kind": "data",
+  "input_changes": [
+    {
+      "op": "delete",
+      "table": "learning_records",
+      "match": {
+        "id": 3
+      }
+    },
+    {
+      "op": "set",
+      "table": "feedback",
+      "match": {
+        "id": 802
+      },
+      "values": {
+        "learning_record_id": null
+      }
+    }
+  ],
+  "expected_status": "validated",
+  "expected_assertions": {
+    "records.valid_unique_rows": 4,
+    "records.known_minutes": 75,
+    "records.missing_duration_count": 1,
+    "records.trusted_teaching_count": 1,
+    "topic.confirmed_count": 2,
+    "topic.missing_teaching_record_links": 1,
+    "new_batch_required": true
+  }
+}

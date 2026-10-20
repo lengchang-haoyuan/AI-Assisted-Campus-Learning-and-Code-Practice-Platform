@@ -1,0 +1,944 @@
+[
+  {
+    "check": "migration_tables",
+    "actual": 36,
+    "expected": 36,
+    "passed": true
+  },
+  {
+    "check": "batch_id_columns_CHAR",
+    "actual": [
+      "CHAR(36)",
+      "CHAR(36)"
+    ],
+    "expected": [
+      "CHAR(36)",
+      "CHAR(36)"
+    ],
+    "passed": true
+  },
+  {
+    "check": "same_identity_replay",
+    "actual": [
+      "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+      true
+    ],
+    "expected": [
+      "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+      true
+    ],
+    "passed": true
+  },
+  {
+    "check": "completed_different_content_conflict",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "check": "completed_header_immutable",
+    "actual": {
+      "batch_id": "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+      "owner_user_id": 3,
+      "period_start": "2026-10-19",
+      "period_end": "2026-10-20",
+      "business_timezone": "Asia/Shanghai",
+      "source_cutoff": "2026-10-20T07:34:07.134833+00:00",
+      "schema_version": "scholarhub-source-1.0",
+      "metric_version": "learning-process-1.0",
+      "rule_version": "quality-1.0",
+      "dataset_kind": "controlled",
+      "state": "completed",
+      "input_counts": {
+        "job_id": "v2-controlled",
+        "dataset_id": "s02-controlled-owner-3",
+        "snapshot_id": "s03-owner3-restored",
+        "source_counts": {
+          "feedback": 3,
+          "projects": 1,
+          "daily_tasks": 4,
+          "submissions": 3,
+          "ai_requests_aux": 1,
+          "learning_records": 4,
+          "teaching_classes": 1,
+          "class_memberships": 2,
+          "campus_memberships": 2,
+          "submission_versions": 4,
+          "teaching_assignments": 3,
+          "source_claim_projection": 2
+        },
+        "tasks_summary": {
+          "total": 4,
+          "cancelled": 1,
+          "completed": 2,
+          "completion_rate": {
+            "display": "50.0%",
+            "percent": "50.000000",
+            "numerator": 2,
+            "denominator": 4
+          },
+          "overdue_unfinished": 1
+        },
+        "records_summary": {
+          "raw_rows": 4,
+          "active_days": 2,
+          "known_minutes": 75,
+          "ordinary_count": 2,
+          "exact_duplicates": 0,
+          "known_zero_count": 0,
+          "valid_unique_rows": 4,
+          "known_duration_count": 2,
+          "missing_duration_count": 2,
+          "trusted_teaching_count": 2,
+          "unverified_claim_count": 0
+        }
+      },
+      "quality": {
+        "reconciled": true,
+        "fatal_errors": 0
+      },
+      "topic_summary": {
+        "cohort_count": 3,
+        "revised_rate": {
+          "display": "33.3%",
+          "percent": "33.333333",
+          "numerator": 1,
+          "denominator": 3
+        },
+        "revised_count": 1,
+        "confirmed_count": 2,
+        "confirmation_rate": {
+          "display": "66.7%",
+          "percent": "66.666667",
+          "numerator": 2,
+          "denominator": 3
+        },
+        "revision_attempts": 1,
+        "returned_ever_count": 1,
+        "first_review_covered": 2,
+        "pending_latest_count": 1,
+        "first_review_histogram": {
+          "[0,60)": 2,
+          "[60,240)": 0,
+          "[240,1440)": 0,
+          "[1440,+inf)": 0
+        },
+        "revised_confirmed_count": 1,
+        "revised_confirmation_rate": {
+          "display": "100.0%",
+          "percent": "100.000000",
+          "numerator": 1,
+          "denominator": 1
+        },
+        "first_pass_confirmed_count": 1,
+        "first_review_wait_sum_minutes": 0.0013899833333333334,
+        "missing_teaching_record_links": 0,
+        "first_review_wait_mean_minutes": "0.000695"
+      },
+      "artifact_ref": "s03-owner3-restored/v2-controlled",
+      "created_at": "2026-10-20T12:52:26.523007+00:00",
+      "published_at": "2026-10-20T12:52:26.536762+00:00"
+    },
+    "expected": {
+      "batch_id": "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+      "owner_user_id": 3,
+      "period_start": "2026-10-19",
+      "period_end": "2026-10-20",
+      "business_timezone": "Asia/Shanghai",
+      "source_cutoff": "2026-10-20T07:34:07.134833+00:00",
+      "schema_version": "scholarhub-source-1.0",
+      "metric_version": "learning-process-1.0",
+      "rule_version": "quality-1.0",
+      "dataset_kind": "controlled",
+      "state": "completed",
+      "input_counts": {
+        "job_id": "v2-controlled",
+        "dataset_id": "s02-controlled-owner-3",
+        "snapshot_id": "s03-owner3-restored",
+        "source_counts": {
+          "feedback": 3,
+          "projects": 1,
+          "daily_tasks": 4,
+          "submissions": 3,
+          "ai_requests_aux": 1,
+          "learning_records": 4,
+          "teaching_classes": 1,
+          "class_memberships": 2,
+          "campus_memberships": 2,
+          "submission_versions": 4,
+          "teaching_assignments": 3,
+          "source_claim_projection": 2
+        },
+        "tasks_summary": {
+          "total": 4,
+          "cancelled": 1,
+          "completed": 2,
+          "completion_rate": {
+            "display": "50.0%",
+            "percent": "50.000000",
+            "numerator": 2,
+            "denominator": 4
+          },
+          "overdue_unfinished": 1
+        },
+        "records_summary": {
+          "raw_rows": 4,
+          "active_days": 2,
+          "known_minutes": 75,
+          "ordinary_count": 2,
+          "exact_duplicates": 0,
+          "known_zero_count": 0,
+          "valid_unique_rows": 4,
+          "known_duration_count": 2,
+          "missing_duration_count": 2,
+          "trusted_teaching_count": 2,
+          "unverified_claim_count": 0
+        }
+      },
+      "quality": {
+        "reconciled": true,
+        "fatal_errors": 0
+      },
+      "topic_summary": {
+        "cohort_count": 3,
+        "revised_rate": {
+          "display": "33.3%",
+          "percent": "33.333333",
+          "numerator": 1,
+          "denominator": 3
+        },
+        "revised_count": 1,
+        "confirmed_count": 2,
+        "confirmation_rate": {
+          "display": "66.7%",
+          "percent": "66.666667",
+          "numerator": 2,
+          "denominator": 3
+        },
+        "revision_attempts": 1,
+        "returned_ever_count": 1,
+        "first_review_covered": 2,
+        "pending_latest_count": 1,
+        "first_review_histogram": {
+          "[0,60)": 2,
+          "[60,240)": 0,
+          "[240,1440)": 0,
+          "[1440,+inf)": 0
+        },
+        "revised_confirmed_count": 1,
+        "revised_confirmation_rate": {
+          "display": "100.0%",
+          "percent": "100.000000",
+          "numerator": 1,
+          "denominator": 1
+        },
+        "first_pass_confirmed_count": 1,
+        "first_review_wait_sum_minutes": 0.0013899833333333334,
+        "missing_teaching_record_links": 0,
+        "first_review_wait_mean_minutes": "0.000695"
+      },
+      "artifact_ref": "s03-owner3-restored/v2-controlled",
+      "created_at": "2026-10-20T12:52:26.523007+00:00",
+      "published_at": "2026-10-20T12:52:26.536762+00:00"
+    },
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "list_only_self",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "check": "prepared_hidden_in_list",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "API_hand_ADS_values",
+    "actual": [
+      75,
+      2,
+      "50.000000",
+      3,
+      1,
+      2
+    ],
+    "expected": [
+      75,
+      2,
+      "50.000000",
+      3,
+      1,
+      2
+    ],
+    "passed": true
+  },
+  {
+    "check": "API_daily_source_counts",
+    "actual": [
+      2,
+      2
+    ],
+    "expected": [
+      2,
+      2
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "API_exact_199_200",
+    "actual": "99.500000",
+    "expected": "99.500000",
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "empty_owner_NULL_and_rows",
+    "actual": [
+      [],
+      null,
+      null
+    ],
+    "expected": [
+      [],
+      null,
+      null
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "unmatched_window_empty",
+    "actual": [],
+    "expected": [],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "no_available_business_batch",
+    "actual": [],
+    "expected": [],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "page_beyond_results_empty",
+    "actual": [],
+    "expected": [],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "uncommitted_daily_not_visible",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "old_completed_read_during_fault",
+    "actual": 75,
+    "expected": 75,
+    "passed": true
+  },
+  {
+    "check": "interruption_observed",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "check": "failed_state",
+    "actual": "failed",
+    "expected": "failed",
+    "passed": true
+  },
+  {
+    "check": "failed_no_partial_daily",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "retry_same_failed_batch",
+    "actual": [
+      "246f4714-1f47-4150-92d1-40c315397591",
+      false
+    ],
+    "expected": [
+      "246f4714-1f47-4150-92d1-40c315397591",
+      false
+    ],
+    "passed": true
+  },
+  {
+    "check": "retry_exact_daily_count",
+    "actual": 2,
+    "expected": 2,
+    "passed": true
+  },
+  {
+    "check": "mismatched_totals_rejected",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "check": "validation_failed_state",
+    "actual": "failed",
+    "expected": "failed",
+    "passed": true
+  },
+  {
+    "check": "GET process/model/publish calls",
+    "actual": [
+      0,
+      0,
+      0
+    ],
+    "expected": [
+      0,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  {
+    "check": "two_distinct_mysql_connections",
+    "actual": 2,
+    "expected": 2,
+    "passed": true
+  },
+  {
+    "check": "concurrent_one_batch",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "check": "concurrent_one_create_one_replay",
+    "actual": [
+      false,
+      true
+    ],
+    "expected": [
+      false,
+      true
+    ],
+    "passed": true
+  },
+  {
+    "check": "concurrent_no_duplicate_daily",
+    "actual": 2,
+    "expected": 2,
+    "passed": true
+  },
+  {
+    "check": "original_source_counts_preserved",
+    "actual": {
+      "submissions": 3,
+      "submission_versions": 4,
+      "feedback": 3,
+      "notifications": 6,
+      "ai_requests": 1,
+      "ai_results": 1,
+      "campus_memberships": 4,
+      "campus_invitations": 3,
+      "password_resets": 0,
+      "account_audits": 7,
+      "comments": 0,
+      "likes": 0,
+      "favorites": 0,
+      "project_views": 0,
+      "community_publications": 0,
+      "community_publication_versions": 0,
+      "community_governance_actions": 0,
+      "community_governance_cases": 0,
+      "courses": 0,
+      "learning_plans": 3,
+      "daily_tasks": 204,
+      "learning_records": 4,
+      "learning_reports": 0,
+      "project_tags": 0,
+      "projects": 1,
+      "tags": 0,
+      "teaching_classes": 1,
+      "class_memberships": 2,
+      "teaching_assignments": 3,
+      "users": 4,
+      "workflows": 0,
+      "workflow_nodes": 0,
+      "workflow_edges": 0,
+      "workflow_runs": 0
+    },
+    "expected": {
+      "submissions": 3,
+      "submission_versions": 4,
+      "feedback": 3,
+      "notifications": 6,
+      "ai_requests": 1,
+      "ai_results": 1,
+      "campus_memberships": 4,
+      "campus_invitations": 3,
+      "password_resets": 0,
+      "account_audits": 7,
+      "comments": 0,
+      "likes": 0,
+      "favorites": 0,
+      "project_views": 0,
+      "community_publications": 0,
+      "community_publication_versions": 0,
+      "community_governance_actions": 0,
+      "community_governance_cases": 0,
+      "courses": 0,
+      "learning_plans": 3,
+      "daily_tasks": 204,
+      "learning_records": 4,
+      "learning_reports": 0,
+      "project_tags": 0,
+      "projects": 1,
+      "tags": 0,
+      "teaching_classes": 1,
+      "class_memberships": 2,
+      "teaching_assignments": 3,
+      "users": 4,
+      "workflows": 0,
+      "workflow_nodes": 0,
+      "workflow_edges": 0,
+      "workflow_runs": 0
+    },
+    "passed": true
+  },
+  {
+    "check": "GET_writes",
+    "actual": [],
+    "expected": [],
+    "passed": true
+  },
+  {
+    "check": "registry_reject_v1-scale",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "check": "registry_reject_v1-D07",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "check": "registry_reject_../v2-controlled",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "check": "unknown_rule_version_rejected",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  }
+]

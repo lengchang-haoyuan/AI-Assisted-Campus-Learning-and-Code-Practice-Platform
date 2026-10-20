@@ -1,0 +1,40 @@
+{
+  "case_id": "D10",
+  "name": "仅取消任务保留分母",
+  "kind": "data",
+  "input_changes": [
+    {
+      "op": "replace",
+      "table": "daily_tasks",
+      "rows": [
+        {
+          "id": 13,
+          "user_id": 1001,
+          "plan_id": null,
+          "project_id": 501,
+          "status": "cancelled",
+          "scheduled_date": "2026-10-03",
+          "completed_at": null,
+          "created_at": "2026-09-30T00:00:00Z",
+          "updated_at": "2026-10-03T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "op": "set",
+      "table": "learning_records",
+      "match": {},
+      "values": {
+        "task_id": null
+      }
+    }
+  ],
+  "expected_status": "validated",
+  "expected_assertions": {
+    "tasks.total": 1,
+    "tasks.completed": 0,
+    "tasks.cancelled": 1,
+    "tasks.overdue_unfinished": 0,
+    "tasks.completion_rate.percent": "0.000000"
+  }
+}

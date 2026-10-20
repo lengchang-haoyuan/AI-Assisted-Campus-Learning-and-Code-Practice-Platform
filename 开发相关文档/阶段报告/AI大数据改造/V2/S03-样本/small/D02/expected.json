@@ -1,0 +1,22 @@
+{
+  "case_id": "D02",
+  "name": "缺失主键",
+  "kind": "data",
+  "input_changes": [
+    {
+      "op": "set",
+      "table": "learning_records",
+      "match": {
+        "id": 5
+      },
+      "values": {
+        "id": null
+      }
+    }
+  ],
+  "expected_status": "failed",
+  "expected_assertions": {
+    "fatal_error": "required_key_missing",
+    "publish": false
+  }
+}

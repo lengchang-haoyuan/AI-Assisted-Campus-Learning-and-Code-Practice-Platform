@@ -1,0 +1,254 @@
+{
+  "verified_at": "2026-10-20T13:02:53.797557+00:00",
+  "target": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "database": "scholarhub_l4_s02_20261020"
+  },
+  "tables": 36,
+  "before_final_checks": [
+    11,
+    15
+  ],
+  "after_final_checks": [
+    11,
+    15
+  ],
+  "analytics_counts": {
+    "batches": 11,
+    "daily_rows": 15
+  },
+  "limit": {
+    "batches": 12,
+    "daily_rows": 40
+  },
+  "source_counts_unchanged": true,
+  "source_counts": {
+    "submissions": 3,
+    "submission_versions": 4,
+    "feedback": 3,
+    "notifications": 6,
+    "ai_requests": 1,
+    "ai_results": 1,
+    "campus_memberships": 4,
+    "campus_invitations": 3,
+    "password_resets": 0,
+    "account_audits": 7,
+    "comments": 0,
+    "likes": 0,
+    "favorites": 0,
+    "project_views": 0,
+    "community_publications": 0,
+    "community_publication_versions": 0,
+    "community_governance_actions": 0,
+    "community_governance_cases": 0,
+    "courses": 0,
+    "learning_plans": 3,
+    "daily_tasks": 204,
+    "learning_records": 4,
+    "learning_reports": 0,
+    "project_tags": 0,
+    "projects": 1,
+    "tags": 0,
+    "teaching_classes": 1,
+    "class_memberships": 2,
+    "teaching_assignments": 3,
+    "users": 4,
+    "workflows": 0,
+    "workflow_nodes": 0,
+    "workflow_edges": 0,
+    "workflow_runs": 0
+  },
+  "retained_batches": [
+    {
+      "batch_id": "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+      "owner_user_id": 3,
+      "state": "completed",
+      "dataset_kind": "controlled",
+      "artifact_ref": "s03-owner3-restored/v2-controlled",
+      "quality": {
+        "reconciled": true,
+        "fatal_errors": 0
+      },
+      "daily_rows": 2
+    },
+    {
+      "batch_id": "b9378c01-70b2-4456-9d44-b579617375d1",
+      "owner_user_id": 4,
+      "state": "completed",
+      "dataset_kind": "controlled",
+      "artifact_ref": "s03-owner4-boundary/v1-boundary",
+      "quality": {
+        "reconciled": true,
+        "fatal_errors": 0
+      },
+      "daily_rows": 1
+    },
+    {
+      "batch_id": "45c55b05-ff63-4cc6-b6ca-734146054710",
+      "owner_user_id": 3,
+      "state": "completed",
+      "dataset_kind": "controlled",
+      "artifact_ref": "s05-permission-empty/s05-empty-permission-fixture",
+      "quality": {
+        "reconciled": true,
+        "fatal_errors": 0,
+        "permission_fixture": true
+      },
+      "daily_rows": 0
+    },
+    {
+      "batch_id": "989b5df8-b382-43bc-91de-5bf0a09cd2bf",
+      "owner_user_id": 3,
+      "state": "prepared",
+      "dataset_kind": "controlled",
+      "artifact_ref": "s03-owner3-restored/s05-prepared-fixture",
+      "quality": {
+        "reconciled": true,
+        "fatal_errors": 0,
+        "permission_fixture": true
+      },
+      "daily_rows": 0
+    },
+    {
+      "batch_id": "297855ea-edfd-442e-9dad-2877abe3a884",
+      "owner_user_id": 3,
+      "state": "completed",
+      "dataset_kind": "controlled",
+      "artifact_ref": "s03-owner3-restored/s05-transaction-fixture",
+      "quality": {
+        "reconciled": true,
+        "fatal_errors": 0,
+        "transaction_fixture": true
+      },
+      "daily_rows": 2
+    },
+    {
+      "batch_id": "97db22ac-38e6-432c-ac5c-e49d52a0c249",
+      "owner_user_id": 3,
+      "state": "failed",
+      "dataset_kind": "controlled",
+      "artifact_ref": "s03-owner3-restored/s05-validation-fixture",
+      "quality": {
+        "reconciled": true,
+        "fatal_errors": 0,
+        "publish_error_count": 1,
+        "transaction_fixture": true
+      },
+      "daily_rows": 0
+    },
+    {
+      "batch_id": "16944674-269f-4aa1-8ec1-1f207e218739",
+      "owner_user_id": 3,
+      "state": "completed",
+      "dataset_kind": "controlled",
+      "artifact_ref": "s03-owner3-restored/s05-concurrent-fixture",
+      "quality": {
+        "reconciled": true,
+        "fatal_errors": 0,
+        "transaction_fixture": true
+      },
+      "daily_rows": 2
+    },
+    {
+      "batch_id": "246f4714-1f47-4150-92d1-40c315397591",
+      "owner_user_id": 3,
+      "state": "completed",
+      "dataset_kind": "controlled",
+      "artifact_ref": "s03-owner3-restored/s05-transaction-fixture-v2",
+      "quality": {
+        "reconciled": true,
+        "fatal_errors": 0,
+        "transaction_fixture": true
+      },
+      "daily_rows": 2
+    },
+    {
+      "batch_id": "8775c62f-ce8b-4068-92c8-425bc225c0dc",
+      "owner_user_id": 3,
+      "state": "completed",
+      "dataset_kind": "controlled",
+      "artifact_ref": "s03-owner3-restored/s05-concurrent-fixture-v2",
+      "quality": {
+        "reconciled": true,
+        "fatal_errors": 0,
+        "transaction_fixture": true
+      },
+      "daily_rows": 2
+    },
+    {
+      "batch_id": "e9c1fc11-14b3-4306-953f-862c37f992c4",
+      "owner_user_id": 3,
+      "state": "completed",
+      "dataset_kind": "controlled",
+      "artifact_ref": "s03-owner3-restored/s05-concurrent-forced-v3",
+      "quality": {
+        "reconciled": true,
+        "fatal_errors": 0,
+        "transaction_fixture": true
+      },
+      "daily_rows": 2
+    },
+    {
+      "batch_id": "bdb4b1d2-12ca-4d9f-9436-580363353d5c",
+      "owner_user_id": 3,
+      "state": "completed",
+      "dataset_kind": "controlled",
+      "artifact_ref": "s03-owner3-restored/s05-creator-yields-v4",
+      "quality": {
+        "reconciled": true,
+        "fatal_errors": 0,
+        "transaction_fixture": true
+      },
+      "daily_rows": 2
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\backend\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "scripts.apply_s05_analytics_migration",
+        "--database",
+        "scholarhub_l4_s02_20261020"
+      ],
+      "exit_code": 0,
+      "log": "migration-replay.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\backend\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "scripts.verify_database_schema"
+      ],
+      "exit_code": 0,
+      "log": "schema-final.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\backend\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "scripts.publish_analytics",
+        "--database",
+        "scholarhub_l4_s02_20261020",
+        "--job-id",
+        "v2-controlled"
+      ],
+      "exit_code": 0,
+      "log": "publish-replay.log"
+    }
+  ],
+  "readonly_requests": 9,
+  "GET_DML": [],
+  "service_configuration_changed": false,
+  "new_batch_or_daily_created_in_final_checks": false
+}

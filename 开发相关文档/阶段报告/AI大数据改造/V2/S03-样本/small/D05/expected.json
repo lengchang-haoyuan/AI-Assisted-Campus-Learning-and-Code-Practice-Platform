@@ -1,0 +1,24 @@
+{
+  "case_id": "D05",
+  "name": "普通学习记录删除后的新快照",
+  "kind": "data",
+  "input_changes": [
+    {
+      "op": "delete",
+      "table": "learning_records",
+      "match": {
+        "id": 5
+      }
+    }
+  ],
+  "expected_status": "validated",
+  "expected_assertions": {
+    "records.valid_unique_rows": 4,
+    "records.known_minutes": 75,
+    "records.known_duration_count": 2,
+    "records.missing_duration_count": 2,
+    "records.known_zero_count": 0,
+    "records.active_days": 3,
+    "new_batch_required": true
+  }
+}

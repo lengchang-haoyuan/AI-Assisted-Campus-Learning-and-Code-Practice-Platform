@@ -1,0 +1,126 @@
+{
+  "status": "passed",
+  "data_queries_only": true,
+  "layers": [
+    {
+      "job_id": "v2-controlled",
+      "batch_id": "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+      "owner_user_id": 3,
+      "frozen_expected": {
+        "known_minutes": 75,
+        "missing_duration_count": 2,
+        "tasks_completed": 2,
+        "tasks_total": 4,
+        "cohort_count": 3,
+        "revised_count": 1,
+        "confirmed_count": 2
+      },
+      "summary_fields_equal_ADS_payload_storage_API": true,
+      "daily_fields_equal_payload_storage_API": true,
+      "stored_daily": [
+        {
+          "metric_date": "2026-10-19",
+          "records": 1,
+          "known_minutes": 30,
+          "known_duration_count": 1,
+          "missing_duration_count": 0,
+          "known_zero_count": 0,
+          "ordinary_count": 1,
+          "trusted_teaching_count": 0,
+          "unverified_claim_count": 0,
+          "task_total": 1,
+          "completed": 0,
+          "cancelled": 0,
+          "overdue_unfinished": 1,
+          "cohort_count": 0,
+          "revised_count": 0,
+          "confirmed_count": 0
+        },
+        {
+          "metric_date": "2026-10-20",
+          "records": 3,
+          "known_minutes": 45,
+          "known_duration_count": 1,
+          "missing_duration_count": 2,
+          "known_zero_count": 0,
+          "ordinary_count": 1,
+          "trusted_teaching_count": 2,
+          "unverified_claim_count": 0,
+          "task_total": 3,
+          "completed": 2,
+          "cancelled": 1,
+          "overdue_unfinished": 0,
+          "cohort_count": 3,
+          "revised_count": 1,
+          "confirmed_count": 2
+        }
+      ],
+      "stored_daily_totals": {
+        "records": 4,
+        "known_minutes": 75,
+        "known_duration_count": 2,
+        "missing_duration_count": 2,
+        "known_zero_count": 0,
+        "ordinary_count": 2,
+        "trusted_teaching_count": 2,
+        "unverified_claim_count": 0,
+        "task_total": 4,
+        "completed": 2,
+        "cancelled": 1,
+        "overdue_unfinished": 1,
+        "cohort_count": 3,
+        "revised_count": 1,
+        "confirmed_count": 2
+      }
+    },
+    {
+      "job_id": "v1-boundary",
+      "batch_id": "b9378c01-70b2-4456-9d44-b579617375d1",
+      "owner_user_id": 4,
+      "frozen_expected": {
+        "completed": 199,
+        "task_total": 200,
+        "completion_rate_percent": "99.500000"
+      },
+      "summary_fields_equal_ADS_payload_storage_API": true,
+      "daily_fields_equal_payload_storage_API": true,
+      "stored_daily": [
+        {
+          "metric_date": "2026-10-20",
+          "records": 0,
+          "known_minutes": 0,
+          "known_duration_count": 0,
+          "missing_duration_count": 0,
+          "known_zero_count": 0,
+          "ordinary_count": 0,
+          "trusted_teaching_count": 0,
+          "unverified_claim_count": 0,
+          "task_total": 200,
+          "completed": 199,
+          "cancelled": 0,
+          "overdue_unfinished": 0,
+          "cohort_count": 0,
+          "revised_count": 0,
+          "confirmed_count": 0
+        }
+      ],
+      "stored_daily_totals": {
+        "records": 0,
+        "known_minutes": 0,
+        "known_duration_count": 0,
+        "missing_duration_count": 0,
+        "known_zero_count": 0,
+        "ordinary_count": 0,
+        "trusted_teaching_count": 0,
+        "unverified_claim_count": 0,
+        "task_total": 200,
+        "completed": 199,
+        "cancelled": 0,
+        "overdue_unfinished": 0,
+        "cohort_count": 0,
+        "revised_count": 0,
+        "confirmed_count": 0
+      }
+    }
+  ]
+}

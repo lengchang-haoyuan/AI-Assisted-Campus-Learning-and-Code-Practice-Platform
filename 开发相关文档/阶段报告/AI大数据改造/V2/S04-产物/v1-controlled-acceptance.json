@@ -1,0 +1,12 @@
+{
+  "job_id": "v1-controlled",
+  "snapshot_id": "s03-owner3-restored",
+  "state": "validated",
+  "spark_python_all_subjects_equal": true,
+  "frozen_assertions_passed": false,
+  "subjects": 1,
+  "spark_seconds": 16.146779578000064,
+  "python_compute_seconds": 0.00016622299995106005,
+  "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+  "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-controlled"
+}

@@ -1,0 +1,1000 @@
+[
+  {
+    "check": "isolated_initial_rows",
+    "actual": 0,
+    "expected": 0,
+    "status": "passed"
+  },
+  {
+    "check": "isolated_table_count",
+    "actual": 34,
+    "expected": 34,
+    "status": "passed"
+  },
+  {
+    "check": "source_schema_fields",
+    "actual": 71,
+    "expected": 71,
+    "status": "passed"
+  },
+  {
+    "check": "empty_plan_preserved_active",
+    "actual": "active",
+    "expected": "active",
+    "status": "passed"
+  },
+  {
+    "check": "task_1_completion_idempotent",
+    "actual": "2026-10-20T07:05:34.904470Z",
+    "expected": "2026-10-20T07:05:34.904470Z",
+    "status": "passed"
+  },
+  {
+    "check": "task_2_completion_idempotent",
+    "actual": "2026-10-20T07:05:34.923631Z",
+    "expected": "2026-10-20T07:05:34.923631Z",
+    "status": "passed"
+  },
+  {
+    "check": "boundary_legacy_display_progress",
+    "actual": 100,
+    "expected": 100,
+    "status": "passed"
+  },
+  {
+    "check": "v1_replay_same_id",
+    "actual": 1,
+    "expected": 1,
+    "status": "passed"
+  },
+  {
+    "check": "v1_replay_no_rows_or_revisions",
+    "actual": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 1,
+        "feedback": 0,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "submitted",
+          1
+        ]
+      ]
+    },
+    "expected": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 1,
+        "feedback": 0,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "submitted",
+          1
+        ]
+      ]
+    },
+    "status": "passed"
+  },
+  {
+    "check": "v1_request_key_conflict_no_partial_write",
+    "actual": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 1,
+        "feedback": 0,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "submitted",
+          1
+        ]
+      ]
+    },
+    "expected": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 1,
+        "feedback": 0,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "submitted",
+          1
+        ]
+      ]
+    },
+    "status": "passed"
+  },
+  {
+    "check": "return_replay_same_feedback",
+    "actual": 1,
+    "expected": 1,
+    "status": "passed"
+  },
+  {
+    "check": "return_replay_no_rows_or_revisions",
+    "actual": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 1,
+        "feedback": 1,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ]
+      ]
+    },
+    "expected": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 1,
+        "feedback": 1,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ]
+      ]
+    },
+    "status": "passed"
+  },
+  {
+    "check": "return_payload_conflict_no_partial_write",
+    "actual": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 1,
+        "feedback": 1,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ]
+      ]
+    },
+    "expected": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 1,
+        "feedback": 1,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ]
+      ]
+    },
+    "status": "passed"
+  },
+  {
+    "check": "old_latest_version_no_partial_write",
+    "actual": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 1,
+        "feedback": 1,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ]
+      ]
+    },
+    "expected": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 1,
+        "feedback": 1,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ]
+      ]
+    },
+    "status": "passed"
+  },
+  {
+    "check": "v2_replay_no_rows_or_revisions",
+    "actual": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 2,
+        "feedback": 1,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ],
+        [
+          1,
+          2,
+          "submitted",
+          1
+        ]
+      ]
+    },
+    "expected": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 2,
+        "feedback": 1,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ],
+        [
+          1,
+          2,
+          "submitted",
+          1
+        ]
+      ]
+    },
+    "status": "passed"
+  },
+  {
+    "check": "old_feedback_revision_no_partial_write",
+    "actual": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 2,
+        "feedback": 1,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ],
+        [
+          1,
+          2,
+          "submitted",
+          1
+        ]
+      ]
+    },
+    "expected": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 2,
+        "feedback": 1,
+        "learning_records": 2
+      },
+      "heads": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ],
+        [
+          1,
+          2,
+          "submitted",
+          1
+        ]
+      ]
+    },
+    "status": "passed"
+  },
+  {
+    "check": "accept_replay_same_feedback",
+    "actual": 2,
+    "expected": 2,
+    "status": "passed"
+  },
+  {
+    "check": "accept_replay_no_record_duplication",
+    "actual": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 2,
+        "feedback": 2,
+        "learning_records": 3
+      },
+      "heads": [
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ],
+        [
+          1,
+          2,
+          "accepted",
+          2
+        ]
+      ]
+    },
+    "expected": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 2,
+        "feedback": 2,
+        "learning_records": 3
+      },
+      "heads": [
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ],
+        [
+          1,
+          2,
+          "accepted",
+          2
+        ]
+      ]
+    },
+    "status": "passed"
+  },
+  {
+    "check": "accept_conflict_no_partial_write",
+    "actual": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 2,
+        "feedback": 2,
+        "learning_records": 3
+      },
+      "heads": [
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ],
+        [
+          1,
+          2,
+          "accepted",
+          2
+        ]
+      ]
+    },
+    "expected": {
+      "counts": {
+        "submissions": 1,
+        "submission_versions": 2,
+        "feedback": 2,
+        "learning_records": 3
+      },
+      "heads": [
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ],
+        [
+          1,
+          2,
+          "accepted",
+          2
+        ]
+      ]
+    },
+    "status": "passed"
+  },
+  {
+    "check": "version_history",
+    "actual": [
+      [
+        2,
+        "accepted"
+      ],
+      [
+        1,
+        "returned"
+      ]
+    ],
+    "expected": [
+      [
+        2,
+        "accepted"
+      ],
+      [
+        1,
+        "returned"
+      ]
+    ],
+    "status": "passed"
+  },
+  {
+    "check": "revised_submission_revision",
+    "actual": 4,
+    "expected": 4,
+    "status": "passed"
+  },
+  {
+    "check": "rollback_probe_record_was_flushed",
+    "actual": 1,
+    "expected": 1,
+    "status": "passed"
+  },
+  {
+    "check": "rollback_after_record_flush_is_atomic",
+    "actual": {
+      "counts": {
+        "submissions": 3,
+        "submission_versions": 4,
+        "feedback": 3,
+        "learning_records": 4
+      },
+      "heads": [
+        [
+          1,
+          2,
+          4
+        ],
+        [
+          2,
+          1,
+          2
+        ],
+        [
+          3,
+          1,
+          1
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ],
+        [
+          1,
+          2,
+          "accepted",
+          2
+        ],
+        [
+          2,
+          1,
+          "accepted",
+          2
+        ],
+        [
+          3,
+          1,
+          "submitted",
+          1
+        ]
+      ]
+    },
+    "expected": {
+      "counts": {
+        "submissions": 3,
+        "submission_versions": 4,
+        "feedback": 3,
+        "learning_records": 4
+      },
+      "heads": [
+        [
+          1,
+          2,
+          4
+        ],
+        [
+          2,
+          1,
+          2
+        ],
+        [
+          3,
+          1,
+          1
+        ]
+      ],
+      "versions": [
+        [
+          1,
+          1,
+          "returned",
+          2
+        ],
+        [
+          1,
+          2,
+          "accepted",
+          2
+        ],
+        [
+          2,
+          1,
+          "accepted",
+          2
+        ],
+        [
+          3,
+          1,
+          "submitted",
+          1
+        ]
+      ]
+    },
+    "status": "passed"
+  },
+  {
+    "check": "resume_same_database",
+    "actual": "scholarhub_l4_s02_20261020",
+    "expected": "scholarhub_l4_s02_20261020",
+    "status": "passed"
+  },
+  {
+    "check": "resume_same_four_marked_accounts",
+    "actual": 4,
+    "expected": 4,
+    "status": "passed"
+  },
+  {
+    "check": "fake_agent_response_completed",
+    "actual": "completed",
+    "expected": "completed",
+    "status": "passed"
+  },
+  {
+    "check": "fake_provider_saved",
+    "actual": "fake",
+    "expected": "fake",
+    "status": "passed"
+  },
+  {
+    "check": "fake_agent_db_status_completed",
+    "actual": "completed",
+    "expected": "completed",
+    "status": "passed"
+  },
+  {
+    "check": "exactly_one_auxiliary_AIRequest",
+    "actual": 1,
+    "expected": 1,
+    "status": "passed"
+  },
+  {
+    "check": "feedback_2_same_student",
+    "actual": 3,
+    "expected": 3,
+    "status": "passed"
+  },
+  {
+    "check": "feedback_2_same_class_and_teacher",
+    "actual": [
+      1,
+      1,
+      "teacher"
+    ],
+    "expected": [
+      1,
+      1,
+      "teacher"
+    ],
+    "status": "passed"
+  },
+  {
+    "check": "feedback_2_version_accepted",
+    "actual": "accepted",
+    "expected": "accepted",
+    "status": "passed"
+  },
+  {
+    "check": "feedback_2_duration_NULL",
+    "actual": null,
+    "expected": null,
+    "status": "passed"
+  },
+  {
+    "check": "feedback_2_task_not_fabricated",
+    "actual": null,
+    "expected": null,
+    "status": "passed"
+  },
+  {
+    "check": "feedback_3_same_student",
+    "actual": 3,
+    "expected": 3,
+    "status": "passed"
+  },
+  {
+    "check": "feedback_3_same_class_and_teacher",
+    "actual": [
+      1,
+      1,
+      "teacher"
+    ],
+    "expected": [
+      1,
+      1,
+      "teacher"
+    ],
+    "status": "passed"
+  },
+  {
+    "check": "feedback_3_version_accepted",
+    "actual": "accepted",
+    "expected": "accepted",
+    "status": "passed"
+  },
+  {
+    "check": "feedback_3_duration_NULL",
+    "actual": null,
+    "expected": null,
+    "status": "passed"
+  },
+  {
+    "check": "feedback_3_task_not_fabricated",
+    "actual": null,
+    "expected": null,
+    "status": "passed"
+  },
+  {
+    "check": "primary_records_minutes_known_missing",
+    "actual": [
+      4,
+      75,
+      2,
+      2
+    ],
+    "expected": [
+      4,
+      75,
+      2,
+      2
+    ],
+    "status": "passed"
+  },
+  {
+    "check": "primary_active_days",
+    "actual": 2,
+    "expected": 2,
+    "status": "passed"
+  },
+  {
+    "check": "primary_tasks_completed_total_cancelled_overdue",
+    "actual": [
+      2,
+      4,
+      1,
+      1
+    ],
+    "expected": [
+      2,
+      4,
+      1,
+      1
+    ],
+    "status": "passed"
+  },
+  {
+    "check": "boundary_199_of_200",
+    "actual": [
+      199,
+      200
+    ],
+    "expected": [
+      199,
+      200
+    ],
+    "status": "passed"
+  },
+  {
+    "check": "boundary_exact_percent",
+    "actual": "99.500000",
+    "expected": "99.500000",
+    "status": "passed"
+  },
+  {
+    "check": "scheduled_DATE_unshifted",
+    "actual": "2026-10-19",
+    "expected": "2026-10-19",
+    "status": "passed"
+  },
+  {
+    "check": "record_timestamps_UTC",
+    "actual": true,
+    "expected": true,
+    "status": "passed"
+  },
+  {
+    "check": "cohort_version_feedback_record_task_counts",
+    "actual": [
+      3,
+      4,
+      3,
+      4,
+      204
+    ],
+    "expected": [
+      3,
+      4,
+      3,
+      4,
+      204
+    ],
+    "status": "passed"
+  },
+  {
+    "check": "rolled_back_record_ids_absent",
+    "actual": true,
+    "expected": true,
+    "status": "passed"
+  },
+  {
+    "check": "teaching_record_3_edit_denied",
+    "actual": 409,
+    "expected": 409,
+    "status": "passed"
+  },
+  {
+    "check": "teaching_record_4_edit_denied",
+    "actual": 409,
+    "expected": 409,
+    "status": "passed"
+  },
+  {
+    "check": "auxiliary_AIResult_other_user_denied",
+    "actual": 404,
+    "expected": 404,
+    "status": "passed"
+  },
+  {
+    "check": "business_aggregate_counts_unchanged",
+    "actual": {
+      "submissions": 0,
+      "submission_versions": 0,
+      "feedback": 0,
+      "notifications": 2,
+      "ai_requests": 28,
+      "ai_results": 27,
+      "campus_memberships": 1,
+      "campus_invitations": 0,
+      "password_resets": 0,
+      "account_audits": 1,
+      "comments": 1,
+      "likes": 1,
+      "favorites": 1,
+      "project_views": 6,
+      "community_publications": 2,
+      "community_publication_versions": 2,
+      "community_governance_actions": 4,
+      "community_governance_cases": 0,
+      "courses": 0,
+      "learning_plans": 1,
+      "daily_tasks": 0,
+      "learning_records": 0,
+      "learning_reports": 2,
+      "project_tags": 1,
+      "projects": 74,
+      "tags": 1,
+      "teaching_classes": 0,
+      "class_memberships": 0,
+      "teaching_assignments": 0,
+      "users": 2,
+      "workflows": 3,
+      "workflow_nodes": 7,
+      "workflow_edges": 5,
+      "workflow_runs": 8
+    },
+    "expected": {
+      "submissions": 0,
+      "submission_versions": 0,
+      "feedback": 0,
+      "notifications": 2,
+      "ai_requests": 28,
+      "ai_results": 27,
+      "campus_memberships": 1,
+      "campus_invitations": 0,
+      "password_resets": 0,
+      "account_audits": 1,
+      "comments": 1,
+      "likes": 1,
+      "favorites": 1,
+      "project_views": 6,
+      "community_publications": 2,
+      "community_publication_versions": 2,
+      "community_governance_actions": 4,
+      "community_governance_cases": 0,
+      "courses": 0,
+      "learning_plans": 1,
+      "daily_tasks": 0,
+      "learning_records": 0,
+      "learning_reports": 2,
+      "project_tags": 1,
+      "projects": 74,
+      "tags": 1,
+      "teaching_classes": 0,
+      "class_memberships": 0,
+      "teaching_assignments": 0,
+      "users": 2,
+      "workflows": 3,
+      "workflow_nodes": 7,
+      "workflow_edges": 5,
+      "workflow_runs": 8
+    },
+    "status": "passed"
+  }
+]

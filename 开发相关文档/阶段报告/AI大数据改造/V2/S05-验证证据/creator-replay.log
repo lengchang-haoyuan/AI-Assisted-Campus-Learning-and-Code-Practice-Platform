@@ -1,0 +1,1 @@
+{"status": "passed", "held_connections": [{"connection_id": 24, "batch_id": "bdb4b1d2-12ca-4d9f-9436-580363353d5c", "replayed": true}, {"connection_id": 25, "batch_id": "bdb4b1d2-12ca-4d9f-9436-580363353d5c", "replayed": false}], "counts": {"batches": 11, "daily_rows": 15}}

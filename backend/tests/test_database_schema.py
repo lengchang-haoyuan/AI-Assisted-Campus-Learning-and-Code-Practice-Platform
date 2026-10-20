@@ -13,6 +13,8 @@ from app.models.base import UTCDateTime
 BACKEND_DIR = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = BACKEND_DIR / "schema.sql"
 EXPECTED_TABLES = {
+    "analytics_batches",
+    "analytics_daily_metrics",
     "account_audits",
     "ai_requests",
     "ai_results",
@@ -54,7 +56,7 @@ CREATE_TABLE_PATTERN = re.compile(
 )
 COLUMN_PATTERN = re.compile(
     r"^\s+`?([a-z_][a-z0-9_]*)`?\s+"
-    r"(?:BIGINT|INTEGER|INT|SMALLINT|VARCHAR|TEXT|BOOLEAN|DATETIME|DATE|TIME|JSON|NUMERIC|BINARY)\b",
+    r"(?:BIGINT|INTEGER|INT|SMALLINT|VARCHAR|CHAR|TEXT|BOOLEAN|DATETIME|DATE|TIME|JSON|NUMERIC|BINARY)\b",
     re.IGNORECASE | re.MULTILINE,
 )
 

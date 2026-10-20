@@ -1,0 +1,50 @@
+{
+  "v2-controlled": {
+    "record_facts": {
+      "n": 4,
+      "distinct_keys": 4,
+      "snapshots": 1,
+      "jobs": 1
+    },
+    "records_values": {
+      "minutes": 75,
+      "missing": 2
+    },
+    "task_facts": {
+      "n": 4,
+      "distinct_keys": 4,
+      "snapshots": 1,
+      "jobs": 1
+    },
+    "cohort_facts": {
+      "n": 3,
+      "distinct_keys": 3,
+      "snapshots": 1,
+      "jobs": 1
+    }
+  },
+  "v1-scale": {
+    "record_facts": {
+      "n": 10000,
+      "distinct_keys": 10000,
+      "snapshots": 1,
+      "jobs": 1
+    },
+    "records_values": {
+      "minutes": 421978,
+      "missing": 2000
+    },
+    "task_facts": {
+      "n": 2500,
+      "distinct_keys": 2500,
+      "snapshots": 1,
+      "jobs": 1
+    },
+    "cohort_facts": {
+      "n": 100,
+      "distinct_keys": 100,
+      "snapshots": 1,
+      "jobs": 1
+    }
+  }
+}

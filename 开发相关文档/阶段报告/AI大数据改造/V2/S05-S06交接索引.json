@@ -1,0 +1,292 @@
+{
+  "stage": "S05",
+  "status": "passed",
+  "next_stage": "S06_not_started",
+  "contract_version": "V2-S01-r2",
+  "target": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "database": "scholarhub_l4_s02_20261020"
+  },
+  "business_service_configuration_changed": false,
+  "target_only_process_override": true,
+  "primary": {
+    "batch_id": "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+    "dataset_id": "s02-controlled-owner-3",
+    "snapshot_id": "s03-owner3-restored",
+    "job_id": "v2-controlled",
+    "owner_user_id": 3,
+    "dataset_kind": "controlled",
+    "source_cutoff": "2026-10-20T07:34:07.134833Z",
+    "period_start": "2026-10-19",
+    "period_end": "2026-10-20",
+    "business_timezone": "Asia/Shanghai",
+    "schema_version": "scholarhub-source-1.0",
+    "metric_version": "learning-process-1.0",
+    "rule_version": "quality-1.0",
+    "daily_rows": 2,
+    "state": "completed",
+    "counts": {
+      "records": {
+        "valid_unique_rows": 4,
+        "known_minutes": 75,
+        "known_duration_count": 2,
+        "missing_duration_count": 2,
+        "known_zero_count": 0,
+        "active_days": 2,
+        "trusted_teaching_count": 2,
+        "unverified_claim_count": 0,
+        "ordinary_count": 2,
+        "raw_rows": 4,
+        "exact_duplicates": 0
+      },
+      "tasks": {
+        "total": 4,
+        "completed": 2,
+        "cancelled": 1,
+        "overdue_unfinished": 1,
+        "completion_rate": {
+          "numerator": 2,
+          "denominator": 4,
+          "percent": "50.000000",
+          "display": "50.0%"
+        }
+      },
+      "topic": {
+        "cohort_count": 3,
+        "revised_count": 1,
+        "confirmed_count": 2,
+        "returned_ever_count": 1,
+        "first_pass_confirmed_count": 1,
+        "revised_confirmed_count": 1,
+        "pending_latest_count": 1,
+        "revision_attempts": 1,
+        "first_review_covered": 2,
+        "first_review_wait_sum_minutes": 0.0013899833333333334,
+        "first_review_wait_mean_minutes": "0.000695",
+        "missing_teaching_record_links": 0,
+        "revised_rate": {
+          "numerator": 1,
+          "denominator": 3,
+          "percent": "33.333333",
+          "display": "33.3%"
+        },
+        "confirmation_rate": {
+          "numerator": 2,
+          "denominator": 3,
+          "percent": "66.666667",
+          "display": "66.7%"
+        },
+        "revised_confirmation_rate": {
+          "numerator": 1,
+          "denominator": 1,
+          "percent": "100.000000",
+          "display": "100.0%"
+        },
+        "first_review_histogram": {
+          "[0,60)": 2,
+          "[60,240)": 0,
+          "[240,1440)": 0,
+          "[1440,+inf)": 0
+        }
+      }
+    },
+    "payload": "S05-发布输入/v2-controlled/payload.json",
+    "S04_result": "S04-产物/jobs/v2-controlled"
+  },
+  "boundary": {
+    "batch_id": "b9378c01-70b2-4456-9d44-b579617375d1",
+    "dataset_id": "s02-controlled-owner-4",
+    "snapshot_id": "s03-owner4-boundary",
+    "job_id": "v1-boundary",
+    "owner_user_id": 4,
+    "dataset_kind": "controlled",
+    "source_cutoff": "2026-10-20T07:34:07.103019Z",
+    "period_start": "2026-10-19",
+    "period_end": "2026-10-20",
+    "business_timezone": "Asia/Shanghai",
+    "schema_version": "scholarhub-source-1.0",
+    "metric_version": "learning-process-1.0",
+    "rule_version": "quality-1.0",
+    "daily_rows": 1,
+    "state": "completed",
+    "counts": {
+      "records": {
+        "valid_unique_rows": 0,
+        "known_minutes": 0,
+        "known_duration_count": 0,
+        "missing_duration_count": 0,
+        "known_zero_count": 0,
+        "active_days": 0,
+        "trusted_teaching_count": 0,
+        "unverified_claim_count": 0,
+        "ordinary_count": 0,
+        "raw_rows": 0,
+        "exact_duplicates": 0
+      },
+      "tasks": {
+        "total": 200,
+        "completed": 199,
+        "cancelled": 0,
+        "overdue_unfinished": 0,
+        "completion_rate": {
+          "numerator": 199,
+          "denominator": 200,
+          "percent": "99.500000",
+          "display": "99.5%"
+        }
+      },
+      "topic": {
+        "cohort_count": 0,
+        "revised_count": 0,
+        "confirmed_count": 0,
+        "returned_ever_count": 0,
+        "first_pass_confirmed_count": 0,
+        "revised_confirmed_count": 0,
+        "pending_latest_count": 0,
+        "revision_attempts": 0,
+        "first_review_covered": 0,
+        "first_review_wait_sum_minutes": 0.0,
+        "first_review_wait_mean_minutes": null,
+        "missing_teaching_record_links": 0,
+        "revised_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "percent": null,
+          "display": "无样本"
+        },
+        "confirmation_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "percent": null,
+          "display": "无样本"
+        },
+        "revised_confirmation_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "percent": null,
+          "display": "无样本"
+        },
+        "first_review_histogram": {
+          "[0,60)": 0,
+          "[60,240)": 0,
+          "[240,1440)": 0,
+          "[1440,+inf)": 0
+        }
+      }
+    },
+    "payload": "S05-发布输入/v1-boundary/payload.json",
+    "S04_result": "S04-产物/jobs/v1-boundary"
+  },
+  "test_fixtures_excluded_from_formal_demo": [
+    {
+      "batch_id": "45c55b05-ff63-4cc6-b6ca-734146054710",
+      "state": "completed",
+      "artifact_ref": "s05-permission-empty/s05-empty-permission-fixture",
+      "daily_rows": 0
+    },
+    {
+      "batch_id": "989b5df8-b382-43bc-91de-5bf0a09cd2bf",
+      "state": "prepared",
+      "artifact_ref": "s03-owner3-restored/s05-prepared-fixture",
+      "daily_rows": 0
+    },
+    {
+      "batch_id": "297855ea-edfd-442e-9dad-2877abe3a884",
+      "state": "completed",
+      "artifact_ref": "s03-owner3-restored/s05-transaction-fixture",
+      "daily_rows": 2
+    },
+    {
+      "batch_id": "97db22ac-38e6-432c-ac5c-e49d52a0c249",
+      "state": "failed",
+      "artifact_ref": "s03-owner3-restored/s05-validation-fixture",
+      "daily_rows": 0
+    },
+    {
+      "batch_id": "16944674-269f-4aa1-8ec1-1f207e218739",
+      "state": "completed",
+      "artifact_ref": "s03-owner3-restored/s05-concurrent-fixture",
+      "daily_rows": 2
+    },
+    {
+      "batch_id": "246f4714-1f47-4150-92d1-40c315397591",
+      "state": "completed",
+      "artifact_ref": "s03-owner3-restored/s05-transaction-fixture-v2",
+      "daily_rows": 2
+    },
+    {
+      "batch_id": "8775c62f-ce8b-4068-92c8-425bc225c0dc",
+      "state": "completed",
+      "artifact_ref": "s03-owner3-restored/s05-concurrent-fixture-v2",
+      "daily_rows": 2
+    },
+    {
+      "batch_id": "e9c1fc11-14b3-4306-953f-862c37f992c4",
+      "state": "completed",
+      "artifact_ref": "s03-owner3-restored/s05-concurrent-forced-v3",
+      "daily_rows": 2
+    },
+    {
+      "batch_id": "bdb4b1d2-12ca-4d9f-9436-580363353d5c",
+      "state": "completed",
+      "artifact_ref": "s03-owner3-restored/s05-creator-yields-v4",
+      "daily_rows": 2
+    }
+  ],
+  "API": {
+    "list": "/api/v1/offline-analytics/batches?dataset_kind=controlled&page=1&page_size=20",
+    "detail": "/api/v1/offline-analytics/batches/{batch_id}",
+    "owner": "authenticated current user only",
+    "default_kind": "business",
+    "detail_window": "whole batch; query parameters forbidden",
+    "ordinary_GET": "DB SELECT only"
+  },
+  "authorization_limits": {
+    "batches": 12,
+    "daily_rows": 40
+  },
+  "actual_counts": {
+    "batches": 11,
+    "daily_rows": 15
+  },
+  "remaining_batch_slots_under_this_S05_authorization": 1,
+  "verification": {
+    "unittest": {
+      "passed": 47,
+      "exit_code": 0,
+      "raw_log": "S05-验证证据/regression-final.log"
+    },
+    "actual_schema": {
+      "tables": 36,
+      "foreign_keys": 83
+    },
+    "resume_get_requests": 30,
+    "resume_explicit_checks": 63,
+    "final_readonly_get_requests": 9,
+    "D13_D14_passed": 10,
+    "GET_DML": []
+  },
+  "retained_sources_unchanged_by_row_counts": true,
+  "real_model_budget_authorized": 0,
+  "remaining_S06_work": [
+    "本人页面与真实浏览器同批展示",
+    "空结果和身份切换缓存",
+    "冻结方法的初步规模实验",
+    "J1专题解释评分需另行明确模型/输入/费用授权"
+  ],
+  "instructions": [
+    "使用primary/boundary明确batch_id，不选列表最新测试fixture冒充Spark来源",
+    "不可把controlled称为真实长期业务",
+    "GET不得运行Spark、模型或发布",
+    "不要重跑创建fixture的整套脚本",
+    "本文件只交接，不授权执行S06或新的数据库写入"
+  ],
+  "evidence": {
+    "report": "S05-完成报告.md",
+    "contract": "S05-发布与接口契约.md",
+    "final_state": "S05-验证证据/final-state.json",
+    "reconciliation": "S05-验证证据/four-layer-reconciliation.json",
+    "publication_policy": "S05-验收矩阵.json"
+  }
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "connection_id": 16,
+    "batch_id": "8775c62f-ce8b-4068-92c8-425bc225c0dc",
+    "replayed": true
+  },
+  {
+    "connection_id": 17,
+    "batch_id": "8775c62f-ce8b-4068-92c8-425bc225c0dc",
+    "replayed": false
+  }
+]

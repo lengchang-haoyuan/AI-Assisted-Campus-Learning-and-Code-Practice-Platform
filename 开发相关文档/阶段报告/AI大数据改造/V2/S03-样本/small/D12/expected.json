@@ -1,0 +1,22 @@
+{
+  "case_id": "D12",
+  "name": "引用不存在的学习记录",
+  "kind": "data",
+  "input_changes": [
+    {
+      "op": "set",
+      "table": "feedback",
+      "match": {
+        "id": 802
+      },
+      "values": {
+        "learning_record_id": 9999
+      }
+    }
+  ],
+  "expected_status": "failed",
+  "expected_assertions": {
+    "fatal_error": "dangling_relation",
+    "publish": false
+  }
+}

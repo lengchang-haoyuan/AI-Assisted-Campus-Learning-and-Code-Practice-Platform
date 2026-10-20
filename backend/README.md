@@ -1,5 +1,7 @@
 # ScholarHub 后端
 
+截至2026-10-20：源码含36张ORM表、83个外键，OpenAPI为98条路径/138个操作。V2大数据主线已完成S00–S05；新增分析表目前仅在专用隔离库迁移验证，普通业务服务配置保持原样。新环境bootstrap包含全部36表；已有34表环境应审查增量迁移，避免把代码更新当成数据库升级。
+
 ## 分层边界
 
 ```text
@@ -279,6 +281,8 @@ python -m scripts.verify_database_schema
 python -m unittest discover -s tests -v
 ```
 
+2026-10-20提交前全量复核296项通过；S05报告中的47项是当阶段定向检查，两者分开记录。ODS测试使用Python zoneinfo：Windows缺少IANA时区数据、但已具备WSL时，可只在当前测试进程设置 `$env:PYTHONTZPATH = '\\wsl.localhost\Ubuntu-24.04\usr\share\zoneinfo'`，不修改系统配置或静默安装依赖。
+
 测试覆盖 health、Swagger、统一异常、错误脱敏、CORS、请求 ID、JSON 日志、Session 释放和 Router 分层边界，同时检查 SQLAlchemy metadata 与 `schema.sql`。`python -m scripts.verify_database_schema` 还会只读对比实际 MySQL 数据库与 Models。
 
 P15 曾提供以下跨模块验收入口：
@@ -338,6 +342,51 @@ POST /api/v1/campus/assignments/{assignment_id}/archive
 社区列表、详情、标签及互动统一要求有效校园身份。作者用 `POST /api/v1/projects/{id}/publication-requests` 提交署名、来源/许可和 AI 辅助声明；管理员在 `/api/v1/community/moderation/*` 审核发布及处理案件。用户通过 `/api/v1/community/reports` 举报当前可见项目版本或评论，通过 `/api/v1/community/moderation/actions/{id}/appeals` 申请复核。旧即时发布入口返回 409，旧撤回入口继续映射到有审计记录的撤回操作。
 
 公开页面只读取获准版本快照。私人 Project 后续编辑不会改变已公开内容，管理员治理响应不会包含 Context、学习笔记、完整 AI 输入或教学提交。发布、撤回、决定、举报与复核均使用事务、请求键或 revision 检查；评论和案件创建使用数据库时间窗口做有界频率限制，不新增 Redis。
+
+## S05 离线分析发布与本人只读接口
+
+离线分析与原 `/statistics`、学习报告并行：原接口实时聚合业务来源，新接口只读取已完成发布批次。HTTP读取链为 `api/v1/analytics.py → AnalyticsService → AnalyticsRepository → AnalyticsBatch/AnalyticsDailyMetric`；PySpark计算和文件读取只发生在离线命令，不进入GET路径。
+
+### 来源与两个表
+
+- S03白名单固定10张业务来源及独立9字段AI辅助；完整窗口一致性快照见[analytics入口](../analytics/README.md)。
+- S04真实PySpark生成DWD Parquet、Spark SQL三类指标、专题、质量和谱系，详见[S04说明](../analytics/S04.md)。
+- `analytics_batches`：CHAR(36)批次ID、本人归属、业务窗口/时区/cutoff、schema/metric/rule版本、数据种类、状态、固定JSON汇总、受控artifact_ref和发布时刻。
+- `analytics_daily_metrics`：PK(batch_id,metric_date)，保存记录/时长覆盖/来源分项、任务分子分母/取消/逾期、提交群组/修订/确认；不重复保存归属，以批次外键校验。
+
+逻辑身份为 `(owner_user_id, artifact_ref, metric_version, rule_version)`，artifact_ref编码snapshot/job。导入先prepared，日行与完成状态在一次短事务提交；失败回滚日行后标failed，旧完成批次仍可读。相同成功来源重放返回原ID，异内容为ConflictError(409语义)，不能覆盖历史。新规则/输入使用新已验证任务和版本。
+
+### 迁移与离线发布命令
+
+本轮脚本明确限制本机`127.0.0.1:3306 / scholarhub_l4_s02_20261020`，只有两份S04主/边界job允许正式发布。脚本从本地既有设置取得连接凭证，再仅为本次命令选择隔离库，不修改.env。**它们是本轮受控验证入口，不是可在任意数据库直接执行的通用迁移器。** 新部署应先审查[增量SQL](migrations/20261020_s05_offline_analytics.sql)和实际目标，不能复制虚构用户ID当作本人来源。
+
+```powershell
+# 在backend目录、已获目标写入许可且对应用户真实存在时执行
+.venv/Scripts/python.exe -B -X utf8 -m scripts.apply_s05_analytics_migration --database scholarhub_l4_s02_20261020
+.venv/Scripts/python.exe -B -X utf8 -m scripts.publish_analytics --database scholarhub_l4_s02_20261020 --job-id v2-controlled
+.venv/Scripts/python.exe -B -X utf8 -m scripts.publish_analytics --database scholarhub_l4_s02_20261020 --job-id v1-boundary
+```
+
+两表都存在时迁移只校验并返回already_applied；只有一张存在则停止，不删除重建。发布入口只从S04交接索引解析文件，核对computed、零fatal/质量对账、独立验收、版本、归属、窗口和ADS。synthetic、未知job/规则、未完成目录和客户端任意路径不得发布。S05的每日零值/来源字段从已完成DWD离线投影补齐，不修改S04产物。
+
+### 本人API
+
+```text
+GET /api/v1/offline-analytics/batches?dataset_kind=controlled&page=1&page_size=20
+GET /api/v1/offline-analytics/batches/{batch_id}
+```
+
+列表默认business，仅认证本人completed，按cutoff/batch_id倒序；size为1–50，可同时提供period_start/end（1–90日），筛选完整落入周期的批次。响应items/total/page/page_size/empty_reason；无完成批次、周期未匹配和页码超出分别为no_completed_batch/no_matching_batch/page_empty。当前样例为controlled，不指定种类时business空列表是正常状态。
+
+详情固定完整批次，返回元信息、安全source标识、records_summary、tasks_summary、topic_summary、quality和daily；拒绝详情额外日期/分页参数。未登录401；非本人/不存在/未完成404（空结果同样先鉴权）；非法UUID/窗口/分页/未知参数422。客户端不能传owner_user_id/user_id改变范围，管理员也不能跨主体读数据。
+
+任务取消仍在分母，199/200保持99.500000%；无任务的percent为NULL，已知0和缺失时长分别表达。提交修订/教师确认是保存的过程事实，ACCEPT不等同代码运行测试通过。GET不调用模型、启动进程、运行Spark、导入文件或回写业务记录。
+
+### 已验证边界与恢复
+
+[S05报告](../开发相关文档/阶段报告/AI大数据改造/V2/S05-完成报告.md)记录真实MySQL/认证ASGI请求、空批次越权、失败后旧批次读取、重复发布、未知版本拒绝及两种双连接并发顺序。[S06交接索引](../开发相关文档/阶段报告/AI大数据改造/V2/S05-S06交接索引.json)区分2个正式Spark批次和9个权限/事务fixture；不要把列表最新测试批次用作正式演示。
+
+当前隔离库保留11批次/15日行，上限12/40；不要重跑创建fixture的整套历史脚本。同一正式job重放为no-op，未完成本批可受控重试，完成历史不删不覆盖。普通业务库未迁移，端口/浏览器/离线页面接入留S06；完整[发布与恢复说明](../开发相关文档/阶段报告/AI大数据改造/V2/S05-发布与接口契约.md)以本轮实际边界为准。
 
 真实 MySQL 隔离验收脚本会创建虚构账号、校园身份、项目、评论和治理记录，验证申请、审核、固定快照、重复请求、举报、下架、复核、权限与通知，并在结束时清理：
 

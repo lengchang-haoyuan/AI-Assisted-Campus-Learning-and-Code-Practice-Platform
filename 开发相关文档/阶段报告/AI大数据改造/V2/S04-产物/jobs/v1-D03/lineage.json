@@ -1,0 +1,25 @@
+{
+  "snapshot_id": "fixture-D03",
+  "job_id": "v1-D03",
+  "counts": {
+    "record_facts": 2,
+    "task_facts": 1,
+    "cohort_facts": 1
+  },
+  "key_columns": {
+    "record_facts": [
+      "id",
+      "feedback_id"
+    ],
+    "task_facts": [
+      "id"
+    ],
+    "cohort_facts": [
+      "submission_id",
+      "latest_version_id",
+      "first_feedback_id"
+    ]
+  },
+  "no_join_amplification": true,
+  "task_semantics": "current_snapshot_not_historical_state_changes"
+}

@@ -1,0 +1,33 @@
+{
+  "job_id": "v1-controlled",
+  "snapshot_id": "s03-owner3-restored",
+  "input_batch_id": "16becd7d-fa30-4f57-afa0-f5170f63741e",
+  "rule_version": "quality-1.0",
+  "metric_version": "learning-process-1.0",
+  "schema_version": "scholarhub-source-1.0",
+  "dataset_kind": "controlled",
+  "owner_user_id": 3,
+  "started_at": "2026-10-20T12:29:16.805772+00:00",
+  "source_cutoff": "2026-10-20T07:34:07.134833Z",
+  "period_start": "2026-10-19",
+  "period_end": "2026-10-20",
+  "business_timezone": "Asia/Shanghai",
+  "input_path": "/mnt/c/Users/Administrator/Desktop/毕业设计/ScholarHub/开发相关文档/阶段报告/AI大数据改造/V2/S03-ODS/snapshots/s03-owner3-restored",
+  "spark_version": "4.2.0",
+  "python_version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "master": "local[2]",
+  "shuffle_partitions": "8",
+  "driver_memory": "2g",
+  "java_version": "17.0.20.1",
+  "timezone": "UTC",
+  "arguments": [
+    "/mnt/c/Users/Administrator/Desktop/毕业设计/ScholarHub/analytics/verify_s04.py",
+    "--output",
+    "/home/administrator/scholarhub-analytics/s04-20261020",
+    "--group",
+    "small",
+    "--tag",
+    "v1"
+  ],
+  "state": "running"
+}

@@ -1,0 +1,15 @@
+{
+  "created_ids": [
+    6,
+    7
+  ],
+  "remaining_S03_ids": [],
+  "scope": "only S03 marked rows",
+  "retained_S02_ids": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "no_model_calls": true
+}

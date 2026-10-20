@@ -1,0 +1,9 @@
+{
+  "main": "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+  "boundary": "b9378c01-70b2-4456-9d44-b579617375d1",
+  "empty_permission_fixture": "45c55b05-ff63-4cc6-b6ca-734146054710",
+  "prepared_fixture": "989b5df8-b382-43bc-91de-5bf0a09cd2bf",
+  "retried_transaction_fixture": "246f4714-1f47-4150-92d1-40c315397591",
+  "failed_validation_fixture": "97db22ac-38e6-432c-ac5c-e49d52a0c249",
+  "concurrent_fixture": "8775c62f-ce8b-4068-92c8-425bc225c0dc"
+}

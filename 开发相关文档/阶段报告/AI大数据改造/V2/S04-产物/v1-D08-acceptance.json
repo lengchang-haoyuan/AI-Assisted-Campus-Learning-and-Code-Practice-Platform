@@ -1,0 +1,12 @@
+{
+  "job_id": "v1-D08",
+  "snapshot_id": "fixture-D08",
+  "state": "validated",
+  "spark_python_all_subjects_equal": true,
+  "frozen_assertions_passed": true,
+  "subjects": 1,
+  "spark_seconds": 15.596259600999986,
+  "python_compute_seconds": 0.00016309599999431157,
+  "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+  "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-D08"
+}

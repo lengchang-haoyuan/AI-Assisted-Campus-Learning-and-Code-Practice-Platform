@@ -1,0 +1,24 @@
+{
+  "records": 10000,
+  "known_minutes": 421978,
+  "known_duration_count": 8000,
+  "missing_duration_count": 2000,
+  "known_zero_count": 1000,
+  "exact_duplicates": 200,
+  "tasks": 2500,
+  "task_statuses": {
+    "completed": 1250,
+    "in_progress": 375,
+    "pending": 625,
+    "cancelled": 250
+  },
+  "cohort_count": 100,
+  "confirmed_count": 60,
+  "revised_count": 30,
+  "first_pass_confirmed_count": 30,
+  "revised_confirmed_count": 30,
+  "returned_latest_count": 20,
+  "pending_latest_count": 20,
+  "missing_teaching_record_links": 0,
+  "trusted_teaching_count": 60
+}

@@ -1,0 +1,15 @@
+{
+  "case_id": "D14",
+  "name": "空批次越权",
+  "kind": "authorization_policy",
+  "input_changes": [],
+  "expected_status": "validated",
+  "expected_assertions": {
+    "owner_1001_status": 200,
+    "other_owner_status": 404,
+    "nonexistent_status": 404,
+    "unauthenticated_status": 401,
+    "ordinary_get_spark_calls": 0,
+    "ordinary_get_model_calls": 0
+  }
+}

@@ -1,0 +1,25 @@
+ M frontend/src/components/WorkflowExecutionPanel.vue
+ M frontend/src/styles/workflow-execution.css
+ M 开发相关文档/AI提示词/README.md
+ M 开发相关文档/README.md
+ M 开发相关文档/开发日志/开发操作日志.md
+?? .rivet/
+?? frontend/scripts/verify-workflow-results.cjs
+?? frontend/src/components/WorkflowNodeResultContent.vue
+?? frontend/src/styles/workflow-node-result.css
+?? tmp/
+?? 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包.zip
+?? 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/
+?? 开发相关文档/开发规划/20261016-ScholarHub大数据毕业设计新版实施方案.md
+?? 开发相关文档/开发规划/20261016-ScholarHub大数据毕业设计新版实施方案.pdf
+?? 开发相关文档/开发规划/20261017-WSL部署完成后的项目改造指南.md
+?? 开发相关文档/开发规划/20261017-WSL部署完成后的项目改造指南.pdf
+?? 开发相关文档/开发规划/AI实践与大数据实施契约.md
+?? 开发相关文档/测试证据/20261018-工作流结果/
+?? 开发相关文档/阶段报告/20261016-大数据毕设新版实施方案交付报告.md
+?? 开发相关文档/阶段报告/20261017-WSL部署后项目改造指南交付报告.md
+?? 开发相关文档/阶段报告/20261018-145436-本地项目启动报告.md
+?? 开发相关文档/阶段报告/20261018-150719-工作流节点结果模块化报告.md
+?? 开发相关文档/阶段报告/20261018-AI实践与大数据阶段DOCX交付报告.md
+?? 开发相关文档/阶段报告/20261019-AI实践与大数据阶段提示词V2调整报告.md
+?? 开发相关文档/阶段报告/AI大数据改造/

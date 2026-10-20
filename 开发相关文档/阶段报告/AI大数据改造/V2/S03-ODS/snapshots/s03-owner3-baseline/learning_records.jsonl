@@ -1,0 +1,4 @@
+{"id": 1, "user_id": 3, "project_id": 1, "course_id": null, "task_id": null, "record_type": "project", "duration_minutes": 30, "occurred_at": "2026-10-19T15:30:00.000000Z", "created_at": "2026-10-20T07:05:34.957402Z"}
+{"id": 2, "user_id": 3, "project_id": 1, "course_id": null, "task_id": null, "record_type": "project", "duration_minutes": 45, "occurred_at": "2026-10-19T16:30:00.000000Z", "created_at": "2026-10-20T07:05:34.979572Z"}
+{"id": 3, "user_id": 3, "project_id": null, "course_id": null, "task_id": null, "record_type": "task", "duration_minutes": null, "occurred_at": "2026-10-20T07:05:39.674175Z", "created_at": "2026-10-20T07:05:39.675344Z"}
+{"id": 4, "user_id": 3, "project_id": null, "course_id": null, "task_id": null, "record_type": "task", "duration_minutes": null, "occurred_at": "2026-10-20T07:05:39.750254Z", "created_at": "2026-10-20T07:05:39.751801Z"}

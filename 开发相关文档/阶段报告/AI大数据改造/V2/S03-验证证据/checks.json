@@ -1,0 +1,156 @@
+[
+  {
+    "name": "source_initial_count",
+    "actual": 4,
+    "expected": 4,
+    "passed": true
+  },
+  {
+    "name": "A_known_minutes",
+    "actual": 105,
+    "expected": 105,
+    "passed": true
+  },
+  {
+    "name": "held_snapshot_sees_preupdate_rows",
+    "actual": {
+      "projects": 1,
+      "daily_tasks": 4,
+      "learning_records": 6,
+      "teaching_classes": 1,
+      "teaching_assignments": 3,
+      "class_memberships": 2,
+      "campus_memberships": 2,
+      "submissions": 3,
+      "submission_versions": 4,
+      "feedback": 3,
+      "ai_requests_aux": 1,
+      "source_claim_projection": 2
+    },
+    "expected": {
+      "projects": 1,
+      "daily_tasks": 4,
+      "learning_records": 6,
+      "teaching_classes": 1,
+      "teaching_assignments": 3,
+      "class_memberships": 2,
+      "campus_memberships": 2,
+      "submissions": 3,
+      "submission_versions": 4,
+      "feedback": 3,
+      "ai_requests_aux": 1,
+      "source_claim_projection": 2
+    },
+    "passed": true
+  },
+  {
+    "name": "writer_read_connection_distinct",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "B_known_minutes",
+    "actual": 90,
+    "expected": 90,
+    "passed": true
+  },
+  {
+    "name": "B_deleted_absent",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "B_updated_value",
+    "actual": 15,
+    "expected": 15,
+    "passed": true
+  },
+  {
+    "name": "A_files_unchanged",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "A_repeated_read_stable",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "completed_overwrite_rejected",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "A_after_rejected_overwrite_unchanged",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "midread_failure_seen",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "failed_not_published",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "one_failed_attempt",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "failed_attempt_reader_rejected",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "retry_new_pending_succeeded",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "retry_same_input",
+    "actual": {
+      "projects": 1,
+      "daily_tasks": 4,
+      "learning_records": 5,
+      "teaching_classes": 1,
+      "teaching_assignments": 3,
+      "class_memberships": 2,
+      "campus_memberships": 2,
+      "submissions": 3,
+      "submission_versions": 4,
+      "feedback": 3,
+      "ai_requests_aux": 1,
+      "source_claim_projection": 2
+    },
+    "expected": {
+      "projects": 1,
+      "daily_tasks": 4,
+      "learning_records": 5,
+      "teaching_classes": 1,
+      "teaching_assignments": 3,
+      "class_memberships": 2,
+      "campus_memberships": 2,
+      "submissions": 3,
+      "submission_versions": 4,
+      "feedback": 3,
+      "ai_requests_aux": 1,
+      "source_claim_projection": 2
+    },
+    "passed": true
+  }
+]

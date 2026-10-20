@@ -1,0 +1,3 @@
+{"id": 1, "class_id": 1, "assignment_id": 1, "student_membership_id": 2, "assignment_due_at": "2026-10-27T07:05:39.452646Z", "latest_version_number": 2, "revision": 4, "created_at": "2026-10-20T07:05:39.521697Z", "updated_at": "2026-10-20T07:05:39.676165Z"}
+{"id": 2, "class_id": 1, "assignment_id": 2, "student_membership_id": 2, "assignment_due_at": "2026-10-27T07:05:39.476162Z", "latest_version_number": 1, "revision": 2, "created_at": "2026-10-20T07:05:39.737672Z", "updated_at": "2026-10-20T07:05:39.752538Z"}
+{"id": 3, "class_id": 1, "assignment_id": 3, "student_membership_id": 2, "assignment_due_at": "2026-10-27T07:05:39.493558Z", "latest_version_number": 1, "revision": 1, "created_at": "2026-10-20T07:05:39.762764Z", "updated_at": "2026-10-20T07:05:39.763604Z"}

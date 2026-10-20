@@ -1,0 +1,227 @@
+{
+  "group": "small",
+  "results": [
+    {
+      "job_id": "v1-D00",
+      "snapshot_id": "fixture-D00",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": true,
+      "subjects": 1,
+      "spark_seconds": 27.268010216999983,
+      "python_compute_seconds": 0.0002896450000093864,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-D00"
+    },
+    {
+      "job_id": "v1-D01",
+      "snapshot_id": "fixture-D01",
+      "status": "expected_rejection",
+      "reason": "duplicate_key_conflict",
+      "elapsed_seconds": 4.802361219999966
+    },
+    {
+      "job_id": "v1-D02",
+      "snapshot_id": "fixture-D02",
+      "status": "expected_rejection",
+      "reason": "required_key_missing",
+      "elapsed_seconds": 4.63440467800001
+    },
+    {
+      "job_id": "v1-D03",
+      "snapshot_id": "fixture-D03",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": true,
+      "subjects": 1,
+      "spark_seconds": 17.504612071999986,
+      "python_compute_seconds": 0.00012601600002426494,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-D03"
+    },
+    {
+      "job_id": "v1-D04",
+      "snapshot_id": "fixture-D04",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": true,
+      "subjects": 1,
+      "spark_seconds": 17.980538302000014,
+      "python_compute_seconds": 0.00026838599995926415,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-D04"
+    },
+    {
+      "job_id": "v1-D05",
+      "snapshot_id": "fixture-D05",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": true,
+      "subjects": 1,
+      "spark_seconds": 16.660887435999996,
+      "python_compute_seconds": 0.00021576199998207812,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-D05"
+    },
+    {
+      "job_id": "v1-D06",
+      "snapshot_id": "fixture-D06",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": true,
+      "subjects": 1,
+      "spark_seconds": 16.418793719999996,
+      "python_compute_seconds": 0.00017584699997996722,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-D06"
+    },
+    {
+      "job_id": "v1-D07",
+      "snapshot_id": "fixture-D07",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": true,
+      "subjects": 1,
+      "spark_seconds": 11.600914143000011,
+      "python_compute_seconds": 4.509100000404942e-05,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-D07"
+    },
+    {
+      "job_id": "v1-D08",
+      "snapshot_id": "fixture-D08",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": true,
+      "subjects": 1,
+      "spark_seconds": 15.596259600999986,
+      "python_compute_seconds": 0.00016309599999431157,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-D08"
+    },
+    {
+      "job_id": "v1-D09",
+      "snapshot_id": "fixture-D09",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": true,
+      "subjects": 1,
+      "spark_seconds": 16.32053753100007,
+      "python_compute_seconds": 0.0001665800000409945,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-D09"
+    },
+    {
+      "job_id": "v1-D10",
+      "snapshot_id": "fixture-D10",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": true,
+      "subjects": 1,
+      "spark_seconds": 15.880341187999989,
+      "python_compute_seconds": 0.000166554999964319,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-D10"
+    },
+    {
+      "job_id": "v1-D11",
+      "snapshot_id": "fixture-D11",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": true,
+      "subjects": 1,
+      "spark_seconds": 15.932997054999987,
+      "python_compute_seconds": 0.0003134350000664199,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-D11"
+    },
+    {
+      "job_id": "v1-D12",
+      "snapshot_id": "fixture-D12",
+      "status": "expected_rejection",
+      "reason": "dangling_relation",
+      "elapsed_seconds": 8.585698713999932
+    },
+    {
+      "job_id": "v1-D15",
+      "snapshot_id": "fixture-D15",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": true,
+      "subjects": 1,
+      "spark_seconds": 15.86257659699993,
+      "python_compute_seconds": 0.00016639499995108054,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-D15"
+    },
+    {
+      "job_id": "v1-D16",
+      "snapshot_id": "fixture-D16",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": true,
+      "subjects": 1,
+      "spark_seconds": 16.517191588999935,
+      "python_compute_seconds": 0.0001668270000436678,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-D16"
+    },
+    {
+      "job_id": "v1-M01",
+      "snapshot_id": "fixture-M01",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": true,
+      "subjects": 3,
+      "spark_seconds": 16.726674548999995,
+      "python_compute_seconds": 0.00030984699992586684,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-M01"
+    },
+    {
+      "job_id": "v1-controlled",
+      "snapshot_id": "s03-owner3-restored",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": false,
+      "subjects": 1,
+      "spark_seconds": 16.146779578000064,
+      "python_compute_seconds": 0.00016622299995106005,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-controlled"
+    },
+    {
+      "job_id": "v1-boundary",
+      "snapshot_id": "s03-owner4-boundary",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": false,
+      "subjects": 1,
+      "spark_seconds": 11.657301250000046,
+      "python_compute_seconds": 0.00021562900008120778,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-boundary"
+    }
+  ],
+  "spark_startup_seconds": 3.2814694900000063,
+  "whole_process_seconds": 270.791041824,
+  "memory": {
+    "sample_seconds": 1,
+    "samples": 270,
+    "peak_process_tree_rss_bytes": 3375292416,
+    "per_process_peak_bytes": {
+      "1671:python": 36020224,
+      "1673:java": 3339272192
+    },
+    "method": "/proc statm; Python driver + descendant JVM/workers; sampled peak, not exact maximum"
+  },
+  "command": [
+    "/mnt/c/Users/Administrator/Desktop/毕业设计/ScholarHub/analytics/verify_s04.py",
+    "--output",
+    "/home/administrator/scholarhub-analytics/s04-20261020",
+    "--group",
+    "small",
+    "--tag",
+    "v1"
+  ]
+}

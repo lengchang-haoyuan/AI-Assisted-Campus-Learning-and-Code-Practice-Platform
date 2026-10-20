@@ -1,0 +1,52 @@
+[
+  {
+    "method": "POST",
+    "path": "/records",
+    "status": 201,
+    "response": {
+      "id": 6,
+      "duration_minutes": 10,
+      "occurred_at": "2026-10-20T07:34:06.885270Z",
+      "record_type": "study"
+    },
+    "at": "2026-10-20T07:34:06.985064+00:00"
+  },
+  {
+    "method": "POST",
+    "path": "/records",
+    "status": 201,
+    "response": {
+      "id": 7,
+      "duration_minutes": 20,
+      "occurred_at": "2026-10-20T07:34:06.986091Z",
+      "record_type": "study"
+    },
+    "at": "2026-10-20T07:34:06.994574+00:00"
+  },
+  {
+    "method": "PUT",
+    "path": "/records/6",
+    "status": 200,
+    "response": {
+      "id": 6,
+      "duration_minutes": 15,
+      "occurred_at": "2026-10-20T07:34:06.885270Z",
+      "record_type": "study"
+    },
+    "at": "2026-10-20T07:34:07.033417+00:00"
+  },
+  {
+    "method": "DELETE",
+    "path": "/records/7",
+    "status": 204,
+    "response": {},
+    "at": "2026-10-20T07:34:07.040424+00:00"
+  },
+  {
+    "method": "DELETE",
+    "path": "/records/6",
+    "status": 204,
+    "response": {},
+    "at": "2026-10-20T07:34:07.130902+00:00"
+  }
+]

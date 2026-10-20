@@ -1,0 +1,44 @@
+{
+  "group": "lifecycle",
+  "results": [
+    {
+      "job_id": "v1-retry",
+      "snapshot_id": "fixture-D00",
+      "state": "validated",
+      "spark_python_all_subjects_equal": true,
+      "frozen_assertions_passed": false,
+      "subjects": 1,
+      "spark_seconds": 17.267950883000026,
+      "python_compute_seconds": 0.00022918800004845252,
+      "python_input_read_seconds": 0.004129766999994899,
+      "comparison": "same files, complete relation/window/NULL rules; Python reference validates relations once per subject; not optimized SQL baseline",
+      "output": "/home/administrator/scholarhub-analytics/s04-20261020/jobs/v1-retry",
+      "retry_new_attempt": true,
+      "failed_dwd_not_published": true,
+      "duplicate_job_rejected": true,
+      "unknown_version_rejected": true,
+      "completed_bytes_unchanged": true
+    }
+  ],
+  "spark_startup_seconds": 3.0849953780000305,
+  "whole_process_seconds": 43.58392659100002,
+  "memory": {
+    "sample_seconds": 1,
+    "samples": 43,
+    "peak_process_tree_rss_bytes": 3151753216,
+    "per_process_peak_bytes": {
+      "14348:python": 34738176,
+      "14350:java": 3117015040
+    },
+    "method": "/proc statm; Python driver + descendant JVM/workers; sampled peak, not exact maximum"
+  },
+  "command": [
+    "/mnt/c/Users/Administrator/Desktop/毕业设计/ScholarHub/analytics/verify_s04.py",
+    "--output",
+    "/home/administrator/scholarhub-analytics/s04-20261020",
+    "--group",
+    "lifecycle",
+    "--tag",
+    "v1"
+  ]
+}

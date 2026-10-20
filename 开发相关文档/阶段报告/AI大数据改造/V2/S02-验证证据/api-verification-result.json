@@ -1,0 +1,19 @@
+{
+  "status": "passed_after_harness_status_assertion_corrections",
+  "database": "scholarhub_l4_s02_20261020",
+  "run_marker": "s02_3e08a80a",
+  "api_requests": 496,
+  "checks": 52,
+  "fake_provider_calls": 1,
+  "real_model_calls": 0,
+  "source_code_changes": 0,
+  "retained_for_S03": true,
+  "first_run_exit_code": 1,
+  "first_resume_exit_code": 1,
+  "final_resume_exit_code": 0,
+  "harness_corrections": [
+    "Agent response status completed, not succeeded",
+    "other-owner Agent result returns 404, not 403"
+  ],
+  "resume_wrote_source_rows": false
+}

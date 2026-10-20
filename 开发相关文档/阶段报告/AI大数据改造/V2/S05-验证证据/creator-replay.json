@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "first_creator_waited_for_second_publication": true,
+  "held_connections": [
+    {
+      "connection_id": 24,
+      "batch_id": "bdb4b1d2-12ca-4d9f-9436-580363353d5c",
+      "replayed": true
+    },
+    {
+      "connection_id": 25,
+      "batch_id": "bdb4b1d2-12ca-4d9f-9436-580363353d5c",
+      "replayed": false
+    }
+  ],
+  "daily_rows": 2,
+  "counts": {
+    "batches": 11,
+    "daily_rows": 15
+  }
+}

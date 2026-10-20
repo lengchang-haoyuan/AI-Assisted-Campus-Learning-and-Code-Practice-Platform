@@ -1,0 +1,27 @@
+{
+  "job_id": "v2-missing-table",
+  "snapshot_id": "fixture-missing",
+  "input_batch_id": "11111111-1111-4111-8111-111111111111",
+  "rule_version": "quality-1.0",
+  "metric_version": "learning-process-1.0",
+  "schema_version": "scholarhub-source-1.0",
+  "dataset_kind": "controlled",
+  "owner_user_id": 1001,
+  "started_at": "2026-10-20T12:33:00.915194+00:00",
+  "source_cutoff": "2026-10-03T16:00:00Z",
+  "period_start": "2026-10-01",
+  "period_end": "2026-10-03",
+  "business_timezone": "Asia/Shanghai",
+  "input_path": "/mnt/c/Users/Administrator/AppData/Local/Temp/ScholarHub-S04-20261020/quality-types/missing/input.json",
+  "spark_version": "4.2.0",
+  "python_version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "master": "local[2]",
+  "shuffle_partitions": "8",
+  "driver_memory": "2g",
+  "java_version": "17.0.20.1",
+  "timezone": "UTC",
+  "arguments": [
+    "/mnt/c/Users/Administrator/AppData/Local/Temp/ScholarHub-S04-20261020/verify_final.py"
+  ],
+  "state": "running"
+}

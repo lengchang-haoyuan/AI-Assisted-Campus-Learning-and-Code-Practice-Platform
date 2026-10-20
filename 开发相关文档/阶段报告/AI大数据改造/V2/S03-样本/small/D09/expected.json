@@ -1,0 +1,23 @@
+{
+  "case_id": "D09",
+  "name": "时长全部未知",
+  "kind": "data",
+  "input_changes": [
+    {
+      "op": "set",
+      "table": "learning_records",
+      "match": {},
+      "values": {
+        "duration_minutes": null
+      }
+    }
+  ],
+  "expected_status": "validated",
+  "expected_assertions": {
+    "records.valid_unique_rows": 5,
+    "records.known_minutes": 0,
+    "records.known_duration_count": 0,
+    "records.missing_duration_count": 5,
+    "records.known_zero_count": 0
+  }
+}

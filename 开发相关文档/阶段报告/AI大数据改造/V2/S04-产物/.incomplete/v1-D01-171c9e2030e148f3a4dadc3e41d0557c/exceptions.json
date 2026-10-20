@@ -1,0 +1,8 @@
+[
+  {
+    "table_name": "learning_records",
+    "source_key": "1",
+    "source_row": null,
+    "reason": "duplicate_key_conflict"
+  }
+]

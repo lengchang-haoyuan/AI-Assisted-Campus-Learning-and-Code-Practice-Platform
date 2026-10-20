@@ -1,0 +1,14 @@
+开发相关文档/测试证据/20261018-工作流结果/frontend-build.log:98: trailing whitespace.
++[plugin builtin:vite-reporter] 
+开发相关文档/测试证据/20261020-GitHub同步/frontend-build.log:98: trailing whitespace.
++[plugin builtin:vite-reporter] 
+开发相关文档/阶段报告/AI大数据改造/V2/S03-验证证据/source-diff-before.patch:9: trailing whitespace.
++ 
+开发相关文档/阶段报告/AI大数据改造/V2/S03-验证证据/source-diff-before.patch:14: trailing whitespace.
++ 
+开发相关文档/阶段报告/AI大数据改造/V2/S03-验证证据/validate_delivery.py:48: new blank line at EOF.
+开发相关文档/阶段报告/AI大数据改造/V2/S04-验证证据/source-diff.patch:9: trailing whitespace.
++ 
+开发相关文档/阶段报告/AI大数据改造/V2/S04-验证证据/source-diff.patch:14: trailing whitespace.
++ 
+开发相关文档/阶段报告/AI大数据改造/V2/S05-验证证据/verify_s05_resume.py:188: new blank line at EOF.

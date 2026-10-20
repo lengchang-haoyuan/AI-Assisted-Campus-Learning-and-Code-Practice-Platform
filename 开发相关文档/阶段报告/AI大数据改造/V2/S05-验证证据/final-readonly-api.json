@@ -1,0 +1,451 @@
+{
+  "status": "passed",
+  "requests": [
+    {
+      "path": "/offline-analytics/batches",
+      "identity": 3,
+      "status": 200,
+      "response": {
+        "items": [],
+        "total": 0,
+        "page": 1,
+        "page_size": 20,
+        "empty_reason": "no_completed_batch"
+      },
+      "process_model_publish_calls": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "/offline-analytics/batches?dataset_kind=controlled&period_start=2025-01-01&period_end=2025-01-02",
+      "identity": 3,
+      "status": 200,
+      "response": {
+        "items": [],
+        "total": 0,
+        "page": 1,
+        "page_size": 20,
+        "empty_reason": "no_matching_batch"
+      },
+      "process_model_publish_calls": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "/offline-analytics/batches?dataset_kind=controlled&page=999",
+      "identity": 3,
+      "status": 200,
+      "response": {
+        "items": [],
+        "total": 8,
+        "page": 999,
+        "page_size": 20,
+        "empty_reason": "page_empty"
+      },
+      "process_model_publish_calls": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "/offline-analytics/batches?dataset_kind=controlled",
+      "identity": 3,
+      "status": 200,
+      "response": {
+        "items": [
+          {
+            "batch_id": "e9c1fc11-14b3-4306-953f-862c37f992c4",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:57:03.027057Z"
+          },
+          {
+            "batch_id": "bdb4b1d2-12ca-4d9f-9436-580363353d5c",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T13:02:32.850121Z"
+          },
+          {
+            "batch_id": "8775c62f-ce8b-4068-92c8-425bc225c0dc",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:55:20.311924Z"
+          },
+          {
+            "batch_id": "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:52:26.536762Z"
+          },
+          {
+            "batch_id": "45c55b05-ff63-4cc6-b6ca-734146054710",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.713149Z"
+          },
+          {
+            "batch_id": "297855ea-edfd-442e-9dad-2877abe3a884",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.946643Z"
+          },
+          {
+            "batch_id": "246f4714-1f47-4150-92d1-40c315397591",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:55:20.290365Z"
+          },
+          {
+            "batch_id": "16944674-269f-4aa1-8ec1-1f207e218739",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.972055Z"
+          }
+        ],
+        "total": 8,
+        "page": 1,
+        "page_size": 20,
+        "empty_reason": null
+      },
+      "process_model_publish_calls": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "/offline-analytics/batches/77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+      "identity": 3,
+      "status": 200,
+      "response": {
+        "batch_id": "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+        "dataset_kind": "controlled",
+        "period_start": "2026-10-19",
+        "period_end": "2026-10-20",
+        "business_timezone": "Asia/Shanghai",
+        "source_cutoff": "2026-10-20T07:34:07.134833Z",
+        "schema_version": "scholarhub-source-1.0",
+        "metric_version": "learning-process-1.0",
+        "rule_version": "quality-1.0",
+        "published_at": "2026-10-20T12:52:26.536762Z",
+        "source": {
+          "dataset_id": "s02-controlled-owner-3",
+          "snapshot_id": "s03-owner3-restored",
+          "job_id": "v2-controlled"
+        },
+        "records_summary": {
+          "valid_unique_rows": 4,
+          "known_minutes": 75,
+          "known_duration_count": 2,
+          "missing_duration_count": 2,
+          "known_zero_count": 0,
+          "active_days": 2,
+          "trusted_teaching_count": 2,
+          "unverified_claim_count": 0,
+          "ordinary_count": 2,
+          "raw_rows": 4,
+          "exact_duplicates": 0
+        },
+        "tasks_summary": {
+          "total": 4,
+          "completed": 2,
+          "cancelled": 1,
+          "overdue_unfinished": 1,
+          "completion_rate": {
+            "numerator": 2,
+            "denominator": 4,
+            "percent": "50.000000",
+            "display": "50.0%"
+          }
+        },
+        "topic_summary": {
+          "cohort_count": 3,
+          "revised_count": 1,
+          "confirmed_count": 2,
+          "returned_ever_count": 1,
+          "first_pass_confirmed_count": 1,
+          "revised_confirmed_count": 1,
+          "pending_latest_count": 1,
+          "revision_attempts": 1,
+          "first_review_covered": 2,
+          "first_review_wait_sum_minutes": 0.0013899833333333334,
+          "first_review_wait_mean_minutes": "0.000695",
+          "missing_teaching_record_links": 0,
+          "revised_rate": {
+            "numerator": 1,
+            "denominator": 3,
+            "percent": "33.333333",
+            "display": "33.3%"
+          },
+          "confirmation_rate": {
+            "numerator": 2,
+            "denominator": 3,
+            "percent": "66.666667",
+            "display": "66.7%"
+          },
+          "revised_confirmation_rate": {
+            "numerator": 1,
+            "denominator": 1,
+            "percent": "100.000000",
+            "display": "100.0%"
+          },
+          "first_review_histogram": {
+            "[0,60)": 2,
+            "[60,240)": 0,
+            "[240,1440)": 0,
+            "[1440,+inf)": 0
+          }
+        },
+        "quality": {
+          "reconciled": true,
+          "fatal_errors": 0
+        },
+        "daily": [
+          {
+            "metric_date": "2026-10-19",
+            "records": 1,
+            "known_minutes": 30,
+            "known_duration_count": 1,
+            "missing_duration_count": 0,
+            "known_zero_count": 0,
+            "ordinary_count": 1,
+            "trusted_teaching_count": 0,
+            "unverified_claim_count": 0,
+            "task_total": 1,
+            "completed": 0,
+            "cancelled": 0,
+            "overdue_unfinished": 1,
+            "cohort_count": 0,
+            "revised_count": 0,
+            "confirmed_count": 0
+          },
+          {
+            "metric_date": "2026-10-20",
+            "records": 3,
+            "known_minutes": 45,
+            "known_duration_count": 1,
+            "missing_duration_count": 2,
+            "known_zero_count": 0,
+            "ordinary_count": 1,
+            "trusted_teaching_count": 2,
+            "unverified_claim_count": 0,
+            "task_total": 3,
+            "completed": 2,
+            "cancelled": 1,
+            "overdue_unfinished": 0,
+            "cohort_count": 3,
+            "revised_count": 1,
+            "confirmed_count": 2
+          }
+        ]
+      },
+      "process_model_publish_calls": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "/offline-analytics/batches/77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+      "identity": 4,
+      "status": 404,
+      "response": {
+        "error": {
+          "code": "resource_not_found",
+          "message": "分析批次不存在",
+          "request_id": "2fcf78d459694bac852c72c302d3b749"
+        }
+      },
+      "process_model_publish_calls": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "/offline-analytics/batches/45c55b05-ff63-4cc6-b6ca-734146054710",
+      "identity": 3,
+      "status": 200,
+      "response": {
+        "batch_id": "45c55b05-ff63-4cc6-b6ca-734146054710",
+        "dataset_kind": "controlled",
+        "period_start": "2026-10-19",
+        "period_end": "2026-10-20",
+        "business_timezone": "Asia/Shanghai",
+        "source_cutoff": "2026-10-20T07:34:07.134833Z",
+        "schema_version": "scholarhub-source-1.0",
+        "metric_version": "learning-process-1.0",
+        "rule_version": "quality-1.0",
+        "published_at": "2026-10-20T12:54:14.713149Z",
+        "source": {
+          "dataset_id": "s05-permission-fixture",
+          "snapshot_id": "s05-permission-empty",
+          "job_id": "s05-empty-permission-fixture"
+        },
+        "records_summary": {
+          "valid_unique_rows": 0,
+          "known_minutes": 0,
+          "known_duration_count": 0,
+          "missing_duration_count": 0,
+          "known_zero_count": 0,
+          "active_days": 0,
+          "trusted_teaching_count": 0,
+          "unverified_claim_count": 0,
+          "ordinary_count": 0,
+          "raw_rows": 0,
+          "exact_duplicates": 0
+        },
+        "tasks_summary": {
+          "total": 0,
+          "completed": 0,
+          "cancelled": 0,
+          "overdue_unfinished": 0,
+          "completion_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          }
+        },
+        "topic_summary": {
+          "cohort_count": 0,
+          "revised_count": 0,
+          "confirmed_count": 0,
+          "returned_ever_count": 0,
+          "first_pass_confirmed_count": 0,
+          "revised_confirmed_count": 0,
+          "pending_latest_count": 0,
+          "revision_attempts": 0,
+          "first_review_covered": 0,
+          "first_review_wait_sum_minutes": 0.0,
+          "first_review_wait_mean_minutes": null,
+          "missing_teaching_record_links": 0,
+          "revised_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          },
+          "confirmation_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          },
+          "revised_confirmation_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          },
+          "first_review_histogram": {
+            "[0,60)": 0,
+            "[60,240)": 0,
+            "[240,1440)": 0,
+            "[1440,+inf)": 0
+          }
+        },
+        "quality": {
+          "reconciled": true,
+          "fatal_errors": 0,
+          "permission_fixture": true
+        },
+        "daily": []
+      },
+      "process_model_publish_calls": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "/offline-analytics/batches/45c55b05-ff63-4cc6-b6ca-734146054710",
+      "identity": 4,
+      "status": 404,
+      "response": {
+        "error": {
+          "code": "resource_not_found",
+          "message": "分析批次不存在",
+          "request_id": "2c0700c2d028465aa610acc3a0eb0c57"
+        }
+      },
+      "process_model_publish_calls": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "/offline-analytics/batches/45c55b05-ff63-4cc6-b6ca-734146054710",
+      "identity": null,
+      "status": 401,
+      "response": {
+        "error": {
+          "code": "authentication_required",
+          "message": "缺少有效的访问令牌",
+          "request_id": "00f61a1feae942b29807b15911ab3025"
+        }
+      },
+      "process_model_publish_calls": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "GET_DML": [],
+  "credential_values_saved": false
+}

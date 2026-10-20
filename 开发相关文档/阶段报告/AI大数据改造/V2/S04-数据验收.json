@@ -1,0 +1,136 @@
+{
+  "contract_id": "V2-S01-r2",
+  "data_cases": [
+    {
+      "case_id": "D00",
+      "job_id": "v1-D00",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 83
+    },
+    {
+      "case_id": "D01",
+      "job_id": "v1-D01",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 2
+    },
+    {
+      "case_id": "D02",
+      "job_id": "v1-D02",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 2
+    },
+    {
+      "case_id": "D03",
+      "job_id": "v1-D03",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 10
+    },
+    {
+      "case_id": "D04",
+      "job_id": "v1-D04",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 4
+    },
+    {
+      "case_id": "D05",
+      "job_id": "v1-D05",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 7
+    },
+    {
+      "case_id": "D06",
+      "job_id": "v1-D06",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 3
+    },
+    {
+      "case_id": "D07",
+      "job_id": "v1-D07",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 11
+    },
+    {
+      "case_id": "D08",
+      "job_id": "v1-D08",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 3
+    },
+    {
+      "case_id": "D09",
+      "job_id": "v1-D09",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 5
+    },
+    {
+      "case_id": "D10",
+      "job_id": "v1-D10",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 5
+    },
+    {
+      "case_id": "D11",
+      "job_id": "v1-D11",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 6
+    },
+    {
+      "case_id": "D12",
+      "job_id": "v1-D12",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 2
+    },
+    {
+      "case_id": "D15",
+      "job_id": "v1-D15",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 6
+    },
+    {
+      "case_id": "D16",
+      "job_id": "v1-D16",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 7
+    },
+    {
+      "case_id": "M01",
+      "job_id": "v1-M01",
+      "status": "passed",
+      "frozen_assertion_leaf_count": 22
+    }
+  ],
+  "data_case_count": 15,
+  "M01_subject_count": 3,
+  "frozen_assertion_leaf_count": 178,
+  "all_frozen_data_assertions_passed": true,
+  "controlled_matches_S03_frozen_answer": true,
+  "boundary_matches_S03_frozen_answer": true,
+  "scale_100_subjects_match_S03_frozen_answers": true,
+  "S01_data_dimensions": {
+    "cohort_and_version": [
+      30,
+      30
+    ],
+    "source_relations": [
+      20,
+      20
+    ],
+    "numbers_null": [
+      20,
+      20
+    ],
+    "time_quality": [
+      20,
+      20
+    ]
+  },
+  "data_score": {
+    "earned": 90,
+    "available": 90
+  },
+  "publication_and_authorization_10_points": "not_run_S05",
+  "overall_project_score": null,
+  "J1_explanation_score": null,
+  "J1_status": "not_run_S06_no_model_authorization",
+  "authoritative_scope": "data assertions and source provenance only; not model quality or graduation-wide acceptance",
+  "early_acceptance_flag_note": "v1 runner frozen_assertions_passed=false meant no expected argument at that call; controlled/boundary/scale are checked against original S03 answers here. Later runner uses null for not supplied. Original files retained."
+}
