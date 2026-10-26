@@ -1,0 +1,833 @@
+{
+  "status": "passed",
+  "completed_at": "2026-10-21T21:56:54.836092+08:00",
+  "scope": "this_J1_run_local_checks_only_not_quality_pass",
+  "provider_attempts": 1,
+  "http_request_events": 1,
+  "automatic_retries": 0,
+  "actual_request_matches_frozen_input": true,
+  "raw_response_revalidation_identical": true,
+  "calibration_passed": false,
+  "analysis_run": false,
+  "local_links_checked": 200,
+  "local_links": [
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "authorization.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "../../S06-J1准备/20261021-r1/README.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "parameters.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "ledger.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "pricing-basis.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "raw/G01-request.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "raw/G01-input.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "raw/G01-response.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "raw/G01-provider-result.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "raw/G01-parsed.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "raw/G01-validation.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "rule-summary.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "final-qa.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "validate_j1_response.py"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "../../S06-完成报告.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md",
+      "to": "../../../../../任务交接.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/authorization.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/source-api.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/prepare-sources.log"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-输入索引.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/e2e-spark-final.log"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-数据验收.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-产物/jobs/s06-e2e-main/manifest.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/main-independent-frozen-answer.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/boundary-independent-frozen-answer-r2.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/completed-validation.log"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/prepare-main.log"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/prepare-boundary.log"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/publication-verification.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/publish-primary-cli.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-发布结果.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/frontend-data/verify-data.cjs"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/browser/final/run_real_browser.py"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/browser/final/verify-real-browser.cjs"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/browser/mock-states/verification.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/final-qa.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/browser/final/desktop.png"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/browser/final/mobile.png"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/browser/final/network-failure-keeps-batch.png"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/browser/final/boundary-199-of-200.png"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/browser/final/verification.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/browser/final/server-observation.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/frozen-cases-recheck.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/S01-验收矩阵.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-实验/实验结果.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-实验/实验方法.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-实验/all-rounds.csv"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-实验/qa.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/trace-timings.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-演示与证据索引.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/cleanup-final-state.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-验证证据/cleanup.log"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/git-baseline.txt"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/README.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/解释稿-v1.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/source-numbers.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/judge-r2-system.txt"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/G01-input.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/G02-input.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/G03-input.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/calibration-expected.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/analysis-input.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/response-contract.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/budget-ledger.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/not-run.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/verify_preparation.py"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/verification.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1准备/20261021-r1/final-qa.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "../../../任务交接.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/authorization.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/parameters.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/pricing-basis.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/final-qa.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/raw/G01-response.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/raw/G01-parsed.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/raw/G01-validation.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/rule-summary.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/ledger.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/README.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md",
+      "to": "../../../任务交接.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-完成报告.md#11-2026-10-21-真实j1评价r1校准失败停止"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/source-api.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-输入索引.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-ODS/snapshots/s06-e2e-owner3-20261021/manifest.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-产物/jobs/s06-e2e-main/manifest.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-产物/jobs/s06-e2e-main/quality.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-产物/jobs/s06-e2e-main/ads/answers.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/main-independent-frozen-answer.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-数据验收.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-发布清单.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-发布输入/s06-e2e-main/payload.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-发布结果.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/browser/final/desktop.png"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/browser/final/mobile.png"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/browser/final/boundary-199-of-200.png"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/browser/final/network-failure-keeps-batch.png"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/browser/final/empty-owned-batch.png"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/browser/final/verification.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/browser/final/server-observation.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-实验/实验结果.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-实验/process-cold-median.png"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-实验/hot-round-median.png"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/cleanup-final-state.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "../../../../frontend/src/views/OfflineAnalyticsView.vue"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "../../../../frontend/src/composables/useOfflineAnalytics.ts"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "../../../../frontend/src/api/offlineAnalytics.ts"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "../../../../frontend/src/types/offlineAnalytics.ts"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "../../../../frontend/src/styles/offline-analytics.css"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "../../../../backend/app/services/analytics_artifacts.py"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "../../../../analytics/prepare_publication.py"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "../../../../analytics/benchmark_s06.py"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/publication-verification.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/backend-targeted-tests.log"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/frontend-build.log"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/frontend-data/verification.log"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-验证证据/browser/mock-states/verification.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1准备/20261021-r1/README.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1准备/20261021-r1/解释稿-v1.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1准备/20261021-r1/source-numbers.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1准备/20261021-r1/analysis-input.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1准备/20261021-r1/G01-input.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1准备/20261021-r1/G02-input.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1准备/20261021-r1/G03-input.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1准备/20261021-r1/calibration-expected.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1准备/20261021-r1/budget-ledger.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1准备/20261021-r1/not-run.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1准备/20261021-r1/verification.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-完成报告.md#10-2026-10-21-s06-收口准备-r1本次追加"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "../../../任务交接.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/README.md"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/authorization.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/raw/G01-response.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/raw/G01-validation.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/ledger.json"
+    },
+    {
+      "from": "开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md",
+      "to": "S06-J1运行/20261021-deepseek-flash-r1/rule-summary.json"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "开发规划/20261021-大数据主线最小改动与AI实践衔接计划书.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "AI提示词/README.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "AI提示词/20261018-AI实践与大数据分阶段执行包/00-执行总纲与使用顺序.docx"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-完成报告.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/README.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/ledger.json"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-J1准备/20261021-r1/README.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "开发规划/AI实践与大数据实施契约.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S01-确认记录.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-完成报告.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-演示与证据索引.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "开发规划/20261021-大数据主线最小改动与AI实践衔接计划书.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S00-完成报告.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "开发规划/AI实践与大数据实施契约.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S01-确认记录.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S01-评价评分表.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S02-完成报告.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S03-完成报告.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S04-完成报告.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../analytics/S04.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S05-完成报告.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S05-发布与接口契约.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-完成报告.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-验证证据/final-qa.json"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "AI提示词/20261018-AI实践与大数据分阶段执行包/"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/scripts/export_ods_snapshot.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../analytics/spark_job.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../analytics/spark_quality.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../analytics/learning_process.sql"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../analytics/prepare_publication.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/services/analytics_artifacts.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/services/analytics.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/api/v1/analytics.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/schemas/analytics.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/models/analytics.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/migrations/20261020_s05_offline_analytics.sql"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/scripts/apply_s05_analytics_migration.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../frontend/src/views/OfflineAnalyticsView.vue"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../frontend/src/composables/useOfflineAnalytics.ts"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../frontend/src/api/offlineAnalytics.ts"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../frontend/src/types/offlineAnalytics.ts"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/agents/base.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/ai/client.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/ai/provider.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/workflow/engine.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/workflow/agents.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/workflow/schemas.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/services/workflow.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/services/project_context.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../frontend/src/views/ProjectAIWorkspaceView.vue"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/services/learning.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "../backend/app/repositories/learning.py"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-J1准备/20261021-r1/README.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-验证证据/cleanup-final-state.json"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S01-分析固定样例与独立答案.json"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S01-AI固定模板与评价案例.json"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S01-评价评分表.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-J1准备/20261021-r1/解释稿-v1.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-J1准备/20261021-r1/analysis-input.json"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-J1准备/20261021-r1/README.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r1/ledger.json"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-J1准备/20261021-r1/budget-ledger.json"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/20261021-最小改动计划与任务交接文档交付报告.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/20261021-阶段提示词按最小改动计划修订报告.md"
+    },
+    {
+      "from": "开发相关文档/任务交接.md",
+      "to": "阶段报告/AI大数据改造/V2/S06-J1准备/20261021-r1/final-qa.json"
+    }
+  ],
+  "json_files_checked": 14,
+  "python_ast": "passed",
+  "token_pattern_scan": "passed",
+  "git_diff_check_exit": 0,
+  "protected_seven_existing_tracked_diffs": "unchanged_by_line_comparison_no_hashing",
+  "operation_log_old_prefix_preserved": true,
+  "old_preparation_not_overwritten": true,
+  "cost": {
+    "currency": "CNY",
+    "from_actual_usage": "0.001636",
+    "account_reconciled": false
+  },
+  "database_connections": 0,
+  "source_writes": 0,
+  "spark_runs": 0,
+  "S07_started": false,
+  "remaining_unused_attempts": 3,
+  "S06_complete": false
+}

@@ -1,0 +1,17 @@
+{
+  "status": "not_run",
+  "reason": "当前实际模型/输入/货币授权仍为0；本轮仅准备，不发送材料。",
+  "provider_id": null,
+  "model_id": null,
+  "calibration_passed": null,
+  "calibration_results": [],
+  "analysis_status": "not_run",
+  "analysis_dimensions": null,
+  "analysis_total": null,
+  "causal_or_ability_overclaim": null,
+  "raw_responses": [],
+  "provider_attempts": 0,
+  "spent": "0",
+  "S06_complete": false,
+  "S07_prerequisite_satisfied": false
+}

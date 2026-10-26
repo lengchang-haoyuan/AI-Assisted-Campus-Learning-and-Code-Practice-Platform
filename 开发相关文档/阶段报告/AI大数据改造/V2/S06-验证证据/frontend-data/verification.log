@@ -1,0 +1,1 @@
+{"passed":true,"checks":50,"scope":"S06 frontend data layer and deterministic view model","api":"mock boundary only; no database or model calls"}

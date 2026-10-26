@@ -1,0 +1,123 @@
+{
+  "status": "not_completed",
+  "contract_id": "V2-S01-r2",
+  "quality_metrics": null,
+  "rule_gates": null,
+  "current_calibration": "not_verified_by_this_script",
+  "complete_quality_acceptance": "not_asserted_requires_authorization_raw_usage_and_current_calibration",
+  "model_calls_by_this_script": 0,
+  "database_access": false,
+  "evaluation_usage_source": "separate_role_ledger_not_inferred_from_file_count",
+  "frozen_denominators": {
+    "reference_issue_cells": 9,
+    "known_pass_cells": 69,
+    "unknown_cells": 18
+  },
+  "unresolved": [
+    {
+      "case_id": "Q06",
+      "status": "invalid",
+      "validation_errors": [
+        "evidence_3_quote_not_contiguous_source_text"
+      ]
+    },
+    {
+      "case_id": "Q07",
+      "status": "not_run",
+      "missing_files": [
+        "Q07-response.json",
+        "Q07-response.json",
+        "Q07-input.json"
+      ]
+    },
+    {
+      "case_id": "Q08",
+      "status": "not_run",
+      "missing_files": [
+        "Q08-response.json",
+        "Q08-response.json",
+        "Q08-input.json"
+      ]
+    },
+    {
+      "case_id": "Q09",
+      "status": "not_run",
+      "missing_files": [
+        "Q09-response.json",
+        "Q09-response.json",
+        "Q09-input.json"
+      ]
+    },
+    {
+      "case_id": "Q10",
+      "status": "not_run",
+      "missing_files": [
+        "Q10-response.json",
+        "Q10-response.json",
+        "Q10-input.json"
+      ]
+    },
+    {
+      "case_id": "Q11",
+      "status": "not_run",
+      "missing_files": [
+        "Q11-response.json",
+        "Q11-response.json",
+        "Q11-input.json"
+      ]
+    },
+    {
+      "case_id": "Q12",
+      "status": "not_run",
+      "missing_files": [
+        "Q12-response.json",
+        "Q12-response.json",
+        "Q12-input.json"
+      ]
+    },
+    {
+      "case_id": "Q13",
+      "status": "not_run",
+      "missing_files": [
+        "Q13-response.json",
+        "Q13-response.json",
+        "Q13-input.json"
+      ]
+    },
+    {
+      "case_id": "Q14",
+      "status": "not_run",
+      "missing_files": [
+        "Q14-response.json",
+        "Q14-response.json",
+        "Q14-input.json"
+      ]
+    },
+    {
+      "case_id": "Q15",
+      "status": "not_run",
+      "missing_files": [
+        "Q15-response.json",
+        "Q15-response.json",
+        "Q15-input.json"
+      ]
+    },
+    {
+      "case_id": "Q16",
+      "status": "not_run",
+      "missing_files": [
+        "Q16-response.json",
+        "Q16-response.json",
+        "Q16-input.json"
+      ]
+    }
+  ],
+  "all_rule_gates_pass": false,
+  "observed_issue_cell_flags": {
+    "unsupported_issue_cells": 0,
+    "unresolved_issue_cells": 0,
+    "unsupported_cells": [],
+    "unresolved_cells": [],
+    "scope": "observed_valid_candidate_fail_cells_not_a_reduced_scoring_denominator"
+  }
+}

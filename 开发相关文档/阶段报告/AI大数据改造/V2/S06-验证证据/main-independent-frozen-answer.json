@@ -1,0 +1,101 @@
+{
+  "owner_user_id": 3,
+  "new_batch_required": true,
+  "eligible_to_complete_plan": false,
+  "records": {
+    "raw_rows": 5,
+    "valid_unique_rows": 5,
+    "exact_duplicates": 0,
+    "known_minutes": 90,
+    "known_duration_count": 3,
+    "missing_duration_count": 2,
+    "known_zero_count": 0,
+    "active_days": 2,
+    "trusted_teaching_count": 2,
+    "unverified_claim_count": 0,
+    "ordinary_count": 3
+  },
+  "tasks": {
+    "total": 4,
+    "completed": 2,
+    "cancelled": 1,
+    "overdue_unfinished": 1,
+    "completion_rate": {
+      "numerator": 2,
+      "denominator": 4,
+      "percent": "50.000000",
+      "display": "50.0%"
+    }
+  },
+  "topic": {
+    "cohort_count": 3,
+    "revised_count": 1,
+    "confirmed_count": 2,
+    "returned_ever_count": 1,
+    "first_pass_confirmed_count": 1,
+    "revised_confirmed_count": 1,
+    "pending_latest_count": 1,
+    "revision_attempts": 1,
+    "revised_rate": {
+      "numerator": 1,
+      "denominator": 3,
+      "percent": "33.333333",
+      "display": "33.3%"
+    },
+    "confirmation_rate": {
+      "numerator": 2,
+      "denominator": 3,
+      "percent": "66.666667",
+      "display": "66.7%"
+    },
+    "revised_confirmation_rate": {
+      "numerator": 1,
+      "denominator": 1,
+      "percent": "100.000000",
+      "display": "100.0%"
+    },
+    "first_review_covered": 2,
+    "first_review_wait_sum_minutes": 0.0013899833333333334,
+    "first_review_wait_mean_minutes": "0.000695",
+    "first_review_histogram": {
+      "[0,60)": 2,
+      "[60,240)": 0,
+      "[240,1440)": 0,
+      "[1440,+inf)": 0
+    },
+    "missing_teaching_record_links": 0
+  },
+  "daily": [
+    {
+      "date": "2026-10-19",
+      "records": 1,
+      "known_minutes": 30,
+      "known_duration_count": 1,
+      "missing_duration_count": 0,
+      "tasks": 1,
+      "completed": 0,
+      "cancelled": 0,
+      "overdue_unfinished": 1,
+      "cohort": 0,
+      "revised": 0,
+      "confirmed": 0
+    },
+    {
+      "date": "2026-10-20",
+      "records": 4,
+      "known_minutes": 60,
+      "known_duration_count": 2,
+      "missing_duration_count": 2,
+      "tasks": 3,
+      "completed": 2,
+      "cancelled": 1,
+      "overdue_unfinished": 0,
+      "cohort": 3,
+      "revised": 1,
+      "confirmed": 2
+    }
+  ],
+  "quality": {
+    "outside_observation_time": 0
+  }
+}

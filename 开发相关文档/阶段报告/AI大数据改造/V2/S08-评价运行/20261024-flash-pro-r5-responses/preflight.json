@@ -1,0 +1,147 @@
+{
+  "status": "preflight_passed",
+  "checked_at": "2026-10-24T20:10:06.458381+08:00",
+  "evaluation_id": "S08-20261024-flash-pro-r5-responses",
+  "credentials_read": false,
+  "network_requests": 0,
+  "database_access": false,
+  "student_code_executed": false,
+  "existing_ledger": false,
+  "currency_hard_cap_cny": "1.53061200",
+  "role_limits": {
+    "under_test": 16,
+    "judge_calibration": 0,
+    "judge_formal": 16
+  },
+  "reused_pro_calibration": "3/3",
+  "calibration_reuse_ref": "calibration-reuse.json",
+  "new_calibration_calls": 0,
+  "under_test_requests_checked": 16,
+  "only_frozen_role_and_native_schema_change": true,
+  "authorization_valid": false,
+  "role_protocols": {
+    "under_test": "/responses",
+    "judge_formal": "/chat/completions"
+  },
+  "scoring_algorithm_thresholds_unchanged": true,
+  "known_request_reservations": [
+    {
+      "role": "under_test",
+      "input_id": "Q01",
+      "input_upper_tokens": 14681,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.04136200"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q02",
+      "input_upper_tokens": 14699,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.04139800"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q03",
+      "input_upper_tokens": 15078,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.04215600"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q04",
+      "input_upper_tokens": 14802,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.04160400"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q05",
+      "input_upper_tokens": 14522,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.04104400"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q06",
+      "input_upper_tokens": 14681,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.04136200"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q07",
+      "input_upper_tokens": 14923,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.04184600"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q08",
+      "input_upper_tokens": 14698,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.04139600"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q09",
+      "input_upper_tokens": 14680,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.04136000"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q10",
+      "input_upper_tokens": 14661,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.04132200"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q11",
+      "input_upper_tokens": 14905,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.04181000"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q12",
+      "input_upper_tokens": 14723,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.04144600"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q13",
+      "input_upper_tokens": 14730,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.04146000"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q14",
+      "input_upper_tokens": 13493,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.03898600"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q15",
+      "input_upper_tokens": 13327,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.03865400"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q16",
+      "input_upper_tokens": 13533,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.03906600"
+    }
+  ],
+  "sum_of_known_max_reservations_cny_not_a_charge": "0.65627200",
+  "formal_judge_cost": "candidate-dependent; recompute complete payload byte bound before each POST",
+  "full_round_cost_guaranteed": false,
+  "admission_rule": "spent_or_held_upper + next_request_reservation <= 1.530612 CNY; prior 0.469388 retained and combined <= 2 CNY; otherwise stop before POST",
+  "failure_settlement": "full pre-POST reservation retained; call counted; stop",
+  "execution": "not_run_use_explicit_execute_after_root_review"
+}

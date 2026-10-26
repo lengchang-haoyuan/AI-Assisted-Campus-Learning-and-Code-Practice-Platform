@@ -1,0 +1,28 @@
+{
+  "evaluation_id": "S08-20261022-flash-pro-r1",
+  "recorded_at": "2026-10-22T10:43:51.616920+08:00",
+  "authorization_source": "用户直接确认固定Q01-Q16/角色次数后回复",
+  "user_reply": "授权，但是我deepseek只有3元额度",
+  "interpretation": "本轮所有角色合计硬上限3 CNY，不充值、不查账户、不重试",
+  "provider": "deepseek",
+  "role_limits": {
+    "under_test": 16,
+    "judge_calibration": 3,
+    "judge_formal": 16
+  },
+  "total_provider_attempt_limit": 35,
+  "currency": "CNY",
+  "currency_hard_cap": "3.00",
+  "under_test_exact_model_id": "deepseek-flash",
+  "judge_exact_model_id": "deepseek-v4-pro",
+  "input_permission": "仅批准的S01-r2固定16例代码/声明及其指定向量；被测不见参考；J1逐例见冻结参考及真实candidate；无数据库/项目私文",
+  "new_judge_calibration_required": true,
+  "calibration_reuse_from_S06": false,
+  "S06_quota_transfer": false,
+  "max_retries": 0,
+  "transport_retries": 0,
+  "provider_failure_counts_and_retains_reservation": true,
+  "failure_policy": "校准失败、Provider/结构异常、正式J1 abstain/invalid均停止剩余；普通质量不达标仍按固定顺序收齐，不挑例、不调参",
+  "recharge_or_account_access_authorized": false,
+  "execution_control": "本任务仅编写和预检，root审阅后统一--execute；已有账本/尝试禁止盲重跑"
+}

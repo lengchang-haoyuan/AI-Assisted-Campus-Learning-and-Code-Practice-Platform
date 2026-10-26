@@ -1,0 +1,21 @@
+{
+  "case_id": "Q06",
+  "criterion_id": "C04",
+  "validation_error": "evidence_3_quote_not_contiguous_source_text",
+  "candidate_artifact_id": "S08-Q06-candidate-v2",
+  "candidate_text_version": "2.0",
+  "quote": "对分钟已知的有效行执行 out[\"known_minutes\"] += duration，已知 0 也正常累加，未知分钟不累加；未发现覆盖、重置、漏加或重复累加已知非零分钟的独立错误。",
+  "candidate_reason": "对分钟已知的有效行执行 out[\"known_minutes\"] += duration，已知 0 也正常累加，未知分钟不累加；未发现覆盖、重置、漏加或重复累加已知非零分钟的独立错误。",
+  "quote_exactly_equals_candidate_decoded_reason": true,
+  "quote_in_raw_student_code": false,
+  "quote_in_serialized_candidate_feedback": false,
+  "candidate_feedback_decodes_to_saved_response": true,
+  "quote_in_decoded_candidate_reason": true,
+  "interpretation": "J1引用了候选reason字段的解码文字；当前校验语料是含转义的candidate_feedback JSON字符串，故引用不在该字符串中连续出现。保留invalid，不自动转义/反转义或修改校验追分；此结果不是C04语义错误的证明。",
+  "student_code_executed": false,
+  "new_model_calls": 0,
+  "frozen_validator_modified": false,
+  "current_round_action": "stopped_after_12_calls_no_retry",
+  "Q07_Q10_this_round": "not_run",
+  "next_step_not_implemented": "先离线明确候选字段原文与序列化文本的引用契约；变更须新版本/对照和明确调用范围，不自动续用本轮20次"
+}

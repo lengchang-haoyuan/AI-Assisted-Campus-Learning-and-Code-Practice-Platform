@@ -1,0 +1,99 @@
+{
+  "status": "passed",
+  "stage": "S06",
+  "prompt_version": "judge-r4",
+  "calibration": [
+    {
+      "case_id": "G01",
+      "status": "scored",
+      "actionability_score": 3,
+      "evidence_valid": true,
+      "unsupported_claim": false,
+      "matched": true,
+      "validation_ref": "raw/G01-validation.json"
+    },
+    {
+      "case_id": "G02",
+      "status": "scored",
+      "actionability_score": 0,
+      "evidence_valid": false,
+      "unsupported_claim": true,
+      "matched": true,
+      "validation_ref": "raw/G02-validation.json"
+    },
+    {
+      "case_id": "G03",
+      "status": "abstain",
+      "actionability_score": null,
+      "evidence_valid": null,
+      "unsupported_claim": null,
+      "matched": true,
+      "validation_ref": "raw/G03-validation.json"
+    }
+  ],
+  "calibration_matched": 3,
+  "calibration_required": 3,
+  "calibration_passed": true,
+  "analysis": {
+    "artifact_id": "S06-analysis-b96ea63e-v1",
+    "status": "scored",
+    "dimensions": [
+      {
+        "dimension_id": "problem_cohort",
+        "score": 2,
+        "quote": "主样例属于隔离虚构用户3，发布batch为b96ea63e-419e-4293-b724-d1ce59bd85ba，snapshot为s06-e2e-owner3-20261021，job为s06-e2e-main。",
+        "reason": "明确本人、V1群组、窗口与快照，并说明分母口径。"
+      },
+      {
+        "dimension_id": "numeric_evidence",
+        "score": 2,
+        "quote": "任务状态图对应完成2/全部4=50.000000%，界面50.0%；取消1条仍在总分母中，逾期未完1条。",
+        "reason": "图表、分子分母与独立答案逐项对应，含边界样例。"
+      },
+      {
+        "dimension_id": "patterns_counterexamples",
+        "score": 2,
+        "quote": "同时有首次提交就获得教师确认的反例，因此修订不是确认的必经步骤。",
+        "reason": "解释首次正确、修订后确认及待评低样本反例。"
+      },
+      {
+        "dimension_id": "conclusion_boundary",
+        "score": 2,
+        "quote": "当前快照状态、记录缺失和确认来源必须分别阅读；本例是隔离虚构数据，不支持自然课堂效果、个人能力或因果推断。",
+        "reason": "清楚区分当前状态、记录缺失、确认来源与不可推断事项。"
+      }
+    ],
+    "total": 8,
+    "causal_or_ability_overclaim": false,
+    "pass": true,
+    "raw_response_ref": "raw/analysis-response.json"
+  },
+  "unresolved_current_run_abstain_or_invalid": [],
+  "G03_abstain_note": "预定材料缺失校准正确匹配，不是正式评价未解决弃权",
+  "historical_failures_preserved": true,
+  "S06_complete": true,
+  "S07_started": false,
+  "budget": {
+    "previous_attempts": 3,
+    "this_round_attempts": 4,
+    "cumulative_attempts": 7,
+    "stage_cap": 7,
+    "remaining": 0,
+    "calibration_attempts_including_failures": 6,
+    "formal_attempts": 1
+  },
+  "usage": {
+    "this_round_prompt_tokens": 10169,
+    "this_round_completion_tokens": 663,
+    "this_round_total_tokens": 10832,
+    "cumulative_prompt_tokens": 14202,
+    "cumulative_completion_tokens": 1052,
+    "cumulative_total_tokens": 15254
+  },
+  "cost": {
+    "currency": "CNY",
+    "this_round_actual_usage_priced": "0.00968500",
+    "cumulative_actual_usage_priced": "0.01464680",
+    "account_reconciled": false
+  }
+}

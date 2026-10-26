@@ -1,0 +1,26 @@
+test_failed_missing_reservation_rejected (test_evaluation_repairs.AccountingTests.test_failed_missing_reservation_rejected) ... ok
+test_failed_response_keeps_known_usage_and_full_hold (test_evaluation_repairs.AccountingTests.test_failed_response_keeps_known_usage_and_full_hold) ... ok
+test_missing_usage_stays_unknown_and_reserved (test_evaluation_repairs.AccountingTests.test_missing_usage_stays_unknown_and_reserved) ... ok
+test_original_real_totals_preserved (test_evaluation_repairs.AccountingTests.test_original_real_totals_preserved) ... ok
+test_all_three_frozen_calibrations_unchanged (test_evaluation_repairs.QuoteTests.test_all_three_frozen_calibrations_unchanged) ... ok
+test_exact_field_quotes_preserve_escapes (test_evaluation_repairs.QuoteTests.test_exact_field_quotes_preserve_escapes) ... ok
+test_fabricated_and_spliced_quote_rejected (test_evaluation_repairs.QuoteTests.test_fabricated_and_spliced_quote_rejected) ... ok
+test_no_global_backslash_replacement (test_evaluation_repairs.QuoteTests.test_no_global_backslash_replacement) ... ok
+test_real_Q06_decoded_quote (test_evaluation_repairs.QuoteTests.test_real_Q06_decoded_quote) ... ok
+test_frozen_schema_matches_original_snapshot (test_evaluation_repairs.ScoringTests.test_frozen_schema_matches_original_snapshot) ... ok
+test_history_replays_from_snapshot_not_live_prompt (test_evaluation_repairs.ScoringTests.test_history_replays_from_snapshot_not_live_prompt) ... ok
+test_positive_control (test_evaluation_repairs.ScoringTests.test_positive_control) ... ok
+test_unknown_is_not_a_definite_pass (test_evaluation_repairs.ScoringTests.test_unknown_is_not_a_definite_pass) ... ok
+test_unresolved_pass_not_forced_zero_or_completed (test_evaluation_repairs.ScoringTests.test_unresolved_pass_not_forced_zero_or_completed) ... ok
+test_unsupported_fail_still_blocks (test_evaluation_repairs.ScoringTests.test_unsupported_fail_still_blocks) ... ok
+test_unsupported_pass_blocks_acceptance (test_evaluation_repairs.ScoringTests.test_unsupported_pass_blocks_acceptance) ... ok
+test_execute_requires_explicit_authorization_before_settings_or_ledger (test_responses_runner.ResponseRunnerTests.test_execute_requires_explicit_authorization_before_settings_or_ledger) ... ok
+test_native_invalid_retains_usage_and_full_reservation_no_retry (test_responses_runner.ResponseRunnerTests.test_native_invalid_retains_usage_and_full_reservation_no_retry) ... ok
+test_native_success_actual_agent_request_matches_reserved_body (test_responses_runner.ResponseRunnerTests.test_native_success_actual_agent_request_matches_reserved_body) ... ok
+test_native_unknown_usage_retains_full_reservation_no_retry (test_responses_runner.ResponseRunnerTests.test_native_unknown_usage_retains_full_reservation_no_retry) ... Executing <Task finished name='Task-17' coro=<ResponseRunnerTests.test_native_unknown_usage_retains_full_reservation_no_retry() done, defined at C:\Users\Administrator\Desktop\毕业设计\ScholarHub\开发相关文档\阶段报告\AI大数据改造\V2\S08-评价运行\20261024-flash-pro-r5-responses\test_responses_runner.py:92> result=None created at C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.110 seconds
+ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.709s
+
+OK

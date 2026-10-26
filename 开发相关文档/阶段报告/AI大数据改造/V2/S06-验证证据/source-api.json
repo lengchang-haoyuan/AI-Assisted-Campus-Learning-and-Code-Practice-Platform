@@ -1,0 +1,88 @@
+{
+  "status": "passed",
+  "events": [
+    {
+      "origin": "reused_API_POST_201_from_first_attempt",
+      "raw_log": "prepare-sources.log",
+      "record_id": 8
+    },
+    {
+      "method": "GET",
+      "path": "/learning/records/8",
+      "identity": 3,
+      "status": 200,
+      "safe_response": {
+        "id": 8,
+        "duration_minutes": 15
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/learning/tasks?page=1&page_size=10",
+      "identity": 3,
+      "status": 200,
+      "safe_response": {
+        "total": 4
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/campus/submissions/1",
+      "identity": 3,
+      "status": 200,
+      "safe_response": {
+        "id": 1,
+        "revision": 4,
+        "latest_version_number": 2,
+        "latest_status": "accepted"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/campus/submissions/2",
+      "identity": 3,
+      "status": 200,
+      "safe_response": {
+        "id": 2,
+        "revision": 2,
+        "latest_version_number": 1,
+        "latest_status": "accepted"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/campus/submissions/3",
+      "identity": 3,
+      "status": 200,
+      "safe_response": {
+        "id": 3,
+        "revision": 1,
+        "latest_version_number": 1,
+        "latest_status": "submitted"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/campus/submissions/1/versions",
+      "identity": 3,
+      "status": 200,
+      "safe_response": {
+        "total": 2,
+        "versions": [
+          {
+            "version_number": 2,
+            "status": "accepted",
+            "feedback_decision": "accept"
+          },
+          {
+            "version_number": 1,
+            "status": "returned",
+            "feedback_decision": "return"
+          }
+        ]
+      }
+    }
+  ],
+  "model_calls": 0,
+  "seconds": 0.20125159999997777
+}

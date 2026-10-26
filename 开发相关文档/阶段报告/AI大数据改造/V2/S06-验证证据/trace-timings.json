@@ -1,0 +1,14 @@
+{
+  "source_first_POST_completed_at": "2026-10-21T05:21:17.863689+00:00",
+  "final_browser_last_request_at": "2026-10-21T05:36:29.011288+00:00",
+  "traced_wall_interval_seconds": 911.147599,
+  "interval_not_performance": "Includes development, benchmark wait, failed orchestration, screenshots and review; not continuous pipeline or user latency",
+  "source_resume_API_and_two_snapshots_seconds": 0.26207769999996344,
+  "spark_main_seconds": 26.787988298000073,
+  "spark_boundary_seconds": 13.824062697000045,
+  "publication_main_process_seconds": 0.6984385999999176,
+  "publication_boundary_process_seconds": 0.694553299999825,
+  "authenticated_main_API_seconds": 0.014314900000044872,
+  "benchmark_full_scope": "Same input -> normalization, relations, aggregates, result files and answer comparison; excludes DB/API/browser",
+  "benchmark_evidence": "S06-实验/all-rounds.csv"
+}

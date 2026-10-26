@@ -1,0 +1,48 @@
+{
+  "controlled_snapshots": [
+    {
+      "owner_user_id": 3,
+      "snapshot_id": "s06-e2e-owner3-20261021",
+      "path": "S06-ODS/snapshots/s06-e2e-owner3-20261021",
+      "source_cutoff": "2026-10-21T05:22:27.611955Z",
+      "seconds": 0.0374431000000186,
+      "row_counts": {
+        "projects": 1,
+        "daily_tasks": 4,
+        "learning_records": 5,
+        "teaching_classes": 1,
+        "teaching_assignments": 3,
+        "class_memberships": 2,
+        "campus_memberships": 2,
+        "submissions": 3,
+        "submission_versions": 4,
+        "feedback": 3,
+        "ai_requests_aux": 1,
+        "source_claim_projection": 2
+      }
+    },
+    {
+      "owner_user_id": 4,
+      "snapshot_id": "s06-e2e-owner4-20261021",
+      "path": "S06-ODS/snapshots/s06-e2e-owner4-20261021",
+      "source_cutoff": "2026-10-21T05:22:27.640605Z",
+      "seconds": 0.021933400000079928,
+      "row_counts": {
+        "projects": 0,
+        "daily_tasks": 200,
+        "learning_records": 0,
+        "teaching_classes": 0,
+        "teaching_assignments": 0,
+        "class_memberships": 0,
+        "campus_memberships": 0,
+        "submissions": 0,
+        "submission_versions": 0,
+        "feedback": 0,
+        "ai_requests_aux": 0,
+        "source_claim_projection": 0
+      }
+    }
+  ],
+  "model_calls": 0,
+  "original_sources_preserved": true
+}

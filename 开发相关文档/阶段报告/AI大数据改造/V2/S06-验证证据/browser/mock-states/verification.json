@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "mode": "Mock API fulfillment only; no database, Spark or real model calls",
+  "checks": [
+    "未知metric_version明确拒绝且无图表",
+    "全部分钟未知保留缺失而非填成真实零",
+    "已知零与未知时长可区分",
+    "新批次响应前保留旧批次标题及完整图表",
+    "重新选择旧批次先完成时身份一致",
+    "晚到的旧请求不会覆盖最新选择",
+    "Mock状态页面无脚本错误"
+  ],
+  "page_errors": []
+}

@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 from enum import Enum
+import json
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, JsonValue, field_validator, model_serializer, model_validator
 
 
 MODEL_NAME_PATTERN = r"^[A-Za-z0-9][A-Za-z0-9._:-]*$"
@@ -16,6 +17,7 @@ class AIMessageRole(str, Enum):
 class AIResponseFormat(str, Enum):
     TEXT = "text"
     JSON_OBJECT = "json_object"
+    JSON_SCHEMA = "json_schema"
 
 
 class AIMessage(BaseModel):
@@ -42,11 +44,35 @@ class AICompletionRequest(BaseModel):
     max_tokens: int | None = Field(default=None, ge=1, le=8192)
     response_format: AIResponseFormat = AIResponseFormat.TEXT
     reasoning_enabled: bool | None = None
+    response_schema: dict[str, JsonValue] | None = None
+    response_schema_name: str | None = Field(
+        default=None, min_length=1, max_length=64, pattern=r"^[A-Za-z][A-Za-z0-9_-]*$",
+    )
+
+    @model_serializer(mode="wrap")
+    def omit_unused_schema_fields(self, handler):
+        # 保持旧请求的序列化字段；不依赖高于项目2.11下限的exclude_if。
+        data = handler(self)
+        if self.response_schema is None:
+            data.pop("response_schema", None)
+        if self.response_schema_name is None:
+            data.pop("response_schema_name", None)
+        return data
 
     @model_validator(mode="after")
     def validate_total_message_size(self) -> "AICompletionRequest":
         if sum(len(message.content) for message in self.messages) > 24000:
             raise ValueError("消息总长度不能超过 24000 个字符")
+        if self.response_format == AIResponseFormat.JSON_SCHEMA:
+            if self.response_schema is None or self.response_schema_name is None:
+                raise ValueError("Schema输出必须提供名称和JSON Schema")
+            if self.response_schema.get("type") != "object":
+                raise ValueError("Schema输出必须是对象")
+            encoded = json.dumps(self.response_schema, ensure_ascii=False, allow_nan=False)
+            if len(encoded) > 12000:
+                raise ValueError("输出Schema不能超过12000字符")
+        elif self.response_schema is not None or self.response_schema_name is not None:
+            raise ValueError("只有Schema输出模式可携带输出Schema")
         return self
 
 
@@ -93,10 +119,12 @@ class AIClientError(Exception):
         category: AIFailureCategory,
         retryable: bool = False,
         retry_after_seconds: float | None = None,
+        observed_usage: AIUsage | None = None,
     ) -> None:
         self.category = category
         self.retryable = retryable
         self.retry_after_seconds = retry_after_seconds
+        self.observed_usage = observed_usage
         super().__init__(message)
 
 

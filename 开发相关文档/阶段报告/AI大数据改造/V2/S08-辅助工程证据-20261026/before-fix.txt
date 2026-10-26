@@ -1,0 +1,99 @@
+test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement (tests.test_practice_submission.PracticeSubmissionTests.test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement) ... 
+  test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement (tests.test_practice_submission.PracticeSubmissionTests.test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement) (statement=True) ... FAIL
+  test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement (tests.test_practice_submission.PracticeSubmissionTests.test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement) (statement=False) ... FAIL
+  test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement (tests.test_practice_submission.PracticeSubmissionTests.test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement) (statement=None) ... FAIL
+test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion (tests.test_practice_submission.PracticeSubmissionTests.test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion) ... ai_request_finished
+
+  test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion (tests.test_practice_submission.PracticeSubmissionTests.test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion) (category='upstream', outcome='AIClientError', resume=False) ... FAIL
+ai_request_finished
+  test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion (tests.test_practice_submission.PracticeSubmissionTests.test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion) (category='upstream', outcome='AIClientError', resume=True) ... FAIL
+  test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion (tests.test_practice_submission.PracticeSubmissionTests.test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion) (category='agent_output_invalid', outcome='dict', resume=False) ... FAIL
+  test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion (tests.test_practice_submission.PracticeSubmissionTests.test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion) (category='agent_output_invalid', outcome='dict', resume=True) ... FAIL
+  test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion (tests.test_practice_submission.PracticeSubmissionTests.test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion) (category='agent_output_invalid', outcome='dict', resume=False) ... FAIL
+  test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion (tests.test_practice_submission.PracticeSubmissionTests.test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion) (category='agent_output_invalid', outcome='dict', resume=True) ... FAIL
+
+======================================================================
+FAIL: test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement (tests.test_practice_submission.PracticeSubmissionTests.test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement) (statement=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\毕业设计\ScholarHub\backend\tests\test_practice_submission.py", line 179, in test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement
+    self.assertEqual(item["status"], "waiting_confirmation")
+AssertionError: 'waiting_submission' != 'waiting_confirmation'
+- waiting_submission
++ waiting_confirmation
+
+
+======================================================================
+FAIL: test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement (tests.test_practice_submission.PracticeSubmissionTests.test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement) (statement=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\毕业设计\ScholarHub\backend\tests\test_practice_submission.py", line 179, in test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement
+    self.assertEqual(item["status"], "waiting_confirmation")
+AssertionError: 'waiting_submission' != 'waiting_confirmation'
+- waiting_submission
++ waiting_confirmation
+
+
+======================================================================
+FAIL: test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement (tests.test_practice_submission.PracticeSubmissionTests.test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement) (statement=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\毕业设计\ScholarHub\backend\tests\test_practice_submission.py", line 179, in test_submission_can_end_without_suggestions_or_output_match_for_any_self_statement
+    self.assertEqual(item["status"], "waiting_confirmation")
+AssertionError: 'waiting_submission' != 'waiting_confirmation'
+- waiting_submission
++ waiting_confirmation
+
+
+======================================================================
+FAIL: test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion (tests.test_practice_submission.PracticeSubmissionTests.test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion) (category='upstream', outcome='AIClientError', resume=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\毕业设计\ScholarHub\backend\tests\test_practice_submission.py", line 234, in test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion
+    self.assertTrue(failed["current_attempt"]["can_confirm"])
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion (tests.test_practice_submission.PracticeSubmissionTests.test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion) (category='upstream', outcome='AIClientError', resume=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\毕业设计\ScholarHub\backend\tests\test_practice_submission.py", line 234, in test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion
+    self.assertTrue(failed["current_attempt"]["can_confirm"])
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion (tests.test_practice_submission.PracticeSubmissionTests.test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion) (category='agent_output_invalid', outcome='dict', resume=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\毕业设计\ScholarHub\backend\tests\test_practice_submission.py", line 234, in test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion
+    self.assertTrue(failed["current_attempt"]["can_confirm"])
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion (tests.test_practice_submission.PracticeSubmissionTests.test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion) (category='agent_output_invalid', outcome='dict', resume=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\毕业设计\ScholarHub\backend\tests\test_practice_submission.py", line 234, in test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion
+    self.assertTrue(failed["current_attempt"]["can_confirm"])
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion (tests.test_practice_submission.PracticeSubmissionTests.test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion) (category='agent_output_invalid', outcome='dict', resume=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\毕业设计\ScholarHub\backend\tests\test_practice_submission.py", line 234, in test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion
+    self.assertTrue(failed["current_attempt"]["can_confirm"])
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion (tests.test_practice_submission.PracticeSubmissionTests.test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion) (category='agent_output_invalid', outcome='dict', resume=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\毕业设计\ScholarHub\backend\tests\test_practice_submission.py", line 234, in test_failed_and_invalid_suggestions_preserve_errors_usage_and_allow_local_completion
+    self.assertTrue(failed["current_attempt"]["can_confirm"])
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.221s
+
+FAILED (failures=9)

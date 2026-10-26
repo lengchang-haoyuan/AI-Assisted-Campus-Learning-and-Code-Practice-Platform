@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "stdout": "{\"batch_id\": \"b96ea63e-419e-4293-b724-d1ce59bd85ba\", \"job_id\": \"s06-e2e-main\", \"state\": \"completed\", \"replayed\": false}\n",
+  "stderr": "",
+  "seconds": 0.6984385999999176
+}

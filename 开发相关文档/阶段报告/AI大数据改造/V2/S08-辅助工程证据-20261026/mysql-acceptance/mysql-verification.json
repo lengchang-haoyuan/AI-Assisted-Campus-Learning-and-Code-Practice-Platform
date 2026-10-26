@@ -1,0 +1,596 @@
+{
+  "stage": "S08",
+  "checked_at": "2026-10-26T14:02:09.219181+08:00",
+  "database": "scholarhub_l4_s02_20261020",
+  "host": "127.0.0.1:3306",
+  "run_id": "s08-advisory-db-20261026",
+  "mode": "apply",
+  "limits": {
+    "practice_sessions": 14,
+    "practice_attempts": 20,
+    "practice_events": 180,
+    "ai_requests": 28,
+    "ai_results": 28
+  },
+  "authorization_source": "用户2026-10-26直接指令：进行收验把；仅补S08隔离真实工程验收，边界见同目录authorization.json",
+  "limits_basis": "本轮必要样例的执行保护上限，不复用历史剩余额度",
+  "initial_row_counts": {
+    "practice_sessions": 15,
+    "practice_attempts": 9,
+    "practice_events": 88,
+    "ai_requests": 27,
+    "ai_results": 25
+  },
+  "initial_table_count": 39,
+  "migration": "not_required",
+  "real_model_calls": 0,
+  "student_code_execution": 0,
+  "cleanup": "retain_new_evidence_rows",
+  "existing_run_ledger": {
+    "run_id": "s08-advisory-db-20261026",
+    "counts": {
+      "practice_sessions": 0,
+      "practice_attempts": 0,
+      "practice_events": 0,
+      "ai_requests": 0,
+      "ai_results": 0
+    },
+    "sessions": []
+  },
+  "checks": {
+    "direct_personal_end": {
+      "state": {
+        "id": "e0c47611-6866-47f9-86ad-eb21011dc19d",
+        "status": "completed",
+        "revision": 6,
+        "current_step_key": "implement",
+        "context_version": 1,
+        "current_attempt": {
+          "id": "55aa8979-dfbf-4ea9-a6da-26d97895ce23",
+          "attempt_no": 1,
+          "status": "confirmed",
+          "can_confirm": false
+        },
+        "attempt_count": 1
+      },
+      "attempts": 1,
+      "advice_not_requested": true,
+      "output_mismatch_retained": true,
+      "personal_review_only": true
+    },
+    "optional_revisions": {
+      "state": {
+        "id": "bbe6570b-751a-433a-882a-eb18a48b6029",
+        "status": "completed",
+        "revision": 14,
+        "current_step_key": "implement",
+        "context_version": 1,
+        "current_attempt": {
+          "id": "58d21ce3-669e-4d50-a89b-0ee7f4dbb671",
+          "attempt_no": 3,
+          "status": "confirmed",
+          "can_confirm": false
+        },
+        "attempt_count": 3
+      },
+      "append_only_attempt_history": "passed"
+    },
+    "cancelled_late": {
+      "state": {
+        "id": "f2fb5289-370e-42c9-8c2b-66cbedfbed10",
+        "status": "waiting_confirmation",
+        "revision": 9,
+        "current_step_key": "implement",
+        "context_version": 1,
+        "current_attempt": {
+          "id": "bdafcc3b-3d68-4741-ab93-60d1609d9f31",
+          "attempt_no": 2,
+          "status": "submitted",
+          "can_confirm": true
+        },
+        "attempt_count": 2
+      },
+      "old_attempt_id": "c086d834-db8f-423d-a422-09689b390b86",
+      "new_attempt_id": "bdafcc3b-3d68-4741-ab93-60d1609d9f31",
+      "late_result_detached": true
+    },
+    "without_submission": {
+      "state": {
+        "id": "0f8e2590-989f-4db7-a316-2f0dd12ea1bf",
+        "status": "waiting_submission",
+        "revision": 6,
+        "current_step_key": "implement",
+        "context_version": 1,
+        "current_attempt": null,
+        "attempt_count": 0
+      },
+      "rejections": {
+        "review": 409,
+        "explain": 409,
+        "confirm": 409
+      },
+      "provider_calls": 0
+    },
+    "failed_advice_personal_end": {
+      "state": {
+        "id": "1571616b-4075-4420-a989-3cbf72433880",
+        "status": "completed",
+        "revision": 9,
+        "current_step_key": "implement",
+        "context_version": 1,
+        "current_attempt": {
+          "id": "d878ea63-b3e9-40d7-9fee-302b85e362aa",
+          "attempt_no": 1,
+          "status": "confirmed",
+          "can_confirm": false
+        },
+        "attempt_count": 1
+      },
+      "error_code": "upstream",
+      "known_fake_usage": {
+        "prompt_tokens": 10,
+        "completion_tokens": 10
+      },
+      "recovery_and_confirmation_provider_calls": 0,
+      "advice_fabricated": false
+    },
+    "insufficient": {
+      "state": {
+        "id": "83f5600c-55ba-4144-8248-5ad6e55ff08d",
+        "status": "completed",
+        "revision": 8,
+        "current_step_key": "implement",
+        "context_version": 1,
+        "current_attempt": {
+          "id": "0907c220-eb9e-4cdd-804e-8425eccccb6a",
+          "attempt_no": 1,
+          "status": "confirmed",
+          "can_confirm": false
+        },
+        "attempt_count": 1
+      },
+      "insufficient_retained": true,
+      "personal_review_only": true
+    },
+    "needs_changes_personal_end": {
+      "state": {
+        "id": "be1ae63d-80ad-4f67-bd1c-78ebbb014406",
+        "status": "completed",
+        "revision": 8,
+        "current_step_key": "implement",
+        "context_version": 1,
+        "current_attempt": {
+          "id": "c8b5d0b9-4e61-4765-b395-a5a71a6f1fb5",
+          "attempt_no": 1,
+          "status": "confirmed",
+          "can_confirm": false
+        },
+        "attempt_count": 1
+      },
+      "needs_changes_retained": true,
+      "second_attempt_required": false
+    },
+    "two_connection_concurrency": {
+      "state": {
+        "id": "14e00277-29c1-448f-992f-59cbcc136593",
+        "status": "completed",
+        "revision": 6,
+        "current_step_key": "implement",
+        "context_version": 1,
+        "current_attempt": {
+          "id": "d17c70e1-3e4d-42d2-9e2b-e1863cafb8e9",
+          "attempt_no": 1,
+          "status": "confirmed",
+          "can_confirm": false
+        },
+        "attempt_count": 1
+      },
+      "submissions": [
+        {
+          "connection_id": 11,
+          "number": 1,
+          "status": 409
+        },
+        {
+          "connection_id": 12,
+          "number": 2,
+          "status": 200
+        }
+      ],
+      "confirmations": [
+        {
+          "connection_id": 12,
+          "number": 1,
+          "status": 200
+        },
+        {
+          "connection_id": 11,
+          "number": 2,
+          "status": 409
+        }
+      ],
+      "session_completed_events": 1,
+      "provider_calls": 0
+    },
+    "expired_review": {
+      "state": {
+        "id": "b82e8123-0d05-47b4-a767-3dbbae8a3b37",
+        "status": "completed",
+        "revision": 8,
+        "current_step_key": "implement",
+        "context_version": 1,
+        "current_attempt": {
+          "id": "2d46c340-404b-456a-9b28-26c5bc1f33f7",
+          "attempt_no": 1,
+          "status": "confirmed",
+          "can_confirm": false
+        },
+        "attempt_count": 1
+      },
+      "safe_resume": true,
+      "late_result_detached": true,
+      "lease_expiry": "controlled_service_clock_against_real_persisted_lease"
+    },
+    "invalid_advice_personal_end": {
+      "state": {
+        "id": "a9321bad-9832-4cc9-9d1c-80f10e6111b1",
+        "status": "completed",
+        "revision": 9,
+        "current_step_key": "implement",
+        "context_version": 1,
+        "current_attempt": {
+          "id": "af0ea841-b903-4906-99fb-291cfc40a9a3",
+          "attempt_no": 1,
+          "status": "confirmed",
+          "can_confirm": false
+        },
+        "attempt_count": 1
+      },
+      "error_code": "agent_output_invalid",
+      "known_fake_usage": {
+        "prompt_tokens": 10,
+        "completion_tokens": 10
+      },
+      "recovery_and_confirmation_provider_calls": 0,
+      "advice_fabricated": false
+    },
+    "transaction_rollback": {
+      "state": {
+        "id": "f4376706-9204-4cc9-b621-815ac5ecce0e",
+        "status": "completed",
+        "revision": 6,
+        "current_step_key": "implement",
+        "context_version": 1,
+        "current_attempt": {
+          "id": "446dc5de-1bfc-44e9-bbb8-79234a38f4ec",
+          "attempt_no": 1,
+          "status": "confirmed",
+          "can_confirm": false
+        },
+        "attempt_count": 1
+      },
+      "injected_failures": [
+        "attempt_submitted_event",
+        "personal_confirmation_event"
+      ],
+      "partial_rows": 0
+    },
+    "api": {
+      "state": {
+        "id": "debe8f4d-df93-4aa3-ab6b-534342ed98f1",
+        "status": "completed",
+        "revision": 8,
+        "current_step_key": "implement",
+        "context_version": 1,
+        "current_attempt": {
+          "id": "603fd253-f515-42a7-bd3f-245f945c1eec",
+          "attempt_no": 1,
+          "status": "confirmed",
+          "can_confirm": false
+        },
+        "attempt_count": 1
+      },
+      "status_codes": {
+        "unauthenticated": 401,
+        "create": 201,
+        "cross_owner": 404,
+        "start": 200,
+        "confirm": 200,
+        "submit": 201,
+        "duplicate_submit": 201,
+        "changed_payload": 409,
+        "cross_owner_submit": 404,
+        "stale_revision": 409,
+        "cross_owner_confirm": 404,
+        "cancel": 200,
+        "cancelled_confirm": 409,
+        "implement_resume": 200,
+        "implement_confirm": 200,
+        "owner_get": 200,
+        "owner_list": 200,
+        "s06_main": 200,
+        "s06_boundary": 200
+      },
+      "authentication": "real_JWT_and_current_user",
+      "transport": "ASGI_in_process",
+      "get_dml_count": 0,
+      "advice_not_requested": true
+    },
+    "fake_provider_calls": 21,
+    "independent_process_restore": {
+      "status": "passed",
+      "restored_state": {
+        "id": "f2fb5289-370e-42c9-8c2b-66cbedfbed10",
+        "status": "waiting_confirmation",
+        "revision": 9,
+        "current_step_key": "implement",
+        "context_version": 1,
+        "current_attempt": {
+          "id": "bdafcc3b-3d68-4741-ab93-60d1609d9f31",
+          "attempt_no": 2,
+          "status": "submitted",
+          "can_confirm": true
+        },
+        "attempt_count": 2
+      },
+      "separate_python_process": true,
+      "fake_provider_calls": 0
+    },
+    "http_server_restart": {
+      "status": "passed",
+      "transport": "real_TCP_loopback",
+      "port": 56551,
+      "runs": [
+        {
+          "process_id": 32176,
+          "http_status": 200,
+          "state": {
+            "id": "f2fb5289-370e-42c9-8c2b-66cbedfbed10",
+            "status": "waiting_confirmation",
+            "revision": 9,
+            "current_step_key": "implement",
+            "context_version": 1,
+            "current_attempt": {
+              "id": "bdafcc3b-3d68-4741-ab93-60d1609d9f31",
+              "attempt_no": 2,
+              "status": "submitted",
+              "can_confirm": true
+            },
+            "attempt_count": 2
+          },
+          "code_matches_current_fixture": true
+        },
+        {
+          "process_id": 5264,
+          "http_status": 200,
+          "state": {
+            "id": "f2fb5289-370e-42c9-8c2b-66cbedfbed10",
+            "status": "waiting_confirmation",
+            "revision": 9,
+            "current_step_key": "implement",
+            "context_version": 1,
+            "current_attempt": {
+              "id": "bdafcc3b-3d68-4741-ab93-60d1609d9f31",
+              "attempt_no": 2,
+              "status": "submitted",
+              "can_confirm": true
+            },
+            "attempt_count": 2
+          },
+          "code_matches_current_fixture": true
+        }
+      ],
+      "sql_write_policy": "SELECT_SHOW_SET_only",
+      "row_deltas": {
+        "practice_sessions": 0,
+        "practice_attempts": 0,
+        "practice_events": 0,
+        "ai_requests": 0,
+        "ai_results": 0
+      },
+      "real_model_calls": 0,
+      "servers_stopped": true,
+      "scope": "restart_at_persisted_human_wait_not_process_crash_during_provider"
+    }
+  },
+  "write_statement_count": 292,
+  "row_deltas": {
+    "ai_requests": 21,
+    "ai_results": 19,
+    "practice_attempts": 14,
+    "practice_events": 100,
+    "practice_sessions": 12
+  },
+  "cumulative_run_ledger": {
+    "run_id": "s08-advisory-db-20261026",
+    "counts": {
+      "practice_sessions": 12,
+      "practice_attempts": 14,
+      "practice_events": 100,
+      "ai_requests": 21,
+      "ai_results": 19
+    },
+    "sessions": [
+      {
+        "id": "0f8e2590-989f-4db7-a316-2f0dd12ea1bf",
+        "status": "waiting_submission",
+        "revision": 6,
+        "current_step_key": "implement",
+        "context_version": 1
+      },
+      {
+        "id": "14e00277-29c1-448f-992f-59cbcc136593",
+        "status": "completed",
+        "revision": 6,
+        "current_step_key": "implement",
+        "context_version": 1
+      },
+      {
+        "id": "1571616b-4075-4420-a989-3cbf72433880",
+        "status": "completed",
+        "revision": 9,
+        "current_step_key": "implement",
+        "context_version": 1
+      },
+      {
+        "id": "83f5600c-55ba-4144-8248-5ad6e55ff08d",
+        "status": "completed",
+        "revision": 8,
+        "current_step_key": "implement",
+        "context_version": 1
+      },
+      {
+        "id": "a9321bad-9832-4cc9-9d1c-80f10e6111b1",
+        "status": "completed",
+        "revision": 9,
+        "current_step_key": "implement",
+        "context_version": 1
+      },
+      {
+        "id": "b82e8123-0d05-47b4-a767-3dbbae8a3b37",
+        "status": "completed",
+        "revision": 8,
+        "current_step_key": "implement",
+        "context_version": 1
+      },
+      {
+        "id": "bbe6570b-751a-433a-882a-eb18a48b6029",
+        "status": "completed",
+        "revision": 14,
+        "current_step_key": "implement",
+        "context_version": 1
+      },
+      {
+        "id": "be1ae63d-80ad-4f67-bd1c-78ebbb014406",
+        "status": "completed",
+        "revision": 8,
+        "current_step_key": "implement",
+        "context_version": 1
+      },
+      {
+        "id": "debe8f4d-df93-4aa3-ab6b-534342ed98f1",
+        "status": "completed",
+        "revision": 8,
+        "current_step_key": "implement",
+        "context_version": 1
+      },
+      {
+        "id": "e0c47611-6866-47f9-86ad-eb21011dc19d",
+        "status": "completed",
+        "revision": 6,
+        "current_step_key": "implement",
+        "context_version": 1
+      },
+      {
+        "id": "f2fb5289-370e-42c9-8c2b-66cbedfbed10",
+        "status": "waiting_confirmation",
+        "revision": 9,
+        "current_step_key": "implement",
+        "context_version": 1
+      },
+      {
+        "id": "f4376706-9204-4cc9-b621-815ac5ecce0e",
+        "status": "completed",
+        "revision": 6,
+        "current_step_key": "implement",
+        "context_version": 1
+      }
+    ]
+  },
+  "protected_baseline_counts": {
+    "account_audits": 7,
+    "ai_requests": 27,
+    "ai_results": 25,
+    "analytics_batches": 14,
+    "analytics_daily_metrics": 20,
+    "campus_invitations": 3,
+    "campus_memberships": 4,
+    "class_memberships": 2,
+    "comments": 0,
+    "community_governance_actions": 0,
+    "community_governance_cases": 0,
+    "community_publication_versions": 0,
+    "community_publications": 0,
+    "courses": 0,
+    "daily_tasks": 204,
+    "favorites": 0,
+    "feedback": 3,
+    "learning_plans": 3,
+    "learning_records": 4,
+    "learning_reports": 0,
+    "likes": 0,
+    "notifications": 6,
+    "password_resets": 0,
+    "practice_attempts": 9,
+    "practice_events": 88,
+    "practice_sessions": 15,
+    "project_tags": 0,
+    "project_views": 0,
+    "projects": 1,
+    "submission_versions": 4,
+    "submissions": 3,
+    "tags": 0,
+    "teaching_assignments": 3,
+    "teaching_classes": 1,
+    "users": 4,
+    "workflow_edges": 0,
+    "workflow_nodes": 0,
+    "workflow_runs": 0,
+    "workflows": 0
+  },
+  "protected_s06_batches": [
+    {
+      "batch_id": "3217db64-1302-4722-a483-c3b1ad7b980f",
+      "owner_user_id": 4,
+      "state": "completed",
+      "source_cutoff": "2026-10-21 05:22:27.640605"
+    },
+    {
+      "batch_id": "b96ea63e-419e-4293-b724-d1ce59bd85ba",
+      "owner_user_id": 3,
+      "state": "completed",
+      "source_cutoff": "2026-10-21 05:22:27.611955"
+    }
+  ],
+  "protected_s06_metrics": [
+    {
+      "batch_id": "3217db64-1302-4722-a483-c3b1ad7b980f",
+      "metric_date": "2026-10-20",
+      "records": 0,
+      "known_minutes": 0,
+      "missing_duration_count": 0,
+      "task_total": 200,
+      "completed": 199,
+      "overdue_unfinished": 1,
+      "cohort_count": 0,
+      "confirmed_count": 0
+    },
+    {
+      "batch_id": "b96ea63e-419e-4293-b724-d1ce59bd85ba",
+      "metric_date": "2026-10-19",
+      "records": 1,
+      "known_minutes": 30,
+      "missing_duration_count": 0,
+      "task_total": 1,
+      "completed": 0,
+      "overdue_unfinished": 1,
+      "cohort_count": 0,
+      "confirmed_count": 0
+    },
+    {
+      "batch_id": "b96ea63e-419e-4293-b724-d1ce59bd85ba",
+      "metric_date": "2026-10-20",
+      "records": 4,
+      "known_minutes": 60,
+      "missing_duration_count": 2,
+      "task_total": 3,
+      "completed": 2,
+      "overdue_unfinished": 0,
+      "cohort_count": 3,
+      "confirmed_count": 2
+    }
+  ],
+  "old_rows_preserved": true,
+  "model_quality": "not_evaluated_fake_only",
+  "status": "passed"
+}

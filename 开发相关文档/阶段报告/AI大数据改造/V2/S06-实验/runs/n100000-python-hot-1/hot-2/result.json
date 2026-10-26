@@ -1,0 +1,33 @@
+{
+  "subjects": 1000,
+  "input_load_seconds": 0.26292149699997935,
+  "compute_seconds": 98.05455436399996,
+  "validation_seconds": 0.169460180000101,
+  "output_seconds": 0.20008104399994409,
+  "round_total_seconds": 98.68701708499998,
+  "totals": {
+    "records": 100000,
+    "known_minutes": 4244036,
+    "known_duration_count": 80000,
+    "missing_duration_count": 20000,
+    "known_zero_count": 10000,
+    "tasks": 25000,
+    "cohort_count": 1000,
+    "confirmed_count": 600,
+    "revised_count": 300,
+    "trusted_teaching_count": 600
+  },
+  "equal_reference_leaf_assertions": 364264,
+  "reference_implementation": "unmodified analytics.fixture_answers.calculate for each subject on all same input tables; repeated deduplication/relation checks are included, not optimized SQL",
+  "label": "hot-2",
+  "measured": true,
+  "lifecycle": "hot",
+  "wall_seconds": 98.71368658799997,
+  "memory": {
+    "sample_seconds": 1,
+    "samples": 97,
+    "peak_process_tree_rss_bytes": 247926784,
+    "method": "/proc statm: Python plus descendants; sampled RSS sum, shared pages may be counted twice"
+  },
+  "sample_finished_at": "2026-10-21T05:23:54.537172+00:00"
+}

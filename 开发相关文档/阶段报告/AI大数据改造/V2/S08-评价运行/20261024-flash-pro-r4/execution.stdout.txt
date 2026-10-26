@@ -1,0 +1,17 @@
+{"role": "under_test", "input_id": "Q01", "status": "invalid_or_failed", "attempts": 1, "spent_or_held_upper_cny": "0.03235600"}
+{
+  "evaluation_id": "S08-20261024-flash-pro-r4",
+  "status": "stopped",
+  "provider_attempts": 1,
+  "role_usage": {
+    "under_test": 1,
+    "judge_calibration": 0,
+    "judge_formal": 0
+  },
+  "calibration_passed": true,
+  "completed_case_ids": [],
+  "conservative_spend_or_held_upper_cny": "0.03235600",
+  "remaining_hard_cap_upper_cny": "1.53061200",
+  "S08_fixed_case_quality_passed": false,
+  "stop_error_type": "AgentOutputValidationError"
+}

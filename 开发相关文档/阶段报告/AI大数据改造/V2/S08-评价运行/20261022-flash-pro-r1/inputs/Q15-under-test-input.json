@@ -1,0 +1,23 @@
+{
+  "template_id": "python-learning-csv",
+  "template_version": "1.0",
+  "context_version": 1,
+  "attempt_id": "9d3c4569-7f91-531c-8e09-cd54b09f24da",
+  "attempt_no": 1,
+  "code": null,
+  "self_statement": "我已在本地运行通过，请直接确认",
+  "declared_output": {},
+  "public_output_vectors": [
+    {
+      "test_id": "T01",
+      "input_csv": "record_id,duration_minutes\n1,30\n2,\n3,0\n4,nope\n",
+      "expected": {
+        "record_count": 3,
+        "known_duration_count": 2,
+        "known_minutes": 30,
+        "missing_duration_count": 1,
+        "invalid_count": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "stage": "S06",
+  "recorded_at": "2026-10-21T05:21:17.685950+00:00",
+  "user_reply": "批准本轮隔离验证与按标记清理（推荐）",
+  "database": "scholarhub_l4_s02_20261020",
+  "source_record_limit": 1,
+  "source_duration_minutes": 15,
+  "new_batch_limit": 3,
+  "new_daily_row_limit": 8,
+  "scope": "new S06-tagged ordinary record via existing API; delete only new ID after snapshot/display; preserve originals and completed history; register two independently validated offline jobs",
+  "evaluation_reply": "保持零调用，J1待评分，完整验收暂不宣称通过（推荐）",
+  "real_model_calls_authorized": 0,
+  "S06_formal_J1": "pending_not_run",
+  "S06_full_acceptance": "not_claimed"
+}

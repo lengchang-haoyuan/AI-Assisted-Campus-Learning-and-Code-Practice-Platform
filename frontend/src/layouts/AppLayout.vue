@@ -31,6 +31,7 @@ const mobileDestinations = [primaryDestinations[0], primaryDestinations[2], prim
 const userInitial = computed(() => authStore.currentUser?.username.slice(0, 1).toUpperCase() || 'S')
 
 function isActive(path: string): boolean {
+  if (path === '/analytics' && route.path === '/offline-analytics') return true
   return path === '/' ? route.path === '/' : route.path === path || route.path.startsWith(`${path}/`)
 }
 

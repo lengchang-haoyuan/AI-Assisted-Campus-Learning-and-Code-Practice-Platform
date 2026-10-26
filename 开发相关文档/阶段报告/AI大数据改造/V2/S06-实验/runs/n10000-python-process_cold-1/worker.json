@@ -1,0 +1,66 @@
+{
+  "status": "completed",
+  "error": null,
+  "engine": "python",
+  "lifecycle": "process_cold",
+  "session_startup_seconds": 0.0,
+  "worker_total_seconds": 0.7468479009999989,
+  "memory": {
+    "sample_seconds": 1,
+    "samples": 1,
+    "peak_process_tree_rss_bytes": 14909440,
+    "method": "/proc statm: Python plus descendants; sampled RSS sum, shared pages may be counted twice"
+  },
+  "rounds": [
+    {
+      "subjects": 100,
+      "input_load_seconds": 0.0415724310000023,
+      "compute_seconds": 0.6716799619999989,
+      "validation_seconds": 0.0004883010000007459,
+      "output_seconds": 0.01880084199999743,
+      "round_total_seconds": 0.7325415359999994,
+      "totals": {
+        "records": 10000,
+        "known_minutes": 421978,
+        "known_duration_count": 8000,
+        "missing_duration_count": 2000,
+        "known_zero_count": 1000,
+        "tasks": 2500,
+        "cohort_count": 100,
+        "confirmed_count": 60,
+        "revised_count": 30,
+        "trusted_teaching_count": 60
+      },
+      "equal_reference_leaf_assertions": null,
+      "reference_implementation": "unmodified analytics.fixture_answers.calculate for each subject on all same input tables; repeated deduplication/relation checks are included, not optimized SQL",
+      "label": "n10000-python-process_cold-1",
+      "measured": true,
+      "lifecycle": "process_cold",
+      "wall_seconds": 0.7461598210000027,
+      "memory": {
+        "sample_seconds": 1,
+        "samples": 1,
+        "peak_process_tree_rss_bytes": 14909440,
+        "method": "/proc statm: Python plus descendants; sampled RSS sum, shared pages may be counted twice"
+      },
+      "sample_finished_at": "2026-10-21T05:11:09.158259+00:00"
+    }
+  ],
+  "argv": [
+    "/mnt/c/Users/Administrator/Desktop/毕业设计/ScholarHub/analytics/benchmark_s06.py",
+    "worker",
+    "--engine",
+    "python",
+    "--lifecycle",
+    "process_cold",
+    "--input",
+    "/home/administrator/scholarhub-analytics/s06-20261021/inputs/snapshots/synthetic-10000-seed-20261020-v1",
+    "--output",
+    "/home/administrator/scholarhub-analytics/s06-20261021/runs/n10000-python-process_cold-1",
+    "--expected",
+    "/home/administrator/scholarhub-analytics/s06-20261021/inputs/synthetic-10000-seed-20261020-v1-expected.json"
+  ],
+  "pid": 395,
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "executable": "/home/administrator/scholarhub-analytics/.venv/bin/python"
+}

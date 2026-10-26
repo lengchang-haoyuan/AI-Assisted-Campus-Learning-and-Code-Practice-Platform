@@ -1,0 +1,24 @@
+{"timestamp":"2026-10-21T05:21:17.863689+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"90aacf1a91b94f408ebe338c05ad01d1","method":"POST","path":"/api/v1/learning/records","status_code":201,"duration_ms":162.266}
+{"timestamp":"2026-10-21T05:21:17.871695+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"4b547b8874e4440b8b84f9b52bc95ed1","method":"GET","path":"/api/v1/learning/records/8","status_code":200,"duration_ms":5.154}
+{"timestamp":"2026-10-21T05:21:17.890074+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"348218efbe6b47d49d2172feb31e660f","method":"GET","path":"/api/v1/learning/tasks","status_code":200,"duration_ms":17.185}
+{"timestamp":"2026-10-21T05:21:17.913650+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"827d80a13848473a8afbb224cbfa7cc3","method":"GET","path":"/api/v1/submissions/1","status_code":404,"duration_ms":22.187}
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Administrator\AppData\Local\Temp\ScholarHub-S06-20261021\prepare_sources.py", line 94, in <module>
+    asyncio.run(prepare())
+  File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Temp\ScholarHub-S06-20261021\prepare_sources.py", line 86, in prepare
+    assert result.status_code == 200, (path, result.status_code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('/submissions/1', 404)

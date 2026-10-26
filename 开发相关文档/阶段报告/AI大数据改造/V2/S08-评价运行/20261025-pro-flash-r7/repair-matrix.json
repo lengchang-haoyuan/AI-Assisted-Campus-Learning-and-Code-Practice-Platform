@@ -1,0 +1,62 @@
+{
+  "status": "known_implementation_errors_repaired_and_checked",
+  "scope": "S08 bounded known problems; no guarantee against all future model mistakes",
+  "checks": [
+    {
+      "problem": "J1转义/字段内连续引用",
+      "evidence": "r2 Q06/J1旧无效已保留",
+      "fix": "evaluation-method-r3按JSON字段解码一次逐项精确查引用",
+      "current_check": "24工具测试通过，J1提示/规则不改"
+    },
+    {
+      "problem": "pass和fail无依据判断漏计/历史重放/失败usage",
+      "evidence": "历史四项工具缺陷",
+      "fix": "沿用r3全确定判断检查/冻结重放/失败用量审计",
+      "current_check": "24工具回归通过"
+    },
+    {
+      "problem": "缺少fail动作/空verdict",
+      "evidence": "旧Q07及r4 Q01原响应",
+      "fix": "生成侧七键必填、非null枚举、fail非空",
+      "current_check": "40相关后端覆盖，旧输出仍拒绝"
+    },
+    {
+      "problem": "criterion与issue_type混用",
+      "evidence": "r5 Q06 C05/counting",
+      "fix": "模板映射六个专属fail分支",
+      "current_check": "组合映射测试通过；语义准确性仍需全16例"
+    },
+    {
+      "problem": "pass/unknown虚构或拼接可选引用",
+      "evidence": "r6 Q03 C02/C03/C05包含...",
+      "fix": "仅生成侧两非fail分支强制evidence_span=null",
+      "current_check": "新请求约束明确，旧Q03原文仍被拒绝"
+    },
+    {
+      "problem": "fail引用冗长/跨段拼接风险",
+      "evidence": "同一自由文本复制路径",
+      "fix": "生成侧短单行<=300；原逐字代码校验保留",
+      "current_check": "短引用/中文/反斜杠/真实Ellipsis及边界测试通过"
+    },
+    {
+      "problem": "历史兼容/缺项/重复/无代码/unknown",
+      "evidence": "原Public1.0业务保护",
+      "fix": "公共Schema/原validator不动，历史合法引用仍可读",
+      "current_check": "40后端相关测试通过"
+    },
+    {
+      "problem": "UTF8/超时/坏JSON/用量/身份/指纹/预算/重发",
+      "evidence": "r6已补工程守卫",
+      "fix": "沿用现有UTF8严格入口及失败保存、审计/独占账本",
+      "current_check": "24工具+20守卫通过，旧78编码检查不重跑"
+    },
+    {
+      "problem": "模型真实误报漏报/可执行性",
+      "evidence": "原r1质量失败与后续未完整",
+      "fix": "不改冻结答案阈值，不把工程检查冒充质量",
+      "current_check": "新真实完整16例尚未运行"
+    }
+  ],
+  "frozen_thresholds_answers_unchanged": true,
+  "new_real_calls": 0
+}

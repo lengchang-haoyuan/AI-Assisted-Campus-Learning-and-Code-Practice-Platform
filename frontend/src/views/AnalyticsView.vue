@@ -2,6 +2,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import type { EChartsCoreOption } from 'echarts/core'
+import '@/styles/offline-analytics.css'
 
 import EChartPanel from '@/components/EChartPanel.vue'
 import LiquidTabs from '@/components/LiquidTabs.vue'
@@ -269,6 +270,10 @@ onMounted(() => {
 
 <template>
   <div class="page-shell analytics-page">
+    <nav class="offline-tabs" aria-label="数据页面">
+      <RouterLink to="/analytics" aria-current="page">学习与社区数据</RouterLink>
+      <RouterLink to="/offline-analytics">我的学习洞察</RouterLink>
+    </nav>
     <header class="analytics-header">
       <div>
         <h1>学习与社区数据</h1>

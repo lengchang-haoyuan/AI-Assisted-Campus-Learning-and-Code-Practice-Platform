@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "backend_tests": 78,
+  "evaluation_tool_tests": 24,
+  "runner_guard_assertions": 20,
+  "fixed_request_checks": 16,
+  "source_utf8_files": 282,
+  "criterion_issue_fail_branches": 6,
+  "public_schema_unchanged": true,
+  "frozen_answers_thresholds_denominators_unchanged": true,
+  "calibration_reused_local_validation": "S06 Flash3/3 actual wire equal",
+  "real_model_calls": 0,
+  "database_access": false,
+  "credentials_read_by_preflight": false,
+  "student_code_executed": false,
+  "model_quality": "not_evaluated",
+  "evidence_refs": [
+    "backend-tests.txt",
+    "local-unittest.txt",
+    "runner-guard-check.json",
+    "preflight.json",
+    "utf8-source-inventory.json",
+    "calibration-reuse.json",
+    "budget-plan.json"
+  ]
+}

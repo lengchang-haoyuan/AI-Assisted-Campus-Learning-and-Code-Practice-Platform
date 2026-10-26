@@ -1,0 +1,53 @@
+{
+  "case_id": "Q04",
+  "candidate_artifact_id": "S08-Q04-candidate-v1",
+  "candidate_text_version": "1.0",
+  "response": {
+    "case_id": "Q04",
+    "status": "scored",
+    "criterion_evidence": [
+      {
+        "criterion_id": "C01",
+        "evidence_valid": true,
+        "quote": "if reader.fieldnames is None or not required.issubset(reader.fieldnames):\n        raise ValueError(\"missing required headers\")",
+        "reason": "候选反馈引用该代码片段，正确指出缺失必需表头时抛出 ValueError，与参考标准一致。"
+      },
+      {
+        "criterion_id": "C02",
+        "evidence_valid": true,
+        "quote": "rid = int(row[\"record_id\"].strip())\n            raw = row[\"duration_minutes\"].strip()\n            duration = None if raw == \"\" else int(raw)\n            if rid <= 0 or (duration is not None and not 0 <= duration <= 1440):\n                raise ValueError(\"out of range\")",
+        "reason": "候选反馈引用该片段，正确描述对 record_id 和 duration_minutes 的校验逻辑，非法行计入 invalid_count，符合参考标准。"
+      },
+      {
+        "criterion_id": "C03",
+        "evidence_valid": true,
+        "quote": "if duration is None:\n            out[\"missing_duration_count\"] += 1\n        else:\n            out[\"known_duration_count\"] += 1",
+        "reason": "候选反馈引用该片段，正确说明分钟为 None 时计入 missing_duration_count，否则计入 known_duration_count，已知 0 分钟不会被当作未知。"
+      },
+      {
+        "criterion_id": "C04",
+        "evidence_valid": true,
+        "quote": "out[\"known_minutes\"] += duration",
+        "reason": "候选反馈引用该片段，正确指出仅在分钟已知时累加 duration，未知分钟不参与累加。"
+      },
+      {
+        "criterion_id": "C05",
+        "evidence_valid": true,
+        "quote": "out = {\"record_count\": 0, \"known_duration_count\": 0, \"known_minutes\": 0,\n           \"missing_duration_count\": 0, \"invalid_count\": 0}",
+        "reason": "候选反馈引用该片段，正确说明返回字典在循环前初始化五个整数字段，空有效集也返回完整五字段。"
+      },
+      {
+        "criterion_id": "C06",
+        "evidence_valid": true,
+        "quote": "reader = csv.DictReader(io.StringIO(csv_text))",
+        "reason": "候选反馈引用该片段，正确指出函数仅使用 csv 和 io 在内存中解析字符串，未读写文件、未联网、未执行任意代码。"
+      }
+    ],
+    "actionability_score": 3,
+    "unsupported_claim": false,
+    "reason": "候选反馈对每个标准均给出具体代码位置、修正方向和验证样例，且所有判断均得到参考标准支持。"
+  },
+  "provider": "deepseek",
+  "model_id": "deepseek-v4-pro",
+  "raw_response_ref": "raw/11-judge_formal-Q04-response.json"
+}

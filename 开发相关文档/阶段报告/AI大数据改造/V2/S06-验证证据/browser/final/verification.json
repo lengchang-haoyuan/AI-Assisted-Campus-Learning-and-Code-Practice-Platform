@@ -1,0 +1,1457 @@
+{
+  "status": "passed",
+  "mode": "real TCP API + authenticated MySQL, no API response fulfillment",
+  "batch_id": "b96ea63e-419e-4293-b724-d1ce59bd85ba",
+  "expected_minutes": 90,
+  "checks": [
+    "真实本人页面对应固定批次",
+    "分钟来自真实发布结果",
+    "任务分子分母精确50%",
+    "确认与群组2比3",
+    "四类图表同屏同批",
+    "规则与首次确认反例存在",
+    "记录覆盖视图可切换",
+    "首次反馈覆盖均值和冻结四区间可核对",
+    "规则可键盘展开",
+    "切图和解释不触发分析请求",
+    "刷新不替换用户正在看的历史",
+    "390px页面没有横向溢出",
+    "真实断网保留旧完整批次",
+    "联网重试仍回到同一批次",
+    "日期筛选为空不混用旧图表",
+    "首次无业务批次有明确空态",
+    "真实空批次先鉴权再显示无样本",
+    "本人不能查看他人批次且不遗留旧图",
+    "实际退出入口清空登录凭证与私人分析",
+    "同一浏览器换号后只展示新本人批次",
+    "换号后原本人批次被真实API拒绝且无旧内容",
+    "另一本人199比200不四舍五入成全完成",
+    "空批次他人仍被真实API拒绝",
+    "空批次未登录真实401",
+    "页面脚本无错误"
+  ],
+  "page_errors": [],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches?dataset_kind=controlled&page=1&page_size=20",
+      "status": 200,
+      "body": {
+        "items": [
+          {
+            "batch_id": "e58e61fb-cb1a-4fd1-91e9-a59eae41acb4",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-21T05:22:27.611955Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-21T05:35:22.580106Z"
+          },
+          {
+            "batch_id": "b96ea63e-419e-4293-b724-d1ce59bd85ba",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-21T05:22:27.611955Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-21T05:35:21.685492Z"
+          },
+          {
+            "batch_id": "e9c1fc11-14b3-4306-953f-862c37f992c4",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:57:03.027057Z"
+          },
+          {
+            "batch_id": "bdb4b1d2-12ca-4d9f-9436-580363353d5c",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T13:02:32.850121Z"
+          },
+          {
+            "batch_id": "8775c62f-ce8b-4068-92c8-425bc225c0dc",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:55:20.311924Z"
+          },
+          {
+            "batch_id": "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:52:26.536762Z"
+          },
+          {
+            "batch_id": "45c55b05-ff63-4cc6-b6ca-734146054710",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.713149Z"
+          },
+          {
+            "batch_id": "297855ea-edfd-442e-9dad-2877abe3a884",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.946643Z"
+          },
+          {
+            "batch_id": "246f4714-1f47-4150-92d1-40c315397591",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:55:20.290365Z"
+          },
+          {
+            "batch_id": "16944674-269f-4aa1-8ec1-1f207e218739",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.972055Z"
+          }
+        ],
+        "total": 10,
+        "page": 1,
+        "page_size": 20,
+        "empty_reason": null
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches/b96ea63e-419e-4293-b724-d1ce59bd85ba",
+      "status": 200,
+      "body": {
+        "batch_id": "b96ea63e-419e-4293-b724-d1ce59bd85ba",
+        "dataset_kind": "controlled",
+        "period_start": "2026-10-19",
+        "period_end": "2026-10-20",
+        "business_timezone": "Asia/Shanghai",
+        "source_cutoff": "2026-10-21T05:22:27.611955Z",
+        "schema_version": "scholarhub-source-1.0",
+        "metric_version": "learning-process-1.0",
+        "rule_version": "quality-1.0",
+        "published_at": "2026-10-21T05:35:21.685492Z",
+        "source": {
+          "dataset_id": "s02-controlled-owner-3",
+          "snapshot_id": "s06-e2e-owner3-20261021",
+          "job_id": "s06-e2e-main"
+        },
+        "records_summary": {
+          "valid_unique_rows": 5,
+          "known_minutes": 90,
+          "known_duration_count": 3,
+          "missing_duration_count": 2,
+          "known_zero_count": 0,
+          "active_days": 2,
+          "trusted_teaching_count": 2,
+          "unverified_claim_count": 0,
+          "ordinary_count": 3,
+          "raw_rows": 5,
+          "exact_duplicates": 0
+        },
+        "tasks_summary": {
+          "total": 4,
+          "completed": 2,
+          "cancelled": 1,
+          "overdue_unfinished": 1,
+          "completion_rate": {
+            "numerator": 2,
+            "denominator": 4,
+            "percent": "50.000000",
+            "display": "50.0%"
+          }
+        },
+        "topic_summary": {
+          "cohort_count": 3,
+          "revised_count": 1,
+          "confirmed_count": 2,
+          "returned_ever_count": 1,
+          "first_pass_confirmed_count": 1,
+          "revised_confirmed_count": 1,
+          "pending_latest_count": 1,
+          "revision_attempts": 1,
+          "first_review_covered": 2,
+          "first_review_wait_sum_minutes": 0.0013899833333333334,
+          "first_review_wait_mean_minutes": "0.000695",
+          "missing_teaching_record_links": 0,
+          "revised_rate": {
+            "numerator": 1,
+            "denominator": 3,
+            "percent": "33.333333",
+            "display": "33.3%"
+          },
+          "confirmation_rate": {
+            "numerator": 2,
+            "denominator": 3,
+            "percent": "66.666667",
+            "display": "66.7%"
+          },
+          "revised_confirmation_rate": {
+            "numerator": 1,
+            "denominator": 1,
+            "percent": "100.000000",
+            "display": "100.0%"
+          },
+          "first_review_histogram": {
+            "[0,60)": 2,
+            "[60,240)": 0,
+            "[240,1440)": 0,
+            "[1440,+inf)": 0
+          }
+        },
+        "quality": {
+          "reconciled": true,
+          "fatal_errors": 0,
+          "independent_answers_matched": true
+        },
+        "daily": [
+          {
+            "metric_date": "2026-10-19",
+            "records": 1,
+            "known_minutes": 30,
+            "known_duration_count": 1,
+            "missing_duration_count": 0,
+            "known_zero_count": 0,
+            "ordinary_count": 1,
+            "trusted_teaching_count": 0,
+            "unverified_claim_count": 0,
+            "task_total": 1,
+            "completed": 0,
+            "cancelled": 0,
+            "overdue_unfinished": 1,
+            "cohort_count": 0,
+            "revised_count": 0,
+            "confirmed_count": 0
+          },
+          {
+            "metric_date": "2026-10-20",
+            "records": 4,
+            "known_minutes": 60,
+            "known_duration_count": 2,
+            "missing_duration_count": 2,
+            "known_zero_count": 0,
+            "ordinary_count": 2,
+            "trusted_teaching_count": 2,
+            "unverified_claim_count": 0,
+            "task_total": 3,
+            "completed": 2,
+            "cancelled": 1,
+            "overdue_unfinished": 0,
+            "cohort_count": 3,
+            "revised_count": 1,
+            "confirmed_count": 2
+          }
+        ]
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches?dataset_kind=controlled&page=1&page_size=20",
+      "status": 200,
+      "body": {
+        "items": [
+          {
+            "batch_id": "e58e61fb-cb1a-4fd1-91e9-a59eae41acb4",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-21T05:22:27.611955Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-21T05:35:22.580106Z"
+          },
+          {
+            "batch_id": "b96ea63e-419e-4293-b724-d1ce59bd85ba",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-21T05:22:27.611955Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-21T05:35:21.685492Z"
+          },
+          {
+            "batch_id": "e9c1fc11-14b3-4306-953f-862c37f992c4",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:57:03.027057Z"
+          },
+          {
+            "batch_id": "bdb4b1d2-12ca-4d9f-9436-580363353d5c",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T13:02:32.850121Z"
+          },
+          {
+            "batch_id": "8775c62f-ce8b-4068-92c8-425bc225c0dc",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:55:20.311924Z"
+          },
+          {
+            "batch_id": "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:52:26.536762Z"
+          },
+          {
+            "batch_id": "45c55b05-ff63-4cc6-b6ca-734146054710",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.713149Z"
+          },
+          {
+            "batch_id": "297855ea-edfd-442e-9dad-2877abe3a884",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.946643Z"
+          },
+          {
+            "batch_id": "246f4714-1f47-4150-92d1-40c315397591",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:55:20.290365Z"
+          },
+          {
+            "batch_id": "16944674-269f-4aa1-8ec1-1f207e218739",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.972055Z"
+          }
+        ],
+        "total": 10,
+        "page": 1,
+        "page_size": 20,
+        "empty_reason": null
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches/b96ea63e-419e-4293-b724-d1ce59bd85ba",
+      "status": 200,
+      "body": {
+        "batch_id": "b96ea63e-419e-4293-b724-d1ce59bd85ba",
+        "dataset_kind": "controlled",
+        "period_start": "2026-10-19",
+        "period_end": "2026-10-20",
+        "business_timezone": "Asia/Shanghai",
+        "source_cutoff": "2026-10-21T05:22:27.611955Z",
+        "schema_version": "scholarhub-source-1.0",
+        "metric_version": "learning-process-1.0",
+        "rule_version": "quality-1.0",
+        "published_at": "2026-10-21T05:35:21.685492Z",
+        "source": {
+          "dataset_id": "s02-controlled-owner-3",
+          "snapshot_id": "s06-e2e-owner3-20261021",
+          "job_id": "s06-e2e-main"
+        },
+        "records_summary": {
+          "valid_unique_rows": 5,
+          "known_minutes": 90,
+          "known_duration_count": 3,
+          "missing_duration_count": 2,
+          "known_zero_count": 0,
+          "active_days": 2,
+          "trusted_teaching_count": 2,
+          "unverified_claim_count": 0,
+          "ordinary_count": 3,
+          "raw_rows": 5,
+          "exact_duplicates": 0
+        },
+        "tasks_summary": {
+          "total": 4,
+          "completed": 2,
+          "cancelled": 1,
+          "overdue_unfinished": 1,
+          "completion_rate": {
+            "numerator": 2,
+            "denominator": 4,
+            "percent": "50.000000",
+            "display": "50.0%"
+          }
+        },
+        "topic_summary": {
+          "cohort_count": 3,
+          "revised_count": 1,
+          "confirmed_count": 2,
+          "returned_ever_count": 1,
+          "first_pass_confirmed_count": 1,
+          "revised_confirmed_count": 1,
+          "pending_latest_count": 1,
+          "revision_attempts": 1,
+          "first_review_covered": 2,
+          "first_review_wait_sum_minutes": 0.0013899833333333334,
+          "first_review_wait_mean_minutes": "0.000695",
+          "missing_teaching_record_links": 0,
+          "revised_rate": {
+            "numerator": 1,
+            "denominator": 3,
+            "percent": "33.333333",
+            "display": "33.3%"
+          },
+          "confirmation_rate": {
+            "numerator": 2,
+            "denominator": 3,
+            "percent": "66.666667",
+            "display": "66.7%"
+          },
+          "revised_confirmation_rate": {
+            "numerator": 1,
+            "denominator": 1,
+            "percent": "100.000000",
+            "display": "100.0%"
+          },
+          "first_review_histogram": {
+            "[0,60)": 2,
+            "[60,240)": 0,
+            "[240,1440)": 0,
+            "[1440,+inf)": 0
+          }
+        },
+        "quality": {
+          "reconciled": true,
+          "fatal_errors": 0,
+          "independent_answers_matched": true
+        },
+        "daily": [
+          {
+            "metric_date": "2026-10-19",
+            "records": 1,
+            "known_minutes": 30,
+            "known_duration_count": 1,
+            "missing_duration_count": 0,
+            "known_zero_count": 0,
+            "ordinary_count": 1,
+            "trusted_teaching_count": 0,
+            "unverified_claim_count": 0,
+            "task_total": 1,
+            "completed": 0,
+            "cancelled": 0,
+            "overdue_unfinished": 1,
+            "cohort_count": 0,
+            "revised_count": 0,
+            "confirmed_count": 0
+          },
+          {
+            "metric_date": "2026-10-20",
+            "records": 4,
+            "known_minutes": 60,
+            "known_duration_count": 2,
+            "missing_duration_count": 2,
+            "known_zero_count": 0,
+            "ordinary_count": 2,
+            "trusted_teaching_count": 2,
+            "unverified_claim_count": 0,
+            "task_total": 3,
+            "completed": 2,
+            "cancelled": 1,
+            "overdue_unfinished": 0,
+            "cohort_count": 3,
+            "revised_count": 1,
+            "confirmed_count": 2
+          }
+        ]
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches?dataset_kind=controlled&page=1&page_size=20",
+      "status": 200,
+      "body": {
+        "items": [
+          {
+            "batch_id": "e58e61fb-cb1a-4fd1-91e9-a59eae41acb4",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-21T05:22:27.611955Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-21T05:35:22.580106Z"
+          },
+          {
+            "batch_id": "b96ea63e-419e-4293-b724-d1ce59bd85ba",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-21T05:22:27.611955Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-21T05:35:21.685492Z"
+          },
+          {
+            "batch_id": "e9c1fc11-14b3-4306-953f-862c37f992c4",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:57:03.027057Z"
+          },
+          {
+            "batch_id": "bdb4b1d2-12ca-4d9f-9436-580363353d5c",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T13:02:32.850121Z"
+          },
+          {
+            "batch_id": "8775c62f-ce8b-4068-92c8-425bc225c0dc",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:55:20.311924Z"
+          },
+          {
+            "batch_id": "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:52:26.536762Z"
+          },
+          {
+            "batch_id": "45c55b05-ff63-4cc6-b6ca-734146054710",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.713149Z"
+          },
+          {
+            "batch_id": "297855ea-edfd-442e-9dad-2877abe3a884",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.946643Z"
+          },
+          {
+            "batch_id": "246f4714-1f47-4150-92d1-40c315397591",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:55:20.290365Z"
+          },
+          {
+            "batch_id": "16944674-269f-4aa1-8ec1-1f207e218739",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.972055Z"
+          }
+        ],
+        "total": 10,
+        "page": 1,
+        "page_size": 20,
+        "empty_reason": null
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches/b96ea63e-419e-4293-b724-d1ce59bd85ba",
+      "status": 200,
+      "body": {
+        "batch_id": "b96ea63e-419e-4293-b724-d1ce59bd85ba",
+        "dataset_kind": "controlled",
+        "period_start": "2026-10-19",
+        "period_end": "2026-10-20",
+        "business_timezone": "Asia/Shanghai",
+        "source_cutoff": "2026-10-21T05:22:27.611955Z",
+        "schema_version": "scholarhub-source-1.0",
+        "metric_version": "learning-process-1.0",
+        "rule_version": "quality-1.0",
+        "published_at": "2026-10-21T05:35:21.685492Z",
+        "source": {
+          "dataset_id": "s02-controlled-owner-3",
+          "snapshot_id": "s06-e2e-owner3-20261021",
+          "job_id": "s06-e2e-main"
+        },
+        "records_summary": {
+          "valid_unique_rows": 5,
+          "known_minutes": 90,
+          "known_duration_count": 3,
+          "missing_duration_count": 2,
+          "known_zero_count": 0,
+          "active_days": 2,
+          "trusted_teaching_count": 2,
+          "unverified_claim_count": 0,
+          "ordinary_count": 3,
+          "raw_rows": 5,
+          "exact_duplicates": 0
+        },
+        "tasks_summary": {
+          "total": 4,
+          "completed": 2,
+          "cancelled": 1,
+          "overdue_unfinished": 1,
+          "completion_rate": {
+            "numerator": 2,
+            "denominator": 4,
+            "percent": "50.000000",
+            "display": "50.0%"
+          }
+        },
+        "topic_summary": {
+          "cohort_count": 3,
+          "revised_count": 1,
+          "confirmed_count": 2,
+          "returned_ever_count": 1,
+          "first_pass_confirmed_count": 1,
+          "revised_confirmed_count": 1,
+          "pending_latest_count": 1,
+          "revision_attempts": 1,
+          "first_review_covered": 2,
+          "first_review_wait_sum_minutes": 0.0013899833333333334,
+          "first_review_wait_mean_minutes": "0.000695",
+          "missing_teaching_record_links": 0,
+          "revised_rate": {
+            "numerator": 1,
+            "denominator": 3,
+            "percent": "33.333333",
+            "display": "33.3%"
+          },
+          "confirmation_rate": {
+            "numerator": 2,
+            "denominator": 3,
+            "percent": "66.666667",
+            "display": "66.7%"
+          },
+          "revised_confirmation_rate": {
+            "numerator": 1,
+            "denominator": 1,
+            "percent": "100.000000",
+            "display": "100.0%"
+          },
+          "first_review_histogram": {
+            "[0,60)": 2,
+            "[60,240)": 0,
+            "[240,1440)": 0,
+            "[1440,+inf)": 0
+          }
+        },
+        "quality": {
+          "reconciled": true,
+          "fatal_errors": 0,
+          "independent_answers_matched": true
+        },
+        "daily": [
+          {
+            "metric_date": "2026-10-19",
+            "records": 1,
+            "known_minutes": 30,
+            "known_duration_count": 1,
+            "missing_duration_count": 0,
+            "known_zero_count": 0,
+            "ordinary_count": 1,
+            "trusted_teaching_count": 0,
+            "unverified_claim_count": 0,
+            "task_total": 1,
+            "completed": 0,
+            "cancelled": 0,
+            "overdue_unfinished": 1,
+            "cohort_count": 0,
+            "revised_count": 0,
+            "confirmed_count": 0
+          },
+          {
+            "metric_date": "2026-10-20",
+            "records": 4,
+            "known_minutes": 60,
+            "known_duration_count": 2,
+            "missing_duration_count": 2,
+            "known_zero_count": 0,
+            "ordinary_count": 2,
+            "trusted_teaching_count": 2,
+            "unverified_claim_count": 0,
+            "task_total": 3,
+            "completed": 2,
+            "cancelled": 1,
+            "overdue_unfinished": 0,
+            "cohort_count": 3,
+            "revised_count": 1,
+            "confirmed_count": 2
+          }
+        ]
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches?dataset_kind=controlled&page=1&page_size=20&period_start=2025-01-01&period_end=2025-01-02",
+      "status": 200,
+      "body": {
+        "items": [],
+        "total": 0,
+        "page": 1,
+        "page_size": 20,
+        "empty_reason": "no_matching_batch"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches?dataset_kind=business&page=1&page_size=20&period_start=2025-01-01&period_end=2025-01-02",
+      "status": 200,
+      "body": {
+        "items": [],
+        "total": 0,
+        "page": 1,
+        "page_size": 20,
+        "empty_reason": "no_completed_batch"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches/45c55b05-ff63-4cc6-b6ca-734146054710",
+      "status": 200,
+      "body": {
+        "batch_id": "45c55b05-ff63-4cc6-b6ca-734146054710",
+        "dataset_kind": "controlled",
+        "period_start": "2026-10-19",
+        "period_end": "2026-10-20",
+        "business_timezone": "Asia/Shanghai",
+        "source_cutoff": "2026-10-20T07:34:07.134833Z",
+        "schema_version": "scholarhub-source-1.0",
+        "metric_version": "learning-process-1.0",
+        "rule_version": "quality-1.0",
+        "published_at": "2026-10-20T12:54:14.713149Z",
+        "source": {
+          "dataset_id": "s05-permission-fixture",
+          "snapshot_id": "s05-permission-empty",
+          "job_id": "s05-empty-permission-fixture"
+        },
+        "records_summary": {
+          "valid_unique_rows": 0,
+          "known_minutes": 0,
+          "known_duration_count": 0,
+          "missing_duration_count": 0,
+          "known_zero_count": 0,
+          "active_days": 0,
+          "trusted_teaching_count": 0,
+          "unverified_claim_count": 0,
+          "ordinary_count": 0,
+          "raw_rows": 0,
+          "exact_duplicates": 0
+        },
+        "tasks_summary": {
+          "total": 0,
+          "completed": 0,
+          "cancelled": 0,
+          "overdue_unfinished": 0,
+          "completion_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          }
+        },
+        "topic_summary": {
+          "cohort_count": 0,
+          "revised_count": 0,
+          "confirmed_count": 0,
+          "returned_ever_count": 0,
+          "first_pass_confirmed_count": 0,
+          "revised_confirmed_count": 0,
+          "pending_latest_count": 0,
+          "revision_attempts": 0,
+          "first_review_covered": 0,
+          "first_review_wait_sum_minutes": 0,
+          "first_review_wait_mean_minutes": null,
+          "missing_teaching_record_links": 0,
+          "revised_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          },
+          "confirmation_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          },
+          "revised_confirmation_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          },
+          "first_review_histogram": {
+            "[0,60)": 0,
+            "[60,240)": 0,
+            "[240,1440)": 0,
+            "[1440,+inf)": 0
+          }
+        },
+        "quality": {
+          "reconciled": true,
+          "fatal_errors": 0,
+          "permission_fixture": true
+        },
+        "daily": []
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches?dataset_kind=controlled&page=1&page_size=20",
+      "status": 200,
+      "body": {
+        "items": [
+          {
+            "batch_id": "e58e61fb-cb1a-4fd1-91e9-a59eae41acb4",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-21T05:22:27.611955Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-21T05:35:22.580106Z"
+          },
+          {
+            "batch_id": "b96ea63e-419e-4293-b724-d1ce59bd85ba",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-21T05:22:27.611955Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-21T05:35:21.685492Z"
+          },
+          {
+            "batch_id": "e9c1fc11-14b3-4306-953f-862c37f992c4",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:57:03.027057Z"
+          },
+          {
+            "batch_id": "bdb4b1d2-12ca-4d9f-9436-580363353d5c",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T13:02:32.850121Z"
+          },
+          {
+            "batch_id": "8775c62f-ce8b-4068-92c8-425bc225c0dc",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:55:20.311924Z"
+          },
+          {
+            "batch_id": "77e12daa-c693-4c47-8ef8-e7c5b78b1395",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:52:26.536762Z"
+          },
+          {
+            "batch_id": "45c55b05-ff63-4cc6-b6ca-734146054710",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.713149Z"
+          },
+          {
+            "batch_id": "297855ea-edfd-442e-9dad-2877abe3a884",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.946643Z"
+          },
+          {
+            "batch_id": "246f4714-1f47-4150-92d1-40c315397591",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:55:20.290365Z"
+          },
+          {
+            "batch_id": "16944674-269f-4aa1-8ec1-1f207e218739",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.134833Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:54:14.972055Z"
+          }
+        ],
+        "total": 10,
+        "page": 1,
+        "page_size": 20,
+        "empty_reason": null
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches/3217db64-1302-4722-a483-c3b1ad7b980f",
+      "status": 404,
+      "body": {
+        "error": {
+          "code": "resource_not_found",
+          "message": "分析批次不存在",
+          "request_id": "a444e2a6f656461b853ec91eb8f8b871"
+        }
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches/3217db64-1302-4722-a483-c3b1ad7b980f",
+      "status": 200,
+      "body": {
+        "batch_id": "3217db64-1302-4722-a483-c3b1ad7b980f",
+        "dataset_kind": "controlled",
+        "period_start": "2026-10-19",
+        "period_end": "2026-10-20",
+        "business_timezone": "Asia/Shanghai",
+        "source_cutoff": "2026-10-21T05:22:27.640605Z",
+        "schema_version": "scholarhub-source-1.0",
+        "metric_version": "learning-process-1.0",
+        "rule_version": "quality-1.0",
+        "published_at": "2026-10-21T05:35:22.422332Z",
+        "source": {
+          "dataset_id": "s02-controlled-owner-4",
+          "snapshot_id": "s06-e2e-owner4-20261021",
+          "job_id": "s06-e2e-boundary"
+        },
+        "records_summary": {
+          "valid_unique_rows": 0,
+          "known_minutes": 0,
+          "known_duration_count": 0,
+          "missing_duration_count": 0,
+          "known_zero_count": 0,
+          "active_days": 0,
+          "trusted_teaching_count": 0,
+          "unverified_claim_count": 0,
+          "ordinary_count": 0,
+          "raw_rows": 0,
+          "exact_duplicates": 0
+        },
+        "tasks_summary": {
+          "total": 200,
+          "completed": 199,
+          "cancelled": 0,
+          "overdue_unfinished": 1,
+          "completion_rate": {
+            "numerator": 199,
+            "denominator": 200,
+            "percent": "99.500000",
+            "display": "99.5%"
+          }
+        },
+        "topic_summary": {
+          "cohort_count": 0,
+          "revised_count": 0,
+          "confirmed_count": 0,
+          "returned_ever_count": 0,
+          "first_pass_confirmed_count": 0,
+          "revised_confirmed_count": 0,
+          "pending_latest_count": 0,
+          "revision_attempts": 0,
+          "first_review_covered": 0,
+          "first_review_wait_sum_minutes": 0,
+          "first_review_wait_mean_minutes": null,
+          "missing_teaching_record_links": 0,
+          "revised_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          },
+          "confirmation_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          },
+          "revised_confirmation_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          },
+          "first_review_histogram": {
+            "[0,60)": 0,
+            "[60,240)": 0,
+            "[240,1440)": 0,
+            "[1440,+inf)": 0
+          }
+        },
+        "quality": {
+          "reconciled": true,
+          "fatal_errors": 0,
+          "independent_answers_matched": true
+        },
+        "daily": [
+          {
+            "metric_date": "2026-10-20",
+            "records": 0,
+            "known_minutes": 0,
+            "known_duration_count": 0,
+            "missing_duration_count": 0,
+            "known_zero_count": 0,
+            "ordinary_count": 0,
+            "trusted_teaching_count": 0,
+            "unverified_claim_count": 0,
+            "task_total": 200,
+            "completed": 199,
+            "cancelled": 0,
+            "overdue_unfinished": 1,
+            "cohort_count": 0,
+            "revised_count": 0,
+            "confirmed_count": 0
+          }
+        ]
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches?dataset_kind=controlled&page=1&page_size=20",
+      "status": 200,
+      "body": {
+        "items": [
+          {
+            "batch_id": "3217db64-1302-4722-a483-c3b1ad7b980f",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-21T05:22:27.640605Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-21T05:35:22.422332Z"
+          },
+          {
+            "batch_id": "b9378c01-70b2-4456-9d44-b579617375d1",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.103019Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:52:27.144320Z"
+          }
+        ],
+        "total": 2,
+        "page": 1,
+        "page_size": 20,
+        "empty_reason": null
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches/b96ea63e-419e-4293-b724-d1ce59bd85ba",
+      "status": 404,
+      "body": {
+        "error": {
+          "code": "resource_not_found",
+          "message": "分析批次不存在",
+          "request_id": "957565e708e249498286b40499eb619e"
+        }
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches?dataset_kind=controlled&page=1&page_size=20",
+      "status": 200,
+      "body": {
+        "items": [
+          {
+            "batch_id": "3217db64-1302-4722-a483-c3b1ad7b980f",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-21T05:22:27.640605Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-21T05:35:22.422332Z"
+          },
+          {
+            "batch_id": "b9378c01-70b2-4456-9d44-b579617375d1",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.103019Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:52:27.144320Z"
+          }
+        ],
+        "total": 2,
+        "page": 1,
+        "page_size": 20,
+        "empty_reason": null
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches?dataset_kind=controlled&page=1&page_size=20",
+      "status": 200,
+      "body": {
+        "items": [
+          {
+            "batch_id": "3217db64-1302-4722-a483-c3b1ad7b980f",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-21T05:22:27.640605Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-21T05:35:22.422332Z"
+          },
+          {
+            "batch_id": "b9378c01-70b2-4456-9d44-b579617375d1",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.103019Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:52:27.144320Z"
+          }
+        ],
+        "total": 2,
+        "page": 1,
+        "page_size": 20,
+        "empty_reason": null
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches/3217db64-1302-4722-a483-c3b1ad7b980f",
+      "status": 200,
+      "body": {
+        "batch_id": "3217db64-1302-4722-a483-c3b1ad7b980f",
+        "dataset_kind": "controlled",
+        "period_start": "2026-10-19",
+        "period_end": "2026-10-20",
+        "business_timezone": "Asia/Shanghai",
+        "source_cutoff": "2026-10-21T05:22:27.640605Z",
+        "schema_version": "scholarhub-source-1.0",
+        "metric_version": "learning-process-1.0",
+        "rule_version": "quality-1.0",
+        "published_at": "2026-10-21T05:35:22.422332Z",
+        "source": {
+          "dataset_id": "s02-controlled-owner-4",
+          "snapshot_id": "s06-e2e-owner4-20261021",
+          "job_id": "s06-e2e-boundary"
+        },
+        "records_summary": {
+          "valid_unique_rows": 0,
+          "known_minutes": 0,
+          "known_duration_count": 0,
+          "missing_duration_count": 0,
+          "known_zero_count": 0,
+          "active_days": 0,
+          "trusted_teaching_count": 0,
+          "unverified_claim_count": 0,
+          "ordinary_count": 0,
+          "raw_rows": 0,
+          "exact_duplicates": 0
+        },
+        "tasks_summary": {
+          "total": 200,
+          "completed": 199,
+          "cancelled": 0,
+          "overdue_unfinished": 1,
+          "completion_rate": {
+            "numerator": 199,
+            "denominator": 200,
+            "percent": "99.500000",
+            "display": "99.5%"
+          }
+        },
+        "topic_summary": {
+          "cohort_count": 0,
+          "revised_count": 0,
+          "confirmed_count": 0,
+          "returned_ever_count": 0,
+          "first_pass_confirmed_count": 0,
+          "revised_confirmed_count": 0,
+          "pending_latest_count": 0,
+          "revision_attempts": 0,
+          "first_review_covered": 0,
+          "first_review_wait_sum_minutes": 0,
+          "first_review_wait_mean_minutes": null,
+          "missing_teaching_record_links": 0,
+          "revised_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          },
+          "confirmation_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          },
+          "revised_confirmation_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "percent": null,
+            "display": "无样本"
+          },
+          "first_review_histogram": {
+            "[0,60)": 0,
+            "[60,240)": 0,
+            "[240,1440)": 0,
+            "[1440,+inf)": 0
+          }
+        },
+        "quality": {
+          "reconciled": true,
+          "fatal_errors": 0,
+          "independent_answers_matched": true
+        },
+        "daily": [
+          {
+            "metric_date": "2026-10-20",
+            "records": 0,
+            "known_minutes": 0,
+            "known_duration_count": 0,
+            "missing_duration_count": 0,
+            "known_zero_count": 0,
+            "ordinary_count": 0,
+            "trusted_teaching_count": 0,
+            "unverified_claim_count": 0,
+            "task_total": 200,
+            "completed": 199,
+            "cancelled": 0,
+            "overdue_unfinished": 1,
+            "cohort_count": 0,
+            "revised_count": 0,
+            "confirmed_count": 0
+          }
+        ]
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches?dataset_kind=controlled&page=1&page_size=20",
+      "status": 200,
+      "body": {
+        "items": [
+          {
+            "batch_id": "3217db64-1302-4722-a483-c3b1ad7b980f",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-21T05:22:27.640605Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-21T05:35:22.422332Z"
+          },
+          {
+            "batch_id": "b9378c01-70b2-4456-9d44-b579617375d1",
+            "dataset_kind": "controlled",
+            "period_start": "2026-10-19",
+            "period_end": "2026-10-20",
+            "business_timezone": "Asia/Shanghai",
+            "source_cutoff": "2026-10-20T07:34:07.103019Z",
+            "schema_version": "scholarhub-source-1.0",
+            "metric_version": "learning-process-1.0",
+            "rule_version": "quality-1.0",
+            "published_at": "2026-10-20T12:52:27.144320Z"
+          }
+        ],
+        "total": 2,
+        "page": 1,
+        "page_size": 20,
+        "empty_reason": null
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8016/api/v1/offline-analytics/batches/45c55b05-ff63-4cc6-b6ca-734146054710",
+      "status": 404,
+      "body": {
+        "error": {
+          "code": "resource_not_found",
+          "message": "分析批次不存在",
+          "request_id": "222deabdea30478d98c06dbf9b44377b"
+        }
+      }
+    }
+  ],
+  "viewport_widths": [
+    1440,
+    390
+  ],
+  "writes_or_models_not_triggered_by_UI": "verified separately by server-observation.json"
+}

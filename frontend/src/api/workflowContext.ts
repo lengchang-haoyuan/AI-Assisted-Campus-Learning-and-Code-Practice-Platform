@@ -36,3 +36,9 @@ export async function updateProjectContext(
   })
   return response.data
 }
+
+// 复用既有节点写入端点；服务端继续限制归属、字段策略与Context版本。
+export async function writeNodeContext(workflowId: number, nodeId: number, expectedVersion: number, values: ProjectContextPatch): Promise<ProjectContextMutationResponse> {
+  const response = await apiClient.post<ProjectContextMutationResponse>(`/workflows/${workflowId}/nodes/${nodeId}/context/write`, { expected_version: expectedVersion, values })
+  return response.data
+}

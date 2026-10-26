@@ -1,0 +1,46 @@
+{
+  "case_id": "Q02",
+  "artifact_id": "S08-Q02-candidate-v1",
+  "text_version": "1.0",
+  "response": {
+    "summary": "静态阅读学生代码：函数使用 csv.DictReader 解析，检查必需表头，逐行校验 record_id 与 duration_minutes，并维护五个计数字段。未发现外部 I/O 或明显计数/累加错误；但代码未显式处理 csv 引号异常，且对额外已命名列忽略、对多余无表头字段判为非法行的行为需结合任务边界确认。本次仅静态评审，未执行代码。",
+    "overall": "pass",
+    "criteria": [
+      {
+        "criterion_id": "C01",
+        "verdict": "pass",
+        "reason": "代码在读取 fieldnames 后检查必需列集合是否为表头子集，缺失时抛出 ValueError，满足缺表头约束。"
+      },
+      {
+        "criterion_id": "C02",
+        "verdict": "pass",
+        "reason": "使用 csv.DictReader 解析，逐行校验 record_id 可转 int 且大于 0、分钟空白或可转 int 且在 0 至 1440，非法行计入 invalid_count 并跳过；额外已命名列被忽略，符合行有效性要求。"
+      },
+      {
+        "criterion_id": "C03",
+        "verdict": "pass",
+        "reason": "有效行先增加 record_count，再按 duration 是否为 None 分别增加 missing_duration_count 或 known_duration_count；已知 0 分钟进入 known_duration_count 而非 missing，NULL 与 0 区分正确。"
+      },
+      {
+        "criterion_id": "C04",
+        "verdict": "pass",
+        "reason": "仅在 duration 非 None 时把 duration 累加到 known_minutes，已知 0 分钟累加 0，未知分钟不参与累加，符合已知分钟求和要求。"
+      },
+      {
+        "criterion_id": "C05",
+        "verdict": "pass",
+        "reason": "返回字典在循环前已初始化五个整数字段，即使没有有效行也会返回完整五字段，满足空有效集契约。"
+      },
+      {
+        "criterion_id": "C06",
+        "verdict": "pass",
+        "reason": "函数仅使用 csv、io 和内存中的字符串处理，不读写文件、不联网、不执行任意代码，符合纯函数与静态边界。"
+      }
+    ]
+  },
+  "prompt_version": "practice-review-r1",
+  "schema_version": "practice-review/1.0",
+  "provider": "deepseek",
+  "model_id": "deepseek-flash",
+  "raw_response_ref": "raw/06-under_test-Q02-response.json"
+}

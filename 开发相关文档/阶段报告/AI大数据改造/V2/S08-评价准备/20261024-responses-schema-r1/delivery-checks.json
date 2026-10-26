@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "python_AST_files": 14,
+  "JSON_files_checked": 29,
+  "markdown_files": 5,
+  "local_links": 189,
+  "backend_related_tests": 64,
+  "fixed_request_checks": 138,
+  "schema_adaptation_real_calls": 0,
+  "database_access": false,
+  "common_credential_patterns_found": 0,
+  "new_python_trailing_whitespace": 0,
+  "real_provider_compatibility": "not_run",
+  "S08_quality": "not_accepted",
+  "git_diff_check_exit_code": 0,
+  "git_diff_check_note": "仅既有CRLF提示，无差异错误"
+}

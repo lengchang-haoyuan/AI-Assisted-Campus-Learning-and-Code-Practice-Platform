@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "head": "2faa8a2e8996fa84aa9b3abe513f85665b3af3db",
+  "protected_untracked_local_state": [
+    ".rivet/",
+    "tmp/"
+  ],
+  "modified_tracked_files": [
+    ".impeccable/design.json",
+    "DESIGN.md",
+    "analytics/prepare_publication.py",
+    "backend/app/services/analytics_artifacts.py",
+    "frontend/src/layouts/AppLayout.vue",
+    "frontend/src/router/index.ts",
+    "frontend/src/views/AnalyticsView.vue",
+    "开发相关文档/开发日志/开发操作日志.md"
+  ],
+  "all_existing_changes_within_S06_boundary": true,
+  "old_S03_S04_S05_artifacts_no_diff": true,
+  "python_AST_files": 12,
+  "JSON_files_parsed": 236,
+  "local_markdown_links_checked": 79,
+  "credential_token_patterns_found": 0,
+  "git_diff_check_exit_code": 0,
+  "no_dependency_or_config_changes": true,
+  "frontend_build_exit_code": 0,
+  "targeted_backend_tests": 30,
+  "S06_full_acceptance": false,
+  "pending": "Formal J1 by explicit user model0 decision",
+  "not_run": [
+    "full296backendtests",
+    "real_model",
+    "million_scale",
+    "cluster",
+    "S07"
+  ]
+}

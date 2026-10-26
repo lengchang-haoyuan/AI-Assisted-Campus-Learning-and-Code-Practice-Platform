@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "python_AST_files": 3,
+  "JSON_files_checked": 6,
+  "local_links": 150,
+  "backend_review_tests": 14,
+  "preparation_checks": 117,
+  "real_model_calls": 0,
+  "database_access": false,
+  "credentials_read": false,
+  "frozen_answers_or_thresholds_changed": false,
+  "new_charge_authorization": "pending_user_response",
+  "trailing_whitespace": 0
+}

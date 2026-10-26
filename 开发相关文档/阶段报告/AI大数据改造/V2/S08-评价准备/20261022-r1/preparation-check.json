@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "check_count": 199,
+  "passed": 199,
+  "failed_checks": [],
+  "ground_truth_counts": {
+    "cases": 16,
+    "correct": 4,
+    "incorrect": 9,
+    "insufficient": 3,
+    "known_criterion_cells": 78,
+    "reference_issue_cells": 9,
+    "known_pass_cells": 69,
+    "unknown_cells": 18
+  },
+  "real_model_calls": 0,
+  "student_code_executed": false,
+  "database_access": false,
+  "command": "backend/.venv/Scripts/python.exe -B 开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261022-r1/validate_inputs.py",
+  "scope": "preparation_files_and_production_DTO_only_not_model_quality"
+}

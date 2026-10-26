@@ -5,7 +5,7 @@ import unittest
 
 from sqlalchemy.dialects import mysql
 from sqlalchemy.orm import configure_mappers
-from sqlalchemy.schema import CreateTable, ForeignKeyConstraint
+from sqlalchemy.schema import CreateTable, ForeignKeyConstraint, UniqueConstraint
 
 from app.models import Base
 from app.models.base import UTCDateTime
@@ -36,6 +36,9 @@ EXPECTED_TABLES = {
     "project_tags",
     "project_views",
     "projects",
+    "practice_sessions",
+    "practice_attempts",
+    "practice_events",
     "password_resets",
     "feedback",
     "notifications",
@@ -149,6 +152,13 @@ class DatabaseSchemaTests(unittest.TestCase):
             ("ai_requests", "workflow_run_id", "workflow_runs.id"): "SET NULL",
             ("ai_results", "request_id", "ai_requests.id"): "CASCADE",
             ("learning_reports", "ai_result_id", "ai_results.id"): "SET NULL",
+            ("practice_sessions", "owner_user_id", "users.id"): "RESTRICT",
+            ("practice_sessions", "project_id", "projects.id"): "CASCADE",
+            ("practice_sessions", "active_ai_request_id", "ai_requests.id"): "SET NULL",
+            ("practice_attempts", "session_id", "practice_sessions.id"): "CASCADE",
+            ("practice_attempts", "ai_request_id", "ai_requests.id"): "SET NULL",
+            ("practice_events", "session_id", "practice_sessions.id"): "CASCADE",
+            ("practice_events", "attempt_id", "practice_attempts.id"): "CASCADE",
         }
         actual: dict[tuple[str, str, str], str | None] = {}
         for table in Base.metadata.tables.values():
@@ -159,6 +169,50 @@ class DatabaseSchemaTests(unittest.TestCase):
         for relation, ondelete in expected.items():
             with self.subTest(relation=relation):
                 self.assertEqual(actual[relation], ondelete)
+
+    def test_practice_attempt_and_event_identity_constraints(self) -> None:
+        attempt = Base.metadata.tables["practice_attempts"]
+        event = Base.metadata.tables["practice_events"]
+        attempt_unique = {
+            tuple(column.name for column in constraint.columns)
+            for constraint in attempt.constraints
+            if isinstance(constraint, UniqueConstraint)
+        }
+        self.assertTrue(
+            {
+                ("session_id", "step_key", "attempt_no"),
+                ("session_id", "request_key"),
+                ("session_id", "id"),
+            }.issubset(attempt_unique)
+        )
+        self.assertIn(
+            ("session_id", "event_key"),
+            {
+                tuple(column.name for column in constraint.columns)
+                for constraint in event.constraints
+                if isinstance(constraint, UniqueConstraint)
+            },
+        )
+        self.assertIn(
+            ("practice_attempts.session_id", "practice_attempts.id"),
+            {
+                tuple(element.target_fullname for element in constraint.elements)
+                for constraint in event.constraints
+                if isinstance(constraint, ForeignKeyConstraint)
+            },
+        )
+
+    def test_s07_migration_contains_only_the_three_practice_tables(self) -> None:
+        migration = (BACKEND_DIR / "migrations/20261021_s07_practice.sql").read_text(
+            encoding="utf-8"
+        )
+        tables = schema_tables(migration)
+        self.assertEqual(
+            set(tables), {"practice_sessions", "practice_attempts", "practice_events"}
+        )
+        for name, columns in tables.items():
+            with self.subTest(table=name):
+                self.assertEqual(columns, set(Base.metadata.tables[name].columns.keys()))
 
     def test_sensitive_fields_are_not_modeled(self) -> None:
         all_columns = {

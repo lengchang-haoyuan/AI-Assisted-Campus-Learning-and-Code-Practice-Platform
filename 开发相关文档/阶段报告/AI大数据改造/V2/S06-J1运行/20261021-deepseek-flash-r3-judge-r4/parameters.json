@@ -1,0 +1,33 @@
+{
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "base_url": "https://api.deepseek.com",
+  "endpoint": "/chat/completions",
+  "prompt_version": "judge-r4",
+  "input_version": "S06-J1准备/20261021-r1",
+  "artifact_id": "S06-analysis-b96ea63e-v1",
+  "text_version": "1.0",
+  "temperature": 0,
+  "max_tokens": 1200,
+  "response_format": "json_object",
+  "reasoning_enabled": false,
+  "thinking": {
+    "type": "disabled"
+  },
+  "reasoning_resolution": "准备稿null未选定思考模式；首次校准前固定为关闭，保证temperature=0有效且不消耗隐含思考输出；全轮保持一致",
+  "total_timeout_seconds": 60,
+  "connect_timeout_seconds": 5,
+  "request_timeout_seconds": 60,
+  "max_retries": 0,
+  "retry_base_delay_seconds": 0,
+  "max_retry_delay_seconds": 0,
+  "transport_retries": 0,
+  "follow_redirects": false,
+  "stream": false,
+  "context": "每次只有相同system和该例user两条消息，无历史上下文",
+  "tools": "none",
+  "runtime_reuse": "现有DeepSeekProvider + AIClient，仅评价进程局部实例；不改全站配置",
+  "system_prompt_ref": "judge-r4-system.txt",
+  "prior_parameters_ref": "../20261021-deepseek-flash-r2-judge-r3/parameters.json",
+  "change_from_prior": "仅system追加候选反馈主张的证据语义；其余参数不变"
+}

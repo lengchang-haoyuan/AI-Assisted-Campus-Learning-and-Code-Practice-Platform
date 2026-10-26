@@ -1,0 +1,33 @@
+{"role": "under_test", "input_id": "Q01", "status": "response_received", "attempts": 1, "spent_or_held_upper_cny": "0.01231600"}
+{"role": "judge_formal", "input_id": "Q01", "status": "response_received", "attempts": 2, "spent_or_held_upper_cny": "0.05114200"}
+{"role": "under_test", "input_id": "Q02", "status": "response_received", "attempts": 3, "spent_or_held_upper_cny": "0.06317400"}
+{"role": "judge_formal", "input_id": "Q02", "status": "response_received", "attempts": 4, "spent_or_held_upper_cny": "0.10171200"}
+{"role": "under_test", "input_id": "Q03", "status": "response_received", "attempts": 5, "spent_or_held_upper_cny": "0.11398600"}
+{"role": "judge_formal", "input_id": "Q03", "status": "response_received", "attempts": 6, "spent_or_held_upper_cny": "0.15313600"}
+{"role": "under_test", "input_id": "Q04", "status": "response_received", "attempts": 7, "spent_or_held_upper_cny": "0.16505200"}
+{"role": "judge_formal", "input_id": "Q04", "status": "response_received", "attempts": 8, "spent_or_held_upper_cny": "0.20386900"}
+{"role": "under_test", "input_id": "Q05", "status": "response_received", "attempts": 9, "spent_or_held_upper_cny": "0.21707100"}
+{"role": "judge_formal", "input_id": "Q05", "status": "response_received", "attempts": 10, "spent_or_held_upper_cny": "0.26134200"}
+{"role": "under_test", "input_id": "Q06", "status": "invalid_or_failed", "attempts": 11, "spent_or_held_upper_cny": "0.30270400"}
+{
+  "evaluation_id": "S08-20261024-flash-pro-r5-responses",
+  "status": "stopped",
+  "provider_attempts": 11,
+  "role_usage": {
+    "under_test": 6,
+    "judge_calibration": 0,
+    "judge_formal": 5
+  },
+  "calibration_passed": true,
+  "completed_case_ids": [
+    "Q01",
+    "Q02",
+    "Q03",
+    "Q04",
+    "Q05"
+  ],
+  "conservative_spend_or_held_upper_cny": "0.30270400",
+  "remaining_hard_cap_upper_cny": "1.22790800",
+  "S08_fixed_case_quality_passed": false,
+  "stop_error_type": "AgentOutputValidationError"
+}

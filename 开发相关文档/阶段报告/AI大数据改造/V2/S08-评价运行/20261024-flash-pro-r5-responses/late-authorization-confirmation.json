@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-10-24T20:54:04.078689+08:00",
+  "evaluation_id": "S08-20261024-flash-pro-r5-responses",
+  "question_item_id": "[\"request_user_input_async\",\"call_a1ac718c86c04ec79e2365b4a7fe11bb\",0]",
+  "user_answer": "授权上述32次及1.530612元上限（推荐）",
+  "original_earlier_direct_authorization": "授权",
+  "original_authorization_ref": "authorization.json",
+  "scope": "同一r5轮：Flash16 Responses/Pro16 Chat、新校准0条件复用、固定16例输入、CNY1.530612，与旧留0.469388合原2CNY、失败即停/重试0/DB0/S09不推进",
+  "relation": "针对此前同一个具体授权问题的后到答复；补充原授权证据，不构成新轮许可或重试指令",
+  "existing_round_status": "stopped",
+  "existing_calls": 11,
+  "existing_role_usage": {
+    "under_test": 6,
+    "judge_calibration": 0,
+    "judge_formal": 5
+  },
+  "additional_model_calls": 0,
+  "additional_currency_authorized": "0.00000000",
+  "new_round_authorized": false,
+  "database_access": false,
+  "original_ledger_raw_and_authorization_unchanged": true
+}

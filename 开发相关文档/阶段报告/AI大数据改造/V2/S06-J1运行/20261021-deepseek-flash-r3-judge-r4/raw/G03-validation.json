@@ -1,0 +1,28 @@
+{
+  "mode": "feedback",
+  "status": "abstain",
+  "response_status": "abstain",
+  "structure_valid": true,
+  "binding_valid": true,
+  "references_valid": true,
+  "reference_checks": [
+    {
+      "path": "response.criterion_evidence[0].quote",
+      "nonempty": false,
+      "present": false,
+      "valid": true
+    }
+  ],
+  "expected_matches": {
+    "expected_status": true,
+    "expected_actionability_score": true,
+    "expected_criterion": true,
+    "expected_evidence_valid": true,
+    "expected_unsupported_claim": true,
+    "expected_case_id": true
+  },
+  "calibration_pass": true,
+  "analysis_total": null,
+  "analysis_pass": false,
+  "errors": []
+}

@@ -1,0 +1,138 @@
+test_cancellation_is_propagated_without_retry (tests.test_ai_provider.AIClientTests.test_cancellation_is_propagated_without_retry) ... {"timestamp":"2026-10-24T11:37:09.783995+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"blocking","model":"deepseek-v4-flash","status":"cancelled","latency_ms":0,"failure_category":"cancelled","attempt_count":1}
+ok
+test_does_not_retry_model_or_ambiguous_failure (tests.test_ai_provider.AIClientTests.test_does_not_retry_model_or_ambiguous_failure) ... {"timestamp":"2026-10-24T11:37:09.784995+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"deepseek-v4-flash","status":"failed","latency_ms":0,"failure_category":"model","attempt_count":1}
+ok
+test_fake_provider_returns_uniform_result_and_safe_log (tests.test_ai_provider.AIClientTests.test_fake_provider_returns_uniform_result_and_safe_log) ... ok
+test_retries_only_explicit_retryable_failure (tests.test_ai_provider.AIClientTests.test_retries_only_explicit_retryable_failure) ... {"timestamp":"2026-10-24T11:37:09.786995+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_retrying","provider":"fake","model":"deepseek-v4-flash","status":"retrying","failure_category":"network","attempt_count":1}
+{"timestamp":"2026-10-24T11:37:09.786995+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"deepseek-v4-flash","status":"succeeded","latency_ms":0,"attempt_count":2}
+ok
+test_total_timeout_bounds_provider_and_retry_work (tests.test_ai_provider.AIClientTests.test_total_timeout_bounds_provider_and_retry_work) ... {"timestamp":"2026-10-24T11:37:09.800047+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"slow","model":"deepseek-v4-flash","status":"failed","latency_ms":12,"failure_category":"total_timeout","attempt_count":1}
+ok
+test_authenticated_endpoint_returns_uniform_json (tests.test_ai_provider.AIProviderAPITests.test_authenticated_endpoint_returns_uniform_json) ... {"timestamp":"2026-10-24T11:37:09.907142+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"e3c865540f45443bb313d9665c6894b0","method":"POST","path":"/api/v1/ai/test","status_code":200,"duration_ms":101.635}
+ok
+test_configuration_error_is_safe_and_actionable (tests.test_ai_provider.AIProviderAPITests.test_configuration_error_is_safe_and_actionable) ... {"timestamp":"2026-10-24T11:37:10.030345+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"7fb1636495d84311b62055a5be489b77","method":"POST","path":"/api/v1/ai/test","status_code":503,"duration_ms":122.364}
+ok
+test_endpoint_requires_authentication_and_valid_payload (tests.test_ai_provider.AIProviderAPITests.test_endpoint_requires_authentication_and_valid_payload) ... {"timestamp":"2026-10-24T11:37:10.123417+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"d46c0ba713724031980596c1032315c3","method":"POST","path":"/api/v1/ai/test","status_code":401,"duration_ms":91.301}
+{"timestamp":"2026-10-24T11:37:10.215529+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"6cefefa966a244a1abff62590aec69e5","method":"POST","path":"/api/v1/ai/test","status_code":422,"duration_ms":91.471}
+ok
+test_missing_key_is_mapped_to_safe_application_error (tests.test_ai_provider.AIServiceTests.test_missing_key_is_mapped_to_safe_application_error) ... {"timestamp":"2026-10-24T11:37:10.216529+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"deepseek-v4-flash","status":"failed","latency_ms":0,"failure_category":"configuration","attempt_count":1}
+ok
+test_api_key_is_optional_and_hidden_from_repr (tests.test_ai_provider.AISettingsTests.test_api_key_is_optional_and_hidden_from_repr) ... ok
+test_rejects_non_official_or_insecure_base_url (tests.test_ai_provider.AISettingsTests.test_rejects_non_official_or_insecure_base_url) ... ok
+test_maps_http_response_to_provider_result (tests.test_ai_provider.DeepSeekProviderTests.test_maps_http_response_to_provider_result) ... ok
+test_maps_json_and_reasoning_options (tests.test_ai_provider.DeepSeekProviderTests.test_maps_json_and_reasoning_options) ... ok
+test_missing_key_fails_before_network_request (tests.test_ai_provider.DeepSeekProviderTests.test_missing_key_fails_before_network_request) ... ok
+test_rate_limit_and_invalid_json_are_classified (tests.test_ai_provider.DeepSeekProviderTests.test_rate_limit_and_invalid_json_are_classified) ... ok
+test_routes_require_authentication_and_validate_input (tests.test_agents.AgentAPITests.test_routes_require_authentication_and_validate_input) ... {"timestamp":"2026-10-24T11:37:10.318147+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"24ce8216d34a4853b6cbc52a75e034ff","method":"POST","path":"/api/v1/agents/project-analysis","status_code":401,"duration_ms":93.532}
+{"timestamp":"2026-10-24T11:37:10.409501+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"d5b6f4e8c30949f3b35ef64d96ad1c53","method":"POST","path":"/api/v1/agents/prompt","status_code":422,"duration_ms":90.687}
+{"timestamp":"2026-10-24T11:37:10.411504+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"665f96562a1b4a01b2b4b63745189f17","method":"GET","path":"/api/v1/agents/results/0","status_code":422,"duration_ms":1.276}
+ok
+test_run_and_query_map_structured_result (tests.test_agents.AgentAPITests.test_run_and_query_map_structured_result) ... {"timestamp":"2026-10-24T11:37:10.557091+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"cf6cf3620e08463ba1725e0a4a276006","method":"POST","path":"/api/v1/agents/project-analysis","status_code":201,"duration_ms":144.47}
+{"timestamp":"2026-10-24T11:37:10.560092+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"aba8eb02c1bb4bfdb3f1a537c8839f7d","method":"GET","path":"/api/v1/agents/results/91","status_code":200,"duration_ms":1.53}
+ok
+test_review_requires_evidence_and_rejects_extra_fields (tests.test_agents.AgentSchemaTests.test_review_requires_evidence_and_rejects_extra_fields) ... ok
+test_output_failure_is_saved_without_raw_model_content (tests.test_agents.AgentServiceTests.test_output_failure_is_saved_without_raw_model_content) ... {"timestamp":"2026-10-24T11:37:10.606354+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_project_ownership_is_checked_before_request_creation (tests.test_agents.AgentServiceTests.test_project_ownership_is_checked_before_request_creation) ... ok
+test_provider_failure_is_saved_and_mapped (tests.test_agents.AgentServiceTests.test_provider_failure_is_saved_and_mapped) ... {"timestamp":"2026-10-24T11:37:10.610354+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"failed","latency_ms":0,"failure_category":"upstream","attempt_count":1}
+ok
+test_service_persists_hashes_and_queryable_structured_result (tests.test_agents.AgentServiceTests.test_service_persists_hashes_and_queryable_structured_result) ... {"timestamp":"2026-10-24T11:37:10.611353+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_unexpected_agent_failure_is_saved_before_propagation (tests.test_agents.AgentServiceTests.test_unexpected_agent_failure_is_saved_before_propagation) ... {"timestamp":"2026-10-24T11:37:10.615859+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_analysis_reads_context_and_returns_structured_result (tests.test_agents.CoreAgentTests.test_analysis_reads_context_and_returns_structured_result) ... {"timestamp":"2026-10-24T11:37:10.617860+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_postprocessing_schema_failure_is_explicit (tests.test_agents.CoreAgentTests.test_postprocessing_schema_failure_is_explicit) ... {"timestamp":"2026-10-24T11:37:10.619861+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_prompt_injection_stays_in_untrusted_user_message (tests.test_agents.CoreAgentTests.test_prompt_injection_stays_in_untrusted_user_message) ... {"timestamp":"2026-10-24T11:37:10.621860+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_prompt_result_deterministically_contains_required_context (tests.test_agents.CoreAgentTests.test_prompt_result_deterministically_contains_required_context) ... {"timestamp":"2026-10-24T11:37:10.622860+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_provider_failure_is_propagated (tests.test_agents.CoreAgentTests.test_provider_failure_is_propagated) ... {"timestamp":"2026-10-24T11:37:10.624368+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"failed","latency_ms":0,"failure_category":"upstream","attempt_count":1}
+ok
+test_review_uses_only_supplied_evidence (tests.test_agents.CoreAgentTests.test_review_uses_only_supplied_evidence) ... {"timestamp":"2026-10-24T11:37:10.626367+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_schema_parse_failure_is_explicit_and_not_retried (tests.test_agents.CoreAgentTests.test_schema_parse_failure_is_explicit_and_not_retried) ... {"timestamp":"2026-10-24T11:37:10.627366+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_sensitive_input_is_rejected_before_provider (tests.test_agents.CoreAgentTests.test_sensitive_input_is_rejected_before_provider) ... ok
+test_sensitive_model_output_is_rejected (tests.test_agents.CoreAgentTests.test_sensitive_model_output_is_rejected) ... {"timestamp":"2026-10-24T11:37:10.630367+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_total_timeout_bounds_agent_call (tests.test_agents.CoreAgentTests.test_total_timeout_bounds_agent_call) ... {"timestamp":"2026-10-24T11:37:10.643878+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"slow","model":"fake-model","status":"failed","latency_ms":12,"failure_category":"total_timeout","attempt_count":1}
+ok
+test_caller_cannot_expand_whitelist (tests.test_practice_agent.PracticeGuidanceAgentTests.test_caller_cannot_expand_whitelist) ... {"timestamp":"2026-10-24T11:37:10.644878+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_context_uses_whitelist_and_keeps_input_as_untrusted_data (tests.test_practice_agent.PracticeGuidanceAgentTests.test_context_uses_whitelist_and_keeps_input_as_untrusted_data) ... {"timestamp":"2026-10-24T11:37:10.646879+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_invalid_model_output_fails_without_retry_or_fake_completion (tests.test_practice_agent.PracticeGuidanceAgentTests.test_invalid_model_output_fails_without_retry_or_fake_completion) ... {"timestamp":"2026-10-24T11:37:10.647879+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.649879+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.650879+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.651879+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.652879+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_invalid_or_free_text_input_fails_before_provider (tests.test_practice_agent.PracticeGuidanceAgentTests.test_invalid_or_free_text_input_fails_before_provider) ... ok
+test_oversized_context_fails_before_provider (tests.test_practice_agent.PracticeGuidanceAgentTests.test_oversized_context_fails_before_provider) ... ok
+test_single_step_uses_existing_client_and_structured_output (tests.test_practice_agent.PracticeGuidanceAgentTests.test_single_step_uses_existing_client_and_structured_output) ... {"timestamp":"2026-10-24T11:37:10.660387+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_runtime_template_excludes_frozen_reference_and_is_independent (tests.test_practice_agent.PracticeTemplateTests.test_runtime_template_excludes_frozen_reference_and_is_independent) ... ok
+test_runtime_template_matches_frozen_task_and_public_vectors (tests.test_practice_agent.PracticeTemplateTests.test_runtime_template_matches_frozen_task_and_public_vectors) ... ok
+test_code_is_immutable_input_text_and_declaration_does_not_claim_execution (tests.test_practice_review.PracticeAttemptSubmissionTests.test_code_is_immutable_input_text_and_declaration_does_not_claim_execution) ... ok
+test_size_sensitive_code_unknown_fields_and_nonboolean_claim_are_rejected (tests.test_practice_review.PracticeAttemptSubmissionTests.test_size_sensitive_code_unknown_fields_and_nonboolean_claim_are_rejected) ... ok
+test_aggregate_request_limit_and_context_version_reject_before_provider (tests.test_practice_review.PracticeReviewTests.test_aggregate_request_limit_and_context_version_reject_before_provider) ... ok
+test_all_case_selected_public_vectors_match_frozen_definitions (tests.test_practice_review.PracticeReviewTests.test_all_case_selected_public_vectors_match_frozen_definitions) ... ok
+test_full_code_and_declared_limit_fit_without_global_limit_changes (tests.test_practice_review.PracticeReviewTests.test_full_code_and_declared_limit_fit_without_global_limit_changes) ... {"timestamp":"2026-10-24T11:37:10.674387+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_guidance_consumes_the_selected_attempt_without_changing_s07_input (tests.test_practice_review.PracticeReviewTests.test_guidance_consumes_the_selected_attempt_without_changing_s07_input) ... {"timestamp":"2026-10-24T11:37:10.676893+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.678893+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_invalid_criterion_structure_is_rejected_without_retry (tests.test_practice_review.PracticeReviewTests.test_invalid_criterion_structure_is_rejected_without_retry) ... {"timestamp":"2026-10-24T11:37:10.681896+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.684896+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.687895+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.691896+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.694896+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.697402+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.700405+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.704405+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_legacy_optional_pass_fields_remain_compatible (tests.test_practice_review.PracticeReviewTests.test_legacy_optional_pass_fields_remain_compatible) ... {"timestamp":"2026-10-24T11:37:10.707404+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_nonexistent_quote_and_forged_binding_are_invalid_outputs (tests.test_practice_review.PracticeReviewTests.test_nonexistent_quote_and_forged_binding_are_invalid_outputs) ... {"timestamp":"2026-10-24T11:37:10.711405+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.714404+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_omitted_fail_actions_are_rejected_without_repair_or_retry (tests.test_practice_review.PracticeReviewTests.test_omitted_fail_actions_are_rejected_without_repair_or_retry) ... {"timestamp":"2026-10-24T11:37:10.717464+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.720464+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.724014+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_prompts_use_only_task_selected_vectors_code_and_permitted_context (tests.test_practice_review.PracticeReviewTests.test_prompts_use_only_task_selected_vectors_code_and_permitted_context) ... {"timestamp":"2026-10-24T11:37:10.726973+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_server_binds_attempt_and_versions_and_keeps_six_stable_criteria (tests.test_practice_review.PracticeReviewTests.test_server_binds_attempt_and_versions_and_keeps_six_stable_criteria) ... {"timestamp":"2026-10-24T11:37:10.729972+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_unknown_and_missing_code_cannot_be_promoted_by_self_statement (tests.test_practice_review.PracticeReviewTests.test_unknown_and_missing_code_cannot_be_promoted_by_self_statement) ... {"timestamp":"2026-10-24T11:37:10.732988+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.736488+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_vectors_cannot_change_expected_values_or_introduce_reference_fields (tests.test_practice_review.PracticeReviewTests.test_vectors_cannot_change_expected_values_or_introduce_reference_fields) ... ok
+test_http_schema_rejection_is_one_call_without_fallback (tests.test_practice_structured_output.ResponsesProviderTests.test_http_schema_rejection_is_one_call_without_fallback) ... {"timestamp":"2026-10-24T11:37:10.740486+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"deepseek","model":"fake-model","status":"failed","latency_ms":0,"failure_category":"model","attempt_count":1}
+ok
+test_incomplete_failed_or_unexpected_outputs_retain_observed_usage (tests.test_practice_structured_output.ResponsesProviderTests.test_incomplete_failed_or_unexpected_outputs_retain_observed_usage) ... {"timestamp":"2026-10-24T11:37:10.744497+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"deepseek","model":"fake-model","status":"failed","latency_ms":0,"failure_category":"response_format","attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.747509+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"deepseek","model":"fake-model","status":"failed","latency_ms":0,"failure_category":"response_format","attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.750504+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"deepseek","model":"fake-model","status":"failed","latency_ms":0,"failure_category":"response_format","attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.753510+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"deepseek","model":"fake-model","status":"failed","latency_ms":0,"failure_category":"response_format","attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.757245+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"deepseek","model":"fake-model","status":"failed","latency_ms":0,"failure_category":"response_format","attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.760258+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"deepseek","model":"fake-model","status":"failed","latency_ms":0,"failure_category":"response_format","attempt_count":1}
+ok
+test_missing_usage_remains_unknown_and_invalid_usage_does_not_become_zero (tests.test_practice_structured_output.ResponsesProviderTests.test_missing_usage_remains_unknown_and_invalid_usage_does_not_become_zero) ... {"timestamp":"2026-10-24T11:37:10.763247+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"deepseek","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.766246+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"deepseek","model":"fake-model","status":"failed","latency_ms":0,"failure_category":"response_format","attempt_count":1}
+{"timestamp":"2026-10-24T11:37:10.770283+00:00","level":"WARNING","logger":"scholarhub.ai","message":"ai_request_finished","provider":"deepseek","model":"fake-model","status":"failed","latency_ms":0,"failure_category":"response_format","attempt_count":1}
+ok
+test_responses_payload_and_usage_map_without_tools_or_chat_fallback (tests.test_practice_structured_output.ResponsesProviderTests.test_responses_payload_and_usage_map_without_tools_or_chat_fallback) ... {"timestamp":"2026-10-24T11:37:10.773245+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"deepseek","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_each_verdict_branch_requires_fields_and_forbids_null_verdict (tests.test_practice_structured_output.StructuredRequestTests.test_each_verdict_branch_requires_fields_and_forbids_null_verdict) ... ok
+test_guidance_keeps_chat_mode_and_old_request_dump (tests.test_practice_structured_output.StructuredRequestTests.test_guidance_keeps_chat_mode_and_old_request_dump) ... ok
+test_inconsistent_schema_mode_is_rejected_before_network (tests.test_practice_structured_output.StructuredRequestTests.test_inconsistent_schema_mode_is_rejected_before_network) ... ok
+test_null_verdict_still_rejected_without_guessing_or_retry (tests.test_practice_structured_output.StructuredRequestTests.test_null_verdict_still_rejected_without_guessing_or_retry) ... {"timestamp":"2026-10-24T11:37:10.780405+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+ok
+test_review_request_binds_same_schema_in_prompt_and_transport (tests.test_practice_structured_output.StructuredRequestTests.test_review_request_binds_same_schema_in_prompt_and_transport) ... ok
+
+----------------------------------------------------------------------
+Ran 64 tests in 1.000s
+
+OK

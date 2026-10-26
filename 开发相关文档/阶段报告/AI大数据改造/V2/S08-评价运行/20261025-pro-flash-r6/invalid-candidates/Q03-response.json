@@ -1,0 +1,67 @@
+{
+  "case_id": "Q03",
+  "response": {
+    "summary": "代码使用 csv.DictReader 解析输入并校验必需表头，随后逐行解析 record_id 和 duration_minutes。主要问题在于行有效性检查：当 CSV 行字段数多于表头时，DictReader 会把多余值放入键 None，代码检测到 None 键并判为 invalid，这符合“额外已命名列忽略”的要求；但若行字段数少于表头，DictReader 会用 None 填充缺失字段，代码同样判为 invalid，这是合理的行有效性处理。未发现明显的分类、累加或空结果返回问题。由于本次仅提供代码片段，未提供完整运行环境或额外材料，但静态可见实现足以判断各验收项。",
+    "overall": "pass",
+    "criteria": [
+      {
+        "criterion_id": "C01",
+        "verdict": "pass",
+        "issue_type": null,
+        "evidence_span": "if reader.fieldnames is None or not required.issubset(reader.fieldnames):\n        raise ValueError(\"missing required headers\")",
+        "reason": "代码在读取后检查 fieldnames 是否存在且包含 record_id 与 duration_minutes，缺失时抛出 ValueError，满足表头约束。",
+        "suggested_self_test": null,
+        "next_action": null
+      },
+      {
+        "criterion_id": "C02",
+        "verdict": "pass",
+        "issue_type": null,
+        "evidence_span": "reader = csv.DictReader(io.StringIO(csv_text))\n...\nif None in row:\n                raise ValueError(\"extra unheaded field\")\n            rid = int(row[\"record_id\"].strip())\n            raw = row[\"duration_minutes\"].strip()\n            duration = None if raw == \"\" else int(raw)\n            if rid <= 0 or (duration is not None and not 0 <= duration <= 1440):\n                raise ValueError(\"out of range\")",
+        "reason": "使用 csv.DictReader 正确解析 CSV，并对 record_id 可解析且大于 0、duration_minutes 非空时须为 0 到 1440 的整数进行校验；非法行通过异常捕获计入 invalid_count，解析与行有效性逻辑符合要求。",
+        "suggested_self_test": null,
+        "next_action": null
+      },
+      {
+        "criterion_id": "C03",
+        "verdict": "pass",
+        "issue_type": null,
+        "evidence_span": "duration = None if raw == \"\" else int(raw)\n...\nif duration is None:\n            out[\"missing_duration_count\"] += 1\n        else:\n            out[\"known_duration_count\"] += 1",
+        "reason": "空白分钟被解析为 None 并计入 missing_duration_count，非空分钟（包括 0）计入 known_duration_count，正确区分了未知与已知 0，计数逻辑符合要求。",
+        "suggested_self_test": null,
+        "next_action": null
+      },
+      {
+        "criterion_id": "C04",
+        "verdict": "pass",
+        "issue_type": null,
+        "evidence_span": "out[\"known_minutes\"] += duration",
+        "reason": "仅对已知分钟行执行累加，duration 为 None 时不会进入 else 分支，因此不会把未知值加入总和；已知 0 分钟累加 0 不影响结果，累加逻辑正确。",
+        "suggested_self_test": null,
+        "next_action": null
+      },
+      {
+        "criterion_id": "C05",
+        "verdict": "pass",
+        "issue_type": null,
+        "evidence_span": "out = {\"record_count\": 0, \"known_duration_count\": 0, \"known_minutes\": 0,\n           \"missing_duration_count\": 0, \"invalid_count\": 0}\n...\nreturn out",
+        "reason": "函数在循环前初始化五个整数字段，即使没有有效行也会返回完整字典，满足空有效集的完整返回要求。",
+        "suggested_self_test": null,
+        "next_action": null
+      },
+      {
+        "criterion_id": "C06",
+        "verdict": "pass",
+        "issue_type": null,
+        "evidence_span": "import csv\nimport io\n\ndef summarize_records(csv_text: str) -> dict:\n    reader = csv.DictReader(io.StringIO(csv_text))",
+        "reason": "代码仅使用标准库 csv 和 io 在内存中解析字符串，未进行文件读写、网络访问或执行任意代码，符合纯函数与静态边界要求。",
+        "suggested_self_test": null,
+        "next_action": null
+      }
+    ]
+  },
+  "raw_response_ref": "raw/05-under_test-Q03-response.json",
+  "validation_status": "invalid",
+  "validation_errors": [],
+  "not_used_for_quality_score": true
+}

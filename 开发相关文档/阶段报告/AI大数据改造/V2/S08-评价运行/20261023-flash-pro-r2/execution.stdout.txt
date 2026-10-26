@@ -1,0 +1,35 @@
+{"role": "under_test", "input_id": "Q01", "status": "response_received", "attempts": 1, "spent_or_held_upper_cny": "0.00882800"}
+{"role": "judge_formal", "input_id": "Q01", "status": "response_received", "attempts": 2, "spent_or_held_upper_cny": "0.04701500"}
+{"role": "under_test", "input_id": "Q02", "status": "response_received", "attempts": 3, "spent_or_held_upper_cny": "0.05720700"}
+{"role": "judge_formal", "input_id": "Q02", "status": "response_received", "attempts": 4, "spent_or_held_upper_cny": "0.10059600"}
+{"role": "under_test", "input_id": "Q03", "status": "response_received", "attempts": 5, "spent_or_held_upper_cny": "0.11087800"}
+{"role": "judge_formal", "input_id": "Q03", "status": "response_received", "attempts": 6, "spent_or_held_upper_cny": "0.15455500"}
+{"role": "under_test", "input_id": "Q04", "status": "response_received", "attempts": 7, "spent_or_held_upper_cny": "0.16465500"}
+{"role": "judge_formal", "input_id": "Q04", "status": "response_received", "attempts": 8, "spent_or_held_upper_cny": "0.20716200"}
+{"role": "under_test", "input_id": "Q05", "status": "response_received", "attempts": 9, "spent_or_held_upper_cny": "0.21668400"}
+{"role": "judge_formal", "input_id": "Q05", "status": "response_received", "attempts": 10, "spent_or_held_upper_cny": "0.25970400"}
+{"role": "under_test", "input_id": "Q06", "status": "response_received", "attempts": 11, "spent_or_held_upper_cny": "0.26826600"}
+{"role": "judge_formal", "input_id": "Q06", "status": "response_received", "attempts": 12, "spent_or_held_upper_cny": "0.30904500"}
+{
+  "evaluation_id": "S08-20261023-flash-pro-r2",
+  "status": "stopped",
+  "provider_attempts": 12,
+  "role_usage": {
+    "under_test": 6,
+    "judge_calibration": 0,
+    "judge_formal": 6
+  },
+  "calibration_passed": true,
+  "completed_case_ids": [
+    "Q01",
+    "Q02",
+    "Q03",
+    "Q04",
+    "Q05"
+  ],
+  "conservative_spend_or_held_upper_cny": "0.40580400",
+  "remaining_hard_cap_upper_cny": "1.59419600",
+  "S08_fixed_case_quality_passed": false,
+  "stop_error_type": "StopRound",
+  "stop_code": "formal_judge_invalid_Q06"
+}

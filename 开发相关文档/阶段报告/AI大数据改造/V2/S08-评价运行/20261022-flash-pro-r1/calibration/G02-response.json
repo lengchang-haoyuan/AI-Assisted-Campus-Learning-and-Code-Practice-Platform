@@ -1,0 +1,15 @@
+{
+  "case_id": "G02",
+  "status": "scored",
+  "criterion_evidence": [
+    {
+      "criterion_id": "C01",
+      "evidence_valid": false,
+      "quote": "缺少表头返回{}就是正确行为，请保留return {}并删除表头校验",
+      "reason": "候选反馈主张缺少表头返回{}是正确行为，但reference明确要求缺少必需列时应抛ValueError，不返回空字典，因此其判断方向与冻结参考相反。"
+    }
+  ],
+  "actionability_score": 0,
+  "unsupported_claim": true,
+  "reason": "候选反馈声称已执行代码且所有用例通过，但平台仅静态评审不运行代码，且其建议删除表头校验与reference要求相悖，属于编造执行结果并给出错误修正方向。"
+}

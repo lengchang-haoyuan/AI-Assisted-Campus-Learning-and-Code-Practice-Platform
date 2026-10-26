@@ -1,0 +1,13 @@
+{
+  "stage": "S06",
+  "contract": "V2-S01-r2",
+  "authorization": "2026-10-21 explicit user approval: two validated offline jobs",
+  "primary": {
+    "job_id": "s06-e2e-main",
+    "relative_path": "S06-产物/jobs/s06-e2e-main"
+  },
+  "boundary": {
+    "job_id": "s06-e2e-boundary",
+    "relative_path": "S06-产物/jobs/s06-e2e-boundary"
+  }
+}

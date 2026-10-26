@@ -60,6 +60,11 @@ const router = createRouter({
           component: () => import('@/views/ProjectAIWorkspaceView.vue'),
         },
         {
+          path: 'projects/:id/practice',
+          name: 'project-practice',
+          component: () => import('@/views/PracticeWorkbenchView.vue'),
+        },
+        {
           path: 'projects/:id',
           name: 'project-detail',
           component: () => import('@/views/ProjectDetailView.vue'),
@@ -113,6 +118,11 @@ const router = createRouter({
           path: 'workflows/:id',
           name: 'workflow-editor',
           component: () => import('@/views/WorkflowEditorView.vue'),
+        },
+        {
+          path: 'offline-analytics',
+          name: 'offline-analytics',
+          component: () => import('@/views/OfflineAnalyticsView.vue'),
         },
         {
           path: 'analytics',

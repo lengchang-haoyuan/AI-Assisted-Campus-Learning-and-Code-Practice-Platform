@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "python_AST_files": 8,
+  "json_parsed_files": 79,
+  "local_links_checked": 192,
+  "missing_local_links": [],
+  "credential_pattern_matches": [],
+  "real_round_status": "stopped",
+  "real_calls": 11,
+  "real_role_usage": {
+    "under_test": 6,
+    "judge_calibration": 0,
+    "judge_formal": 5
+  },
+  "actual_result_audit_assertions": 102,
+  "quality_complete": false,
+  "database_access": false,
+  "student_code_executed": false,
+  "source_changes_this_execution": 0,
+  "all_evidence_preserved": true,
+  "recovery": "read-only ledger/diagnosis; never repeat --execute"
+}

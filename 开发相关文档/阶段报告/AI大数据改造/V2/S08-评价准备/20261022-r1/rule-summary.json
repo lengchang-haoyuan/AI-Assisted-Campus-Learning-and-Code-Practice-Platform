@@ -1,0 +1,53 @@
+{
+  "contract_id": "V2-S01-r2",
+  "source_ref": "开发相关文档/阶段报告/AI大数据改造/V2/S01-AI固定模板与评价案例.json",
+  "score_sheet_ref": "开发相关文档/阶段报告/AI大数据改造/V2/S01-评价评分表.md",
+  "status": "not_run",
+  "ground_truth_counts": {
+    "cases": 16,
+    "correct": 4,
+    "incorrect": 9,
+    "insufficient": 3,
+    "known_criterion_cells": 78,
+    "reference_issue_cells": 9,
+    "known_pass_cells": 69,
+    "unknown_cells": 18
+  },
+  "quality_gate": {
+    "issue_recall_min": "8/9",
+    "misses_max": "1/9",
+    "precision_min": "0.80",
+    "false_positive_rate_max": "0.05 (FP <= 3 of 69, precision also applies)",
+    "incorrect_passes_max": "0/9",
+    "insufficient_passes_max": "0/3",
+    "correct_passes_min": "3/4",
+    "actionable_error_feedback_min": "8/9 score >=2",
+    "actionability_mean_min": "2.0 over all 9 incorrect cases",
+    "invalid_response_max": 0,
+    "insufficient_detection_min": "3/3 overall insufficient",
+    "unsupported_definitive_claims_max": 0
+  },
+  "scoring_unit": "每个(case_id,criterion_id)只计一次；issue_type另作定位解释。C02判行分类，C03判分类后的计数，C04判对有效已知值的累加，不重复计上游错误造成的下游数值症状。",
+  "scoring_policy": {
+    "ground_truth": "冻结case.reference_criteria与reference_issues；裁判不能改参考",
+    "tp": "冻结问题criterion被标fail且J1确认对应证据成立，每单元最多1次",
+    "fn": "冻结9个问题中未正确指出；标对但证据不成立仍为FN",
+    "fp": "冻结69个正确单元被标fail；裁判不能豁免",
+    "actionability": "9个错误例全部参与；漏报固定0；abstain/invalid为未评分并使评价未完成，不缩分母",
+    "unresolved": "保留原始材料与未解决项，不无限重试或强行判通过",
+    "claim": "固定案例规则校验与AI裁判辅助评价；非人工双评、教师认可或教学效果"
+  },
+  "deterministic_definitions": {
+    "TP": "known fail cell: candidate verdict=fail and J1 status=scored with evidence_valid=true; each case_id/criterion_id once",
+    "FN": "9 - TP; matching label with unsupported evidence remains FN",
+    "FP": "known pass cell with candidate verdict=fail, regardless of J1 explanation",
+    "precision": "TP/(TP+FP); denominator 0 => unscorable; compare 5*TP >= 4*(TP+FP)",
+    "false_positive_rate": "FP/69; FP <= 3 and precision also required",
+    "unknown_cells": "18 excluded from 69 known-pass denominator; all three insufficient cases overall=insufficient and six verdicts unknown; no unsupported definitive claims",
+    "incorrect_pass": "known nine incorrect case overall=pass; gate zero",
+    "correct_confirmation": "four known correct case overall=pass; gate at least three",
+    "actionability": "all nine incorrect cases stay denominator; any FN cell in the case => fixed 0; scored valid J1 score otherwise; abstain/invalid unresolved remains unscored, do not discard; at least eight scores>=2 and sum>=18",
+    "invalid_or_exception": "any missing/invalid model response, exception, unresolved judge item or failed/missing calibration => full evaluation not completed"
+  },
+  "evaluation_result": null
+}

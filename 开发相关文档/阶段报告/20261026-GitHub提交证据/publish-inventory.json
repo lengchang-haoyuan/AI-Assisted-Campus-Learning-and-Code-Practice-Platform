@@ -1,0 +1,12 @@
+{
+  "selected_files": 2544,
+  "selected_bytes": 270055876,
+  "text_files_scanned": 1347,
+  "archive_members_scanned": 280,
+  "findings": [],
+  "excluded_prefixes": [
+    ".rivet/",
+    "tmp/",
+    "开发相关文档/选题与导师沟通/"
+  ]
+}

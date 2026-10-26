@@ -1,0 +1,158 @@
+{
+  "case_ids": [
+    "Q01",
+    "Q02",
+    "Q03",
+    "Q04",
+    "Q05",
+    "Q06"
+  ],
+  "artifacts": [
+    {
+      "local_ref": "inputs/Q01-under-test-input.json",
+      "source_ref": "../20261023-flash-pro-r2/inputs/Q01-under-test-input.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "candidates/Q01-response.json",
+      "source_ref": "../20261023-flash-pro-r2/candidates/Q01-response.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "judges/Q01-input.json",
+      "source_ref": "../20261023-flash-pro-r2/judges/Q01-input.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "judges/Q01-response.json",
+      "source_ref": "../20261023-flash-pro-r2/judges/Q01-response.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "inputs/Q02-under-test-input.json",
+      "source_ref": "../20261023-flash-pro-r2/inputs/Q02-under-test-input.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "candidates/Q02-response.json",
+      "source_ref": "../20261023-flash-pro-r2/candidates/Q02-response.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "judges/Q02-input.json",
+      "source_ref": "../20261023-flash-pro-r2/judges/Q02-input.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "judges/Q02-response.json",
+      "source_ref": "../20261023-flash-pro-r2/judges/Q02-response.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "inputs/Q03-under-test-input.json",
+      "source_ref": "../20261023-flash-pro-r2/inputs/Q03-under-test-input.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "candidates/Q03-response.json",
+      "source_ref": "../20261023-flash-pro-r2/candidates/Q03-response.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "judges/Q03-input.json",
+      "source_ref": "../20261023-flash-pro-r2/judges/Q03-input.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "judges/Q03-response.json",
+      "source_ref": "../20261023-flash-pro-r2/judges/Q03-response.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "inputs/Q04-under-test-input.json",
+      "source_ref": "../20261023-flash-pro-r2/inputs/Q04-under-test-input.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "candidates/Q04-response.json",
+      "source_ref": "../20261023-flash-pro-r2/candidates/Q04-response.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "judges/Q04-input.json",
+      "source_ref": "../20261023-flash-pro-r2/judges/Q04-input.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "judges/Q04-response.json",
+      "source_ref": "../20261023-flash-pro-r2/judges/Q04-response.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "inputs/Q05-under-test-input.json",
+      "source_ref": "../20261023-flash-pro-r2/inputs/Q05-under-test-input.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "candidates/Q05-response.json",
+      "source_ref": "../20261023-flash-pro-r2/candidates/Q05-response.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "judges/Q05-input.json",
+      "source_ref": "../20261023-flash-pro-r2/judges/Q05-input.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "judges/Q05-response.json",
+      "source_ref": "../20261023-flash-pro-r2/judges/Q05-response.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "inputs/Q06-under-test-input.json",
+      "source_ref": "../20261023-flash-pro-r2/inputs/Q06-under-test-input.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "candidates/Q06-response.json",
+      "source_ref": "../20261023-flash-pro-r2/candidates/Q06-response.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "judges/Q06-input.json",
+      "source_ref": "../20261023-flash-pro-r2/judges/Q06-input.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    },
+    {
+      "local_ref": "judges/Q06-response.json",
+      "source_ref": "../20261023-flash-pro-r2/judges/Q06-response.json",
+      "raw_refs_resolve_against": "../20261023-flash-pro-r2",
+      "new_calls": 0
+    }
+  ],
+  "source_files_unchanged": true,
+  "method_version": "evaluation-method-r3"
+}

@@ -1,0 +1,278 @@
+{
+  "kind": "isolated_engineering_fake_only",
+  "real_model_quality_evidence": false,
+  "attempt": {
+    "id": "a4c3420e-e35e-469e-bcc1-72d32b9d4ae9",
+    "session_id": "bea14377-308f-4740-aeb8-0236b22a78ea",
+    "attempt_no": 1,
+    "status": "confirmed",
+    "feedback": {
+      "binding": {
+        "attempt_id": "a4c3420e-e35e-469e-bcc1-72d32b9d4ae9",
+        "attempt_no": 1,
+        "context_version": 1,
+        "template_version": "1.0",
+        "submitted_revision": 4
+      },
+      "schema_version": "practice-feedback/1.0",
+      "self_statement": {
+        "value": true,
+        "source": "student_declaration"
+      },
+      "ai_static_review": {
+        "review": {
+          "overall": "pass",
+          "summary": "固定Fake反馈，仅验证状态编排。",
+          "criteria": [
+            {
+              "reason": "固定工程Fake按冻结标签返回，不代表模型质量。",
+              "verdict": "pass",
+              "issue_type": null,
+              "next_action": null,
+              "criterion_id": "C01",
+              "evidence_span": "import csv",
+              "suggested_self_test": null
+            },
+            {
+              "reason": "固定工程Fake按冻结标签返回，不代表模型质量。",
+              "verdict": "pass",
+              "issue_type": null,
+              "next_action": null,
+              "criterion_id": "C02",
+              "evidence_span": "import csv",
+              "suggested_self_test": null
+            },
+            {
+              "reason": "固定工程Fake按冻结标签返回，不代表模型质量。",
+              "verdict": "pass",
+              "issue_type": null,
+              "next_action": null,
+              "criterion_id": "C03",
+              "evidence_span": "import csv",
+              "suggested_self_test": null
+            },
+            {
+              "reason": "固定工程Fake按冻结标签返回，不代表模型质量。",
+              "verdict": "pass",
+              "issue_type": null,
+              "next_action": null,
+              "criterion_id": "C04",
+              "evidence_span": "import csv",
+              "suggested_self_test": null
+            },
+            {
+              "reason": "固定工程Fake按冻结标签返回，不代表模型质量。",
+              "verdict": "pass",
+              "issue_type": null,
+              "next_action": null,
+              "criterion_id": "C05",
+              "evidence_span": "import csv",
+              "suggested_self_test": null
+            },
+            {
+              "reason": "固定工程Fake按冻结标签返回，不代表模型质量。",
+              "verdict": "pass",
+              "issue_type": null,
+              "next_action": null,
+              "criterion_id": "C06",
+              "evidence_span": "import csv",
+              "suggested_self_test": null
+            }
+          ],
+          "attempt_id": "a4c3420e-e35e-469e-bcc1-72d32b9d4ae9",
+          "attempt_no": 1,
+          "context_version": 1,
+          "template_version": "1.0"
+        },
+        "source": "ai_static_review",
+        "operation_id": "f19b01d2-4b61-4f6a-9fc3-1313d14b4f2a",
+        "ai_request_id": 12,
+        "code_executed": false
+      },
+      "teacher_confirmation": null,
+      "personal_confirmation": {
+        "source": "authenticated_practice_owner",
+        "criteria": [
+          {
+            "criterion_id": "C01",
+            "evidence_ref": "ai_request:12/criteria/0"
+          },
+          {
+            "criterion_id": "C02",
+            "evidence_ref": "ai_request:12/criteria/1"
+          },
+          {
+            "criterion_id": "C03",
+            "evidence_ref": "ai_request:12/criteria/2"
+          },
+          {
+            "criterion_id": "C04",
+            "evidence_ref": "ai_request:12/criteria/3"
+          },
+          {
+            "criterion_id": "C05",
+            "evidence_ref": "ai_request:12/criteria/4"
+          },
+          {
+            "criterion_id": "C06",
+            "evidence_ref": "ai_request:12/criteria/5"
+          }
+        ],
+        "confirmed_at": "2026-10-22T02:43:16.384830+00:00",
+        "actor_user_id": 3,
+        "ai_request_id": 12,
+        "submitted_output_ref": "attempt:a4c3420e-e35e-469e-bcc1-72d32b9d4ae9/submitted_output_match"
+      },
+      "submitted_output_match": {
+        "checks": [
+          {
+            "matched": true,
+            "test_id": "T01"
+          },
+          {
+            "matched": true,
+            "test_id": "T04"
+          }
+        ],
+        "source": "server_fixed_value_comparison",
+        "matched": true,
+        "meaning": "只核对声明值，不证明代码执行、本人掌握或教师认可",
+        "code_executed": false
+      }
+    },
+    "review_schema_version": "practice-review/1.0",
+    "reviewed_at": "2026-10-22 02:43:16.371973"
+  },
+  "event_examples": [
+    {
+      "id": "9340431c-49b2-4204-9de6-e339623eab90",
+      "session_id": "bea14377-308f-4740-aeb8-0236b22a78ea",
+      "attempt_id": null,
+      "event_key": "ea7df3b3-05be-5975-99b6-98646cd0ce26:action",
+      "event_type": "step_confirmed",
+      "criterion_id": null,
+      "issue_type": null,
+      "confirmation_kind": "understanding",
+      "occurred_at": "2026-10-22 02:43:16.342394",
+      "action_payload": {
+        "status": "waiting_submission",
+        "request": {
+          "action": "confirm",
+          "attempt_id": null,
+          "expected_revision": 3
+        },
+        "revision": 4,
+        "step_key": "understand",
+        "template_id": "python-learning-csv",
+        "operation_id": "74bf3752-4b87-4b54-8c20-b2e90aafc127",
+        "ai_request_id": 11,
+        "context_version": 1,
+        "template_version": "1.0"
+      }
+    },
+    {
+      "id": "1dd433e6-a24b-40b6-abf1-bbc5b4ad3741",
+      "session_id": "bea14377-308f-4740-aeb8-0236b22a78ea",
+      "attempt_id": "a4c3420e-e35e-469e-bcc1-72d32b9d4ae9",
+      "event_key": "5ed06203-b603-5635-bd2b-f21110d1fffa:submit",
+      "event_type": "attempt_submitted",
+      "criterion_id": null,
+      "issue_type": null,
+      "confirmation_kind": null,
+      "occurred_at": "2026-10-22 02:43:16.356263",
+      "action_payload": {
+        "status": "waiting_submission",
+        "request": {
+          "step_key": "implement",
+          "expected_revision": 4
+        },
+        "revision": 5,
+        "step_key": "implement",
+        "attempt_id": "a4c3420e-e35e-469e-bcc1-72d32b9d4ae9",
+        "attempt_no": 1,
+        "template_id": "python-learning-csv",
+        "operation_id": null,
+        "ai_request_id": null,
+        "context_version": 1,
+        "template_version": "1.0"
+      }
+    },
+    {
+      "id": "3febf965-7558-418d-badc-dc085f0a91ef",
+      "session_id": "bea14377-308f-4740-aeb8-0236b22a78ea",
+      "attempt_id": "a4c3420e-e35e-469e-bcc1-72d32b9d4ae9",
+      "event_key": "91130e01-f784-5daa-98be-1b118003a289:action:finished",
+      "event_type": "review_finished",
+      "criterion_id": null,
+      "issue_type": null,
+      "confirmation_kind": null,
+      "occurred_at": "2026-10-22 02:43:16.372978",
+      "action_payload": {
+        "status": "waiting_confirmation",
+        "request": {},
+        "revision": 7,
+        "step_key": "implement",
+        "attempt_id": "a4c3420e-e35e-469e-bcc1-72d32b9d4ae9",
+        "attempt_no": 1,
+        "template_id": "python-learning-csv",
+        "operation_id": "f19b01d2-4b61-4f6a-9fc3-1313d14b4f2a",
+        "ai_request_id": 12,
+        "context_version": 1,
+        "template_version": "1.0"
+      }
+    },
+    {
+      "id": "d530076d-e38b-4baa-a9e3-9f26c83c26bc",
+      "session_id": "bea14377-308f-4740-aeb8-0236b22a78ea",
+      "attempt_id": "a4c3420e-e35e-469e-bcc1-72d32b9d4ae9",
+      "event_key": "d9250f91-ba42-568a-a3d6-8ff99f8d4637:action:completed",
+      "event_type": "session_completed",
+      "criterion_id": null,
+      "issue_type": null,
+      "confirmation_kind": null,
+      "occurred_at": "2026-10-22 02:43:16.384830",
+      "action_payload": {
+        "status": "completed",
+        "request": {
+          "action": "confirm",
+          "attempt_id": "a4c3420e-e35e-469e-bcc1-72d32b9d4ae9",
+          "expected_revision": 7
+        },
+        "revision": 8,
+        "step_key": "implement",
+        "attempt_id": "a4c3420e-e35e-469e-bcc1-72d32b9d4ae9",
+        "attempt_no": 1,
+        "template_id": "python-learning-csv",
+        "operation_id": "f19b01d2-4b61-4f6a-9fc3-1313d14b4f2a",
+        "ai_request_id": 12,
+        "context_version": 1,
+        "template_version": "1.0"
+      }
+    },
+    {
+      "id": "50cd7732-0a4c-4f8d-b7c5-4febaac186e1",
+      "session_id": "8732b41b-bc1b-48f8-8a8f-7b524c0155e7",
+      "attempt_id": "86fee02d-022d-4e59-a07a-73a83d908ba2",
+      "event_key": "215211bd-30c3-5205-90c1-15628067005c:action:criterion:C01",
+      "event_type": "criterion_issue",
+      "criterion_id": "C01",
+      "issue_type": "missing_header_validation",
+      "confirmation_kind": null,
+      "occurred_at": "2026-10-22 02:43:16.456580",
+      "action_payload": {
+        "status": "waiting_revision",
+        "request": {},
+        "revision": 7,
+        "step_key": "implement",
+        "attempt_id": "86fee02d-022d-4e59-a07a-73a83d908ba2",
+        "attempt_no": 1,
+        "template_id": "python-learning-csv",
+        "operation_id": "20a6371a-4723-43ed-afad-17bf962394f4",
+        "ai_request_id": 14,
+        "context_version": 1,
+        "template_version": "1.0"
+      }
+    }
+  ],
+  "note": "只展示已授权隔离工程反馈结构与引用，不带代码原文/Prompt/凭证；Fake内容不能证明模型指导质量。"
+}

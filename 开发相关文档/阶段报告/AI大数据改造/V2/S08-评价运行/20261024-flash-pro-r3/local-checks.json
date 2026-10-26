@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "unit_tests": 16,
+  "runner_guard_assertions": 20,
+  "python_AST_files": 7,
+  "historical_replays": [
+    {
+      "source_round": "20261022-flash-pro-r1",
+      "legacy_replay_exact": true,
+      "corrected_method_status": "rules_computed_current_calibration_and_authorization_separate",
+      "old_files_modified": false
+    },
+    {
+      "source_round": "20261023-flash-pro-r2",
+      "legacy_replay_exact": true,
+      "corrected_method_status": "not_completed",
+      "old_files_modified": false
+    }
+  ],
+  "calibration_revalidated": "3/3",
+  "reused_cases_revalidated": "6/6",
+  "new_model_calls": 0,
+  "credentials_read": false,
+  "database_access": false,
+  "student_code_executed": false,
+  "frozen_answers_and_thresholds_changed": false,
+  "public_API_dependencies_config_changed": false
+}

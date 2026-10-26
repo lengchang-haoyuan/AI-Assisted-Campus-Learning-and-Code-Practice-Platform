@@ -1,0 +1,93 @@
+{
+  "currency": "CNY",
+  "rounds": [
+    {
+      "round": "20261022-flash-pro-r1",
+      "actual_calls": 35,
+      "observed_tokens": 96774,
+      "known_usage_peak_upper_cny": "0.84289100",
+      "spent_or_held_upper_cny": "0.84289100"
+    },
+    {
+      "round": "20261023-flash-pro-r2",
+      "actual_calls": 12,
+      "observed_tokens": 37047,
+      "known_usage_peak_upper_cny": "0.30904500",
+      "spent_or_held_upper_cny": "0.40580400"
+    },
+    {
+      "round": "20261024-flash-pro-r3",
+      "actual_calls": 1,
+      "observed_tokens": 2619,
+      "known_usage_peak_upper_cny": "0.00815400",
+      "spent_or_held_upper_cny": "0.03122800"
+    },
+    {
+      "round": "20261024-flash-pro-r4",
+      "actual_calls": 1,
+      "observed_tokens": 2828,
+      "known_usage_peak_upper_cny": "0.00911200",
+      "spent_or_held_upper_cny": "0.03235600"
+    },
+    {
+      "round": "20261024-flash-pro-r5-responses",
+      "actual_calls": 11,
+      "observed_tokens": 42461,
+      "known_usage_peak_upper_cny": "0.27508000",
+      "spent_or_held_upper_cny": "0.30270400"
+    },
+    {
+      "round": "20261025-pro-flash-r6",
+      "actual_calls": 5,
+      "observed_tokens": 27562,
+      "known_usage_peak_upper_cny": "0.26310700",
+      "spent_or_held_upper_cny": "0.42112000"
+    },
+    {
+      "round": "20261025-pro-flash-r7",
+      "actual_calls": 11,
+      "observed_tokens": 56195,
+      "known_usage_peak_upper_cny": "0.49440900",
+      "spent_or_held_upper_cny": "0.65730900"
+    }
+  ],
+  "S08_actual_calls": 76,
+  "S08_observed_tokens": 265486,
+  "S08_known_usage_peak_upper_cny": "2.20179800",
+  "S08_spent_or_held_upper_cny": "2.69341200",
+  "new_round_accounting": {
+    "tokens": {
+      "prompt_tokens": 48734,
+      "completion_tokens": 7461,
+      "total_tokens": 56195,
+      "cache_hit_tokens": 27008,
+      "cache_miss_tokens": 21726,
+      "reasoning_tokens": 0
+    },
+    "unknown_usage_attempts": [],
+    "known_usage_peak_upper_cny": "0.49440900",
+    "spent_or_held_upper_cny": "0.65730900",
+    "known_usage_by_role": {
+      "under_test": "0.44624700",
+      "judge_formal": "0.04816200"
+    },
+    "spent_or_held_by_role": {
+      "under_test": "0.60914700",
+      "judge_formal": "0.04816200"
+    },
+    "account_charge_verified": false
+  },
+  "combined_r2_chain_spent_or_held_upper_cny": "1.85052100",
+  "combined_r2_chain_cap_cny": "2.77209200",
+  "new_round_cap_cny": "1.57888000",
+  "remaining_cap_not_automatic_restart_permission_cny": "0.92157100",
+  "remaining_role_quota_not_automatic_restart_permission": {
+    "under_test": 10,
+    "judge_calibration": 0,
+    "judge_formal": 11
+  },
+  "S06_separate_calls": 7,
+  "new_calibration_calls": 0,
+  "account_charge_or_balance_verified": false,
+  "stop_policy": "r7按失败即停结束，剩余Pro10/Flash11共21次与0.921571CNY不自动续用。"
+}

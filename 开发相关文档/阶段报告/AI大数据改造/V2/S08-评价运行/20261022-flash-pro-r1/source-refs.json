@@ -1,0 +1,33 @@
+{
+  "preparation_ref": "../../S08-评价准备/20261022-r1",
+  "frozen_contract_ref": "../../S01-AI固定模板与评价案例.json",
+  "score_sheet_ref": "../../S01-评价评分表.md",
+  "production_agent_ref": "backend/app/practice/review.py",
+  "schema_version": "practice-review/1.0",
+  "prompt_version": "practice-review-r1",
+  "judge_prompt_ref": "../../S08-评价准备/20261022-r1/judge-r4-system.txt",
+  "case_order": [
+    "Q01",
+    "Q02",
+    "Q03",
+    "Q04",
+    "Q05",
+    "Q06",
+    "Q07",
+    "Q08",
+    "Q09",
+    "Q10",
+    "Q11",
+    "Q12",
+    "Q13",
+    "Q14",
+    "Q15",
+    "Q16"
+  ],
+  "calibration_order": [
+    "G01",
+    "G02",
+    "G03"
+  ],
+  "result_status": "not_run"
+}

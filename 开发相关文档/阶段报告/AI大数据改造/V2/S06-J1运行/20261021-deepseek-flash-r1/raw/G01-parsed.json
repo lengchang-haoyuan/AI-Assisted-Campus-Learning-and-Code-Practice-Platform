@@ -1,0 +1,15 @@
+{
+  "case_id": "G01",
+  "status": "ok",
+  "criterion_evidence": [
+    {
+      "criterion_id": "C01",
+      "evidence_valid": true,
+      "quote": "if reader.fieldnames is None or not required.issubset(reader.fieldnames):\n        return {}",
+      "reason": "代码在缺少必需列时返回空字典，而参考要求抛ValueError，问题定位准确。"
+    }
+  ],
+  "actionability_score": 3,
+  "unsupported_claim": false,
+  "reason": "反馈指出具体代码行为（return {}）、给出修正方向（改为抛ValueError）和可执行验证样例（仅record_id表头的输入），未替学生完成整题，符合3分标准。"
+}

@@ -1,0 +1,25 @@
+{
+  "snapshot_id": "synthetic-10000-seed-20261020-v1",
+  "job_id": "n10000-spark-process_cold-1",
+  "counts": {
+    "record_facts": 10000,
+    "task_facts": 2500,
+    "cohort_facts": 100
+  },
+  "key_columns": {
+    "record_facts": [
+      "id",
+      "feedback_id"
+    ],
+    "task_facts": [
+      "id"
+    ],
+    "cohort_facts": [
+      "submission_id",
+      "latest_version_id",
+      "first_feedback_id"
+    ]
+  },
+  "no_join_amplification": true,
+  "task_semantics": "current_snapshot_not_historical_state_changes"
+}

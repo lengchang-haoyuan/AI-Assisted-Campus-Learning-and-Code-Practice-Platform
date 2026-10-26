@@ -1,0 +1,21 @@
+test_failed_missing_reservation_rejected (test_evaluation_repairs.AccountingTests.test_failed_missing_reservation_rejected) ... ok
+test_failed_response_keeps_known_usage_and_full_hold (test_evaluation_repairs.AccountingTests.test_failed_response_keeps_known_usage_and_full_hold) ... ok
+test_missing_usage_stays_unknown_and_reserved (test_evaluation_repairs.AccountingTests.test_missing_usage_stays_unknown_and_reserved) ... ok
+test_original_real_totals_preserved (test_evaluation_repairs.AccountingTests.test_original_real_totals_preserved) ... ok
+test_all_three_frozen_calibrations_unchanged (test_evaluation_repairs.QuoteTests.test_all_three_frozen_calibrations_unchanged) ... ok
+test_exact_field_quotes_preserve_escapes (test_evaluation_repairs.QuoteTests.test_exact_field_quotes_preserve_escapes) ... ok
+test_fabricated_and_spliced_quote_rejected (test_evaluation_repairs.QuoteTests.test_fabricated_and_spliced_quote_rejected) ... ok
+test_no_global_backslash_replacement (test_evaluation_repairs.QuoteTests.test_no_global_backslash_replacement) ... ok
+test_real_Q06_decoded_quote (test_evaluation_repairs.QuoteTests.test_real_Q06_decoded_quote) ... ok
+test_frozen_schema_matches_original_snapshot (test_evaluation_repairs.ScoringTests.test_frozen_schema_matches_original_snapshot) ... ok
+test_history_replays_from_snapshot_not_live_prompt (test_evaluation_repairs.ScoringTests.test_history_replays_from_snapshot_not_live_prompt) ... ok
+test_positive_control (test_evaluation_repairs.ScoringTests.test_positive_control) ... ok
+test_unknown_is_not_a_definite_pass (test_evaluation_repairs.ScoringTests.test_unknown_is_not_a_definite_pass) ... ok
+test_unresolved_pass_not_forced_zero_or_completed (test_evaluation_repairs.ScoringTests.test_unresolved_pass_not_forced_zero_or_completed) ... ok
+test_unsupported_fail_still_blocks (test_evaluation_repairs.ScoringTests.test_unsupported_fail_still_blocks) ... ok
+test_unsupported_pass_blocks_acceptance (test_evaluation_repairs.ScoringTests.test_unsupported_pass_blocks_acceptance) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.579s
+
+OK

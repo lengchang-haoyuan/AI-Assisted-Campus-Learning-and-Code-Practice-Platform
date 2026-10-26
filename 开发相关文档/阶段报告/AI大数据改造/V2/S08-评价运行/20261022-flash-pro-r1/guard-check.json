@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "scope": "offline_runner_guard_unit_test_not_model_quality_or_real_provider_attempts",
+  "assertions": 14,
+  "passed": 14,
+  "checks": [
+    {
+      "check": "real_round_has_not_started",
+      "passed": true
+    },
+    {
+      "check": "temporary_target_within_run_directory",
+      "passed": true
+    },
+    {
+      "check": "attempt_counted_before_operation",
+      "passed": true
+    },
+    {
+      "check": "money_reserved_before_operation",
+      "passed": true
+    },
+    {
+      "check": "raw_request_excludes_headers_and_synthetic_key",
+      "passed": true
+    },
+    {
+      "check": "injected_failure_preserved",
+      "passed": true
+    },
+    {
+      "check": "failure_count_not_rolled_back",
+      "passed": true
+    },
+    {
+      "check": "failure_holds_full_reservation",
+      "passed": true
+    },
+    {
+      "check": "failure_has_no_response_or_fake_quality",
+      "passed": true
+    },
+    {
+      "check": "over_cap_rejected",
+      "passed": true
+    },
+    {
+      "check": "over_cap_does_not_call_or_count",
+      "passed": true
+    },
+    {
+      "check": "role_cap_rejected_without_borrowing",
+      "passed": true
+    },
+    {
+      "check": "existing_artifacts_block_blind_rerun",
+      "passed": true
+    },
+    {
+      "check": "temporary_ledger_removed_real_ledger_absent",
+      "passed": true
+    }
+  ],
+  "network_requests": 0,
+  "real_credentials_read": false,
+  "database_access": false,
+  "real_round_ledger_created": false,
+  "temporary_fixtures_retained": false,
+  "preflight_status": "preflight_passed"
+}

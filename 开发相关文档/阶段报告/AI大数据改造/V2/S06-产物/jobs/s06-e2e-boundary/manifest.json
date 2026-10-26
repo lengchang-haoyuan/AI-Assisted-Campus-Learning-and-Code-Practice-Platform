@@ -1,0 +1,38 @@
+{
+  "job_id": "s06-e2e-boundary",
+  "snapshot_id": "s06-e2e-owner4-20261021",
+  "input_batch_id": "a31b90f3-80e3-4931-a350-f7be1f670bff",
+  "rule_version": "quality-1.0",
+  "metric_version": "learning-process-1.0",
+  "schema_version": "scholarhub-source-1.0",
+  "dataset_kind": "controlled",
+  "owner_user_id": 4,
+  "started_at": "2026-10-21T05:32:16.047917+00:00",
+  "source_cutoff": "2026-10-21T05:22:27.640605Z",
+  "period_start": "2026-10-19",
+  "period_end": "2026-10-20",
+  "business_timezone": "Asia/Shanghai",
+  "input_path": "/home/administrator/scholarhub-analytics/s06-e2e-20261021/开发相关文档/阶段报告/AI大数据改造/V2/S06-ODS/snapshots/s06-e2e-owner4-20261021",
+  "spark_version": "4.2.0",
+  "python_version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "master": "local[2]",
+  "shuffle_partitions": "8",
+  "driver_memory": "2g",
+  "java_version": "17.0.20.1",
+  "timezone": "UTC",
+  "arguments": [
+    "run_e2e_spark.py"
+  ],
+  "state": "computed",
+  "finished_at": "2026-10-21T05:32:29.871966+00:00",
+  "elapsed_seconds": 13.824062697000045,
+  "quality_and_dwd_seconds": 9.734829376999869,
+  "input_load_seconds": 0.0007590479999635136,
+  "ads_collect_seconds": 1.7222833900000296,
+  "output_counts": {
+    "record_facts": 0,
+    "task_facts": 200,
+    "cohort_facts": 0
+  },
+  "validation": "requires independent acceptance; not database published"
+}

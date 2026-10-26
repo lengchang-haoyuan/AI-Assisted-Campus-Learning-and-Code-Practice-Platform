@@ -1,0 +1,53 @@
+{
+  "case_id": "Q08",
+  "candidate_artifact_id": "S08-Q08-candidate-v1",
+  "candidate_text_version": "1.0",
+  "response": {
+    "case_id": "Q08",
+    "status": "scored",
+    "criterion_evidence": [
+      {
+        "criterion_id": "C01",
+        "evidence_valid": true,
+        "quote": "使用csv.DictReader读取后检查fieldnames，缺失或未包含record_id、duration_minutes时抛出ValueError，满足缺表头抛错要求。",
+        "reason": "候选反馈判断C01通过，与reference一致；其描述与student_code中required.issubset检查及raise ValueError相符。"
+      },
+      {
+        "criterion_id": "C02",
+        "evidence_valid": true,
+        "quote": "if rid <= 0 or (duration is not None and not 0 <= duration <= 999999):",
+        "reason": "候选反馈指出分钟上限应为1440而代码写成999999，与reference的fail理由一致；引用代码片段支持该主张。"
+      },
+      {
+        "criterion_id": "C03",
+        "evidence_valid": true,
+        "quote": "有效行先增加record_count；空白分钟增加missing_duration_count，非空分钟增加known_duration_count；已知0分钟走非空分支计入known_duration_count且累加0，未与未知混淆。",
+        "reason": "候选反馈判断C03通过，与reference一致；其描述与student_code中duration为None时missing_duration_count递增、否则known_duration_count递增的逻辑相符。"
+      },
+      {
+        "criterion_id": "C04",
+        "evidence_valid": true,
+        "quote": "仅对duration非None的有效行执行known_minutes累加，空白分钟不累加；已知0分钟累加0，符合已知分钟整数和语义。",
+        "reason": "候选反馈判断C04通过，与reference一致；其描述与student_code中else分支累加known_minutes的逻辑相符。"
+      },
+      {
+        "criterion_id": "C05",
+        "evidence_valid": true,
+        "quote": "返回字典在循环前已初始化五个计数字段为整数0，无有效行时仍返回完整五字段。",
+        "reason": "候选反馈判断C05通过，与reference一致；其描述与student_code中out字典初始化的逻辑相符。"
+      },
+      {
+        "criterion_id": "C06",
+        "evidence_valid": true,
+        "quote": "函数仅使用csv、io对传入字符串解析并返回字典，未读写文件、联网或执行任意代码，符合纯函数静态边界。",
+        "reason": "候选反馈判断C06通过，与reference一致；其描述与student_code中仅使用csv和io模块、无外部IO的逻辑相符。"
+      }
+    ],
+    "actionability_score": 3,
+    "unsupported_claim": false,
+    "reason": "候选反馈对每个criterion均给出与reference一致的判断，并针对C02提供了准确的代码位置、修正方向和自测样例，可执行性强。"
+  },
+  "provider": "deepseek",
+  "model_id": "deepseek-v4-pro",
+  "raw_response_ref": "raw/19-judge_formal-Q08-response.json"
+}

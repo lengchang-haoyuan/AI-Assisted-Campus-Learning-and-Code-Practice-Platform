@@ -1,0 +1,89 @@
+{
+  "status": "passed",
+  "scope": "synthetic_scoring_utility_test_only_not_model_quality_or_raw_model_response",
+  "assertions": 15,
+  "passed": 15,
+  "checks": [
+    {
+      "check": "synthetic_positive_control_rule_gates",
+      "passed": true
+    },
+    {
+      "check": "false_evidence_TP8",
+      "passed": true
+    },
+    {
+      "check": "false_evidence_FN1",
+      "passed": true
+    },
+    {
+      "check": "false_evidence_cell_recorded",
+      "passed": true
+    },
+    {
+      "check": "top_level_false_does_not_mask_cell",
+      "passed": true
+    },
+    {
+      "check": "unsupported_gate_fails",
+      "passed": true
+    },
+    {
+      "check": "TP8_FN1_cannot_pass_all_gates",
+      "passed": true
+    },
+    {
+      "check": "issue_denominator_stays9",
+      "passed": true
+    },
+    {
+      "check": "correct_denominator_stays69",
+      "passed": true
+    },
+    {
+      "check": "null_evidence_not_completed",
+      "passed": true
+    },
+    {
+      "check": "null_evidence_cannot_pass",
+      "passed": true
+    },
+    {
+      "check": "null_evidence_no_forced_metrics",
+      "passed": true
+    },
+    {
+      "check": "null_evidence_cell_retained",
+      "passed": true
+    },
+    {
+      "check": "null_keeps_issue_denominator9",
+      "passed": true
+    },
+    {
+      "check": "null_keeps_correct_denominator69",
+      "passed": true
+    }
+  ],
+  "false_evidence_boundary": {
+    "TP": 8,
+    "FN": 1,
+    "unsupported_claims_top_level": 0,
+    "unsupported_issue_cells": 1,
+    "all_rule_gates_pass": false
+  },
+  "null_evidence_boundary": {
+    "status": "not_completed",
+    "unresolved_issue_cells": 1,
+    "quality_metrics": null,
+    "frozen_denominators": {
+      "reference_issue_cells": 9,
+      "known_pass_cells": 69,
+      "unknown_cells": 18
+    }
+  },
+  "temporary_synthetic_fixtures_retained": false,
+  "model_calls": 0,
+  "database_access": false,
+  "student_code_executed": false
+}

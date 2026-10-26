@@ -1,0 +1,569 @@
+{
+  "status": "passed",
+  "checks_passed": 138,
+  "checks": [
+    {
+      "name": "new_prompt_and_protocol_frozen",
+      "passed": true
+    },
+    {
+      "name": "public_schema_unchanged",
+      "passed": true
+    },
+    {
+      "name": "role_text_identical_to_previous_r3",
+      "passed": true
+    },
+    {
+      "name": "wire_has_no_unresolved_refs",
+      "passed": true
+    },
+    {
+      "name": "fixed16",
+      "passed": true
+    },
+    {
+      "name": "three_verdict_branches",
+      "passed": true
+    },
+    {
+      "name": "all_seven_fields_required",
+      "passed": true
+    },
+    {
+      "name": "Q01_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q01_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q01_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q01_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q01_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q01_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q01_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q01_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q02_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q02_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q02_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q02_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q02_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q02_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q02_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q02_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q03_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q03_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q03_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q03_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q03_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q03_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q03_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q03_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q04_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q04_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q04_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q04_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q04_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q04_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q04_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q04_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q05_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q05_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q05_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q05_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q05_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q05_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q05_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q05_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q06_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q06_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q06_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q06_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q06_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q06_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q06_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q06_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q07_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q07_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q07_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q07_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q07_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q07_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q07_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q07_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q08_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q08_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q08_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q08_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q08_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q08_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q08_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q08_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q09_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q09_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q09_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q09_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q09_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q09_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q09_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q09_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q10_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q10_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q10_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q10_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q10_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q10_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q10_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q10_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q11_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q11_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q11_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q11_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q11_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q11_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q11_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q11_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q12_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q12_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q12_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q12_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q12_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q12_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q12_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q12_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q13_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q13_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q13_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q13_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q13_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q13_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q13_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q13_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q14_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q14_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q14_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q14_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q14_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q14_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q14_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q14_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q15_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q15_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q15_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q15_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q15_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q15_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q15_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q15_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "Q16_code_and_statement",
+      "passed": true
+    },
+    {
+      "name": "Q16_selected_vectors",
+      "passed": true
+    },
+    {
+      "name": "Q16_no_reference_labels",
+      "passed": true
+    },
+    {
+      "name": "Q16_responses_schema_request",
+      "passed": true
+    },
+    {
+      "name": "Q16_nonthinking_single_response",
+      "passed": true
+    },
+    {
+      "name": "Q16_all_data_messages_unchanged",
+      "passed": true
+    },
+    {
+      "name": "Q16_only_expected_role_and_schema_changes",
+      "passed": true
+    },
+    {
+      "name": "Q16_existing_message_limits",
+      "passed": true
+    },
+    {
+      "name": "zero_provider_calls",
+      "passed": true
+    },
+    {
+      "name": "old_Q07_still_invalid_no_repair",
+      "passed": true
+    },
+    {
+      "name": "old_Q01_still_invalid_no_repair",
+      "passed": true
+    }
+  ],
+  "prompt_version": "practice-review-r4",
+  "request_version": "practice-review-responses-schema-r1",
+  "public_schema_version": "practice-review/1.0",
+  "wire_schema_characters": 2804,
+  "real_model_calls": 0,
+  "provider_calls": 0,
+  "credentials_read": false,
+  "database_access": false,
+  "student_code_executed_or_compiled": false,
+  "real_provider_compatibility": "not_run",
+  "real_AI_quality": "not_accepted"
+}

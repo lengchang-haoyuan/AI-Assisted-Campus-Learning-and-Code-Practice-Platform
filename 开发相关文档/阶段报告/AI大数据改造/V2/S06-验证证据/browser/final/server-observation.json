@@ -1,0 +1,327 @@
+{
+  "GET_DML": [],
+  "GET_process_calls": 0,
+  "GET_publish_calls": 0,
+  "model_calls": 0,
+  "requests": [
+    {
+      "method": "OPTIONS",
+      "path": "/api/v1/users/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "status": 200
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/api/v1/offline-analytics/batches/b96ea63e-419e-4293-b724-d1ce59bd85ba",
+      "status": 200
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/api/v1/campus/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches/b96ea63e-419e-4293-b724-d1ce59bd85ba",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/campus/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches/b96ea63e-419e-4293-b724-d1ce59bd85ba",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches/b96ea63e-419e-4293-b724-d1ce59bd85ba",
+      "status": 200
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "status": 200
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/api/v1/offline-analytics/batches/45c55b05-ff63-4cc6-b6ca-734146054710",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/campus/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches/45c55b05-ff63-4cc6-b6ca-734146054710",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "status": 200
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/api/v1/offline-analytics/batches/3217db64-1302-4722-a483-c3b1ad7b980f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/campus/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches/3217db64-1302-4722-a483-c3b1ad7b980f",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/campus/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches/3217db64-1302-4722-a483-c3b1ad7b980f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/campus/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches/b96ea63e-419e-4293-b724-d1ce59bd85ba",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/api/v1/users/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "status": 200
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/api/v1/offline-analytics/batches/3217db64-1302-4722-a483-c3b1ad7b980f",
+      "status": 200
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/api/v1/campus/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/campus/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches/3217db64-1302-4722-a483-c3b1ad7b980f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "status": 200
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/api/v1/offline-analytics/batches/45c55b05-ff63-4cc6-b6ca-734146054710",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/campus/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches/45c55b05-ff63-4cc6-b6ca-734146054710",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/offline-analytics/batches/45c55b05-ff63-4cc6-b6ca-734146054710",
+      "status": 401
+    }
+  ],
+  "all_table_counts_before": {
+    "submissions": 3,
+    "submission_versions": 4,
+    "feedback": 3,
+    "notifications": 6,
+    "ai_requests": 1,
+    "ai_results": 1,
+    "analytics_batches": 14,
+    "analytics_daily_metrics": 20,
+    "campus_memberships": 4,
+    "campus_invitations": 3,
+    "password_resets": 0,
+    "account_audits": 7,
+    "comments": 0,
+    "likes": 0,
+    "favorites": 0,
+    "project_views": 0,
+    "community_publications": 0,
+    "community_publication_versions": 0,
+    "community_governance_actions": 0,
+    "community_governance_cases": 0,
+    "courses": 0,
+    "learning_plans": 3,
+    "daily_tasks": 204,
+    "learning_records": 5,
+    "learning_reports": 0,
+    "project_tags": 0,
+    "projects": 1,
+    "tags": 0,
+    "teaching_classes": 1,
+    "class_memberships": 2,
+    "teaching_assignments": 3,
+    "users": 4,
+    "workflows": 0,
+    "workflow_nodes": 0,
+    "workflow_edges": 0,
+    "workflow_runs": 0
+  },
+  "all_table_counts_after": {
+    "submissions": 3,
+    "submission_versions": 4,
+    "feedback": 3,
+    "notifications": 6,
+    "ai_requests": 1,
+    "ai_results": 1,
+    "analytics_batches": 14,
+    "analytics_daily_metrics": 20,
+    "campus_memberships": 4,
+    "campus_invitations": 3,
+    "password_resets": 0,
+    "account_audits": 7,
+    "comments": 0,
+    "likes": 0,
+    "favorites": 0,
+    "project_views": 0,
+    "community_publications": 0,
+    "community_publication_versions": 0,
+    "community_governance_actions": 0,
+    "community_governance_cases": 0,
+    "courses": 0,
+    "learning_plans": 3,
+    "daily_tasks": 204,
+    "learning_records": 5,
+    "learning_reports": 0,
+    "project_tags": 0,
+    "projects": 1,
+    "tags": 0,
+    "teaching_classes": 1,
+    "class_memberships": 2,
+    "teaching_assignments": 3,
+    "users": 4,
+    "workflows": 0,
+    "workflow_nodes": 0,
+    "workflow_edges": 0,
+    "workflow_runs": 0
+  },
+  "row_counts_unchanged": true,
+  "transmission": "real TCP HTTP to FastAPI + real authenticated MySQL; no API response interception",
+  "servers_stopped": true
+}

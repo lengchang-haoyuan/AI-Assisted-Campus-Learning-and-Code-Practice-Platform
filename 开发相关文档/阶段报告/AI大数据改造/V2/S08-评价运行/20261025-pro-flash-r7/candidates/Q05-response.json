@@ -1,0 +1,71 @@
+{
+  "case_id": "Q05",
+  "artifact_id": "S08-Q05-candidate-v6",
+  "text_version": "6.0",
+  "response": {
+    "summary": "代码使用csv.DictReader解析输入，并检查必需列。主要问题：缺少表头时返回空字典而不是抛出ValueError；行有效性检查中把None键视为非法，可能误判带额外列的行；已知0分钟被正确计入known_duration_count，但未知与已知分类基本正确。累加逻辑对当前可见代码未发现独立于分类的sum_error。空有效集返回完整五字段。未发现文件、网络或执行任意代码的外部IO。",
+    "overall": "needs_changes",
+    "criteria": [
+      {
+        "criterion_id": "C01",
+        "verdict": "fail",
+        "issue_type": "missing_header_validation",
+        "evidence_span": "if reader.fieldnames is None or not required.issubset(reader.fieldnames):\n        return {}",
+        "reason": "任务要求缺表头抛ValueError，但代码在缺少必需列时返回空字典，违反表头约束。",
+        "suggested_self_test": "调用summarize_records('record_id,minutes\\n1,30\\n')，应观察到抛出ValueError而不是返回{}。",
+        "next_action": "将return {}改为raise ValueError，并保留对reader.fieldnames为None或缺少必需列的判断。"
+      },
+      {
+        "criterion_id": "C02",
+        "verdict": "fail",
+        "issue_type": "row_validation",
+        "evidence_span": "if None in row:\n                raise ValueError(\"extra unheaded field\")",
+        "reason": "csv.DictReader在行字段数多于表头时会把多余值放入None键，但任务允许额外已命名列并忽略；这里将None键一律判为非法，会误把带额外列的有效行计入invalid_count。",
+        "suggested_self_test": "输入表头record_id,duration_minutes,note，数据行1,30,x，应得到record_count=1且invalid_count=0；当前代码会因None键而invalid_count=1。",
+        "next_action": "删除或调整None in row的检查，只验证record_id和duration_minutes两个必需字段，忽略额外列。"
+      },
+      {
+        "criterion_id": "C03",
+        "verdict": "pass",
+        "issue_type": null,
+        "evidence_span": null,
+        "reason": "在行有效后，duration为None时增加missing_duration_count，否则增加known_duration_count；已知0分钟会进入else分支并计入known_duration_count，未把0当缺失，也未把未知当已知。",
+        "suggested_self_test": null,
+        "next_action": null
+      },
+      {
+        "criterion_id": "C04",
+        "verdict": "pass",
+        "issue_type": null,
+        "evidence_span": null,
+        "reason": "对每个有效且已知分钟的行执行out[\"known_minutes\"] += duration，未发现覆盖、重置、漏加或重复累加有效非零分钟的独立错误。",
+        "suggested_self_test": null,
+        "next_action": null
+      },
+      {
+        "criterion_id": "C05",
+        "verdict": "pass",
+        "issue_type": null,
+        "evidence_span": null,
+        "reason": "out初始化为五个整数字段，即使没有有效行也会返回完整五字段字典。",
+        "suggested_self_test": null,
+        "next_action": null
+      },
+      {
+        "criterion_id": "C06",
+        "verdict": "pass",
+        "issue_type": null,
+        "evidence_span": null,
+        "reason": "代码仅使用csv、io和字符串解析，未发现文件读写、网络访问或执行任意代码。",
+        "suggested_self_test": null,
+        "next_action": null
+      }
+    ]
+  },
+  "prompt_version": "practice-review-r6",
+  "request_version": "practice-review-responses-schema-r3",
+  "schema_version": "practice-review/1.0",
+  "provider": "deepseek",
+  "model_id": "deepseek-v4-pro",
+  "raw_response_ref": "raw/09-under_test-Q05-response.json"
+}

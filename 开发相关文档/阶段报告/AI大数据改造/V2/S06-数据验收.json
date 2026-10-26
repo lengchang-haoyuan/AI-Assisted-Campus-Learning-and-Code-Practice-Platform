@@ -1,0 +1,33 @@
+{
+  "stage": "S06",
+  "contract": "V2-S01-r2",
+  "scope": "Data correctness only; J1 remains pending",
+  "all_frozen_data_assertions_passed": true,
+  "jobs": {
+    "s06-e2e-main": {
+      "job_id": "s06-e2e-main",
+      "snapshot_id": "s06-e2e-owner3-20261021",
+      "owner_user_id": 3,
+      "independent_answers_matched": true,
+      "frozen_answers_matched": true,
+      "rule_version": "quality-1.0",
+      "metric_version": "learning-process-1.0",
+      "spark_elapsed_seconds": 26.787988298000073,
+      "daily_rows": 2
+    },
+    "s06-e2e-boundary": {
+      "job_id": "s06-e2e-boundary",
+      "snapshot_id": "s06-e2e-owner4-20261021",
+      "owner_user_id": 4,
+      "independent_answers_matched": true,
+      "frozen_answers_matched": true,
+      "rule_version": "quality-1.0",
+      "metric_version": "learning-process-1.0",
+      "spark_elapsed_seconds": 13.824062697000045,
+      "daily_rows": 1
+    }
+  },
+  "boundary_expectation_correction": "S03 cutoff Oct20 -> S06 cutoff Oct21; pending Oct20 now overdue1, source/rules unchanged; original failed check retained",
+  "J1": "pending_by_user_decision",
+  "model_calls": 0
+}

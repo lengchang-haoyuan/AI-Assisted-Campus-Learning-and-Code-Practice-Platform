@@ -1,0 +1,9 @@
+{
+  "job_id": "s06-e2e-boundary",
+  "snapshot_id": "s06-e2e-owner4-20261021",
+  "spark_version": "4.2.0",
+  "mode": "read_completed_DWD_and_project_approved_fields",
+  "DWD_ADS_crosscheck": true,
+  "daily_rows": 1,
+  "source_recomputed": false
+}

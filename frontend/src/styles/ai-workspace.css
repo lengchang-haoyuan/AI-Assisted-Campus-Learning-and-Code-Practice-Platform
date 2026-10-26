@@ -177,3 +177,16 @@
 @media (prefers-reduced-motion: reduce) {
   .ai-workspace-loading span { animation: none; }
 }
+.ai-template-preview { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(220px, 1fr); gap: 28px; padding: 28px; margin-block: 24px; background: var(--paper, #fffdf8); border: 1px solid var(--line); border-radius: 12px; }
+.ai-template-preview h2 { margin: 6px 0 18px; font-size: 23px; }
+.ai-template-preview p { line-height: 1.8; overflow-wrap: anywhere; }
+.ai-template-start { align-self: center; display: grid; gap: 14px; }
+.ai-template-start small { color: var(--muted); line-height: 1.7; }
+.ai-fixed-tech { min-width: 0; margin: 0; padding: 20px; border: 1px solid var(--line); border-radius: 8px; }
+.ai-fixed-tech legend { padding-inline: 8px; font-weight: 750; }
+.ai-fixed-tech p, .ai-preparation-goal { margin: 0; line-height: 1.8; color: var(--muted); }
+.ai-material-details summary, .ai-legacy-tools > summary { cursor: pointer; padding-block: 12px; font-weight: 750; }
+.ai-material-details pre { max-height: 360px; overflow: auto; padding: 16px; background: #f0f5f0; font: 13px/1.8 Consolas, monospace; }
+.ai-legacy-tools { margin-top: 28px; border-top: 1px solid var(--line); padding-block: 16px; }
+.ai-workspace-page :focus-visible { outline: 3px solid #168565; outline-offset: 3px; }
+@media (max-width: 760px) { .ai-template-preview { grid-template-columns: 1fr; padding: 20px; } .ai-fixed-tech { padding: 14px; } }

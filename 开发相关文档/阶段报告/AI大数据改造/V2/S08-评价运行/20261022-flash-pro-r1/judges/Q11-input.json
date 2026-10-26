@@ -1,0 +1,91 @@
+{
+  "mode": "feedback",
+  "data": {
+    "case_id": "Q11",
+    "template_id": "python-learning-csv",
+    "template_version": "1.0",
+    "task": "输入语法良好的CSV字符串；必需列record_id、duration_minutes，额外已命名列忽略。record_id须int可解析且>0；分钟空白为未知，非空须int可解析且0至1440。每行独立，不要求跨行去重，空白物理行由csv忽略。缺表头抛ValueError；非法行计invalid_count。已知0与未知分开。返回五个计数字段。函数不读写文件、不联网、不执行任意代码。平台仅静态评审，不运行学生代码。",
+    "criterion_ids": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06"
+    ],
+    "criteria": [
+      {
+        "criterion_id": "C01",
+        "name": "表头约束",
+        "issue_types": [
+          "missing_header_validation"
+        ]
+      },
+      {
+        "criterion_id": "C02",
+        "name": "CSV解析与行有效性",
+        "issue_types": [
+          "row_validation",
+          "csv_quoting"
+        ]
+      },
+      {
+        "criterion_id": "C03",
+        "name": "分类计数与NULL零值区分",
+        "issue_types": [
+          "counting",
+          "zero_as_missing",
+          "unknown_as_known"
+        ]
+      },
+      {
+        "criterion_id": "C04",
+        "name": "已知分钟累加",
+        "issue_types": [
+          "sum_error"
+        ]
+      },
+      {
+        "criterion_id": "C05",
+        "name": "空有效集的完整返回",
+        "issue_types": [
+          "empty_result_contract"
+        ]
+      },
+      {
+        "criterion_id": "C06",
+        "name": "纯函数与静态边界",
+        "issue_types": [
+          "external_io"
+        ]
+      }
+    ],
+    "reference": {
+      "reference_label": "needs_changes",
+      "reference_criteria": {
+        "C01": "pass",
+        "C02": "pass",
+        "C03": "pass",
+        "C04": "pass",
+        "C05": "fail",
+        "C06": "pass"
+      },
+      "reference_issues": [
+        {
+          "criterion_id": "C05",
+          "issue_type": "empty_result_contract",
+          "reference_reason": "无有效记录也返回五个完整字段"
+        }
+      ],
+      "reference_action": "无有效记录也返回五个完整字段"
+    },
+    "student_code": "import csv\nimport io\n\ndef summarize_records(csv_text: str) -> dict:\n    reader = csv.DictReader(io.StringIO(csv_text))\n    required = {\"record_id\", \"duration_minutes\"}\n    if reader.fieldnames is None or not required.issubset(reader.fieldnames):\n        raise ValueError(\"missing required headers\")\n    out = {\"record_count\": 0, \"known_duration_count\": 0, \"known_minutes\": 0,\n           \"missing_duration_count\": 0, \"invalid_count\": 0}\n    for row in reader:\n        try:\n            if None in row:\n                raise ValueError(\"extra unheaded field\")\n            rid = int(row[\"record_id\"].strip())\n            raw = row[\"duration_minutes\"].strip()\n            duration = None if raw == \"\" else int(raw)\n            if rid <= 0 or (duration is not None and not 0 <= duration <= 1440):\n                raise ValueError(\"out of range\")\n        except (ValueError, TypeError, AttributeError):\n            out[\"invalid_count\"] += 1\n            continue\n        out[\"record_count\"] += 1\n        if duration is None:\n            out[\"missing_duration_count\"] += 1\n        else:\n            out[\"known_duration_count\"] += 1\n            out[\"known_minutes\"] += duration\n    return {} if out[\"record_count\"] == 0 else out\n",
+    "candidate_feedback": "{\n  \"summary\": \"静态阅读学生代码：表头校验、CSV解析、行有效性、分类计数与分钟累加基本符合任务；但空有效集时返回空字典而非完整五字段，违反输出契约。未执行代码，结论仅基于静态文本。\",\n  \"overall\": \"needs_changes\",\n  \"criteria\": [\n    {\n      \"criterion_id\": \"C01\",\n      \"verdict\": \"pass\",\n      \"reason\": \"使用 csv.DictReader 读取后检查 fieldnames，缺失必需列或 fieldnames 为 None 时抛出 ValueError，满足缺表头抛错要求。\"\n    },\n    {\n      \"criterion_id\": \"C02\",\n      \"verdict\": \"pass\",\n      \"reason\": \"使用 csv.DictReader 解析，能处理引号；对 record_id 去空白后 int 解析并要求 >0，分钟空白视为未知、非空 int 解析并要求 0 至 1440，非法行计入 invalid_count 并跳过，符合行有效性约束。\"\n    },\n    {\n      \"criterion_id\": \"C03\",\n      \"verdict\": \"pass\",\n      \"reason\": \"有效行先计入 record_count；分钟为 None 计入 missing_duration_count，已知（含 0）计入 known_duration_count，0 未被当作缺失，分类计数正确。\"\n    },\n    {\n      \"criterion_id\": \"C04\",\n      \"verdict\": \"pass\",\n      \"reason\": \"仅在 duration 非 None 时把 duration 累加到 known_minutes，未知分钟不参与累加，已知 0 累加 0，符合要求。\"\n    },\n    {\n      \"criterion_id\": \"C05\",\n      \"verdict\": \"fail\",\n      \"issue_type\": \"empty_result_contract\",\n      \"evidence_span\": \"return {} if out[\\\"record_count\\\"] == 0 else out\",\n      \"reason\": \"当没有有效行时返回空字典，缺少 record_count、known_duration_count、known_minutes、missing_duration_count、invalid_count 五个整数字段，违反空有效集也返回完整五字段的契约。\",\n      \"suggested_self_test\": \"用输入 \\\"record_id,duration_minutes\\\\n\\\" 调用 summarize_records，断言返回字典包含五个键且值均为 0；再用 \\\"record_id,duration_minutes\\\\n0,20\\\\n1,-2\\\\n\\\" 断言 invalid_count 为 2 且其余计数为 0。\",\n      \"next_action\": \"删除空集特判，始终返回已初始化的 out 字典，使无有效行时也包含五个整数字段。\"\n    },\n    {\n      \"criterion_id\": \"C06\",\n      \"verdict\": \"pass\",\n      \"reason\": \"函数仅使用 csv、io 和内存中的字符串处理，不读写文件、不联网、不执行任意代码，符合纯函数与静态边界要求。\"\n    }\n  ]\n}",
+    "rubric": {
+      "0": "方向错误、编造执行结果、建议破坏纯函数边界，或模型异常／无有效反馈",
+      "1": "只说“检查边界／优化代码”，没有可定位的问题和下一步",
+      "2": "指出具体criterion与代码行为，给出学生能执行的修正方向",
+      "3": "同时给出代码位置或准确片段、修正方向和适当验证样例；不直接替学生完成整题"
+    }
+  }
+}

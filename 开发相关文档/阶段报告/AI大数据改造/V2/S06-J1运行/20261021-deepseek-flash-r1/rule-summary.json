@@ -1,0 +1,65 @@
+{
+  "evaluation_id": "S06-J1-20261021-deepseek-flash-r1",
+  "status": "stopped_calibration_failed",
+  "stop_reason": "G01 status=ok is outside frozen scored/abstain/invalid; not normalized",
+  "calibration": {
+    "attempted": [
+      "G01"
+    ],
+    "not_run": [
+      "G02",
+      "G03"
+    ],
+    "pass_count": 0,
+    "required_pass_count": 3,
+    "valid": false,
+    "reusable": false
+  },
+  "G01": {
+    "raw_status": "ok",
+    "effective_status": "invalid",
+    "expected_status": "scored",
+    "actionability_raw": 3,
+    "expected_matches": {
+      "expected_status": false,
+      "expected_actionability_score": true,
+      "expected_criterion": true,
+      "expected_evidence_valid": true,
+      "expected_unsupported_claim": true,
+      "expected_case_id": true
+    },
+    "references_valid": true,
+    "errors": [
+      "response.status must be scored, abstain or invalid",
+      "response.criterion_evidence[0].evidence_valid must be null when not scored",
+      "response.actionability_score must be null when not scored",
+      "response.unsupported_claim must be null when not scored"
+    ]
+  },
+  "analysis": {
+    "status": "not_run",
+    "artifact_id": "S06-analysis-b96ea63e-v1",
+    "dimensions": null,
+    "total": null,
+    "causal_or_ability_overclaim": null
+  },
+  "provider_attempts": 1,
+  "remaining_unused_attempts": 3,
+  "automatic_retries": 0,
+  "tokens": {
+    "prompt_tokens": 1080,
+    "completion_tokens": 139,
+    "total_tokens": 1219,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 1080
+  },
+  "currency": "CNY",
+  "cost_from_actual_usage": "0.001636",
+  "account_reconciled": false,
+  "S06_complete": false,
+  "S07_prerequisite_satisfied": false,
+  "next_round": "requires_explicit_new_scope_and_recalibration; do_not_retry_this_run"
+}

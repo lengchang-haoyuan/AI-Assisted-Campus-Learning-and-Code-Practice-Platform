@@ -1,0 +1,283 @@
+{
+  "status": "revalidated_under_evaluation_method_r3",
+  "cases": [
+    {
+      "case_id": "Q01",
+      "validation": {
+        "case_id": "Q01",
+        "status": "scored",
+        "structure_binding_and_quotes_valid": true,
+        "reference_checks": [
+          {
+            "criterion_id": "C01",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C02",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C03",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C04",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C05",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C06",
+            "quote_present": true,
+            "valid": true
+          }
+        ],
+        "calibration_expected_matches": {},
+        "calibration_pass": false,
+        "errors": [],
+        "semantic_evidence_note": "quote存在仅证明可定位；evidence_valid语义仍是J1判断，不是规则重新生成"
+      },
+      "prior_validation_ref": "../20261023-flash-pro-r2/validations/Q01-judge.json",
+      "paid_calls": 0
+    },
+    {
+      "case_id": "Q02",
+      "validation": {
+        "case_id": "Q02",
+        "status": "scored",
+        "structure_binding_and_quotes_valid": true,
+        "reference_checks": [
+          {
+            "criterion_id": "C01",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C02",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C03",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C04",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C05",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C06",
+            "quote_present": true,
+            "valid": true
+          }
+        ],
+        "calibration_expected_matches": {},
+        "calibration_pass": false,
+        "errors": [],
+        "semantic_evidence_note": "quote存在仅证明可定位；evidence_valid语义仍是J1判断，不是规则重新生成"
+      },
+      "prior_validation_ref": "../20261023-flash-pro-r2/validations/Q02-judge.json",
+      "paid_calls": 0
+    },
+    {
+      "case_id": "Q03",
+      "validation": {
+        "case_id": "Q03",
+        "status": "scored",
+        "structure_binding_and_quotes_valid": true,
+        "reference_checks": [
+          {
+            "criterion_id": "C01",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C02",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C03",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C04",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C05",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C06",
+            "quote_present": true,
+            "valid": true
+          }
+        ],
+        "calibration_expected_matches": {},
+        "calibration_pass": false,
+        "errors": [],
+        "semantic_evidence_note": "quote存在仅证明可定位；evidence_valid语义仍是J1判断，不是规则重新生成"
+      },
+      "prior_validation_ref": "../20261023-flash-pro-r2/validations/Q03-judge.json",
+      "paid_calls": 0
+    },
+    {
+      "case_id": "Q04",
+      "validation": {
+        "case_id": "Q04",
+        "status": "scored",
+        "structure_binding_and_quotes_valid": true,
+        "reference_checks": [
+          {
+            "criterion_id": "C01",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C02",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C03",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C04",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C05",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C06",
+            "quote_present": true,
+            "valid": true
+          }
+        ],
+        "calibration_expected_matches": {},
+        "calibration_pass": false,
+        "errors": [],
+        "semantic_evidence_note": "quote存在仅证明可定位；evidence_valid语义仍是J1判断，不是规则重新生成"
+      },
+      "prior_validation_ref": "../20261023-flash-pro-r2/validations/Q04-judge.json",
+      "paid_calls": 0
+    },
+    {
+      "case_id": "Q05",
+      "validation": {
+        "case_id": "Q05",
+        "status": "scored",
+        "structure_binding_and_quotes_valid": true,
+        "reference_checks": [
+          {
+            "criterion_id": "C01",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C02",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C03",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C04",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C05",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C06",
+            "quote_present": true,
+            "valid": true
+          }
+        ],
+        "calibration_expected_matches": {},
+        "calibration_pass": false,
+        "errors": [],
+        "semantic_evidence_note": "quote存在仅证明可定位；evidence_valid语义仍是J1判断，不是规则重新生成"
+      },
+      "prior_validation_ref": "../20261023-flash-pro-r2/validations/Q05-judge.json",
+      "paid_calls": 0
+    },
+    {
+      "case_id": "Q06",
+      "validation": {
+        "case_id": "Q06",
+        "status": "scored",
+        "structure_binding_and_quotes_valid": true,
+        "reference_checks": [
+          {
+            "criterion_id": "C01",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C02",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C03",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C04",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C05",
+            "quote_present": true,
+            "valid": true
+          },
+          {
+            "criterion_id": "C06",
+            "quote_present": true,
+            "valid": true
+          }
+        ],
+        "calibration_expected_matches": {},
+        "calibration_pass": false,
+        "errors": [],
+        "semantic_evidence_note": "quote存在仅证明可定位；evidence_valid语义仍是J1判断，不是规则重新生成"
+      },
+      "prior_validation_ref": "../20261023-flash-pro-r2/validations/Q06-judge.json",
+      "paid_calls": 0
+    }
+  ],
+  "old_Q06_invalid_record_preserved": true,
+  "model_calls": 0
+}

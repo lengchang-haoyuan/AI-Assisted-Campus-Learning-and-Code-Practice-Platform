@@ -1,0 +1,77 @@
+{
+  "currency": "CNY",
+  "rounds": [
+    {
+      "round": "20261022-flash-pro-r1",
+      "actual_calls": 35,
+      "observed_tokens": 96774,
+      "known_usage_peak_upper_cny": "0.84289100",
+      "spent_or_held_upper_cny": "0.84289100"
+    },
+    {
+      "round": "20261023-flash-pro-r2",
+      "actual_calls": 12,
+      "observed_tokens": 37047,
+      "known_usage_peak_upper_cny": "0.30904500",
+      "spent_or_held_upper_cny": "0.40580400"
+    },
+    {
+      "round": "20261024-flash-pro-r3",
+      "actual_calls": 1,
+      "observed_tokens": 2619,
+      "known_usage_peak_upper_cny": "0.00815400",
+      "spent_or_held_upper_cny": "0.03122800"
+    },
+    {
+      "round": "20261024-flash-pro-r4",
+      "actual_calls": 1,
+      "observed_tokens": 2828,
+      "known_usage_peak_upper_cny": "0.00911200",
+      "spent_or_held_upper_cny": "0.03235600"
+    },
+    {
+      "round": "20261024-flash-pro-r5-responses",
+      "actual_calls": 11,
+      "observed_tokens": 42461,
+      "known_usage_peak_upper_cny": "0.27508000",
+      "spent_or_held_upper_cny": "0.30270400"
+    }
+  ],
+  "S08_actual_calls": 60,
+  "S08_observed_tokens": 181729,
+  "S08_known_usage_peak_upper_cny": "1.44428200",
+  "S08_spent_or_held_upper_cny": "1.61498300",
+  "new_round_accounting": {
+    "tokens": {
+      "prompt_tokens": 35713,
+      "completion_tokens": 6748,
+      "total_tokens": 42461,
+      "cache_hit_tokens": 24704,
+      "cache_miss_tokens": 11009,
+      "reasoning_tokens": 0
+    },
+    "unknown_usage_attempts": [],
+    "known_usage_peak_upper_cny": "0.27508000",
+    "spent_or_held_upper_cny": "0.30270400",
+    "known_usage_by_role": {
+      "under_test": "0.07547800",
+      "judge_formal": "0.19960200"
+    },
+    "spent_or_held_by_role": {
+      "under_test": "0.10310200",
+      "judge_formal": "0.19960200"
+    },
+    "account_charge_verified": false
+  },
+  "combined_original_r2_spent_or_held_upper_cny": "0.77209200",
+  "combined_original_r2_cap_cny": "2.00000000",
+  "remaining_hard_cap_not_automatic_new_round_permission_cny": "1.22790800",
+  "remaining_role_quota_not_automatic_new_round_permission": {
+    "under_test": 10,
+    "judge_calibration": 0,
+    "judge_formal": 11
+  },
+  "stop_policy": "本轮已结束，剩余次数/金额不代表重试或新轮许可",
+  "S06_separate_calls": 7,
+  "account_charge_or_balance_verified": false
+}

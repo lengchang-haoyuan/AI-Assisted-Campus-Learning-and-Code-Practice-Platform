@@ -1,0 +1,77 @@
+{
+  "source_ref": "开发相关文档/阶段报告/AI大数据改造/V2/S01-AI固定模板与评价案例.json",
+  "scope": "frozen_reference_all_seven_vectors_do_not_send_this_bundle_to_under_test",
+  "vectors": [
+    {
+      "test_id": "T01",
+      "input_csv": "record_id,duration_minutes\n1,30\n2,\n3,0\n4,nope\n",
+      "expected": {
+        "record_count": 3,
+        "known_duration_count": 2,
+        "known_minutes": 30,
+        "missing_duration_count": 1,
+        "invalid_count": 1
+      }
+    },
+    {
+      "test_id": "T02",
+      "input_csv": "record_id,duration_minutes\n\"1\",\"30\"\n\"2\",\"0\"\n",
+      "expected": {
+        "record_count": 2,
+        "known_duration_count": 2,
+        "known_minutes": 30,
+        "missing_duration_count": 0,
+        "invalid_count": 0
+      }
+    },
+    {
+      "test_id": "T03",
+      "input_csv": "record_id,duration_minutes\n",
+      "expected": {
+        "record_count": 0,
+        "known_duration_count": 0,
+        "known_minutes": 0,
+        "missing_duration_count": 0,
+        "invalid_count": 0
+      }
+    },
+    {
+      "test_id": "T04",
+      "input_csv": "record_id,duration_minutes\n1,1440\n2,-1\n3,1441\n4,1.5\n0,30\n",
+      "expected": {
+        "record_count": 1,
+        "known_duration_count": 1,
+        "known_minutes": 1440,
+        "missing_duration_count": 0,
+        "invalid_count": 4
+      }
+    },
+    {
+      "test_id": "T05",
+      "input_csv": "record_id,duration_minutes\n1,\n2, \n",
+      "expected": {
+        "record_count": 2,
+        "known_duration_count": 0,
+        "known_minutes": 0,
+        "missing_duration_count": 2,
+        "invalid_count": 0
+      }
+    },
+    {
+      "test_id": "T06",
+      "input_csv": "record_id,minutes\n1,30\n",
+      "expected_exception": "ValueError"
+    },
+    {
+      "test_id": "T07",
+      "input_csv": "record_id,duration_minutes\n0,20\n1,-2\n",
+      "expected": {
+        "record_count": 0,
+        "known_duration_count": 0,
+        "known_minutes": 0,
+        "missing_duration_count": 0,
+        "invalid_count": 2
+      }
+    }
+  ]
+}

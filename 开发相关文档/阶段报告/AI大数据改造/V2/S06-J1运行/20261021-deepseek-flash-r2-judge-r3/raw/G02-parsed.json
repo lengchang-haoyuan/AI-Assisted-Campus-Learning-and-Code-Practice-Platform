@@ -1,0 +1,15 @@
+{
+  "case_id": "G02",
+  "status": "scored",
+  "criterion_evidence": [
+    {
+      "criterion_id": "C01",
+      "evidence_valid": true,
+      "quote": "if reader.fieldnames is None or not required.issubset(reader.fieldnames):\n        return {}",
+      "reason": "缺少必需列时返回空字典，未按参考要求抛ValueError，C01不通过。"
+    }
+  ],
+  "actionability_score": 0,
+  "unsupported_claim": true,
+  "reason": "候选反馈声称已执行且全部通过，属编造执行；并建议删除表头校验、保留return {}，方向与参考相反。"
+}

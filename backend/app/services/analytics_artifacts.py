@@ -11,20 +11,35 @@ V2=Path(__file__).resolve().parents[3]/"开发相关文档/阶段报告/AI大数
 
 
 def load_publication(job_id: str) -> PublicationPayload:
-    index=json.loads((V2/"S04-S05交接索引.json").read_text(encoding="utf-8"))
-    registry={index["primary"]["job_id"]:index["primary"], index["boundary"]["job_id"]:index["boundary"]}
-    if job_id not in registry:
+    # S06仅增加本轮批准的两份固定任务；API仍不能传入文件路径。
+    selected = None
+    for index_name, jobs_root, inputs_root, acceptance_name in (
+        ("S04-S05交接索引.json", "S04-产物/jobs", "S05-发布输入", "S04-数据验收.json"),
+        ("S06-发布清单.json", "S06-产物/jobs", "S06-发布输入", "S06-数据验收.json"),
+    ):
+        index_path = V2 / index_name
+        if not index_path.exists():
+            continue
+        index = json.loads(index_path.read_text(encoding="utf-8"))
+        for key in ("primary", "boundary"):
+            entry = index[key]
+            if entry["job_id"] == job_id:
+                selected = entry, jobs_root, inputs_root, acceptance_name
+    if selected is None:
         raise InputError("任务不在受控发布清单，禁止合成或测试向量发布")
-    job=(V2/registry[job_id]["relative_path"]).resolve()
-    root=(V2/"S04-产物/jobs").resolve()
+    entry, jobs_root, inputs_root, acceptance_name = selected
+    job=(V2/entry["relative_path"]).resolve()
+    root=(V2/jobs_root).resolve()
     if not job.is_relative_to(root) or job.name!=job_id:
         raise InputError("产物引用不在受控完成目录")
     manifest=json.loads((job/"manifest.json").read_text(encoding="utf-8"))
     quality=json.loads((job/"quality.json").read_text(encoding="utf-8"))
-    acceptance=json.loads((V2/"S04-数据验收.json").read_text(encoding="utf-8"))
+    acceptance=json.loads((V2/acceptance_name).read_text(encoding="utf-8"))
     if manifest["state"]!="computed" or quality["fatal_errors"]!=0 or quality["reconciled"] is not True or acceptance["all_frozen_data_assertions_passed"] is not True:
         raise InputError("离线任务或独立验收未完成")
-    payload=PublicationPayload.model_validate_json((V2/"S05-发布输入"/job_id/"payload.json").read_text(encoding="utf-8"))
+    if acceptance_name == "S06-数据验收.json" and acceptance.get("jobs", {}).get(job_id, {}).get("independent_answers_matched") is not True:
+        raise InputError("本轮任务尚未通过独立答案核对")
+    payload=PublicationPayload.model_validate_json((V2/inputs_root/job_id/"payload.json").read_text(encoding="utf-8"))
     for key in ("job_id","snapshot_id","owner_user_id","dataset_kind","period_start","period_end","business_timezone","source_cutoff","schema_version","metric_version","rule_version"):
         actual=payload.model_dump(mode="json")[key]
         if key=="source_cutoff":

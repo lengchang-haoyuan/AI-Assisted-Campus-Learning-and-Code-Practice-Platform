@@ -1,0 +1,108 @@
+{
+  "name": "n10000-spark-process_cold-3",
+  "command": [
+    "/home/administrator/scholarhub-analytics/.venv/bin/python",
+    "-B",
+    "-m",
+    "analytics.benchmark_s06",
+    "worker",
+    "--engine",
+    "spark",
+    "--lifecycle",
+    "process_cold",
+    "--input",
+    "/home/administrator/scholarhub-analytics/s06-20261021/inputs/snapshots/synthetic-10000-seed-20261020-v1",
+    "--output",
+    "/home/administrator/scholarhub-analytics/s06-20261021/runs/n10000-spark-process_cold-3",
+    "--expected",
+    "/home/administrator/scholarhub-analytics/s06-20261021/inputs/synthetic-10000-seed-20261020-v1-expected.json",
+    "--reference",
+    "/home/administrator/scholarhub-analytics/s06-20261021/runs/n10000-python-process_cold-1/n10000-python-process_cold-1/answers.json"
+  ],
+  "exit_code": 0,
+  "external_process_seconds": 35.359291420000005,
+  "log": "/home/administrator/scholarhub-analytics/s06-20261021/runs/n10000-spark-process_cold-3.log",
+  "worker": {
+    "status": "completed",
+    "error": null,
+    "engine": "spark",
+    "lifecycle": "process_cold",
+    "session_startup_seconds": 3.242668821999999,
+    "worker_total_seconds": 35.272501054,
+    "memory": {
+      "sample_seconds": 1,
+      "samples": 36,
+      "peak_process_tree_rss_bytes": 3136253952,
+      "method": "/proc statm: Python plus descendants; sampled RSS sum, shared pages may be counted twice"
+    },
+    "rounds": [
+      {
+        "job_id": "n10000-spark-process_cold-3",
+        "snapshot_id": "synthetic-10000-seed-20261020-v1",
+        "subjects": 100,
+        "input_load_seconds": 0.03238671500000123,
+        "compute_seconds": 25.877968557000003,
+        "quality_and_dwd_seconds": 22.569505757,
+        "ads_collect_seconds": 3.340849515000002,
+        "output_seconds": 4.990390648000002,
+        "job_total_seconds": 30.932899893,
+        "validation_seconds": 0.015389358000007292,
+        "round_total_seconds": 30.948289251000006,
+        "equal_reference_leaf_assertions": 36436,
+        "quality_reconciled": true,
+        "output": "/home/administrator/scholarhub-analytics/s06-20261021/runs/n10000-spark-process_cold-3/n10000-spark-process_cold-3/jobs/n10000-spark-process_cold-3",
+        "totals": {
+          "records": 10000,
+          "known_minutes": 421978,
+          "known_duration_count": 8000,
+          "missing_duration_count": 2000,
+          "known_zero_count": 1000,
+          "tasks": 2500,
+          "cohort_count": 100,
+          "confirmed_count": 60,
+          "revised_count": 30,
+          "trusted_teaching_count": 60
+        },
+        "spark": {
+          "spark_version": "4.2.0",
+          "python_version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+          "master": "local[2]",
+          "shuffle_partitions": "8",
+          "driver_memory": "2g",
+          "java_version": "17.0.20.1",
+          "timezone": "UTC"
+        },
+        "label": "n10000-spark-process_cold-3",
+        "measured": true,
+        "lifecycle": "process_cold",
+        "wall_seconds": 30.949211418999994,
+        "memory": {
+          "sample_seconds": 1,
+          "samples": 31,
+          "peak_process_tree_rss_bytes": 3118166016,
+          "method": "/proc statm: Python plus descendants; sampled RSS sum, shared pages may be counted twice"
+        },
+        "sample_finished_at": "2026-10-21T05:12:54.207892+00:00"
+      }
+    ],
+    "argv": [
+      "/mnt/c/Users/Administrator/Desktop/毕业设计/ScholarHub/analytics/benchmark_s06.py",
+      "worker",
+      "--engine",
+      "spark",
+      "--lifecycle",
+      "process_cold",
+      "--input",
+      "/home/administrator/scholarhub-analytics/s06-20261021/inputs/snapshots/synthetic-10000-seed-20261020-v1",
+      "--output",
+      "/home/administrator/scholarhub-analytics/s06-20261021/runs/n10000-spark-process_cold-3",
+      "--expected",
+      "/home/administrator/scholarhub-analytics/s06-20261021/inputs/synthetic-10000-seed-20261020-v1-expected.json",
+      "--reference",
+      "/home/administrator/scholarhub-analytics/s06-20261021/runs/n10000-python-process_cold-1/n10000-python-process_cold-1/answers.json"
+    ],
+    "pid": 3050,
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "executable": "/home/administrator/scholarhub-analytics/.venv/bin/python"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "source_ref": "backend/app/practice/review.py",
+  "review_prompt_version": "practice-review-r4",
+  "review_schema_version": "practice-review/1.0",
+  "candidate_artifact_pattern": "S08-{case_id}-candidate-v4",
+  "candidate_text_version": "4.0",
+  "change_scope": "仅新请求协议/提示身份与冻结快照绑定；evaluation-method-r3判定、答案、阈值、分母不变",
+  "review_request_version": "practice-review-responses-schema-r1"
+}

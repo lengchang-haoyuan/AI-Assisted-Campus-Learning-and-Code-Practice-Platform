@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/administrator/scholarhub-analytics/s06-e2e-20261021/run_e2e_spark.py", line 16, in <module>
+    write_json(V2/'S06-验证证据/main-independent-frozen-answer.json', expected)
+  File "/home/administrator/scholarhub-analytics/s06-e2e-20261021/analytics/snapshot_files.py", line 10, in write_json
+    with Path(path).open("x", encoding="utf-8", newline="\n") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: '/home/administrator/scholarhub-analytics/s06-e2e-20261021/开发相关文档/阶段报告/AI大数据改造/V2/S06-验证证据/main-independent-frozen-answer.json'

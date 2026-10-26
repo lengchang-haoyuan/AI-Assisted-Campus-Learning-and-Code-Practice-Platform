@@ -1,0 +1,8 @@
+{
+  "source_ref": "backend/app/practice/review.py",
+  "review_prompt_version": "practice-review-r2",
+  "review_schema_version": "practice-review/1.0",
+  "candidate_artifact_pattern": "S08-{case_id}-candidate-v2",
+  "candidate_text_version": "2.0",
+  "change_scope": "原计分算法/阈值/分母不改，仅绑定本轮r2 prompt与新candidate v2身份；J1固定输入仍取原冻结模板"
+}

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "python_AST_files": 7,
+  "JSON_files": 58,
+  "markdown_documents": 3,
+  "local_links": 149,
+  "trailing_whitespace_new_python": 0,
+  "common_credential_patterns_found": 0,
+  "database_or_model_calls": 0,
+  "frozen_reference_equal_original": true,
+  "git_diff_check_exit_code": 0,
+  "git_diff_check_note": "仅既有CRLF提示，无差异错误"
+}

@@ -1,0 +1,192 @@
+{
+  "name": "n10000-python-hot-1",
+  "command": [
+    "/home/administrator/scholarhub-analytics/.venv/bin/python",
+    "-B",
+    "-m",
+    "analytics.benchmark_s06",
+    "worker",
+    "--engine",
+    "python",
+    "--lifecycle",
+    "hot",
+    "--input",
+    "/home/administrator/scholarhub-analytics/s06-20261021/inputs/snapshots/synthetic-10000-seed-20261020-v1",
+    "--output",
+    "/home/administrator/scholarhub-analytics/s06-20261021/runs/n10000-python-hot-1",
+    "--expected",
+    "/home/administrator/scholarhub-analytics/s06-20261021/inputs/synthetic-10000-seed-20261020-v1-expected.json",
+    "--reference",
+    "/home/administrator/scholarhub-analytics/s06-20261021/runs/n10000-python-process_cold-1/n10000-python-process_cold-1/answers.json"
+  ],
+  "exit_code": 0,
+  "external_process_seconds": 3.1733942010000007,
+  "log": "/home/administrator/scholarhub-analytics/s06-20261021/runs/n10000-python-hot-1.log",
+  "worker": {
+    "status": "completed",
+    "error": null,
+    "engine": "python",
+    "lifecycle": "hot",
+    "session_startup_seconds": 0.0,
+    "worker_total_seconds": 3.118875716999998,
+    "memory": {
+      "sample_seconds": 1,
+      "samples": 4,
+      "peak_process_tree_rss_bytes": 43298816,
+      "method": "/proc statm: Python plus descendants; sampled RSS sum, shared pages may be counted twice"
+    },
+    "rounds": [
+      {
+        "subjects": 100,
+        "input_load_seconds": 0.029899319999998397,
+        "compute_seconds": 0.6985571830000019,
+        "validation_seconds": 0.018933520999997455,
+        "output_seconds": 0.02127927800000151,
+        "round_total_seconds": 0.7686693019999993,
+        "totals": {
+          "records": 10000,
+          "known_minutes": 421978,
+          "known_duration_count": 8000,
+          "missing_duration_count": 2000,
+          "known_zero_count": 1000,
+          "tasks": 2500,
+          "cohort_count": 100,
+          "confirmed_count": 60,
+          "revised_count": 30,
+          "trusted_teaching_count": 60
+        },
+        "equal_reference_leaf_assertions": 36436,
+        "reference_implementation": "unmodified analytics.fixture_answers.calculate for each subject on all same input tables; repeated deduplication/relation checks are included, not optimized SQL",
+        "label": "warmup",
+        "measured": false,
+        "lifecycle": "hot",
+        "wall_seconds": 0.7784559410000007,
+        "memory": {
+          "sample_seconds": 1,
+          "samples": 1,
+          "peak_process_tree_rss_bytes": 15073280,
+          "method": "/proc statm: Python plus descendants; sampled RSS sum, shared pages may be counted twice"
+        },
+        "sample_finished_at": "2026-10-21T05:11:11.582089+00:00"
+      },
+      {
+        "subjects": 100,
+        "input_load_seconds": 0.027984192999998214,
+        "compute_seconds": 0.7187882660000007,
+        "validation_seconds": 0.015299583000000894,
+        "output_seconds": 0.01965463399999834,
+        "round_total_seconds": 0.7817266759999981,
+        "totals": {
+          "records": 10000,
+          "known_minutes": 421978,
+          "known_duration_count": 8000,
+          "missing_duration_count": 2000,
+          "known_zero_count": 1000,
+          "tasks": 2500,
+          "cohort_count": 100,
+          "confirmed_count": 60,
+          "revised_count": 30,
+          "trusted_teaching_count": 60
+        },
+        "equal_reference_leaf_assertions": 36436,
+        "reference_implementation": "unmodified analytics.fixture_answers.calculate for each subject on all same input tables; repeated deduplication/relation checks are included, not optimized SQL",
+        "label": "hot-1",
+        "measured": true,
+        "lifecycle": "hot",
+        "wall_seconds": 0.7841210819999986,
+        "memory": {
+          "sample_seconds": 1,
+          "samples": 1,
+          "peak_process_tree_rss_bytes": 25415680,
+          "method": "/proc statm: Python plus descendants; sampled RSS sum, shared pages may be counted twice"
+        },
+        "sample_finished_at": "2026-10-21T05:11:12.366555+00:00"
+      },
+      {
+        "subjects": 100,
+        "input_load_seconds": 0.026678019000001996,
+        "compute_seconds": 0.7066396039999994,
+        "validation_seconds": 0.01582017999999863,
+        "output_seconds": 0.01939491500000301,
+        "round_total_seconds": 0.768532718000003,
+        "totals": {
+          "records": 10000,
+          "known_minutes": 421978,
+          "known_duration_count": 8000,
+          "missing_duration_count": 2000,
+          "known_zero_count": 1000,
+          "tasks": 2500,
+          "cohort_count": 100,
+          "confirmed_count": 60,
+          "revised_count": 30,
+          "trusted_teaching_count": 60
+        },
+        "equal_reference_leaf_assertions": 36436,
+        "reference_implementation": "unmodified analytics.fixture_answers.calculate for each subject on all same input tables; repeated deduplication/relation checks are included, not optimized SQL",
+        "label": "hot-2",
+        "measured": true,
+        "lifecycle": "hot",
+        "wall_seconds": 0.771232629,
+        "memory": {
+          "sample_seconds": 1,
+          "samples": 1,
+          "peak_process_tree_rss_bytes": 30781440,
+          "method": "/proc statm: Python plus descendants; sampled RSS sum, shared pages may be counted twice"
+        },
+        "sample_finished_at": "2026-10-21T05:11:13.138134+00:00"
+      },
+      {
+        "subjects": 100,
+        "input_load_seconds": 0.025355654999998478,
+        "compute_seconds": 0.7170200720000004,
+        "validation_seconds": 0.01645702700000129,
+        "output_seconds": 0.022181761999998884,
+        "round_total_seconds": 0.781014515999999,
+        "totals": {
+          "records": 10000,
+          "known_minutes": 421978,
+          "known_duration_count": 8000,
+          "missing_duration_count": 2000,
+          "known_zero_count": 1000,
+          "tasks": 2500,
+          "cohort_count": 100,
+          "confirmed_count": 60,
+          "revised_count": 30,
+          "trusted_teaching_count": 60
+        },
+        "equal_reference_leaf_assertions": 36436,
+        "reference_implementation": "unmodified analytics.fixture_answers.calculate for each subject on all same input tables; repeated deduplication/relation checks are included, not optimized SQL",
+        "label": "hot-3",
+        "measured": true,
+        "lifecycle": "hot",
+        "wall_seconds": 0.7833003279999993,
+        "memory": {
+          "sample_seconds": 1,
+          "samples": 1,
+          "peak_process_tree_rss_bytes": 33959936,
+          "method": "/proc statm: Python plus descendants; sampled RSS sum, shared pages may be counted twice"
+        },
+        "sample_finished_at": "2026-10-21T05:11:13.921764+00:00"
+      }
+    ],
+    "argv": [
+      "/mnt/c/Users/Administrator/Desktop/毕业设计/ScholarHub/analytics/benchmark_s06.py",
+      "worker",
+      "--engine",
+      "python",
+      "--lifecycle",
+      "hot",
+      "--input",
+      "/home/administrator/scholarhub-analytics/s06-20261021/inputs/snapshots/synthetic-10000-seed-20261020-v1",
+      "--output",
+      "/home/administrator/scholarhub-analytics/s06-20261021/runs/n10000-python-hot-1",
+      "--expected",
+      "/home/administrator/scholarhub-analytics/s06-20261021/inputs/synthetic-10000-seed-20261020-v1-expected.json",
+      "--reference",
+      "/home/administrator/scholarhub-analytics/s06-20261021/runs/n10000-python-process_cold-1/n10000-python-process_cold-1/answers.json"
+    ],
+    "pid": 404,
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "executable": "/home/administrator/scholarhub-analytics/.venv/bin/python"
+  }
+}

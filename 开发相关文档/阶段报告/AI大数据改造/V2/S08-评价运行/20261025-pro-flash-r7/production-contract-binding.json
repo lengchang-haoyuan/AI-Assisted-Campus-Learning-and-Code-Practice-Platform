@@ -1,0 +1,9 @@
+{
+  "source_ref": "backend/app/practice/review.py",
+  "review_prompt_version": "practice-review-r6",
+  "review_schema_version": "practice-review/1.0",
+  "candidate_artifact_pattern": "S08-{case_id}-candidate-v6",
+  "candidate_text_version": "6.0",
+  "change_scope": "仅生成侧pass/unknown引用null、fail短单行连续原文；公共Schema/严格引用/冻结答案阈值分母不改。",
+  "review_request_version": "practice-review-responses-schema-r3"
+}

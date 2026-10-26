@@ -1,0 +1,30 @@
+{
+  "evaluation_id": "S06-J1-20261021-deepseek-flash-r1",
+  "stage": "S06",
+  "authorization_source": "本对话中用户直接回复",
+  "user_statements": [
+    "授权",
+    "用deepseek吧，用flash，没有上线，我记得这个项目配置的有密钥",
+    "本轮费用不设上限，仍最多4次调用"
+  ],
+  "provider_id": "deepseek",
+  "model_id": "deepseek-flash",
+  "model_resolution": "按用户指定Flash采用当前官方精确API型号；全站配置仍保留deepseek-v4-flash，不修改",
+  "input_permission": "本轮已审阅的G01-G03校准输入与S06固定解释及同批数字；仅4份准备输入、judge-r2原文",
+  "calibration_attempt_limit": 3,
+  "analysis_attempt_limit": 1,
+  "total_provider_attempt_limit": 4,
+  "currency": "CNY",
+  "currency_cap": null,
+  "currency_cap_policy": "用户明确本轮费用不设上限；替代此前待明确金额前提，次数上限4及失败停止保持",
+  "allow_existing_project_credential_use": true,
+  "allow_printing_or_persisting_credential": false,
+  "automatic_retries": 0,
+  "stop_on_any_calibration_failure": true,
+  "allow_extra_round_or_parameter_retry": false,
+  "allow_S07": false,
+  "allow_database_or_source_writes": false,
+  "allow_global_configuration_change": false,
+  "recorded_at": "2026-10-21T21:48:24.879085+08:00",
+  "recorded_at_note": "授权记录文件首次落盘时间，不推断用户消息发送时间"
+}

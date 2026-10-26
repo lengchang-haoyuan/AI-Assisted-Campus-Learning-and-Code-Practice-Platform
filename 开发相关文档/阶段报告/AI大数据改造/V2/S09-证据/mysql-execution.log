@@ -1,0 +1,30 @@
+{"timestamp":"2026-10-26T08:27:22.073729+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"f211b74a712d4f359c46a479a5d295e4","method":"GET","path":"/api/v1/projects/2","status_code":200,"duration_ms":123.13}
+{"timestamp":"2026-10-26T08:27:22.097751+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"1b39787c252b4f518c9beb6baa84a155","method":"POST","path":"/api/v1/projects/2/context","status_code":201,"duration_ms":22.42}
+{"timestamp":"2026-10-26T08:27:22.175988+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"329a29a8023b42bfaab3fab99a25ead3","method":"POST","path":"/api/v1/workflows","status_code":201,"duration_ms":75.89}
+{"timestamp":"2026-10-26T08:27:22.193022+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"0cc960ccc5824abdad6da02baac53025","method":"POST","path":"/api/v1/workflows/1/nodes","status_code":201,"duration_ms":15.24}
+{"timestamp":"2026-10-26T08:27:22.199564+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"df47a170f1af4a6fbc2ed923da58bb9f","method":"GET","path":"/api/v1/workflows/1","status_code":200,"duration_ms":5.41}
+{"timestamp":"2026-10-26T08:27:22.210611+00:00","level":"ERROR","logger":"scholarhub.error","message":"unhandled_exception","request_id":"4999a3ba5b7b43b2bb1c02b07f2b377e","error_code":"internal_error","error_type":"VerificationFailure"}
+{
+  "passed": false,
+  "code": "fixture_api_500",
+  "deltas": {
+    "projects": 1,
+    "workflows": 1,
+    "workflow_nodes": 1,
+    "workflow_runs": 0,
+    "practice_sessions": 0,
+    "practice_attempts": 0,
+    "practice_events": 0,
+    "ai_requests": 0,
+    "ai_results": 0
+  },
+  "fake_calls": null,
+  "all_old_rows_preserved": true,
+  "cleanup": {
+    "temporary_api_stopped": true,
+    "restart_process_stopped": true,
+    "fixtures_retained": true,
+    "ddl": 0,
+    "deletes": 0
+  }
+}

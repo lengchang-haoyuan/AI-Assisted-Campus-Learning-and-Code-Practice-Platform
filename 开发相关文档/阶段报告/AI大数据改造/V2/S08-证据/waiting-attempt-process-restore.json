@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "restored_state": {
+    "id": "aef71165-eae1-44ac-8548-14cabd0e755c",
+    "status": "waiting_confirmation",
+    "revision": 9,
+    "current_step_key": "implement",
+    "context_version": 1,
+    "current_attempt": {
+      "id": "6325ca22-6f5a-44d9-ad94-3db1f2602417",
+      "attempt_no": 1,
+      "status": "reviewed"
+    },
+    "attempt_count": 1
+  },
+  "fake_provider_calls": 0
+}

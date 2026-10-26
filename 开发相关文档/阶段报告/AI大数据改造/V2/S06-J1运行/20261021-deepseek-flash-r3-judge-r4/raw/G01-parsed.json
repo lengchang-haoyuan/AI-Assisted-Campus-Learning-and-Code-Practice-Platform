@@ -1,0 +1,15 @@
+{
+  "case_id": "G01",
+  "status": "scored",
+  "criterion_evidence": [
+    {
+      "criterion_id": "C01",
+      "evidence_valid": true,
+      "quote": "C01：缺少必需表头的分支现在是return {}。请改为抛出ValueError；用只有record_id表头的输入验证抛出异常，保留其余行处理。",
+      "reason": "候选反馈准确指出缺少必需表头时返回{}，与reference要求抛ValueError一致，并给出修正方向与验证样例。"
+    }
+  ],
+  "actionability_score": 3,
+  "unsupported_claim": false,
+  "reason": "候选反馈定位到具体分支与代码行为，给出可执行修正和验证样例，无无依据声明。"
+}

@@ -1,0 +1,53 @@
+{
+  "case_id": "Q02",
+  "candidate_artifact_id": "S08-Q02-candidate-v5",
+  "candidate_text_version": "5.0",
+  "response": {
+    "case_id": "Q02",
+    "status": "scored",
+    "criterion_evidence": [
+      {
+        "criterion_id": "C01",
+        "evidence_valid": true,
+        "quote": "if reader.fieldnames is None or not required.issubset(reader.fieldnames):",
+        "reason": "候选反馈判定C01通过，引用代码确为表头缺失校验并抛ValueError，与reference一致。"
+      },
+      {
+        "criterion_id": "C02",
+        "evidence_valid": false,
+        "quote": "题目只规定额外已命名列忽略，未明确未命名额外列是否应计 invalid_count",
+        "reason": "reference将C02判为pass，候选反馈以材料未界定为由保留unknown，判断方向与冻结参考相反。"
+      },
+      {
+        "criterion_id": "C03",
+        "evidence_valid": true,
+        "quote": "空白分钟被解析为 None 并计入 missing_duration_count；非空分钟解析为 int 后计入 known_duration_count，包括 0 分钟。",
+        "reason": "候选反馈对NULL与0区分及分类计数的判断受代码支持，与reference的pass一致。"
+      },
+      {
+        "criterion_id": "C04",
+        "evidence_valid": true,
+        "quote": "仅对 duration 非 None 的有效已知行执行 known_minutes 累加",
+        "reason": "代码仅在duration非None分支累加，候选反馈判定通过有据，与reference一致。"
+      },
+      {
+        "criterion_id": "C05",
+        "evidence_valid": true,
+        "quote": "函数在遍历前初始化五个整数字段，即使没有有效行也会返回完整五字段字典",
+        "reason": "代码确在循环前初始化五字段，候选反馈判定通过受支持。"
+      },
+      {
+        "criterion_id": "C06",
+        "evidence_valid": true,
+        "quote": "代码仅使用 csv 和 io.StringIO 解析内存字符串，未发现文件读写、网络访问或执行任意代码等外部副作用",
+        "reason": "代码无外部IO，候选反馈判定通过有据，与reference一致。"
+      }
+    ],
+    "actionability_score": 2,
+    "unsupported_claim": false,
+    "reason": "多数criterion指出具体代码行为并给出方向；C02以未界定为由保留unknown与冻结参考相反，且其next_action要求补充验收说明，可执行性有限。"
+  },
+  "provider": "deepseek",
+  "model_id": "deepseek-flash",
+  "raw_response_ref": "raw/04-judge_formal-Q02-response.json"
+}

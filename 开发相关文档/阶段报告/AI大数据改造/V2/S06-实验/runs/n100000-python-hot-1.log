@@ -1,0 +1,4 @@
+{"engine": "python", "label": "warmup", "seconds": 96.71531270400004}
+{"engine": "python", "label": "hot-1", "seconds": 98.98318043899997}
+{"engine": "python", "label": "hot-2", "seconds": 98.68701708499998}
+{"engine": "python", "label": "hot-3", "seconds": 95.85768770799996}

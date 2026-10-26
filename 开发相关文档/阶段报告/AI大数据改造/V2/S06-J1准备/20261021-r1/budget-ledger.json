@@ -1,0 +1,96 @@
+{
+  "evaluation_id": "S06-J1-20261021-prep-r1",
+  "phase_status": "prepared_J1_pending",
+  "authorization": {
+    "provider_id": null,
+    "model_id": null,
+    "input_permission": null,
+    "authorized_by": null,
+    "authorized_at": null,
+    "calibration_attempts": 0,
+    "analysis_attempts": 0,
+    "total_attempts": 0,
+    "currency": null,
+    "total_currency_cap": "0"
+  },
+  "proposed_configuration_not_authorized": {
+    "prompt_version": "judge-r2",
+    "temperature": 0,
+    "max_tokens": 1200,
+    "response_format": "json_object",
+    "reasoning_enabled": null,
+    "total_timeout_seconds": 60,
+    "max_retries": 0,
+    "retry_base_delay_seconds": 0,
+    "max_retry_delay_seconds": 0,
+    "context": "one fresh context per input"
+  },
+  "proposed_this_stage": {
+    "judge_calibration": 3,
+    "judge_analysis": 1,
+    "total_provider_attempts": 4,
+    "max_output_tokens_per_attempt": 1200,
+    "total_output_token_cap": 4800,
+    "input_tokens": null,
+    "price_per_input_token": null,
+    "price_per_output_token": null,
+    "currency": null,
+    "total_currency_cap": null
+  },
+  "cross_stage_plan_not_permission": {
+    "under_test_S08": 16,
+    "shared_J1_calibration": 3,
+    "J1_S08_formal": 16,
+    "J1_S06_analysis": 1,
+    "total": 36
+  },
+  "actual": {
+    "provider_attempts": 0,
+    "calibration_attempts": 0,
+    "analysis_attempts": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0,
+    "spent": "0",
+    "remaining_authorized_attempts": 0,
+    "remaining_authorized_money": "0",
+    "attempts": []
+  },
+  "calibration": {
+    "status": "not_run",
+    "reusable_now": false,
+    "reuse_condition": "真实3/3命中后，同provider/model_id、judge-r2提示词、参数和校准输入不变可供S08复用；首次3次在36方案中只计一次。"
+  },
+  "required_before_execution": [
+    "用户明确provider与精确model_id；不得读取全站默认型号推断许可",
+    "允许发送四份输入中的白名单材料；输入正文不含授权记录或校准expected",
+    "明确3次校准+1次正式及合计货币上限/币种/价格依据；计划额度不是许可",
+    "精确参数获认可；模型不支持时停止，不静默换参数或型号",
+    "评价进程独立AIClient(max_retries=0)，不得改变全站配置",
+    "每次开始Provider尝试即记账；异常也消耗本角色额度，不自动重试、不互借额度"
+  ],
+  "attempt_record_fields_for_future": [
+    "attempt_no",
+    "role",
+    "input_file",
+    "input_id",
+    "provider_id",
+    "model_id",
+    "prompt_version",
+    "parameters",
+    "started_at",
+    "latency_ms",
+    "status",
+    "raw_response_ref",
+    "failure_category",
+    "usage_prompt_tokens",
+    "usage_completion_tokens",
+    "usage_total_tokens",
+    "cost_amount",
+    "currency",
+    "price_basis_ref",
+    "remaining_attempts",
+    "remaining_money"
+  ],
+  "cost_rule": "按授权币种及Provider真实用量/价格结算，用Decimal。无法确定费用时保留null并停止下一次，不填免费或估算成功；每次请求前须保证最大可能费用未超剩余额度。"
+}

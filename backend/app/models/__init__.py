@@ -16,6 +16,7 @@ from app.models.community import (
 from app.models.course import Course
 from app.models.learning import DailyTask, LearningPlan, LearningRecord, LearningReport
 from app.models.project import Project, Tag, project_tags
+from app.models.practice import PracticeAttempt, PracticeEvent, PracticeSession, PracticeSessionStatus
 from app.models.teaching import ClassMembership, TeachingAssignment, TeachingClass
 from app.models.user import User
 from app.models.workflow import Workflow, WorkflowEdge, WorkflowNode, WorkflowRun
@@ -44,6 +45,10 @@ __all__ = [
     "LearningReport",
     "Like",
     "Project",
+    "PracticeAttempt",
+    "PracticeEvent",
+    "PracticeSession",
+    "PracticeSessionStatus",
     "ProjectView",
     "Tag",
     "TeachingAssignment",

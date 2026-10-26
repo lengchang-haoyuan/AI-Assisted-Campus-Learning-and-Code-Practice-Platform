@@ -1,0 +1,19 @@
+{
+  "elapsed_seconds": 0.789701494,
+  "row_counts": {
+    "projects": 1000,
+    "daily_tasks": 25000,
+    "learning_records": 102000,
+    "teaching_classes": 1,
+    "teaching_assignments": 1000,
+    "class_memberships": 1001,
+    "campus_memberships": 1001,
+    "submissions": 1000,
+    "submission_versions": 1300,
+    "feedback": 1100,
+    "source_claim_projection": 0
+  },
+  "input_bytes": 30917608,
+  "spark_runs": 0,
+  "seed": 20261020
+}

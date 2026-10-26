@@ -27,9 +27,12 @@ python -c "import secrets; print(secrets.token_urlsafe(48))"
 ```
 
 ```powershell
+. ../scripts/Use-Utf8.ps1
 .\.venv\Scripts\Activate.ps1
-python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+python -X utf8 -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
+
+应用、后端脚本和分析入口统一Python标准输出/错误及子进程为UTF-8；日志和HTTP JSON沿用原结构。项目脚本只影响当前会话，不修改系统区域或用户profile。Windows PowerShell 5的UTF-8文本重定向带BOM；新JSON证据由Python明确使用UTF-8无BOM写入，旧证据和二进制不转码。
 
 - Swagger：`http://127.0.0.1:8000/docs`
 - Health：`http://127.0.0.1:8000/api/v1/health`

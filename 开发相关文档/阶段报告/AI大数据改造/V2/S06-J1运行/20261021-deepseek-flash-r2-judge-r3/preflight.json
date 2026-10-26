@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "scope": "local_preflight_only",
+  "previous_provider_attempts": 1,
+  "new_round_attempt_limit": 4,
+  "stage_attempt_limit": 5,
+  "response_validator_unchanged": true,
+  "r2_prompt_preserved_as_prefix": true,
+  "fixed_inputs_and_expectations": "original_files_read_only",
+  "python_ast": "passed",
+  "AICompletionRequest_validation": "passed",
+  "provider_attempts_this_round": 0,
+  "currency_cap_policy": "unbounded_as_previously_authorized",
+  "cross_stage_plan": {
+    "under_test_S08": 16,
+    "J1_calibration_including_failed": 4,
+    "J1_S08_formal": 16,
+    "J1_S06_analysis": 1,
+    "total_plan_not_S08_permission": 37
+  }
+}

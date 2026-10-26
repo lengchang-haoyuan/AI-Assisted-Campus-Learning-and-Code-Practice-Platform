@@ -26,6 +26,8 @@ class AgentInputValidationError(ValueError):
 class AgentOutputValidationError(ValueError):
     """模型输出不是 Agent 约定的结构化结果。"""
 
+    completion: AICompletionResult | None = None
+
 
 @dataclass(frozen=True, slots=True)
 class AgentResult:
@@ -40,6 +42,8 @@ class BaseAgent(ABC):
     input_schema: type[AgentSchema]
     model_output_schema: type[AgentSchema]
     role_instruction: str
+    response_format = AIResponseFormat.JSON_OBJECT
+    response_schema_name: str | None = None
 
     def __init__(
         self,
@@ -76,25 +80,39 @@ class BaseAgent(ABC):
         context_fields: frozenset[str] | None = None,
     ) -> AgentResult:
         validated_input = self.validate_input(input_data)
-        request = AICompletionRequest(
-            messages=self._build_messages(context, validated_input, context_fields=context_fields),
-            model=self._model,
-            temperature=self._temperature,
-            max_tokens=self._max_tokens,
-            response_format=AIResponseFormat.JSON_OBJECT,
-            reasoning_enabled=False,
-        )
+        request = self._build_completion_request(context, validated_input, context_fields=context_fields)
         completion = await self._client.complete(request)
-        model_output = self._parse_model_output(completion.content)
         try:
-            result = self.build_result(context, validated_input, model_output)
-        except ValidationError as exc:
-            raise AgentOutputValidationError("Agent 结构化结果后处理失败") from exc
+            model_output = self._parse_model_output(completion.content)
+            try:
+                result = self.build_result(context, validated_input, model_output)
+            except ValidationError as exc:
+                raise AgentOutputValidationError("Agent 结构化结果后处理失败") from exc
+        except AgentOutputValidationError as exc:
+            # 无效建议仍已消耗请求；交给调用方记录已知用量，不伪造有效结果。
+            exc.completion = completion
+            raise
         return AgentResult(
             agent_type=self.agent_type,
             context_version=context.version,
             result=result,
             completion=completion,
+        )
+
+    def _model_output_json_schema(self) -> dict:
+        return self.model_output_schema.model_json_schema()
+
+    def _build_completion_request(
+        self, context: ProjectContext, input_data: AgentSchema, *,
+        context_fields: frozenset[str] | None = None,
+    ) -> AICompletionRequest:
+        use_schema = self.response_format == AIResponseFormat.JSON_SCHEMA
+        return AICompletionRequest(
+            messages=self._build_messages(context, input_data, context_fields=context_fields),
+            model=self._model, temperature=self._temperature, max_tokens=self._max_tokens,
+            response_format=self.response_format, reasoning_enabled=False,
+            response_schema=self._model_output_json_schema() if use_schema else None,
+            response_schema_name=self.response_schema_name if use_schema else None,
         )
 
     def _build_messages(
@@ -125,7 +143,7 @@ class BaseAgent(ABC):
             raise AgentInputValidationError("Agent Context 与输入合计超过安全上限")
 
         output_schema = json.dumps(
-            self.model_output_schema.model_json_schema(),
+            self._model_output_json_schema(),
             ensure_ascii=False,
             separators=(",", ":"),
         )

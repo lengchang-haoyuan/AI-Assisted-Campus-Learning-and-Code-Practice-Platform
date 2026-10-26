@@ -1,0 +1,343 @@
+{
+  "status": "archived_and_removed",
+  "authorization": "2026-10-25用户要求清理未完成冗余文件；限定停用离线评价脚本，不触及运行代码和原始证据",
+  "archive": "开发相关文档/阶段报告/AI大数据改造/V2/S08-历史评价工具归档.zip",
+  "file_count": 55,
+  "original_bytes": 690834,
+  "archive_bytes": 225447,
+  "byte_equality_verified": true,
+  "new_model_calls": 0,
+  "database_writes": 0,
+  "files": [
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261022-r1/check_scoring_boundaries.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261022-r1/check_scoring_boundaries.py",
+      "bytes": 6434,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261022-r1/score_results.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261022-r1/score_results.py",
+      "bytes": 11154,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261022-r1/validate_inputs.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261022-r1/validate_inputs.py",
+      "bytes": 8500,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261022-r1/validate_judge.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261022-r1/validate_judge.py",
+      "bytes": 5996,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261023-review-r2/verify_local.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261023-review-r2/verify_local.py",
+      "bytes": 13984,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261024-responses-schema-r1/verify_local.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261024-responses-schema-r1/verify_local.py",
+      "bytes": 10146,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261024-review-r3/verify_local.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价准备/20261024-review-r3/verify_local.py",
+      "bytes": 15153,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261022-flash-pro-r1/check_runner_guards.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261022-flash-pro-r1/check_runner_guards.py",
+      "bytes": 5457,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261022-flash-pro-r1/run_evaluation.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261022-flash-pro-r1/run_evaluation.py",
+      "bytes": 29978,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261023-flash-pro-r2/audit_results.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261023-flash-pro-r2/audit_results.py",
+      "bytes": 8335,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261023-flash-pro-r2/check_runner_guards.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261023-flash-pro-r2/check_runner_guards.py",
+      "bytes": 6611,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261023-flash-pro-r2/check_scoring_boundaries.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261023-flash-pro-r2/check_scoring_boundaries.py",
+      "bytes": 6573,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261023-flash-pro-r2/run_evaluation.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261023-flash-pro-r2/run_evaluation.py",
+      "bytes": 34570,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261023-flash-pro-r2/score_results_r2.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261023-flash-pro-r2/score_results_r2.py",
+      "bytes": 11378,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261023-flash-pro-r2/validate_judge.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261023-flash-pro-r2/validate_judge.py",
+      "bytes": 5996,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/audit_results.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/audit_results.py",
+      "bytes": 9241,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/check_runner_guards.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/check_runner_guards.py",
+      "bytes": 7272,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/frozen_review_schema.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/frozen_review_schema.py",
+      "bytes": 4523,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/run_evaluation.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/run_evaluation.py",
+      "bytes": 38330,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/score_results_r3.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/score_results_r3.py",
+      "bytes": 12582,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/test_evaluation_repairs.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/test_evaluation_repairs.py",
+      "bytes": 10824,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/validate_judge.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r3/validate_judge.py",
+      "bytes": 6825,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/audit_results.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/audit_results.py",
+      "bytes": 9023,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/check_runner_guards.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/check_runner_guards.py",
+      "bytes": 7226,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/frozen_review_schema.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/frozen_review_schema.py",
+      "bytes": 4523,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/run_evaluation.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/run_evaluation.py",
+      "bytes": 35931,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/score_results_r3.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/score_results_r3.py",
+      "bytes": 12657,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/test_evaluation_repairs.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/test_evaluation_repairs.py",
+      "bytes": 10824,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/validate_judge.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r4/validate_judge.py",
+      "bytes": 6825,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/audit_results.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/audit_results.py",
+      "bytes": 11915,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/check_runner_guards.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/check_runner_guards.py",
+      "bytes": 7117,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/frozen_review_schema.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/frozen_review_schema.py",
+      "bytes": 4523,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/run_evaluation.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/run_evaluation.py",
+      "bytes": 39075,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/score_results_r3.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/score_results_r3.py",
+      "bytes": 12924,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/test_evaluation_repairs.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/test_evaluation_repairs.py",
+      "bytes": 11007,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/test_responses_runner.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/test_responses_runner.py",
+      "bytes": 6126,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/validate_judge.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261024-flash-pro-r5-responses/validate_judge.py",
+      "bytes": 6825,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/audit_results.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/audit_results.py",
+      "bytes": 13424,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/check_runner_guards.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/check_runner_guards.py",
+      "bytes": 7117,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/frozen_review_schema.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/frozen_review_schema.py",
+      "bytes": 4523,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/run_evaluation.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/run_evaluation.py",
+      "bytes": 44346,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/score_results_r3.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/score_results_r3.py",
+      "bytes": 12983,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/test_evaluation_repairs.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/test_evaluation_repairs.py",
+      "bytes": 11007,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/test_responses_runner.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/test_responses_runner.py",
+      "bytes": 7814,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/test_role_swap_round.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/test_role_swap_round.py",
+      "bytes": 9086,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/validate_judge.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r6/validate_judge.py",
+      "bytes": 6825,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/audit_results.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/audit_results.py",
+      "bytes": 13424,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/check_runner_guards.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/check_runner_guards.py",
+      "bytes": 7117,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/frozen_review_schema.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/frozen_review_schema.py",
+      "bytes": 4523,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/run_evaluation.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/run_evaluation.py",
+      "bytes": 44488,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/score_results_r3.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/score_results_r3.py",
+      "bytes": 13042,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/test_evaluation_repairs.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/test_evaluation_repairs.py",
+      "bytes": 11007,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/test_responses_runner.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/test_responses_runner.py",
+      "bytes": 7814,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/test_role_swap_round.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/test_role_swap_round.py",
+      "bytes": 9086,
+      "removed": true
+    },
+    {
+      "original_path": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/validate_judge.py",
+      "archive_member": "开发相关文档/阶段报告/AI大数据改造/V2/S08-评价运行/20261025-pro-flash-r7/validate_judge.py",
+      "bytes": 6825,
+      "removed": true
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "case_id": "Q09",
+  "artifact_id": "S08-Q09-candidate-v1",
+  "text_version": "1.0",
+  "response": {
+    "summary": "静态阅读学生代码：表头校验、CSV解析、行有效性、NULL/0分类和空集返回结构基本符合任务；但已知分钟累加使用赋值而非累加，导致known_minutes只保留最后一条已知分钟，与T01期望30不符。未执行代码，结论仅基于静态文本。",
+    "overall": "needs_changes",
+    "criteria": [
+      {
+        "criterion_id": "C01",
+        "verdict": "pass",
+        "reason": "使用csv.DictReader读取后检查fieldnames，缺失或未包含record_id、duration_minutes时抛出ValueError，满足缺表头抛错要求。"
+      },
+      {
+        "criterion_id": "C02",
+        "verdict": "pass",
+        "reason": "使用csv模块解析引号与空白物理行；逐行校验record_id可转int且>0，分钟空白视为未知，非空须int且0至1440，非法行计入invalid_count并跳过，符合行有效性约束。"
+      },
+      {
+        "criterion_id": "C03",
+        "verdict": "pass",
+        "reason": "有效行先增加record_count；分钟为None时增加missing_duration_count，否则增加known_duration_count，已知0分钟走else分支，未把0当缺失，分类计数正确。"
+      },
+      {
+        "criterion_id": "C04",
+        "verdict": "fail",
+        "issue_type": "sum_error",
+        "evidence_span": "out[\"known_minutes\"] = duration",
+        "reason": "已知分钟累加处使用赋值而非累加，known_minutes会被最后一条已知分钟覆盖，而不是所有有效已知分钟之和；例如T01中30与0会得到0而非30。",
+        "next_action": "将已知分钟累加改为在现有known_minutes基础上加上当前duration，保留整数累加语义，并确保未知分钟不参与累加。",
+        "suggested_self_test": "用输入\"record_id,duration_minutes\\n1,30\\n2,\\n3,0\\n4,nope\\n\"调用summarize_records，检查known_minutes是否为30、known_duration_count是否为2、missing_duration_count是否为1、invalid_count是否为1。"
+      },
+      {
+        "criterion_id": "C05",
+        "verdict": "pass",
+        "reason": "返回字典在循环前已初始化五个计数字段为整数0；没有有效行时仍返回完整五字段，满足空有效集契约。"
+      },
+      {
+        "criterion_id": "C06",
+        "verdict": "pass",
+        "reason": "函数仅使用csv和io处理传入字符串，未读写文件、未联网、未执行任意代码，符合纯函数与静态边界要求。"
+      }
+    ]
+  },
+  "prompt_version": "practice-review-r1",
+  "schema_version": "practice-review/1.0",
+  "provider": "deepseek",
+  "model_id": "deepseek-flash",
+  "raw_response_ref": "raw/20-under_test-Q09-response.json"
+}

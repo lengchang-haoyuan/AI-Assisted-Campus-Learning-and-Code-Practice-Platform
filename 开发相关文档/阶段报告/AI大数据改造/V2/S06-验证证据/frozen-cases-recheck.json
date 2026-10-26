@@ -1,0 +1,4188 @@
+{
+  "contract_id": "V2-S01-r2",
+  "rechecked_at": "2026-10-21T05:39:02.043314+00:00",
+  "status": "passed",
+  "method": "Current independent standard-library Python recalculates same frozen S03 vectors; rereads immutable S04 ADS/quality/conclusions. No new Spark run, no database or model connection.",
+  "data_vectors": 15,
+  "M01_subjects": 3,
+  "frozen_leaf_assertions": 178,
+  "full_Python_ADS_leaf_checks": 1191,
+  "cases": [
+    {
+      "case_id": "D00",
+      "name": "基准、同键同值重复、NULL和0及跨日",
+      "status": "passed",
+      "kind": "immutable_S04_ADS_matches_current_Python",
+      "source": "S04-产物\\jobs\\v1-D00",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 83,
+      "full_answer_leaf_checks": 87
+    },
+    {
+      "case_id": "D01",
+      "name": "同键不同值冲突",
+      "status": "passed",
+      "kind": "expected_rejection_rechecked",
+      "source": "S04-产物\\.incomplete\\v1-D01-171c9e2030e148f3a4dadc3e41d0557c",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 2,
+      "full_answer_leaf_checks": 0
+    },
+    {
+      "case_id": "D02",
+      "name": "缺失主键",
+      "status": "passed",
+      "kind": "expected_rejection_rechecked",
+      "source": "S04-产物\\.incomplete\\v1-D02-f0920880286a46f99f7466c5c9cac694",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 2,
+      "full_answer_leaf_checks": 0
+    },
+    {
+      "case_id": "D03",
+      "name": "单业务日、DATE不二次换算",
+      "status": "passed",
+      "kind": "immutable_S04_ADS_matches_current_Python",
+      "source": "S04-产物\\jobs\\v1-D03",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 10,
+      "full_answer_leaf_checks": 63
+    },
+    {
+      "case_id": "D04",
+      "name": "伪教学来源投影",
+      "status": "passed",
+      "kind": "immutable_S04_ADS_matches_current_Python",
+      "source": "S04-产物\\jobs\\v1-D04",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 4,
+      "full_answer_leaf_checks": 87
+    },
+    {
+      "case_id": "D05",
+      "name": "普通学习记录删除后的新快照",
+      "status": "passed",
+      "kind": "immutable_S04_ADS_matches_current_Python",
+      "source": "S04-产物\\jobs\\v1-D05",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 7,
+      "full_answer_leaf_checks": 87
+    },
+    {
+      "case_id": "D06",
+      "name": "学习记录修改无updated_at",
+      "status": "passed",
+      "kind": "immutable_S04_ADS_matches_current_Python",
+      "source": "S04-产物\\jobs\\v1-D06",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 3,
+      "full_answer_leaf_checks": 87
+    },
+    {
+      "case_id": "D07",
+      "name": "全部为空但批次有所有者",
+      "status": "passed",
+      "kind": "immutable_S04_ADS_matches_current_Python",
+      "source": "S04-产物\\jobs\\v1-D07",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 11,
+      "full_answer_leaf_checks": 51
+    },
+    {
+      "case_id": "D08",
+      "name": "无任务与真实SET NULL关系",
+      "status": "passed",
+      "kind": "immutable_S04_ADS_matches_current_Python",
+      "source": "S04-产物\\jobs\\v1-D08",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 3,
+      "full_answer_leaf_checks": 87
+    },
+    {
+      "case_id": "D09",
+      "name": "时长全部未知",
+      "status": "passed",
+      "kind": "immutable_S04_ADS_matches_current_Python",
+      "source": "S04-产物\\jobs\\v1-D09",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 5,
+      "full_answer_leaf_checks": 87
+    },
+    {
+      "case_id": "D10",
+      "name": "仅取消任务保留分母",
+      "status": "passed",
+      "kind": "immutable_S04_ADS_matches_current_Python",
+      "source": "S04-产物\\jobs\\v1-D10",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 5,
+      "full_answer_leaf_checks": 87
+    },
+    {
+      "case_id": "D11",
+      "name": "199除以200不是全部完成",
+      "status": "passed",
+      "kind": "immutable_S04_ADS_matches_current_Python",
+      "source": "S04-产物\\jobs\\v1-D11",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 6,
+      "full_answer_leaf_checks": 87
+    },
+    {
+      "case_id": "D12",
+      "name": "引用不存在的学习记录",
+      "status": "passed",
+      "kind": "expected_rejection_rechecked",
+      "source": "S04-产物\\.incomplete\\v1-D12-49fc1982dcc340649901594d015eb7b5",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 2,
+      "full_answer_leaf_checks": 0
+    },
+    {
+      "case_id": "D15",
+      "name": "右开截止边界",
+      "status": "passed",
+      "kind": "immutable_S04_ADS_matches_current_Python",
+      "source": "S04-产物\\jobs\\v1-D15",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 6,
+      "full_answer_leaf_checks": 87
+    },
+    {
+      "case_id": "D16",
+      "name": "教学学习记录删除不撤销教师确认",
+      "status": "passed",
+      "kind": "immutable_S04_ADS_matches_current_Python",
+      "source": "S04-产物\\jobs\\v1-D16",
+      "S01_S03_input_and_expected_equal": true,
+      "frozen_leaf_assertions": 7,
+      "full_answer_leaf_checks": 87
+    },
+    {
+      "case_id": "M01",
+      "name": "多主体、低覆盖、首次通过与无样本反例",
+      "status": "passed",
+      "kind": "immutable_S04_ADS_matches_current_Python",
+      "source": "S04-产物/jobs/v1-M01",
+      "subjects": [
+        1001,
+        1002,
+        1003
+      ],
+      "frozen_leaf_assertions": 22,
+      "full_answer_leaf_checks": 207,
+      "should_describe_material": [
+        "1001存在修订后确认且仍有待评",
+        "1002首次通过，无需人为制造二次提交",
+        "1002只有取消任务，取消仍占分母",
+        "1003无样本"
+      ],
+      "must_not_infer_material": [
+        "分钟少等于能力低",
+        "修订导致学习提升",
+        "无任务等于完成率100%",
+        "教师确认等于执行代码"
+      ],
+      "J1_score": null
+    }
+  ],
+  "assertions": [
+    {
+      "case_id": "D00",
+      "field_path": "records.raw_rows",
+      "expected": 6,
+      "actual": 6,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "records.valid_unique_rows",
+      "expected": 5,
+      "actual": 5,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "records.exact_duplicates",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "records.known_minutes",
+      "expected": 75,
+      "actual": 75,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "records.known_duration_count",
+      "expected": 3,
+      "actual": 3,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "records.missing_duration_count",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "records.known_zero_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "records.active_days",
+      "expected": 3,
+      "actual": 3,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "records.ordinary_count",
+      "expected": 3,
+      "actual": 3,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "records.trusted_teaching_count",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "records.unverified_claim_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "tasks.total",
+      "expected": 4,
+      "actual": 4,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "tasks.completed",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "tasks.cancelled",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "tasks.overdue_unfinished",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "tasks.completion_rate.numerator",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "tasks.completion_rate.denominator",
+      "expected": 4,
+      "actual": 4,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "tasks.completion_rate.percent",
+      "expected": "50.000000",
+      "actual": "50.000000",
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "tasks.completion_rate.display",
+      "expected": "50.0%",
+      "actual": "50.0%",
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.cohort_count",
+      "expected": 3,
+      "actual": 3,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.revised_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.confirmed_count",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.returned_ever_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.first_pass_confirmed_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.revised_confirmed_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.pending_latest_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.revision_attempts",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.revised_rate.numerator",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.revised_rate.denominator",
+      "expected": 3,
+      "actual": 3,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.revised_rate.percent",
+      "expected": "33.333333",
+      "actual": "33.333333",
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.revised_rate.display",
+      "expected": "33.3%",
+      "actual": "33.3%",
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.confirmation_rate.numerator",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.confirmation_rate.denominator",
+      "expected": 3,
+      "actual": 3,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.confirmation_rate.percent",
+      "expected": "66.666667",
+      "actual": "66.666667",
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.confirmation_rate.display",
+      "expected": "66.7%",
+      "actual": "66.7%",
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.revised_confirmation_rate.numerator",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.revised_confirmation_rate.denominator",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.revised_confirmation_rate.percent",
+      "expected": "100.000000",
+      "actual": "100.000000",
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.revised_confirmation_rate.display",
+      "expected": "100.0%",
+      "actual": "100.0%",
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.first_review_covered",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.first_review_wait_sum_minutes",
+      "expected": 90,
+      "actual": 90.0,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.first_review_wait_mean_minutes",
+      "expected": "45.000000",
+      "actual": "45.000000",
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.first_review_histogram.[0,60)",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.first_review_histogram.[60,240)",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.first_review_histogram.[240,1440)",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.first_review_histogram.[1440,+inf)",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "topic.missing_teaching_record_links",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[0].date",
+      "expected": "2026-10-01",
+      "actual": "2026-10-01",
+      "passed": true,
+      "coverage_dimensions": [
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[0].records",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[0].known_minutes",
+      "expected": 30,
+      "actual": 30,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[0].known_duration_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[0].missing_duration_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[0].tasks",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[0].completed",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[0].cancelled",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[0].overdue_unfinished",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[0].cohort",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[0].revised",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[0].confirmed",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[1].date",
+      "expected": "2026-10-02",
+      "actual": "2026-10-02",
+      "passed": true,
+      "coverage_dimensions": [
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[1].records",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[1].known_minutes",
+      "expected": 45,
+      "actual": 45,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[1].known_duration_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[1].missing_duration_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[1].tasks",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[1].completed",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[1].cancelled",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[1].overdue_unfinished",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[1].cohort",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[1].revised",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[1].confirmed",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[2].date",
+      "expected": "2026-10-03",
+      "actual": "2026-10-03",
+      "passed": true,
+      "coverage_dimensions": [
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[2].records",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[2].known_minutes",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[2].known_duration_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[2].missing_duration_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[2].tasks",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[2].completed",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[2].cancelled",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[2].overdue_unfinished",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[2].cohort",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[2].revised",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D00",
+      "field_path": "daily[2].confirmed",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D01",
+      "field_path": "fatal_error",
+      "expected": "duplicate_key_conflict",
+      "actual": "duplicate_key_conflict",
+      "passed": true,
+      "coverage_dimensions": [
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D01",
+      "field_path": "publish",
+      "expected": false,
+      "actual": false,
+      "passed": true,
+      "coverage_dimensions": [
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D02",
+      "field_path": "fatal_error",
+      "expected": "required_key_missing",
+      "actual": "required_key_missing",
+      "passed": true,
+      "coverage_dimensions": [
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D02",
+      "field_path": "publish",
+      "expected": false,
+      "actual": false,
+      "passed": true,
+      "coverage_dimensions": [
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "field_path": "records.valid_unique_rows",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "field_path": "records.known_minutes",
+      "expected": 45,
+      "actual": 45,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "field_path": "records.active_days",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "field_path": "records.missing_duration_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "field_path": "records.trusted_teaching_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "field_path": "tasks.total",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "field_path": "tasks.completed",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "field_path": "topic.cohort_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "field_path": "topic.confirmed_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "field_path": "topic.revised_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D04",
+      "field_path": "records.trusted_teaching_count",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D04",
+      "field_path": "records.unverified_claim_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D04",
+      "field_path": "records.ordinary_count",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D04",
+      "field_path": "records.known_minutes",
+      "expected": 75,
+      "actual": 75,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D05",
+      "field_path": "records.valid_unique_rows",
+      "expected": 4,
+      "actual": 4,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D05",
+      "field_path": "records.known_minutes",
+      "expected": 75,
+      "actual": 75,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D05",
+      "field_path": "records.known_duration_count",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D05",
+      "field_path": "records.missing_duration_count",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D05",
+      "field_path": "records.known_zero_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D05",
+      "field_path": "records.active_days",
+      "expected": 3,
+      "actual": 3,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D05",
+      "field_path": "new_batch_required",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "coverage_dimensions": [
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D06",
+      "field_path": "records.known_minutes",
+      "expected": 90,
+      "actual": 90,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D06",
+      "field_path": "records.valid_unique_rows",
+      "expected": 5,
+      "actual": 5,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D06",
+      "field_path": "new_batch_required",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "coverage_dimensions": [
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D07",
+      "field_path": "records.valid_unique_rows",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D07",
+      "field_path": "records.known_minutes",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D07",
+      "field_path": "records.known_duration_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D07",
+      "field_path": "records.missing_duration_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D07",
+      "field_path": "records.active_days",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D07",
+      "field_path": "tasks.total",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D07",
+      "field_path": "tasks.completion_rate.percent",
+      "expected": null,
+      "actual": null,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D07",
+      "field_path": "topic.cohort_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D07",
+      "field_path": "topic.confirmation_rate.percent",
+      "expected": null,
+      "actual": null,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D07",
+      "field_path": "topic.first_review_wait_mean_minutes",
+      "expected": null,
+      "actual": null,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version"
+      ]
+    },
+    {
+      "case_id": "D07",
+      "field_path": "owner_user_id",
+      "expected": 1001,
+      "actual": 1001,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations"
+      ]
+    },
+    {
+      "case_id": "D08",
+      "field_path": "tasks.total",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D08",
+      "field_path": "tasks.completion_rate.percent",
+      "expected": null,
+      "actual": null,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D08",
+      "field_path": "records.valid_unique_rows",
+      "expected": 5,
+      "actual": 5,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D09",
+      "field_path": "records.valid_unique_rows",
+      "expected": 5,
+      "actual": 5,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D09",
+      "field_path": "records.known_minutes",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D09",
+      "field_path": "records.known_duration_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D09",
+      "field_path": "records.missing_duration_count",
+      "expected": 5,
+      "actual": 5,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D09",
+      "field_path": "records.known_zero_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D10",
+      "field_path": "tasks.total",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D10",
+      "field_path": "tasks.completed",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D10",
+      "field_path": "tasks.cancelled",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D10",
+      "field_path": "tasks.overdue_unfinished",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D10",
+      "field_path": "tasks.completion_rate.percent",
+      "expected": "0.000000",
+      "actual": "0.000000",
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D11",
+      "field_path": "tasks.total",
+      "expected": 200,
+      "actual": 200,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D11",
+      "field_path": "tasks.completed",
+      "expected": 199,
+      "actual": 199,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D11",
+      "field_path": "tasks.overdue_unfinished",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D11",
+      "field_path": "tasks.completion_rate.percent",
+      "expected": "99.500000",
+      "actual": "99.500000",
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D11",
+      "field_path": "tasks.completion_rate.display",
+      "expected": "99.5%",
+      "actual": "99.5%",
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D11",
+      "field_path": "eligible_to_complete_plan",
+      "expected": false,
+      "actual": false,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D12",
+      "field_path": "fatal_error",
+      "expected": "dangling_relation",
+      "actual": "dangling_relation",
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations"
+      ]
+    },
+    {
+      "case_id": "D12",
+      "field_path": "publish",
+      "expected": false,
+      "actual": false,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations"
+      ]
+    },
+    {
+      "case_id": "D15",
+      "field_path": "records.valid_unique_rows",
+      "expected": 4,
+      "actual": 4,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D15",
+      "field_path": "records.known_minutes",
+      "expected": 75,
+      "actual": 75,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D15",
+      "field_path": "records.known_duration_count",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D15",
+      "field_path": "records.missing_duration_count",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D15",
+      "field_path": "records.known_zero_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D15",
+      "field_path": "quality.outside_observation_time",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "D16",
+      "field_path": "records.valid_unique_rows",
+      "expected": 4,
+      "actual": 4,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D16",
+      "field_path": "records.known_minutes",
+      "expected": 75,
+      "actual": 75,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D16",
+      "field_path": "records.missing_duration_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D16",
+      "field_path": "records.trusted_teaching_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "D16",
+      "field_path": "topic.confirmed_count",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "source_relations"
+      ]
+    },
+    {
+      "case_id": "D16",
+      "field_path": "topic.missing_teaching_record_links",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "source_relations"
+      ]
+    },
+    {
+      "case_id": "D16",
+      "field_path": "new_batch_required",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1001.records.known_minutes",
+      "expected": 75,
+      "actual": 75,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1001.records.active_days",
+      "expected": 3,
+      "actual": 3,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1001.tasks.total",
+      "expected": 4,
+      "actual": 4,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1001.topic.revised_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "source_relations"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1001.topic.confirmed_count",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "source_relations"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1002.records.valid_unique_rows",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1002.records.known_minutes",
+      "expected": 10,
+      "actual": 10,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1002.records.active_days",
+      "expected": 2,
+      "actual": 2,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null",
+        "time_quality"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1002.records.missing_duration_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1002.tasks.total",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1002.tasks.cancelled",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1002.tasks.completion_rate.percent",
+      "expected": "0.000000",
+      "actual": "0.000000",
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1002.topic.cohort_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "source_relations"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1002.topic.revised_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "source_relations"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1002.topic.confirmed_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "source_relations"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1002.topic.first_pass_confirmed_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "source_relations"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1002.topic.first_review_wait_mean_minutes",
+      "expected": "30.000000",
+      "actual": "30.000000",
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "source_relations"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1003.records.valid_unique_rows",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1003.tasks.total",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1003.tasks.completion_rate.percent",
+      "expected": null,
+      "actual": null,
+      "passed": true,
+      "coverage_dimensions": [
+        "source_relations",
+        "numbers_null"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1003.topic.cohort_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "source_relations"
+      ]
+    },
+    {
+      "case_id": "M01",
+      "field_path": "1003.topic.confirmation_rate.percent",
+      "expected": null,
+      "actual": null,
+      "passed": true,
+      "coverage_dimensions": [
+        "cohort_and_version",
+        "source_relations",
+        "numbers_null"
+      ]
+    }
+  ],
+  "coverage_mapping_note": "Weights and equal-assertion scoring are frozen S01 rules. Field/case tags here are a transparent coverage index created this round, not a pre-existing frozen per-leaf dimension ID; one assertion may support multiple dimensions. No weights, thresholds or expected values changed.",
+  "data_dimension_scores": {
+    "cohort_and_version": {
+      "weight_from_S01": 30,
+      "passed": 54,
+      "covered_assertions": 54,
+      "score": 30.0
+    },
+    "source_relations": {
+      "weight_from_S01": 20,
+      "passed": 43,
+      "covered_assertions": 43,
+      "score": 20.0
+    },
+    "numbers_null": {
+      "weight_from_S01": 20,
+      "passed": 124,
+      "covered_assertions": 124,
+      "score": 20.0
+    },
+    "time_quality": {
+      "weight_from_S01": 20,
+      "passed": 38,
+      "covered_assertions": 38,
+      "score": 20.0
+    }
+  },
+  "data_score": {
+    "earned": 90.0,
+    "available": 90
+  },
+  "deterministic_rule_units": 75,
+  "rule_checks": [
+    {
+      "case_id": "D00",
+      "owner_user_id": 1001,
+      "rule_id": "revision_observed",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D00",
+      "owner_user_id": 1001,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D00",
+      "owner_user_id": 1001,
+      "rule_id": "pending_review",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D00",
+      "owner_user_id": 1001,
+      "rule_id": "unknown_duration",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 2,
+      "denominator": 5,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D00",
+      "owner_user_id": 1001,
+      "rule_id": "no_tasks",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 4,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D03",
+      "owner_user_id": 1001,
+      "rule_id": "revision_observed",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 1,
+      "dates": [
+        "2026-10-02"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D03",
+      "owner_user_id": 1001,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 1,
+      "dates": [
+        "2026-10-02"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D03",
+      "owner_user_id": 1001,
+      "rule_id": "pending_review",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 1,
+      "dates": [
+        "2026-10-02"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D03",
+      "owner_user_id": 1001,
+      "rule_id": "unknown_duration",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 2,
+      "dates": [
+        "2026-10-02"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D03",
+      "owner_user_id": 1001,
+      "rule_id": "no_tasks",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 1,
+      "dates": [
+        "2026-10-02"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D04",
+      "owner_user_id": 1001,
+      "rule_id": "revision_observed",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D04",
+      "owner_user_id": 1001,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D04",
+      "owner_user_id": 1001,
+      "rule_id": "pending_review",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D04",
+      "owner_user_id": 1001,
+      "rule_id": "unknown_duration",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 2,
+      "denominator": 5,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D04",
+      "owner_user_id": 1001,
+      "rule_id": "no_tasks",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 4,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D05",
+      "owner_user_id": 1001,
+      "rule_id": "revision_observed",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D05",
+      "owner_user_id": 1001,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D05",
+      "owner_user_id": 1001,
+      "rule_id": "pending_review",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D05",
+      "owner_user_id": 1001,
+      "rule_id": "unknown_duration",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 2,
+      "denominator": 4,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D05",
+      "owner_user_id": 1001,
+      "rule_id": "no_tasks",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 4,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D06",
+      "owner_user_id": 1001,
+      "rule_id": "revision_observed",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D06",
+      "owner_user_id": 1001,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D06",
+      "owner_user_id": 1001,
+      "rule_id": "pending_review",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D06",
+      "owner_user_id": 1001,
+      "rule_id": "unknown_duration",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 2,
+      "denominator": 5,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D06",
+      "owner_user_id": 1001,
+      "rule_id": "no_tasks",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 4,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D07",
+      "owner_user_id": 1001,
+      "rule_id": "revision_observed",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 0,
+      "dates": [],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D07",
+      "owner_user_id": 1001,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 0,
+      "dates": [],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D07",
+      "owner_user_id": 1001,
+      "rule_id": "pending_review",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 0,
+      "dates": [],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D07",
+      "owner_user_id": 1001,
+      "rule_id": "unknown_duration",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 0,
+      "dates": [],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D07",
+      "owner_user_id": 1001,
+      "rule_id": "no_tasks",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 0,
+      "dates": [],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D08",
+      "owner_user_id": 1001,
+      "rule_id": "revision_observed",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D08",
+      "owner_user_id": 1001,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D08",
+      "owner_user_id": 1001,
+      "rule_id": "pending_review",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D08",
+      "owner_user_id": 1001,
+      "rule_id": "unknown_duration",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 2,
+      "denominator": 5,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D08",
+      "owner_user_id": 1001,
+      "rule_id": "no_tasks",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 0,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D09",
+      "owner_user_id": 1001,
+      "rule_id": "revision_observed",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D09",
+      "owner_user_id": 1001,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D09",
+      "owner_user_id": 1001,
+      "rule_id": "pending_review",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D09",
+      "owner_user_id": 1001,
+      "rule_id": "unknown_duration",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 5,
+      "denominator": 5,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D09",
+      "owner_user_id": 1001,
+      "rule_id": "no_tasks",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 4,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D10",
+      "owner_user_id": 1001,
+      "rule_id": "revision_observed",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D10",
+      "owner_user_id": 1001,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D10",
+      "owner_user_id": 1001,
+      "rule_id": "pending_review",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D10",
+      "owner_user_id": 1001,
+      "rule_id": "unknown_duration",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 2,
+      "denominator": 5,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D10",
+      "owner_user_id": 1001,
+      "rule_id": "no_tasks",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 1,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D11",
+      "owner_user_id": 1001,
+      "rule_id": "revision_observed",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D11",
+      "owner_user_id": 1001,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D11",
+      "owner_user_id": 1001,
+      "rule_id": "pending_review",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D11",
+      "owner_user_id": 1001,
+      "rule_id": "unknown_duration",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 2,
+      "denominator": 5,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D11",
+      "owner_user_id": 1001,
+      "rule_id": "no_tasks",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 200,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D15",
+      "owner_user_id": 1001,
+      "rule_id": "revision_observed",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D15",
+      "owner_user_id": 1001,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D15",
+      "owner_user_id": 1001,
+      "rule_id": "pending_review",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D15",
+      "owner_user_id": 1001,
+      "rule_id": "unknown_duration",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 2,
+      "denominator": 4,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D15",
+      "owner_user_id": 1001,
+      "rule_id": "no_tasks",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 4,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D16",
+      "owner_user_id": 1001,
+      "rule_id": "revision_observed",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D16",
+      "owner_user_id": 1001,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D16",
+      "owner_user_id": 1001,
+      "rule_id": "pending_review",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D16",
+      "owner_user_id": 1001,
+      "rule_id": "unknown_duration",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 4,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "D16",
+      "owner_user_id": 1001,
+      "rule_id": "no_tasks",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 4,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1001,
+      "rule_id": "revision_observed",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1001,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1001,
+      "rule_id": "pending_review",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 3,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1001,
+      "rule_id": "unknown_duration",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 2,
+      "denominator": 5,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1001,
+      "rule_id": "no_tasks",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 4,
+      "dates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1003,
+      "rule_id": "revision_observed",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 0,
+      "dates": [],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1003,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 0,
+      "dates": [],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1003,
+      "rule_id": "pending_review",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 0,
+      "dates": [],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1003,
+      "rule_id": "unknown_duration",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 0,
+      "dates": [],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1003,
+      "rule_id": "no_tasks",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 0,
+      "dates": [],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1002,
+      "rule_id": "revision_observed",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 1,
+      "dates": [
+        "2026-10-01",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "群组存在修订，不能推断修订改善能力",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1002,
+      "rule_id": "first_pass_counterexample",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 1,
+      "dates": [
+        "2026-10-01",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "存在首次通过，修订不是确认的必经步骤",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1002,
+      "rule_id": "pending_review",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 1,
+      "dates": [
+        "2026-10-01",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "最新版本仍待评，等待不补零",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1002,
+      "rule_id": "unknown_duration",
+      "expected_triggered": true,
+      "actual_triggered": true,
+      "numerator": 1,
+      "denominator": 2,
+      "dates": [
+        "2026-10-01",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "部分记录时长未知，已知分钟仅反映已记录覆盖",
+      "J1_semantic_score": null,
+      "passed": true
+    },
+    {
+      "case_id": "M01",
+      "owner_user_id": 1002,
+      "rule_id": "no_tasks",
+      "expected_triggered": false,
+      "actual_triggered": false,
+      "numerator": 0,
+      "denominator": 1,
+      "dates": [
+        "2026-10-01",
+        "2026-10-03"
+      ],
+      "checked_fields": {
+        "owner_user_id": true,
+        "snapshot_id": true,
+        "rule_id": true,
+        "condition": true,
+        "triggered": true,
+        "numerator": true,
+        "denominator": true,
+        "dates": true,
+        "evidence_ref": true
+      },
+      "interpretation_material": "空任务集合没有完成率样本",
+      "J1_semantic_score": null,
+      "passed": true
+    }
+  ],
+  "rule_confusion": {
+    "first_pass_counterexample": {
+      "TP": 12,
+      "TN": 3,
+      "FP": 0,
+      "FN": 0
+    },
+    "no_tasks": {
+      "TP": 3,
+      "TN": 12,
+      "FP": 0,
+      "FN": 0
+    },
+    "pending_review": {
+      "TP": 12,
+      "TN": 3,
+      "FP": 0,
+      "FN": 0
+    },
+    "revision_observed": {
+      "TP": 11,
+      "TN": 4,
+      "FP": 0,
+      "FN": 0
+    },
+    "unknown_duration": {
+      "TP": 13,
+      "TN": 2,
+      "FP": 0,
+      "FN": 0
+    }
+  },
+  "rule_metric_scope": "(case_id, owner_user_id, rule_id) against independently recalculated frozen facts, not AI semantic quality or generalization",
+  "external_publication_permission": {
+    "case_ids": [
+      "D13",
+      "D14"
+    ],
+    "available": 10,
+    "current_score_in_this_readonly_recheck": null,
+    "S05_historical_evidence": "S05-验证证据/checks.json",
+    "S06_current_evidence": "S06-验证证据/publication-verification.json and browser/real-API evidence maintained by root",
+    "scope": "Not re-executed here; final S06 score must combine root current publication/authentication/GET verification, not copy historical test counts"
+  },
+  "combined_numeric_score": null,
+  "J1_explanation_score": null,
+  "J1_status": "pending_by_user_choice_zero_models",
+  "models_called": 0,
+  "Spark_jobs_started": 0,
+  "database_connections": 0,
+  "not_claimed": [
+    "15 new Spark runs",
+    "J1 passing score",
+    "S06 overall acceptance",
+    "teaching causality",
+    "student code execution"
+  ]
+}

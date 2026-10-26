@@ -1,0 +1,35 @@
+{
+  "currency": "CNY",
+  "new_calls": 1,
+  "new_role_usage": {
+    "under_test": 1,
+    "judge_calibration": 0,
+    "judge_formal": 0
+  },
+  "new_observed_tokens": {
+    "prompt_tokens": 2133,
+    "completion_tokens": 486,
+    "total_tokens": 2619,
+    "cache_hit_tokens": 1408,
+    "cache_miss_tokens": 725
+  },
+  "new_known_usage_peak_upper": "0.00815400",
+  "new_spent_or_held_upper": "0.03122800",
+  "continued_r2_combined_known_usage_peak_upper": "0.31719900",
+  "continued_r2_combined_spent_or_held_upper": "0.43703200",
+  "continued_r2_original_cap": "2.00000000",
+  "remaining_cap_not_automatic_restart_permission": "1.56296800",
+  "remaining_role_quota_not_automatic_restart_permission": {
+    "under_test": 9,
+    "judge_formal": 10,
+    "judge_calibration": 0
+  },
+  "S08_all_rounds_actual_calls": 48,
+  "S08_all_rounds_tokens": 136440,
+  "S08_all_rounds_known_usage_peak_upper": "1.16009000",
+  "S08_all_rounds_spent_or_held_upper": "1.27992300",
+  "S06_separate_calls": 7,
+  "account_charge_verified": false,
+  "account_balance_queried": false,
+  "recharge_performed": false
+}

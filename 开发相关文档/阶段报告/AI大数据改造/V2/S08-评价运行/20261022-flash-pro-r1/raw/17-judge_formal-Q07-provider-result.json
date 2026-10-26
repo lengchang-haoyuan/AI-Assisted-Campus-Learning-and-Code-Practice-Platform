@@ -1,0 +1,12 @@
+{
+  "provider": "deepseek",
+  "model": "deepseek-v4-pro",
+  "content": "{\n  \"case_id\": \"Q07\",\n  \"status\": \"scored\",\n  \"criterion_evidence\": [\n    {\n      \"criterion_id\": \"C01\",\n      \"evidence_valid\": true,\n      \"quote\": \"使用 csv.DictReader 读取后检查 fieldnames，缺失必需列或表头为空时抛出 ValueError，符合缺表头约束。\",\n      \"reason\": \"候选反馈判断C01通过，与reference一致；其描述与student_code中fieldnames检查逻辑相符。\"\n    },\n    {\n      \"criterion_id\": \"C02\",\n      \"evidence_valid\": true,\n      \"quote\": \"使用 csv 模块解析引号字段；逐行校验 record_id 可转 int 且大于0，分钟空白视为未知，非空须可转 int 且在0至1440，非法行计入 invalid_count 并跳过。\",\n      \"reason\": \"候选反馈判断C02通过，与reference一致；其描述与student_code中csv解析和行校验逻辑相符。\"\n    },\n    {\n      \"criterion_id\": \"C03\",\n      \"evidence_valid\": true,\n      \"quote\": \"duration 为已知整数0时 `not duration` 为真，被计入 missing_duration_count，未计入 known_duration_count，混淆了已知0与未知空白。\",\n      \"reason\": \"候选反馈判断C03失败，与reference一致；其引用代码片段和解释准确指出0被误判为未知的问题。\"\n    },\n    {\n      \"criterion_id\": \"C04\",\n      \"evidence_valid\": false,\n      \"quote\": \"已知0分钟因 `not duration` 进入 missing 分支，未执行 known_minutes 累加；虽然加0不改变和，但该行未被当作已知分钟处理，累加逻辑对0值分类错误。\",\n      \"reason\": \"候选反馈判断C04失败，但reference中C04为pass；其主张的sum_error不成立，因为0分钟累加0不影响known_minutes，且该问题已由C03覆盖。\"\n    },\n    {\n      \"criterion_id\": \"C05\",\n      \"evidence_valid\": true,\n      \"quote\": \"out 字典在循环前初始化五个整数字段，无有效行时直接返回完整五字段，符合空有效集契约。\",\n      \"reason\": \"候选反馈判断C05通过，与reference一致；其描述与student_code中初始化并返回完整字典的逻辑相符。\"\n    },\n    {\n      \"criterion_id\": \"C06\",\n      \"evidence_valid\": true,\n      \"quote\": \"函数仅使用 csv、io 和内存字符串处理，不读写文件、不联网、不执行任意代码，符合纯函数静态边界。\",\n      \"reason\": \"候选反馈判断C06通过，与reference一致；其描述与student_code中无外部IO的逻辑相符。\"\n    }\n  ],\n  \"actionability_score\": 3,\n  \"unsupported_claim\": false,\n  \"reason\": \"候选反馈对C03的失败判断准确，并给出代码位置、修正方向和验证样例；对C04的失败判断与reference冲突，但整体反馈可操作性强。\"\n}",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 2791,
+    "completion_tokens": 676,
+    "total_tokens": 3467
+  },
+  "latency_ms": 6790
+}

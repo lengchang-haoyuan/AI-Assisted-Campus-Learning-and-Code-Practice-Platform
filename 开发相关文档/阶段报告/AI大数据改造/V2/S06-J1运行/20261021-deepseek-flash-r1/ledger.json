@@ -1,0 +1,63 @@
+{
+  "evaluation_id": "S06-J1-20261021-deepseek-flash-r1",
+  "started_at": "2026-10-21T21:51:10.145645+08:00",
+  "status": "stopped_calibration_failed",
+  "provider": "deepseek",
+  "model_id": "deepseek-flash",
+  "authorized_attempts": 4,
+  "currency": "CNY",
+  "currency_cap": null,
+  "currency_cap_policy": "explicitly_unbounded_by_user",
+  "attempts": [
+    {
+      "attempt_no": 1,
+      "input_id": "G01",
+      "role": "judge_calibration",
+      "started_at": "2026-10-21T21:51:10.235984+08:00",
+      "status": "invalid",
+      "http_request_events": 1,
+      "input_ref": "raw/G01-input.json",
+      "parameters_ref": "parameters.json",
+      "model_requested": "deepseek-flash",
+      "http_status": 200,
+      "raw_response_ref": "raw/G01-response.json",
+      "response_redacted": false,
+      "latency_ms": 1111,
+      "model_returned": "deepseek-flash",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 1080,
+        "completion_tokens": 139,
+        "total_tokens": 1219
+      },
+      "validation_ref": "raw/G01-validation.json",
+      "finished_at": "2026-10-21T21:51:11.348268+08:00",
+      "cost": {
+        "currency": "CNY",
+        "amount": "0.001636",
+        "kind": "actual_usage_times_official_price_not_account_reconciled",
+        "price_period": "off_peak",
+        "cache_hit_tokens": 0,
+        "cache_miss_tokens": 1080,
+        "completion_tokens": 139,
+        "basis_ref": "pricing-basis.json"
+      }
+    }
+  ],
+  "provider_attempts": 1,
+  "remaining_authorized_attempts": 3,
+  "calibration_passed": false,
+  "calibration_reusable": false,
+  "analysis_total": null,
+  "analysis_passed": false,
+  "cost_from_actual_usage": "0.001636",
+  "account_reconciled": false,
+  "stop_input_id": "G01",
+  "finished_at": "2026-10-21T21:51:11.349024+08:00",
+  "no_automatic_retry": true,
+  "analysis_attempts": 0,
+  "calibration_attempts": 1,
+  "total_prompt_tokens": 1080,
+  "total_completion_tokens": 139,
+  "S06_complete": false
+}

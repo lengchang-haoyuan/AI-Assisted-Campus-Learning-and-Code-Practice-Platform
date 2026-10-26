@@ -1,3 +1,5 @@
+import json
+
 import httpx
 from pydantic import BaseModel, ConfigDict, Field, SecretStr, ValidationError
 
@@ -42,6 +44,40 @@ class _DeepSeekResponse(BaseModel):
     usage: _DeepSeekUsage | None = None
 
 
+class _ResponsesUsage(BaseModel):
+    model_config = ConfigDict(extra="ignore", frozen=True)
+
+    input_tokens: int = Field(ge=0, strict=True)
+    output_tokens: int = Field(ge=0, strict=True)
+    total_tokens: int = Field(ge=0, strict=True)
+
+
+class _ResponsesContent(BaseModel):
+    model_config = ConfigDict(extra="ignore", frozen=True)
+
+    type: str
+    text: str | None = None
+
+
+class _ResponsesItem(BaseModel):
+    model_config = ConfigDict(extra="ignore", frozen=True)
+
+    type: str
+    role: str | None = None
+    content: list[_ResponsesContent] | None = None
+
+
+class _ResponsesResult(BaseModel):
+    model_config = ConfigDict(extra="ignore", frozen=True)
+
+    model: str = Field(min_length=1, max_length=100, pattern=MODEL_NAME_PATTERN)
+    status: str
+    output: list[_ResponsesItem]
+    usage: _ResponsesUsage | None = None
+    error: dict | None = None
+    incomplete_details: dict | None = None
+
+
 class DeepSeekProvider(AIProvider):
     def __init__(
         self,
@@ -71,27 +107,11 @@ class DeepSeekProvider(AIProvider):
                 category=AIFailureCategory.CONFIGURATION,
             )
 
-        payload: dict[str, object] = {
-            "model": request.model,
-            "messages": [
-                {"role": message.role.value, "content": message.content}
-                for message in request.messages
-            ],
-            "temperature": request.temperature,
-            "stream": False,
-        }
-        if request.max_tokens is not None:
-            payload["max_tokens"] = request.max_tokens
-        if request.response_format == AIResponseFormat.JSON_OBJECT:
-            payload["response_format"] = {"type": "json_object"}
-        if request.reasoning_enabled is not None:
-            payload["thinking"] = {
-                "type": "enabled" if request.reasoning_enabled else "disabled"
-            }
+        path, payload = self._request_payload(request)
 
         try:
             response = await self._http_client.post(
-                f"{self._base_url}/chat/completions",
+                f"{self._base_url}{path}",
                 headers={
                     "Authorization": f"Bearer {self._api_key.get_secret_value()}",
                     "Content-Type": "application/json",
@@ -150,8 +170,11 @@ class DeepSeekProvider(AIProvider):
                 category=AIFailureCategory.UPSTREAM,
             )
 
+        if request.response_format == AIResponseFormat.JSON_SCHEMA:
+            return self._parse_responses_result(response)
+
         try:
-            parsed = _DeepSeekResponse.model_validate(response.json())
+            parsed = _DeepSeekResponse.model_validate(self._decode_json(response))
         except (ValueError, ValidationError) as exc:
             raise AIClientError(
                 "AI Provider 返回格式无效",
@@ -176,6 +199,87 @@ class DeepSeekProvider(AIProvider):
                 total_tokens=usage.total_tokens if usage else None,
             ),
         )
+
+    @staticmethod
+    def _request_payload(request: AICompletionRequest) -> tuple[str, dict]:
+        if request.response_format == AIResponseFormat.JSON_SCHEMA:
+            payload = {
+                "model": request.model,
+                "input": [{"role": item.role.value, "content": item.content} for item in request.messages],
+                "temperature": request.temperature,
+                "stream": False,
+                "text": {"format": {
+                    "type": "json_schema", "name": request.response_schema_name,
+                    "schema": request.response_schema,
+                }},
+            }
+            if request.max_tokens is not None:
+                payload["max_output_tokens"] = request.max_tokens
+            if request.reasoning_enabled is not None:
+                payload["reasoning"] = {"effort": "high" if request.reasoning_enabled else "none"}
+            return "/responses", payload
+
+        payload = {
+            "model": request.model,
+            "messages": [
+                {"role": message.role.value, "content": message.content}
+                for message in request.messages
+            ],
+            "temperature": request.temperature,
+            "stream": False,
+        }
+        if request.max_tokens is not None:
+            payload["max_tokens"] = request.max_tokens
+        if request.response_format == AIResponseFormat.JSON_OBJECT:
+            payload["response_format"] = {"type": "json_object"}
+        if request.reasoning_enabled is not None:
+            payload["thinking"] = {
+                "type": "enabled" if request.reasoning_enabled else "disabled"
+            }
+
+        return "/chat/completions", payload
+
+    def _parse_responses_result(self, response: httpx.Response) -> AIProviderResult:
+        observed = None
+        try:
+            body = self._decode_json(response)
+            raw_usage = body.get("usage") if isinstance(body, dict) else None
+            if raw_usage is not None:
+                usage = _ResponsesUsage.model_validate(raw_usage)
+                if usage.input_tokens + usage.output_tokens != usage.total_tokens:
+                    raise ValueError("Responses用量合计不一致")
+                observed = AIUsage(prompt_tokens=usage.input_tokens,
+                                   completion_tokens=usage.output_tokens, total_tokens=usage.total_tokens)
+            parsed = _ResponsesResult.model_validate(body)
+            if parsed.status != "completed" or parsed.error is not None or parsed.incomplete_details is not None:
+                raise ValueError("Responses未完成")
+            if len(parsed.output) != 1:
+                raise ValueError("Responses必须仅有一个文本输出")
+            item = parsed.output[0]
+            if item.type != "message" or item.role != "assistant" or not item.content or len(item.content) != 1:
+                raise ValueError("Responses输出类型不符合约定")
+            part = item.content[0]
+            if part.type != "output_text" or not part.text or not part.text.strip():
+                raise ValueError("Responses无有效文本")
+            content = part.text.strip()
+            if not isinstance(json.loads(content), dict):
+                raise ValueError("Responses输出不是JSON对象")
+            return AIProviderResult(
+                provider=self.name, model=parsed.model, content=content,
+                # 此接口不返回Chat finish_reason，保留其真实终态，不伪造stop。
+                finish_reason=parsed.status,
+                usage=observed or AIUsage(prompt_tokens=None, completion_tokens=None, total_tokens=None),
+            )
+        except (ValueError, ValidationError) as exc:
+            raise AIClientError(
+                "AI Provider 结构化响应无效或未完成", category=AIFailureCategory.RESPONSE_FORMAT,
+                observed_usage=observed,
+            ) from exc
+
+    @staticmethod
+    def _decode_json(response: httpx.Response) -> object:
+        # 模型网络JSON只接受UTF-8（兼容BOM），禁止按本机/响应charset猜测或替换坏字节。
+        return json.loads(response.content.decode("utf-8-sig"))
 
     @staticmethod
     def _read_retry_after(response: httpx.Response) -> float | None:

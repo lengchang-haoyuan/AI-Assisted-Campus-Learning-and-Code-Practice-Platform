@@ -1,0 +1,32 @@
+{
+  "artifact_id": "S06-analysis-b96ea63e-v1",
+  "status": "scored",
+  "dimensions": [
+    {
+      "dimension_id": "problem_cohort",
+      "score": 2,
+      "quote": "主样例属于隔离虚构用户3，发布batch为b96ea63e-419e-4293-b724-d1ce59bd85ba，snapshot为s06-e2e-owner3-20261021，job为s06-e2e-main。",
+      "reason": "明确本人、V1群组、窗口与快照，并说明分母口径。"
+    },
+    {
+      "dimension_id": "numeric_evidence",
+      "score": 2,
+      "quote": "任务状态图对应完成2/全部4=50.000000%，界面50.0%；取消1条仍在总分母中，逾期未完1条。",
+      "reason": "图表、分子分母与独立答案逐项对应，含边界样例。"
+    },
+    {
+      "dimension_id": "patterns_counterexamples",
+      "score": 2,
+      "quote": "同时有首次提交就获得教师确认的反例，因此修订不是确认的必经步骤。",
+      "reason": "解释首次正确、修订后确认及待评低样本反例。"
+    },
+    {
+      "dimension_id": "conclusion_boundary",
+      "score": 2,
+      "quote": "当前快照状态、记录缺失和确认来源必须分别阅读；本例是隔离虚构数据，不支持自然课堂效果、个人能力或因果推断。",
+      "reason": "清楚区分当前状态、记录缺失、确认来源与不可推断事项。"
+    }
+  ],
+  "causal_or_ability_overclaim": false,
+  "reason": "四维均达最高档，未发现因果或能力夸大。"
+}

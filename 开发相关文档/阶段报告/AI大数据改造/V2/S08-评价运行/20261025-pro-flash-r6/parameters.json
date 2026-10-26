@@ -1,0 +1,59 @@
+{
+  "evaluation_id": "S08-20261025-pro-flash-r6",
+  "provider": "deepseek",
+  "base_url": "https://api.deepseek.com",
+  "endpoint": "role_specific_see_roles",
+  "roles": {
+    "under_test": {
+      "model_id": "deepseek-v4-pro",
+      "documented_service_version": "DeepSeek-V4-Pro-0813",
+      "prompt_version": "practice-review-r5",
+      "schema_version": "practice-review/1.0",
+      "max_tokens": 1500,
+      "request_version": "practice-review-responses-schema-r2",
+      "endpoint": "/responses",
+      "response_format": "json_schema",
+      "output_schema_ref": "wire-output-schema.json",
+      "terminal_status": "completed"
+    },
+    "judge_calibration": {
+      "model_id": "deepseek-flash",
+      "documented_service_version": "DeepSeek-V4.1-Flash-1017",
+      "prompt_version": "judge-r4",
+      "max_tokens": 1200,
+      "endpoint": "/chat/completions",
+      "response_format": "json_object",
+      "terminal_status": "stop"
+    },
+    "judge_formal": {
+      "model_id": "deepseek-flash",
+      "documented_service_version": "DeepSeek-V4.1-Flash-1017",
+      "prompt_version": "judge-r4",
+      "max_tokens": 1200,
+      "endpoint": "/chat/completions",
+      "response_format": "json_object",
+      "terminal_status": "stop"
+    }
+  },
+  "temperature": 0,
+  "response_format": "role_specific_see_roles",
+  "reasoning_enabled": false,
+  "thinking": {
+    "type": "disabled"
+  },
+  "connect_timeout_seconds": 5,
+  "request_timeout_seconds": 60,
+  "total_timeout_seconds": 60,
+  "max_retries": 0,
+  "transport_retries": 0,
+  "retry_base_delay_seconds": 0,
+  "max_retry_delay_seconds": 0,
+  "stream": false,
+  "follow_redirects": false,
+  "context_policy": "每次固定system与该例全新消息；被测使用纯合成白名单Context，无DB；J1不带厂商/型号元数据",
+  "request_protocol_token_margin": 512,
+  "input_token_upper_method": "完整请求payload紧凑UTF8字节+512；须包括text.format.schema，不能只计messages",
+  "budget_pricing_method": "峰价并把全部输入按cache-miss定价；每次POST前预留，成功后用真实usage的同口径上界结算，失败保留预留",
+  "completion_policy": "被测Responses必须status=completed；J1 Chat必须finish_reason=stop；未知usage/超预算/无效/失败即停止，无自动降级或重试",
+  "encoding_policy": "本轮stdout/stderr/文件UTF-8；原始HTTP严格UTF-8（兼容BOM），坏字节base64包装并停止，不替换引文或代码"
+}

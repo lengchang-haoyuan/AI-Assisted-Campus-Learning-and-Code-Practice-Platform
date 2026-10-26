@@ -1,0 +1,16 @@
+diff --git a/C:/Users/Administrator/AppData/Local/Temp/ScholarHub-s09-20261026/before/frontend/src/router/index.ts b/frontend/src/router/index.ts
+index 0eebbb5..cda8572 100644
+--- a/C:/Users/Administrator/AppData/Local/Temp/ScholarHub-s09-20261026/before/frontend/src/router/index.ts
++++ b/frontend/src/router/index.ts
+@@ -59,6 +59,11 @@ const router = createRouter({
+           name: 'project-ai-workspace',
+           component: () => import('@/views/ProjectAIWorkspaceView.vue'),
+         },
++        {
++          path: 'projects/:id/practice',
++          name: 'project-practice',
++          component: () => import('@/views/PracticeWorkbenchView.vue'),
++        },
+         {
+           path: 'projects/:id',
+           name: 'project-detail',

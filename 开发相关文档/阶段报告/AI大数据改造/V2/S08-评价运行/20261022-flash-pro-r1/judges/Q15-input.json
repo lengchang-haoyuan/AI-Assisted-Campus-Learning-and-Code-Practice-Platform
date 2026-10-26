@@ -1,0 +1,85 @@
+{
+  "mode": "feedback",
+  "data": {
+    "case_id": "Q15",
+    "template_id": "python-learning-csv",
+    "template_version": "1.0",
+    "task": "输入语法良好的CSV字符串；必需列record_id、duration_minutes，额外已命名列忽略。record_id须int可解析且>0；分钟空白为未知，非空须int可解析且0至1440。每行独立，不要求跨行去重，空白物理行由csv忽略。缺表头抛ValueError；非法行计invalid_count。已知0与未知分开。返回五个计数字段。函数不读写文件、不联网、不执行任意代码。平台仅静态评审，不运行学生代码。",
+    "criterion_ids": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06"
+    ],
+    "criteria": [
+      {
+        "criterion_id": "C01",
+        "name": "表头约束",
+        "issue_types": [
+          "missing_header_validation"
+        ]
+      },
+      {
+        "criterion_id": "C02",
+        "name": "CSV解析与行有效性",
+        "issue_types": [
+          "row_validation",
+          "csv_quoting"
+        ]
+      },
+      {
+        "criterion_id": "C03",
+        "name": "分类计数与NULL零值区分",
+        "issue_types": [
+          "counting",
+          "zero_as_missing",
+          "unknown_as_known"
+        ]
+      },
+      {
+        "criterion_id": "C04",
+        "name": "已知分钟累加",
+        "issue_types": [
+          "sum_error"
+        ]
+      },
+      {
+        "criterion_id": "C05",
+        "name": "空有效集的完整返回",
+        "issue_types": [
+          "empty_result_contract"
+        ]
+      },
+      {
+        "criterion_id": "C06",
+        "name": "纯函数与静态边界",
+        "issue_types": [
+          "external_io"
+        ]
+      }
+    ],
+    "reference": {
+      "reference_label": "insufficient",
+      "reference_criteria": {
+        "C01": "unknown",
+        "C02": "unknown",
+        "C03": "unknown",
+        "C04": "unknown",
+        "C05": "unknown",
+        "C06": "unknown"
+      },
+      "reference_issues": [],
+      "reference_action": "请求缺失的完整代码或辅助函数，不确认通过"
+    },
+    "student_code": null,
+    "candidate_feedback": "{\n  \"summary\": \"本次材料未包含任何学生代码：student_code_available 为 false，student_code_parts 为 0，因此无法对固定任务中的函数实现进行静态评审。自测声明和公开输出向量不能替代代码原文，也不能作为正确性证据。\",\n  \"overall\": \"insufficient\",\n  \"criteria\": [\n    {\n      \"criterion_id\": \"C01\",\n      \"verdict\": \"unknown\",\n      \"reason\": \"未提供学生代码，无法判断是否在缺少必需表头时抛出 ValueError。\",\n      \"next_action\": \"请提供完整的 summarize_records 函数源码（含表头处理部分）。\",\n      \"suggested_self_test\": \"在本人环境用仅含 record_id 列、缺少 duration_minutes 的 CSV 调用函数，确认抛出 ValueError。\"\n    },\n    {\n      \"criterion_id\": \"C02\",\n      \"verdict\": \"unknown\",\n      \"reason\": \"未提供学生代码，无法判断 CSV 解析方式、引号处理及 record_id 与分钟的行有效性校验。\",\n      \"next_action\": \"请提供完整的 summarize_records 函数源码，特别是 csv 读取与逐行校验逻辑。\",\n      \"suggested_self_test\": \"在本人环境测试含引号字段、record_id 非正整数、分钟非整数或超出 0 至 1440 的输入，核对 invalid_count。\"\n    },\n    {\n      \"criterion_id\": \"C03\",\n      \"verdict\": \"unknown\",\n      \"reason\": \"未提供学生代码，无法判断有效行计数、已知 0 分钟与空白未知分钟的分类计数是否正确。\",\n      \"next_action\": \"请提供完整的 summarize_records 函数源码，特别是分钟空白判断与计数分支。\",\n      \"suggested_self_test\": \"在本人环境输入分钟分别为 30、空白、0 的有效行，核对 record_count、known_duration_count、missing_duration_count 与 invalid_count。\"\n    },\n    {\n      \"criterion_id\": \"C04\",\n      \"verdict\": \"unknown\",\n      \"reason\": \"未提供学生代码，无法判断已知分钟是否仅对有效行累加且包含 0。\",\n      \"next_action\": \"请提供完整的 summarize_records 函数源码，特别是 known_minutes 的累加逻辑。\",\n      \"suggested_self_test\": \"在本人环境输入已知分钟 30、0 与一行非法分钟，确认 known_minutes 只累加有效已知值。\"\n    },\n    {\n      \"criterion_id\": \"C05\",\n      \"verdict\": \"unknown\",\n      \"reason\": \"未提供学生代码，无法判断没有有效行时是否仍返回完整五字段整数结果。\",\n      \"next_action\": \"请提供完整的 summarize_records 函数源码，特别是初始化与返回字典部分。\",\n      \"suggested_self_test\": \"在本人环境用只有表头或全部非法行的 CSV 调用函数，确认返回五个字段且均为整数。\"\n    },\n    {\n      \"criterion_id\": \"C06\",\n      \"verdict\": \"unknown\",\n      \"reason\": \"未提供学生代码，无法判断函数是否仅做纯计算、不读写文件或联网。\",\n      \"next_action\": \"请提供完整的 summarize_records 函数源码及其导入语句。\",\n      \"suggested_self_test\": \"在本人环境检查源码导入与函数体，确认无 open、网络请求或子进程调用。\"\n    }\n  ]\n}",
+    "rubric": {
+      "0": "方向错误、编造执行结果、建议破坏纯函数边界，或模型异常／无有效反馈",
+      "1": "只说“检查边界／优化代码”，没有可定位的问题和下一步",
+      "2": "指出具体criterion与代码行为，给出学生能执行的修正方向",
+      "3": "同时给出代码位置或准确片段、修正方向和适当验证样例；不直接替学生完成整题"
+    }
+  }
+}

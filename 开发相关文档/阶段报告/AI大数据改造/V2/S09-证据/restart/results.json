@@ -1,0 +1,16 @@
+{
+  "mode": "restart",
+  "model": "fake",
+  "real_model_calls": 0,
+  "checks": [
+    {
+      "name": "服务进程重启后读取同一当前attempt/安全等待点",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\阶段报告\\AI大数据改造\\V2\\S09-证据\\restart\\restart-restored.png"
+  ],
+  "passed": true
+}

@@ -1,0 +1,9 @@
+{
+  "job_id": "s06-e2e-main",
+  "snapshot_id": "s06-e2e-owner3-20261021",
+  "spark_version": "4.2.0",
+  "mode": "read_completed_DWD_and_project_approved_fields",
+  "DWD_ADS_crosscheck": true,
+  "daily_rows": 2,
+  "source_recomputed": false
+}

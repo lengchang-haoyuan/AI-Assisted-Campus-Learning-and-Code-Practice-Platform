@@ -1,0 +1,661 @@
+{
+  "evaluation_id": "S08-20261025-pro-flash-r7",
+  "status": "stopped",
+  "started_at": "2026-10-25T21:05:56.664564+08:00",
+  "evaluation_method_version": "evaluation-method-r3",
+  "under_test_prompt_version": "practice-review-r6",
+  "authorization_ref": "authorization.json",
+  "parameters_ref": "parameters.json",
+  "pricing_ref": "pricing-basis.json",
+  "currency": "CNY",
+  "currency_hard_cap": "1.57888000",
+  "conservative_spend_or_held_upper_cny": "0.65730900",
+  "provider_attempts": 11,
+  "authorized_provider_attempts": 32,
+  "role_usage": {
+    "under_test": 6,
+    "judge_calibration": 0,
+    "judge_formal": 5
+  },
+  "role_limits": {
+    "under_test": 16,
+    "judge_calibration": 0,
+    "judge_formal": 16
+  },
+  "calibration_passed": true,
+  "calibration_reused": true,
+  "calibration_model_id": "deepseek-flash",
+  "calibration_reuse_ref": "calibration-reuse.json",
+  "calibration_source_ledger_ref": "../../S06-J1运行/20261021-deepseek-flash-r3-judge-r4/ledger.json",
+  "completed_case_ids": [
+    "Q01",
+    "Q02",
+    "Q03",
+    "Q04",
+    "Q05"
+  ],
+  "attempts": [
+    {
+      "attempt_no": 1,
+      "attempt_id": "01-under_test-Q01",
+      "role": "under_test",
+      "input_id": "Q01",
+      "status": "response_received",
+      "started_at": "2026-10-25T21:05:56.740527+08:00",
+      "model_requested": "deepseek-v4-pro",
+      "input_upper_tokens": 22144,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.23979600",
+      "budget_charged_upper_cny": "0.07512300",
+      "budget_basis": "actual_usage_peak_all_input_cache_miss_upper_not_account_charge",
+      "http_request_events": 1,
+      "raw_request_ref": "raw/01-under_test-Q01-request.json",
+      "raw_response_ref": "raw/01-under_test-Q01-response.json",
+      "endpoint": "/responses",
+      "response_format": "json_schema",
+      "expected_terminal_status": "completed",
+      "http_status": 200,
+      "response_redacted": false,
+      "response_encoding_status": "utf8_valid",
+      "response_system_fingerprint": null,
+      "model_returned": "deepseek-v4-pro",
+      "finish_reason": "completed",
+      "usage": {
+        "prompt_tokens": 5791,
+        "completion_tokens": 852,
+        "total_tokens": 6643
+      },
+      "raw_usage": {
+        "input_tokens": 5791,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 852,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 6643
+      },
+      "known_usage_peak_all_miss_upper_cny": "0.07512300",
+      "provider_result_ref": "raw/01-under_test-Q01-provider-result.json",
+      "usage_record_status": "raw_usage_retained_even_if_structure_failed",
+      "response_identity": {
+        "id": "882f5abe-11fd-48cc-8afc-0ec3b4bd5c83",
+        "model": "deepseek-v4-pro",
+        "status": "completed",
+        "created_at": 1792933557,
+        "system_fingerprint": null
+      },
+      "system_fingerprint_status": "not_reported_unknown",
+      "latency_ms": 10691,
+      "finished_at": "2026-10-25T21:06:07.433316+08:00"
+    },
+    {
+      "attempt_no": 2,
+      "attempt_id": "02-judge_formal-Q01",
+      "role": "judge_formal",
+      "input_id": "Q01",
+      "status": "response_received",
+      "started_at": "2026-10-25T21:06:07.440318+08:00",
+      "model_requested": "deepseek-flash",
+      "input_upper_tokens": 12813,
+      "output_cap": 1200,
+      "reservation_upper_cny": "0.03522600",
+      "budget_charged_upper_cny": "0.00980600",
+      "budget_basis": "actual_usage_peak_all_input_cache_miss_upper_not_account_charge",
+      "http_request_events": 1,
+      "raw_request_ref": "raw/02-judge_formal-Q01-request.json",
+      "raw_response_ref": "raw/02-judge_formal-Q01-response.json",
+      "endpoint": "/chat/completions",
+      "response_format": "json_object",
+      "expected_terminal_status": "stop",
+      "http_status": 200,
+      "response_redacted": false,
+      "response_encoding_status": "utf8_valid",
+      "response_system_fingerprint": "e72d3c7f663d3e1383b00b3884cb4501",
+      "model_returned": "deepseek-flash",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 2827,
+        "completion_tokens": 519,
+        "total_tokens": 3346
+      },
+      "raw_usage": {
+        "prompt_tokens": 2827,
+        "completion_tokens": 519,
+        "total_tokens": 3346,
+        "prompt_tokens_details": {
+          "cached_tokens": 1664
+        },
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 1163
+      },
+      "known_usage_peak_all_miss_upper_cny": "0.00980600",
+      "provider_result_ref": "raw/02-judge_formal-Q01-provider-result.json",
+      "usage_record_status": "raw_usage_retained_even_if_structure_failed",
+      "response_identity": {
+        "id": "32691dc8-b5ab-4fd6-a34d-d0865a8c57cb",
+        "model": "deepseek-flash",
+        "status": null,
+        "created_at": null,
+        "system_fingerprint": "e72d3c7f663d3e1383b00b3884cb4501"
+      },
+      "system_fingerprint_status": "reported",
+      "latency_ms": 3159,
+      "finished_at": "2026-10-25T21:06:10.602376+08:00",
+      "validation_ref": "validations/Q01-judge.json",
+      "evaluation_status": "scored"
+    },
+    {
+      "attempt_no": 3,
+      "attempt_id": "03-under_test-Q02",
+      "role": "under_test",
+      "input_id": "Q02",
+      "status": "response_received",
+      "started_at": "2026-10-25T21:06:10.615332+08:00",
+      "model_requested": "deepseek-v4-pro",
+      "input_upper_tokens": 22162,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.23995800",
+      "budget_charged_upper_cny": "0.07227900",
+      "budget_basis": "actual_usage_peak_all_input_cache_miss_upper_not_account_charge",
+      "http_request_events": 1,
+      "raw_request_ref": "raw/03-under_test-Q02-request.json",
+      "raw_response_ref": "raw/03-under_test-Q02-response.json",
+      "endpoint": "/responses",
+      "response_format": "json_schema",
+      "expected_terminal_status": "completed",
+      "http_status": 200,
+      "response_redacted": false,
+      "response_encoding_status": "utf8_valid",
+      "response_system_fingerprint": null,
+      "model_returned": "deepseek-v4-pro",
+      "finish_reason": "completed",
+      "usage": {
+        "prompt_tokens": 5793,
+        "completion_tokens": 746,
+        "total_tokens": 6539
+      },
+      "raw_usage": {
+        "input_tokens": 5793,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 746,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 6539
+      },
+      "known_usage_peak_all_miss_upper_cny": "0.07227900",
+      "provider_result_ref": "raw/03-under_test-Q02-provider-result.json",
+      "usage_record_status": "raw_usage_retained_even_if_structure_failed",
+      "response_identity": {
+        "id": "9bb1a5d2-4168-402a-9bf2-0dcd6e5f16f8",
+        "model": "deepseek-v4-pro",
+        "status": "completed",
+        "created_at": 1792933571,
+        "system_fingerprint": null
+      },
+      "system_fingerprint_status": "not_reported_unknown",
+      "latency_ms": 7463,
+      "finished_at": "2026-10-25T21:06:18.080730+08:00"
+    },
+    {
+      "attempt_no": 4,
+      "attempt_id": "04-judge_formal-Q02",
+      "role": "judge_formal",
+      "input_id": "Q02",
+      "status": "response_received",
+      "started_at": "2026-10-25T21:06:18.088038+08:00",
+      "model_requested": "deepseek-flash",
+      "input_upper_tokens": 12350,
+      "output_cap": 1200,
+      "reservation_upper_cny": "0.03430000",
+      "budget_charged_upper_cny": "0.01002000",
+      "budget_basis": "actual_usage_peak_all_input_cache_miss_upper_not_account_charge",
+      "http_request_events": 1,
+      "raw_request_ref": "raw/04-judge_formal-Q02-request.json",
+      "raw_response_ref": "raw/04-judge_formal-Q02-response.json",
+      "endpoint": "/chat/completions",
+      "response_format": "json_object",
+      "expected_terminal_status": "stop",
+      "http_status": 200,
+      "response_redacted": false,
+      "response_encoding_status": "utf8_valid",
+      "response_system_fingerprint": "e72d3c7f663d3e1383b00b3884cb4501",
+      "model_returned": "deepseek-flash",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 2714,
+        "completion_tokens": 574,
+        "total_tokens": 3288
+      },
+      "raw_usage": {
+        "prompt_tokens": 2714,
+        "completion_tokens": 574,
+        "total_tokens": 3288,
+        "prompt_tokens_details": {
+          "cached_tokens": 1664
+        },
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 1050
+      },
+      "known_usage_peak_all_miss_upper_cny": "0.01002000",
+      "provider_result_ref": "raw/04-judge_formal-Q02-provider-result.json",
+      "usage_record_status": "raw_usage_retained_even_if_structure_failed",
+      "response_identity": {
+        "id": "b3a95483-e531-4ef1-8fdd-e911893458b5",
+        "model": "deepseek-flash",
+        "status": null,
+        "created_at": null,
+        "system_fingerprint": "e72d3c7f663d3e1383b00b3884cb4501"
+      },
+      "system_fingerprint_status": "reported",
+      "latency_ms": 3309,
+      "finished_at": "2026-10-25T21:06:21.399200+08:00",
+      "validation_ref": "validations/Q02-judge.json",
+      "evaluation_status": "scored"
+    },
+    {
+      "attempt_no": 5,
+      "attempt_id": "05-under_test-Q03",
+      "role": "under_test",
+      "input_id": "Q03",
+      "status": "response_received",
+      "started_at": "2026-10-25T21:06:21.413042+08:00",
+      "model_requested": "deepseek-v4-pro",
+      "input_upper_tokens": 22541,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.24336900",
+      "budget_charged_upper_cny": "0.07102800",
+      "budget_basis": "actual_usage_peak_all_input_cache_miss_upper_not_account_charge",
+      "http_request_events": 1,
+      "raw_request_ref": "raw/05-under_test-Q03-request.json",
+      "raw_response_ref": "raw/05-under_test-Q03-response.json",
+      "endpoint": "/responses",
+      "response_format": "json_schema",
+      "expected_terminal_status": "completed",
+      "http_status": 200,
+      "response_redacted": false,
+      "response_encoding_status": "utf8_valid",
+      "response_system_fingerprint": null,
+      "model_returned": "deepseek-v4-pro",
+      "finish_reason": "completed",
+      "usage": {
+        "prompt_tokens": 5894,
+        "completion_tokens": 666,
+        "total_tokens": 6560
+      },
+      "raw_usage": {
+        "input_tokens": 5894,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        },
+        "output_tokens": 666,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 6560
+      },
+      "known_usage_peak_all_miss_upper_cny": "0.07102800",
+      "provider_result_ref": "raw/05-under_test-Q03-provider-result.json",
+      "usage_record_status": "raw_usage_retained_even_if_structure_failed",
+      "response_identity": {
+        "id": "561d0c57-2de6-4e94-bf2e-ff3cdaf51f6a",
+        "model": "deepseek-v4-pro",
+        "status": "completed",
+        "created_at": 1792933582,
+        "system_fingerprint": null
+      },
+      "system_fingerprint_status": "not_reported_unknown",
+      "latency_ms": 6585,
+      "finished_at": "2026-10-25T21:06:27.999335+08:00"
+    },
+    {
+      "attempt_no": 6,
+      "attempt_id": "06-judge_formal-Q03",
+      "role": "judge_formal",
+      "input_id": "Q03",
+      "status": "response_received",
+      "started_at": "2026-10-25T21:06:28.006999+08:00",
+      "model_requested": "deepseek-flash",
+      "input_upper_tokens": 11975,
+      "output_cap": 1200,
+      "reservation_upper_cny": "0.03355000",
+      "budget_charged_upper_cny": "0.00941200",
+      "budget_basis": "actual_usage_peak_all_input_cache_miss_upper_not_account_charge",
+      "http_request_events": 1,
+      "raw_request_ref": "raw/06-judge_formal-Q03-request.json",
+      "raw_response_ref": "raw/06-judge_formal-Q03-response.json",
+      "endpoint": "/chat/completions",
+      "response_format": "json_object",
+      "expected_terminal_status": "stop",
+      "http_status": 200,
+      "response_redacted": false,
+      "response_encoding_status": "utf8_valid",
+      "response_system_fingerprint": "e72d3c7f663d3e1383b00b3884cb4501",
+      "model_returned": "deepseek-flash",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 2634,
+        "completion_tokens": 518,
+        "total_tokens": 3152
+      },
+      "raw_usage": {
+        "prompt_tokens": 2634,
+        "completion_tokens": 518,
+        "total_tokens": 3152,
+        "prompt_tokens_details": {
+          "cached_tokens": 896
+        },
+        "prompt_cache_hit_tokens": 896,
+        "prompt_cache_miss_tokens": 1738
+      },
+      "known_usage_peak_all_miss_upper_cny": "0.00941200",
+      "provider_result_ref": "raw/06-judge_formal-Q03-provider-result.json",
+      "usage_record_status": "raw_usage_retained_even_if_structure_failed",
+      "response_identity": {
+        "id": "b8b4fb88-4319-43a4-b91b-3da3d9c50e41",
+        "model": "deepseek-flash",
+        "status": null,
+        "created_at": null,
+        "system_fingerprint": "e72d3c7f663d3e1383b00b3884cb4501"
+      },
+      "system_fingerprint_status": "reported",
+      "latency_ms": 2928,
+      "finished_at": "2026-10-25T21:06:30.937701+08:00",
+      "validation_ref": "validations/Q03-judge.json",
+      "evaluation_status": "scored"
+    },
+    {
+      "attempt_no": 7,
+      "attempt_id": "07-under_test-Q04",
+      "role": "under_test",
+      "input_id": "Q04",
+      "status": "response_received",
+      "started_at": "2026-10-25T21:06:30.949981+08:00",
+      "model_requested": "deepseek-v4-pro",
+      "input_upper_tokens": 22265,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.24088500",
+      "budget_charged_upper_cny": "0.07593300",
+      "budget_basis": "actual_usage_peak_all_input_cache_miss_upper_not_account_charge",
+      "http_request_events": 1,
+      "raw_request_ref": "raw/07-under_test-Q04-request.json",
+      "raw_response_ref": "raw/07-under_test-Q04-response.json",
+      "endpoint": "/responses",
+      "response_format": "json_schema",
+      "expected_terminal_status": "completed",
+      "http_status": 200,
+      "response_redacted": false,
+      "response_encoding_status": "utf8_valid",
+      "response_system_fingerprint": null,
+      "model_returned": "deepseek-v4-pro",
+      "finish_reason": "completed",
+      "usage": {
+        "prompt_tokens": 5827,
+        "completion_tokens": 870,
+        "total_tokens": 6697
+      },
+      "raw_usage": {
+        "input_tokens": 5827,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        },
+        "output_tokens": 870,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 6697
+      },
+      "known_usage_peak_all_miss_upper_cny": "0.07593300",
+      "provider_result_ref": "raw/07-under_test-Q04-provider-result.json",
+      "usage_record_status": "raw_usage_retained_even_if_structure_failed",
+      "response_identity": {
+        "id": "943b29e1-c137-44a6-a903-ab6884f4b1ef",
+        "model": "deepseek-v4-pro",
+        "status": "completed",
+        "created_at": 1792933591,
+        "system_fingerprint": null
+      },
+      "system_fingerprint_status": "not_reported_unknown",
+      "latency_ms": 8563,
+      "finished_at": "2026-10-25T21:06:39.515487+08:00"
+    },
+    {
+      "attempt_no": 8,
+      "attempt_id": "08-judge_formal-Q04",
+      "role": "judge_formal",
+      "input_id": "Q04",
+      "status": "response_received",
+      "started_at": "2026-10-25T21:06:39.522870+08:00",
+      "model_requested": "deepseek-flash",
+      "input_upper_tokens": 12756,
+      "output_cap": 1200,
+      "reservation_upper_cny": "0.03511200",
+      "budget_charged_upper_cny": "0.00974600",
+      "budget_basis": "actual_usage_peak_all_input_cache_miss_upper_not_account_charge",
+      "http_request_events": 1,
+      "raw_request_ref": "raw/08-judge_formal-Q04-request.json",
+      "raw_response_ref": "raw/08-judge_formal-Q04-response.json",
+      "endpoint": "/chat/completions",
+      "response_format": "json_object",
+      "expected_terminal_status": "stop",
+      "http_status": 200,
+      "response_redacted": false,
+      "response_encoding_status": "utf8_valid",
+      "response_system_fingerprint": "e72d3c7f663d3e1383b00b3884cb4501",
+      "model_returned": "deepseek-flash",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 2845,
+        "completion_tokens": 507,
+        "total_tokens": 3352
+      },
+      "raw_usage": {
+        "prompt_tokens": 2845,
+        "completion_tokens": 507,
+        "total_tokens": 3352,
+        "prompt_tokens_details": {
+          "cached_tokens": 896
+        },
+        "prompt_cache_hit_tokens": 896,
+        "prompt_cache_miss_tokens": 1949
+      },
+      "known_usage_peak_all_miss_upper_cny": "0.00974600",
+      "provider_result_ref": "raw/08-judge_formal-Q04-provider-result.json",
+      "usage_record_status": "raw_usage_retained_even_if_structure_failed",
+      "response_identity": {
+        "id": "a9d51893-57a0-45de-85b1-e09159a33848",
+        "model": "deepseek-flash",
+        "status": null,
+        "created_at": null,
+        "system_fingerprint": "e72d3c7f663d3e1383b00b3884cb4501"
+      },
+      "system_fingerprint_status": "reported",
+      "latency_ms": 2784,
+      "finished_at": "2026-10-25T21:06:42.310129+08:00",
+      "validation_ref": "validations/Q04-judge.json",
+      "evaluation_status": "scored"
+    },
+    {
+      "attempt_no": 9,
+      "attempt_id": "09-under_test-Q05",
+      "role": "under_test",
+      "input_id": "Q05",
+      "status": "response_received",
+      "started_at": "2026-10-25T21:06:42.323838+08:00",
+      "model_requested": "deepseek-v4-pro",
+      "input_upper_tokens": 21985,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.23836500",
+      "budget_charged_upper_cny": "0.07498800",
+      "budget_basis": "actual_usage_peak_all_input_cache_miss_upper_not_account_charge",
+      "http_request_events": 1,
+      "raw_request_ref": "raw/09-under_test-Q05-request.json",
+      "raw_response_ref": "raw/09-under_test-Q05-response.json",
+      "endpoint": "/responses",
+      "response_format": "json_schema",
+      "expected_terminal_status": "completed",
+      "http_status": 200,
+      "response_redacted": false,
+      "response_encoding_status": "utf8_valid",
+      "response_system_fingerprint": null,
+      "model_returned": "deepseek-v4-pro",
+      "finish_reason": "completed",
+      "usage": {
+        "prompt_tokens": 5746,
+        "completion_tokens": 862,
+        "total_tokens": 6608
+      },
+      "raw_usage": {
+        "input_tokens": 5746,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        },
+        "output_tokens": 862,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 6608
+      },
+      "known_usage_peak_all_miss_upper_cny": "0.07498800",
+      "provider_result_ref": "raw/09-under_test-Q05-provider-result.json",
+      "usage_record_status": "raw_usage_retained_even_if_structure_failed",
+      "response_identity": {
+        "id": "c2917b8f-715a-40bc-8eca-51fc6bc3d151",
+        "model": "deepseek-v4-pro",
+        "status": "completed",
+        "created_at": 1792933603,
+        "system_fingerprint": null
+      },
+      "system_fingerprint_status": "not_reported_unknown",
+      "latency_ms": 8670,
+      "finished_at": "2026-10-25T21:06:50.996927+08:00"
+    },
+    {
+      "attempt_no": 10,
+      "attempt_id": "10-judge_formal-Q05",
+      "role": "judge_formal",
+      "input_id": "Q05",
+      "status": "response_received",
+      "started_at": "2026-10-25T21:06:51.004917+08:00",
+      "model_requested": "deepseek-flash",
+      "input_upper_tokens": 12937,
+      "output_cap": 1200,
+      "reservation_upper_cny": "0.03547400",
+      "budget_charged_upper_cny": "0.00917800",
+      "budget_basis": "actual_usage_peak_all_input_cache_miss_upper_not_account_charge",
+      "http_request_events": 1,
+      "raw_request_ref": "raw/10-judge_formal-Q05-request.json",
+      "raw_response_ref": "raw/10-judge_formal-Q05-response.json",
+      "endpoint": "/chat/completions",
+      "response_format": "json_object",
+      "expected_terminal_status": "stop",
+      "http_status": 200,
+      "response_redacted": false,
+      "response_encoding_status": "utf8_valid",
+      "response_system_fingerprint": "e72d3c7f663d3e1383b00b3884cb4501",
+      "model_returned": "deepseek-flash",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 2873,
+        "completion_tokens": 429,
+        "total_tokens": 3302
+      },
+      "raw_usage": {
+        "prompt_tokens": 2873,
+        "completion_tokens": 429,
+        "total_tokens": 3302,
+        "prompt_tokens_details": {
+          "cached_tokens": 896
+        },
+        "prompt_cache_hit_tokens": 896,
+        "prompt_cache_miss_tokens": 1977
+      },
+      "known_usage_peak_all_miss_upper_cny": "0.00917800",
+      "provider_result_ref": "raw/10-judge_formal-Q05-provider-result.json",
+      "usage_record_status": "raw_usage_retained_even_if_structure_failed",
+      "response_identity": {
+        "id": "1c7c0cd1-03af-42fe-a4c2-44917973a939",
+        "model": "deepseek-flash",
+        "status": null,
+        "created_at": null,
+        "system_fingerprint": "e72d3c7f663d3e1383b00b3884cb4501"
+      },
+      "system_fingerprint_status": "reported",
+      "latency_ms": 2716,
+      "finished_at": "2026-10-25T21:06:53.723195+08:00",
+      "validation_ref": "validations/Q05-judge.json",
+      "evaluation_status": "scored"
+    },
+    {
+      "attempt_no": 11,
+      "attempt_id": "11-under_test-Q06",
+      "role": "under_test",
+      "input_id": "Q06",
+      "status": "invalid_or_failed",
+      "started_at": "2026-10-25T21:06:53.738702+08:00",
+      "model_requested": "deepseek-v4-pro",
+      "input_upper_tokens": 22144,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.23979600",
+      "budget_charged_upper_cny": "0.23979600",
+      "budget_basis": "full_reservation_retained_when_round_stopped_after_response_or_failure",
+      "http_request_events": 1,
+      "raw_request_ref": "raw/11-under_test-Q06-request.json",
+      "raw_response_ref": "raw/11-under_test-Q06-response.json",
+      "endpoint": "/responses",
+      "response_format": "json_schema",
+      "expected_terminal_status": "completed",
+      "http_status": 200,
+      "response_redacted": false,
+      "response_encoding_status": "utf8_valid",
+      "failure_type": "AgentOutputValidationError",
+      "raw_usage": {
+        "input_tokens": 5790,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        },
+        "output_tokens": 918,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 6708
+      },
+      "usage": {
+        "prompt_tokens": 5790,
+        "completion_tokens": 918,
+        "total_tokens": 6708
+      },
+      "usage_record_status": "raw_usage_retained_even_if_structure_failed",
+      "response_identity": {
+        "id": "153a56cc-0a6c-4d6f-a987-7398b91a68d4",
+        "model": "deepseek-v4-pro",
+        "status": "completed",
+        "created_at": 1792933614,
+        "system_fingerprint": null
+      },
+      "system_fingerprint_status": "not_reported_unknown",
+      "latency_ms": 9678,
+      "finished_at": "2026-10-25T21:07:03.418446+08:00"
+    }
+  ],
+  "max_retries": 0,
+  "transport_retries": 0,
+  "account_reconciled": false,
+  "account_balance_queried": false,
+  "recharge_performed": false,
+  "S08_fixed_case_quality_passed": false,
+  "under_test_request_version": "practice-review-responses-schema-r3",
+  "service_identity_policy": "Pro Responses无承诺Chat指纹；保存实际model/id/status且不伪造；Flash正式评分须保持原S06 e72d指纹",
+  "remaining_hard_cap_upper_cny": "0.92157100",
+  "combined_spent_or_held_upper_cny": "1.85052100",
+  "stop_error_type": "AgentOutputValidationError",
+  "finished_at": "2026-10-25T21:07:03.421766+08:00",
+  "total_prompt_tokens_recorded": 48734,
+  "total_completion_tokens_recorded": 7461,
+  "case_status_ref": "case-status.json",
+  "rule_summary_ref": "rule-summary.json"
+}

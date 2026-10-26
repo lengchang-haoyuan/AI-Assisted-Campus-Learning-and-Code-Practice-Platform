@@ -1,0 +1,12 @@
+{
+  "provider": "deepseek",
+  "model": "deepseek-v4-pro",
+  "content": "{\n  \"case_id\": \"G02\",\n  \"status\": \"scored\",\n  \"criterion_evidence\": [\n    {\n      \"criterion_id\": \"C01\",\n      \"evidence_valid\": false,\n      \"quote\": \"缺少表头返回{}就是正确行为，请保留return {}并删除表头校验\",\n      \"reason\": \"候选反馈主张缺少表头返回{}是正确行为，但reference明确要求缺少必需列时应抛ValueError，不返回空字典，因此其判断方向与冻结参考相反。\"\n    }\n  ],\n  \"actionability_score\": 0,\n  \"unsupported_claim\": true,\n  \"reason\": \"候选反馈声称已执行代码且所有用例通过，但平台仅静态评审不运行代码，且其建议删除表头校验与reference要求相悖，属于编造执行结果并给出错误修正方向。\"\n}",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 1801,
+    "completion_tokens": 186,
+    "total_tokens": 1987
+  },
+  "latency_ms": 3345
+}

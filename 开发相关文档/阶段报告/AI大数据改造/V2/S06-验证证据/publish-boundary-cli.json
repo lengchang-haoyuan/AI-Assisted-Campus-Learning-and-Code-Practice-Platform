@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "stdout": "{\"batch_id\": \"3217db64-1302-4722-a483-c3b1ad7b980f\", \"job_id\": \"s06-e2e-boundary\", \"state\": \"completed\", \"replayed\": false}\n",
+  "stderr": "",
+  "seconds": 0.694553299999825
+}

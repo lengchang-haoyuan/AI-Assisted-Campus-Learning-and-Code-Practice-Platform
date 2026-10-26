@@ -1,0 +1,50 @@
+{
+  "case_id": "Q06",
+  "artifact_id": "S08-Q06-candidate-v2",
+  "text_version": "2.0",
+  "response": {
+    "summary": "静态阅读学生代码：表头校验、CSV解析、行有效性、NULL/0分类、空集返回和纯函数边界基本符合任务；但有效行计数使用 record_count += 2，导致 record_count 与有效行数不一致。未执行代码，结论仅基于静态文本。",
+    "overall": "needs_changes",
+    "criteria": [
+      {
+        "criterion_id": "C01",
+        "verdict": "pass",
+        "reason": "使用 csv.DictReader 读取后检查 fieldnames，缺失或未包含 record_id、duration_minutes 时抛出 ValueError，满足缺表头抛错要求。"
+      },
+      {
+        "criterion_id": "C02",
+        "verdict": "pass",
+        "reason": "使用 csv.DictReader 解析，能处理引号；逐行校验 record_id 可转 int 且大于 0，duration_minutes 空白视为未知，非空须可转 int 且在 0 至 1440，非法行计入 invalid_count 并跳过，符合行有效性约束。"
+      },
+      {
+        "criterion_id": "C03",
+        "verdict": "fail",
+        "issue_type": "counting",
+        "evidence_span": "out[\"record_count\"] += 2",
+        "reason": "有效行计数错误：每处理一条有效行将 record_count 增加 2，而任务要求 record_count 为有效行数（含分钟未知行），导致计数翻倍；分钟空白与已知 0 的分类本身正确，但有效行总数不符合契约。",
+        "suggested_self_test": "用输入 'record_id,duration_minutes\\n1,30\\n2,\\n3,0\\n4,nope\\n' 调用函数，检查返回的 record_count 是否为 3（有效行 1、2、3），而不是 6。",
+        "next_action": "将有效行计数改为每条有效行只增加 1，例如 out[\"record_count\"] += 1。"
+      },
+      {
+        "criterion_id": "C04",
+        "verdict": "pass",
+        "reason": "对分钟已知的有效行执行 out[\"known_minutes\"] += duration，已知 0 也正常累加，未知分钟不累加；未发现覆盖、重置、漏加或重复累加已知非零分钟的独立错误。"
+      },
+      {
+        "criterion_id": "C05",
+        "verdict": "pass",
+        "reason": "返回字典在循环前已初始化五个计数字段为整数 0，没有有效行时仍返回完整五字段。"
+      },
+      {
+        "criterion_id": "C06",
+        "verdict": "pass",
+        "reason": "函数仅使用 csv、io 和内置类型处理传入字符串，未读写文件、未联网、未执行任意代码，符合纯函数与静态边界要求。"
+      }
+    ]
+  },
+  "prompt_version": "practice-review-r2",
+  "schema_version": "practice-review/1.0",
+  "provider": "deepseek",
+  "model_id": "deepseek-flash",
+  "raw_response_ref": "raw/11-under_test-Q06-response.json"
+}

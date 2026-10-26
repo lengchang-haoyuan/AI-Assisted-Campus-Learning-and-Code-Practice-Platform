@@ -1,0 +1,17 @@
+{
+  "checked_date": "2026-10-21",
+  "currency": "CNY",
+  "unit_tokens": 1000000,
+  "official_price_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+  "official_model_update_url": "https://api-docs.deepseek.com/updates/",
+  "official_parameter_url": "https://api-docs.deepseek.com/api/create-chat-completion/",
+  "model_id": "deepseek-flash",
+  "documented_model_version": "DeepSeek-V4.1-Flash-1017",
+  "off_peak": {"input_cache_hit": "0.02", "input_cache_miss": "1", "output": "4"},
+  "peak": {"input_cache_hit": "0.04", "input_cache_miss": "2", "output": "8"},
+  "time_policy": "北京时间工作日09:00-12:00和14:00-18:00高峰，其余空闲；本轮夜间为空闲，不涉及节假日判定",
+  "calculation": "以原始usage的prompt_cache_hit_tokens、prompt_cache_miss_tokens和completion_tokens乘对应单价，用Decimal除以1000000；缺缓存拆分只保留区间，不编造精确费用",
+  "account_reconciled": false,
+  "cost_kind": "实际usage按查询时官方单价计算，非账户扣费或发票核对",
+  "unbounded_budget": "本轮用户明确金额不设上限，仍保留最多4次Provider尝试，不增加角色额度"
+}

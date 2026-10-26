@@ -1,0 +1,24 @@
+{"role": "under_test", "input_id": "Q01", "status": "response_received", "attempts": 1, "spent_or_held_upper_cny": "0.08111700"}
+{"role": "judge_formal", "input_id": "Q01", "status": "response_received", "attempts": 2, "spent_or_held_upper_cny": "0.09094500"}
+{"role": "under_test", "input_id": "Q02", "status": "response_received", "attempts": 3, "spent_or_held_upper_cny": "0.17245800"}
+{"role": "judge_formal", "input_id": "Q02", "status": "response_received", "attempts": 4, "spent_or_held_upper_cny": "0.18227800"}
+{"role": "under_test", "input_id": "Q03", "status": "invalid_or_failed", "attempts": 5, "spent_or_held_upper_cny": "0.42112000"}
+{
+  "evaluation_id": "S08-20261025-pro-flash-r6",
+  "status": "stopped",
+  "provider_attempts": 5,
+  "role_usage": {
+    "under_test": 3,
+    "judge_calibration": 0,
+    "judge_formal": 2
+  },
+  "calibration_passed": true,
+  "completed_case_ids": [
+    "Q01",
+    "Q02"
+  ],
+  "conservative_spend_or_held_upper_cny": "0.42112000",
+  "remaining_hard_cap_upper_cny": "1.57888000",
+  "S08_fixed_case_quality_passed": false,
+  "stop_error_type": "AgentOutputValidationError"
+}

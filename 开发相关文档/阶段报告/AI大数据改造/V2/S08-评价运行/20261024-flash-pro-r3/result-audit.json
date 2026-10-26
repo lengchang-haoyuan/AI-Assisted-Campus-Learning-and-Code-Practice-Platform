@@ -1,0 +1,187 @@
+{
+  "audit_status": "passed",
+  "evaluation_status": "stopped",
+  "assertions": 36,
+  "checks": [
+    {
+      "name": "round_finished",
+      "passed": true
+    },
+    {
+      "name": "new_role_and_total_caps",
+      "passed": true
+    },
+    {
+      "name": "no_retry_or_new_calibration",
+      "passed": true
+    },
+    {
+      "name": "calibration_reused",
+      "passed": true
+    },
+    {
+      "name": "01-under_test-Q07_single_post_and_parameters",
+      "passed": true
+    },
+    {
+      "name": "01-under_test-Q07_reservation",
+      "passed": true
+    },
+    {
+      "name": "01-under_test-Q07_raw_usage_retained_even_on_failure",
+      "passed": true
+    },
+    {
+      "name": "held_matches_ledger_and_new_cap",
+      "passed": true
+    },
+    {
+      "name": "combined_original_cap",
+      "passed": true
+    },
+    {
+      "name": "remaining_money",
+      "passed": true
+    },
+    {
+      "name": "observed_tokens_include_failed_rows",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_inputs/Q01-under-test-input.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_candidates/Q01-response.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_judges/Q01-input.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_judges/Q01-response.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_inputs/Q02-under-test-input.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_candidates/Q02-response.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_judges/Q02-input.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_judges/Q02-response.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_inputs/Q03-under-test-input.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_candidates/Q03-response.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_judges/Q03-input.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_judges/Q03-response.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_inputs/Q04-under-test-input.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_candidates/Q04-response.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_judges/Q04-input.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_judges/Q04-response.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_inputs/Q05-under-test-input.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_candidates/Q05-response.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_judges/Q05-input.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_judges/Q05-response.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_inputs/Q06-under-test-input.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_candidates/Q06-response.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_judges/Q06-input.json",
+      "passed": true
+    },
+    {
+      "name": "reused_unchanged_judges/Q06-response.json",
+      "passed": true
+    },
+    {
+      "name": "partial_not_complete",
+      "passed": true
+    }
+  ],
+  "new_calls": 1,
+  "new_role_usage": {
+    "under_test": 1,
+    "judge_calibration": 0,
+    "judge_formal": 0
+  },
+  "reused_candidate_judge_pairs": 6,
+  "new_accounting": {
+    "tokens": {
+      "prompt_tokens": 2133,
+      "completion_tokens": 486,
+      "total_tokens": 2619,
+      "cache_hit_tokens": 1408,
+      "cache_miss_tokens": 725
+    },
+    "unknown_usage_attempts": [],
+    "known_usage_peak_upper_cny": "0.00815400",
+    "spent_or_held_upper_cny": "0.03122800",
+    "known_usage_by_role": {
+      "under_test": "0.00815400"
+    },
+    "spent_or_held_by_role": {
+      "under_test": "0.03122800"
+    },
+    "account_charge_verified": false
+  },
+  "combined_spent_or_held_upper_cny": "0.43703200",
+  "quality_metrics": null,
+  "rule_gates": null,
+  "quality_passed": false,
+  "audit_side_effects": {
+    "model_calls": 0,
+    "database_access": false,
+    "credentials_read": false,
+    "student_code_executed": false
+  }
+}

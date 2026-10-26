@@ -1,0 +1,23 @@
+{
+  "case_id": "G01",
+  "status": "scored",
+  "structure_binding_and_quotes_valid": true,
+  "reference_checks": [
+    {
+      "criterion_id": "C01",
+      "quote_present": true,
+      "valid": true
+    }
+  ],
+  "calibration_expected_matches": {
+    "calibration_id": true,
+    "expected_status": true,
+    "expected_actionability_score": true,
+    "expected_criterion": true,
+    "expected_evidence_valid": true,
+    "expected_unsupported_claim": true
+  },
+  "calibration_pass": true,
+  "errors": [],
+  "semantic_evidence_note": "quote存在仅证明可定位；evidence_valid语义仍是J1判断，不是规则重新生成"
+}

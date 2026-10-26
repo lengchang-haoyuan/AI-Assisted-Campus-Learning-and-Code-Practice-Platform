@@ -1,0 +1,105 @@
+$ vue-tsc -b && vite build
+vite v8.2.2 building client environment for production...
+transforming...
+✓ 2419 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                           1.19 kB │ gzip:   0.69 kB
+dist/assets/components-400-BiaX0G_q.webp                  9.58 kB
+dist/assets/noticeboard-400-DVue5cEE.webp                10.23 kB
+dist/assets/books-400-2Fkx2GP9.webp                      12.03 kB
+dist/assets/research-400-ZkC0S75T.webp                   12.81 kB
+dist/assets/notebook-400-BjpVAUjk.webp                   14.01 kB
+dist/assets/noto-sans-sc-display-DLf5kn8L.woff2          17.56 kB
+dist/assets/components-Cemj8aBO.webp                     28.44 kB
+dist/assets/books-BdkSlYFv.webp                          33.29 kB
+dist/assets/research-wtuEPtUH.webp                       34.82 kB
+dist/assets/notebook-DlDcgfQn.webp                       48.60 kB
+dist/assets/noticeboard-BNArOIjs.webp                    49.62 kB
+dist/assets/brand-mark-D3GvcH6i.png                      82.57 kB
+dist/assets/reem-kufi-600-BV8k7074.ttf                   82.90 kB
+dist/assets/manrope-700-DbNN7f-K.ttf                     94.92 kB
+dist/assets/manrope-400-BEIO-tX3.ttf                     94.97 kB
+dist/assets/manrope-800-CNT0ON31.ttf                     95.68 kB
+dist/assets/noto-sans-sc-ui-700-DtH3UvKJ.woff2          164.19 kB
+dist/assets/noto-sans-sc-ui-400-NtXeRok2.woff2          164.37 kB
+dist/assets/lost-found-cover-CUZv3PfQ.png               897.17 kB
+dist/assets/featured-cover-BrJRZYqE.png               1,231.88 kB
+dist/assets/classroom-cover-Db-2a9Rr.png              1,544.31 kB
+dist/assets/ProjectAIWorkspaceView-DQtYNV-1.css           7.38 kB │ gzip:   1.86 kB
+dist/assets/EChartPanel-CIzqjdaw.css                      8.33 kB │ gzip:   2.12 kB
+dist/assets/WorkflowEditorView-B9DxRFNJ.css              21.03 kB │ gzip:   4.18 kB
+dist/assets/LoginView-Cin9I418.css                       22.60 kB │ gzip:   4.35 kB
+dist/assets/AppLayout-BXXNVqCk.css                       29.05 kB │ gzip:   5.87 kB
+dist/assets/index-Blp_N_3g.css                           94.28 kB │ gzip:  16.86 kB
+dist/assets/lost-found-cover-Ba-4nTbn.js                  0.06 kB │ gzip:   0.08 kB
+dist/assets/rolldown-runtime-DK3Fl9T5.js                  0.15 kB │ gzip:   0.15 kB
+dist/assets/learning-CVHktf_S.js                          0.34 kB │ gzip:   0.27 kB
+dist/assets/workflowContext-CKWDXgcn.js                   0.40 kB │ gzip:   0.25 kB
+dist/assets/projects-B4X7Eicd.js                          0.42 kB │ gzip:   0.21 kB
+dist/assets/errors-RsB2OpCh.js                            0.58 kB │ gzip:   0.38 kB
+dist/assets/projects-BHzr0SDR.js                          0.64 kB │ gzip:   0.47 kB
+dist/assets/auth-D7mrfd5p.js                              0.65 kB │ gzip:   0.27 kB
+dist/assets/LiquidTabs-kQKB9bg2.js                        0.66 kB │ gzip:   0.40 kB
+dist/assets/workspace-DMbE-ycU.js                         0.67 kB │ gzip:   0.50 kB
+dist/assets/NumberRoller-D7Bq2wge.js                      0.75 kB │ gzip:   0.45 kB
+dist/assets/useApi-CUgTH_jn-Hj_JqTfA.js                   0.84 kB │ gzip:   0.46 kB
+dist/assets/submissions-CAxlqruy.js                       1.19 kB │ gzip:   0.39 kB
+dist/assets/teaching-cjAh_m_1.js                          1.34 kB │ gzip:   0.41 kB
+dist/assets/projects-CEgRE877.js                          1.42 kB │ gzip:   0.69 kB
+dist/assets/projectCovers-BnxHl3G-.js                     1.46 kB │ gzip:   0.81 kB
+dist/assets/community-CSTg3DPH.js                         2.15 kB │ gzip:   0.60 kB
+dist/assets/community-BehOUgae.js                         2.40 kB │ gzip:   1.01 kB
+dist/assets/ResetPasswordView-Bkz3mQkM.js                 2.41 kB │ gzip:   1.28 kB
+dist/assets/CampusJoinView-BMeKPTF8.js                    2.66 kB │ gzip:   1.47 kB
+dist/assets/workspace-C6WErQrh.js                         2.94 kB │ gzip:   1.16 kB
+dist/assets/WorkspaceProjectsView-DUumFn9s.js             3.00 kB │ gzip:   1.49 kB
+dist/assets/NotificationsView-KHqbJdMt.js                 3.50 kB │ gzip:   1.85 kB
+dist/assets/ProjectFlipCard-DwRNLfI5.js                   4.13 kB │ gzip:   1.76 kB
+dist/assets/RegisterView-DouHEsRl.js                      4.32 kB │ gzip:   2.08 kB
+dist/assets/learning-DbU6UlOj.js                          4.39 kB │ gzip:   1.47 kB
+dist/assets/ProjectsView-BG8zHntL.js                      4.46 kB │ gzip:   2.22 kB
+dist/assets/ProfileView-BkO3fFiE.js                       4.64 kB │ gzip:   2.14 kB
+dist/assets/SubmissionsView-2OY9JAM5.js                   4.81 kB │ gzip:   2.11 kB
+dist/assets/WorkspaceProjectDetailView-BxlL24Fc.js        4.90 kB │ gzip:   1.98 kB
+dist/assets/ClassroomsView-tA_mq7q-.js                    4.95 kB │ gzip:   2.32 kB
+dist/assets/WorkflowsView-Cy0wiS3E.js                     5.17 kB │ gzip:   2.45 kB
+dist/assets/AppLayout-K79rdGGo.js                         5.54 kB │ gzip:   2.32 kB
+dist/assets/ProjectForm-39SIDkH3.js                       5.91 kB │ gzip:   2.10 kB
+dist/assets/pinia-CAF_JnS_.js                             5.92 kB │ gzip:   2.79 kB
+dist/assets/WorkspaceDashboardView-DEFFR5yD.js            5.97 kB │ gzip:   2.21 kB
+dist/assets/SubmissionDetailView-DyA-xbjt.js              6.12 kB │ gzip:   2.72 kB
+dist/assets/WorkspaceRecordsView-BK7ERUdO.js              6.67 kB │ gzip:   3.00 kB
+dist/assets/UiIcon-BOsp-Lr_.js                            6.75 kB │ gzip:   1.73 kB
+dist/assets/WorkspaceTasksView-B0VYAlgr.js                7.54 kB │ gzip:   3.14 kB
+dist/assets/CommunityView-JRCpJVqB.js                     7.91 kB │ gzip:   3.21 kB
+dist/assets/CampusAdminView-yrgzrrkW.js                   8.01 kB │ gzip:   3.24 kB
+dist/assets/CommunityGovernanceView-C2xSofY_.js           8.89 kB │ gzip:   3.44 kB
+dist/assets/DashboardView-C02L4NKT.js                     9.03 kB │ gzip:   3.73 kB
+dist/assets/LearningRecordsView-DAardy_8.js               9.42 kB │ gzip:   3.66 kB
+dist/assets/message-DmsUKRJk.js                          10.31 kB │ gzip:   4.44 kB
+dist/assets/CommunityProjectDetailView-DFC7IYhj.js       10.58 kB │ gzip:   4.08 kB
+dist/assets/LearningTasksView-CqwHiKvD.js                11.05 kB │ gzip:   4.18 kB
+dist/assets/TeachingAssignmentDetailView-CxvEoA5A.js     11.27 kB │ gzip:   4.20 kB
+dist/assets/LoginView-DtxXJMed.js                        11.38 kB │ gzip:   4.80 kB
+dist/assets/ProjectDetailView-CFsac92H.js                12.54 kB │ gzip:   5.06 kB
+dist/assets/ClassroomDetailView-Bgk2MHst.js              13.80 kB │ gzip:   4.66 kB
+dist/assets/LearningOverviewView-DZ57WGAF.js             14.99 kB │ gzip:   4.87 kB
+dist/assets/AnalyticsView-CuyHS3b9.js                    15.85 kB │ gzip:   5.48 kB
+dist/assets/input-B37UW8f5.js                            20.06 kB │ gzip:   7.60 kB
+dist/assets/typescript-DGyndkKF.js                       23.70 kB │ gzip:   9.39 kB
+dist/assets/ProjectAIWorkspaceView-Dey7yjJ9.js           27.48 kB │ gzip:   8.77 kB
+dist/assets/OfflineAnalyticsView-1cUr8e5D.js             29.08 kB │ gzip:  11.18 kB
+dist/assets/message-box-BPE0KvYn.js                      39.19 kB │ gzip:  14.23 kB
+dist/assets/WorkflowEditorView-BvAUduUJ.js               39.59 kB │ gzip:  13.45 kB
+dist/assets/index-B2gTA_JK.js                            48.56 kB │ gzip:  18.56 kB
+dist/assets/client-CIAsEzuu.js                          113.22 kB │ gzip:  42.89 kB
+dist/assets/workflows-Bgkexxix.js                       156.75 kB │ gzip:  51.48 kB
+dist/assets/EChartPanel-DUsxY6Qu.js                     556.64 kB │ gzip: 189.14 kB
+
+✓ built in 1.15s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

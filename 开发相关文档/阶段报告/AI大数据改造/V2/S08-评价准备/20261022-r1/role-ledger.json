@@ -1,0 +1,45 @@
+{
+  "evaluation_id": "S08-eval-20261022-r1",
+  "status": "prepared_not_run",
+  "authorization": {
+    "source": "用户本轮明确0真实模型",
+    "under_test_calls": 0,
+    "judge_calibration_calls": 0,
+    "judge_formal_calls": 0,
+    "total_calls": 0,
+    "total_cost": 0,
+    "currency": null,
+    "provider": null,
+    "exact_model_id": null,
+    "input_permission": false
+  },
+  "actual": {
+    "under_test_calls": 0,
+    "judge_calibration_calls": 0,
+    "judge_formal_calls": 0,
+    "provider_failures": 0,
+    "total_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0,
+    "cost": 0,
+    "currency": null,
+    "raw_response_refs": []
+  },
+  "calibration_reuse": {
+    "status": "not_verified_not_claimed",
+    "new_calls": 0,
+    "historical_evidence_ref": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r3-judge-r4/calibration-reuse.json"
+  },
+  "unrun_reasons": [
+    "当前用户授权真实模型调用0",
+    "被测与J1精确provider/model_id、输入许可、角色次数及费用上限未选定",
+    "生产review schema/prompt已保存快照；真实调用前仍需绑定实际Provider请求并复核源码未变",
+    "S06仅可条件复用校准，7/7额度已用完不得借用"
+  ],
+  "result": {
+    "fixed_case_quality": "not_run",
+    "independent_judge_quality": "not_run",
+    "complete_S08_quality_gate": "not_passed_pending_evaluation"
+  }
+}

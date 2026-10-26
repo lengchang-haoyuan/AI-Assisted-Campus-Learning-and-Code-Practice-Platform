@@ -1,0 +1,81 @@
+{
+  "dataset_id": "s02-controlled-owner-4",
+  "snapshot_id": "s06-e2e-owner4-20261021",
+  "batch_id": "a31b90f3-80e3-4931-a350-f7be1f670bff",
+  "owner_user_id": 4,
+  "subject_coverage": [
+    4
+  ],
+  "scope": "single_owner_with_relation_closure",
+  "dataset_kind": "controlled",
+  "source_provenance": "existing_api_created_isolated_fictional_data",
+  "schema_version": "scholarhub-source-1.0",
+  "metric_version": "learning-process-1.0",
+  "rule_version": "quality-1.0",
+  "contract_id": "V2-S01-r2",
+  "period_start": "2026-10-19",
+  "period_end": "2026-10-20",
+  "business_timezone": "Asia/Shanghai",
+  "window_start_utc": "2026-10-18T16:00:00.000000Z",
+  "window_end_exclusive_utc": "2026-10-20T16:00:00.000000Z",
+  "source_cutoff": "2026-10-21T05:22:27.640605Z",
+  "snapshot_started_at": "2026-10-21T05:22:27.639652+00:00",
+  "snapshot_finished_at": "2026-10-21T05:22:27.650594+00:00",
+  "file_generated_at": "2026-10-21T05:22:27.650594+00:00",
+  "transaction": {
+    "connection_id": 11,
+    "isolation_level": "REPEATABLE-READ",
+    "read_only": 1,
+    "db": "scholarhub_l4_s02_20261020"
+  },
+  "transaction_method": "one connection; START TRANSACTION WITH CONSISTENT SNAPSHOT, READ ONLY; commit before file I/O",
+  "filters": {
+    "records": "owner and UTC window and occurred_at<cutoff plus feedback-linked closure",
+    "tasks": "owner and unshifted DATE window plus record-linked closure",
+    "submissions": "owner V1 in UTC window plus record-provenance closure; all versions",
+    "incremental_watermark": null
+  },
+  "auxiliary_checks": {
+    "owner_exists": true,
+    "checked_plan_refs": 1,
+    "checked_course_refs": 0,
+    "checked_user_refs": 0
+  },
+  "source_tables_read": [
+    "learning_records",
+    "daily_tasks",
+    "ai_requests"
+  ],
+  "auxiliary_schema_version": "ai-request-aux-1.0",
+  "extraction_status": "complete",
+  "state": "prepared",
+  "row_counts": {
+    "projects": 0,
+    "daily_tasks": 200,
+    "learning_records": 0,
+    "teaching_classes": 0,
+    "teaching_assignments": 0,
+    "class_memberships": 0,
+    "campus_memberships": 0,
+    "submissions": 0,
+    "submission_versions": 0,
+    "feedback": 0,
+    "ai_requests_aux": 0,
+    "source_claim_projection": 0
+  },
+  "input_bytes": {
+    "projects": 0,
+    "daily_tasks": 50273,
+    "learning_records": 0,
+    "teaching_classes": 0,
+    "teaching_assignments": 0,
+    "class_memberships": 0,
+    "campus_memberships": 0,
+    "submissions": 0,
+    "submission_versions": 0,
+    "feedback": 0,
+    "ai_requests_aux": 0,
+    "source_claim_projection": 0
+  },
+  "total_input_bytes": 50273
+}

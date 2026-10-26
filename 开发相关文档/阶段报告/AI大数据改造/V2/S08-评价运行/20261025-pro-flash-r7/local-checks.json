@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "backend_tests": 40,
+  "tool_tests": 24,
+  "runner_guards": 20,
+  "fixed_request_checks": 16,
+  "calibration_local_reuse": "3/3 same exact S06 Flash wire",
+  "current_prompt_version": "practice-review-r6",
+  "current_request_version": "practice-review-responses-schema-r3",
+  "public_schema_unchanged": true,
+  "frozen_answers_thresholds_denominators_unchanged": true,
+  "model_calls": 0,
+  "database_access": false,
+  "credentials_read_by_checks": false,
+  "historical_UTF8_tests": "r6 78 tests include9UTF8 passed; no encoding-source changes this round",
+  "evidence_refs": [
+    "backend-tests.txt",
+    "local-unittest.txt",
+    "runner-guard-check.json",
+    "preflight.json",
+    "repair-matrix.json",
+    "budget-plan.json"
+  ]
+}

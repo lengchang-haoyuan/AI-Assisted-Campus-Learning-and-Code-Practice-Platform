@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "processes_exit_zero": 16,
+  "rounds": 28,
+  "measured_rounds": 24,
+  "warmup_rounds": 4,
+  "spark_completed_jobs": 14,
+  "spark_reference_leaf_checks": 2804900,
+  "all_quality_reconciled": true,
+  "all_parameters_checked": true,
+  "original_10000_bytes_equal": true,
+  "figure_png_dimensions": [
+    2160,
+    1280
+  ],
+  "figures_visually_checked": true,
+  "models_called": 0,
+  "database_connections": 0,
+  "not_run": [
+    "J1 language scoring",
+    "million scale",
+    "cluster"
+  ],
+  "evidence_scope": "offline experiment only"
+}

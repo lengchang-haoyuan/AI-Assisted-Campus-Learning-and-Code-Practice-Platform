@@ -1,0 +1,58 @@
+{
+  "mode": "mock",
+  "model": "fake",
+  "real_model_calls": 0,
+  "checks": [
+    {
+      "name": "项目准备：固定模板、已定技术、无需生成草案入口",
+      "passed": true
+    },
+    {
+      "name": "保存冲突保留草稿、读取最新后合并、不串项目",
+      "passed": true
+    },
+    {
+      "name": "首次提交后直接本人结束，不请求implement建议",
+      "passed": true
+    },
+    {
+      "name": "建议后自选修改、不可覆盖历史、复制绑定所选版本",
+      "passed": true
+    },
+    {
+      "name": "无提交继续等待，取消后恢复不自动调用模型",
+      "passed": true
+    },
+    {
+      "name": "建议失败、恢复后本人结束",
+      "passed": true
+    },
+    {
+      "name": "取消后迟到模型响应不覆盖恢复和新提交",
+      "passed": true
+    },
+    {
+      "name": "刷新重入保留当前attempt与等待点",
+      "passed": true
+    },
+    {
+      "name": "候选只应用明确勾选字段、原端点版本保护与防重复",
+      "passed": true
+    },
+    {
+      "name": "快速切换项目后丢弃旧Context迟到响应",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\阶段报告\\AI大数据改造\\V2\\S09-证据\\mock\\preparation-desktop.png",
+    "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\阶段报告\\AI大数据改造\\V2\\S09-证据\\mock\\preparation-390.png",
+    "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\阶段报告\\AI大数据改造\\V2\\S09-证据\\mock\\workbench-desktop.png",
+    "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\阶段报告\\AI大数据改造\\V2\\S09-证据\\mock\\workbench-390.png"
+  ],
+  "current_check": "错误项目的会话响应不渲染私有提交",
+  "restore_session": "c5e9b07f-f917-4a6c-b072-97ee1d21d660",
+  "passed": false,
+  "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('返回的实践不属于当前项目或账号。') to be visible\u001b[22m\n"
+}

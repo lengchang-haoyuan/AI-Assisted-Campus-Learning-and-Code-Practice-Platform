@@ -1,0 +1,95 @@
+{
+  "status": "reused_pro_calibration_3_of_3_materials_valid",
+  "source_ledger_ref": "../20261022-flash-pro-r1/ledger.json",
+  "model_id": "deepseek-v4-pro",
+  "prompt_version": "judge-r4",
+  "expected_system_fingerprint": "a307abda487cd1b463329ccb945ce396",
+  "calibration_calls_this_round": 0,
+  "all_new_formal_responses_require_same_fingerprint": true,
+  "cases": [
+    {
+      "calibration_id": "G01",
+      "source_response_ref": "../20261022-flash-pro-r1/raw/01-judge_calibration-G01-response.json",
+      "source_validation_ref": "../20261022-flash-pro-r1/validations/G01.json",
+      "current_local_validation": {
+        "case_id": "G01",
+        "status": "scored",
+        "structure_binding_and_quotes_valid": true,
+        "reference_checks": [
+          {
+            "criterion_id": "C01",
+            "quote_present": true,
+            "valid": true
+          }
+        ],
+        "calibration_expected_matches": {
+          "calibration_id": true,
+          "expected_status": true,
+          "expected_actionability_score": true,
+          "expected_criterion": true,
+          "expected_evidence_valid": true,
+          "expected_unsupported_claim": true
+        },
+        "calibration_pass": true,
+        "errors": [],
+        "semantic_evidence_note": "quote存在仅证明可定位；evidence_valid语义仍是J1判断，不是规则重新生成"
+      }
+    },
+    {
+      "calibration_id": "G02",
+      "source_response_ref": "../20261022-flash-pro-r1/raw/02-judge_calibration-G02-response.json",
+      "source_validation_ref": "../20261022-flash-pro-r1/validations/G02.json",
+      "current_local_validation": {
+        "case_id": "G02",
+        "status": "scored",
+        "structure_binding_and_quotes_valid": true,
+        "reference_checks": [
+          {
+            "criterion_id": "C01",
+            "quote_present": true,
+            "valid": true
+          }
+        ],
+        "calibration_expected_matches": {
+          "calibration_id": true,
+          "expected_status": true,
+          "expected_actionability_score": true,
+          "expected_criterion": true,
+          "expected_evidence_valid": true,
+          "expected_unsupported_claim": true
+        },
+        "calibration_pass": true,
+        "errors": [],
+        "semantic_evidence_note": "quote存在仅证明可定位；evidence_valid语义仍是J1判断，不是规则重新生成"
+      }
+    },
+    {
+      "calibration_id": "G03",
+      "source_response_ref": "../20261022-flash-pro-r1/raw/03-judge_calibration-G03-response.json",
+      "source_validation_ref": "../20261022-flash-pro-r1/validations/G03.json",
+      "current_local_validation": {
+        "case_id": "G03",
+        "status": "abstain",
+        "structure_binding_and_quotes_valid": true,
+        "reference_checks": [
+          {
+            "criterion_id": "C01",
+            "quote_present": false,
+            "valid": true
+          }
+        ],
+        "calibration_expected_matches": {
+          "calibration_id": true,
+          "expected_status": true,
+          "expected_actionability_score": true,
+          "expected_criterion": true,
+          "expected_evidence_valid": true,
+          "expected_unsupported_claim": true
+        },
+        "calibration_pass": true,
+        "errors": [],
+        "semantic_evidence_note": "quote存在仅证明可定位；evidence_valid语义仍是J1判断，不是规则重新生成"
+      }
+    }
+  ]
+}

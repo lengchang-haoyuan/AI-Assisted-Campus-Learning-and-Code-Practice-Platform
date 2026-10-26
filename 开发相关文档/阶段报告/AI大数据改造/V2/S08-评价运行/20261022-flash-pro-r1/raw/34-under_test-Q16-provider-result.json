@@ -1,0 +1,12 @@
+{
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "content": "{\"summary\":\"学生代码仅包含一个包装函数 summarize_records，其函数体直接调用未提供的 build_summary，未展示任何表头校验、CSV 解析、行有效性判断、分类计数、分钟累加或空结果构造逻辑。由于关键辅助函数缺失，无法静态判断六项验收要求是否满足；自测声明不能替代代码证据。\",\"overall\":\"insufficient\",\"criteria\":[{\"criterion_id\":\"C01\",\"verdict\":\"unknown\",\"reason\":\"当前代码未展示表头缺失时抛出 ValueError 的逻辑，相关行为完全依赖未提供的 build_summary。\",\"issue_type\":null,\"evidence_span\":null,\"suggested_self_test\":null,\"next_action\":\"请提供 build_summary 的完整实现，或补充 summarize_records 中显式校验必需表头并抛 ValueError 的代码。\"},{\"criterion_id\":\"C02\",\"verdict\":\"unknown\",\"reason\":\"无法看到 csv 解析方式、必需列读取、record_id 与 duration_minutes 的行级校验及非法行计数逻辑。\",\"issue_type\":null,\"evidence_span\":null,\"suggested_self_test\":null,\"next_action\":\"请提供 build_summary 的完整实现，包含 CSV 解析、必需列检查、record_id 正整数校验和分钟范围校验。\"},{\"criterion_id\":\"C03\",\"verdict\":\"unknown\",\"reason\":\"有效行、已知分钟、未知分钟和非法行的分类计数均在未提供的辅助函数中，无法判断 NULL/空白与已知 0 是否区分。\",\"issue_type\":null,\"evidence_span\":null,\"suggested_self_test\":null,\"next_action\":\"请提供 build_summary 中分类计数相关代码，明确空白分钟计入 missing_duration_count、已知 0 计入 known_duration_count。\"},{\"criterion_id\":\"C04\",\"verdict\":\"unknown\",\"reason\":\"当前代码没有可见的分钟累加逻辑，无法判断是否只累加有效行中的已知分钟。\",\"issue_type\":null,\"evidence_span\":null,\"suggested_self_test\":null,\"next_action\":\"请提供 build_summary 中 known_minutes 的累加实现。\"},{\"criterion_id\":\"C05\",\"verdict\":\"unknown\",\"reason\":\"返回五个计数字段的构造位于未提供的辅助函数中，无法确认没有有效行时是否仍返回完整五字段。\",\"issue_type\":null,\"evidence_span\":null,\"suggested_self_test\":null,\"next_action\":\"请提供 build_summary 的返回构造代码，展示空有效集时五个整数字段仍完整返回。\"},{\"criterion_id\":\"C06\",\"verdict\":\"unknown\",\"reason\":\"当前可见代码未直接读写文件、联网或执行任意代码，但无法确认未提供的 build_summary 是否保持纯函数边界。\",\"issue_type\":null,\"evidence_span\":null,\"suggested_self_test\":null,\"next_action\":\"请提供 build_summary 的完整实现，以便静态确认其中没有文件、网络或其他外部 I/O 操作。\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 1639,
+    "completion_tokens": 639,
+    "total_tokens": 2278
+  },
+  "latency_ms": 3434
+}

@@ -1,0 +1,161 @@
+{
+  "counts": {
+    "scored": 5,
+    "invalid_candidate": 1,
+    "not_run": 10
+  },
+  "all_16_completed": false,
+  "cases": [
+    {
+      "case_id": "Q01",
+      "status": "scored",
+      "reason": "本轮新候选及Pro正式响应均保存，结构/绑定/引用有效；整轮未完，不据此推导完整质量",
+      "under_test_calls": 1,
+      "judge_calls": 1,
+      "raw_response_refs": [
+        "raw/01-under_test-Q01-response.json",
+        "raw/02-judge_formal-Q01-response.json"
+      ]
+    },
+    {
+      "case_id": "Q02",
+      "status": "scored",
+      "reason": "本轮新候选及Pro正式响应均保存，结构/绑定/引用有效；整轮未完，不据此推导完整质量",
+      "under_test_calls": 1,
+      "judge_calls": 1,
+      "raw_response_refs": [
+        "raw/03-under_test-Q02-response.json",
+        "raw/04-judge_formal-Q02-response.json"
+      ]
+    },
+    {
+      "case_id": "Q03",
+      "status": "scored",
+      "reason": "本轮新候选及Pro正式响应均保存，结构/绑定/引用有效；整轮未完，不据此推导完整质量",
+      "under_test_calls": 1,
+      "judge_calls": 1,
+      "raw_response_refs": [
+        "raw/05-under_test-Q03-response.json",
+        "raw/06-judge_formal-Q03-response.json"
+      ]
+    },
+    {
+      "case_id": "Q04",
+      "status": "scored",
+      "reason": "本轮新候选及Pro正式响应均保存，结构/绑定/引用有效；整轮未完，不据此推导完整质量",
+      "under_test_calls": 1,
+      "judge_calls": 1,
+      "raw_response_refs": [
+        "raw/07-under_test-Q04-response.json",
+        "raw/08-judge_formal-Q04-response.json"
+      ]
+    },
+    {
+      "case_id": "Q05",
+      "status": "scored",
+      "reason": "本轮新候选及Pro正式响应均保存，结构/绑定/引用有效；整轮未完，不据此推导完整质量",
+      "under_test_calls": 1,
+      "judge_calls": 1,
+      "raw_response_refs": [
+        "raw/09-under_test-Q05-response.json",
+        "raw/10-judge_formal-Q05-response.json"
+      ]
+    },
+    {
+      "case_id": "Q06",
+      "status": "invalid_candidate",
+      "reason": "C05/counting组合不合法，J1未调用，按失败停止",
+      "under_test_calls": 1,
+      "judge_calls": 0,
+      "raw_response_refs": [
+        "raw/11-under_test-Q06-response.json"
+      ]
+    },
+    {
+      "case_id": "Q07",
+      "status": "not_run",
+      "reason": "前序Q06无效后停止，未发送",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q08",
+      "status": "not_run",
+      "reason": "前序Q06无效后停止，未发送",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q09",
+      "status": "not_run",
+      "reason": "前序Q06无效后停止，未发送",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q10",
+      "status": "not_run",
+      "reason": "前序Q06无效后停止，未发送",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q11",
+      "status": "not_run",
+      "reason": "前序Q06无效后停止，未发送",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q12",
+      "status": "not_run",
+      "reason": "前序Q06无效后停止，未发送",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q13",
+      "status": "not_run",
+      "reason": "前序Q06无效后停止，未发送",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q14",
+      "status": "not_run",
+      "reason": "前序Q06无效后停止，未发送",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q15",
+      "status": "not_run",
+      "reason": "前序Q06无效后停止，未发送",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q16",
+      "status": "not_run",
+      "reason": "前序Q06无效后停止，未发送",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    }
+  ],
+  "frozen_denominators": {
+    "reference_issue_cells": 9,
+    "known_pass_cells": 69,
+    "unknown_cells": 18
+  },
+  "quality_metrics": "not_computed_incomplete_fixed_set"
+}

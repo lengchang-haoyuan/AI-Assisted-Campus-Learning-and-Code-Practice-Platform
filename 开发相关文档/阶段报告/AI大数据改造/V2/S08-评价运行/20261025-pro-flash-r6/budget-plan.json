@@ -1,0 +1,125 @@
+{
+  "status": "proposal_only_not_authorized",
+  "proposed_roles": {
+    "under_test_pro": 16,
+    "judge_formal_flash": 16,
+    "judge_calibration": 0
+  },
+  "total_calls": 32,
+  "exact_under_test_model": "deepseek-v4-pro",
+  "exact_judge_model": "deepseek-flash",
+  "proposed_new_hard_cap_cny": "2.00000000",
+  "previous_r2_chain_spent_or_held_cny": "0.77209200",
+  "proposed_combined_r2_chain_cap_cny": "2.77209200",
+  "previous_r2_chain_cap_cny": "2.00000000",
+  "original_remaining_option_cny": "1.22790800",
+  "S08_previous_all_rounds_spent_or_held_cny": "1.61498300",
+  "S08_all_rounds_max_if_new_cap_fully_consumed_cny": "3.61498300",
+  "account_charge_or_balance_verified": false,
+  "recharge_authorized": false,
+  "known_pro_whole_payload_max_reservations_sum_cny": "3.73946400",
+  "historical_candidate_flash_reservation_scenario_sum_cny": "0.53109400",
+  "historical_candidate_scenario": [
+    {
+      "case_id": "Q01",
+      "input_upper_tokens": 11019,
+      "reservation_cny": "0.03163800",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q02",
+      "input_upper_tokens": 11222,
+      "reservation_cny": "0.03204400",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q03",
+      "input_upper_tokens": 11051,
+      "reservation_cny": "0.03170200",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q04",
+      "input_upper_tokens": 13287,
+      "reservation_cny": "0.03617400",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q05",
+      "input_upper_tokens": 12122,
+      "reservation_cny": "0.03384400",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q06",
+      "input_upper_tokens": 11855,
+      "reservation_cny": "0.03331000",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q07",
+      "input_upper_tokens": 12451,
+      "reservation_cny": "0.03450200",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q08",
+      "input_upper_tokens": 11746,
+      "reservation_cny": "0.03309200",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q09",
+      "input_upper_tokens": 11847,
+      "reservation_cny": "0.03329400",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q10",
+      "input_upper_tokens": 12775,
+      "reservation_cny": "0.03515000",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q11",
+      "input_upper_tokens": 11901,
+      "reservation_cny": "0.03340200",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q12",
+      "input_upper_tokens": 12037,
+      "reservation_cny": "0.03367400",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q13",
+      "input_upper_tokens": 11910,
+      "reservation_cny": "0.03342000",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q14",
+      "input_upper_tokens": 11074,
+      "reservation_cny": "0.03174800",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q15",
+      "input_upper_tokens": 11145,
+      "reservation_cny": "0.03189000",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    },
+    {
+      "case_id": "Q16",
+      "input_upper_tokens": 11305,
+      "reservation_cny": "0.03221000",
+      "basis": "历史候选仅用于预算场景，不用于新质量成绩"
+    }
+  ],
+  "caution": "预留是保守POST前准入上界，不是实际费用；成功按已观测usage峰价全miss结算。新候选长度未知，本轮2元亦不保证任何最坏输出下完整结束；预算/余额不足、Provider/响应/评分无效或指纹变化均停，不自动重试或调参。",
+  "calibration_reuse": "S06 Flash judge-r4三份实际wire及预期3/3一致，正式逐次核e72d指纹；新校准0，旧Pro校准不复用",
+  "scope": "仅固定Q01-Q16代码/声明/向量及合成白名单Context，J1单例冻结参考；不混旧5例，数据写入0、S09不推进",
+  "input_budget_method": "完整payload UTF8字节+512，包括Schema",
+  "new_model_call_authorization": 0
+}

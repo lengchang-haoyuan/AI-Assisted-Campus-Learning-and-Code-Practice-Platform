@@ -1,0 +1,53 @@
+{
+  "case_id": "Q04",
+  "candidate_artifact_id": "S08-Q04-candidate-v4",
+  "candidate_text_version": "4.0",
+  "response": {
+    "case_id": "Q04",
+    "status": "scored",
+    "criterion_evidence": [
+      {
+        "criterion_id": "C01",
+        "evidence_valid": true,
+        "quote": "if reader.fieldnames is None or not required.issubset(reader.fieldnames):",
+        "reason": "候选反馈引用该行并判断表头校验通过，与reference的pass一致，代码确实在读取行前检查必需列并抛ValueError。"
+      },
+      {
+        "criterion_id": "C02",
+        "evidence_valid": true,
+        "quote": "reader = csv.DictReader(io.StringIO(csv_text))",
+        "reason": "候选反馈引用DictReader并说明逐行校验与invalid_count，与reference的pass一致，代码行为支持该主张。"
+      },
+      {
+        "criterion_id": "C03",
+        "evidence_valid": true,
+        "quote": "duration = None if raw == \"\" else int(raw)",
+        "reason": "候选反馈引用该行并说明空白为None、0与未知区分，与reference的pass一致，代码逻辑支持该主张。"
+      },
+      {
+        "criterion_id": "C04",
+        "evidence_valid": true,
+        "quote": "out[\"known_minutes\"] += duration",
+        "reason": "候选反馈引用该行并说明仅累加已知分钟，与reference的pass一致，代码在else分支累加，支持该主张。"
+      },
+      {
+        "criterion_id": "C05",
+        "evidence_valid": true,
+        "quote": "out = {\"record_count\": 0, \"known_duration_count\": 0, \"known_minutes\": 0,",
+        "reason": "候选反馈引用初始化字典并说明空有效集返回完整五字段，与reference的pass一致，代码初始化五个字段并直接返回。"
+      },
+      {
+        "criterion_id": "C06",
+        "evidence_valid": true,
+        "quote": "import csv\nimport io",
+        "reason": "候选反馈引用导入语句并说明仅内存解析、无外部IO，与reference的pass一致，代码未使用文件或网络操作。"
+      }
+    ],
+    "actionability_score": 2,
+    "unsupported_claim": false,
+    "reason": "候选反馈逐项给出具体代码位置和与reference一致的判断，但未提供验证样例或修正方向，可执行性为2。"
+  },
+  "provider": "deepseek",
+  "model_id": "deepseek-v4-pro",
+  "raw_response_ref": "raw/08-judge_formal-Q04-response.json"
+}

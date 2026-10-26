@@ -1,0 +1,85 @@
+{
+  "status": "invalid_candidate_stop",
+  "failure_stage": "PracticeReviewDraft.model_validator criterion issue_type binding",
+  "provider_status": "completed",
+  "http_status": 200,
+  "model_returned": "deepseek-flash",
+  "case_id": "Q06",
+  "response_ref": "raw/11-under_test-Q06-response.json",
+  "candidate_ref": "invalid-candidates/Q06-response.json",
+  "validation_errors": [
+    {
+      "type": "value_error",
+      "loc": [
+        "criteria",
+        4
+      ],
+      "msg": "Value error, 问题类型必须对应当前验收项"
+    }
+  ],
+  "observed_issue": {
+    "criterion_id": "C05",
+    "verdict": "fail",
+    "issue_type": "counting",
+    "allowed_types_for_C05": [
+      "empty_result_contract"
+    ],
+    "allowed_types_for_C03": [
+      "counting",
+      "unknown_as_known",
+      "zero_as_missing"
+    ],
+    "code_quote_exact": true,
+    "evidence_span": "out[\"record_count\"] += 2",
+    "model_C03_verdict": "pass"
+  },
+  "frozen_reference": {
+    "reference_label": "needs_changes",
+    "reference_criteria": {
+      "C01": "pass",
+      "C02": "pass",
+      "C03": "fail",
+      "C04": "pass",
+      "C05": "pass",
+      "C06": "pass"
+    },
+    "reference_issues": [
+      {
+        "criterion_id": "C03",
+        "issue_type": "counting",
+        "reference_reason": "每条有效行计数一次，不能乘二"
+      }
+    ]
+  },
+  "all_six_objects_have_seven_keys": true,
+  "null_verdict_count": 0,
+  "generation_schema_gap": {
+    "verdict_branches": 3,
+    "fail_criterion_enum": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06"
+    ],
+    "fail_issue_type_enum": [
+      "missing_header_validation",
+      "row_validation",
+      "csv_quoting",
+      "counting",
+      "zero_as_missing",
+      "unknown_as_known",
+      "sum_error",
+      "empty_result_contract",
+      "external_io"
+    ],
+    "C05_and_counting_individually_allowed": true,
+    "cross_field_criterion_issue_type_constraint_encoded": false,
+    "server_side_constraint_enforced": true
+  },
+  "conclusion": "识别了record_count += 2计数错误，但标到C05且把C03判pass；counting只允许C03，因此响应被原业务校验正确拒绝。生成侧Schema约束了字段/枚举/非空，却未编码criterion与issue_type的组合。Schema不能代替语义质量。",
+  "model_calls_during_diagnosis": 0,
+  "auto_repair_retry_or_label_change": false,
+  "recommended_next_scope_only": "如继续修复，只补生成侧criterion/issue_type组合及正确归类提示和本地回归，保留原校验/答案/阈值；新提示整轮真实评价须另明确次数与费用，不直接改写Q06为通过。"
+}

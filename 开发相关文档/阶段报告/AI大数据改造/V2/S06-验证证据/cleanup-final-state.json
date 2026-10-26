@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "target": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "database": "scholarhub_l4_s02_20261020"
+  },
+  "deleted_only_record_id": 8,
+  "verified_marker": "S06-20261021",
+  "API_events": [
+    {
+      "method": "DELETE",
+      "path": "/api/v1/learning/records/8",
+      "status": 204
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/learning/records/8",
+      "status": 404
+    }
+  ],
+  "source_table_counts_restored": true,
+  "all_counts": {
+    "submissions": 3,
+    "submission_versions": 4,
+    "feedback": 3,
+    "notifications": 6,
+    "ai_requests": 1,
+    "ai_results": 1,
+    "analytics_batches": 14,
+    "analytics_daily_metrics": 20,
+    "campus_memberships": 4,
+    "campus_invitations": 3,
+    "password_resets": 0,
+    "account_audits": 7,
+    "comments": 0,
+    "likes": 0,
+    "favorites": 0,
+    "project_views": 0,
+    "community_publications": 0,
+    "community_publication_versions": 0,
+    "community_governance_actions": 0,
+    "community_governance_cases": 0,
+    "courses": 0,
+    "learning_plans": 3,
+    "daily_tasks": 204,
+    "learning_records": 4,
+    "learning_reports": 0,
+    "project_tags": 0,
+    "projects": 1,
+    "tags": 0,
+    "teaching_classes": 1,
+    "class_memberships": 2,
+    "teaching_assignments": 3,
+    "users": 4,
+    "workflows": 0,
+    "workflow_nodes": 0,
+    "workflow_edges": 0,
+    "workflow_runs": 0
+  },
+  "table_count": 36,
+  "analytics_states": {
+    "completed": 12,
+    "failed": 1,
+    "prepared": 1
+  },
+  "preserved_completed_history": true,
+  "no_accounts_or_schema_modified": true,
+  "snapshot_remains_immutable_90_minutes": true,
+  "model_calls": 0
+}

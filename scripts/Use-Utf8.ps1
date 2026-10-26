@@ -1,0 +1,10 @@
+$ScholarHubUtf8Encoding = New-Object System.Text.UTF8Encoding($false)
+[Console]::InputEncoding = $ScholarHubUtf8Encoding
+[Console]::OutputEncoding = $ScholarHubUtf8Encoding
+$OutputEncoding = $ScholarHubUtf8Encoding
+$env:PYTHONUTF8 = '1'
+$env:PYTHONIOENCODING = 'utf-8'
+$ScholarHubUtf8FileEncoding = if ($PSVersionTable.PSVersion.Major -ge 6) { 'utf8NoBOM' } else { 'utf8' }
+$PSDefaultParameterValues['Out-File:Encoding'] = $ScholarHubUtf8FileEncoding
+$PSDefaultParameterValues['Set-Content:Encoding'] = $ScholarHubUtf8FileEncoding
+$PSDefaultParameterValues['Add-Content:Encoding'] = $ScholarHubUtf8FileEncoding

@@ -1,0 +1,136 @@
+{
+  "counts": {
+    "candidate_invalid_or_provider_failed": 1,
+    "not_run": 13,
+    "scored": 2
+  },
+  "cases": [
+    {
+      "case_id": "Q01",
+      "status": "scored",
+      "under_test_calls": 1,
+      "judge_calls": 1,
+      "raw_response_refs": [
+        "raw/01-under_test-Q01-response.json",
+        "raw/02-judge_formal-Q01-response.json"
+      ]
+    },
+    {
+      "case_id": "Q02",
+      "status": "scored",
+      "under_test_calls": 1,
+      "judge_calls": 1,
+      "raw_response_refs": [
+        "raw/03-under_test-Q02-response.json",
+        "raw/04-judge_formal-Q02-response.json"
+      ]
+    },
+    {
+      "case_id": "Q03",
+      "status": "candidate_invalid_or_provider_failed",
+      "under_test_calls": 1,
+      "judge_calls": 0,
+      "raw_response_refs": [
+        "raw/05-under_test-Q03-response.json"
+      ],
+      "invalid_candidate_ref": "invalid-candidates/Q03-response.json"
+    },
+    {
+      "case_id": "Q04",
+      "status": "not_run",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q05",
+      "status": "not_run",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q06",
+      "status": "not_run",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q07",
+      "status": "not_run",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q08",
+      "status": "not_run",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q09",
+      "status": "not_run",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q10",
+      "status": "not_run",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q11",
+      "status": "not_run",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q12",
+      "status": "not_run",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q13",
+      "status": "not_run",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q14",
+      "status": "not_run",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q15",
+      "status": "not_run",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    },
+    {
+      "case_id": "Q16",
+      "status": "not_run",
+      "under_test_calls": 0,
+      "judge_calls": 0,
+      "raw_response_refs": []
+    }
+  ],
+  "all_16_completed": false,
+  "frozen_denominators": {
+    "reference_issue_cells": 9,
+    "known_pass_cells": 69,
+    "unknown_cells": 18
+  }
+}

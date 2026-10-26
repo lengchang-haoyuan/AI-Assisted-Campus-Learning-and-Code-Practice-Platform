@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "version": 1,
+  "values": {
+    "project_name": "S08固定CSV静态评价",
+    "language": "Python",
+    "framework": null,
+    "frontend": null,
+    "backend": null,
+    "database": null,
+    "difficulty": "beginner",
+    "requirements": [
+      {
+        "title": "固定Python CSV函数静态评审"
+      }
+    ],
+    "output_requirement": "只静态评审输入中的固定任务与验收项，不执行学生代码。",
+    "architecture": null,
+    "features": [],
+    "constraints": [],
+    "extensions": {}
+  },
+  "field_metadata": {
+    "language": {
+      "version": 1,
+      "updated_at": "2026-10-22T00:00:00Z",
+      "source": {
+        "type": "project",
+        "id": 1,
+        "node_key": null
+      }
+    },
+    "frontend": {
+      "version": 1,
+      "updated_at": "2026-10-22T00:00:00Z",
+      "source": {
+        "type": "project",
+        "id": 1,
+        "node_key": null
+      }
+    },
+    "output_requirement": {
+      "version": 1,
+      "updated_at": "2026-10-22T00:00:00Z",
+      "source": {
+        "type": "project",
+        "id": 1,
+        "node_key": null
+      }
+    },
+    "features": {
+      "version": 1,
+      "updated_at": "2026-10-22T00:00:00Z",
+      "source": {
+        "type": "project",
+        "id": 1,
+        "node_key": null
+      }
+    },
+    "extensions": {
+      "version": 1,
+      "updated_at": "2026-10-22T00:00:00Z",
+      "source": {
+        "type": "project",
+        "id": 1,
+        "node_key": null
+      }
+    },
+    "backend": {
+      "version": 1,
+      "updated_at": "2026-10-22T00:00:00Z",
+      "source": {
+        "type": "project",
+        "id": 1,
+        "node_key": null
+      }
+    },
+    "project_name": {
+      "version": 1,
+      "updated_at": "2026-10-22T00:00:00Z",
+      "source": {
+        "type": "project",
+        "id": 1,
+        "node_key": null
+      }
+    },
+    "database": {
+      "version": 1,
+      "updated_at": "2026-10-22T00:00:00Z",
+      "source": {
+        "type": "project",
+        "id": 1,
+        "node_key": null
+      }
+    },
+    "constraints": {
+      "version": 1,
+      "updated_at": "2026-10-22T00:00:00Z",
+      "source": {
+        "type": "project",
+        "id": 1,
+        "node_key": null
+      }
+    },
+    "difficulty": {
+      "version": 1,
+      "updated_at": "2026-10-22T00:00:00Z",
+      "source": {
+        "type": "project",
+        "id": 1,
+        "node_key": null
+      }
+    },
+    "requirements": {
+      "version": 1,
+      "updated_at": "2026-10-22T00:00:00Z",
+      "source": {
+        "type": "project",
+        "id": 1,
+        "node_key": null
+      }
+    },
+    "framework": {
+      "version": 1,
+      "updated_at": "2026-10-22T00:00:00Z",
+      "source": {
+        "type": "project",
+        "id": 1,
+        "node_key": null
+      }
+    },
+    "architecture": {
+      "version": 1,
+      "updated_at": "2026-10-22T00:00:00Z",
+      "source": {
+        "type": "project",
+        "id": 1,
+        "node_key": null
+      }
+    }
+  },
+  "updated_at": "2026-10-22T00:00:00Z",
+  "source": {
+    "type": "project",
+    "id": 1,
+    "node_key": null
+  }
+}

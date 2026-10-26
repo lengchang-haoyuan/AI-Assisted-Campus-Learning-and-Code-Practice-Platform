@@ -1,0 +1,85 @@
+{
+  "mode": "feedback",
+  "data": {
+    "case_id": "Q14",
+    "template_id": "python-learning-csv",
+    "template_version": "1.0",
+    "task": "输入语法良好的CSV字符串；必需列record_id、duration_minutes，额外已命名列忽略。record_id须int可解析且>0；分钟空白为未知，非空须int可解析且0至1440。每行独立，不要求跨行去重，空白物理行由csv忽略。缺表头抛ValueError；非法行计invalid_count。已知0与未知分开。返回五个计数字段。函数不读写文件、不联网、不执行任意代码。平台仅静态评审，不运行学生代码。",
+    "criterion_ids": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06"
+    ],
+    "criteria": [
+      {
+        "criterion_id": "C01",
+        "name": "表头约束",
+        "issue_types": [
+          "missing_header_validation"
+        ]
+      },
+      {
+        "criterion_id": "C02",
+        "name": "CSV解析与行有效性",
+        "issue_types": [
+          "row_validation",
+          "csv_quoting"
+        ]
+      },
+      {
+        "criterion_id": "C03",
+        "name": "分类计数与NULL零值区分",
+        "issue_types": [
+          "counting",
+          "zero_as_missing",
+          "unknown_as_known"
+        ]
+      },
+      {
+        "criterion_id": "C04",
+        "name": "已知分钟累加",
+        "issue_types": [
+          "sum_error"
+        ]
+      },
+      {
+        "criterion_id": "C05",
+        "name": "空有效集的完整返回",
+        "issue_types": [
+          "empty_result_contract"
+        ]
+      },
+      {
+        "criterion_id": "C06",
+        "name": "纯函数与静态边界",
+        "issue_types": [
+          "external_io"
+        ]
+      }
+    ],
+    "reference": {
+      "reference_label": "insufficient",
+      "reference_criteria": {
+        "C01": "unknown",
+        "C02": "unknown",
+        "C03": "unknown",
+        "C04": "unknown",
+        "C05": "unknown",
+        "C06": "unknown"
+      },
+      "reference_issues": [],
+      "reference_action": "请求缺失的完整代码或辅助函数，不确认通过"
+    },
+    "student_code": "def summarize_records(csv_text):\n    # 函数体未提供\n",
+    "candidate_feedback": "{\n  \"summary\": \"学生代码仅包含函数签名和注释，函数体未提供，无法静态判断表头校验、CSV解析、计数、分钟累加、空集返回或纯函数边界；公开测试向量和自测声明不能替代缺失实现。\",\n  \"overall\": \"insufficient\",\n  \"criteria\": [\n    {\n      \"criterion_id\": \"C01\",\n      \"verdict\": \"unknown\",\n      \"reason\": \"函数体未提供，无法判断是否在缺表头时抛出ValueError。\",\n      \"next_action\": \"请提供summarize_records的完整函数体，特别是表头读取与必需列校验部分。\",\n      \"suggested_self_test\": \"用空字符串或仅含其他列名的CSV调用，确认抛出ValueError。\"\n    },\n    {\n      \"criterion_id\": \"C02\",\n      \"verdict\": \"unknown\",\n      \"reason\": \"没有解析与逐行校验代码，无法判断record_id和duration_minutes的有效性处理及CSV引号解析。\",\n      \"next_action\": \"请提供完整函数体，包含csv解析、必需列定位和每行有效性判断。\",\n      \"suggested_self_test\": \"输入含非法record_id、非法分钟、带引号字段和空白物理行的CSV，检查非法行是否只计入invalid_count。\"\n    },\n    {\n      \"criterion_id\": \"C03\",\n      \"verdict\": \"unknown\",\n      \"reason\": \"函数体缺失，无法判断有效行、已知分钟、未知分钟和非法行的分类计数，也无法判断0是否被当作未知。\",\n      \"next_action\": \"请提供完整函数体，展示五个计数字段的初始化与分类更新逻辑。\",\n      \"suggested_self_test\": \"输入分钟分别为空、0、正整数的有效行，检查missing_duration_count只统计空白，known_duration_count包含0。\"\n    },\n    {\n      \"criterion_id\": \"C04\",\n      \"verdict\": \"unknown\",\n      \"reason\": \"没有分钟累加实现，无法判断known_minutes是否只累加有效行的已知分钟。\",\n      \"next_action\": \"请提供完整函数体中的分钟解析与known_minutes累加代码。\",\n      \"suggested_self_test\": \"输入有效行分钟0、30和未知空白，检查known_minutes为30且未知不参与累加。\"\n    },\n    {\n      \"criterion_id\": \"C05\",\n      \"verdict\": \"unknown\",\n      \"reason\": \"函数体缺失，无法判断没有有效行时是否仍返回完整五字段整数结果。\",\n      \"next_action\": \"请提供完整函数体及返回语句，确认空有效集也返回五个整数字段。\",\n      \"suggested_self_test\": \"输入只有表头或全部为非法行的CSV，检查返回字典包含五个字段且计数均为0。\"\n    },\n    {\n      \"criterion_id\": \"C06\",\n      \"verdict\": \"unknown\",\n      \"reason\": \"仅见函数签名，无法判断实现是否避免文件、网络或其他外部IO。\",\n      \"next_action\": \"请提供完整函数体，以便检查是否仅使用内存中的csv_text和标准解析。\",\n      \"suggested_self_test\": \"静态检查函数体不含open、网络请求或文件路径操作，并用纯字符串输入调用。\"\n    }\n  ]\n}",
+    "rubric": {
+      "0": "方向错误、编造执行结果、建议破坏纯函数边界，或模型异常／无有效反馈",
+      "1": "只说“检查边界／优化代码”，没有可定位的问题和下一步",
+      "2": "指出具体criterion与代码行为，给出学生能执行的修正方向",
+      "3": "同时给出代码位置或准确片段、修正方向和适当验证样例；不直接替学生完成整题"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "scope": "local_document_link_checker_only",
+  "reason": "检查器把既有有效目录链接误判为必须是文件",
+  "target": "任务交接.md -> AI提示词/20261018-AI实践与大数据分阶段执行包/",
+  "resolution": "仅修正临时QA工具为路径存在检查；没有修改材料/模型提示/阈值或重新调用",
+  "provider_attempts_unchanged": 1
+}

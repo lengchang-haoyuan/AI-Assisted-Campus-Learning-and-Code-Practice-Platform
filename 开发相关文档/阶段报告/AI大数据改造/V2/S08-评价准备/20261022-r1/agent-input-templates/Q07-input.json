@@ -1,0 +1,34 @@
+{
+  "template_id": "python-learning-csv",
+  "template_version": "1.0",
+  "context_version": 1,
+  "attempt_id": "7969c341-4fc6-5c0c-bf17-d1ae33436f41",
+  "attempt_no": 1,
+  "code": "import csv\nimport io\n\ndef summarize_records(csv_text: str) -> dict:\n    reader = csv.DictReader(io.StringIO(csv_text))\n    required = {\"record_id\", \"duration_minutes\"}\n    if reader.fieldnames is None or not required.issubset(reader.fieldnames):\n        raise ValueError(\"missing required headers\")\n    out = {\"record_count\": 0, \"known_duration_count\": 0, \"known_minutes\": 0,\n           \"missing_duration_count\": 0, \"invalid_count\": 0}\n    for row in reader:\n        try:\n            if None in row:\n                raise ValueError(\"extra unheaded field\")\n            rid = int(row[\"record_id\"].strip())\n            raw = row[\"duration_minutes\"].strip()\n            duration = None if raw == \"\" else int(raw)\n            if rid <= 0 or (duration is not None and not 0 <= duration <= 1440):\n                raise ValueError(\"out of range\")\n        except (ValueError, TypeError, AttributeError):\n            out[\"invalid_count\"] += 1\n            continue\n        out[\"record_count\"] += 1\n        if not duration:\n            out[\"missing_duration_count\"] += 1\n        else:\n            out[\"known_duration_count\"] += 1\n            out[\"known_minutes\"] += duration\n    return out\n",
+  "self_statement": null,
+  "declared_output": {},
+  "public_output_vectors": [
+    {
+      "test_id": "T01",
+      "input_csv": "record_id,duration_minutes\n1,30\n2,\n3,0\n4,nope\n",
+      "expected": {
+        "record_count": 3,
+        "known_duration_count": 2,
+        "known_minutes": 30,
+        "missing_duration_count": 1,
+        "invalid_count": 1
+      }
+    },
+    {
+      "test_id": "T02",
+      "input_csv": "record_id,duration_minutes\n\"1\",\"30\"\n\"2\",\"0\"\n",
+      "expected": {
+        "record_count": 2,
+        "known_duration_count": 2,
+        "known_minutes": 30,
+        "missing_duration_count": 0,
+        "invalid_count": 0
+      }
+    }
+  ]
+}

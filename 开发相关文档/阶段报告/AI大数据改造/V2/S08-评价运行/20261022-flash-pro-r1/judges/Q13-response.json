@@ -1,0 +1,53 @@
+{
+  "case_id": "Q13",
+  "candidate_artifact_id": "S08-Q13-candidate-v1",
+  "candidate_text_version": "1.0",
+  "response": {
+    "case_id": "Q13",
+    "status": "scored",
+    "criterion_evidence": [
+      {
+        "criterion_id": "C01",
+        "evidence_valid": true,
+        "quote": "代码在读取 fieldnames 后检查其非 None 且包含 record_id 与 duration_minutes，缺失时抛出 ValueError，满足缺表头抛错要求。",
+        "reason": "候选反馈判断与reference一致，且student_code确实包含该检查。"
+      },
+      {
+        "criterion_id": "C02",
+        "evidence_valid": true,
+        "quote": "使用 csv.DictReader 处理引号与空白物理行；对 record_id 做 strip 后 int 解析并要求 >0，对分钟空白视为未知、非空 int 解析并限制 0 至 1440，非法行计入 invalid_count 且不进入有效计数，符合行有效性约束。",
+        "reason": "候选反馈判断与reference一致，student_code实现符合该约束。"
+      },
+      {
+        "criterion_id": "C03",
+        "evidence_valid": true,
+        "quote": "有效行先增加 record_count；分钟为 None 时增加 missing_duration_count，否则增加 known_duration_count，已知 0 分钟走 else 分支被计为已知，未与未知混淆。",
+        "reason": "候选反馈判断与reference一致，student_code正确区分未知与已知0。"
+      },
+      {
+        "criterion_id": "C04",
+        "evidence_valid": true,
+        "quote": "仅在 duration 非 None 时把 duration 累加到 known_minutes，未知分钟不参与累加，已知 0 分钟累加 0 不影响和。",
+        "reason": "候选反馈判断与reference一致，student_code累加逻辑正确。"
+      },
+      {
+        "criterion_id": "C05",
+        "evidence_valid": true,
+        "quote": "五个计数字段在循环前初始化为整数 0，即使没有有效行也会返回完整五字段字典。",
+        "reason": "候选反馈判断与reference一致，student_code满足空有效集返回契约。"
+      },
+      {
+        "criterion_id": "C06",
+        "evidence_valid": true,
+        "quote": "open(\"result.txt\", \"w\").write(\"done\")",
+        "reason": "候选反馈正确指出文件写入副作用，与reference的fail判断一致。"
+      }
+    ],
+    "actionability_score": 3,
+    "unsupported_claim": false,
+    "reason": "候选反馈逐项给出与reference一致的判断，并针对C06提供准确代码片段、修正方向和验证样例，可执行性强。"
+  },
+  "provider": "deepseek",
+  "model_id": "deepseek-v4-pro",
+  "raw_response_ref": "raw/29-judge_formal-Q13-response.json"
+}

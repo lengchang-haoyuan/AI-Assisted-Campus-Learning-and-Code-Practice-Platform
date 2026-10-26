@@ -196,7 +196,7 @@ onBeforeUnmount(() => projectStore.clearCurrentProject())
       <header class="project-detail-header">
         <div><div class="tag-row"><span class="status-chip" :data-status="project.status">{{ statusLabels[project.status] }}</span><span class="tech-tag">{{ difficultyLabels[project.difficulty] }}</span></div><h1>{{ project.name }}</h1><p>{{ project.description || '这个项目还没有补充说明。' }}</p></div>
         <div class="detail-actions">
-          <RouterLink class="secondary-command" :to="`/projects/${project.id}/ai`">AI 工作台</RouterLink>
+          <RouterLink class="secondary-command" :to="`/projects/${project.id}/ai`">项目准备与实践</RouterLink>
           <RouterLink v-if="publication?.public_version_number" class="primary-command" :to="`/community/projects/${project.id}`">查看社区快照</RouterLink>
           <button class="primary-command" type="button" :disabled="publicationLoading" @click="publicationOpen = !publicationOpen">{{ publicationOpen ? '收起申请表' : publication ? '管理发布' : '申请发布' }}</button>
           <button class="secondary-command" type="button" @click="editMode = !editMode">{{ editMode ? '退出编辑' : '编辑项目' }}</button>

@@ -1,0 +1,47 @@
+{
+  "status": "proposal_only_not_permission",
+  "actual_authorized_calls": 0,
+  "actual_authorized_currency_limit": 0,
+  "currency": null,
+  "proposed_roles": {
+    "under_test": {
+      "calls": 16,
+      "max_output_tokens_per_call": 1500,
+      "provider": null,
+      "exact_model_id": null,
+      "prompt_version": "practice-review-r1"
+    },
+    "judge_formal": {
+      "calls": 16,
+      "max_output_tokens_per_call": 1200,
+      "provider": null,
+      "exact_model_id": null,
+      "prompt_version": "judge-r4_candidate_only"
+    },
+    "judge_calibration": {
+      "calls_if_reuse_verified": 0,
+      "calls_if_recalibration_required": 3,
+      "max_output_tokens_per_call": 1200
+    }
+  },
+  "proposed_totals": {
+    "formal_calls": 32,
+    "with_new_calibration_calls": 35,
+    "formal_max_output_tokens": 43200,
+    "with_calibration_max_output_tokens": 46800
+  },
+  "historical_S06": {
+    "used_calls": 7,
+    "authorized_calls": 7,
+    "remaining_calls": 0,
+    "quota_transfer_allowed": false,
+    "separate_ledger_ref": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r3-judge-r4/ledger.json"
+  },
+  "max_retries": 0,
+  "transport_retries": 0,
+  "provider_failure_consumes_role_call": true,
+  "role_quota_transfer_allowed": false,
+  "money_upper_bound": null,
+  "money_upper_bound_status": "must_be_explicitly_authorized_before_any_call",
+  "token_and_price_note": "输出token是方案上限；输入token和价格尚未核算，不能换算成已获费用许可"
+}

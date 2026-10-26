@@ -1,0 +1,46 @@
+{
+  "case_id": "Q07",
+  "status": "invalid_under_test_output",
+  "actual_command_exit_code": 1,
+  "input_ref": "inputs/Q07-under-test-input.json",
+  "request_ref": "raw/01-under_test-Q07-request.json",
+  "raw_response_ref": "raw/01-under_test-Q07-response.json",
+  "invalid_draft_ref": "invalid-candidates/Q07-response.json",
+  "failure_location": "criteria[2] / C03",
+  "observed_verdict": "fail",
+  "observed_issue_type": "zero_as_missing",
+  "missing_required_on_fail": [
+    "suggested_self_test",
+    "next_action"
+  ],
+  "frozen_schema_errors": [
+    {
+      "type": "value_error",
+      "location": [
+        "criteria",
+        2
+      ],
+      "message": "Value error, fail必须有代码依据、建议自测和下一动作"
+    }
+  ],
+  "required_fields_explicit_in_actual_system_prompt": true,
+  "http_status": 200,
+  "finish_reason": "stop",
+  "same_under_test_system_fingerprint": true,
+  "actual_new_calls": 1,
+  "actual_new_judge_calls": 0,
+  "retry_count": 0,
+  "raw_usage": {
+    "prompt_tokens": 2133,
+    "completion_tokens": 486,
+    "total_tokens": 2619,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 725
+  },
+  "inference": "模型遗漏已明确要求的条件必填字段；属于被测输出有效性失败。不是Q06引用工具误判，不凭静态阅读替模型补写反馈。",
+  "prompt_or_threshold_modified_after_failure": false,
+  "next_round_automatically_started": false
+}

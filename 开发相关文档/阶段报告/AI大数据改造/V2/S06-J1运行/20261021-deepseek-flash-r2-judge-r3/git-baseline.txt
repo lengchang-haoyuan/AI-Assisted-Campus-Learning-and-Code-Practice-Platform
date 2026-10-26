@@ -1,0 +1,53 @@
+ M .impeccable/design.json
+ M DESIGN.md
+ M analytics/prepare_publication.py
+ M backend/app/services/analytics_artifacts.py
+ M frontend/src/layouts/AppLayout.vue
+ M frontend/src/router/index.ts
+ M frontend/src/views/AnalyticsView.vue
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包.zip
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/00-执行总纲与使用顺序.docx
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S00-现状扫描与核心业务数据基线.docx
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S01-毕设范围数据指标与评价契约.docx
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S02-现有业务最小闭环与数据契约落实.docx
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S03-多源一致性快照与实验样本.docx
+ M "开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S04-PySpark 清洗关联与指标聚合.docx"
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S05-分析批次发布与只读接口.docx
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S06-学习过程洞察与大数据主线验收.docx
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S07-最小AI实践会话与单步执行.docx
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S08-提交评审恢复与早期AI质量验收.docx
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S09-项目准备与步骤式实践工作台.docx
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S10-新增实践事件分析与建议应用闭环.docx
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S11-可选自然语言草案与项目启动模板.docx
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S12-综合验收与对照实验复验.docx
+ M 开发相关文档/AI提示词/20261018-AI实践与大数据分阶段执行包/S13-论文答辩与最终交接.docx
+ M 开发相关文档/AI提示词/README.md
+ M 开发相关文档/README.md
+ M 开发相关文档/开发日志/开发操作日志.md
+?? .impeccable/surfaces/
+?? .rivet/
+?? analytics/benchmark_s06.py
+?? frontend/src/api/offlineAnalytics.ts
+?? frontend/src/composables/useOfflineAnalytics.ts
+?? frontend/src/styles/offline-analytics.css
+?? frontend/src/types/offlineAnalytics.ts
+?? frontend/src/views/OfflineAnalyticsView.vue
+?? tmp/
+?? 开发相关文档/任务交接.md
+?? 开发相关文档/开发规划/20261021-大数据主线最小改动与AI实践衔接计划书.md
+?? 开发相关文档/选题与导师沟通/
+?? 开发相关文档/阶段报告/20261021-最小改动计划与任务交接文档交付报告.md
+?? 开发相关文档/阶段报告/20261021-阶段提示词按最小改动计划修订报告.md
+?? 开发相关文档/阶段报告/AI大数据改造/V2/S06-J1准备/
+?? 开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/
+?? 开发相关文档/阶段报告/AI大数据改造/V2/S06-ODS/
+?? 开发相关文档/阶段报告/AI大数据改造/V2/S06-产物/
+?? 开发相关文档/阶段报告/AI大数据改造/V2/S06-发布清单.json
+?? 开发相关文档/阶段报告/AI大数据改造/V2/S06-发布结果.json
+?? 开发相关文档/阶段报告/AI大数据改造/V2/S06-发布输入/
+?? 开发相关文档/阶段报告/AI大数据改造/V2/S06-完成报告.md
+?? 开发相关文档/阶段报告/AI大数据改造/V2/S06-实验/
+?? 开发相关文档/阶段报告/AI大数据改造/V2/S06-数据验收.json
+?? 开发相关文档/阶段报告/AI大数据改造/V2/S06-演示与证据索引.md
+?? 开发相关文档/阶段报告/AI大数据改造/V2/S06-输入索引.json
+?? 开发相关文档/阶段报告/AI大数据改造/V2/S06-验证证据/

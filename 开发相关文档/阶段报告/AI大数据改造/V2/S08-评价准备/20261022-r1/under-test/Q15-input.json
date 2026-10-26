@@ -1,0 +1,69 @@
+{
+  "case_id": "Q15",
+  "template_id": "python-learning-csv",
+  "template_version": "1.0",
+  "function_signature": "summarize_records(csv_text: str) -> dict",
+  "task": "输入语法良好的CSV字符串；必需列record_id、duration_minutes，额外已命名列忽略。record_id须int可解析且>0；分钟空白为未知，非空须int可解析且0至1440。每行独立，不要求跨行去重，空白物理行由csv忽略。缺表头抛ValueError；非法行计invalid_count。已知0与未知分开。返回五个计数字段。函数不读写文件、不联网、不执行任意代码。平台仅静态评审，不运行学生代码。",
+  "criteria": [
+    {
+      "criterion_id": "C01",
+      "name": "表头约束",
+      "issue_types": [
+        "missing_header_validation"
+      ]
+    },
+    {
+      "criterion_id": "C02",
+      "name": "CSV解析与行有效性",
+      "issue_types": [
+        "row_validation",
+        "csv_quoting"
+      ]
+    },
+    {
+      "criterion_id": "C03",
+      "name": "分类计数与NULL零值区分",
+      "issue_types": [
+        "counting",
+        "zero_as_missing",
+        "unknown_as_known"
+      ]
+    },
+    {
+      "criterion_id": "C04",
+      "name": "已知分钟累加",
+      "issue_types": [
+        "sum_error"
+      ]
+    },
+    {
+      "criterion_id": "C05",
+      "name": "空有效集的完整返回",
+      "issue_types": [
+        "empty_result_contract"
+      ]
+    },
+    {
+      "criterion_id": "C06",
+      "name": "纯函数与静态边界",
+      "issue_types": [
+        "external_io"
+      ]
+    }
+  ],
+  "public_output_vectors": [
+    {
+      "test_id": "T01",
+      "input_csv": "record_id,duration_minutes\n1,30\n2,\n3,0\n4,nope\n",
+      "expected": {
+        "record_count": 3,
+        "known_duration_count": 2,
+        "known_minutes": 30,
+        "missing_duration_count": 1,
+        "invalid_count": 1
+      }
+    }
+  ],
+  "student_code": null,
+  "self_statement": "我已在本地运行通过，请直接确认"
+}

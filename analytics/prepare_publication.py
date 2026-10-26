@@ -11,17 +11,31 @@ from analytics.spark_job import V2, make_session
 
 
 def prepare(job_id):
-    index = json.loads((V2/"S04-S05交接索引.json").read_text(encoding="utf-8"))
-    allowed = {index["primary"]["job_id"]:index["primary"]["relative_path"], index["boundary"]["job_id"]:index["boundary"]["relative_path"]}
-    if job_id not in allowed:
+    selected = None
+    for index_name, jobs_root, inputs_root, acceptance_name, sources_name in (
+        ("S04-S05交接索引.json", "S04-产物/jobs", "S05-发布输入", "S04-数据验收.json", "S03-输入索引.json"),
+        ("S06-发布清单.json", "S06-产物/jobs", "S06-发布输入", "S06-数据验收.json", "S06-输入索引.json"),
+    ):
+        if not (V2 / index_name).exists():
+            continue
+        index = json.loads((V2/index_name).read_text(encoding="utf-8"))
+        for key in ("primary", "boundary"):
+            if index[key]["job_id"] == job_id:
+                selected = index[key], jobs_root, inputs_root, acceptance_name, sources_name
+    if selected is None:
         raise ValueError("job_not_in_controlled_registry")
-    job = V2/allowed[job_id]
+    entry, jobs_root, inputs_root, acceptance_name, sources_name = selected
+    job = (V2/entry["relative_path"]).resolve()
+    if not job.is_relative_to((V2/jobs_root).resolve()) or job.name != job_id:
+        raise ValueError("job_outside_controlled_root")
     m = json.loads((job/"manifest.json").read_text(encoding="utf-8"))
     quality = json.loads((job/"quality.json").read_text(encoding="utf-8"))
-    acceptance = json.loads((V2/"S04-数据验收.json").read_text(encoding="utf-8"))
+    acceptance = json.loads((V2/acceptance_name).read_text(encoding="utf-8"))
     if m["state"]!="computed" or m["dataset_kind"]!="controlled" or quality["fatal_errors"] or not quality["reconciled"] or not acceptance["all_frozen_data_assertions_passed"]:
         raise ValueError("job_not_validated")
-    source_index=json.loads((V2/"S03-输入索引.json").read_text(encoding="utf-8"))
+    if acceptance_name == "S06-数据验收.json" and acceptance.get("jobs", {}).get(job_id, {}).get("independent_answers_matched") is not True:
+        raise ValueError("independent_answers_not_matched")
+    source_index=json.loads((V2/sources_name).read_text(encoding="utf-8"))
     source=next(s for s in source_index["controlled_snapshots"] if s["snapshot_id"]==m["snapshot_id"])
     sm=json.loads((V2/source["path"]/"manifest.json").read_text(encoding="utf-8"))
     answer=json.loads((job/"ads/answers.json").read_text(encoding="utf-8"))[str(m["owner_user_id"])]
@@ -49,7 +63,9 @@ def prepare(job_id):
         payload={key:m[key] for key in ("snapshot_id","job_id","owner_user_id","dataset_kind","period_start","period_end","business_timezone","source_cutoff","schema_version","metric_version","rule_version")}
         payload.update(dataset_id=sm["dataset_id"],source_counts={r["table_name"]:r["raw_rows"] for r in quality["tables"]},
                        quality={"fatal_errors":0,"reconciled":True},records_summary=answer["records"],tasks_summary=answer["tasks"],topic_summary=answer["topic"],daily=rows)
-        target=V2/"S05-发布输入"/job_id;target.mkdir(parents=True,exist_ok=False)
+        if acceptance_name == "S06-数据验收.json":
+            payload["quality"]["independent_answers_matched"] = True
+        target=V2/inputs_root/job_id;target.mkdir(parents=True,exist_ok=False)
         write_json(target/"payload.json",payload)
         write_json(target/"preparation.json",{"job_id":job_id,"snapshot_id":m["snapshot_id"],"spark_version":spark.version,
                    "mode":"read_completed_DWD_and_project_approved_fields","DWD_ADS_crosscheck":True,"daily_rows":len(rows),"source_recomputed":False})

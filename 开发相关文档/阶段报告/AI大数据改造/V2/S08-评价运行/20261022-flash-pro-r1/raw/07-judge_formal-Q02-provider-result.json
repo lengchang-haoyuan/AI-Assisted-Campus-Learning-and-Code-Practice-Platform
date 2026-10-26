@@ -1,0 +1,12 @@
+{
+  "provider": "deepseek",
+  "model": "deepseek-v4-pro",
+  "content": "{\n  \"case_id\": \"Q02\",\n  \"status\": \"scored\",\n  \"criterion_evidence\": [\n    {\n      \"criterion_id\": \"C01\",\n      \"evidence_valid\": true,\n      \"quote\": \"代码在读取 fieldnames 后检查必需列集合是否为表头子集，缺失时抛出 ValueError，满足缺表头约束。\",\n      \"reason\": \"候选反馈的判断与reference一致，且student_code中确实有required.issubset检查并抛出ValueError。\"\n    },\n    {\n      \"criterion_id\": \"C02\",\n      \"evidence_valid\": true,\n      \"quote\": \"使用 csv.DictReader 解析，逐行校验 record_id 可转 int 且大于 0、分钟空白或可转 int 且在 0 至 1440，非法行计入 invalid_count 并跳过；额外已命名列被忽略，符合行有效性要求。\",\n      \"reason\": \"候选反馈的判断与reference一致，student_code中确实有逐行校验和invalid_count计数，且额外已命名列被忽略。\"\n    },\n    {\n      \"criterion_id\": \"C03\",\n      \"evidence_valid\": true,\n      \"quote\": \"有效行先增加 record_count，再按 duration 是否为 None 分别增加 missing_duration_count 或 known_duration_count；已知 0 分钟进入 known_duration_count 而非 missing，NULL 与 0 区分正确。\",\n      \"reason\": \"候选反馈的判断与reference一致，student_code中确实按duration是否为None分类计数，0分钟进入known_duration_count。\"\n    },\n    {\n      \"criterion_id\": \"C04\",\n      \"evidence_valid\": true,\n      \"quote\": \"仅在 duration 非 None 时把 duration 累加到 known_minutes，已知 0 分钟累加 0，未知分钟不参与累加，符合已知分钟求和要求。\",\n      \"reason\": \"候选反馈的判断与reference一致，student_code中确实仅在duration非None时累加。\"\n    },\n    {\n      \"criterion_id\": \"C05\",\n      \"evidence_valid\": true,\n      \"quote\": \"返回字典在循环前已初始化五个整数字段，即使没有有效行也会返回完整五字段，满足空有效集契约。\",\n      \"reason\": \"候选反馈的判断与reference一致，student_code中确实在循环前初始化了五个字段。\"\n    },\n    {\n      \"criterion_id\": \"C06\",\n      \"evidence_valid\": true,\n      \"quote\": \"函数仅使用 csv、io 和内存中的字符串处理，不读写文件、不联网、不执行任意代码，符合纯函数与静态边界。\",\n      \"reason\": \"候选反馈的判断与reference一致，student_code中确实没有外部I/O或执行任意代码。\"\n    }\n  ],\n  \"actionability_score\": 2,\n  \"unsupported_claim\": false,\n  \"reason\": \"候选反馈对每个criterion都给出了具体判断和代码行为描述，但未提供代码位置或验证样例，因此actionability_score为2。\"\n}",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 2473,
+    "completion_tokens": 655,
+    "total_tokens": 3128
+  },
+  "latency_ms": 6173
+}

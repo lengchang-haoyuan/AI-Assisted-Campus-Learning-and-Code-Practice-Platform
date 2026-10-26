@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "method": "GET",
+  "owner_role": "isolated_fixture_owner3",
+  "batch_id": "00000000-0000-4000-8000-000000000000",
+  "expected": 404,
+  "actual": 404,
+  "body": {
+    "error": {
+      "code": "resource_not_found",
+      "message": "分析批次不存在",
+      "request_id": "6426e5f6ec7f4cb899bdd2fedcc8e83e"
+    }
+  },
+  "mode": "real ASGI authentication + isolated MySQL"
+}

@@ -1,0 +1,113 @@
+{
+  "status": "preflight_passed",
+  "checked_at": "2026-10-24T18:45:26.742167+08:00",
+  "evaluation_id": "S08-20261024-flash-pro-r3",
+  "evaluation_method_version": "evaluation-method-r3",
+  "credentials_read": false,
+  "network_requests": 0,
+  "database_access": false,
+  "student_code_executed": false,
+  "existing_ledger": false,
+  "new_currency_hard_cap_cny": "1.59419600",
+  "previous_spent_or_held_upper_cny": "0.40580400",
+  "combined_currency_hard_cap_cny": "2.00000000",
+  "role_limits": {
+    "under_test": 10,
+    "judge_calibration": 0,
+    "judge_formal": 10
+  },
+  "reused_pro_calibration": "3/3",
+  "reused_candidate_judge_pairs": 6,
+  "new_calibration_calls": 0,
+  "under_test_requests_checked": 16,
+  "pending_case_ids": [
+    "Q07",
+    "Q08",
+    "Q09",
+    "Q10",
+    "Q11",
+    "Q12",
+    "Q13",
+    "Q14",
+    "Q15",
+    "Q16"
+  ],
+  "scoring_thresholds_unchanged": true,
+  "known_request_reservations": [
+    {
+      "role": "under_test",
+      "input_id": "Q07",
+      "input_upper_tokens": 9614,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.03122800"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q08",
+      "input_upper_tokens": 9389,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.03077800"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q09",
+      "input_upper_tokens": 9371,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.03074200"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q10",
+      "input_upper_tokens": 9352,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.03070400"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q11",
+      "input_upper_tokens": 9596,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.03119200"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q12",
+      "input_upper_tokens": 9414,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.03082800"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q13",
+      "input_upper_tokens": 9421,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.03084200"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q14",
+      "input_upper_tokens": 8184,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02836800"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q15",
+      "input_upper_tokens": 8018,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02803600"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q16",
+      "input_upper_tokens": 8224,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02844800"
+    }
+  ],
+  "formal_judge_cost": "candidate-dependent; pre-POST byte-bound reservation",
+  "full_round_cost_guaranteed": false,
+  "admission_rule": "new spent_or_held + next reservation <= 1.594196 CNY; combined with previous 0.405804 <= 2 CNY",
+  "failure_settlement": "call counted; full reservation retained; stop without retry",
+  "execution": "not_run_until_explicit_execute"
+}

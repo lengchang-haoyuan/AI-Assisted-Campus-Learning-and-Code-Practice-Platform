@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "authorization": true,
+  "AST_python_files": 9,
+  "missing_links": [],
+  "backend_tests": 40,
+  "tool_tests": 24,
+  "guards": 20,
+  "model_calls": 0,
+  "DB": false,
+  "student_code_executed": false
+}

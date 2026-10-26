@@ -1,0 +1,488 @@
+{
+  "mode": "mock",
+  "model": "fake",
+  "real_model_calls": 0,
+  "checks": [
+    {
+      "name": "项目准备：固定模板、已定技术、无需生成草案入口",
+      "passed": true
+    },
+    {
+      "name": "保存冲突保留草稿、读取最新后合并、不串项目",
+      "passed": true
+    },
+    {
+      "name": "首次提交后直接本人结束，不请求implement建议",
+      "passed": true
+    },
+    {
+      "name": "建议后自选修改、不可覆盖历史、复制绑定所选版本",
+      "passed": true
+    },
+    {
+      "name": "无提交继续等待，取消后恢复不自动调用模型",
+      "passed": true
+    },
+    {
+      "name": "建议失败、恢复后本人结束",
+      "passed": true
+    },
+    {
+      "name": "取消后迟到模型响应不覆盖恢复和新提交",
+      "passed": true
+    },
+    {
+      "name": "刷新重入保留当前attempt与等待点",
+      "passed": true
+    },
+    {
+      "name": "长代码在390px内部滚动、控件具有键盘焦点",
+      "passed": true
+    },
+    {
+      "name": "候选只应用明确勾选字段、原端点版本保护与防重复",
+      "passed": true
+    },
+    {
+      "name": "快速切换项目后丢弃旧Context迟到响应",
+      "passed": true
+    },
+    {
+      "name": "错误项目的会话响应不渲染私有提交",
+      "passed": true
+    },
+    {
+      "name": "退出账号清空私有页面、旧路由保留",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\阶段报告\\AI大数据改造\\V2\\S09-证据\\mock\\preparation-desktop.png",
+    "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\阶段报告\\AI大数据改造\\V2\\S09-证据\\mock\\preparation-390.png",
+    "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\阶段报告\\AI大数据改造\\V2\\S09-证据\\mock\\workbench-desktop.png",
+    "C:\\Users\\Administrator\\Desktop\\毕业设计\\ScholarHub\\开发相关文档\\阶段报告\\AI大数据改造\\V2\\S09-证据\\mock\\workbench-390.png"
+  ],
+  "current_check": "退出账号清空私有页面、旧路由保留",
+  "restore_session": "60b91729-7fc7-4423-bc4c-34f59268d6ca",
+  "passed": true,
+  "mock_requests": [
+    {
+      "path": "/users/me",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "GET"
+    },
+    {
+      "path": "/campus/me",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "PUT"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "PUT"
+    },
+    {
+      "path": "/projects/701",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/practice-sessions",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/practice-sessions",
+      "method": "POST"
+    },
+    {
+      "path": "/projects/701",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/practice-sessions",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/5c2250ad-4b89-410d-9de3-b946c8b36706",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/5c2250ad-4b89-410d-9de3-b946c8b36706/actions",
+      "method": "POST",
+      "action": "start"
+    },
+    {
+      "path": "/practice-sessions/5c2250ad-4b89-410d-9de3-b946c8b36706/actions",
+      "method": "POST",
+      "action": "confirm"
+    },
+    {
+      "path": "/practice-sessions/5c2250ad-4b89-410d-9de3-b946c8b36706/attempts",
+      "method": "POST"
+    },
+    {
+      "path": "/practice-sessions/5c2250ad-4b89-410d-9de3-b946c8b36706/actions",
+      "method": "POST",
+      "action": "confirm"
+    },
+    {
+      "path": "/projects/701/practice-sessions",
+      "method": "POST"
+    },
+    {
+      "path": "/projects/701",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/practice-sessions",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/411862ad-4956-4041-a6d5-969079f1b16a",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/411862ad-4956-4041-a6d5-969079f1b16a/actions",
+      "method": "POST",
+      "action": "start"
+    },
+    {
+      "path": "/practice-sessions/411862ad-4956-4041-a6d5-969079f1b16a/actions",
+      "method": "POST",
+      "action": "confirm"
+    },
+    {
+      "path": "/practice-sessions/411862ad-4956-4041-a6d5-969079f1b16a/attempts",
+      "method": "POST"
+    },
+    {
+      "path": "/practice-sessions/411862ad-4956-4041-a6d5-969079f1b16a/actions",
+      "method": "POST",
+      "action": "review"
+    },
+    {
+      "path": "/practice-sessions/411862ad-4956-4041-a6d5-969079f1b16a/attempts",
+      "method": "POST"
+    },
+    {
+      "path": "/practice-sessions/411862ad-4956-4041-a6d5-969079f1b16a/actions",
+      "method": "POST",
+      "action": "confirm"
+    },
+    {
+      "path": "/projects/701/practice-sessions",
+      "method": "POST"
+    },
+    {
+      "path": "/projects/701",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/practice-sessions",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/394f119a-3849-4396-a705-c06cb851df6f",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/394f119a-3849-4396-a705-c06cb851df6f/actions",
+      "method": "POST",
+      "action": "start"
+    },
+    {
+      "path": "/practice-sessions/394f119a-3849-4396-a705-c06cb851df6f/actions",
+      "method": "POST",
+      "action": "confirm"
+    },
+    {
+      "path": "/practice-sessions/394f119a-3849-4396-a705-c06cb851df6f/actions",
+      "method": "POST",
+      "action": "cancel"
+    },
+    {
+      "path": "/practice-sessions/394f119a-3849-4396-a705-c06cb851df6f/actions",
+      "method": "POST",
+      "action": "resume"
+    },
+    {
+      "path": "/practice-sessions/394f119a-3849-4396-a705-c06cb851df6f/attempts",
+      "method": "POST"
+    },
+    {
+      "path": "/practice-sessions/394f119a-3849-4396-a705-c06cb851df6f/actions",
+      "method": "POST",
+      "action": "review"
+    },
+    {
+      "path": "/practice-sessions/394f119a-3849-4396-a705-c06cb851df6f/actions",
+      "method": "POST",
+      "action": "resume"
+    },
+    {
+      "path": "/practice-sessions/394f119a-3849-4396-a705-c06cb851df6f/actions",
+      "method": "POST",
+      "action": "confirm"
+    },
+    {
+      "path": "/projects/701/practice-sessions",
+      "method": "POST"
+    },
+    {
+      "path": "/projects/701",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/practice-sessions",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/104e525f-7ec5-4a43-b0b7-01cf6dbcd88b",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/104e525f-7ec5-4a43-b0b7-01cf6dbcd88b/actions",
+      "method": "POST",
+      "action": "start"
+    },
+    {
+      "path": "/practice-sessions/104e525f-7ec5-4a43-b0b7-01cf6dbcd88b/actions",
+      "method": "POST",
+      "action": "confirm"
+    },
+    {
+      "path": "/practice-sessions/104e525f-7ec5-4a43-b0b7-01cf6dbcd88b/attempts",
+      "method": "POST"
+    },
+    {
+      "path": "/practice-sessions/104e525f-7ec5-4a43-b0b7-01cf6dbcd88b/actions",
+      "method": "POST",
+      "action": "review"
+    },
+    {
+      "path": "/practice-sessions/104e525f-7ec5-4a43-b0b7-01cf6dbcd88b/actions",
+      "method": "POST",
+      "action": "cancel"
+    },
+    {
+      "path": "/practice-sessions/104e525f-7ec5-4a43-b0b7-01cf6dbcd88b",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/104e525f-7ec5-4a43-b0b7-01cf6dbcd88b/actions",
+      "method": "POST",
+      "action": "resume"
+    },
+    {
+      "path": "/practice-sessions/104e525f-7ec5-4a43-b0b7-01cf6dbcd88b/attempts",
+      "method": "POST"
+    },
+    {
+      "path": "/projects/701/practice-sessions",
+      "method": "POST"
+    },
+    {
+      "path": "/projects/701",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/practice-sessions",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/60b91729-7fc7-4423-bc4c-34f59268d6ca",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/60b91729-7fc7-4423-bc4c-34f59268d6ca/actions",
+      "method": "POST",
+      "action": "start"
+    },
+    {
+      "path": "/practice-sessions/60b91729-7fc7-4423-bc4c-34f59268d6ca/actions",
+      "method": "POST",
+      "action": "confirm"
+    },
+    {
+      "path": "/practice-sessions/60b91729-7fc7-4423-bc4c-34f59268d6ca/attempts",
+      "method": "POST"
+    },
+    {
+      "path": "/users/me",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/practice-sessions",
+      "method": "GET"
+    },
+    {
+      "path": "/campus/me",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/60b91729-7fc7-4423-bc4c-34f59268d6ca",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/60b91729-7fc7-4423-bc4c-34f59268d6ca/attempts",
+      "method": "POST"
+    },
+    {
+      "path": "/users/me",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "GET"
+    },
+    {
+      "path": "/campus/me",
+      "method": "GET"
+    },
+    {
+      "path": "/workflows",
+      "method": "GET"
+    },
+    {
+      "path": "/workflows/999/graph",
+      "method": "GET"
+    },
+    {
+      "path": "/workflows/999/runs",
+      "method": "GET"
+    },
+    {
+      "path": "/workflows/999/nodes/9991/context/write",
+      "method": "POST"
+    },
+    {
+      "path": "/users/me",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/702",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/702/context",
+      "method": "GET"
+    },
+    {
+      "path": "/campus/me",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/702",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/702/context",
+      "method": "GET"
+    },
+    {
+      "path": "/users/me",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/702",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/702/context",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/702/practice-sessions",
+      "method": "GET"
+    },
+    {
+      "path": "/campus/me",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/60b91729-7fc7-4423-bc4c-34f59268d6ca",
+      "method": "GET"
+    },
+    {
+      "path": "/users/me",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/context",
+      "method": "GET"
+    },
+    {
+      "path": "/projects/701/practice-sessions",
+      "method": "GET"
+    },
+    {
+      "path": "/campus/me",
+      "method": "GET"
+    },
+    {
+      "path": "/practice-sessions/60b91729-7fc7-4423-bc4c-34f59268d6ca",
+      "method": "GET"
+    }
+  ]
+}

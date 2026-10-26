@@ -1,0 +1,461 @@
+{
+  "checked_at": "2026-10-23T16:06:42.088734+08:00",
+  "audit_status": "passed",
+  "evaluation_status": "stopped",
+  "assertions": 104,
+  "checks": [
+    {
+      "name": "finished_round_not_running",
+      "passed": true
+    },
+    {
+      "name": "attempt_and_role_counts",
+      "passed": true
+    },
+    {
+      "name": "no_new_calibration_reuse_preserved",
+      "passed": true
+    },
+    {
+      "name": "no_retries",
+      "passed": true
+    },
+    {
+      "name": "01-under_test-Q01_one_http_200_stop",
+      "passed": true
+    },
+    {
+      "name": "01-under_test-Q01_identity_and_caps",
+      "passed": true
+    },
+    {
+      "name": "01-under_test-Q01_parameters_and_no_headers",
+      "passed": true
+    },
+    {
+      "name": "01-under_test-Q01_raw_usage_matches_ledger_and_provider",
+      "passed": true
+    },
+    {
+      "name": "01-under_test-Q01_reservation_and_actual_usage_upper",
+      "passed": true
+    },
+    {
+      "name": "01-under_test-Q01_candidate_raw_and_v2_binding",
+      "passed": true
+    },
+    {
+      "name": "01-under_test-Q01_provider_content_preserves_normalized_body",
+      "passed": true
+    },
+    {
+      "name": "02-judge_formal-Q01_one_http_200_stop",
+      "passed": true
+    },
+    {
+      "name": "02-judge_formal-Q01_identity_and_caps",
+      "passed": true
+    },
+    {
+      "name": "02-judge_formal-Q01_parameters_and_no_headers",
+      "passed": true
+    },
+    {
+      "name": "02-judge_formal-Q01_raw_usage_matches_ledger_and_provider",
+      "passed": true
+    },
+    {
+      "name": "02-judge_formal-Q01_reservation_and_actual_usage_upper",
+      "passed": true
+    },
+    {
+      "name": "02-judge_formal-Q01_same_calibrated_service",
+      "passed": true
+    },
+    {
+      "name": "02-judge_formal-Q01_judge_raw_and_saved_result",
+      "passed": true
+    },
+    {
+      "name": "02-judge_formal-Q01_judge_input_is_actual_post",
+      "passed": true
+    },
+    {
+      "name": "02-judge_formal-Q01_provider_content_preserves_normalized_body",
+      "passed": true
+    },
+    {
+      "name": "03-under_test-Q02_one_http_200_stop",
+      "passed": true
+    },
+    {
+      "name": "03-under_test-Q02_identity_and_caps",
+      "passed": true
+    },
+    {
+      "name": "03-under_test-Q02_parameters_and_no_headers",
+      "passed": true
+    },
+    {
+      "name": "03-under_test-Q02_raw_usage_matches_ledger_and_provider",
+      "passed": true
+    },
+    {
+      "name": "03-under_test-Q02_reservation_and_actual_usage_upper",
+      "passed": true
+    },
+    {
+      "name": "03-under_test-Q02_candidate_raw_and_v2_binding",
+      "passed": true
+    },
+    {
+      "name": "03-under_test-Q02_provider_content_preserves_normalized_body",
+      "passed": true
+    },
+    {
+      "name": "04-judge_formal-Q02_one_http_200_stop",
+      "passed": true
+    },
+    {
+      "name": "04-judge_formal-Q02_identity_and_caps",
+      "passed": true
+    },
+    {
+      "name": "04-judge_formal-Q02_parameters_and_no_headers",
+      "passed": true
+    },
+    {
+      "name": "04-judge_formal-Q02_raw_usage_matches_ledger_and_provider",
+      "passed": true
+    },
+    {
+      "name": "04-judge_formal-Q02_reservation_and_actual_usage_upper",
+      "passed": true
+    },
+    {
+      "name": "04-judge_formal-Q02_same_calibrated_service",
+      "passed": true
+    },
+    {
+      "name": "04-judge_formal-Q02_judge_raw_and_saved_result",
+      "passed": true
+    },
+    {
+      "name": "04-judge_formal-Q02_judge_input_is_actual_post",
+      "passed": true
+    },
+    {
+      "name": "04-judge_formal-Q02_provider_content_preserves_normalized_body",
+      "passed": true
+    },
+    {
+      "name": "05-under_test-Q03_one_http_200_stop",
+      "passed": true
+    },
+    {
+      "name": "05-under_test-Q03_identity_and_caps",
+      "passed": true
+    },
+    {
+      "name": "05-under_test-Q03_parameters_and_no_headers",
+      "passed": true
+    },
+    {
+      "name": "05-under_test-Q03_raw_usage_matches_ledger_and_provider",
+      "passed": true
+    },
+    {
+      "name": "05-under_test-Q03_reservation_and_actual_usage_upper",
+      "passed": true
+    },
+    {
+      "name": "05-under_test-Q03_candidate_raw_and_v2_binding",
+      "passed": true
+    },
+    {
+      "name": "05-under_test-Q03_provider_content_preserves_normalized_body",
+      "passed": true
+    },
+    {
+      "name": "06-judge_formal-Q03_one_http_200_stop",
+      "passed": true
+    },
+    {
+      "name": "06-judge_formal-Q03_identity_and_caps",
+      "passed": true
+    },
+    {
+      "name": "06-judge_formal-Q03_parameters_and_no_headers",
+      "passed": true
+    },
+    {
+      "name": "06-judge_formal-Q03_raw_usage_matches_ledger_and_provider",
+      "passed": true
+    },
+    {
+      "name": "06-judge_formal-Q03_reservation_and_actual_usage_upper",
+      "passed": true
+    },
+    {
+      "name": "06-judge_formal-Q03_same_calibrated_service",
+      "passed": true
+    },
+    {
+      "name": "06-judge_formal-Q03_judge_raw_and_saved_result",
+      "passed": true
+    },
+    {
+      "name": "06-judge_formal-Q03_judge_input_is_actual_post",
+      "passed": true
+    },
+    {
+      "name": "06-judge_formal-Q03_provider_content_preserves_normalized_body",
+      "passed": true
+    },
+    {
+      "name": "07-under_test-Q04_one_http_200_stop",
+      "passed": true
+    },
+    {
+      "name": "07-under_test-Q04_identity_and_caps",
+      "passed": true
+    },
+    {
+      "name": "07-under_test-Q04_parameters_and_no_headers",
+      "passed": true
+    },
+    {
+      "name": "07-under_test-Q04_raw_usage_matches_ledger_and_provider",
+      "passed": true
+    },
+    {
+      "name": "07-under_test-Q04_reservation_and_actual_usage_upper",
+      "passed": true
+    },
+    {
+      "name": "07-under_test-Q04_candidate_raw_and_v2_binding",
+      "passed": true
+    },
+    {
+      "name": "07-under_test-Q04_provider_content_preserves_normalized_body",
+      "passed": true
+    },
+    {
+      "name": "08-judge_formal-Q04_one_http_200_stop",
+      "passed": true
+    },
+    {
+      "name": "08-judge_formal-Q04_identity_and_caps",
+      "passed": true
+    },
+    {
+      "name": "08-judge_formal-Q04_parameters_and_no_headers",
+      "passed": true
+    },
+    {
+      "name": "08-judge_formal-Q04_raw_usage_matches_ledger_and_provider",
+      "passed": true
+    },
+    {
+      "name": "08-judge_formal-Q04_reservation_and_actual_usage_upper",
+      "passed": true
+    },
+    {
+      "name": "08-judge_formal-Q04_same_calibrated_service",
+      "passed": true
+    },
+    {
+      "name": "08-judge_formal-Q04_judge_raw_and_saved_result",
+      "passed": true
+    },
+    {
+      "name": "08-judge_formal-Q04_judge_input_is_actual_post",
+      "passed": true
+    },
+    {
+      "name": "08-judge_formal-Q04_provider_content_preserves_normalized_body",
+      "passed": true
+    },
+    {
+      "name": "09-under_test-Q05_one_http_200_stop",
+      "passed": true
+    },
+    {
+      "name": "09-under_test-Q05_identity_and_caps",
+      "passed": true
+    },
+    {
+      "name": "09-under_test-Q05_parameters_and_no_headers",
+      "passed": true
+    },
+    {
+      "name": "09-under_test-Q05_raw_usage_matches_ledger_and_provider",
+      "passed": true
+    },
+    {
+      "name": "09-under_test-Q05_reservation_and_actual_usage_upper",
+      "passed": true
+    },
+    {
+      "name": "09-under_test-Q05_candidate_raw_and_v2_binding",
+      "passed": true
+    },
+    {
+      "name": "09-under_test-Q05_provider_content_preserves_normalized_body",
+      "passed": true
+    },
+    {
+      "name": "10-judge_formal-Q05_one_http_200_stop",
+      "passed": true
+    },
+    {
+      "name": "10-judge_formal-Q05_identity_and_caps",
+      "passed": true
+    },
+    {
+      "name": "10-judge_formal-Q05_parameters_and_no_headers",
+      "passed": true
+    },
+    {
+      "name": "10-judge_formal-Q05_raw_usage_matches_ledger_and_provider",
+      "passed": true
+    },
+    {
+      "name": "10-judge_formal-Q05_reservation_and_actual_usage_upper",
+      "passed": true
+    },
+    {
+      "name": "10-judge_formal-Q05_same_calibrated_service",
+      "passed": true
+    },
+    {
+      "name": "10-judge_formal-Q05_judge_raw_and_saved_result",
+      "passed": true
+    },
+    {
+      "name": "10-judge_formal-Q05_judge_input_is_actual_post",
+      "passed": true
+    },
+    {
+      "name": "10-judge_formal-Q05_provider_content_preserves_normalized_body",
+      "passed": true
+    },
+    {
+      "name": "11-under_test-Q06_one_http_200_stop",
+      "passed": true
+    },
+    {
+      "name": "11-under_test-Q06_identity_and_caps",
+      "passed": true
+    },
+    {
+      "name": "11-under_test-Q06_parameters_and_no_headers",
+      "passed": true
+    },
+    {
+      "name": "11-under_test-Q06_raw_usage_matches_ledger_and_provider",
+      "passed": true
+    },
+    {
+      "name": "11-under_test-Q06_reservation_and_actual_usage_upper",
+      "passed": true
+    },
+    {
+      "name": "11-under_test-Q06_candidate_raw_and_v2_binding",
+      "passed": true
+    },
+    {
+      "name": "11-under_test-Q06_provider_content_preserves_normalized_body",
+      "passed": true
+    },
+    {
+      "name": "12-judge_formal-Q06_one_http_200_stop",
+      "passed": true
+    },
+    {
+      "name": "12-judge_formal-Q06_identity_and_caps",
+      "passed": true
+    },
+    {
+      "name": "12-judge_formal-Q06_parameters_and_no_headers",
+      "passed": true
+    },
+    {
+      "name": "12-judge_formal-Q06_raw_usage_matches_ledger_and_provider",
+      "passed": true
+    },
+    {
+      "name": "12-judge_formal-Q06_reservation_and_actual_usage_upper",
+      "passed": true
+    },
+    {
+      "name": "12-judge_formal-Q06_same_calibrated_service",
+      "passed": true
+    },
+    {
+      "name": "12-judge_formal-Q06_judge_raw_and_saved_result",
+      "passed": true
+    },
+    {
+      "name": "12-judge_formal-Q06_judge_input_is_actual_post",
+      "passed": true
+    },
+    {
+      "name": "12-judge_formal-Q06_provider_content_preserves_normalized_body",
+      "passed": true
+    },
+    {
+      "name": "money_total_below_hard_cap",
+      "passed": true
+    },
+    {
+      "name": "remaining_money_matches",
+      "passed": true
+    },
+    {
+      "name": "total_tokens_match_ledger",
+      "passed": true
+    },
+    {
+      "name": "stopped_round_keeps_incomplete_metrics",
+      "passed": true
+    }
+  ],
+  "actual_calls": 12,
+  "role_usage": {
+    "under_test": 6,
+    "judge_calibration": 0,
+    "judge_formal": 6
+  },
+  "total_usage": {
+    "prompt_tokens": 29255,
+    "completion_tokens": 7792,
+    "total_tokens": 37047,
+    "cache_hit_tokens": 13312,
+    "cache_miss_tokens": 15943
+  },
+  "fees": {
+    "currency": "CNY",
+    "conservative_spend_or_held_upper": "0.40580400",
+    "known_usage_peak_upper": "0.30904500",
+    "known_usage_by_role": {
+      "under_test": "0.05748600",
+      "judge_formal": "0.25155900"
+    },
+    "held_or_spent_by_role": {
+      "under_test": "0.05748600",
+      "judge_formal": "0.34831800"
+    },
+    "actual_account_charge_verified": false
+  },
+  "score_replay_status": "not_completed",
+  "quality_metrics": null,
+  "rule_gates": null,
+  "quality_passed": false,
+  "audit_side_effects": {
+    "model_calls": 0,
+    "database_connections": 0,
+    "credentials_read": false,
+    "student_code_executed": false
+  }
+}

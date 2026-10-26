@@ -153,7 +153,7 @@ def main():
                 expected = json.loads((V2 / "S03-验证证据" / answerfile).read_text(encoding="utf-8"))
                 # 等待小数在独立实现中允许1e-10分钟误差；冻结整数和6位比例精确。
                 result = verify_one(spark, V2 / "S03-ODS/snapshots" / snapshot, root, args.tag+"-"+name)
-                actual = json.loads((Path(result["output"]) / "ads/answers.json").read_text())
+                actual = json.loads((Path(result["output"]) / "ads/answers.json").read_text(encoding="utf-8"))
                 compare(next(iter(actual.values())), expected)
                 results.append(result)
                 print(json.dumps({"case": name, "status": "validated"}), flush=True)

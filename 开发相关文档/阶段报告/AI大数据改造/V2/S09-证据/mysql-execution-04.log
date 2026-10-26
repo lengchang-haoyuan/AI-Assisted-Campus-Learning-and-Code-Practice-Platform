@@ -1,0 +1,53 @@
+{"timestamp":"2026-10-26T08:30:13.221825+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"aeb1796e1f164fe1b05f90557962237e","method":"GET","path":"/api/v1/projects/2","status_code":200,"duration_ms":126.335}
+{"timestamp":"2026-10-26T08:30:13.301520+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"b8ce9863695c4fd59a2f8cb058b7bd17","method":"GET","path":"/api/v1/workflows/1","status_code":200,"duration_ms":77.946}
+{"timestamp":"2026-10-26T08:30:13.309398+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"a89b0b7736aa480bbd53d14436718913","method":"GET","path":"/api/v1/workflows/1","status_code":200,"duration_ms":5.904}
+{"timestamp":"2026-10-26T08:30:13.334195+00:00","level":"INFO","logger":"scholarhub.workflow","message":"workflow_run_started","status":"running","latency_ms":0,"workflow_run_id":2,"total_tokens":0}
+{"timestamp":"2026-10-26T08:30:13.344195+00:00","level":"INFO","logger":"scholarhub.workflow","message":"workflow_node_started","status":"running","latency_ms":0,"workflow_run_id":2,"node_id":1,"node_key":"requirements"}
+{"timestamp":"2026-10-26T08:30:13.344195+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-s09","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-26T08:30:13.356830+00:00","level":"INFO","logger":"scholarhub.workflow","message":"workflow_node_finished","status":"success","latency_ms":0,"workflow_run_id":2,"node_id":1,"node_key":"requirements"}
+{"timestamp":"2026-10-26T08:30:13.366338+00:00","level":"INFO","logger":"scholarhub.workflow","message":"workflow_run_finished","status":"completed","latency_ms":33,"workflow_run_id":2,"termination_reason":"completed","total_tokens":10}
+{"timestamp":"2026-10-26T08:30:13.366338+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"a3eae7bacbc64bccb75be2367bacffb0","method":"POST","path":"/api/v1/workflows/1/run","status_code":201,"duration_ms":55.828}
+{"timestamp":"2026-10-26T08:30:13.377339+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"265ac9ce7b5b4158b586f1b9bbf9e5db","method":"GET","path":"/api/v1/projects/2/context","status_code":200,"duration_ms":8.697}
+{"timestamp":"2026-10-26T08:30:14.151026+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"a11acaadb1e14444b9ae72cc988b9cb2","method":"GET","path":"/api/v1/users/me","status_code":200,"duration_ms":4.628}
+{"timestamp":"2026-10-26T08:30:14.382894+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"874834810f274a4895274a9eb275730e","method":"GET","path":"/api/v1/projects/2/context","status_code":200,"duration_ms":40.941}
+{"timestamp":"2026-10-26T08:30:14.388448+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"b81dbe2fa97c4968ba0557273219c55d","method":"GET","path":"/api/v1/campus/me","status_code":200,"duration_ms":45.19}
+{"timestamp":"2026-10-26T08:30:14.402410+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"57be08a55b4e4bd7832d23dbc8a765be","method":"GET","path":"/api/v1/projects/2","status_code":200,"duration_ms":60.549}
+{"timestamp":"2026-10-26T08:30:14.815427+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"4f225a25a11a4e8e9958b38c7f42bce6","method":"GET","path":"/api/v1/projects/2","status_code":200,"duration_ms":14.332}
+{"timestamp":"2026-10-26T08:30:14.819386+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"314ecadb718b4ce8928bc9b796f9630c","method":"GET","path":"/api/v1/projects/2/practice-sessions","status_code":200,"duration_ms":14.713}
+{"timestamp":"2026-10-26T08:30:14.819386+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"8d8d2dcaaf15467f8f080afbf3020344","method":"GET","path":"/api/v1/projects/2/context","status_code":200,"duration_ms":17.139}
+{"timestamp":"2026-10-26T08:30:14.884949+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"c3dde55f9238482aa7fe47f3118de7f2","method":"POST","path":"/api/v1/projects/2/practice-sessions","status_code":201,"duration_ms":15.047}
+{"timestamp":"2026-10-26T08:30:14.904013+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"443e871f62474598bea810c05aef1323","method":"GET","path":"/api/v1/projects/2","status_code":200,"duration_ms":12.326}
+{"timestamp":"2026-10-26T08:30:14.909011+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"a0d2cbed471440ebbde30249cf8399b9","method":"GET","path":"/api/v1/projects/2/context","status_code":200,"duration_ms":15.968}
+{"timestamp":"2026-10-26T08:30:14.910012+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"cc99f7efe96b4bd4b301b43ea6e4d56e","method":"GET","path":"/api/v1/projects/2/practice-sessions","status_code":200,"duration_ms":17.443}
+{"timestamp":"2026-10-26T08:30:14.920052+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"d2647c093b094dfc9de7898cab0eb48e","method":"GET","path":"/api/v1/practice-sessions/b5a71af8-ca4e-432e-9383-a5a4a9d8de39","status_code":200,"duration_ms":6.528}
+{"timestamp":"2026-10-26T08:30:14.993835+00:00","level":"INFO","logger":"scholarhub.ai","message":"ai_request_finished","provider":"fake","model":"fake-model","status":"succeeded","latency_ms":0,"attempt_count":1}
+{"timestamp":"2026-10-26T08:30:15.007350+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"7a0d2fe6043447a280d451767eafacd2","method":"POST","path":"/api/v1/practice-sessions/b5a71af8-ca4e-432e-9383-a5a4a9d8de39/actions","status_code":200,"duration_ms":30.285}
+{"timestamp":"2026-10-26T08:30:15.064569+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"8caf32b2a0be4c21a768ba99c6a30602","method":"POST","path":"/api/v1/practice-sessions/b5a71af8-ca4e-432e-9383-a5a4a9d8de39/actions","status_code":200,"duration_ms":13.729}
+{"timestamp":"2026-10-26T08:30:15.139546+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"96d8927964b140eeaad3597a926e3457","method":"POST","path":"/api/v1/practice-sessions/b5a71af8-ca4e-432e-9383-a5a4a9d8de39/attempts","status_code":201,"duration_ms":14.239}
+{"timestamp":"2026-10-26T08:30:15.201622+00:00","level":"ERROR","logger":"scholarhub.error","message":"unhandled_exception","request_id":"2462a0c1ed504113be3983bda4cfa78a","error_code":"internal_error","error_type":"VerificationFailure"}
+{"timestamp":"2026-10-26T08:30:15.210583+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"6f5ffd3ef2af4b49b8e75fcbf0bc5962","method":"GET","path":"/api/v1/practice-sessions/b5a71af8-ca4e-432e-9383-a5a4a9d8de39","status_code":200,"duration_ms":6.664}
+{"timestamp":"2026-10-26T08:30:16.183376+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"f79c9928c0d64eda898b9c5d1b96bc8d","method":"GET","path":"/api/v1/practice-sessions/b5a71af8-ca4e-432e-9383-a5a4a9d8de39","status_code":200,"duration_ms":5.9}
+{
+  "passed": false,
+  "code": "real_browser_failed_see_results",
+  "deltas": {
+    "projects": 1,
+    "workflows": 1,
+    "workflow_nodes": 1,
+    "workflow_runs": 2,
+    "practice_sessions": 1,
+    "practice_attempts": 1,
+    "practice_events": 4,
+    "ai_requests": 3,
+    "ai_results": 2
+  },
+  "fake_calls": null,
+  "all_old_rows_preserved": true,
+  "cleanup": {
+    "temporary_api_stopped": true,
+    "restart_process_stopped": true,
+    "fixtures_retained": true,
+    "ddl": 0,
+    "deletes": 0
+  }
+}

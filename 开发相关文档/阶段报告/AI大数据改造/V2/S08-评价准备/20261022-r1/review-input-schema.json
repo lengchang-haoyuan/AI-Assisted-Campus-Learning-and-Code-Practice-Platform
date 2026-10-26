@@ -1,0 +1,98 @@
+{
+  "$defs": {
+    "JsonValue": {}
+  },
+  "additionalProperties": false,
+  "properties": {
+    "template_id": {
+      "const": "python-learning-csv",
+      "default": "python-learning-csv",
+      "title": "Template Id",
+      "type": "string"
+    },
+    "template_version": {
+      "const": "1.0",
+      "title": "Template Version",
+      "type": "string"
+    },
+    "context_version": {
+      "minimum": 1,
+      "title": "Context Version",
+      "type": "integer"
+    },
+    "attempt_id": {
+      "maxLength": 36,
+      "minLength": 36,
+      "title": "Attempt Id",
+      "type": "string"
+    },
+    "attempt_no": {
+      "minimum": 1,
+      "title": "Attempt No",
+      "type": "integer"
+    },
+    "code": {
+      "anyOf": [
+        {
+          "maxLength": 12000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Code"
+    },
+    "self_statement": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Self Statement"
+    },
+    "declared_output": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Declared Output",
+      "type": "object"
+    },
+    "public_output_vectors": {
+      "anyOf": [
+        {
+          "items": {
+            "additionalProperties": {
+              "$ref": "#/$defs/JsonValue"
+            },
+            "type": "object"
+          },
+          "maxItems": 7,
+          "minItems": 1,
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Public Output Vectors"
+    }
+  },
+  "required": [
+    "template_version",
+    "context_version",
+    "attempt_id",
+    "attempt_no"
+  ],
+  "title": "PracticeReviewInput",
+  "type": "object"
+}

@@ -1,0 +1,2 @@
+{"timestamp":"2026-10-26T06:02:13.881798+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"4afd74acc6ab447c9f8aa4a6a414ed92","method":"GET","path":"/api/v1/health","status_code":200,"duration_ms":5.469}
+{"timestamp":"2026-10-26T06:02:14.017781+00:00","level":"INFO","logger":"scholarhub.request","message":"request_completed","request_id":"1b3d7bbbbef0414ba9d3bf83b2d1e3cd","method":"GET","path":"/api/v1/practice-sessions/f2fb5289-370e-42c9-8c2b-66cbedfbed10","status_code":200,"duration_ms":133.333}

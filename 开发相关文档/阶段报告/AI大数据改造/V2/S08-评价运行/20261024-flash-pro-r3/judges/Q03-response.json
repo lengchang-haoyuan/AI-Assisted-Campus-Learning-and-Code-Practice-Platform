@@ -1,0 +1,53 @@
+{
+  "case_id": "Q03",
+  "candidate_artifact_id": "S08-Q03-candidate-v2",
+  "candidate_text_version": "2.0",
+  "response": {
+    "case_id": "Q03",
+    "status": "scored",
+    "criterion_evidence": [
+      {
+        "criterion_id": "C01",
+        "evidence_valid": true,
+        "quote": "if reader.fieldnames is None or not required.issubset(reader.fieldnames):\n        raise ValueError(\"missing required headers\")",
+        "reason": "候选反馈引用该代码片段，正确指出缺失必需表头时抛出 ValueError，与参考判定一致。"
+      },
+      {
+        "criterion_id": "C02",
+        "evidence_valid": true,
+        "quote": "rid = int(row[\"record_id\"].strip())\n            raw = row[\"duration_minutes\"].strip()\n            duration = None if raw == \"\" else int(raw)\n            if rid <= 0 or (duration is not None and not 0 <= duration <= 1440):",
+        "reason": "候选反馈引用该片段，正确说明 record_id 与分钟解析及范围校验，非法行计入 invalid_count，与参考判定一致。"
+      },
+      {
+        "criterion_id": "C03",
+        "evidence_valid": true,
+        "quote": "if duration is None:\n            out[\"missing_duration_count\"] += 1\n        else:\n            out[\"known_duration_count\"] += 1",
+        "reason": "候选反馈引用该片段，正确区分未知分钟与已知 0 分钟，未将 0 当缺失，与参考判定一致。"
+      },
+      {
+        "criterion_id": "C04",
+        "evidence_valid": true,
+        "quote": "out[\"known_duration_count\"] += 1\n            out[\"known_minutes\"] += duration",
+        "reason": "候选反馈引用该片段，正确指出仅在已知分支累加分钟，未发现累加错误，与参考判定一致。"
+      },
+      {
+        "criterion_id": "C05",
+        "evidence_valid": true,
+        "quote": "out = {\"record_count\": 0, \"known_duration_count\": 0, \"known_minutes\": 0,\n           \"missing_duration_count\": 0, \"invalid_count\": 0}",
+        "reason": "候选反馈引用该片段，正确指出循环前初始化五个计数字段，空有效集返回完整字段，与参考判定一致。"
+      },
+      {
+        "criterion_id": "C06",
+        "evidence_valid": true,
+        "quote": "reader = csv.DictReader(io.StringIO(csv_text))",
+        "reason": "候选反馈引用该片段，正确指出仅使用内存解析，无外部 I/O，与参考判定一致。"
+      }
+    ],
+    "actionability_score": 2,
+    "unsupported_claim": false,
+    "reason": "候选反馈逐项给出具体代码位置与行为判断，均受代码和参考支持；但未提供可执行的验证样例或修正方向，故可执行性为2。"
+  },
+  "provider": "deepseek",
+  "model_id": "deepseek-v4-pro",
+  "raw_response_ref": "raw/06-judge_formal-Q03-response.json"
+}

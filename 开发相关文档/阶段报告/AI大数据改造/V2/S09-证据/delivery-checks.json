@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "local_links_checked": 126,
+  "missing_links": [],
+  "python_ast_files": 2,
+  "evidence_check_counts": {
+    "mock/results.json": 14,
+    "real/results.json": 8,
+    "restart/results.json": 1
+  },
+  "real_model_calls": 0,
+  "fake_requests": 8,
+  "old_rows_preserved": true,
+  "ports_listening": 0,
+  "source_head": "2faa8a2e8996fa84aa9b3abe513f85665b3af3db",
+  "new_dependencies": 0,
+  "new_public_api": 0,
+  "ddl_or_delete": 0
+}

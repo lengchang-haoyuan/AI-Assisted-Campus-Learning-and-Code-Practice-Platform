@@ -1,0 +1,48 @@
+{
+  "job_id": "hot-1",
+  "snapshot_id": "synthetic-100000-seed-20261020-v1",
+  "subjects": 1000,
+  "input_load_seconds": 0.28270923500008394,
+  "compute_seconds": 19.216639057000066,
+  "quality_and_dwd_seconds": 15.710618261000036,
+  "ads_collect_seconds": 3.7887300310001137,
+  "output_seconds": 4.1845522169999185,
+  "job_total_seconds": 23.717930546999924,
+  "validation_seconds": 0.1454841849999866,
+  "round_total_seconds": 23.86341473199991,
+  "equal_reference_leaf_assertions": 364264,
+  "quality_reconciled": true,
+  "output": "/home/administrator/scholarhub-analytics/s06-20261021/runs/n100000-spark-hot-1/hot-1/jobs/hot-1",
+  "totals": {
+    "records": 100000,
+    "known_minutes": 4244036,
+    "known_duration_count": 80000,
+    "missing_duration_count": 20000,
+    "known_zero_count": 10000,
+    "tasks": 25000,
+    "cohort_count": 1000,
+    "confirmed_count": 600,
+    "revised_count": 300,
+    "trusted_teaching_count": 600
+  },
+  "spark": {
+    "spark_version": "4.2.0",
+    "python_version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "master": "local[2]",
+    "shuffle_partitions": "8",
+    "driver_memory": "2g",
+    "java_version": "17.0.20.1",
+    "timezone": "UTC"
+  },
+  "label": "hot-1",
+  "measured": true,
+  "lifecycle": "hot",
+  "wall_seconds": 23.867171383999903,
+  "memory": {
+    "sample_seconds": 1,
+    "samples": 24,
+    "peak_process_tree_rss_bytes": 3719294976,
+    "method": "/proc statm: Python plus descendants; sampled RSS sum, shared pages may be counted twice"
+  },
+  "sample_finished_at": "2026-10-21T05:28:34.539373+00:00"
+}

@@ -1,0 +1,159 @@
+{
+  "status": "preflight_passed",
+  "checked_at": "2026-10-22T10:49:07.128670+08:00",
+  "evaluation_id": "S08-20261022-flash-pro-r1",
+  "preparation_checks_passed": 199,
+  "credentials_read": false,
+  "network_requests": 0,
+  "database_access": false,
+  "student_code_executed": false,
+  "existing_ledger": false,
+  "currency_hard_cap_cny": "3.00000000",
+  "role_limits": {
+    "under_test": 16,
+    "judge_calibration": 3,
+    "judge_formal": 16
+  },
+  "known_request_reservations": [
+    {
+      "role": "under_test",
+      "input_id": "Q01",
+      "input_upper_tokens": 8669,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02933800"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q02",
+      "input_upper_tokens": 8687,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02937400"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q03",
+      "input_upper_tokens": 9066,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.03013200"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q04",
+      "input_upper_tokens": 8790,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02958000"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q05",
+      "input_upper_tokens": 8510,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02902000"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q06",
+      "input_upper_tokens": 8669,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02933800"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q07",
+      "input_upper_tokens": 8911,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02982200"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q08",
+      "input_upper_tokens": 8686,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02937200"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q09",
+      "input_upper_tokens": 8668,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02933600"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q10",
+      "input_upper_tokens": 8649,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02929800"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q11",
+      "input_upper_tokens": 8893,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02978600"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q12",
+      "input_upper_tokens": 8711,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02942200"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q13",
+      "input_upper_tokens": 8718,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02943600"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q14",
+      "input_upper_tokens": 7481,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02696200"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q15",
+      "input_upper_tokens": 7315,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02663000"
+    },
+    {
+      "role": "under_test",
+      "input_id": "Q16",
+      "input_upper_tokens": 7521,
+      "output_cap": 1500,
+      "reservation_upper_cny": "0.02704200"
+    },
+    {
+      "role": "judge_calibration",
+      "input_id": "G01",
+      "input_upper_tokens": 8446,
+      "output_cap": 1200,
+      "reservation_upper_cny": "0.10841400"
+    },
+    {
+      "role": "judge_calibration",
+      "input_id": "G02",
+      "input_upper_tokens": 8432,
+      "output_cap": 1200,
+      "reservation_upper_cny": "0.10828800"
+    },
+    {
+      "role": "judge_calibration",
+      "input_id": "G03",
+      "input_upper_tokens": 8286,
+      "output_cap": 1200,
+      "reservation_upper_cny": "0.10697400"
+    }
+  ],
+  "sum_of_known_max_reservations_cny_not_a_charge": "0.78756400",
+  "formal_judge_cost": "candidate-dependent; compute exact message UTF8 bytes before each call",
+  "full_round_cost_guaranteed": false,
+  "admission_rule": "spent_or_held_upper + next_request_reservation <= 3.00 CNY; otherwise stop before POST",
+  "successful_call_settlement": "actual usage at peak all-input-cache-miss upper; unused reservation released",
+  "failure_settlement": "full pre-POST reservation retained; call counted; stop",
+  "execution": "not_run_use_explicit_execute_after_root_review"
+}

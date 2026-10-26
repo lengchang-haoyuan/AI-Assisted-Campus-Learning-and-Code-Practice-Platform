@@ -1,0 +1,40 @@
+{
+  "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+  "verified_date": "2026-10-25",
+  "verified_by": "仅用公开官方网页核对，未访问DeepSeek模型/账户API或读取凭证",
+  "currency": "CNY",
+  "unit_tokens": 1000000,
+  "models": {
+    "deepseek-flash": {
+      "documented_service_version": "DeepSeek-V4.1-Flash-1017",
+      "peak": {
+        "input_cache_hit": "0.04",
+        "input_cache_miss": "2",
+        "output": "8"
+      },
+      "off_peak": {
+        "input_cache_hit": "0.02",
+        "input_cache_miss": "1",
+        "output": "4"
+      }
+    },
+    "deepseek-v4-pro": {
+      "documented_service_version": "DeepSeek-V4-Pro-0813",
+      "peak": {
+        "input_cache_hit": "0.30",
+        "input_cache_miss": "9",
+        "output": "27"
+      },
+      "off_peak": {
+        "input_cache_hit": "0.15",
+        "input_cache_miss": "4.5",
+        "output": "13.5"
+      }
+    }
+  },
+  "budget_policy": "按峰价和输入全未命中预留，不依赖折扣/缓存；不是账户余额或实际扣款证明",
+  "account_reconciled": false,
+  "verification_note_for_execution": "本轮只读官方价格/Responses文档，Pro/Flash精确版本和峰价不变，不查询账户/余额或读取凭证。",
+  "current_public_docs_rechecked_at": "2026-10-25 Asia/Shanghai",
+  "current_public_docs_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
+}

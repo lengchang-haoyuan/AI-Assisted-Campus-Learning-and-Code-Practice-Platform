@@ -1,0 +1,167 @@
+{
+  "prompt_version": "judge-r2",
+  "analysis": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "artifact_id",
+      "status",
+      "dimensions",
+      "causal_or_ability_overclaim",
+      "reason"
+    ],
+    "properties": {
+      "artifact_id": {
+        "const": "S06-analysis-b96ea63e-v1"
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "scored",
+          "abstain",
+          "invalid"
+        ]
+      },
+      "dimensions": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 4,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "dimension_id",
+            "score",
+            "quote",
+            "reason"
+          ],
+          "properties": {
+            "dimension_id": {
+              "enum": [
+                "problem_cohort",
+                "numeric_evidence",
+                "patterns_counterexamples",
+                "conclusion_boundary"
+              ]
+            },
+            "score": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 2
+            },
+            "quote": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      },
+      "causal_or_ability_overclaim": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "reason": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "feedback": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "case_id",
+      "status",
+      "criterion_evidence",
+      "actionability_score",
+      "unsupported_claim",
+      "reason"
+    ],
+    "properties": {
+      "case_id": {
+        "enum": [
+          "G01",
+          "G02",
+          "G03"
+        ]
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "scored",
+          "abstain",
+          "invalid"
+        ]
+      },
+      "criterion_evidence": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 1,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "criterion_id",
+            "evidence_valid",
+            "quote",
+            "reason"
+          ],
+          "properties": {
+            "criterion_id": {
+              "const": "C01"
+            },
+            "evidence_valid": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "quote": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      },
+      "actionability_score": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "minimum": 0,
+        "maximum": 3
+      },
+      "unsupported_claim": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "reason": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "semantic_checks": [
+    "每次响应绑定当前输入artifact_id或case_id，不接受其他用例；analysis四维ID不重复不缺失。",
+    "scored时analysis四项必须为真正整数0至2（布尔不是分数）、夸大标记必须为布尔；逐项引用必须非空并存在于本次explanation/source_numbers。",
+    "scored时feedback分数为真正整数0至3，evidence_valid和unsupported_claim为布尔；quote须非空并定位当前code/feedback/reference。",
+    "abstain/invalid不以0分填空；分数和未知布尔为null，quote可空但必须给reason；analysis仍列四维，feedback仍绑定C01。",
+    "G03预期弃权只用于校准命中，不产生正式analysis得分；实际分析abstain/invalid均未完成。",
+    "G01/G02/G03逐项匹配冻结expected_status、expected_actionability_score、expected_criterion、expected_evidence_valid、expected_unsupported_claim，3/3才进入正式。",
+    "analysis总分由四项外部相加；status=scored、总分>=6且夸大=false且无未解决无效/弃权才通过。",
+    "引用存在只证明可定位；数字冲突由本地规则先拒绝，语言分数不能覆盖。"
+  ]
+}

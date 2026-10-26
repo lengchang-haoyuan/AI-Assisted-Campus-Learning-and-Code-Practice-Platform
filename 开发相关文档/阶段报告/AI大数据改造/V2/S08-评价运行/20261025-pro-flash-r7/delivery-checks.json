@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "python_AST_files": 11,
+  "json_files": 82,
+  "local_links": 235,
+  "missing_links": [],
+  "credential_pattern_matches": [],
+  "backend_tests": 40,
+  "tool_tests": 24,
+  "guard_assertions": 20,
+  "actual_result_audit_assertions": 112,
+  "new_calls": 11,
+  "new_call_roles": {
+    "under_test": 6,
+    "judge_calibration": 0,
+    "judge_formal": 5
+  },
+  "quality_complete": false,
+  "postprocess_error": null,
+  "model_calls_during_final_check": 0,
+  "database_access": false,
+  "student_code_executed": false,
+  "old_evidence_preserved": true,
+  "S09_started": false
+}

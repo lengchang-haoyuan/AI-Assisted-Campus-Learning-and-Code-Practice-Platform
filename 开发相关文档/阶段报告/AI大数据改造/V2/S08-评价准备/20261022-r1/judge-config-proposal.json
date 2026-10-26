@@ -1,0 +1,81 @@
+{
+  "status": "unselected_not_authorized",
+  "selected_provider": null,
+  "selected_exact_model_id": null,
+  "input_permission": false,
+  "system_prompt_ref": "judge-r4-system.txt",
+  "prior_parameters_ref": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r3-judge-r4/parameters.json",
+  "historical_parameters": {
+    "provider": "deepseek",
+    "model": "deepseek-flash",
+    "base_url": "https://api.deepseek.com",
+    "endpoint": "/chat/completions",
+    "prompt_version": "judge-r4",
+    "input_version": "S06-J1准备/20261021-r1",
+    "artifact_id": "S06-analysis-b96ea63e-v1",
+    "text_version": "1.0",
+    "temperature": 0,
+    "max_tokens": 1200,
+    "response_format": "json_object",
+    "reasoning_enabled": false,
+    "thinking": {
+      "type": "disabled"
+    },
+    "reasoning_resolution": "准备稿null未选定思考模式；首次校准前固定为关闭，保证temperature=0有效且不消耗隐含思考输出；全轮保持一致",
+    "total_timeout_seconds": 60,
+    "connect_timeout_seconds": 5,
+    "request_timeout_seconds": 60,
+    "max_retries": 0,
+    "retry_base_delay_seconds": 0,
+    "max_retry_delay_seconds": 0,
+    "transport_retries": 0,
+    "follow_redirects": false,
+    "stream": false,
+    "context": "每次只有相同system和该例user两条消息，无历史上下文",
+    "tools": "none",
+    "runtime_reuse": "现有DeepSeekProvider + AIClient，仅评价进程局部实例；不改全站配置",
+    "system_prompt_ref": "judge-r4-system.txt",
+    "prior_parameters_ref": "../20261021-deepseek-flash-r2-judge-r3/parameters.json",
+    "change_from_prior": "仅system追加候选反馈主张的证据语义；其余参数不变"
+  },
+  "historical_reuse_record_ref": "开发相关文档/阶段报告/AI大数据改造/V2/S06-J1运行/20261021-deepseek-flash-r3-judge-r4/calibration-reuse.json",
+  "historical_reuse_record": {
+    "valid": true,
+    "provider": "deepseek",
+    "requested_model_id": "deepseek-flash",
+    "documented_service_version_at_run": "DeepSeek-V4.1-Flash-1017",
+    "response_system_fingerprints_if_present": [
+      "e72d3c7f663d3e1383b00b3884cb4501"
+    ],
+    "prompt_version": "judge-r4",
+    "prompt_ref": "judge-r4-system.txt",
+    "parameters_ref": "parameters.json",
+    "calibration_result_refs": [
+      "raw/G01-validation.json",
+      "raw/G02-validation.json",
+      "raw/G03-validation.json"
+    ],
+    "reuse_only_if": [
+      "相同provider及精确实际服务模型版本",
+      "judge-r4原文和调用/采样参数不变",
+      "三份固定校准材料不变",
+      "复用前确认模型别名没有切换服务版本"
+    ],
+    "S08_under_test_model_rule": "默认不同精确型号；同型号仅标同模型辅助诊断",
+    "S08_real_calls_authorized": false,
+    "new_calibration_calls_if_reused": 0
+  },
+  "current_reuse_status": "not_verified",
+  "reuse_conditions": [
+    "相同provider及精确实际服务模型版本",
+    "judge-r4原文和调用/采样参数不变",
+    "三份固定校准材料不变",
+    "复用前确认模型别名没有切换服务版本",
+    "用户另行明确S08裁判及被测角色精确模型、输入范围、调用数和费用上限",
+    "S08正式被测模型默认不同于裁判精确型号；同型号只记同模型辅助诊断",
+    "新J1版本必须可确认与历史服务精确版本相同，不能仅凭别名判定"
+  ],
+  "formal_validation_note": "S06旧validator只绑定G01-G03/C01，不能直接作为S08六criterion正式响应验证器",
+  "client_max_retries": 0,
+  "transport_retries": 0
+}

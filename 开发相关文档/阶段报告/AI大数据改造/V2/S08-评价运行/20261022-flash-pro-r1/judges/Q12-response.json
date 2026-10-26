@@ -1,0 +1,53 @@
+{
+  "case_id": "Q12",
+  "candidate_artifact_id": "S08-Q12-candidate-v1",
+  "candidate_text_version": "1.0",
+  "response": {
+    "case_id": "Q12",
+    "status": "scored",
+    "criterion_evidence": [
+      {
+        "criterion_id": "C01",
+        "evidence_valid": true,
+        "quote": "代码在读取行前检查 reader.fieldnames 是否为 None 以及必需列是否为其子集，缺失时抛出 ValueError，符合表头约束。",
+        "reason": "候选反馈对C01的判断为pass，与reference一致；其引用代码行为（检查fieldnames并抛ValueError）得到student_code支持。"
+      },
+      {
+        "criterion_id": "C02",
+        "evidence_valid": true,
+        "quote": "任务输入为语法良好的 CSV，公开向量含双引号包裹字段；QUOTE_NONE 会禁用引号处理，使带引号字段无法按 CSV 语义解析，可能导致行被误判或字段值含引号。",
+        "reason": "候选反馈对C02的判断为fail，与reference一致；其引用代码行（quoting=csv.QUOTE_NONE）及理由（禁用引号处理导致解析错误）得到student_code和reference支持。"
+      },
+      {
+        "criterion_id": "C03",
+        "evidence_valid": true,
+        "quote": "有效行先计入 record_count；分钟空白时 duration 为 None 并计入 missing_duration_count，已知 0 时 duration 为 0 并计入 known_duration_count，未把 0 当缺失，分类计数符合契约。",
+        "reason": "候选反馈对C03的判断为pass，与reference一致；其引用代码行为（区分None和0）得到student_code支持。"
+      },
+      {
+        "criterion_id": "C04",
+        "evidence_valid": true,
+        "quote": "仅当 duration 不为 None 时把 duration 累加到 known_minutes，已知 0 也参与累加且不改变和，符合已知分钟累加要求。",
+        "reason": "候选反馈对C04的判断为pass，与reference一致；其引用代码行为（仅累加非None的duration）得到student_code支持。"
+      },
+      {
+        "criterion_id": "C05",
+        "evidence_valid": true,
+        "quote": "out 字典在循环前初始化五个计数字段为整数 0，无有效行时仍返回完整五字段，符合空有效集契约。",
+        "reason": "候选反馈对C05的判断为pass，与reference一致；其引用代码行为（初始化五个字段）得到student_code支持。"
+      },
+      {
+        "criterion_id": "C06",
+        "evidence_valid": true,
+        "quote": "函数仅使用 csv、io 和内存中的字符串处理，未读写文件、未联网、未执行任意代码，符合纯函数与静态边界。",
+        "reason": "候选反馈对C06的判断为pass，与reference一致；其引用代码行为（仅使用csv/io）得到student_code支持。"
+      }
+    ],
+    "actionability_score": 3,
+    "unsupported_claim": false,
+    "reason": "候选反馈对每个criterion均给出与reference一致的判断，并引用具体代码行为支持；对C02提供了代码位置、修正方向和自测样例，可执行性强。"
+  },
+  "provider": "deepseek",
+  "model_id": "deepseek-v4-pro",
+  "raw_response_ref": "raw/27-judge_formal-Q12-response.json"
+}
