@@ -1,5 +1,0 @@
-locator.selectOption: Timeout 30000ms exceeded.
-Call log:
-[2m  - waiting for getByLabel('数据来源', { exact: true })[22m
-
-    at mainline (C:\Users\Administrator\AppData\Local\Temp\ScholarHub-S06-20261021\verify-real-browser.cjs:86:52)

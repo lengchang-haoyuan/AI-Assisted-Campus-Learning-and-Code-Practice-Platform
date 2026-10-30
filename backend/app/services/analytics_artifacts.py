@@ -16,14 +16,15 @@ def load_publication(job_id: str) -> PublicationPayload:
     for index_name, jobs_root, inputs_root, acceptance_name in (
         ("S04-S05交接索引.json", "S04-产物/jobs", "S05-发布输入", "S04-数据验收.json"),
         ("S06-发布清单.json", "S06-产物/jobs", "S06-发布输入", "S06-数据验收.json"),
+        ("S10-发布清单.json", "S10-产物/jobs", "S10-发布输入", "S10-数据验收.json"),
     ):
         index_path = V2 / index_name
         if not index_path.exists():
             continue
         index = json.loads(index_path.read_text(encoding="utf-8"))
         for key in ("primary", "boundary"):
-            entry = index[key]
-            if entry["job_id"] == job_id:
+            entry = index.get(key)
+            if entry is not None and entry["job_id"] == job_id:
                 selected = entry, jobs_root, inputs_root, acceptance_name
     if selected is None:
         raise InputError("任务不在受控发布清单，禁止合成或测试向量发布")
@@ -37,7 +38,7 @@ def load_publication(job_id: str) -> PublicationPayload:
     acceptance=json.loads((V2/acceptance_name).read_text(encoding="utf-8"))
     if manifest["state"]!="computed" or quality["fatal_errors"]!=0 or quality["reconciled"] is not True or acceptance["all_frozen_data_assertions_passed"] is not True:
         raise InputError("离线任务或独立验收未完成")
-    if acceptance_name == "S06-数据验收.json" and acceptance.get("jobs", {}).get(job_id, {}).get("independent_answers_matched") is not True:
+    if acceptance_name in {"S06-数据验收.json", "S10-数据验收.json"} and acceptance.get("jobs", {}).get(job_id, {}).get("independent_answers_matched") is not True:
         raise InputError("本轮任务尚未通过独立答案核对")
     payload=PublicationPayload.model_validate_json((V2/inputs_root/job_id/"payload.json").read_text(encoding="utf-8"))
     for key in ("job_id","snapshot_id","owner_user_id","dataset_kind","period_start","period_end","business_timezone","source_cutoff","schema_version","metric_version","rule_version"):

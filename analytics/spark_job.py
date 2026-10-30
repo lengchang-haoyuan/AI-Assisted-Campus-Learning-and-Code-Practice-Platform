@@ -16,6 +16,9 @@ from pyspark.sql import SparkSession, functions as F, types as T
 
 from analytics.snapshot_files import read_snapshot, write_json
 from analytics.spark_quality import normalize, relationship_errors, source_definitions
+from analytics.practice_contract import COHORT_RULE, METRIC_VERSION, PRACTICE_DEFINITIONS, QUALITY_VERSION, SOURCE_VERSION
+from analytics.practice_quality import practice_clock_observations, practice_relationship_errors
+from analytics.practice_ads import collect_practice
 
 ROOT = Path(__file__).resolve().parents[1]
 V2 = ROOT / "开发相关文档/阶段报告/AI大数据改造/V2"
@@ -87,7 +90,7 @@ def collect_ads(spark, stats, manifest):
 def evidence_conclusions(answers, snapshot_id):
     conclusions = []
     for owner, a in answers.items():
-        topic, records, tasks = a["topic"], a["records"], a["tasks"]
+        topic, records, tasks = a["topic"].get("teaching", a["topic"]), a["records"], a["tasks"]
         for rule, condition, n, d, meaning, ref in [
             ("revision_observed", "revised_count>0", topic["revised_count"], topic["cohort_count"], "群组存在修订，不能推断修订改善能力", "dwd/cohort_facts"),
             ("first_pass_counterexample", "first_pass_confirmed_count>0", topic["first_pass_confirmed_count"], topic["cohort_count"], "存在首次通过，修订不是确认的必经步骤", "dwd/cohort_facts"),
@@ -108,13 +111,20 @@ def run_job(spark, input_path, output_root, job_id, rule_version="quality-1.0", 
     final = output_root / "jobs" / job_id
     if final.exists():
         raise FileExistsError("completed_job_exists")
-    if rule_version != "quality-1.0":
+    if rule_version not in ("quality-1.0", QUALITY_VERSION):
         raise ValueError("unapproved_rule_version")
     started, tick = datetime.now(UTC).isoformat(), time.perf_counter()
     manifest, tables = load_input(input_path)
     input_loaded_at = time.perf_counter()
-    if manifest["schema_version"] != "scholarhub-source-1.0" or manifest["rule_version"] != rule_version or manifest["metric_version"] != "learning-process-1.0":
+    versions = (manifest["schema_version"], manifest["metric_version"], manifest["rule_version"])
+    practice = versions == (SOURCE_VERSION, METRIC_VERSION, QUALITY_VERSION)
+    if versions not in (("scholarhub-source-1.0", "learning-process-1.0", "quality-1.0"),
+                        (SOURCE_VERSION, METRIC_VERSION, QUALITY_VERSION)) or manifest["rule_version"] != rule_version:
         raise ValueError("unsupported_input_version")
+    if practice and (type(manifest.get("owner_user_id")) is not int or len(tables.get("practice_sessions", [])) > 500):
+        raise ValueError("practice_single_owner_and_bound_required")
+    if practice and (manifest.get("practice_cohort_rule") != COHORT_RULE or manifest.get("coverage_basis") != "first_retained_owner_event"):
+        raise ValueError("unsupported_practice_scope")
     if manifest.get("business_timezone") != "Asia/Shanghai":
         raise ValueError("unsupported_business_timezone")
     if manifest["dataset_kind"] not in ("business", "controlled", "synthetic"):
@@ -145,16 +155,28 @@ def run_job(spark, input_path, output_root, job_id, rule_version="quality-1.0", 
         if set(core) - set(tables):
             raise QualityFailure("missing_source_table")
         definitions = source_definitions(core)
+        if practice:
+            definitions.update(PRACTICE_DEFINITIONS)
+            if set(PRACTICE_DEFINITIONS) - set(tables):
+                raise QualityFailure("missing_practice_source_table")
         frames, stats, errors = normalize(spark, tables, definitions)
+        observations = practice_clock_observations(spark) if practice and not errors else []
+        if practice:
+            write_json(pending / "observations.json", observations)
         if not errors:
             errors = relationship_errors(spark, manifest.get("owner_user_id"))
+            if practice:
+                errors += practice_relationship_errors(spark, manifest)
         for table, field in (("submission_versions", "submitted_at"), ("feedback", "created_at")):
             future = spark.sql(f"SELECT cast(id as string) source_key FROM v_{table} WHERE {field}>=TIMESTAMP '{manifest['source_cutoff']}'").collect()
             errors += [{"table_name": table, "source_key": r.source_key, "reason": "future_teaching_event"} for r in future]
         write_json(pending / "exceptions.json", errors)
-        write_json(pending / "quality.json", {"tables": stats, "fatal_errors": len(errors),
+        quality_report = {"tables": stats, "fatal_errors": len(errors),
                    "reconciled": all(s["raw_rows"] == s["unique_rows"] + s["exact_duplicates"] + s["invalid_rows"] for s in stats),
-                   "historical_minutes_rule": "NULL unknown; zero valid; historical nonnegative integer, no API 1440 limit"})
+                   "historical_minutes_rule": "NULL unknown; zero valid; historical nonnegative integer, no API 1440 limit"}
+        if practice:
+            quality_report["practice_cross_clock_creation_observations"] = len(observations)
+        write_json(pending / "quality.json", quality_report)
         if errors:
             raise QualityFailure(errors[0]["reason"])
         scope = manifest.get("subject_coverage")
@@ -179,6 +201,11 @@ def run_job(spark, input_path, output_root, job_id, rule_version="quality-1.0", 
             if name in ("record_facts", "task_facts", "cohort_facts"):
                 view.persist()
                 view.count()
+        if practice:
+            practice_sql = (ROOT / "analytics/practice_process.sql").read_text(encoding="utf-8")
+            parts = re.split(r"-- @view ([a-z_]+)\n", practice_sql)
+            for i in range(1, len(parts), 2):
+                spark.sql(parts[i+1].strip().format(**params)).createOrReplaceTempView(parts[i])
         calculated = time.perf_counter()
         answers = collect_ads(spark, stats, manifest)
         compute_finished = time.perf_counter()
@@ -195,11 +222,23 @@ def run_job(spark, input_path, output_root, job_id, rule_version="quality-1.0", 
             raise RuntimeError("injected_after_dwd_failure")
         for name in ("ads_records", "ads_tasks", "ads_topic", "ads_daily"):
             tagged(spark.table(name)).write.mode("errorifexists").parquet(str(pending / "ads" / name))
+        if practice:
+            for name in ("practice_session_facts", "practice_event_facts", "practice_advice_facts"):
+                counts[name] = spark.table(name).count()
+                tagged(spark.table(name)).write.mode("errorifexists").parquet(str(pending / "dwd" / name))
+            for name in ("ads_practice_events", "ads_practice_summary"):
+                tagged(spark.table(name)).write.mode("errorifexists").parquet(str(pending / "ads" / name))
         for owner, answer in answers.items():
             if counts["record_facts"] < answer["records"]["valid_unique_rows"]:
                 raise AssertionError("join_cardinality_mismatch")
         if counts["record_facts"] != sum(a["records"]["valid_unique_rows"] for a in answers.values()) or counts["task_facts"] != sum(a["tasks"]["total"] for a in answers.values()) or counts["cohort_facts"] != sum(a["topic"]["cohort_count"] for a in answers.values()):
             raise AssertionError("layer_reconciliation_failed")
+        if practice:
+            summaries = collect_practice(spark, manifest)
+            for owner, answer in answers.items():
+                answer["topic"] = {"teaching": answer["topic"], "practice": summaries[owner]}
+            if counts["practice_session_facts"] != sum(a["topic"]["practice"]["session_count"] for a in answers.values()):
+                raise AssertionError("practice_layer_reconciliation_failed")
         write_json(pending / "ads/answers.json", answers)
         write_json(pending / "ads/conclusions.json", evidence_conclusions(answers, manifest["snapshot_id"]))
         write_json(pending / "lineage.json", {"snapshot_id": manifest["snapshot_id"], "job_id": job_id,

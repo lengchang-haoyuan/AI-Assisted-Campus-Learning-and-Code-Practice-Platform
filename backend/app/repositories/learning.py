@@ -136,6 +136,13 @@ class LearningRepository:
             raise RuntimeError("任务写入后无法重新加载")
         return saved
 
+    def add_recommendation_task(self, task: DailyTask) -> None:
+        # 外层窄用例负责与来源映射一起提交；普通save_task保持原语义。
+        if task.plan_id is not None:
+            raise ValueError("建议首版不写入学习计划")
+        self._session.add(task)
+        self._session.flush()
+
     def delete_task(self, task: DailyTask) -> None:
         plan_id = task.plan_id
         self._session.delete(task)

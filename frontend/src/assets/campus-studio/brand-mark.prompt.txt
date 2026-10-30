@@ -1,8 +1,0 @@
-Use case: logo-brand
-Asset type: standalone transparent logo mark for the approved Campus Studio ScholarHub frontend.
-Input image 1: reference for the existing approved identity only. Closely match the sprouting code-bracket symbol at the upper-left of this screenshot, immediately before the ScholarHub wordmark. Isolate the symbol; omit the wordmark and every other part of the interface.
-Primary request: the approved flat sprouting code-bracket logo mark alone. Thick dark forest-green angle brackets < and > sit at left and right, with modestly rounded stroke ends. Between them is a single chartreuse diagonal slash rising from lower-left to upper-right. At the top is a delicate two-leaf sprout: one forest-green leaf curves toward the upper-left and a second green leaf curves toward the upper-right, connected by slim green stems.
-Style/medium: clean polished flat identity; crisp simple vector-like edges; accurate balanced geometry; no gradients, textures, shadows, perspective, or dimensional effects.
-Composition/framing: centered square icon, target 512 x 512 pixels. Match the approved mark's compact proportions, leaves at the top, angle brackets below, a narrow lime center slash. Transparent padding around the mark on all sides. The logo mark occupies about 78% of the square's height.
-Color palette: brackets dark forest #073F30; leaves natural forest green #357C3F; central diagonal stroke chartreuse #DCEB74.
-Constraints: genuinely transparent background with an alpha channel. No background color, no white tile, no checkerboard pixels, no letters, no wordmark, no text, no border, no watermark, no UI, no extra decoration. Only the sprouting code-bracket mark.

@@ -1,8 +1,0 @@
-{
-  "source_ref": "backend/app/practice/review.py",
-  "review_prompt_version": "practice-review-r3",
-  "review_schema_version": "practice-review/1.0",
-  "candidate_artifact_pattern": "S08-{case_id}-candidate-v3",
-  "candidate_text_version": "3.0",
-  "change_scope": "仅适配新提示身份/当前冻结快照；沿用evaluation-method-r3全部计分规则与引用/确定判断门槛，不改答案阈值分母"
-}

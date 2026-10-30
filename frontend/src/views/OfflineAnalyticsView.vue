@@ -4,7 +4,8 @@ import { useRoute, useRouter } from 'vue-router'
 import type { EChartsCoreOption } from 'echarts/core'
 
 import EChartPanel from '@/components/EChartPanel.vue'
-import { buildOfflineChartData, buildProcessInsights, formatBatchInstant, formatRatio, useOfflineAnalytics } from '@/composables/useOfflineAnalytics'
+import PracticeAnalyticsPanel from '@/components/PracticeAnalyticsPanel.vue'
+import { buildOfflineChartData, buildProcessInsights, formatBatchInstant, formatRatio, teachingSummary, useOfflineAnalytics } from '@/composables/useOfflineAnalytics'
 import type { OfflineBatchInfo, OfflineDatasetKind } from '@/types/offlineAnalytics'
 import '@/styles/offline-analytics.css'
 
@@ -21,22 +22,29 @@ const startInput = ref('')
 const endInput = ref('')
 const focusedDay = ref('')
 const trendMode = ref<'minutes' | 'records'>('minutes')
+const teaching = computed(() => detail.value ? teachingSummary(detail.value) : null)
+const practiceBatch = computed(() => detail.value?.schema_version === 'scholarhub-source-2.0' ? detail.value : null)
 const charts = computed(() => detail.value ? buildOfflineChartData(detail.value) : null)
 const insights = computed(() => detail.value ? buildProcessInsights(detail.value) : [])
 const isFixture = computed(() => detail.value?.quality.transaction_fixture === true || detail.value?.quality.permission_fixture === true)
-const isEmptyBatch = computed(() => detail.value !== null && detail.value.daily.length === 0)
+const isEmptyBatch = computed(() => detail.value !== null && detail.value.daily.length === 0
+  && (detail.value.schema_version === 'scholarhub-source-1.0' || detail.value.topic_summary.practice.session_count === 0))
 const visibleDaily = computed(() => detail.value?.daily.filter(day => !focusedDay.value || day.metric_date === focusedDay.value) ?? [])
 const selectionValue = computed(() => pendingBatchId.value ?? selectedBatchId.value ?? '')
 const historyOutsideList = computed(() => detail.value && !batches.value.some(batch => batch.batch_id === detail.value?.batch_id) ? detail.value : null)
 const summary = computed(() => {
   if (!detail.value) return '把任务、记录与提交反馈放在一起，找到这段实践下一步值得跟进的事。'
-  const c = detail.value.topic_summary
+  if (detail.value.schema_version === 'scholarhub-source-2.0') {
+    const p = detail.value.topic_summary.practice
+    return `${p.session_count}次实践会话、本周期${p.submission_event_count}次实际提交；${p.personal_end_count}次由本人审阅后结束。结合操作记录，选择下一步自测。`
+  }
+  const c = teachingSummary(detail.value)
   return c.cohort_count === 0 ? '本批没有首次提交群组，先结合个人任务和记录了解当前覆盖。'
     : c.cohort_count + '个首次提交群组中，' + c.confirmed_count + '个已获教师确认，' + c.pending_latest_count + '个最新版本仍待评。'
 })
 const nextStep = computed(() => {
   if (!detail.value) return ''
-  if (detail.value.topic_summary.pending_latest_count > 0) return '先核对待评版本与反馈，再安排下一步。'
+  if (teachingSummary(detail.value).pending_latest_count > 0) return '先核对待评版本与反馈，再安排下一步。'
   if (detail.value.tasks_summary.overdue_unfinished > 0) return '先核对逾期未完任务的计划与当前状态。'
   if (detail.value.records_summary.missing_duration_count > 0) return '记录时长尚有缺失，避免将已知分钟当成全部投入。'
   return '按具体任务要求继续实践。'
@@ -48,7 +56,7 @@ const emptyCopy = computed(() => ({
 }[emptyReason.value ?? 'no_completed_batch']))
 const facts = computed(() => {
   if (!detail.value) return []
-  const r = detail.value.records_summary, t = detail.value.tasks_summary, c = detail.value.topic_summary
+  const r = detail.value.records_summary, t = detail.value.tasks_summary, c = teachingSummary(detail.value)
   return [
     { key: 'known-minutes', title: '记录覆盖', value: String(r.known_minutes), unit: '分钟', summary: r.valid_unique_rows + '条记录 · 活跃' + r.active_days + '日',
       note: '时长已知' + r.known_duration_count + '条，缺失' + r.missing_duration_count + '条，明确为零' + r.known_zero_count + '条' },
@@ -101,7 +109,7 @@ function countOption(items: { name: string; value: number }[]): EChartsCoreOptio
 }
 const figures = computed(() => {
   if (!detail.value) return []
-  const r = detail.value.records_summary, t = detail.value.tasks_summary, c = detail.value.topic_summary
+  const r = detail.value.records_summary, t = detail.value.tasks_summary, c = teachingSummary(detail.value)
   return [
     { key: 'trend', title: trendMode.value === 'minutes' ? '记录分钟的变化' : '有记录的日子', subtitle: '分钟是背景，记录覆盖决定这条趋势能说明多少。', option: trendOption.value, empty: r.valid_unique_rows === 0,
       emptyText: '本批没有学习记录，不能据此判断没有实践。', aria: '记录分钟与记录覆盖趋势图', note: '明确为零保留零点；有记录但全部时长未知时，分钟曲线断开。数值可在下方日明细核对。' },
@@ -155,7 +163,8 @@ const ruleTitles: Record<string, string> = {
         <p>数据截至 {{ formatBatchInstant(detail.source_cutoff, detail.business_timezone) }}（{{ detail.business_timezone }}） · 批次 {{ detail.batch_id.slice(0, 8) }}</p>
         <p v-if="isFixture">此批用于权限或事务验证，不作为实际 Spark 来源的正式演示。</p><p v-else-if="detail.dataset_kind === 'controlled'">这是虚构业务样例，用于核对学习过程分析，不代表真实长期使用或教学成效。</p>
       </section>
-      <p v-if="detail.topic_summary.cohort_count > 0 && detail.topic_summary.cohort_count < 5" class="offline-sample-note">当前只有 {{ detail.topic_summary.cohort_count }} 个首次提交群组，适合逐项跟进，不宜推广为能力或效果结论。</p>
+      <PracticeAnalyticsPanel v-if="practiceBatch" :key="practiceBatch.batch_id" :batch="practiceBatch" />
+      <p v-if="teaching && teaching.cohort_count > 0 && teaching.cohort_count < 5" class="offline-sample-note">当前只有 {{ teaching.cohort_count }} 个首次提交群组，适合逐项跟进，不宜推广为能力或效果结论。</p>
       <dl class="offline-facts" aria-label="三类学习过程事实"><div v-for="fact in facts" :key="fact.key"><dt>{{ fact.title }}</dt><dd><strong :data-testid="fact.key">{{ fact.value }}</strong> {{ fact.unit }}</dd><p>{{ fact.summary }}</p><p>{{ fact.note }}</p></div></dl>
       <div v-if="isEmptyBatch" class="offline-empty offline-empty--batch"><h2>本批没有可绘制样本</h2><p>该批次已完成且属于本人；无记录、任务或提交时显示无样本，不把空集合解释为全部完成。</p></div>
       <div v-else class="offline-chart-grid" :data-chart-batch="detail.batch_id">

@@ -2,6 +2,9 @@ from dataclasses import dataclass
 from datetime import UTC, date, datetime, time
 from math import ceil
 from typing import Any
+from uuid import uuid4
+
+from sqlalchemy.exc import IntegrityError, OperationalError
 
 from app.core.exceptions import ConflictError, InputError, PermissionDeniedError, ResourceNotFoundError
 from app.models.course import Course
@@ -15,6 +18,11 @@ from app.models.learning import DailyTask, LearningPlan, LearningRecord, RECORD_
 from app.models.submission import FeedbackDecision
 from app.models.project import Project
 from app.repositories.learning import LearningPersistenceConflictError, LearningRepository
+from app.repositories.recommendation import RecommendationRepository
+from app.models.recommendation import PracticeRecommendationApplication
+from app.schemas.analytics import PracticeTopicSummary
+from app.schemas.practice_analytics import RecommendationApplicationCreate, RecommendationApplicationResponse
+from app.services.practice_recommendations import build_recommendations
 
 PLAN_TRANSITIONS: dict[LearningPlanStatus, set[LearningPlanStatus]] = {
     LearningPlanStatus.DRAFT: {LearningPlanStatus.ACTIVE, LearningPlanStatus.CANCELLED},
@@ -177,8 +185,111 @@ class RecordPage:
 
 
 class LearningService:
-    def __init__(self, repository: LearningRepository) -> None:
+    def __init__(self, repository: LearningRepository,
+                 recommendations: RecommendationRepository | None = None) -> None:
         self._repository = repository
+        self._recommendations = recommendations
+
+    def create_task_from_recommendation(self, user_id: int, data: RecommendationApplicationCreate,
+                                        batch_id: str) -> RecommendationApplicationResponse:
+        repo = self._recommendations
+        if repo is None:
+            raise RuntimeError("建议应用事务未配置")
+        batch_id = str(batch_id)
+        payload = {"batch_id": batch_id, **data.model_dump(mode="json", exclude={"request_key"})}
+
+        def response(row, replayed):
+            return RecommendationApplicationResponse(application_id=row.id, task_id=row.task_id,
+                batch_id=row.batch_id, candidate_key=row.candidate_key, replayed=replayed,
+                source_url=f"/offline-analytics?batch_id={row.batch_id}")
+
+        def replay(row):
+            if row.request_payload != payload:
+                raise ConflictError("同一请求键的原始审阅载荷不同")
+            return response(row, True)
+
+        try:
+            with repo.transaction():
+                batch = repo.lock_batch(user_id, batch_id)
+                if batch is None:
+                    raise ResourceNotFoundError("分析批次不存在")
+                prior = repo.by_request(user_id, data.request_key)
+                if prior is not None:
+                    return replay(prior)
+                if (batch.schema_version, batch.metric_version, batch.rule_version) != (
+                    "scholarhub-source-2.0", data.expected_metric_version, "quality-2.0"):
+                    raise ConflictError("该批次不支持辅助建议应用")
+                topic = PracticeTopicSummary.model_validate(batch.topic_summary)
+                candidate = next((item for item in build_recommendations(topic.practice)
+                                  if item.candidate_key == data.candidate_key), None)
+                if candidate is None or candidate.rule_version != data.expected_rule_version:
+                    raise ConflictError("候选来源不足或规则版本已过期")
+                if candidate.session_revision != data.expected_session_revision:
+                    raise ConflictError("候选会话版本不一致")
+                self._validate_recommendation_source(user_id, repo, candidate, batch)
+                if repo.by_candidate(user_id, batch_id, data.candidate_key) is not None:
+                    raise ConflictError("该候选已应用，请使用原请求读取结果")
+                # 与普通创建共用归属验证，首版明确无plan、无自动排程。
+                _, project_id = self._resolve_task_relations(None, data.project_id, user_id, data.scheduled_date)
+                description = (f"可选边界自测：{candidate.explanation}\n"
+                    f"来源批次：{batch_id}；截点：{batch.source_cutoff.isoformat()}\n"
+                    f"规则：{candidate.rule_version}；指标：{batch.metric_version}\n"
+                    f"会话：{candidate.session_id}；提交：{candidate.attempt_id}；"
+                    f"验收项：{candidate.criterion_id}；模型线索类别：{candidate.issue_type}\n"
+                    f"/offline-analytics?batch_id={batch_id}\n"
+                    f"/projects/{candidate.project_id}/practice?session={candidate.session_id}")
+                task = DailyTask(user_id=user_id, title=data.title, description=description,
+                    priority=TaskPriority.MEDIUM, status=TaskStatus.PENDING,
+                    scheduled_date=data.scheduled_date, plan_id=None, project_id=project_id)
+                self._repository.add_recommendation_task(task)
+                application = PracticeRecommendationApplication(id=str(uuid4()), owner_user_id=user_id,
+                    batch_id=batch_id, candidate_key=data.candidate_key, request_key=data.request_key,
+                    request_payload=payload, task_id=task.id)
+                repo.save_application(application)
+                result = response(application, False)
+            return result
+        except IntegrityError as exc:
+            # 唯一约束冲突时整个任务/映射事务已回滚；新事务只读取原成功请求。
+            with repo.transaction():
+                prior = repo.by_request(user_id, data.request_key)
+                if prior is not None:
+                    return replay(prior)
+            raise ConflictError("建议已被其他请求应用，请刷新") from exc
+        except OperationalError as exc:
+            if exc.orig.args and exc.orig.args[0] in (1205, 1213):
+                raise ConflictError("建议应用存在并发冲突，请用原请求键重试") from exc
+            raise
+
+    @staticmethod
+    def _validate_recommendation_source(owner, repo, candidate, batch):
+        current, latest = repo.current_source(owner, str(candidate.session_id))
+        if current is None or latest is None or (
+            current["revision"] != candidate.session_revision
+            or current["project_id"] != candidate.project_id
+            or current["template_id"] != candidate.template_id
+            or current["template_version"] != candidate.template_version
+            or current["context_version"] != candidate.context_version
+            or current["current_step_key"] != "implement"
+            or current["status"] not in {"waiting_submission", "waiting_revision", "waiting_confirmation"}
+            or latest["id"] != str(candidate.attempt_id)
+        ):
+            raise ConflictError("会话来源已变化，请生成新批次后重新审阅")
+        ref = next(item for item in candidate.references if item.attempt_id == candidate.attempt_id)
+        if latest["operation_id"] != str(ref.operation_id) or latest["ai_request_id"] != ref.ai_request_id:
+            raise ConflictError("当前建议绑定已变化")
+        ids = {str(value) for item in candidate.references for value in (item.review_event_id, item.issue_event_id)}
+        events = {row["id"]: row for row in repo.source_events(str(candidate.session_id), ids)}
+        if set(events) != ids:
+            raise ConflictError("建议事件引用缺失")
+        for item in candidate.references:
+            for identity, kind in ((item.review_event_id, "review_finished"), (item.issue_event_id, "criterion_issue")):
+                event = events[str(identity)]
+                if (event["attempt_id"] != str(item.attempt_id) or event["event_type"] != kind
+                    or event["operation_id"] != str(item.operation_id)
+                    or event["ai_request_id"] != item.ai_request_id
+                    or event["occurred_at"] >= batch.source_cutoff
+                    or kind == "criterion_issue" and (event["criterion_id"], event["issue_type"]) != (item.criterion_id, item.issue_type)):
+                    raise ConflictError("建议事件来源或版本不一致")
 
     def list_plans(self, user_id: int, *, page: int, page_size: int) -> PlanPage:
         total = self._repository.count_plans(user_id)

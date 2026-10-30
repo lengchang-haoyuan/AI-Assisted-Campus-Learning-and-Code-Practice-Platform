@@ -4,11 +4,18 @@ from uuid import uuid4
 
 from app.core.exceptions import ConflictError, InputError, ResourceNotFoundError
 from app.repositories.analytics import AnalyticsRepository
-from app.schemas.analytics import BatchDetail, BatchInfo, BatchPage, DailyMetric, PublicationPayload
+from app.schemas.analytics import BatchDetail, BatchInfo, BatchPage, DailyMetric, PublicationPayload, PracticeTopicSummary
+from app.services.practice_recommendations import build_recommendations, validate_practice_summary
 
 
 def validate_payload(payload: PublicationPayload):
-    r, t, c = payload.records_summary, payload.tasks_summary, payload.topic_summary
+    r, t = payload.records_summary, payload.tasks_summary
+    c = payload.topic_summary.teaching if isinstance(payload.topic_summary, PracticeTopicSummary) else payload.topic_summary
+    if isinstance(payload.topic_summary, PracticeTopicSummary):
+        try:
+            validate_practice_summary(payload.topic_summary.practice)
+        except ValueError as exc:
+            raise InputError(str(exc)) from exc
     if payload.quality.get("fatal_errors") != 0 or payload.quality.get("reconciled") is not True:
         raise InputError("离线质量未通过")
     if r.known_duration_count+r.missing_duration_count != r.valid_unique_rows or r.ordinary_count+r.trusted_teaching_count+r.unverified_claim_count != r.valid_unique_rows:
@@ -97,7 +104,16 @@ class AnalyticsService:
         row = self.repository.get_visible(str(batch_id), owner)
         if row is None:
             raise ResourceNotFoundError("分析批次不存在")
+        if (row.schema_version, row.metric_version, row.rule_version) not in {
+            ("scholarhub-source-1.0", "learning-process-1.0", "quality-1.0"),
+            ("scholarhub-source-2.0", "learning-process-2.0", "quality-2.0"),
+        }:
+            raise ConflictError("不支持的分析版本组合")
+        candidates = []
+        if row.metric_version == "learning-process-2.0":
+            candidates = build_recommendations(PracticeTopicSummary.model_validate(row.topic_summary).practice)
         return BatchDetail(**self.info(row).model_dump(),source={k:row.input_counts[k] for k in ("dataset_id","snapshot_id","job_id")},
                            records_summary=row.input_counts["records_summary"],tasks_summary=row.input_counts["tasks_summary"],
                            topic_summary=row.topic_summary,quality=row.quality,
-                           daily=[{k:getattr(d,k) for k in DailyMetric.model_fields} for d in self.repository.daily(row.batch_id)])
+                           daily=[{k:getattr(d,k) for k in DailyMetric.model_fields} for d in self.repository.daily(row.batch_id)],
+                           recommendations=candidates)

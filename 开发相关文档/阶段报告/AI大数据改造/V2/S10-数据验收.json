@@ -1,0 +1,66 @@
+{
+  "stage": "S10",
+  "scope": "process data engineering only; no model quality claim",
+  "all_frozen_data_assertions_passed": true,
+  "jobs": {
+    "s10-practice-main-r4": {
+      "job_id": "s10-practice-main-r4",
+      "snapshot_id": "s10-practice-owner3-20261026",
+      "independent_answers_matched": true,
+      "all_frozen_data_assertions_passed": true,
+      "output": "开发相关文档/阶段报告/AI大数据改造/V2/S10-产物/jobs/s10-practice-main-r4",
+      "spark_version": "4.2.0",
+      "versions": {
+        "schema_version": "scholarhub-source-2.0",
+        "metric_version": "learning-process-2.0",
+        "rule_version": "quality-2.0"
+      },
+      "whole_answers_compared": true
+    },
+    "s10-fixed-process": {
+      "job_id": "s10-fixed-process",
+      "snapshot_id": "fixture-process",
+      "independent_answers_matched": true,
+      "all_frozen_data_assertions_passed": true,
+      "output": "开发相关文档/阶段报告/AI大数据改造/V2/S10-产物/jobs/s10-fixed-process",
+      "spark_version": "4.2.0",
+      "versions": {
+        "schema_version": "scholarhub-source-2.0",
+        "metric_version": "learning-process-2.0",
+        "rule_version": "quality-2.0"
+      },
+      "whole_answers_compared": true
+    },
+    "s10-window-boundary": {
+      "job_id": "s10-window-boundary",
+      "snapshot_id": "fixture-window-boundary",
+      "independent_answers_matched": true,
+      "all_frozen_data_assertions_passed": true,
+      "output": "开发相关文档/阶段报告/AI大数据改造/V2/S10-产物/jobs/s10-window-boundary",
+      "spark_version": "4.2.0",
+      "versions": {
+        "schema_version": "scholarhub-source-2.0",
+        "metric_version": "learning-process-2.0",
+        "rule_version": "quality-2.0"
+      },
+      "whole_answers_compared": true
+    },
+    "s10-compat-v1": {
+      "job_id": "s10-compat-v1",
+      "snapshot_id": "s06-e2e-owner3-20261021",
+      "independent_answers_matched": true,
+      "all_frozen_data_assertions_passed": true,
+      "output": "开发相关文档/阶段报告/AI大数据改造/V2/S10-产物/jobs/s10-compat-v1",
+      "spark_version": "4.2.0",
+      "versions": {
+        "schema_version": "scholarhub-source-1.0",
+        "metric_version": "learning-process-1.0",
+        "rule_version": "quality-1.0"
+      },
+      "whole_answers_compared": true
+    }
+  },
+  "old_source_1_full_answers_unchanged": true,
+  "model_calls": 0,
+  "original_batches_overwritten": false
+}

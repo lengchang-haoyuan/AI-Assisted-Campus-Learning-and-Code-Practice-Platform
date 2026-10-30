@@ -92,6 +92,11 @@ export async function createLearningTask(
   return response.data
 }
 
+export async function getLearningTask(taskId: number, signal?: AbortSignal): Promise<LearningTaskResponse> {
+  const response = await apiClient.get<LearningTaskResponse>(`/learning/tasks/${taskId}`, { signal })
+  return response.data
+}
+
 export async function updateLearningTask(
   taskId: number,
   input: LearningTaskUpdateInput,

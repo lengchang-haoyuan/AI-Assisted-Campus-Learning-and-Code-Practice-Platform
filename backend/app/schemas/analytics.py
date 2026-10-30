@@ -4,6 +4,8 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from app.schemas.practice_analytics import PracticeSummary, RecommendationCandidate
+
 Count = Annotated[int, Field(strict=True, ge=0, le=2**63-1)]
 Kind = Literal["business", "controlled"]
 
@@ -60,6 +62,24 @@ class TopicSummary(StrictModel):
     first_review_histogram: dict[str, Count]
 
 
+class PracticeTopicSummary(StrictModel):
+    teaching: TopicSummary
+    practice: PracticeSummary
+
+
+def require_supported_topic(value):
+    versions = (value.schema_version, value.metric_version, value.rule_version)
+    if versions == ("scholarhub-source-1.0", "learning-process-1.0", "quality-1.0"):
+        if not isinstance(value.topic_summary, TopicSummary):
+            raise ValueError("旧版必须使用原教学专题")
+    elif versions == ("scholarhub-source-2.0", "learning-process-2.0", "quality-2.0"):
+        if not isinstance(value.topic_summary, PracticeTopicSummary):
+            raise ValueError("新版必须分别提供教学与实践专题")
+    else:
+        raise ValueError("不支持的分析版本组合")
+    return value
+
+
 class DailyMetric(StrictModel):
     metric_date: date
     records: Count
@@ -89,18 +109,19 @@ class PublicationPayload(StrictModel):
     period_end: date
     business_timezone: Literal["Asia/Shanghai"]
     source_cutoff: datetime
-    schema_version: Literal["scholarhub-source-1.0"]
-    metric_version: Literal["learning-process-1.0"]
-    rule_version: Literal["quality-1.0"]
+    schema_version: Literal["scholarhub-source-1.0", "scholarhub-source-2.0"]
+    metric_version: Literal["learning-process-1.0", "learning-process-2.0"]
+    rule_version: Literal["quality-1.0", "quality-2.0"]
     source_counts: dict[str, Count]
     quality: dict[str, Count | bool]
     records_summary: RecordsSummary
     tasks_summary: TasksSummary
-    topic_summary: TopicSummary
+    topic_summary: TopicSummary | PracticeTopicSummary
     daily: list[DailyMetric] = Field(max_length=90)
 
     @model_validator(mode="after")
     def require_window(self):
+        require_supported_topic(self)
         if self.period_end < self.period_start or (self.period_end-self.period_start).days >= 90:
             raise ValueError("分析窗口必须为1至90天")
         if self.source_cutoff.tzinfo is None or self.source_cutoff.utcoffset() is None:
@@ -153,6 +174,11 @@ class BatchDetail(BatchInfo):
     source: dict[str, str]
     records_summary: RecordsSummary
     tasks_summary: TasksSummary
-    topic_summary: TopicSummary
+    topic_summary: TopicSummary | PracticeTopicSummary
     quality: dict[str, Count | bool]
     daily: list[DailyMetric]
+    recommendations: list[RecommendationCandidate] = Field(default_factory=list, max_length=500)
+
+    @model_validator(mode="after")
+    def require_versions(self):
+        return require_supported_topic(self)

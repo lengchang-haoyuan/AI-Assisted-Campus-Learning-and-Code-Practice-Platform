@@ -1,0 +1,11 @@
+{
+  "controlled_snapshots": [
+    {
+      "snapshot_id": "s10-practice-owner3-20261026",
+      "owner_user_id": 3,
+      "path": "S10-样本/snapshots/s10-practice-owner3-20261026"
+    }
+  ],
+  "model_calls": 0,
+  "original_sources_preserved": true
+}

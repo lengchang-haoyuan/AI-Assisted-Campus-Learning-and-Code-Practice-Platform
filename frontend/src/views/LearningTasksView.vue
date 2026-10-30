@@ -1,20 +1,54 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onScopeDispose, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 import { getApiErrorMessage } from '@/api/errors'
-import { listPlans } from '@/api/learning'
+import { getLearningTask, listPlans } from '@/api/learning'
 import { listProjects } from '@/api/projects'
 import LearningNav from '@/components/LearningNav.vue'
 import LearningTaskEditor from '@/components/LearningTaskEditor.vue'
 import LiquidTabs, { type LiquidTabOption } from '@/components/LiquidTabs.vue'
 import { getLocalDateValue, priorityLabels, taskStatusLabels } from '@/domain/workspace'
 import { useLearningStore } from '@/stores/learning'
+import { useAuthStore } from '@/stores/auth'
 import type { LearningPlanResponse, LearningTaskCreateInput, LearningTaskResponse } from '@/types/learning'
 import type { ProjectResponse } from '@/types/project'
 import type { TaskStatus } from '@/types/workspace'
 
 const learningStore = useLearningStore()
+const route = useRoute(), auth = useAuthStore()
+const locatedTask = ref<LearningTaskResponse | null>(null), locatedError = ref<string | null>(null), locating = ref(false)
+let locatedController: AbortController | undefined, locatedGeneration = 0, locatedRequest = 0
+function sourceLinks(description: string | null): string[] {
+  if (!description) return []
+  return [...new Set(description.match(/\/offline-analytics\?batch_id=[\da-f-]{36}(?:&dataset_kind=(?:business|controlled))?|\/projects\/\d+\/practice\?session=[\da-f-]{36}/gi) ?? [])]
+}
+function isLocatedRequestCurrent(id: number, ticket: number): boolean {
+  return ticket === locatedGeneration && Number(route.query.task_id) === id && auth.token !== null && auth.currentUser !== null
+}
+async function refreshLocatedTask(id: number, ticket: number): Promise<void> {
+  if (!isLocatedRequestCurrent(id, ticket)) return
+  const request = ++locatedRequest
+  locatedController?.abort()
+  locatedController = new AbortController(); locating.value = true
+  locatedError.value = null
+  try {
+    const result = await getLearningTask(id, locatedController.signal)
+    if (request === locatedRequest && isLocatedRequestCurrent(id, ticket)) locatedTask.value = result
+  } catch (cause: unknown) {
+    if (request === locatedRequest && isLocatedRequestCurrent(id, ticket)) locatedError.value = getApiErrorMessage(cause, '所定位任务不可读取，请核对当前登录身份')
+  } finally { if (request === locatedRequest && isLocatedRequestCurrent(id, ticket)) locating.value = false }
+}
+watch(() => [route.query.task_id, auth.token, auth.currentUser?.id], async () => {
+  const ticket = ++locatedGeneration
+  locatedController?.abort(); locatedTask.value = null; locatedError.value = null; locating.value = false
+  if (!route.query.task_id || !auth.token || !auth.currentUser) return
+  const id = Number(route.query.task_id)
+  if (!Number.isSafeInteger(id) || id < 1) { locatedError.value = '任务编号无效，请从建议应用结果重新打开'; return }
+  await refreshLocatedTask(id, ticket)
+}, { immediate: true, flush: 'sync' })
+onScopeDispose(() => { ++locatedGeneration; locatedController?.abort() })
 const planOptions = ref<LearningPlanResponse[]>([])
 const projectOptions = ref<ProjectResponse[]>([])
 const scope = ref('today')
@@ -62,8 +96,10 @@ function closeEditor(): void {
 
 async function saveTask(input: LearningTaskCreateInput & { status?: TaskStatus }): Promise<void> {
   const wasEditing = editingTask.value !== null
+  const taskId = editingTask.value?.id, ticket = locatedGeneration
   try {
-    await learningStore.saveTask(input, editingTask.value?.id)
+    await learningStore.saveTask(input, taskId)
+    if (taskId !== undefined) await refreshLocatedTask(taskId, ticket)
     closeEditor()
     await Promise.all([loadTasks(), loadPlanOptions()])
     ElMessage.success(wasEditing ? '任务已更新' : '任务已创建')
@@ -73,8 +109,10 @@ async function saveTask(input: LearningTaskCreateInput & { status?: TaskStatus }
 }
 
 async function completeTask(task: LearningTaskResponse): Promise<void> {
+  const ticket = locatedGeneration
   try {
     await learningStore.completeTask(task.id)
+    await refreshLocatedTask(task.id, ticket)
     await loadPlanOptions()
     ElMessage.success('任务已完成，计划进度已同步')
   } catch (error: unknown) {
@@ -83,11 +121,16 @@ async function completeTask(task: LearningTaskResponse): Promise<void> {
 }
 
 async function removeTask(task: LearningTaskResponse): Promise<void> {
+  const ticket = locatedGeneration
   try {
     await ElMessageBox.confirm(`确定删除任务“${task.title}”吗？`, '删除任务', {
       confirmButtonText: '确认删除', cancelButtonText: '取消', type: 'warning',
     })
     await learningStore.removeTask(task.id)
+    if (isLocatedRequestCurrent(task.id, ticket)) {
+      ++locatedGeneration; locatedController?.abort()
+      locatedTask.value = null; locatedError.value = null; locating.value = false
+    }
     await Promise.all([loadTasks(), loadPlanOptions()])
     ElMessage.success('任务已删除')
   } catch (error: unknown) {
@@ -121,6 +164,14 @@ onMounted(() => {
       <button class="primary-command" type="button" @click="openEditor()">创建任务</button>
     </header>
 
+    <p v-if="locating" role="status">正在定位任务与建议来源…</p>
+    <p v-if="locatedError" class="inline-alert is-error" role="alert">{{ locatedError }}</p>
+    <section v-if="locatedTask" class="workspace-panel" aria-label="所定位任务与来源" :data-located-task="locatedTask.id">
+      <h2>{{ locatedTask.title }}</h2><p>{{ locatedTask.scheduled_date }} · {{ locatedTask.project?.name || '无关联项目' }} · {{ taskStatusLabels[locatedTask.status] }}</p>
+      <p style="white-space: pre-wrap; overflow-wrap: anywhere">{{ locatedTask.description }}</p>
+      <div class="learning-row-actions"><RouterLink v-for="link in sourceLinks(locatedTask.description)" :key="link" :to="link">{{ link.startsWith('/offline-analytics') ? '返回分析批次与建议来源' : '返回实践会话与提交历史' }}</RouterLink></div>
+    </section>
+
     <section v-if="showEditor" class="workspace-panel workspace-editor learning-editor" aria-label="任务编辑器">
       <div class="panel-title-row"><h2>{{ editingTask ? '编辑任务' : '创建任务' }}</h2><button class="text-command" type="button" @click="closeEditor">关闭</button></div>
       <LearningTaskEditor :key="editingTask?.id ?? 'new-task'" :initial-value="editingTask" :plans="planOptions" :projects="projectOptions" :submitting="learningStore.saving" @submit="saveTask" @cancel="closeEditor" />
@@ -136,7 +187,7 @@ onMounted(() => {
     <ul v-else-if="learningStore.taskPage.items.length" class="workspace-task-board learning-task-board">
       <li v-for="task in learningStore.taskPage.items" :key="task.id" :class="{ 'is-completed': task.status === 'completed' }">
         <div class="task-priority" :data-priority="task.priority"><span />{{ priorityLabels[task.priority] }}</div>
-        <div class="task-main-copy"><strong>{{ task.title }}</strong><p v-if="task.description">{{ task.description }}</p><small>{{ task.scheduled_date }} · {{ task.plan?.name || '独立任务' }} · {{ task.project?.name || '无关联项目' }}</small></div>
+        <div class="task-main-copy"><strong>{{ task.title }}</strong><p v-if="task.description">{{ task.description }}</p><small>{{ task.scheduled_date }} · {{ task.plan?.name || '独立任务' }} · {{ task.project?.name || '无关联项目' }}</small><div><RouterLink v-for="link in sourceLinks(task.description)" :key="link" :to="link">{{ link.startsWith('/offline-analytics') ? '分析建议来源' : '实践提交历史' }}</RouterLink></div></div>
         <span class="status-chip">{{ taskStatusLabels[task.status] }}</span>
         <div class="learning-row-actions">
           <button class="text-command" type="button" @click="openEditor(task)">编辑</button>

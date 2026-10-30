@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "C:\Users\Administrator\AppData\Local\Temp/ScholarHub-S03-20261020/validate_delivery.py", line 36, in <module>
-    ok=ctypes.windll.psapi.GetProcessMemoryInfo(ctypes.windll.kernel32.GetCurrentProcess(),ctypes.byref(mem),mem.cb)
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ctypes.ArgumentError: argument 1: OverflowError: int too long to convert

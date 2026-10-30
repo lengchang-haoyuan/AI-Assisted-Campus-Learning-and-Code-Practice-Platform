@@ -16,6 +16,10 @@ from app.core.config import Settings
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from analytics.snapshot_files import begin_snapshot, publish_snapshot, write_json
+from analytics.practice_contract import (
+    COHORT_RULE, METRIC_VERSION, PRACTICE_DEFINITIONS, QUALITY_VERSION,
+    SOURCE_VERSION, validate_practice_sources,
+)
 
 FIXTURE = ROOT / "开发相关文档/阶段报告/AI大数据改造/V2/S01-分析固定样例与独立答案.json"
 SCHEMA = json.loads(FIXTURE.read_text(encoding="utf-8"))["schema"]
@@ -60,6 +64,57 @@ class SnapshotReader:
             return []
         placeholders = ",".join(f":v{i}" for i in range(len(ids)))
         return self.table(name, f"id IN ({placeholders})", {f"v{i}": v for i, v in enumerate(ids)})
+
+
+def select_practice_sources(reader, owner, start, end, cutoff):
+    """同事务投影群组及其父链；JSON只在SQL内按已定路径读取。"""
+    params = {"owner": owner, "start": start, "end": end, "cutoff": cutoff}
+    session_fields = ",".join(f["field"] for f in PRACTICE_DEFINITIONS["practice_sessions"])
+    sessions = reader.query(f"SELECT {session_fields} FROM practice_sessions WHERE owner_user_id=:owner "
+        "AND created_at>=:start AND created_at<:end AND created_at<:cutoff ORDER BY id LIMIT 501", params)
+    if len(sessions) > 500:
+        raise ValueError("practice_summary_session_bound_exceeded")
+    coverage = reader.query("SELECT MIN(e.occurred_at) AS first_at FROM practice_events e "
+        "JOIN practice_sessions s ON s.id=e.session_id WHERE s.owner_user_id=:owner AND e.occurred_at<:cutoff", params)[0]["first_at"]
+    rows = {name: [] for name in PRACTICE_DEFINITIONS}
+    rows["practice_sessions"] = sessions
+    if sessions:
+        params.update({f"p{i}": s["id"] for i, s in enumerate(sessions)})
+        marks = ",".join(f":p{i}" for i in range(len(sessions)))
+        rows["practice_attempts"] = reader.query(f"""
+            SELECT a.id,a.session_id,a.step_key,a.attempt_no,a.status,a.operation_id,a.ai_request_id,
+              NULLIF(JSON_UNQUOTE(JSON_EXTRACT(a.feedback,'$.ai_static_review.operation_id')),'null') AS bound_operation_id,
+              CAST(NULLIF(JSON_UNQUOTE(JSON_EXTRACT(a.feedback,'$.ai_static_review.ai_request_id')),'null') AS UNSIGNED) AS bound_ai_request_id,
+              CAST(a.self_statement AS UNSIGNED) AS self_statement,
+              CASE JSON_UNQUOTE(JSON_EXTRACT(a.feedback,'$.submitted_output_match.matched'))
+                WHEN 'true' THEN 'matched' WHEN 'false' THEN 'mismatched' ELSE 'unknown' END AS output_comparison,
+              CASE WHEN JSON_UNQUOTE(JSON_EXTRACT(a.feedback,'$.personal_confirmation.source'))='authenticated_practice_owner'
+                THEN 1 ELSE 0 END AS personal_reviewed,
+              CASE JSON_UNQUOTE(JSON_EXTRACT(a.feedback,'$.teacher_confirmation.value'))
+                WHEN 'true' THEN 1 WHEN 'false' THEN 0 ELSE NULL END AS teacher_confirmation,
+              a.created_at,a.updated_at,a.reviewed_at
+            FROM practice_attempts a WHERE a.session_id IN ({marks}) AND a.created_at<:cutoff ORDER BY a.id
+        """, params)
+        rows["practice_events"] = reader.query(f"""
+            SELECT e.id,e.session_id,e.attempt_id,e.event_key,e.event_type,e.criterion_id,e.issue_type,
+              e.confirmation_kind,e.occurred_at,
+              JSON_UNQUOTE(JSON_EXTRACT(e.action_payload,'$.template_id')) AS template_id,
+              JSON_UNQUOTE(JSON_EXTRACT(e.action_payload,'$.template_version')) AS template_version,
+              JSON_UNQUOTE(JSON_EXTRACT(e.action_payload,'$.step_key')) AS step_key,
+              CAST(JSON_UNQUOTE(JSON_EXTRACT(e.action_payload,'$.context_version')) AS UNSIGNED) AS context_version,
+              CAST(JSON_UNQUOTE(JSON_EXTRACT(e.action_payload,'$.revision')) AS UNSIGNED) AS revision,
+              NULLIF(JSON_UNQUOTE(JSON_EXTRACT(e.action_payload,'$.operation_id')),'null') AS operation_id,
+              CAST(NULLIF(JSON_UNQUOTE(JSON_EXTRACT(e.action_payload,'$.ai_request_id')),'null') AS UNSIGNED) AS ai_request_id,
+              ar.user_id AS ai_request_owner_id,
+              NULLIF(JSON_UNQUOTE(JSON_EXTRACT(ar.request_metadata,'$.prompt_version')),'null') AS prompt_version,
+              JSON_UNQUOTE(JSON_EXTRACT(e.action_payload,'$.status')) AS status
+            FROM practice_events e LEFT JOIN ai_requests ar
+              ON ar.id=CAST(NULLIF(JSON_UNQUOTE(JSON_EXTRACT(e.action_payload,'$.ai_request_id')),'null') AS UNSIGNED)
+            WHERE e.session_id IN ({marks}) AND e.occurred_at<:cutoff ORDER BY e.id
+        """, params)
+    reader.reads.extend(PRACTICE_DEFINITIONS)
+    return {table: [{key: iso(value) for key, value in row.items()} for row in values]
+            for table, values in rows.items()}, iso(coverage)
 
 
 def select_sources(reader, owner, start, end, cutoff, include_ai=False):
@@ -197,7 +252,7 @@ def validate_sources(rows, owner, cutoff):
 
 
 def export_snapshot(engine, root, snapshot_id, owner, period_start, period_end,
-                    include_ai=False, after_snapshot_started=None, after_read=None):
+                    include_ai=False, after_snapshot_started=None, after_read=None, include_practice=False):
     start, end = utc_window(period_start, period_end)
     pending, final = begin_snapshot(root, snapshot_id)
     started = datetime.now(UTC).isoformat()
@@ -215,14 +270,24 @@ def export_snapshot(engine, root, snapshot_id, owner, period_start, period_end,
             required = set(SCHEMA) | {"users", "courses", "learning_plans"}
             if include_ai:
                 required.add("ai_requests")
+            if include_practice:
+                required.update(PRACTICE_DEFINITIONS)
+                required.add("ai_requests")
             if any(dict((r["name"], r["engine"]) for r in engines).get(t) != "InnoDB" for t in required):
                 raise ValueError("non_transactional_or_missing_source")
             if after_snapshot_started:
                 after_snapshot_started()
             rows, auxiliary = select_sources(reader, owner, start, end, cutoff, include_ai)
+            if include_practice:
+                practice_rows, coverage = select_practice_sources(reader, owner, start, end, cutoff)
+                rows.update(practice_rows)
+                project_ids = {r["id"] for r in rows["projects"]}
+                rows["projects"] += reader.ids("projects", {s["project_id"] for s in practice_rows["practice_sessions"]} - project_ids)
             if after_read:
                 after_read()
             validate_sources(rows, owner, cutoff)
+            if include_practice:
+                validate_practice_sources(rows, owner, cutoff)
             connection.commit()
         finished = datetime.now(UTC).isoformat()
         manifest = {
@@ -244,6 +309,11 @@ def export_snapshot(engine, root, snapshot_id, owner, period_start, period_end,
             "auxiliary_checks": auxiliary, "source_tables_read": reader.reads,
             "auxiliary_schema_version": "ai-request-aux-1.0" if include_ai else None,
         }
+        if include_practice:
+            manifest.update(schema_version=SOURCE_VERSION, metric_version=METRIC_VERSION, rule_version=QUALITY_VERSION,
+                practice_cohort_rule=COHORT_RULE, observed_event_coverage_start=coverage,
+                coverage_basis="first_retained_owner_event")
+            manifest["filters"]["practice"] = COHORT_RULE
         return final, publish_snapshot(pending, final, rows, manifest)
     except Exception as error:
         write_json(pending / "failure.json", {"extraction_status": "failed", "snapshot_id": snapshot_id,
@@ -260,6 +330,7 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--snapshot-id", default=f"ods-{uuid4().hex}")
     parser.add_argument("--include-ai-aux", action="store_true")
+    parser.add_argument("--include-practice", action="store_true", help="显式使用source-2.0实践白名单；默认保留1.0")
     args = parser.parse_args()
     # 本轮入口限定已核实目标；扩展到业务源时必须明确数据授权及 kind。
     if args.database != "scholarhub_l4_s02_20261020" or args.owner not in (3, 4):
@@ -270,7 +341,7 @@ def main():
     engine = create_engine(url.set(database=args.database), echo=False)
     try:
         path, manifest = export_snapshot(engine, args.output, args.snapshot_id, args.owner,
-                                         args.start, args.end, args.include_ai_aux)
+                                         args.start, args.end, args.include_ai_aux, include_practice=args.include_practice)
         print(json.dumps({"path": str(path), "counts": manifest["row_counts"]}, ensure_ascii=False))
     finally:
         engine.dispose()

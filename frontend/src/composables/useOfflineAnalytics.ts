@@ -14,6 +14,7 @@ import type {
   OfflineDatasetKind,
   OfflineEmptyReason,
   OfflineRatio,
+  OfflineTopicSummary,
 } from '@/types/offlineAnalytics'
 
 interface RefreshOptions {
@@ -295,10 +296,14 @@ export interface OfflineChartData {
   reviewHistogram: OfflineChartSlice[]
 }
 
+export function teachingSummary(batch: OfflineBatchDetail): OfflineTopicSummary {
+  return batch.schema_version === 'scholarhub-source-2.0' ? batch.topic_summary.teaching : batch.topic_summary
+}
+
 export function buildOfflineChartData(batch: OfflineBatchDetail): OfflineChartData {
   const r = batch.records_summary
   const t = batch.tasks_summary
-  const c = batch.topic_summary
+  const c = teachingSummary(batch)
   return {
     dates: batch.daily.map(day => day.metric_date),
     minutes: batch.daily.map(day => day.known_duration_count > 0 ? day.known_minutes : day.records > 0 ? null : 0),
@@ -352,7 +357,7 @@ export interface ProcessInsight {
 export function buildProcessInsights(batch: OfflineBatchDetail): ProcessInsight[] {
   const r = batch.records_summary
   const t = batch.tasks_summary
-  const c = batch.topic_summary
+  const c = teachingSummary(batch)
   const cohortDates = batch.daily.filter(day => day.cohort_count > 0).map(day => day.metric_date)
   return [
     {

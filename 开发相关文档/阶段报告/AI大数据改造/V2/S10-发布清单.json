@@ -1,0 +1,9 @@
+{
+  "stage": "S10",
+  "contract": "V2-S01-r2 + S10-advisory-1.0",
+  "primary": {
+    "job_id": "s10-practice-main-r4",
+    "relative_path": "S10-产物/jobs/s10-practice-main-r4"
+  },
+  "authorization": "2026-10-26 user approved isolated S10 chain; one validated practice job"
+}

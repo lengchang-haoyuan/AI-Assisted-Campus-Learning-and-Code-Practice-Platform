@@ -39,6 +39,7 @@ EXPECTED_TABLES = {
     "practice_sessions",
     "practice_attempts",
     "practice_events",
+    "practice_recommendation_applications",
     "password_resets",
     "feedback",
     "notifications",
@@ -159,6 +160,9 @@ class DatabaseSchemaTests(unittest.TestCase):
             ("practice_attempts", "ai_request_id", "ai_requests.id"): "SET NULL",
             ("practice_events", "session_id", "practice_sessions.id"): "CASCADE",
             ("practice_events", "attempt_id", "practice_attempts.id"): "CASCADE",
+            ("practice_recommendation_applications", "owner_user_id", "users.id"): "RESTRICT",
+            ("practice_recommendation_applications", "batch_id", "analytics_batches.batch_id"): "RESTRICT",
+            ("practice_recommendation_applications", "task_id", "daily_tasks.id"): "RESTRICT",
         }
         actual: dict[tuple[str, str, str], str | None] = {}
         for table in Base.metadata.tables.values():

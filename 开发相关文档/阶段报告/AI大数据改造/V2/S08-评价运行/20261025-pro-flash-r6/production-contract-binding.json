@@ -1,9 +1,0 @@
-{
-  "source_ref": "backend/app/practice/review.py",
-  "review_prompt_version": "practice-review-r5",
-  "review_schema_version": "practice-review/1.0",
-  "candidate_artifact_pattern": "S08-{case_id}-candidate-v5",
-  "candidate_text_version": "5.0",
-  "change_scope": "生成侧补criterion/issue_type组合；新角色身份/UTF8错误处理，公共Schema/冻结答案/阈值/分母与evaluation-method-r3不改",
-  "review_request_version": "practice-review-responses-schema-r2"
-}

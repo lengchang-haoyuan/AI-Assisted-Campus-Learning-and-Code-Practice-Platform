@@ -52,6 +52,8 @@ def normalize(spark, tables, definitions):
                 value = F.expr(f"try_cast(`{name}` AS BIGINT)")
                 minimum = 1 if name in ("id", "learning_record_id", "revision", "version_number", "latest_version_number") or name.endswith("_id") else 0
                 errors.append(F.when(original.isNotNull() & (value.isNull() | (value < minimum)), F.lit("integer_out_of_range")))
+                if field.get("enum_values"):
+                    errors.append(F.when(original.isNotNull() & ~value.isin(field["enum_values"]), F.lit("unknown_enum")))
             elif kind in ("DATE", "DATETIME"):
                 value = F.expr(f"try_cast(`{name}` AS {'DATE' if kind == 'DATE' else 'TIMESTAMP'})")
                 pattern = r"^\d{4}-\d{2}-\d{2}$" if kind == "DATE" else r"(Z|[+-]\d{2}:\d{2})$"
@@ -60,6 +62,13 @@ def normalize(spark, tables, definitions):
                 value = original
                 if field.get("enum_values"):
                     errors.append(F.when(original.isNotNull() & ~original.isin(field["enum_values"]), F.lit("unknown_enum")))
+                if table.startswith("practice_"):
+                    import re
+                    length = re.fullmatch(r"(?:VAR)?CHAR\((\d+)\)", kind)
+                    if length:
+                        errors.append(F.when(original.isNotNull() & (F.length(original) > int(length.group(1))), F.lit("string_too_long")))
+                    if kind == "CHAR(36)":
+                        errors.append(F.when(original.isNotNull() & ~original.rlike(r"^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"), F.lit("practice_invalid_uuid")))
             if not field["nullable"]:
                 errors.append(F.when(original.isNull(), F.lit("required_key_missing")))
             expressions.append(value.alias(name))

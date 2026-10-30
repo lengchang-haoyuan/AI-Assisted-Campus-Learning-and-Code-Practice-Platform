@@ -1,0 +1,116 @@
+[
+  {
+    "table_name": "practice_events",
+    "source_key": "1fe929aa-27a3-49b2-9526-c2f130d19774",
+    "reason": "session_creation_cross_clock",
+    "database_ahead_microseconds": 323
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "35fd4d38-dc0f-4eae-a8e9-6028db07e548",
+    "reason": "session_creation_cross_clock",
+    "database_ahead_microseconds": 76
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "1fd4d781-b13f-4b1a-91d7-e443e16fec29",
+    "reason": "session_creation_cross_clock",
+    "database_ahead_microseconds": 891
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "62e7f9f3-0305-4d92-b4c1-2566e5841e94",
+    "reason": "session_creation_cross_clock",
+    "database_ahead_microseconds": 74
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "43b90309-9eea-435d-af09-ce69f01b1424",
+    "reason": "session_creation_cross_clock",
+    "database_ahead_microseconds": 268
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "501d44d5-2a76-4f77-bade-08a743d67482",
+    "reason": "session_creation_cross_clock",
+    "database_ahead_microseconds": 421
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "61569a52-91f9-46a4-83f3-f0ba35670848",
+    "reason": "session_creation_cross_clock",
+    "database_ahead_microseconds": 183
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "700b9d62-b3d9-40b3-85b0-9b81015bd7d4",
+    "reason": "session_creation_cross_clock",
+    "database_ahead_microseconds": 182
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "76231b87-ee50-44b2-9287-5b5788ff5701",
+    "reason": "session_creation_cross_clock",
+    "database_ahead_microseconds": 268
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "fe934dde-a6dd-422d-8ba6-c02f8683ed96",
+    "reason": "session_creation_cross_clock",
+    "database_ahead_microseconds": 146
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "a43c015b-598b-4a12-92d5-65eed75be502",
+    "reason": "session_creation_cross_clock",
+    "database_ahead_microseconds": 211
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "a535c84d-aaa5-4d4f-8362-17cef6101d2c",
+    "reason": "session_creation_cross_clock",
+    "database_ahead_microseconds": 60
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "be70a142-d453-4195-b75b-91340ae02092",
+    "reason": "session_creation_cross_clock",
+    "database_ahead_microseconds": 54
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "3e877c67-2654-4c9e-be06-95bc348ff51b",
+    "reason": "attempt_creation_cross_clock",
+    "database_ahead_microseconds": 9
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "40c3f177-4198-48a9-a05b-d79c005cc038",
+    "reason": "attempt_creation_cross_clock",
+    "database_ahead_microseconds": 235
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "1b37740f-cd41-470b-9cb7-c06a35c71c22",
+    "reason": "attempt_creation_cross_clock",
+    "database_ahead_microseconds": 155
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "25323aeb-d373-4009-a376-1a319de191cb",
+    "reason": "attempt_creation_cross_clock",
+    "database_ahead_microseconds": 92
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "e4a5facd-9999-43e4-886f-2ed6b322fb39",
+    "reason": "attempt_creation_cross_clock",
+    "database_ahead_microseconds": 169
+  },
+  {
+    "table_name": "practice_events",
+    "source_key": "7b0cb59c-e128-4cb8-b4c6-08442cea3af0",
+    "reason": "attempt_creation_cross_clock",
+    "database_ahead_microseconds": 196
+  }
+]

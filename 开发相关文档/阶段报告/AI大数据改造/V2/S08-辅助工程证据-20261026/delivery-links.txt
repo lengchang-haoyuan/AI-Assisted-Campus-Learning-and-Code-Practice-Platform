@@ -1,7 +1,0 @@
-{
-  "markdown_documents": 5,
-  "local_links": 277,
-  "missing_links": [],
-  "json_parse_files": 2,
-  "utf8_replacement_characters": 0
-}
